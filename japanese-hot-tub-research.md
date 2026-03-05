@@ -531,3 +531,167 @@ across all three scenarios. Every day of delay in ordering shifts the entire pro
 
 *Agent 9 — Loop 1 Research Complete*
 
+---
+
+## Agent 10: Scaling Specialist — 2-Person vs 4-Person Tub Analysis (Loop 1)
+
+### 1. Dimension Changes & Structural Impact
+
+| Specification | 2-Person | 4-Person (Rectangular) | 4-Person (Round) | Change |
+|---|---|---|---|---|
+| Length | 48" | 60" | 54" diameter | +25% (rect) |
+| Width | 30" | 48" | 54" diameter | +60% (rect) |
+| Depth | 24" | 24" | 24" | Same |
+| Water Volume | ~100 gal | ~200 gal | ~200 gal | +100% |
+| Floor Area | 10 sq ft | 20 sq ft | ~16 sq ft (round) | +60-100% |
+
+**Structural implications of wider span:**
+- A 48" wide tub vs 30" wide means floor boards span 60% farther unsupported. Deflection increases with the cube of span length, so a 60% wider span produces roughly **4x the deflection** under the same load per board. This demands thicker floor boards (2" vs 1.5") or mid-span floor support joists.
+- Longer staves (needed for the wider rectangular walls) flex more and are harder to keep watertight. The 60" long wall staves on a rectangular 4-person tub have 56% more flex than the 48" staves of a 2-person.
+- A round 54" diameter tub distributes forces more evenly (each stave is in compression), making it structurally superior to the rectangular option at this size.
+
+### 2. Structural Complexity Comparison
+
+| Factor | 2-Person | 4-Person | Notes |
+|---|---|---|---|
+| Stave count (round) | ~24-28 | ~34-40 | +40-45% more staves to mill and fit |
+| Steel bands required | 3 | 4-5 | More bands, larger diameter |
+| Band circumference | ~36" | ~55-60" | +55-67% more steel per band |
+| Floor support | Simple slab | Needs mid-span support or 2" boards | Critical difference |
+| Joinery precision | Important | Critical | Errors compound over more staves |
+| Total loaded weight | ~1,300 lbs | ~2,500-2,800 lbs | +100-115% |
+
+**Foundation requirements:**
+- **2-person (~1,300 lbs):** Can sit on a reinforced deck, compacted gravel pad, or patio blocks. ~130 PSF on 10 sq ft footprint. Most existing decks rated at 40-60 PSF will NOT support this without reinforcement.
+- **4-person (~2,800 lbs):** Requires a 4" reinforced concrete pad minimum ($1,000-$3,000 installed). At ~140-175 PSF on 16-20 sq ft, this exceeds all standard deck ratings. A structural engineer consultation is recommended.
+
+**Weight breakdown (4-person):**
+- Water: 200 gal x 8.34 lbs = **1,668 lbs**
+- Tub (empty): **350-400 lbs**
+- 4 occupants (avg): **740 lbs**
+- **Total: ~2,758-2,808 lbs**
+
+### 3. Material Cost Increase
+
+| Material | 2-Person Cost | 4-Person Cost | Increase |
+|---|---|---|---|
+| Lumber (Western Red Cedar) | $600-$900 | $1,100-$1,700 | +80-90% |
+| Stainless steel bands + hardware | $150-$250 | $300-$450 | +80-100% |
+| Drain assembly | $40-$60 | $60-$100 | +50-65% |
+| Benches/seating | $100-$150 | $200-$350 | +100-130% |
+| Sealant/finish | $40-$60 | $70-$100 | +65-75% |
+| **Materials subtotal** | **$930-$1,420** | **$1,730-$2,700** | **+85-90%** |
+
+**Heater sizing:**
+- 100 gal tub: A 1.5-2 kW inline heater or small wood-fired stove is sufficient. Heats in 2-4 hours.
+- 200 gal tub: Needs 3-5 kW heater or larger wood-fired stove. Heats in 3-6 hours. A 1.5 kW heater would take 8+ hours.
+- Heater cost increase: $200-$500 more for the larger capacity unit.
+- 100 gal requires ~12.2 kWh to heat from 50F to 100F; 200 gal requires ~24.4 kWh. Exactly **2x the energy** per heating cycle.
+
+### 4. Build Time Increase
+
+| Phase | 2-Person (Student) | 4-Person (Student) | Increase |
+|---|---|---|---|
+| Planning & layout | 4-6 hrs | 6-8 hrs | +40% |
+| Milling staves | 16-24 hrs | 28-40 hrs | +65-75% |
+| Floor assembly | 4-6 hrs | 8-12 hrs | +100% |
+| Stave assembly & fitting | 12-20 hrs | 24-36 hrs | +85-100% |
+| Banding & tightening | 4-6 hrs | 8-12 hrs | +100% |
+| Bench installation | 3-5 hrs | 6-10 hrs | +100% |
+| Drain & plumbing | 3-4 hrs | 4-6 hrs | +40% |
+| Sanding & finishing | 6-10 hrs | 12-18 hrs | +90-100% |
+| Foundation prep | 2-4 hrs | 8-16 hrs (concrete pad) | +300% |
+| **Total build hours** | **54-85 hrs** | **104-158 hrs** | **+85-95%** |
+
+**Difficulty assessment:**
+- The 4-person tub is not just "more of the same" — it is disproportionately harder:
+  - **Joinery precision compounds**: With 35-40 staves instead of 25-28, small angle errors multiply. A 1/32" error per stave becomes a 1.1" gap over 35 staves vs 0.8" over 25. The margin for error shrinks.
+  - **Handling**: Longer, heavier staves are harder for one person to position and clamp.
+  - **Floor complexity**: Mid-span support adds a step that does not exist in the 2-person build.
+  - **Overall difficulty increase: approximately 120-150%** (not just 85-95% like raw hours suggest). The skill threshold is meaningfully higher.
+
+### 5. Operational Cost Increase
+
+| Operating Cost | 2-Person (monthly) | 4-Person (monthly) | Increase |
+|---|---|---|---|
+| Water (weekly changes, ~$5/1000 gal) | $2.00 | $4.00 | +100% |
+| Electricity for heating (maintain temp) | $15-$25 | $30-$50 | +100% |
+| Salt (0.5% salinity) | $1.50 | $3.00 | +100% |
+| Linseed oil treatment (amortized) | $2-$3 | $4-$6 | +100% |
+| **Monthly operating total** | **$20-$32** | **$41-$63** | **+100%** |
+
+**Per-heating-cycle costs:**
+- 100 gal from cold: ~$1.41 electricity (at $0.115/kWh national avg)
+- 200 gal from cold: ~$2.82 electricity
+- One BTU heats one gallon of water by 1 degree F. Formula: gallons x 8.33 BTU x temp rise = total BTUs needed. The relationship is perfectly linear with volume.
+- Wooden tubs lose heat through the walls, and a larger tub has more surface area (~60-80% more), so heat maintenance cost increases by more than 2x in practice: closer to **2.2-2.5x**.
+
+### 6. Maintenance Complexity Increase
+
+| Maintenance Task | 2-Person | 4-Person | Impact |
+|---|---|---|---|
+| Interior surface area | ~28 sq ft | ~48-55 sq ft | +70-95% more to scrub |
+| Drain time (gravity) | ~10-15 min | ~20-30 min | +100% |
+| Refill time (garden hose) | ~20-25 min | ~40-50 min | +100% |
+| Band inspection/tightening | 3 bands | 4-5 bands, larger | +50-65% |
+| Mold/algae risk | Moderate | Higher | More surface area, harder to dry completely |
+| Wood treatment (linseed oil) | 30-45 min | 60-90 min | +100% |
+| Seasonal winterization | Straightforward | More complex | More water to drain, more wood to protect |
+
+**Key maintenance concerns for 4-person:**
+- Interior corners (on rectangular) are harder to reach and scrub, promoting mold/algae growth.
+- A round 4-person eliminates corner issues but increases overall surface area.
+- Drying time between uses is longer — important because wood tubs must not stay empty too long (staves shrink and leak on refill) but also must be cleaned. The 4-person tub hits a worse balance point here.
+- More weight means more stress on bands over time — bands need re-tightening more frequently.
+
+### 7. Recommendation & Cost-Benefit Analysis
+
+#### Side-by-Side Summary
+
+| Category | 2-Person | 4-Person | Delta |
+|---|---|---|---|
+| Material cost | $930-$1,420 | $1,730-$2,700 | +85-90% |
+| Build hours (student) | 54-85 hrs | 104-158 hrs | +85-95% |
+| Build difficulty | Moderate | Hard | +120-150% |
+| Foundation cost | $0-$500 | $1,000-$3,000 | +$1,000-2,500 |
+| Monthly operating | $20-$32 | $41-$63 | +100% |
+| Total first-year cost | $1,500-$2,500 | $3,500-$6,500 | +130-160% |
+| Weight (loaded) | ~1,300 lbs | ~2,800 lbs | +115% |
+
+#### Is the 4-person worth it for casual use?
+
+**Generally, no.** For casual/occasional use (2-4 times per week), the 4-person tub roughly doubles every cost category while providing marginal benefit unless you regularly have 3-4 people soaking simultaneously. Specific reasons:
+
+1. **Diminishing returns on enjoyment**: Two people in a 4-person tub is a worse experience — water cools faster, feels less intimate, and wastes resources.
+2. **Student builder difficulty**: The jump from 2-person to 4-person crosses a meaningful skill threshold. A 2-person is achievable for a careful beginner; a 4-person demands intermediate woodworking competence, especially for watertight joinery over 35+ staves.
+3. **Foundation cost is a hidden multiplier**: The 2-person can sit on a simple gravel pad; the 4-person almost certainly needs poured concrete.
+
+#### The "Compact 4-Person" Compromise
+
+A strong middle option exists: a **round tub, 48" diameter x 26" deep** (~150 gallons):
+
+| Spec | Compact 4-Person |
+|---|---|
+| Capacity | 3-4 people (cozy) |
+| Volume | ~150 gal (50% more than 2-person, 25% less than full 4-person) |
+| Weight loaded | ~2,050 lbs |
+| Material cost | ~$1,300-$1,900 |
+| Build hours | ~80-115 hrs |
+| Foundation | Reinforced gravel pad or thin concrete slab |
+| Monthly operating | ~$30-$45 |
+
+This compromise:
+- Keeps weight under the threshold where a full concrete pad is mandatory
+- Uses a round shape for better structural integrity (staves in compression)
+- Fits 4 people for short soaks while being comfortable for 2
+- Reduces build difficulty vs. full 4-person by ~30%
+- Saves ~$1,000-$2,000 in total first-year costs vs. full 4-person
+
+#### Final Recommendation
+
+**For this project (student builder, casual use): Build the 2-person tub.** If social soaking is important, consider the compact 48" round as a stretch goal. Avoid the full 60"x48" rectangular 4-person — it crosses into territory where professional construction experience becomes important for a watertight result, and the foundation requirements add significant cost and complexity.
+
+---
+
+*Agent 10 — Loop 1 Research Complete*
+
