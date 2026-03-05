@@ -30,8 +30,9 @@
 - **Results**: All 10 agents completed cross-pollination refinements
 
 ### Loop 3 - Integration
-- **Status**: IN PROGRESS
+- **Status**: COMPLETE
 - **Objective**: Agents integrate findings, resolve conflicts, align numbers
+- **Results**: 3 integration agents resolved all cross-agent conflicts
 
 ### Loop 4 - Optimization
 - **Status**: PENDING
@@ -1502,4 +1503,136 @@ When wood fibers absorb water, they swell. This swelling is what makes a coopera
 ---
 
 *Loop 2 — Cross-Pollination Complete. All 10 agents refined.*
+
+---
+
+# ═══════════════════════════════════════════════════════════════
+# LOOP 3 — INTEGRATION (Conflict Resolution & Alignment)
+# ═══════════════════════════════════════════════════════════════
+
+## Conflicts Resolved
+
+### 1. Construction Method — FINAL: Rectangular Box
+- Round cooperage eliminated (requires power bevel cuts)
+- Agent 2's cooperage approach and Agent 10's round compromise dropped
+- Rectangular stacked-plank with through-bolted battens is the single approved method
+
+### 2. Lumber Pricing Standardized
+- Agent 1 implied $4-6/BF, Agent 2 implied $8-12/BF
+- **Resolved: $6-8/BF** for quality clear/VG WRC in 8/4 stock
+- 2-person: ~85-90 BF = **$540-720**
+- 4-person: ~130-140 BF = **$780-1,120**
+
+### 3. Hardware Cost Aligned
+- Agent 1 said $80-150 (assumed zinc/304 SS)
+- Agent 2 said $336 (proper 316 SS)
+- **Resolved: ~$310** for 316 SS throughout (non-negotiable for salt water)
+
+### 4. Student Hours — FINAL
+- Agent 9 said 20-55 hrs, Agent 3 said 40-109 hrs
+- Root cause: Agent 9 correctly removed power-tool milling from student scope
+- **Resolved: Student hours = 20-55 (hand tools only). Adult adds 15-30 hrs for milling.**
+- Total project hours: 35-85 depending on scenario
+
+### 5. Monthly Operating Cost — FINAL
+- Agent 7 original: $43-175/mo. Agent 8 original: $30-75/mo
+- **Resolved: $31-75/month typical.** Up to $85-95 in cold-climate winter.
+- Breakdown: Electricity $8-35, Water $3-6, H2O2 $15-25, Salt $2-4, Misc $3-5
+
+### 6. H2O2 Dosing — FINAL
+- Conflict between 3% and 35% concentrations resolved with dual protocol:
+- **3% drugstore:** 6-8 fl oz per 150 gal (maintenance), 16 fl oz (shock). Cost: ~$19/mo
+- **35% food-grade:** 0.5-0.7 fl oz per 150 gal (maintenance), 1.5 fl oz (shock). Cost: ~$9/mo
+- Target residual: 30-50 ppm. Test with H2O2 strips before each soak.
+
+### 7. Salt Concentration — FINAL
+- Options were 0.2%, 0.3%, or 0.5%
+- **Resolved: 0.2%** — provides silky feel with minimal corrosion risk
+- **Exact amount: 2.5 lbs non-iodized pool salt per 150 gal fill**
+
+---
+
+## FINAL ALIGNED BUDGET (Loop 3)
+
+### 2-Person Construction
+| Category | LOW | MID | HIGH |
+|----------|-----|-----|------|
+| WRC Lumber (~85 BF) | $340 | $425 | $510 |
+| 316 SS Hardware | $250 | $310 | $420 |
+| 5.5kW Heater + Pump | $300 | $400 | $500 |
+| Plumbing/fittings | $30 | $50 | $75 |
+| Student labor (20-55 hrs @ $15/hr) | $300 | $525 | $825 |
+| Electrician (240V circuit) | $150 | $275 | $400 |
+| Misc (sandpaper, sealant, tools) | $40 | $65 | $100 |
+| **TOTAL** | **$1,410** | **$2,050** | **$2,830** |
+
+### 4-Person Construction
+| Category | LOW | MID | HIGH |
+|----------|-----|-----|------|
+| WRC Lumber (~130 BF) | $520 | $650 | $780 |
+| 316 SS Hardware | $350 | $470 | $590 |
+| 5.5-11kW Heater + Pump | $380 | $500 | $650 |
+| Plumbing/fittings | $40 | $65 | $100 |
+| Student labor (+30%) | $390 | $680 | $1,070 |
+| Electrician | $150 | $300 | $500 |
+| Misc | $50 | $80 | $130 |
+| Foundation | $100 | $175 | $300 |
+| **TOTAL** | **$1,980** | **$2,920** | **$4,120** |
+
+### Year 1 All-In
+| | 2-Person MID | 4-Person MID |
+|--|-------------|-------------|
+| Construction | $2,050 | $2,920 |
+| 12 mo operating ($49/mo) | $588 | $735 |
+| **Year 1 Total** | **$2,638** | **$3,655** |
+
+### 5-Year Cost of Ownership
+| | 2-Person MID | 4-Person MID |
+|--|-------------|-------------|
+| Year 1 | $2,638 | $3,655 |
+| Years 2-5 operating | $2,352 | $2,940 |
+| Maintenance reserve | $300 | $400 |
+| **5-Year Total** | **$5,290** | **$6,995** |
+
+---
+
+## FINAL TIMELINE (Loop 3)
+
+| Scenario | Calendar Weeks | Student Hrs | Adult Hrs | Total Hrs |
+|----------|---------------|-------------|-----------|-----------|
+| Super Fast (pre-cut kit) | 3-4 | 20-25 | 15-20 | 35-45 |
+| Fast (rough lumber + adult cuts) | 4-6 | 25-35 | 20-30 | 45-65 |
+| Medium (educational pace) | 8-12 | 40-55 | 20-30 | 60-85 |
+
+4-person adds ~30-40% to all hour counts and 1-2 weeks to calendar time.
+
+---
+
+## FINAL WATER MANAGEMENT PROTOCOL (Loop 3)
+
+### Water Change Schedule
+| Usage | Drains/Week | Interval | Annual Water Cost |
+|-------|-------------|----------|-------------------|
+| Light (1-3 soaks/wk) | — | Every 4 weeks | ~$8 |
+| Moderate (4-7 soaks/wk) | — | Every 2-3 weeks | ~$16 |
+| Heavy (daily) | — | Every 7-10 days | ~$31 |
+
+### Day 1 Setup Checklist
+1. Fill tub with clean water, note source TDS
+2. Heat to 100-104°F
+3. Dissolve 2.5 lbs pool salt in bucket, add to tub
+4. Add shock dose H2O2 (16 oz of 3% OR 1.5 oz of 35%)
+5. Wait 30 min, test H2O2 residual (target 30-50 ppm)
+6. Test pH (target 7.0-7.4), record TDS baseline
+7. Shower before entering (reduces organic load ~70%)
+8. Post-soak: add maintenance H2O2 dose, replace cover
+
+### Drainage
+- H2O2-treated water is safe for lawn/garden (breaks down to water + oxygen)
+- Salt water at 0.2%: drain to sanitary sewer or rotate across 3-4 lawn zones
+- Never drain to storm drains (likely illegal, fines $1,000+)
+
+---
+
+*Loop 3 — Integration Complete. All conflicts resolved.*
 
