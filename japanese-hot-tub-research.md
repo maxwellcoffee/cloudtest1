@@ -48,6 +48,25 @@
 
 ---
 
+### Agent 8 - Budget Analysis (Loop 1 Findings)
+
+**File:** `agent-8-budget-analysis.md`
+
+**Key Findings:**
+
+1. **2-Person Construction Cost (self-build, cedar):** $1,264 (low) / $2,510 (mid) / $4,521 (high)
+2. **4-Person Construction Cost (self-build, cedar):** $1,760 (low) / $3,350 (mid) / $5,640 (high)
+3. **Monthly operating cost is $30-75/mo** across all three sanitization scenarios -- heating energy dominates, not water or chemicals
+4. **Annual cost of ownership (years 2+):** ~$530/yr (2-person) / ~$855/yr (4-person) including maintenance reserve
+5. **Recommended Year 1 budget with contingency:** $3,235 (2-person) / $4,450 (4-person)
+6. **Absolute minimum viable build:** ~$315-445 (spartan, 120V heater, no pump, frequent drains)
+7. **Biggest cost-saving levers:** Borrow tools ($100-500 saved), buy rough-sawn from mill ($100-300), skip UV/ozone ($100-250)
+8. **4-person costs ~33-39% more to build** than 2-person, not double
+9. **Insulated cover is the single best operating-cost investment** -- reduces heating energy significantly
+10. **Budget for a licensed electrician ($150-400)** for the 240V heater circuit -- non-negotiable safety item
+
+---
+
 ## Agent 9: Timeline & Project Management - Loop 1 Research
 
 ### OVERVIEW
