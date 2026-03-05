@@ -695,3 +695,473 @@ This compromise:
 
 *Agent 10 — Loop 1 Research Complete*
 
+---
+
+## Agent 7 - Maintenance Planning: Loop 1 Findings
+
+### Overview
+
+This section covers maintenance requirements for a Japanese wooden hot tub (ofuro-style) using salt water with minimal or no chemical treatment. Three usage scenarios are analyzed: LOW (1-2x/week), MEDIUM (3-4x/week), and HIGH (daily). All costs are in USD and assume a 2-person tub (~100-175 gallons). A 4-person tub (~200-400 gallons) would roughly double water and energy costs.
+
+**Critical principle for wooden tubs:** The interior wood must remain unfinished/raw so it can absorb water and swell to maintain a watertight seal. Oil treatments (tung oil, teak oil) are for the EXTERIOR only. The interior relies on the wood's natural water resistance (cedar, hinoki, or teak).
+
+---
+
+### 1. WATER CHANGE FREQUENCY AND PROCEDURE
+
+#### Scenario 1 — LOW USE (1-2x/week)
+- **Frequency:** Every 3-4 weeks (salt water extends intervals vs. fresh water's 7-10 days)
+- **Procedure:** Drain via gravity plug or submersible pump (15-20 min). Scrub interior with soft-bristle brush and plain water — no soap, no chlorine. Rinse thoroughly. Refill at slow rate to allow wood to re-swell gradually (30-45 min for ~175 gallons). Total time: ~1.5 hours per water change.
+- **Water cost per change:** $1-3 (municipal water for 175 gallons)
+- **Annual water changes:** ~13-17
+
+#### Scenario 2 — MEDIUM USE (3-4x/week)
+- **Frequency:** Every 2-3 weeks
+- **Procedure:** Same as above, but scrub more thoroughly due to higher bather load. Check for biofilm along waterline before draining.
+- **Water cost per change:** $1-3
+- **Annual water changes:** ~17-26
+
+#### Scenario 3 — HIGH USE (daily)
+- **Frequency:** Every 7-14 days
+- **Procedure:** Same as above. With daily use and no chemical sanitizer, bacterial load accumulates faster. Salt water buys some extra time (7-10 days vs. 3-4 days for plain fresh water), but weekly changes are safest for daily soakers.
+- **Water cost per change:** $1-3
+- **Annual water changes:** ~26-52
+
+---
+
+### 2. TUB INTERIOR CLEANING
+
+**What to use:** Soft-bristle brush (natural fiber, not metal). Plain water only. For stubborn buildup, a paste of baking soda and water can be gently applied. NEVER use soap, chlorine, bleach, or abrasive cleaners — these damage wood fibers, stain the wood, and leave residue.
+
+#### Scenario 1 — LOW USE
+- **Between uses:** Quick wipe-down of waterline and interior surfaces with a damp cloth after each soak. ~5 min.
+- **Deep scrub:** At each water change (every 3-4 weeks). Scrub entire interior with brush and rinse. ~20-30 min.
+
+#### Scenario 2 — MEDIUM USE
+- **Between uses:** Wipe-down after each soak. ~5 min.
+- **Light scrub:** Weekly, scrub waterline and seating area. ~10 min.
+- **Deep scrub:** At each water change (every 2-3 weeks). ~20-30 min.
+
+#### Scenario 3 — HIGH USE
+- **After each use:** Wipe-down of waterline. ~5 min.
+- **Light scrub:** Every 2-3 days, scrub waterline and seat surfaces. ~10 min.
+- **Deep scrub:** At each water change (every 1-2 weeks). ~20-30 min.
+
+---
+
+### 3. SALT RESIDUE MANAGEMENT
+
+Salt water leaves mineral deposits on wood as water evaporates, especially at and above the waterline. Over time this can cause white crystalline buildup.
+
+#### All Scenarios
+- **After each soak:** Wipe the waterline and any splashed exterior surfaces with a damp cloth to remove salt residue before it dries. ~2-3 min.
+- **At water change:** During the drain-and-scrub cycle, pay special attention to the waterline band (the 2-3 inches where water meets air). Use a soft brush with plain water to dissolve and remove salt deposits.
+- **Exterior protection:** Salt splashes on exterior wood accelerate weathering. Wipe immediately. The exterior oil treatment (see section 5) helps protect against salt damage.
+- **Metal hardware:** Salt is corrosive to non-marine-grade metals. All bands, bolts, and fittings MUST be 316 stainless steel or marine-grade. Inspect monthly for any corrosion. Rinse metal components with fresh water if salt splashes on them.
+
+**Note:** Research indicates that dissolved sea salt can actually act as a mild natural impregnator/preservative for the interior wood, which is a benefit. The concern is with dried salt residue above the waterline.
+
+---
+
+### 4. CHECKING FOR MOLD, MILDEW, AND ALGAE
+
+Wooden tubs are more susceptible to biological growth than acrylic/fiberglass. Salt water inhibits some growth but does not eliminate it, especially in warm, humid conditions.
+
+#### Scenario 1 — LOW USE (highest risk — water sits longer between uses)
+- **Before each use:** Visual inspection of interior surfaces for green/black/fuzzy spots. Check under any rim or lip where moisture lingers. ~3 min.
+- **Weekly:** Even if not using the tub, lift the cover and inspect. Ensure adequate airflow. Stagnant covered water in a warm tub is ideal for algae.
+- **Action if found:** Drain immediately. Scrub affected area with baking soda paste and soft brush. Rinse thoroughly. Allow to air dry for 2-4 hours in sunlight if possible (UV kills mold), then refill. Do NOT let the tub dry out completely (see section on wet vs. dry below).
+
+#### Scenario 2 — MEDIUM USE (moderate risk)
+- **Before each use:** Quick visual inspection. ~2 min.
+- **Weekly:** Full interior inspection during weekly light scrub.
+- **Action if found:** Same as above.
+
+#### Scenario 3 — HIGH USE (lowest risk — frequent water changes and use)
+- **Before each use:** Brief visual check. ~1 min. Daily use with frequent water changes keeps biological growth minimal.
+- **Action if found:** Same as above, but occurrence should be rare with proper water changes.
+
+---
+
+### 5. WOOD CONDITIONING / TREATMENT SCHEDULE
+
+**Critical distinction:**
+- **Interior:** Do NOT apply oil, varnish, or sealant. The raw wood must absorb water to swell and seal. The tub's watertight integrity depends on this.
+- **Exterior:** Apply tung oil, teak oil, or Seafin Teak Oil to protect from UV, weather, and salt splash.
+
+#### Exterior Treatment Schedule
+
+| Scenario | Indoor Tub | Outdoor Tub |
+|----------|-----------|-------------|
+| LOW | Annually | Every 6 months |
+| MEDIUM | Annually | Every 6 months |
+| HIGH | Annually | Every 4-6 months (more splash/exposure) |
+
+**Application procedure:**
+1. Drain tub and allow exterior to dry for 4-8 hours (do NOT let interior dry completely — keep a few inches of water inside).
+2. Lightly sand exterior with 220-grit sandpaper if needed.
+3. Apply tung oil or teak oil with a brush or cloth, following wood grain.
+4. Allow 15-30 min penetration, wipe excess.
+5. Apply second coat after 24 hours.
+6. Allow 48 hours cure time before full use.
+- **Time per application:** ~2-3 hours of active work (plus drying/curing time).
+- **Cost per application:** Tung oil ~$20-35/quart (one quart sufficient for a 2-person tub exterior). Teak oil ~$15-25/pint.
+
+#### Interior Wood Care
+
+Instead of oil, maintain the interior by:
+- Keeping the tub filled (wood stays swollen and sealed)
+- Regular scrubbing to prevent buildup
+- Ensuring the wood never fully dries out (see wet vs. dry section)
+
+---
+
+### 6. HEATING SYSTEM MAINTENANCE
+
+Maintenance depends on heating type. Covering the two most likely options:
+
+#### Electric Heater (inline or submersible)
+- **Monthly:** Check connections, inspect heating element for scale/mineral buildup from salt water. Salt water accelerates scale formation. Descale with white vinegar soak if needed. ~15-20 min.
+- **Quarterly:** Full inspection of wiring, thermostat calibration check. ~30 min.
+- **Annually:** Professional inspection recommended. ~$75-150.
+- **Element replacement:** Every 3-5 years depending on salt concentration. Cost: $50-200 for element.
+
+#### Wood-Fired Stove (snorkel-style or external)
+- **Every 20 uses:** Sweep chimney and clean firebox of soot/ash. ~20-30 min.
+- **After each use:** Remove ash from firebox once cooled. ~5 min.
+- **Monthly:** Inspect stove body, welds, and chimney for cracks or corrosion (salt air accelerates this). Lubricate damper. ~15 min.
+- **Annually:** Full chimney sweep and stove inspection. Professional service: ~$100-200. Or DIY with chimney brush: ~$30-50 for brush kit.
+- **Firebox/stove replacement:** Every 10-15 years. Cost: $500-2,000 depending on type.
+
+---
+
+### 7. PUMP / FILTER CLEANING
+
+If the tub has a circulation pump and filter (not all traditional ofuro do — many are simple fill-and-soak):
+
+#### Scenario 1 — LOW USE
+- **Filter rinse:** Weekly with garden hose. ~5-10 min.
+- **Deep filter clean:** Monthly with filter cleaning solution (non-chlorine). Soak 8-12 hours, rinse. ~10 min active time.
+- **Filter replacement:** Every 12-18 months. Cost: $20-50 per cartridge.
+- **Pump inspection:** Monthly, check for unusual noise, leaks, salt corrosion. ~5 min.
+- **Pump impeller cleaning:** Every 3-6 months. ~20 min.
+
+#### Scenario 2 — MEDIUM USE
+- **Filter rinse:** Twice weekly. ~5-10 min each.
+- **Deep filter clean:** Every 2-3 weeks. ~10 min active.
+- **Filter replacement:** Every 6-12 months. Cost: $20-50.
+- **Pump inspection:** Bi-weekly. ~5 min.
+- **Pump impeller cleaning:** Every 2-3 months. ~20 min.
+
+#### Scenario 3 — HIGH USE
+- **Filter rinse:** Every other day. ~5-10 min.
+- **Deep filter clean:** Weekly. ~10 min active.
+- **Filter replacement:** Every 3-6 months. Cost: $20-50.
+- **Pump inspection:** Weekly. ~5 min.
+- **Pump impeller cleaning:** Monthly. ~20 min.
+
+**Salt water note:** Salt water is harder on pump seals and metal components. Use only salt-water-rated pumps with marine-grade internals. Pump lifespan with salt water: ~5-8 years (vs. 8-12 years with fresh water). Replacement cost: $200-600.
+
+---
+
+### 8. SEASONAL MAINTENANCE
+
+#### Spring (if tub was winterized)
+- Inspect all wood for cracks, warping, mold that developed over winter. ~30-60 min.
+- Re-tighten bands if wood shifted. ~15 min.
+- Fill slowly to allow wood to re-swell (may take 24-48 hours to become fully watertight).
+- Apply exterior oil treatment. ~2-3 hours.
+- Run and test pump/heater. ~15 min.
+
+#### Summer
+- Increased algae risk in warm weather. Increase inspection frequency.
+- For outdoor tubs: UV cover when not in use. Check exterior oil condition.
+- Monitor water temperature — may need less heating energy.
+
+#### Fall
+- Apply exterior oil treatment if outdoor (pre-winter protection).
+- Inspect and tighten bands before temperature swings begin.
+- Check all seals, plumbing connections.
+- Stock up on maintenance supplies.
+
+#### Winter / Winterizing
+
+**If continuing to use through winter:**
+- Keep the tub filled and heated. A running hot tub is easier to maintain than a winterized one.
+- Insulated cover is essential. Consider a floating thermal blanket under the cover.
+- Monitor for ice formation around edges if outdoor.
+- Energy costs increase 30-50% in cold months.
+
+**If winterizing (shutting down for the season):**
+1. Drain completely. Use wet/dry vacuum to blow out all plumbing lines (up to 6 gallons can remain in pipes and freeze/crack them).
+2. Clean and scrub interior thoroughly.
+3. Apply exterior sealant/oil.
+4. Add pool-grade or RV-grade antifreeze to plumbing lines. NEVER use automotive antifreeze (toxic).
+5. Cover with insulated, waterproof cover secured tightly.
+6. **CRITICAL for wooden tubs:** A fully drained wooden tub WILL shrink and may crack. Options:
+   - Leave a few inches of water in the bottom (risk of freezing in cold climates)
+   - Accept that re-swelling will be needed in spring (fill slowly, may leak for 24-48 hours)
+   - Best option: keep tub running at a lower temperature (85-90F) through winter if possible
+
+**Winterizing time:** ~3-4 hours
+**Winterizing cost:** Antifreeze ($15-25), cover ($100-300 if not already owned)
+
+---
+
+### 9. WOOD INSPECTION FOR CRACKS, WARPING, LEAKS
+
+#### Scenario 1 — LOW USE
+- **Weekly:** Visual check of interior staves for hairline cracks, especially near waterline where wet/dry cycles occur. Check for any dripping on exterior. ~5 min.
+- **Monthly:** Thorough inspection at water change. Feel along stave joints for gaps. Check bottom for soft spots. ~15 min.
+- **Quarterly:** Full structural inspection including bottom, all staves, joints, and exterior. ~30 min.
+
+#### Scenario 2 — MEDIUM USE
+- **Weekly:** Visual and tactile inspection during scrub. ~5-10 min.
+- **Monthly:** Full inspection at water change. ~15 min.
+
+#### Scenario 3 — HIGH USE
+- **Weekly:** Visual inspection during regular cleaning. ~5 min.
+- **Bi-weekly:** Inspect at water change. ~15 min.
+- **Daily use actually reduces cracking risk** because the wood stays consistently saturated.
+
+#### Repairs
+- **Hairline cracks:** Fill with food-safe wood filler or beeswax. Cost: $5-15. Time: 30 min.
+- **Small gaps between staves:** Often resolved by tightening bands and allowing wood to re-swell. Free (just time). ~15-30 min.
+- **Warped stave:** May need professional replacement. Cost: $50-200 per stave plus labor ($50-100/hr). Time: 2-4 hours.
+- **Leaking bottom:** Most serious issue. May require lifting tub, replacing bottom boards. Professional repair: $300-800.
+
+---
+
+### 10. RE-TIGHTENING METAL BANDS / HOOPS
+
+Wooden tubs use metal bands (ideally 316 stainless steel for salt water) that compress the staves together. Wood expands and contracts with moisture and temperature changes, so bands need periodic adjustment.
+
+#### All Scenarios
+- **Weekly:** Visual check for band looseness. Tap bands — a tight band rings, a loose band thuds. ~2 min.
+- **Monthly:** Check band tension with a wrench. Snug as needed — do NOT over-tighten (can crack staves). ~10-15 min.
+- **Seasonally (spring and fall):** As temperatures shift, wood moves more. Check and adjust all bands. ~20-30 min.
+- **Major tune-up every 6-7 years:** Full disassembly, reseat all staves, re-tighten all bands. This is the most significant periodic maintenance for a cooperage-style tub. Professional service: $200-500. DIY: 4-8 hours of labor.
+
+**Salt water consideration:** Ensure all band hardware (nuts, bolts, threaded rods) is 316 stainless steel. Salt will destroy regular steel or even 304 stainless within 1-2 years. Lubricate threads annually with marine-grade lubricant to prevent seizing. Cost: $10-15 for lubricant.
+
+---
+
+### 11. WEEKLY TIME COMMITMENT
+
+| Task | LOW (1-2x/wk) | MEDIUM (3-4x/wk) | HIGH (daily) |
+|------|---------------|-------------------|--------------|
+| Post-soak wipe-down | 10-15 min | 20-25 min | 35-40 min |
+| Salt residue cleanup | 5-10 min | 10-15 min | 15-20 min |
+| Water chemistry check (pH test strips) | 5 min | 10 min | 10 min |
+| Filter rinse | 5-10 min | 10-15 min | 25-35 min |
+| Mold/mildew inspection | 5 min | 5 min | 5 min |
+| Interior scrub (light) | 0 min (not weekly) | 10 min | 20 min |
+| Band/wood inspection | 5 min | 5 min | 5 min |
+| Heating system check | 5 min | 5 min | 5 min |
+| **Weekly total** | **40-55 min** | **~1.25-1.5 hrs** | **~2-2.25 hrs** |
+
+**Add periodic tasks averaged weekly:**
+
+| Periodic Task | LOW | MEDIUM | HIGH |
+|--------------|-----|--------|------|
+| Water change (amortized) | +20 min/wk | +30 min/wk | +45 min/wk |
+| Deep filter clean (amortized) | +5 min/wk | +5 min/wk | +10 min/wk |
+| Exterior oil treatment (amortized) | +5 min/wk | +5 min/wk | +8 min/wk |
+| **Total weekly average** | **~1-1.5 hrs** | **~1.75-2.25 hrs** | **~2.75-3.25 hrs** |
+
+---
+
+### 12. MONTHLY MAINTENANCE COSTS
+
+#### Scenario 1 — LOW USE (1-2x/week)
+
+| Expense | Monthly Cost |
+|---------|-------------|
+| Water (1-1.5 changes/mo) | $2-5 |
+| Salt (marine salt, ~2 lbs/change) | $3-5 |
+| Electricity/gas for heating | $30-50 |
+| Filter cartridges (amortized) | $2-4 |
+| Cleaning supplies (baking soda, brushes) | $2-3 |
+| Exterior oil treatment (amortized) | $2-3 |
+| pH test strips | $2-3 |
+| **Monthly total** | **$43-73** |
+
+#### Scenario 2 — MEDIUM USE (3-4x/week)
+
+| Expense | Monthly Cost |
+|---------|-------------|
+| Water (2-2.5 changes/mo) | $3-8 |
+| Salt | $5-8 |
+| Electricity/gas for heating | $50-80 |
+| Filter cartridges (amortized) | $4-7 |
+| Cleaning supplies | $3-5 |
+| Exterior oil treatment (amortized) | $3-4 |
+| pH test strips | $3-4 |
+| **Monthly total** | **$71-116** |
+
+#### Scenario 3 — HIGH USE (daily)
+
+| Expense | Monthly Cost |
+|---------|-------------|
+| Water (2-4 changes/mo) | $4-12 |
+| Salt | $8-12 |
+| Electricity/gas for heating | $70-120 |
+| Filter cartridges (amortized) | $7-12 |
+| Cleaning supplies | $5-8 |
+| Exterior oil treatment (amortized) | $4-6 |
+| pH test strips | $4-5 |
+| **Monthly total** | **$102-175** |
+
+**Notes:**
+- Energy costs assume an electric heater in a moderate climate. Wood-fired heating replaces electricity cost with firewood cost (~$5-15 per heating session, but zero electricity).
+- Costs increase 30-50% in winter months for outdoor tubs due to heating demands.
+- These costs do NOT include equipment replacement (pump, heater elements) which are amortized over years.
+
+---
+
+### KEEPING THE TUB WET VS. LETTING IT DRY
+
+**This is the single most important maintenance concept for a wooden hot tub.**
+
+When wood fibers absorb water, they swell. This swelling is what makes a cooperage-style wooden tub watertight — the staves press tightly against each other. If the wood dries out, it shrinks, gaps form between staves, and the tub leaks. Repeated wet/dry cycles cause cracking, warping, and premature failure.
+
+**Rules:**
+- **NEVER let the tub sit completely empty and dry for more than 24-48 hours** (less in hot/dry climates, where cracking can begin in as little as 12 hours).
+- If you must drain for cleaning, refill the same day.
+- Between uses, keep the tub filled with water (can be at a lower temperature to save energy — 85F "standby" vs. 104F "soak" temperature).
+- Always use a cover when the tub is not in use to reduce evaporation.
+
+**LOW use scenario risk:** With only 1-2 uses per week, you might be tempted to drain between uses. DO NOT. Keep the tub filled. The cost of maintaining water at a low standby temperature is far less than the cost of repairing cracked/leaking staves.
+
+---
+
+### HANDLING A 2-WEEK VACATION
+
+#### Option A: Leave the Tub Running (RECOMMENDED)
+- Fill with fresh salt water before departure.
+- Set heater to standby/low temperature (85F) to save energy while keeping the wood wet.
+- Ensure cover is secured.
+- Turn off jets/circulation pump if desired, but leave heater on freeze-protection mode in cold weather.
+- Have a neighbor or friend check on it once mid-trip (5 min check: water level, cover secure, no leaks).
+- Upon return: drain, scrub, refill with fresh salt water before soaking (2 weeks of stagnant water will have bacterial growth). ~1.5 hours.
+- **Cost of 2-week vacation mode:** ~$15-30 in electricity (standby heating).
+
+#### Option B: Drain and Cover (RISKY for wood)
+- Only consider this in humid climates where the wood will not dry out quickly.
+- Drain, scrub interior, leave cover on tightly.
+- Place damp towels inside the tub and cover to maintain some humidity (a trick used by some wooden tub owners).
+- Upon return: fill slowly, allow 24-48 hours for wood to re-swell before expecting watertight seal. May leak initially. ~2-3 hours of active work.
+- **Risk:** Cracks, stave shrinkage, leaking upon refill. NOT recommended for hot/dry climates.
+
+#### Option C: Have Someone Maintain It
+- Ask a neighbor to check water level, add water if evaporating, and confirm heater is running. Once per week, 10 min per visit.
+- Best option if you can arrange it.
+
+---
+
+### EXPECTED LIFESPAN OF THE WOODEN TUB
+
+| Factor | LOW Use | MEDIUM Use | HIGH Use |
+|--------|---------|-----------|----------|
+| **Expected tub lifespan** | **20-25+ years** | **15-20 years** | **10-15 years** |
+| Wood saturation consistency | Good (kept filled) | Good | Very good (constantly in use) |
+| Wear from use/scrubbing | Minimal | Moderate | Highest |
+| Salt exposure (cumulative) | Lowest | Moderate | Highest |
+| Wet/dry cycle risk | Highest (temptation to drain) | Moderate | Lowest (always wet) |
+| Mold/algae risk | Highest (stagnant water) | Moderate | Lowest (frequent changes) |
+
+**Key factors that shorten lifespan:**
+- Allowing the tub to dry out repeatedly (biggest risk — can halve lifespan)
+- Using chlorine or harsh chemicals (destroys wood fibers)
+- Neglecting exterior oil treatment (UV and weather damage)
+- Ignoring loose bands (leads to leaks and structural failure)
+- High salt concentration (above 3.5% — keep at 1-2% for best wood preservation)
+
+**Key factors that extend lifespan:**
+- Consistent water fill (wood stays swollen)
+- Regular exterior oil treatment
+- Prompt repair of hairline cracks
+- 316 stainless steel hardware (no corrosion)
+- Proper wood species selection (hinoki, cedar, or teak)
+
+---
+
+### WHEN MAJOR MAINTENANCE / REPAIRS ARE NEEDED
+
+| Repair | When Typically Needed | Cost (DIY) | Cost (Professional) | Time |
+|--------|----------------------|------------|---------------------|------|
+| Re-sealing stave joints | Year 5-8, then every 3-5 years | $20-50 (sealant) | $200-400 | 3-5 hrs |
+| Replacing individual stave | Year 8-15 (if cracked/warped) | $50-200 (wood + materials) | $200-500 | 2-4 hrs |
+| Full band retightening + stave reseating | Every 6-7 years | Free (just labor) | $200-500 | 4-8 hrs |
+| Bottom board replacement | Year 10-20 (if soft/rotted) | $100-300 | $500-1,000 | 4-8 hrs |
+| Pump replacement | Every 5-8 years (salt water) | $200-600 | $350-800 (with labor) | 1-2 hrs |
+| Heater element replacement | Every 3-5 years (salt water) | $50-200 | $150-350 | 1-2 hrs |
+| Full tub rebuild (all staves) | Year 15-25+ | $500-1,500 | $1,500-3,000+ | Multi-day |
+| Exterior refinishing (full sand + oil) | Every 3-5 years | $30-60 | $200-400 | 4-6 hrs |
+
+---
+
+### MAINTENANCE QUICK-REFERENCE CALENDAR
+
+#### Daily (if using the tub that day): ~10 min
+- Wipe interior at waterline after soaking
+- Wipe salt residue from exterior splashes
+- Check water level (top off if low)
+- Visual check for anything unusual
+
+#### Weekly: ~15-30 min
+- Test water pH (target 7.2-7.8)
+- Rinse filter cartridge
+- Inspect bands for looseness
+- Check for mold/mildew under cover
+- Skim debris from water surface
+
+#### Monthly: ~1-2 hours
+- Deep clean filter (overnight soak in cleaning solution)
+- Inspect all metal hardware for corrosion
+- Check pump operation and seals
+- Inspect wood for cracks or soft spots
+- Tighten bands if needed
+- Clean heating system / descale
+
+#### Quarterly: ~2-4 hours
+- Full structural wood inspection
+- Seasonal band adjustment
+- Exterior oil treatment (outdoor tubs)
+- Plumbing line flush
+- Chimney sweep (if wood-fired, every 20 uses or quarterly)
+
+#### Annually: ~4-8 hours
+- Exterior oil treatment (indoor tubs) or second annual treatment (outdoor)
+- Professional heater/pump inspection (optional but recommended)
+- Full hardware lubrication
+- Comprehensive structural assessment
+- Replace filter cartridge(s)
+
+#### Every 6-7 Years
+- Full stave reseating and band retightening tune-up
+
+---
+
+### SOURCES
+
+- [The Log Company — How to Care for Wood-Fired Hot Tubs](https://thelogcompany.com/news/how-to-care-wood-fired-hot-tubs-2025)
+- [Roberts Hot Tubs — Wooden Hot Tub Maintenance Guide](https://rhtubs.com/worried-about-wooden-hot-tub-maintenance-the-no-stress-guide-to-caring-for-your-spa/)
+- [Roberts Hot Tubs — Maintaining and Protecting Custom Wooden Tubs for Decades](https://rhtubs.com/resources/how-to-maintain-and-protect-your-custom-wooden-tub-for-decades/)
+- [Roberts Hot Tubs — How Long Do Wooden Hot Tubs Last](https://rhtubs.com/how-long-do-wooden-hot-tubs-last-what-every-buyer-needs-to-know/)
+- [Roberts Hot Tubs — Ofuro Soaking Tubs](https://rhtubs.com/resources/japanese-ofuro-soaking-tubs/)
+- [Zen Bathworks — Discover Ofuros](https://www.zenbathworks.com/discover-ofuros/)
+- [Sauneco — Wooden Hot Tub Guidance](https://sauneco.com/help/wooden-hot-tub-guidance/)
+- [AlumiTubs — Water Use and Cleaning Tips](https://alumitubs.com/blogs/woodfiredhottubs/water-use-tips-how-often-to-change-clean-and-more)
+- [Backcountry Recreation — Wood-Fired Cedar Hot Tub Maintenance](https://www.backcountryrecreation.com/pages/wood-fired-cedar-hot-tub-maintenance)
+- [Snorkel Hot Tubs — Product Specifications and Maintenance](https://snorkel.com/product/6x4-wood-fired-hot-tub-package-w-snorkel/)
+- [Kirami — Hot Tub Maintenance and Service Life](https://www.kirami.com/manuals/frequently-asked-questions/tub-maintenance-and-durability)
+- [Cedar Tubs — Maintenance Checklist](https://www.cedartubs.com/hot-tub-maintenance-checklist.html)
+- [Angi — How Much Does It Cost to Run a Hot Tub (2026)](https://www.angi.com/articles/cost-to-run-a-hot-tub.htm)
+- [Backcountry Recreation — How to Winterize a Wood-Fired Hot Tub](https://www.backcountryrecreation.com/blogs/news/winterize-wood-fired-hot-tub)
+- [GOODLAND — How to Winterize Your Hot Tub](https://hellogoodland.com/blogs/news/how-to-winterize-your-hot-tub)
+
+---
+
+*Agent 7 — Loop 1 Research Complete*
+
