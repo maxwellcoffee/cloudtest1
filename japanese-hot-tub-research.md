@@ -35,12 +35,14 @@
 - **Results**: 3 integration agents resolved all cross-agent conflicts
 
 ### Loop 4 - Optimization
-- **Status**: PENDING
+- **Status**: COMPLETE
 - **Objective**: Agents optimize recommendations, find cost savings, refine timelines
+- **Results**: Identified paths to $750-1,000 build (vs $2,050 mid), absolute minimum $360-490
 
 ### Loop 5 - Final Synthesis
-- **Status**: PENDING
+- **Status**: COMPLETE
 - **Objective**: Final consolidated recommendations with complete budget and timeline
+- **Results**: Complete actionable report with build guide, shopping list, protocols, FAQ
 
 ---
 
@@ -1635,4 +1637,281 @@ When wood fibers absorb water, they swell. This swelling is what makes a coopera
 ---
 
 *Loop 3 — Integration Complete. All conflicts resolved.*
+
+---
+
+# ═══════════════════════════════════════════════════════════════
+# LOOP 4 — OPTIMIZATION (Cost Savings & Efficiency)
+# ═══════════════════════════════════════════════════════════════
+
+## TOP 10 COST-SAVING TIPS (Ranked by Dollar Impact)
+
+1. **Use construction-grade cedar or reclaimed lumber ($200-400 saved)** — Mill ends, fence-grade WRC, Craigslist. $2-4/BF vs $6-8/BF.
+2. **Use 120V/1.5kW heater to eliminate electrician ($275 saved)** — Plugs into standard GFCI outlet. Tradeoff: 8-12 hr heat-up vs 2-4 hrs. Use a timer.
+3. **DIY insulated cover ($80-150 saved)** — 2" XPS foam + marine vinyl. $30-50 materials vs $150-250 purchased.
+4. **Reduce SS hardware above waterline ($80-150 saved)** — 316 SS only where submerged. Galvanized OK for structural connections above waterline.
+5. **Borrow/rent all tools ($100-300 avoided)** — Tool libraries, neighbors, Home Depot rentals (~$25/day).
+6. **Source heater/pump used ($50-150 saved)** — eBay, FB Marketplace, spa dealer closeouts.
+7. **Smaller tub dimensions ($50-100 saved)** — 48"x30"x24" (~100 gal) cuts lumber 15-20%.
+8. **Buy H2O2 in bulk ($5-10/mo saved)** — 5-gallon food-grade: ~$8-12/mo vs $15-25 small bottles.
+9. **Student labor as course credit or trade ($150-375 saved)** — Shop class credit, skill trades.
+10. **Skip the pump initially ($50-100 saved)** — Manual agitation or $25 submersible pump.
+
+## Budget Path Scenarios
+
+| Scenario | Build Cost | Monthly Operating |
+|----------|-----------|-------------------|
+| Standard mid estimate | $2,050 | $49/mo |
+| Optimized (120V, sourced lumber) | $750-1,000 | $20-30/mo |
+| Absolute minimum viable | $360-490 | $15-25/mo |
+
+## Absolute Minimum Viable Tub ($360-490)
+- 42"x28"x22" interior (~65 gal, tight 2-person)
+- Construction cedar fence boards + DF framing: $150-200
+- Mixed metals, minimal hardware: $80-120
+- Propane turkey fryer + copper coil heat exchanger: $40-60
+- No pump, no electrician needed
+- Rigid foam + tarp cover: $25
+- Sealant/plumbing: $40-60
+
+## What NOT to Cheap Out On
+1. **GFCI protection** — electricity + water = death without it
+2. **Drain/bulkhead fitting** — leak here undermines entire build
+3. **Submerged fasteners** — must be 316 SS or silicon bronze
+4. **Sealant** — food-grade/aquarium-safe silicone only
+5. **Heater UL/ETL listing** — no unbranded imports (fire/shock risk)
+
+---
+
+*Loop 4 — Optimization Complete.*
+
+---
+
+# ═══════════════════════════════════════════════════════════════
+# LOOP 5 — FINAL SYNTHESIS (Complete Project Report)
+# ═══════════════════════════════════════════════════════════════
+
+## 1. EXECUTIVE SUMMARY
+
+This report provides a complete, actionable guide for building a traditional Japanese-style wooden hot tub (ofuro) as a student woodworking project. The design uses stacked Western Red Cedar planks with lap-joint corners, salt-water chemistry (no chlorine), and electric inline heating. A 2-person tub costs approximately $2,050 to build with $49/month operating costs; a 4-person tub costs $2,920 to build with $61/month operating costs. Students (under 18) are legally restricted to hand tools only under Federal Hazardous Occupation Order #5, so an adult must pre-cut all lumber with power tools. With proper maintenance, the tub will last 15-25 years. The recommended path is to build the 2-person tub first — it is achievable in 3-6 weeks, weighs under 1,700 lbs loaded, and requires no concrete foundation.
+
+---
+
+## 2. QUICK-START DECISION GUIDE
+
+| Factor | 2-Person | 4-Person |
+|---|---|---|
+| Internal dimensions | 54"L x 28"W x 24"D | 60"L x 48"W x 28"D |
+| Water volume | ~150 gallons | ~280 gallons |
+| Loaded weight | ~1,700 lbs | ~3,250 lbs |
+| Build cost (mid) | $2,050 | $2,920 |
+| Year 1 total cost | $2,638 | $3,655 |
+| 5-year ownership | $5,290 | $6,995 |
+| Student hours | 20-35 hrs | 40-70 hrs |
+| Difficulty | Moderate | Advanced |
+| Foundation needed? | Deck/patio OK if rated | Concrete pad required |
+| Build time | 3-6 weeks | 8-12 weeks |
+
+**Recommendation:** Build the 2-person first. The 4-person is +42% cost, +100% more hours, and +120-150% more difficult.
+
+---
+
+## 3. COMPLETE BUILD GUIDE
+
+### Phase 1: Planning & Procurement (Week 1)
+1. Select placement site — must support 1,700 lbs, within 50 ft of electrical panel
+2. Hire licensed electrician — 240V/30A GFCI circuit, $150-400
+3. Order lumber — 85 BF WRC 8/4 stock (include 10-15% waste)
+4. Order hardware — all 316 SS fasteners, bulkhead fittings, sealant
+5. Write student employment agreement with parent/guardian signature
+
+### Phase 2: Adult Pre-Cut (Week 1-2)
+6. Mill 8/4 stock to 1.5" finished thickness (planer/jointer)
+7. Rip planks to 6" width on table saw
+8. Cut to length — sides 54", ends 28", cut lap joints at corners
+9. Cut batten stock (2x4 WRC, 24" lengths)
+10. Cut floor boards (tongue-and-groove or ship-lap, 1.5" thick)
+11. Pre-drill all bolt holes (5/16" for 1/4-20 bolts)
+12. Cut plumbing penetrations (1.5" supply, 2" drain)
+
+### Phase 3: Student Assembly (Weeks 2-5)
+13. Dry-fit floor frame — joists on 16" centers, fasten with 316 SS screws
+14. Apply backer rod + silicone caulk in all floor seams
+15. Stack wall courses with lap joints interlocking at corners, backer rod + silicone between each course
+16. Install external battens, through-bolt with 1/4-20 SS carriage bolts
+17. Install drain fitting (2" 316 SS bulkhead + ball valve)
+18. Install supply fitting (1.5" 316 SS bulkhead, mid-wall)
+19. Hand-sand interior (120-grit then 220-grit). NO finish on interior.
+20. Apply tung oil to exterior only (2 coats, 24 hrs apart)
+
+### Phase 4: Plumbing & Electrical (Week 4-5)
+21. Install salt-rated circulation pump beside tub
+22. Install 5.5kW inline heater (titanium element) downstream of pump
+23. Electrician connects 240V/30A GFCI circuit
+24. Build insulated cover (2" XPS foam wrapped in marine vinyl)
+
+### Phase 5: Fill, Season & First Soak (Week 5-6)
+25. Fill with garden hose — expect leaking for 24-72 hrs as wood swells (normal)
+26. Once leaking stops, drain and refill (first fill leaches tannins)
+27. Add 2.5 lbs pool salt per 150 gal (dissolve in bucket first)
+28. Heat to 104°F (~3.3 hrs from cold)
+29. Dose H2O2: 0.5-0.7 fl oz of 35% (pre-diluted to 7%) OR 6-8 fl oz of 3%
+30. Test: H2O2 >10 ppm, pH 7.0-7.4
+31. Shower, then soak!
+
+---
+
+## 4. MATERIALS SHOPPING LIST
+
+### Lumber
+| Item | 2-Person | Cost |
+|---|---|---|
+| WRC 8/4 rough stock | 85 BF | $680-1,020 |
+| WRC 2x4 (battens/joists) | 40 LF | $120 |
+| **Subtotal** | | **$800-1,140** |
+
+### Hardware (316 SS)
+| Item | Cost |
+|---|---|
+| Carriage bolts 1/4-20 x 4" (60-80) | $60-90 |
+| Deck screws #10 x 2.5" (1 lb) | $25 |
+| 2" bulkhead drain + ball valve | $45-60 |
+| 1.5" bulkhead supply fitting | $25-35 |
+| Backer rod 3/8" (100 ft) | $12 |
+| Marine silicone caulk (4-6 tubes) | $40-60 |
+| **Subtotal** | **$210-280** |
+
+### Plumbing & Heating
+| Item | Cost |
+|---|---|
+| 5.5kW inline heater (titanium element) | $250-350 |
+| Salt-rated circulation pump | $130-160 |
+| Flexible PVC hose + fittings | $50-70 |
+| **Subtotal** | **$430-580** |
+
+### Other
+| Item | Cost |
+|---|---|
+| Electrician (240V/30A GFCI) | $150-400 |
+| 2" XPS foam + marine vinyl (cover) | $55-75 |
+| Tung oil (exterior) | $15-20 |
+| H2O2 test strips | $10-15 |
+| Pool salt (10 lb) | $5-8 |
+| 35% food-grade H2O2 (1 qt) | $15-20 |
+| **Subtotal** | **$250-540** |
+
+### **GRAND TOTAL: ~$1,690-2,540 (mid ~$2,050)**
+
+---
+
+## 5. WATER CHEMISTRY PROTOCOL
+
+### System: Salt (0.2%) + Hydrogen Peroxide — NO Chlorine
+
+**Daily (2 min):**
+- Test H2O2 with strip — must read >10 ppm
+- If low, dose: 0.5-0.7 fl oz of 35% H2O2 (diluted to 7%) per 150 gal
+- OR: 6-8 fl oz of 3% drugstore H2O2 per 150 gal
+
+**After Each Soak:**
+- Dose H2O2 (amounts above)
+- Replace insulated cover immediately
+
+**Weekly (~15 min):**
+- Skim debris, wipe waterline
+- Check salt level (target 0.2% / 2,000 ppm)
+
+**Every 1-4 Weeks (by use level):**
+- Full water change: drain, scrub interior with soft brush (no soap), refill
+- Re-add: 2.5 lbs salt + shock dose H2O2
+
+### Safety — 35% H2O2
+- Wear nitrile gloves + splash goggles
+- Pre-dilute to 7%: 1 part 35% + 4 parts water, store in labeled HDPE bottle
+- Never mix with other chemicals
+
+---
+
+## 6. BUDGET SUMMARY
+
+| | 2-Person | 4-Person |
+|--|----------|----------|
+| **Construction** | **$2,050** | **$2,920** |
+| **Monthly operating** | **$49** | **$61** |
+| **Year 1 all-in** | **$2,638** | **$3,655** |
+| **5-year total** | **$5,290** | **$6,995** |
+
+---
+
+## 7. TIMELINE SUMMARY
+
+| Scenario | Weeks | Student Hrs | Adult Hrs | Total |
+|----------|-------|-------------|-----------|-------|
+| Super Fast (pre-cut) | 3-4 | 20-25 | 15-20 | 35-45 |
+| Fast (standard) | 4-6 | 25-35 | 20-30 | 45-65 |
+| Educational | 8-12 | 40-55 | 20-30 | 60-85 |
+
+---
+
+## 8. MAINTENANCE CALENDAR
+
+| Frequency | Task | Time |
+|-----------|------|------|
+| **Daily** | Test/dose H2O2, check cover | 2 min |
+| **Weekly** | Wipe waterline, check bolts (first 6 mo) | 15 min |
+| **Monthly** | Full water change + scrub | 1-2 hrs |
+| **Quarterly** | Re-tighten all bolts, inspect silicone seams | 30 min |
+| **Biannually** | Tung oil exterior, check heater for scale | 1 hr |
+| **Annually** | Full inspection of all components | 2 hrs |
+
+**Critical Rule: NEVER let the tub dry out.** This is the #1 killer. Keep filled at all times. If away >3 days, fill to brim and cover. Dry tub = warped wood = permanent damage.
+
+**Expected Lifespan:** 15-25 years (good maintenance) / 3-5 years (poor)
+
+---
+
+## 9. LEGAL REQUIREMENTS
+
+### Student Labor
+- **Federal HO #5:** Minors under 18 cannot use power-driven woodworking machines
+- **Permitted:** Hand saws, chisels, planes, mallets, cordless drill (fastening only)
+- **Pay:** $15-18/hr, written agreement with parent/guardian
+- **Supervision:** Adult on-site at all times
+
+### Electrical & Permits
+- 240V circuit requires licensed electrician + permit + inspection
+- GFCI protection required by NEC for all outdoor/wet-area circuits
+- Some jurisdictions classify a plumbed hot tub as a plumbing fixture requiring permit
+
+### Drainage
+- H2O2-treated water: safe for lawns/gardens
+- Salt water: drain to sanitary sewer or rotate lawn zones. Never to storm drains.
+
+---
+
+## 10. FAQ
+
+**Q1: Why no chlorine?** Chlorine attacks wood fibers, accelerating rot. Salt + H2O2 is effective, wood-safe, and simpler.
+
+**Q2: Can students build this with hand tools only?** Yes. Adult pre-cuts all lumber. Students assemble — stacking, bolting, fitting, sanding.
+
+**Q3: How long until it stops leaking?** 24-72 hours. Cedar swells as it absorbs water. If seepage persists, apply silicone to exterior seam. EPDM liner as fallback.
+
+**Q4: Can I put it on my deck?** Only if the deck is rated for 170+ psf (1,700 lbs on ~10 sq ft). Most residential decks need reinforcement. Ground-level pad is safer.
+
+**Q5: Can I use it in winter?** Yes. Maintain 85°F standby. Never let water drop below 40°F. Insulated cover is critical.
+
+**Q6: How much per soak?** ~$3-4 per soak (at $49/mo and 12-15 soaks/month).
+
+**Q7: Why 316 SS, not 304?** 304 corrodes in salt water within months. 316 contains molybdenum for chloride resistance. Non-negotiable.
+
+**Q8: Do I need a concrete pad?** 2-person: No (gravel pad or existing patio OK). 4-person: Yes (minimum 4" reinforced concrete).
+
+**Q9: How much maintenance time?** ~2 min/day + 15 min/week + 1-2 hrs/month. Becomes routine quickly.
+
+**Q10: What is the single most important rule?** **Never let the tub dry out.** Keep it filled, maintain standby temp, always cover. This determines whether your tub lasts 3 years or 25 years.
+
+---
+
+*All 5 Loops Complete. 10 agents across 5 iterations. Research concluded.*
 
