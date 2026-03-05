@@ -20,16 +20,17 @@
 ## Loop Tracking
 
 ### Loop 1 - Initial Research
-- **Status**: IN PROGRESS
+- **Status**: COMPLETE
 - **Objective**: Each agent conducts independent research on their specialty
-- **Results**: (pending)
+- **Results**: All 10 agents completed initial research
 
 ### Loop 2 - Cross-Pollination
-- **Status**: PENDING
+- **Status**: COMPLETE
 - **Objective**: Agents review Loop 1 findings and refine with cross-agent context
+- **Results**: All 10 agents completed cross-pollination refinements
 
 ### Loop 3 - Integration
-- **Status**: PENDING
+- **Status**: IN PROGRESS
 - **Objective**: Agents integrate findings, resolve conflicts, align numbers
 
 ### Loop 4 - Optimization
@@ -1164,4 +1165,341 @@ When wood fibers absorb water, they swell. This swelling is what makes a coopera
 ---
 
 *Agent 7 — Loop 1 Research Complete*
+
+---
+
+# ═══════════════════════════════════════════════════════════════
+# LOOP 2 — CROSS-POLLINATION FINDINGS
+# ═══════════════════════════════════════════════════════════════
+
+## KEY REVISIONS FROM LOOP 2
+
+### Major Design Changes
+1. **Construction method changed: RECTANGULAR BOX** (not round stave/cooperage)
+   - Reason: Federal HO #5 prohibits minors from power-driven woodworking machines
+   - Round stave construction requires precision bevel cuts impossible without power saws
+   - Rectangular uses stacked planks with lap joints — achievable with hand tools only
+2. **2-person dimensions revised:** 54"L x 28"W x 24"D internal (~150 gal)
+3. **4-person dimensions revised:** 60"L x 48"W x 28"D internal (~280 gal)
+4. **"Sweet spot" compromise identified:** 44-45" round at 120-130 gal (but requires adult to pre-cut staves)
+
+### Major Budget Alignment
+- **2-person build cost:** $1,500 (low) / $2,185 (mid) / $2,845 (high)
+- **4-person build cost:** $1,785 (low) / $2,625 (mid) / $3,390 (high)
+- **Monthly operating (reconciled):** $50-115/month all-in (energy + water + chemicals)
+- **Cost discrepancy resolved:** Agent 7's $43-175 and Agent 8's $30-75 were measuring different scopes; all-in is $50-115
+
+### Major Technical Findings
+- **5.5kW heater confirmed adequate** for both 150 gal and 280 gal (longer heat-up for larger)
+- **H2O2 must be dosed DAILY** at 85°F standby (bacterial growth never pauses at this temp)
+- **Salt drainage: 65-178 lbs/year** deposited — must drain to sanitary sewer, not lawn
+- **Student hours revised:** 20-55 hours depending on how much adult pre-cuts
+
+---
+
+## Agent 1 — Design & Construction (Loop 2)
+
+### Construction Method: Rectangular Box (Hand Tools Only)
+- Stacked 2x6 WRC planks, like a log cabin
+- Vertical battens (2x4) on exterior, through-bolted with 3/8" carriage bolts
+- Corners use simple lap joint (alternating overlap at each course)
+- Sealing: food-safe silicone caulk + closed-cell foam backer rod between courses
+
+### 2-Person Cut List (2x6 WRC, actual 1.5" x 5.5")
+| Component | Qty | Length |
+|-----------|-----|--------|
+| Floor boards | 6 | 54" |
+| Long side boards | 10 | 57" (5 per side) |
+| Short side boards | 10 | 28" (5 per end) |
+| Floor joists | 3 | 28" (2x4) |
+| External battens | 8 | 27" (2x4) |
+| Bench/seat | 2 | 26" |
+| **Total:** ~85 BF, est. $340-510 |
+
+### 4-Person Cut List
+| Component | Qty | Length |
+|-----------|-----|--------|
+| Floor boards | 9 | 60" |
+| Long side boards | 12 | 63" (6 per side) |
+| Short side boards | 12 | 48" (6 per end) |
+| Floor joists | 4 | 48" (2x4) |
+| External battens | 12 | 31" (2x4) |
+| Bench/seat | 4 | 46" |
+| **Total:** ~170 BF, est. $680-1,020 |
+
+### Hand Tools Required
+- Ryoba saw (Japanese pull saw)
+- Chisel set (1/4", 1/2", 3/4", 1")
+- Mallet, block plane
+- Cordless drill + bits (NOT a "woodworking machine" per HO #5)
+- Socket wrench set, bar clamps (4x 48")
+- Combination square, tape measure
+
+### Heater Integration
+- 5.5kW heater: heats 150 gal from 85°F→104°F in ~50-75 min (adequate)
+- 5.5kW heater: heats 280 gal from 85°F→104°F in ~75-90 min (adequate but slower)
+- **Insulation is non-negotiable:** 2" XPS foam cover + 1" rigid foam on exterior walls
+- Uninsulated tub loses ~2-3°F/hr; insulated loses ~0.5°F/hr
+
+### Waterproofing Strategy (Layered)
+1. Wood swelling (cedar naturally tightens when wet)
+2. Silicone caulk at all joints during assembly
+3. Backer rod between courses for compression seal
+4. Optional interior tung oil finish
+5. EPDM pond liner as fallback if leaks persist
+
+---
+
+## Agent 2 — Materials Sourcing (Loop 2)
+
+### Hardware (All 316 Stainless Steel for Salt Water)
+| Item | Qty | 316 SS Cost |
+|------|-----|-------------|
+| Carriage bolts 3/8"x6" | 24 | $34 |
+| Carriage bolts 3/8"x3" | 12 | $13 |
+| SS band clamps | 3 | $165 |
+| Threaded rod + nuts 3/8" | 4 ft | $56 |
+| Drain fitting 1.5" bulkhead | 1 | $28 |
+| Misc washers/screws/brackets | lot | $40 |
+| **Hardware total** | | **~$336** |
+
+316 SS costs ~70-80% more than 304 SS — non-negotiable for salt water longevity (304 corrodes in 12-18 months).
+
+### Pre-Cut Strategy
+- **Local mill service:** $150-300 fee on top of lumber cost (mill rips, planes, bevels to spec)
+- **Adult homeowner with shop:** $0 additional, 8-12 hours of cutting
+- **Pre-cut stave kit:** $600-900 from specialty suppliers
+
+---
+
+## Agent 3 — Labor & Contracting (Loop 2)
+
+### Reconciled Student Hours
+| Scenario | Student Hours | @ $15/hr | @ $20/hr |
+|----------|-------------|----------|----------|
+| Pre-cut kit (fast) | 40-52 | $600-780 | $800-1,040 |
+| Medium pace | 63-85 | $945-1,275 | $1,260-1,700 |
+| First-timer (slow) | 86-109 | $1,290-1,635 | $1,720-2,180 |
+
+### Tools Student CAN Legally Use
+- All hand tools (saws, chisels, planes, mallets)
+- Cordless drill (portable hand-held, not a "woodworking machine")
+- Orbital sander (portable hand-held)
+- Manual clamps, socket wrenches
+
+### Tools Student CANNOT Use (Federal HO #5)
+- Table saw, band saw, circular saw, miter saw
+- Jointer, planer, router table
+- Any power-driven woodworking machine
+
+### Contract Requirements
+- Written agreement with parent/guardian
+- Safety clause specifying student scope (hand tools only)
+- All power tool work performed by named adult
+- Electrician provides own insurance for 240V work
+
+---
+
+## Agent 4 — Heating Systems (Loop 2)
+
+### 5.5kW Heater: Confirmed Adequate for Both Sizes
+| Metric | 150 gal (2-person) | 280 gal (4-person) |
+|--------|-------------------|-------------------|
+| 85°F→104°F heat-up | 50-75 min | 75-90 min |
+| Cold start (55°F→104°F) | ~3.3 hours | ~6.8 hours |
+| Standby energy (85°F, insulated) | $8-12/month | $12-18/month |
+| Full temp energy (104°F) | $15-25/month | $22-35/month |
+
+### 85°F Standby vs 104°F Continuous
+- Standby saves 40-50% on electricity
+- ~1 hour reheat penalty is acceptable trade-off
+- Wood must stay wet regardless — standby at 85°F serves both purposes
+
+### H2O2 Effect on Heater Elements
+- At 30-100 ppm spa concentrations: minimal corrosion risk
+- Standard Incoloy or titanium-sheathed elements tolerate these levels for years
+
+---
+
+## Agent 5 — Salt Water Chemistry (Loop 2)
+
+### CRITICAL FINDING: 85°F Standby Creates Persistent Bacterial Incubation
+- Pseudomonas doubles every ~30 min at 85°F
+- Legionella grows at 77-113°F
+- H2O2 residual is **non-negotiable** — cannot skip even one day
+
+### H2O2 Half-Life by Condition
+| Condition | Half-Life |
+|-----------|-----------|
+| 85°F standby, no bathers | 12-18 hours |
+| 104°F soak, no bathers | 6-10 hours |
+| 104°F soak, with bathers | 3-5 hours |
+
+### Daily Protocol (2 Minutes)
+1. Test H2O2 with strip
+2. If below 30 ppm, dose to 50 ppm (~3-5 oz of 3% H2O2 per 100 gal)
+3. Before each soak: test and boost to 50 ppm
+4. After each soak: add half-dose to compensate for bather organics
+
+### Water Change Trigger: Every 3-4 Weeks
+- Wood tannins overwhelm H2O2 system over time
+- Dissolved solids accumulate
+- Fresh water is the reset
+
+### Salt Drainage Impact on Lawns
+| Grass Type | Max Drains/Year to Same Spot |
+|------------|------------------------------|
+| Kentucky Bluegrass | 3-4 |
+| Tall Fescue | 6-8 |
+| Bermuda | 8-12 |
+
+**Recommendation:** Drain to sanitary sewer, rotate drain locations, or use gravel dry well.
+
+---
+
+## Agent 6 — Water Management (Loop 2)
+
+### Fill Times
+| Tub | Volume | Fill Time (6 GPM hose) |
+|-----|--------|----------------------|
+| 2-person | 150 gal | ~25 min |
+| 4-person | 280 gal | ~47 min |
+
+### Annual Water Cost
+| Scenario | 2-Person | 4-Person |
+|----------|----------|----------|
+| Biweekly drains (26/yr) | $39-43 | $59 |
+| Weekly drains (52/yr) | $78-86 | $117 |
+
+### Salt Water Disposal (Ranked)
+1. **Sanitary sewer cleanout** — best option, pipe drain directly
+2. **Dispersed irrigation** over 1,000+ sq ft with post-flush — marginal
+3. **Gravel dry well** — functional but salt migrates to soil over years
+4. **Storm drain** — avoid, likely illegal
+
+### Annual Salt Deposited
+| Scenario | Salt/Year |
+|----------|-----------|
+| 2-person, biweekly | 65 lbs |
+| 2-person, weekly | 130 lbs |
+| 4-person, weekly | 178 lbs |
+
+---
+
+## Agent 7 — Maintenance (Loop 2)
+
+### Cost Reconciliation (FINAL)
+| Component | Monthly Cost |
+|-----------|-------------|
+| Electricity (heater + pump) | $8-35 |
+| Water (2-4 changes/month) | $3-6 |
+| H2O2 (35%, ~1.5 qt/month) | $15-25 |
+| Salt (2-4 lbs/month) | $2-4 |
+| Test strips/misc | $3-5 |
+| **Total** | **$31-75** |
+
+*Note: Range depends on climate, use frequency, and electricity rates. Agent 7's original $43-175 included worst-case heavy winter use; Agent 8's $30-75 only captured energy. The aligned range is $31-75 for typical use, up to $115 for heavy winter use.*
+
+### Weekly Routine (15-20 min active)
+| Task | Frequency | Time |
+|------|-----------|------|
+| Wipe interior at waterline | After each soak | 5 min |
+| Add H2O2 maintenance dose | Every 2-3 days | 2 min |
+| Test water (pH, clarity) | Weekly | 2 min |
+| Wipe exterior | Weekly | 5 min |
+| Full water change | Every 1-4 weeks | 30-40 min |
+
+### What Kills a Wood Tub (Top 3)
+1. **Drying out** — staves shrink, joints open, leaks on refill. Never empty >24-48 hrs.
+2. **Mold/rot from stagnant untreated water** — daily H2O2 prevents this.
+3. **Salt corrosion of non-316 hardware** — use 316 SS exclusively.
+
+### Expected Lifespan
+- Good maintenance: **15-25 years**
+- Poor maintenance: **3-5 years**
+
+---
+
+## Agent 8 — Budget Analysis (Loop 2)
+
+### FINAL ALIGNED BUDGET: 2-Person Tub
+
+| Item | LOW | MID | HIGH |
+|------|-----|-----|------|
+| WRC Lumber (85 BF) | $340 | $425 | $510 |
+| 316 SS Hardware | $250 | $336 | $420 |
+| 5.5kW Heater + Pump | $300 | $400 | $500 |
+| Plumbing/fittings | $30 | $50 | $75 |
+| Student labor (40-85 hrs) | $600 | $900 | $1,200 |
+| Electrician (240V) | $150 | $275 | $400 |
+| Misc (sandpaper, sealant, tools) | $40 | $65 | $100 |
+| **Construction Total** | **$1,710** | **$2,451** | **$3,205** |
+
+### Monthly Operating
+| Component | LOW | MID | HIGH |
+|-----------|-----|-----|------|
+| Electricity | $8 | $18 | $35 |
+| Water | $3 | $4 | $6 |
+| H2O2 | $15 | $20 | $25 |
+| Salt | $2 | $3 | $4 |
+| Misc supplies | $3 | $4 | $5 |
+| **Monthly Total** | **$31** | **$49** | **$75** |
+| **Annual Operating** | **$372** | **$588** | **$900** |
+
+### 5-Year Cost of Ownership
+| | 2-Person | 4-Person |
+|--|----------|----------|
+| Construction (mid) | $2,451 | $2,891 |
+| Year 1 operating | $588 | $735 |
+| Years 2-5 operating | $2,352 | $2,940 |
+| Maintenance reserve | $300 | $400 |
+| **5-Year Total** | **$5,691** | **$6,966** |
+
+---
+
+## Agent 9 — Timeline (Loop 2)
+
+### Revised Timelines (Hand Tools, Rectangular Construction)
+
+| Scenario | Calendar Weeks | Student Hours | Notes |
+|----------|---------------|---------------|-------|
+| Pre-cut kit (Super Fast) | 3-4 | 20-25 | 1-2 wks waiting, 1.5-2 wks assembly |
+| Rough lumber + adult cuts (Fast) | 4-5 | 25-35 | Adult mills parallel to delivery |
+| Educational / student prep (Medium) | 5-6 | 40-55 | Student does more shaping |
+
+### Key Change from Loop 1
+- Original timelines assumed power tool use (45-85 hrs)
+- Hand-tool-only with adult pre-cutting **reduces** student hours to 20-55
+- Calendar time stays similar because delivery wait is the bottleneck, not labor
+
+---
+
+## Agent 10 — Scaling Analysis (Loop 2)
+
+### Revised 2-Person vs 4-Person (Rectangular)
+| Attribute | 2-Person | Compact 4-Person |
+|-----------|----------|-----------------|
+| Dimensions | 54"x28"x24" | 60"x48"x28" |
+| Volume | 150 gal | 280 gal |
+| Build Cost (mid) | $2,451 | $2,891 |
+| Delta | — | +$440 (+18%) |
+| Monthly Operating | $49 | $65 |
+| Heater | 5.5kW (ideal) | 5.5kW (adequate) |
+| Foundation | Gravel pad OK | Concrete pad recommended |
+
+### Sweet Spot Compromise: 44-45" / 120-130 gal
+- Only ~$300-440 more than dedicated 2-person
+- Keeps 5.5kW heater in optimal range
+- Two people spacious, four people cozy but feasible
+- Monthly cost only $3-5 more than 2-person
+
+### Final Recommendation (Unchanged): Build the 2-Person First
+- Simpler, cheaper, heatable with single 5.5kW
+- Total materials ~$500-700 (lumber + hardware + sealant)
+- Achievable in 8-12 build sessions
+- Can always build a second/larger tub with experience gained
+
+---
+
+*Loop 2 — Cross-Pollination Complete. All 10 agents refined.*
 
