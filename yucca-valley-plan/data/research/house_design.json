@@ -1,0 +1,674 @@
+{
+ "topic": "house_design",
+ "executive_summary": "The smallest permitted house you can build depends on which side of the town line the lot sits. In unincorporated San Bernardino County there is no local minimum house size: a 'Tiny Home' is allowed if it meets the California Residential Code (CRC). The CRC only requires habitable rooms of at least 70 sq ft, no side under 7 ft, a full bathroom and a kitchen with a sink. Inside the Town of Yucca Valley, the Development Code (section 9.07.100) currently sets a 725 sq ft minimum, measured from the outside walls, with an average width and depth of at least 20 ft. The Town's Rural Living zone also requires 2 covered parking spaces (garage or carport). The Planning Commission was reconsidering the 725 sq ft rule in May-June 2026, and I could not confirm the result. Realistic sweet spots are about 560-640 sq ft in the County (for example 20'x32') and about 750 sq ft in the Town (for example 22'x34' plus a solar carport). Every new primary house must have fire sprinklers (CRC R309.2) and a real water source, since the County does not allow hauled water for a new house. It must also meet the 2025 Energy Code (heat pumps for heating and hot water, plus solar panels) for permits applied for on or after Jan 1, 2026, and, if the parcel is mapped in a fire zone, the new 2025 California Wildland-Urban Interface Code. The County has four free pre-approved plans (560, 735, 1,008 and 1,008 sq ft) built to the 2025 codes. They are labeled as ADUs (accessory dwelling units), and an ADU generally cannot be signed off for occupancy before the main house, so ask the County whether the 560 sq ft Model D can be submitted as your main house. The biggest clash with your plan is time, not design. Living on site during construction is only legal with a temporary use permit after the building permit is issued: 12 months plus one 12-month extension in the County, or up to 4 years in the Town. It also has to be in a certified manufactured home or self-contained RV, so an uncertified $20k capsule does not qualify. That pushes toward a simple shell (a kit or SIP panels, i.e. pre-insulated structural panels) and a 'core house' that passes final inspection fast. For the whole-floor soft surface, thick traditional tatami (55-60 mm) would block most of the floor heat. Use thin tatami rated for floor heating, cork, or wool carpet on a thin pad, and keep the total insulating value of the floor covering to about R-1.5. Use a ductless mini-split heat pump as the code-compliant primary heating and cooling, with radiant heat under the soft zones. I recommend three concrete-slab floor build-ups below. Caveat: the shared web-search budget ran out early in this task. Code findings come from fetched primary documents, but Morongo Basin construction costs and tatami and radiant pricing are estimates that need local quotes.",
+ "findings": [
+  {
+   "title": "State minimum: the CRC allows a very small house",
+   "detail": "2025 CRC R312.1: habitable rooms of at least 70 sq ft, kitchens exempt. R312.2: at least 7 ft in any horizontal direction. R313.1: ceilings at least 7'-0\" in habitable space and 6'-8\" in bathrooms and laundry; with a sloped ceiling, at least 50% of the required floor area must be 7 ft or higher, and floor area under 5 ft does not count. California HCD Information Bulletin 2016-06 says the 2016 CRC dropped the old 120 sq ft room rule, so a dwelling needs only a 70 sq ft habitable room, a bathroom (toilet, sink, tub or shower) and a kitchen area with a sink. HCD also told local agencies not to apply the larger 'efficiency dwelling unit' rules to detached homes built on a foundation. The 190 sq ft minimum you may see is in the California Building Code (section 1208.3), which covers apartments and other non-CRC buildings, not detached houses. Sleeping rooms need an emergency escape opening (R319): 5.7 sq ft net clear (5.0 sq ft at grade), at least 24\" high and 20\" wide, sill no higher than 44\". A sliding or side-hinged door counts. R328 (aging in place) adds 2x8 grab-bar blocking in one entry-level bathroom, switches and outlets between 15\" and 48\" above the floor, and a 32\" clear door to one entry-level bathroom and bedroom.",
+   "confidence": "high",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r312-minimum-room-areas",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r313-ceiling-height",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r319-emergency-escape-and-rescue-openings",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r328-aging-in-place-design-and-fall-prevention",
+    "https://www.hcd.ca.gov/sites/default/files/docs/building-standards/ib-2016-06.pdf",
+    "https://gocodebook.com/library/us/ca/ca-building-code/chapter-12-interior-environment/section-1208-interior-space-dimensions"
+   ],
+   "implication": "Under state code alone you could permit roughly a 300-400 sq ft studio. An open plan works if the sleeping area either has its own escape opening (for example a south sliding door) or is simply part of the great room. Building code is not the real limit; local zoning, cost per square foot and how you want to live are."
+  },
+  {
+   "title": "Town of Yucca Valley: 725 sq ft minimum, 20 ft average width, eaves and covered parking",
+   "detail": "Development Code section 9.07.100 (Ord. 253, 2014; GoCodebook text dated 2026-10-03) covers all detached single-family homes. A6: 'Minimum floor area shall be seven hundred twenty five (725) square feet measured from the exterior of the structure', with an average width and depth of at least 20 ft, not counting garages and porches. A3: siding must be stucco, wood, brick, stone, decorative block or equivalent synthetics; metal siding must be nonreflective. A4: roofing must be tile, composite shingle, wood shake or another material customary locally, with eaves and gable overhangs of at least 12\", except flat roofs with parapets. A7: washer and dryer hookups are required. A8: you need legal and physical access (engineer- or surveyor-certified as passable by a standard sedan), water from a water provider or a proven well, sanitation, and fire flow meeting County Fire rules. The 9.07.050 Rural Living table: front setback 25', side and rear 15', lot coverage 25%, height 35', and parking of '2 parking spaces per unit within a garage or carport' (18' wide x 19' long inside). Accessory buildings: up to 4, 25' tall maximum. On May 26-27, 2026 the Planning Commission heard a contractor argue for a lower minimum and voted to bring alternatives back on June 9, 2026. Staff had expected to keep 725. ADUs and tiny homes on wheels were described as exempt. I could not confirm what happened after June 9.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-9-development-code/chapter-9.07-residential-and-hillside-reserve-districts",
+    "https://z1077fm.com/yucca-valley-planning-commission-pauses-on-recommended-minimum-square-footage-for-single-family-residences/",
+    "https://z1077fm.com/yucca-valley-planning-commission-agenda-how-small-can-a-single-family-residence-be-built/"
+   ],
+   "implication": "If the lot is inside the Town, design about 22'x34' (748 sq ft) and budget a 2-car carport. Making it a solar carport covers both the parking rule and the solar requirement. A flat roof with a parapet avoids the 12\" eave rule, but deep overhangs are good desert design anyway. Call the Town to find out whether 725 still stands."
+  },
+  {
+   "title": "Unincorporated County: no minimum size, but siding and roofing material lists",
+   "detail": "County Development Code 84.21.030 (single-family standards): siding of stucco, wood, brick, stone, decorative block or similar synthetics, with nonreflective metal; roofing of tile, composite shingle or wood shake (only where the fire overlay allows) or other materials customary in the community. A 'Tiny Home' may be permitted if it meets the CRC minimums. Recreational vehicles cannot be approved as dwellings. Water must come from a water provider where one is available; a well is possible outside a service area; hauled water needs Environmental Health approval. The County's IB-0004 (updated Jan 1, 2026) says that for a new single-family home 'hauled water shall not be permitted per SB 1263', and that an NFPA 13D sprinkler system is required. A garage or carport requirement appears for Valley and Desert RS zones; I did not see one for RL, so verify.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.21-single-family-residential-dwellings",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0004-2025-Homestead-Rec-Cabins-Rev-11.19.25.pdf"
+   ],
+   "implication": "In the County a 480-640 sq ft modern house is legal. Plan for a well or water-district connection before the house: you cannot finish a permitted house on hauled water. Pick nonreflective metal, fiber-cement or stucco cladding and a Class A roof (fire rating) that the County accepts."
+  },
+  {
+   "title": "County pre-approved plans exist but are ADU plans with pitched roofs",
+   "detail": "San Bernardino County Land Use Services posts four pre-approved detached ADU plans: Model B (735 sq ft), Model C (1,008 sq ft), Model D (560 sq ft, 1 bedroom) and Plan H (1,008 sq ft). They are drawn to the 2025 CRC, the 2025 Wildland-Urban Interface Code, CALGreen and the Energy Code, and their notes include the CRC R337 wildfire requirements. Design loads on Model D: 130 mph ultimate wind speed, Exposure C (open terrain), Seismic Design Category D2, 30 psf ground snow, 20 psf roof live load. The roofs are 4:12 and 5:12 gables, and the solar array is 'shown for reference, by energy consultant'. The County says pre-approved plans can cut review by up to 30 days. HCD's ADU Handbook (March 2026) says an ADU's certificate of occupancy generally cannot be issued before the main house's (Gov. Code 66328; exceptions only after declared disasters). ADUs are exempt from sprinklers only if the main house has none (CRC R309.2 Exception 2; Gov. Code 66314(d)(12)). I found no pre-approved plan program for the Town of Yucca Valley. The Town website blocked my fetch, and local news described only ADU outreach webpages and handouts.",
+   "confidence": "high",
+   "sources": [
+    "https://main.sbcounty.gov/2026/06/11/county-offers-tools-to-help-homeowners-add-accessory-dwelling-units/",
+    "https://lus.sbcounty.gov/building-safety-home/guidance-and-technical-handouts/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Model-D-CRC-2025.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Model-B-CRC-2025.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/LUS-ADU-Handout-2.13.2026.pdf",
+    "https://www.hcd.ca.gov/building-standards/adu/handbook",
+    "https://z1077fm.com/yucca-valley-planning-commission-adus-fuel-stations-and-bath-body-works"
+   ],
+   "implication": "Building the small house as an ADU first and the main house later does not get you a legal place to live, because the ADU cannot be signed off first. Permit the small modern house as the PRIMARY dwelling. Model D is still useful as a free, code-checked template: compare its structural and wildfire details against your own drawings, and ask the County whether it can be filed as a primary home with sprinklers added (the County fee schedule has a 'standard plans: single family residence' category). Your later capsule-style units become the legal ADUs."
+  },
+  {
+   "title": "Fire sprinklers and water are fixed costs for any new main house",
+   "detail": "CRC R309.2: 'An automatic sprinkler system shall be installed in one- and two-family dwellings', designed to R309 or NFPA 13D. On a private well you usually need a small storage tank and pump sized for the sprinkler demand. From memory of NFPA 13D, small single-story homes under 2,000 sq ft need 7-10 minutes of supply for two sprinkler heads, which typically means a 200-500 gallon tank; verify with a C-16 fire sprinkler contractor. County Fire may separately require a fire-flow water tank for the parcel.",
+   "confidence": "high",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r309-automatic-sprinkler-systems",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0004-2025-Homestead-Rec-Cabins-Rev-11.19.25.pdf"
+   ],
+   "implication": "Reserve a mechanical closet of about 4'x6' for the sprinkler riser, water heater, radiant manifold and ventilation unit. Budget about $4k-12k for sprinklers plus $3k-8k for a tank and pump. With flat ceilings, sprinkler pipe runs are simpler than with tall sloped ones."
+  },
+  {
+   "title": "The temporary-residence clock dictates how 'slow' the build can be",
+   "detail": "County: Development Code 84.25.040(e) lets an existing dwelling or a temporary structure be used as a residence during construction under a Temporary Use Permit. It runs up to 12 months after the companion building permit is issued (or until completion, whichever comes first). You can extend it once for up to 12 more months by asking in writing at least 14 days before it expires. The temporary unit must be removed within 30 days of completion. Without a permit, owner camping on parcels of 5+ acres in RL/AG/RC zones is limited to 4 days in 30 for a temporary structure or vehicle (84.25.070). Town: section 9.39.050(A)(1) allows a manufactured home or self-contained RV as a temporary residence after construction permits are issued, in 1-year increments up to 4 years total. It also requires HCD/HUD approval evidence (9.39.060(B)) and prohibits living in an unpermitted structure (9.39.080). Building permits generally expire if work stops for 180 days, so you need an inspection at least every ~180 days. This is from memory of standard CBC/CRC administrative language; confirm County and Town rules. HCD's tiny-home bulletin says an occupied tiny home must be an RV/park trailer, HUD manufactured home, factory-built housing or a code-built dwelling.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.25-temporary-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-9-development-code/chapter-9.39-temporary-uses-and-structures",
+    "https://www.hcd.ca.gov/sites/default/files/docs/building-standards/ib-2016-01.pdf"
+   ],
+   "implication": "An uncertified $20k capsule is not a legal place to live. Swap it for a certified self-contained RV or a HUD-code unit for the construction period, and only after the building permit is issued. Design the house so a 'core' (wet core, kitchen and one soft room) can pass final inspection within about 18-24 months in the County. Add later rooms as separate addition permits."
+  },
+  {
+   "title": "2025 Energy Code: heat pumps, solar, and why electric radiant cannot be the main heat",
+   "detail": "The 2025 Building Energy Efficiency Standards apply to permit applications submitted on or after Jan 1, 2026. For homes, the code sets heat pumps as the baseline for both space heating and water heating, expanding the single heat-pump baselines of 2022. Rooftop solar panels have been required on new single-family homes since the 2020 code, sized by a formula; small homes may qualify for a minimum-size exception, so ask the energy consultant. Yucca Valley is almost certainly in Climate Zone 14 (high desert), but I could not fetch the official climate-zone-by-ZIP tool, so confirm it. The prescriptive (checklist) path caps window solar heat gain, which conflicts with high-gain south glass for passive solar. A performance model (computer energy model) lets you trade that off. Electric-resistance heat, including electric floor mats, scores poorly against the heat-pump baseline. Whether the energy software can model an air-to-water heat pump driving a radiant slab should be confirmed with your consultant.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.energy.ca.gov/programs-and-topics/programs/building-energy-efficiency-standards/2025-building-energy-efficiency",
+    "https://www.energy.ca.gov/sites/default/files/2024-09/2025_California_Energy_Code_Fact_Sheet_ada.pdf",
+    "https://www.energy.ca.gov/sites/default/files/2024-12/2025_Energy_Code_Summary_ADA.pdf",
+    "https://www.energy.ca.gov/publications/2025/2025-single-family-residential-compliance-manual-2025-building-energy-efficiency"
+   ],
+   "implication": "Go all-electric. Make a ductless mini-split heat pump the code-compliant primary heating and cooling and a heat-pump water heater the hot water. Treat radiant floor heat as comfort, either electric mats under the soft zones (supplemental) or a hydronic slab heated by an air-to-water heat pump. Hire the energy consultant before the windows are finalized."
+  },
+  {
+   "title": "Wildfire construction: the 2025 Wildland-Urban Interface Code replaces CRC R337 content",
+   "detail": "In the 2025 CRC, R337 says the exterior wildfire rules moved to Title 24 Part 7, the California Wildland-Urban Interface Code, effective with the 2025 codes on Jan 1, 2026. The County pre-approved plans list the typical requirements. Roof covering must be Class A (ASTM E108/UL 790). Vents must be listed ember- and flame-resistant or covered with noncombustible mesh with openings of 1/16\" to 1/8\". Exterior walls must be noncombustible or ignition-resistant, or backed by 5/8\" Type X gypsum sheathing. Eaves and soffits must be protected, or rafter tails must be solid wood at least 2\" nominal. Windows must be insulating glass with at least one tempered pane. Exterior doors must be noncombustible-faced, solid wood with minimum stile thicknesses, 20-minute rated, or tested to SFM 12-7A-1. A 0-5 ft 'Zone 0' ember-resistant rule for the area around houses was required by AB 3074. I could not confirm whether the Board of Forestry had adopted it or when it takes effect as of Oct 2026. Whether your parcel is in a Fire Hazard Severity Zone (and which class) needs a parcel lookup; the OSFM page blocked my fetch.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r337-materials-and-construction-methods-for-exterior-wildfire-exposure",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Model-D-CRC-2025.pdf"
+   ],
+   "implication": "Design to wildfire standards regardless of mapping; it also helps with insurance. Use steel or fiber-cement nonreflective cladding, a Class A low-slope membrane or standing-seam roof, enclosed or noncombustible soffits, tempered dual-pane glass, and a noncombustible terrace (concrete or porcelain pavers, no wood deck) for the first 5 ft around the house. Keep plantings and storage out of that 5-ft ring."
+  },
+  {
+   "title": "Structural design: wind, earthquake, slope and slab rules",
+   "detail": "County design criteria: 130 mph ultimate wind speed, Exposure C, Seismic Design Category D2. California amendment R301.1.3.3 requires plans 'approved and stamped' by a California-licensed architect or engineer for floor, wall or roof elements of cold-formed steel, concrete, masonry or SIPs (structural insulated panels). R403.1.7 governs footings on or next to slopes steeper than 1:3 (33%). Clearance from an uphill slope is the smaller of H/2 and 15 ft. The setback from a downhill slope face is commonly H/3 with a 40 ft maximum (IRC figure, not reproduced in the fetched text; verify). Exterior footings must be at least 12\" below undisturbed ground. Slabs (R506): at least 3.5\" thick; 4\" base course where required; vapor retarder of at least 6-mil polyethylene; fill no deeper than 24\" (clean sand or gravel) or 8\" (earth) unless approved; a California amendment requires a capillary break under CALGreen 4.505.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Model-D-CRC-2025.pdf",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r301-design-criteria",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-4-foundations/section-r403-footings",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-5-floors/section-r506-concrete-floors-on-ground"
+   ],
+   "implication": "Budget a structural engineer ($2.5k-8k) whichever system you pick, plus a soils report. Mostly cut into the slope rather than fill, because deep fill under a slab needs an engineered, compaction-tested fill. A stepped slab that follows the contour, with the entry one step down and the soft room level, fits the incline and Japanese floor-living."
+  },
+  {
+   "title": "High-desert passive design for a small modern house",
+   "detail": "Yucca Valley sits at about 34.1 N latitude. Noon sun altitude is about 79 degrees at the June solstice, 56 degrees at the equinoxes and 32 degrees at the December solstice (calculated). A south overhang of about 3-4 ft over 7-ft-tall glass (head about 8 ft) shades the glass fully in summer and lets most of the winter sun reach the floor. September and October are still hot, so add exterior roll-down screens. Run the long axis east-west. Keep west glass to a small slot or none; use modest east glass and north clerestories (high windows) for even daylight and stack ventilation. Size south glass at about 10-15% of floor area so a high-mass slab does not overheat. Use a cool, light-colored roof. Insulation targets above prescriptive (my recommendation): roof R-40 to R-50, walls about R-25 to R-32 effective, windows U-0.28 or better, and R-10 under the full slab. Airtightness: 3 air changes per hour at 50 Pa or better, plus a balanced energy-recovery ventilator with MERV-13 filters to keep out dust during wind events. Put the entry on the side sheltered from the strong west and southwest spring winds. Open windows at night to flush heat out, since day-night swings are often 25-35 F.",
+   "confidence": "medium",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Radiant_cooling",
+    "https://www.energy.ca.gov/publications/2025/2025-single-family-residential-compliance-manual-2025-building-energy-efficiency"
+   ],
+   "implication": "Draw the house as a 32-34 ft long east-west bar with a deep south terrace roof. The orientation costs nothing and decides most of the comfort and energy result."
+  },
+  {
+   "title": "Radiant heat options: hydronic slab vs electric mats vs solar thermal",
+   "detail": "Hydronic in-slab: PEX tubing in the slab, heated by an air-to-water heat pump (about 2-3 tons, with a buffer tank and outdoor-temperature control). It is efficient and the same unit can make chilled water, but it needs a skilled designer. Installed cost for a ~600 sq ft house is roughly $20k-40k for the whole system, which is a lot of money for a heat load of only about 6-10k Btu/h. A slab responds over 6-12+ hours. In the desert that means a slab heated overnight can overheat a sunny room by midday, so run it at low water temperature (about 85-100 F) and limit south glass. Electric mats or cable: simpler, faster to respond when laid over an insulating underlayment, and easy for an owner-builder. They draw about 10-15 W per sq ft, cost roughly $12-25 per sq ft installed ($8-12 if you do it yourself), and need GFCI-protected thermostats with floor sensors. They score poorly against the energy code heat-pump baseline, so use them as supplemental heat. Solar thermal to slab: plenty of winter sun, but summer overheating and stagnation make it complex; not recommended as the only source. Comfort note: tatami, cork and wool feel warm to the touch, so a floor surface around 75-80 F feels luxurious. Occupied floors are normally capped at about 84 F (29 C) under standard radiant design practice (the EN 1264 standard).",
+   "confidence": "medium",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Underfloor_heating",
+    "https://www.greenbuildingadvisor.com/article/all-about-radiant-floors"
+   ],
+   "implication": "For a small, well-insulated house: mini-split as primary plus electric radiant under the soft and bath zones gives the most comfort for the money and is the easiest to build yourself. Choose hydronic only if you want floor cooling or a combined heat-pump water heater system and can pay for a designer."
+  },
+  {
+   "title": "Cooling: a radiant slab helps in dry air, but you still need a mini-split",
+   "detail": "Hot, dry climates are the best case for radiant cooling. The floor surface must stay above the room's dew point, though, and from June through September the summer monsoon raises the dew point. Floor cooling capacity is modest. As an engineering estimate, about 6-12 Btu/h per sq ft with the surface around 66-68 F, roughly half of a small desert house's peak load. Soft, insulating coverings such as tatami and carpet greatly reduce it. Convection carries under 10% of the heat transfer in floor cooling, compared with about 50% in floor heating.",
+   "confidence": "medium",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Radiant_cooling",
+    "https://en.wikipedia.org/wiki/Underfloor_heating"
+   ],
+   "implication": "Install a 9-12k Btu ductless mini-split as the cooling workhorse; it also dehumidifies during the monsoon. Radiant cooling is only worth doing on hard floor zones with a hydronic system."
+  },
+  {
+   "title": "Whole-floor soft surface over radiant heat: keep the floor-covering insulation low",
+   "detail": "Every layer above the heating element adds insulation. Common guidance: UK carpet industry about 2.5 tog (about R-1.4 US) for carpet plus underlay; US radiant designers typically cap total covering at about R-2 to R-2.5 and design water temperatures around it. I could not fetch a primary standard; treat this as industry guidance. My engineering estimates: traditional 55-60 mm rice-straw tatami is about R-3.5 to R-4, and foam-core tatami about R-6 to R-9, so both largely block floor heat. Thin tatami rated for floor heating (15-30 mm, board core) is about R-1 to R-1.7. Glue-down cork is about R-0.5 (6 mm) to R-0.9 (10 mm). Wool loop carpet about 3/8\" thick is about R-1, plus a 1/4\" rubber pad (about R-0.3) or felt pad (about R-0.6 to R-1). Tatami sizes: Edoma 1.76 x 0.88 m, Kyoma 1.91 x 0.955 m, 5.5-6 cm thick traditionally; modern cores use wood-chip board or polystyrene foam. Desert behavior (judgment): natural igusa rush gets brittle, sheds fibers and fades under UV in very dry air. Washi (paper-resin) or polypropylene facings resist abrasion, sun and stains better. Sand is the enemy of every soft floor, so use an entry step-down (genkan), shoes off, and a central or robot vacuum. Keep the entry, kitchen strip, bath, laundry and mechanical areas hard and waterproof.",
+   "confidence": "medium",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tatami",
+    "https://en.wikipedia.org/wiki/Underfloor_heating"
+   ],
+   "implication": "Order samples and test them on a warm, sunny floor before deciding. Don't lay thick traditional tatami over radiant heat. Either use thin floor-heating tatami flush in a slab recess, or put thick tatami on a raised platform with its own heat (build-up C)."
+  },
+  {
+   "title": "Recommended floor build-up A: hydronic slab with flush thin tatami",
+   "detail": "Layers, bottom up: (1) compacted subgrade or engineered fill per the soils report; (2) 4\" crushed 3/4\" rock capillary break; (3) 15-mil taped vapor retarder (code minimum is 6-mil); (4) 2\" EPS or XPS foam board (R-8 to R-10) under the entire slab, plus 2\" vertical R-10 at the slab edge (the Title 24 minimum for a heated slab edge is lower, about R-5, from memory); (5) rebar on chairs, with 1/2\" PEX-a tubing at 9\" spacing in the soft zone and 12\" elsewhere, loops of 300 ft or less, manifold in the mechanical closet; (6) 4\" slab, power-troweled, dropped about 1\" in the tatami zone; (7) hard zones finished as ground and sealed concrete or porcelain tile; soft zone gets 2-3 mm cork or felt underlay plus 20-30 mm floor-heating tatami (washi or polypropylene facing). Heat source: an air-to-water heat pump with buffer tank; add a mini-split for cooling. Rough cost for 640 sq ft: slab, insulation and capillary break $9k-14k; PEX, manifold and labor $3k-6k; heat pump system $15k-30k; tatami for about 340 sq ft $7k-15k; mini-split $4k-8k.",
+   "confidence": "low",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-5-floors/section-r506-concrete-floors-on-ground",
+    "https://en.wikipedia.org/wiki/Underfloor_heating"
+   ],
+   "implication": "This is the most comfortable and most Japanese option, and the most expensive and least DIY-friendly. Choose it only with a radiant designer involved."
+  },
+  {
+   "title": "Recommended floor build-up B: insulated slab, electric radiant, cork or wool (best for owner-builders)",
+   "detail": "Layers: (1)-(4) as in build-up A; (5) 4\" slab with no tubing, ground and sealed as the finished floor in hard zones (electric mat in thinset under porcelain tile in the bath); (6) soft zone: 1/4\"-1/2\" bonded cork or a listed insulating underlayment (R-0.5 to R-1) so heat goes up; (7) UL-listed electric heating cable or mat at about 10-12 W per sq ft, with floor-sensing GFCI thermostats; (8) 3/8\" self-leveling underlayment over it; (9) finish of glue-down cork 6-10 mm, or wool loop carpet plus a thin pad (total under R-1.5), or thin tatami laid loose. Primary heating and cooling: a 9-12k Btu ductless mini-split. Rough cost: radiant for 340 sq ft $3k-8.5k; leveler $1k-2k; cork $8-16 per sq ft installed or wool $10-20 per sq ft; mini-split $4k-8k. Electrical load: about 3.4-4 kW for the soft zone, so two 240V circuits.",
+   "confidence": "low",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Underfloor_heating",
+    "https://www.greenbuildingadvisor.com/article/all-about-radiant-floors"
+   ],
+   "implication": "This is the recommended default. It is cheapest, fastest to respond during desert day-night swings, easy for an owner to install, and easy to repair or change zone by zone."
+  },
+  {
+   "title": "Recommended floor build-up C: raised tatami platform or sunken pit over a plain slab",
+   "detail": "Layers: (1)-(4) as in build-up A; (5) 4\" slab finished as hard floor everywhere, the cheapest slab; (6) in the living and sleeping zone, a 12-16\" timber platform built like furniture (2x sleepers, 3/4\" tongue-and-groove plywood, storage drawers), kept under 30\" so no guard rail is required. Optionally include a 16\" deep foot well (horigotatsu) for a low table, or form a sunken conversation pit in the slab with risers of 7.75\" or less. (7) Electric radiant film or mat rated for wood subfloors, plus 1/4\" cork; (8) standard 30-55 mm tatami cut to whole-mat modules, with wood nosing at the edges. Rough cost for 340 sq ft: platform $3.5k-8.5k DIY; tatami $7k-15k; heat film $2k-4k.",
+   "confidence": "low",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tatami",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r313-ceiling-height"
+   ],
+   "implication": "The step up keeps sand off the sleeping surface, gives built-in storage (useful for the Bhutan trip) and avoids tubing in the slab. The platform eats ceiling height: the R313 7 ft minimum applies above the platform, so plan 9 ft or more of ceiling there."
+  },
+  {
+   "title": "Construction systems for slow owner-building in the desert",
+   "detail": "My estimates, labeled as such (I could not research local 2025-2026 bids because the search budget ran out). Conventional 2x6 wood frame on slab: cheapest material, best known to local inspectors and subs, and the CRC prescriptive path still needs engineered shear walls in Seismic Category D2. SIPs (structural insulated panels): very airtight, about R-24 to R-32, and a fast weather-tight shell (days to weeks). They need a California-stamped design (R301.1.3.3), and the panels must be protected from UV, and from insects at grade. Rough cost: shell package $35k-65k plus erection $8k-20k for about 650 sq ft. Steel-frame kit: noncombustible, termite-proof, will not rot if the build pauses, engineered and stamped by the supplier. Rough cost: shell frame $25k-60k. Steel prices rose with the 2025 Section 232 tariffs, so get current quotes. Factory-built modular or panelized: fastest to final inspection. HCD-approved factory-built housing is reviewed by the state, so the local agency reviews mainly the foundation and site. Rough cost: $250-450 per sq ft delivered plus $50k-150k site work. Rammed earth or adobe: beautiful thermal mass and fire-resistant, but must be engineered for D2, is slow and specialized, and runs about $250-450 per sq ft of wall; poor fit for 'finish fast'. Whole-house hard cost (excluding well, septic, power, road, grading, fees): owner-builder with subs about $225-375 per sq ft; a contractor-built small custom modern house about $350-550 per sq ft. Small houses cost more per sq ft because the kitchen and bath are fixed costs.",
+   "confidence": "low",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r301-design-criteria",
+    "https://www.hcd.ca.gov/sites/default/files/docs/building-standards/ib-2016-01.pdf"
+   ],
+   "implication": "Given the 12-24 month temporary-residence clock, a SIP or steel kit shell erected by a crew, with you finishing the inside, is the best balance of speed, owner labor and modern look. Get at least three quotes, including one from a factory-built supplier."
+  },
+  {
+   "title": "Owner-builder timeline and which trades to hire",
+   "detail": "Typical (estimates): design, engineering, energy calculations and soils report, 2-4 months; plan check, 1-4 months with 1-3 correction rounds; owner-builder construction part-time, 18-36 months for wood frame, 9-18 months with a kit or SIP shell plus subs. California's owner-builder exemption (Business and Professions Code 7044, from memory) lets you build your own home without a contractor's license, doing the work yourself or hiring licensed subcontractors. If you hire unlicensed helpers you become an employer, with payroll and workers' comp obligations. Selling within 1 year of completion creates a presumption that you built it for sale. Hire out: grading and pad; slab and foundation (with tubing or radiant prep); well (C-57 licensed driller) and septic; the main electrical service and solar interconnection; the fire sprinkler system (C-16); refrigerant work for the mini-split (EPA 608 certification, unless you use a pre-charged DIY unit); roofing membrane; stucco. Owner-friendly: insulation, interior framing, drywall, cabinets, cork, carpet or tatami, platform, paint, landscaping.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r309-automatic-sprinkler-systems"
+   ],
+   "implication": "Build the schedule backward from the temporary-use-permit expiry date. Put licensed subs on the critical path (slab, shell, roof, power, sprinklers) and save your own labor for finishes."
+  },
+  {
+   "title": "Concrete design brief: 'core house' with soft-floor great room",
+   "detail": "COUNTY version: 20'x32' outside (640 sq ft gross, about 585 sq ft net), one story, east-west long axis, slab on grade. TOWN version: 22'x34' (748 sq ft) plus a 2-car carport (18'x19' inside minimum; a solar carport is ideal). Room list along the north side: genkan entry 5'x7', one 6\" step down, porcelain tile, shoe bench, vacuum closet, placed on the east or north out of the prevailing wind; bath 7'x9' with curbless shower and grab-bar blocking; stacked washer-dryer closet 30\"x32\" (required by the Town); mechanical closet 4'x6'; galley kitchen 12' long on a 4' wide hard-floor strip with induction cooktop, 24\" fridge and 18\" dishwasher. South side: soft-floor great room about 18'x19' (about 340 sq ft) for living, eating and sleeping on futons. A sliding shoji or fusuma screen can close off a 10'x10' sleeping alcove (at least 70 sq ft, 7' clear) with its own sliding glass door for emergency escape. Futon closet (oshiire) 3'x8'. Ceilings: 8'-6\" to 9' flat, with an 11'-6\" north clerestory roof monitor over the great room. Windows: south about 90-110 sq ft (sliders plus fixed panes, low sills 12-18\" for floor-level views); north clerestory about 24 sq ft; east about 12 sq ft; west 6 sq ft or less; all dual-pane tempered low-e, U-0.28 or better. Outside: south terrace 8'x32' of concrete or porcelain pavers under a 4' roof overhang plus a steel trellis with shade screens. Systems: 9-12k Btu ductless heat pump; electric radiant under the soft zone and bath (build-up B), or hydronic (build-up A); heat-pump water heater; energy-recovery ventilator with MERV-13 filter; 3-5 kW solar panels, battery optional; NFPA 13D sprinklers. Envelope: Class A low-slope cool-roof membrane or standing-seam metal, nonreflective steel or fiber-cement cladding, enclosed noncombustible soffits. Hard-cost budget, excluding site utilities and fees: owner-built with subs $190k-320k; contractor-built $300k-450k. The Town version adds about $15k-35k for the larger area and the carport.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-9-development-code/chapter-9.07-residential-and-hillside-reserve-districts",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r312-minimum-room-areas",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r319-emergency-escape-and-rescue-openings"
+   ],
+   "implication": "Use this as the one-page brief to send to designers for fee proposals and to model in Blender. Phase 1 is the whole 640 sq ft core finaled. Any extra room comes later as an addition permit, or as one of the ADU capsule units."
+  }
+ ],
+ "critical_claims": [
+  {
+   "claim": "The Town of Yucca Valley Development Code section 9.07.100(A)(6) requires single-family homes to be at least 725 sq ft measured from the outside walls, with an average width and depth of at least 20 ft. The Planning Commission was weighing alternatives in May-June 2026, and I could not confirm the outcome.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-9-development-code/chapter-9.07-residential-and-hillside-reserve-districts",
+    "https://z1077fm.com/yucca-valley-planning-commission-pauses-on-recommended-minimum-square-footage-for-single-family-residences/"
+   ]
+  },
+  {
+   "claim": "Unincorporated San Bernardino County sets no minimum house size: a 'Tiny Home' is allowed if it meets the CRC. The CRC minimum is 70 sq ft habitable rooms with no side under 7 ft (R312), so a 400-640 sq ft primary house is legal there.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.21-single-family-residential-dwellings",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r312-minimum-room-areas",
+    "https://www.hcd.ca.gov/sites/default/files/docs/building-standards/ib-2016-06.pdf"
+   ]
+  },
+  {
+   "claim": "Living on site during construction is legal only with a temporary use permit after the building permit is issued. County: 12 months plus one 12-month extension (84.25.040(e)). Town: manufactured home or self-contained RV, up to 4 years (9.39.050). An uncertified capsule does not qualify.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.25-temporary-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-9-development-code/chapter-9.39-temporary-uses-and-structures"
+   ]
+  },
+  {
+   "claim": "A new primary house must have automatic fire sprinklers (CRC R309.2), and San Bernardino County does not allow hauled water for a new single-family home (IB-0004, citing SB 1263).",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r309-automatic-sprinkler-systems",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0004-2025-Homestead-Rec-Cabins-Rev-11.19.25.pdf"
+   ]
+  },
+  {
+   "claim": "The County's four pre-approved plans (560, 735, 1,008 and 1,008 sq ft) are ADU plans. An ADU generally cannot get its certificate of occupancy before the main house (Gov. Code 66328), so the small house should be permitted as the primary dwelling.",
+   "sources": [
+    "https://lus.sbcounty.gov/building-safety-home/guidance-and-technical-handouts/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Model-D-CRC-2025.pdf",
+    "https://www.hcd.ca.gov/building-standards/adu/handbook"
+   ]
+  },
+  {
+   "claim": "Floor coverings over radiant heat should total about R-1.5 or less (industry guidance; I did not fetch a primary standard). Traditional 55-60 mm tatami would largely block floor heat, so use thin floor-heating-rated tatami, cork or wool on a thin pad.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tatami",
+    "https://en.wikipedia.org/wiki/Underfloor_heating"
+   ]
+  }
+ ],
+ "design_numbers": [
+  "County design version: 20' x 32' exterior = 640 sq ft gross, single story, long axis east-west (my recommendation)",
+  "Town of Yucca Valley design version: 22' x 34' = 748 sq ft (code minimum 725 sq ft measured from exterior; average width and depth 20' or more; section 9.07.100(A)(6))",
+  "Yucca Valley RL: 2 covered parking spaces in a garage or carport, 18' wide x 19' long inside minimum (9.07.050 Table 2-4)",
+  "Yucca Valley RL setbacks: front 25', interior side 15', rear 15', street side 15' local / 25' collector or arterial; height 35'; lot coverage 25%; min lot 150' x 150'; up to 4 accessory buildings, 25' max height",
+  "Yucca Valley eaves and gable overhangs 12\" minimum, except flat roofs with parapets (9.07.100(A)(4))",
+  "CRC R312: habitable room 70 sq ft minimum, 7' minimum in any horizontal direction (kitchens exempt)",
+  "CRC R313: ceiling 7'-0\" habitable, 6'-8\" bath and laundry; with a sloped ceiling, 50% of the required area must be 7' or higher and area under 5' does not count",
+  "CRC R319 emergency escape opening: 5.7 sq ft net clear (5.0 at grade floor), 24\" high and 20\" wide minimum, sill 44\" maximum; sliding or side-hinged door counts",
+  "CRC R328: 2x8 grab-bar blocking 32\"-39.25\" above the floor in one entry-level bath; switches and outlets 15\"-48\" above the floor; 32\" clear door to the entry-level bath and bedroom",
+  "County pre-approved plan design loads: 130 mph ultimate wind, Exposure C; Seismic Design Category D2; ground snow 30 psf; roof live load 20 psf (Model D sheet)",
+  "Footings: 12\" minimum below undisturbed ground (R403.1.4); clearance from an uphill slope the smaller of H/2 and 15' (R403.1.7.1); setback from a downhill slope commonly H/3, max 40' (verify)",
+  "Slab: 3.5\" minimum (use 4\"); 4\" base course; 6-mil minimum vapor retarder (use 15-mil); capillary break required (R506; CALGreen 4.505); fill no deeper than 24\" sand/gravel or 8\" earth without approval",
+  "Radiant slab insulation (recommended): 2\" R-10 under the full slab plus 2\" R-10 vertical at the edge",
+  "PEX tubing 1/2\" at 9\" spacing in the soft zone, 12\" elsewhere; loops 300 ft or less (rule of thumb)",
+  "Electric radiant 10-12 W per sq ft; 340 sq ft soft zone = about 3.4-4.1 kW = two 240V circuits",
+  "Floor surface temperature 84 F (29 C) maximum in occupied zones (EN 1264 practice); comfort target under soft floors 75-80 F",
+  "Floor covering total insulation about R-1.5 or less (about 2.5 tog), R-2.5 practical maximum",
+  "Tatami modules: Edoma 1.76 x 0.88 m (about 5'-9\" x 2'-11\"); Kyoma 1.91 x 0.955 m; traditional thickness 55-60 mm; floor-heating type about 15-30 mm",
+  "Slab recess for flush tatami: 1\" (25 mm mat) to 1-1/4\" (30 mm); for 6-10 mm cork, plan a 3/8\" recess or no recess",
+  "Genkan entry step-down: one riser, about 6\" (7.75\" maximum riser)",
+  "Raised tatami platform 12-16\" high (stay under 30\" to avoid a guard rail); horigotatsu foot well about 16\" deep",
+  "Solar geometry at 34.1 N: noon sun altitude about 79 degrees (June), 56 degrees (equinox), 32 degrees (December). South overhang about 3'-4' over 7'-tall glass with its head at about 8'",
+  "South glass about 90-110 sq ft (10-15% of floor area); north clerestory about 24 sq ft; east about 12 sq ft; west 6 sq ft or less",
+  "Ceiling 8'-6\" to 9' flat; clerestory monitor about 11'-6\" over the great room",
+  "Room sizes: genkan 5'x7'; bath 7'x9'; washer-dryer closet 30\"x32\"; mechanical 4'x6'; galley kitchen 12' long with 4' wide hard strip; great room about 18'x19'; sleeping alcove 10'x10'; futon closet 3'x8'",
+  "South terrace 8' x 32', noncombustible pavers; keep a 0-5' noncombustible ring around the house",
+  "Wildfire vents: noncombustible mesh with 1/16\"-1/8\" openings, or listed ember-resistant vents; Class A roof; dual-pane glass with one tempered pane"
+ ],
+ "costs": [
+  {
+   "item": "Design: building designer or architect for a small modern house (drawings for permit)",
+   "low_usd": 5000,
+   "high_usd": 25000,
+   "notes": "Estimate; using a County pre-approved plan as a starting point lowers this"
+  },
+  {
+   "item": "Structural engineering (wind 130 mph Exposure C, Seismic D2; required for SIP or steel)",
+   "low_usd": 2500,
+   "high_usd": 8000,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Title 24 energy calculations (performance model) plus home energy rater verification",
+   "low_usd": 800,
+   "high_usd": 2500,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Soils/geotechnical report for the building pad",
+   "low_usd": 2000,
+   "high_usd": 5000,
+   "notes": "Estimate; may be required for cut/fill on a slope"
+  },
+  {
+   "item": "Pad grading (cut, compaction) and drainage for about 1,000-1,500 sq ft pad plus terrace",
+   "low_usd": 5000,
+   "high_usd": 25000,
+   "notes": "Estimate; depends on slope, rock, caliche (hard mineral soil layer)"
+  },
+  {
+   "item": "Insulated slab (gravel, 15-mil vapor retarder, R-10 under-slab foam, 4\" slab) for 640 sq ft",
+   "low_usd": 9000,
+   "high_usd": 14000,
+   "notes": "Estimate about $14-22 per sq ft"
+  },
+  {
+   "item": "Hydronic tubing, manifold and labor (build-up A)",
+   "low_usd": 3000,
+   "high_usd": 6000,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Air-to-water heat pump plus buffer tank and controls, installed (build-up A)",
+   "low_usd": 15000,
+   "high_usd": 30000,
+   "notes": "Estimate; needs a radiant designer"
+  },
+  {
+   "item": "Electric radiant mats or cable for about 340 sq ft soft zone plus bath, installed (build-up B)",
+   "low_usd": 3000,
+   "high_usd": 8500,
+   "notes": "Estimate $8-12 per sq ft DIY, $14-25 per sq ft installed"
+  },
+  {
+   "item": "Ductless mini-split heat pump, 9-12k Btu, installed",
+   "low_usd": 4000,
+   "high_usd": 8000,
+   "notes": "Estimate; DIY pre-charged units about $1.5k-3k equipment"
+  },
+  {
+   "item": "Heat-pump water heater",
+   "low_usd": 3000,
+   "high_usd": 6000,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Energy-recovery ventilator (balanced, MERV-13)",
+   "low_usd": 2500,
+   "high_usd": 6000,
+   "notes": "Estimate"
+  },
+  {
+   "item": "NFPA 13D fire sprinkler system",
+   "low_usd": 4000,
+   "high_usd": 12000,
+   "notes": "Estimate; required by CRC R309.2"
+  },
+  {
+   "item": "Sprinkler water storage tank and pump (if on a well)",
+   "low_usd": 3000,
+   "high_usd": 8000,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Floor-heating-rated thin tatami for about 340 sq ft (washi or polypropylene facing)",
+   "low_usd": 7000,
+   "high_usd": 15000,
+   "notes": "Estimate about $20-45 per sq ft; import and custom-fit pricing varies widely"
+  },
+  {
+   "item": "Glue-down cork for about 340 sq ft, installed",
+   "low_usd": 2700,
+   "high_usd": 5500,
+   "notes": "Estimate $8-16 per sq ft"
+  },
+  {
+   "item": "Wool loop carpet plus thin pad for about 340 sq ft, installed",
+   "low_usd": 3400,
+   "high_usd": 6800,
+   "notes": "Estimate $10-20 per sq ft"
+  },
+  {
+   "item": "Raised tatami platform with storage (DIY, about 340 sq ft)",
+   "low_usd": 3500,
+   "high_usd": 8500,
+   "notes": "Estimate"
+  },
+  {
+   "item": "SIP shell package (walls plus roof) for about 650 sq ft, delivered, plus erection",
+   "low_usd": 43000,
+   "high_usd": 85000,
+   "notes": "Estimate; prices volatile in 2025-2026"
+  },
+  {
+   "item": "Steel-frame kit shell (engineered)",
+   "low_usd": 25000,
+   "high_usd": 60000,
+   "notes": "Estimate; Section 232 steel tariffs raised prices in 2025"
+  },
+  {
+   "item": "Wildfire-rated dual-pane tempered windows and doors (about 150-200 sq ft glazing)",
+   "low_usd": 15000,
+   "high_usd": 40000,
+   "notes": "Estimate; large sliders drive cost"
+  },
+  {
+   "item": "Solar panels 3-5 kW (required for a new home)",
+   "low_usd": 9000,
+   "high_usd": 18000,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Battery, about 13.5 kWh (optional; useful if off-grid or for outages)",
+   "low_usd": 10000,
+   "high_usd": 16000,
+   "notes": "Estimate"
+  },
+  {
+   "item": "2-car solar carport (Town of Yucca Valley parking requirement)",
+   "low_usd": 12000,
+   "high_usd": 30000,
+   "notes": "Estimate; excludes solar panels"
+  },
+  {
+   "item": "Whole house hard cost, owner-builder with licensed subs, 640 sq ft (excludes well, septic, power, road, fees)",
+   "low_usd": 190000,
+   "high_usd": 320000,
+   "notes": "Estimate about $300-500 per sq ft; small houses cost more per sq ft"
+  },
+  {
+   "item": "Whole house hard cost, contractor-built, 640-750 sq ft (excludes site utilities and fees)",
+   "low_usd": 300000,
+   "high_usd": 450000,
+   "notes": "Estimate"
+  }
+ ],
+ "people_to_involve": [
+  {
+   "role": "Building designer or California-licensed architect (small modern, desert, Japanese-influenced)",
+   "why": "Turn the brief into permit drawings, fit the house to the slope, and coordinate the engineer and energy consultant",
+   "when": "Before you close on the land, for a 1-2 hour site walk; then right after closing",
+   "how_to_find": "Ask County Building and Safety counter staff and local contractors who they see succeed; look at completed Morongo Basin modern houses and ask the owners",
+   "questions_to_ask": [
+    "Have you permitted a primary house under 700 sq ft in SB County or Yucca Valley?",
+    "Can we use County pre-approved Model D details to save fees?",
+    "How do you handle the energy-code window limits vs south glass?",
+    "Fixed fee or hourly, and how many revision rounds?"
+   ],
+   "typical_cost": "$5k-25k (estimate)"
+  },
+  {
+   "role": "Structural engineer",
+   "why": "Required stamp for SIP or steel systems (R301.1.3.3); wind and seismic design; footings near slopes",
+   "when": "During design, after picking the shell system",
+   "how_to_find": "Referral from SIP or steel kit supplier or your designer",
+   "questions_to_ask": [
+    "Can the slab be stepped to follow the slope?",
+    "Is a soils report required?",
+    "Can the shell be designed so a later addition is easy?"
+   ],
+   "typical_cost": "$2.5k-8k (estimate)"
+  },
+  {
+   "role": "Title 24 energy consultant (Certified Energy Analyst) and home energy (HERS) rater",
+   "why": "Required energy compliance; models the trade-offs between radiant, heat pumps, south glass and solar panels",
+   "when": "Early schematic design, before windows are chosen",
+   "how_to_find": "California Association of Building Energy Consultants directory, or designer referral",
+   "questions_to_ask": [
+    "Can the software model an air-to-water heat pump with radiant slab?",
+    "How much is electric radiant penalized if the mini-split is primary?",
+    "What minimum solar size applies to 640 sq ft in our climate zone?"
+   ],
+   "typical_cost": "$800-2,500 (estimate)"
+  },
+  {
+   "role": "Geotechnical/soils engineer",
+   "why": "Pad design on the incline, fill compaction, footing setbacks",
+   "when": "Before final site plan; ideally during the purchase contingency period",
+   "how_to_find": "Designer or engineer referral",
+   "questions_to_ask": [
+    "Cut vs fill recommendation?",
+    "Caliche (hard mineral layer) or collapsible desert soils present?",
+    "Drainage around the pad during flash floods?"
+   ],
+   "typical_cost": "$2k-5k (estimate)"
+  },
+  {
+   "role": "Radiant heating designer or hydronic contractor",
+   "why": "Tube layout, water temperatures and controls tuned to soft coverings and desert day-night swings (only if you choose hydronic)",
+   "when": "Design phase, before the slab pour",
+   "how_to_find": "Radiant Professionals Alliance members; heat-pump suppliers' dealer lists",
+   "questions_to_ask": [
+    "What surface temperature can you reach under thin tatami at our design temperature?",
+    "How do you avoid daytime overheating from the sun?",
+    "Can one unit also do hot water and chilled-water floor cooling?"
+   ],
+   "typical_cost": "Design $1k-3k; system $20k-40k (estimate)"
+  },
+  {
+   "role": "Fire sprinkler contractor (C-16 license)",
+   "why": "NFPA 13D design and install; tank and pump sizing on a well",
+   "when": "Design phase (layout affects ceilings) and rough-in",
+   "how_to_find": "Ask County Fire or Building and Safety for local contractors",
+   "questions_to_ask": [
+    "How many gallons of storage for our layout?",
+    "Can pipes run in a flat ceiling without a soffit?",
+    "Cost for 640 sq ft?"
+   ],
+   "typical_cost": "$4k-12k plus tank $3k-8k (estimate)"
+  },
+  {
+   "role": "SIP / steel kit / factory-built home suppliers (get at least 3 quotes)",
+   "why": "Speed to a weather-tight shell within the temporary-residence clock",
+   "when": "Schematic design",
+   "how_to_find": "Manufacturers that ship to Southern California; ask for local projects to visit",
+   "questions_to_ask": [
+    "Delivered price for 20'x32' to Yucca Valley?",
+    "Engineering stamp included for 130 mph Exposure C, Seismic D2?",
+    "Crew erection time and truck access needs?"
+   ],
+   "typical_cost": "Shell $25k-85k (estimate)"
+  },
+  {
+   "role": "Tatami maker or importer and a flooring installer",
+   "why": "Floor-heating-compatible thin tatami, custom sizes, washi or polypropylene facings; cork or wool installation",
+   "when": "Design phase (slab recess depth depends on mat thickness)",
+   "how_to_find": "Japanese tatami importers and makers in California; ask for floor-heating models",
+   "questions_to_ask": [
+    "What thickness and core for radiant heat?",
+    "Insulation value (R or m2K/W)?",
+    "How do they hold up in under 15% humidity and UV?",
+    "Price per mat, delivered?"
+   ],
+   "typical_cost": "$20-45 per sq ft (estimate)"
+  },
+  {
+   "role": "San Bernardino County Land Use Services, Building and Safety (909-387-8311), or Town of Yucca Valley Building/Planning",
+   "why": "Confirm minimum size, pre-approved plan use as a primary home, temporary-use-permit rules, fees",
+   "when": "Before buying",
+   "how_to_find": "County: 385 N. Arrowhead Ave, San Bernardino (number from the County plan sheet); Town: yucca-valley.org (number not verified)",
+   "questions_to_ask": [
+    "Is the parcel in the Town or the County?",
+    "Can Model D be filed as a primary home?",
+    "Temporary use permit process for living on site during construction?",
+    "What fire hazard zone and climate zone apply to this parcel?"
+   ],
+   "typical_cost": "Free"
+  }
+ ],
+ "next_actions": [
+  "Download San Bernardino County Pre-Approved ADU Model D (560 sq ft) from https://lus.sbcounty.gov/wp-content/uploads/sites/48/Model-D-CRC-2025.pdf and print the floor plan sheet to mark up your soft-floor and hard-floor zones.",
+  "Call SB County Building and Safety at 909-387-8311 and ask: 'Can pre-approved ADU Model D be submitted as the primary single-family dwelling on a vacant RL lot if we add NFPA 13D sprinklers, and what review time and fee apply?'",
+  "Call the Town of Yucca Valley Planning Division (find the number on yucca-valley.org) and ask whether the 725 sq ft minimum in section 9.07.100(A)(6) changed after the June 9, 2026 Planning Commission meeting, and whether a solar carport satisfies the 2-space RL parking requirement.",
+  "Ask the County or Town counter, for the specific parcel number: 'What fire hazard severity zone and energy-code climate zone apply, and is a soils report required for a new home on a sloped pad?'",
+  "Tape out a 20' x 32' rectangle (and a 22' x 34' one) with string or painter's tape in a yard or parking lot, then lie down in the 18' x 19' great-room zone together to test the size.",
+  "Order samples: thin floor-heating-rated tatami (washi or polypropylene facing), 6 mm and 10 mm glue-down cork, and a wool loop carpet with a thin felt pad. Put them in a sunny spot for a week and walk sand over them.",
+  "Open SunCalc.org on your phone at the candidate building pad and screenshot the sun paths for June 21 and December 21 to confirm the east-west long axis and any hills shading the south.",
+  "Email this design brief (20' x 32', soft-floor great room, mini-split plus radiant) to two building designers and one energy consultant, asking for fee proposals and how they would handle the energy-code window limits.",
+  "Request delivered-price quotes for a 20' x 32' shell from one SIP manufacturer and one steel-frame kit supplier, specifying 130 mph Exposure C wind and Seismic Design Category D2.",
+  "Write down the date you would apply for the building permit, add 12 months and 24 months (County temporary-use-permit limits), and list which trades must be hired to finish the core house before then."
+ ],
+ "risks": [
+  {
+   "risk": "Living in an uncertified capsule (no HCD, HUD or RV certification) as a residence: code enforcement, no power or utility release, no insurance, possible forced removal",
+   "severity": "high",
+   "mitigation": "Use a certified self-contained RV or HUD-code unit under a temporary use permit after the building permit is issued; keep the capsule as unoccupied storage or a studio only if the County approves it as an accessory structure"
+  },
+  {
+   "risk": "Slow owner-build outlasts the temporary-residence permit (County 12+12 months) or the building permit lapses after 180 days without inspection",
+   "severity": "high",
+   "mitigation": "Kit or SIP shell erected by a crew; 'core house' scope finaled first; schedule an inspection at least every 5 months; hire out critical-path trades"
+  },
+  {
+   "risk": "No permanent water source: hauled water not allowed for a new single-family home, and sprinklers need a supply",
+   "severity": "high",
+   "mitigation": "Confirm water district service or a well's feasibility and cost before buying; budget a sprinkler tank and pump"
+  },
+  {
+   "risk": "Yucca Valley 725 sq ft minimum plus required carport raises cost and time",
+   "severity": "medium",
+   "mitigation": "Confirm the Town vs County boundary; if in the Town, use the 22' x 34' plan with a solar carport, or favor County parcels"
+  },
+  {
+   "risk": "Thick tatami or carpet insulates the floor so the radiant heat cannot get through",
+   "severity": "medium",
+   "mitigation": "Keep total covering at about R-1.5 or less; use thin floor-heating tatami, cork or wool on a thin pad; or a raised platform with its own heat"
+  },
+  {
+   "risk": "High-mass radiant slab overheats on sunny winter days (desert day-night swings)",
+   "severity": "medium",
+   "mitigation": "Limit south glass to 10-15% of floor area with overhangs; low water temperatures with outdoor-temperature control; or low-mass electric mats over insulation"
+  },
+  {
+   "risk": "Energy code non-compliance if electric radiant is the primary heat, or south glass exceeds prescriptive limits",
+   "severity": "medium",
+   "mitigation": "Mini-split heat pump as primary; performance energy model by a certified energy analyst before ordering windows"
+  },
+  {
+   "risk": "Sand and dust destroy soft floors and the indoor air quality",
+   "severity": "medium",
+   "mitigation": "Genkan entry step-down, shoes off, walk-off grates, airtight envelope plus MERV-13 ventilator, central or robot vacuum, washi or polypropylene tatami facings"
+  },
+  {
+   "risk": "Wildfire zone requirements and insurance availability",
+   "severity": "medium",
+   "mitigation": "Design to wildfire standards anyway: Class A roof, ember vents, noncombustible cladding and terrace, tempered glass, clear 0-5 ft zone"
+  },
+  {
+   "risk": "Tariff and price volatility for steel kits, imported prefab, windows and Japanese tatami",
+   "severity": "medium",
+   "mitigation": "Lock quotes with expiration dates; keep a 15-20% contingency; compare domestic SIP/wood options"
+  },
+  {
+   "risk": "Building on the incline: fill settlement or footing too close to the slope face",
+   "severity": "medium",
+   "mitigation": "Soils report; cut rather than fill; stepped slab; follow R403.1.7 setbacks"
+  },
+  {
+   "risk": "Monsoon humidity causes condensation if you use radiant floor cooling",
+   "severity": "low",
+   "mitigation": "Dew-point-based controls; floor surface at 66-68 F or warmer; rely on the mini-split for monsoon peaks"
+  },
+  {
+   "risk": "Floor-living ergonomics as you age (getting up and down, knees and backs)",
+   "severity": "low",
+   "mitigation": "Include one chair-height zone (kitchen counter stool or bench), a horigotatsu foot well, and grab-bar blocking (required by R328)"
+  }
+ ],
+ "brainstorm_prompts": [
+  "Walk through a perfect ordinary weekday in the house hour by hour: where do we wake, eat, work, nap and talk? Which of those happen on the floor?",
+  "Are we floor-living people for the next 20-30 years? Do we want one chair-height spot (counter or bench, or a sunken foot well) for bad-back days?",
+  "One open room with sliding screens, or do we want at least one door we can close (sleep, guests, a work call)?",
+  "What matters more: finishing fast enough to stay within the temporary-residence permit, or doing most of the building ourselves? Which tasks do we each actually want to do with our hands?",
+  "What is our hard budget ceiling for the house, and how many hours per week can each of us realistically give to building?",
+  "Real tatami (smell, beauty, replacement every few years in dry air) vs washi or synthetic tatami vs cork or wool? Which would we enjoy cleaning sand off?",
+  "Are we willing to live by a strict shoes-off entry rule with a step-down sand lock for every person and every guest?",
+  "If the lot is inside Yucca Valley (725 sq ft minimum plus carport), does that change which lot we want, or is a slightly bigger house welcome?",
+  "How hot can we tolerate the summer (100 F+): are we fine relying on one mini-split, and where should it blow?",
+  "Where do our belongings go while we are in Bhutan: built-in storage in the house (futon closet, platform drawers) or a separate permitted storage building?",
+  "What is the minimum house we would call 'done' for final inspection, and what is Phase 2 (extra room, capsule ADUs, garden)?",
+  "Where do guests sleep: on the soft floor, in a future capsule ADU, or not overnight at all?",
+  "How do we feel about swapping the $20k capsule for a certified RV or park-model-style unit during construction, so the plan stays legal?"
+ ],
+ "site_visit_checks": [
+  "Measure slope direction and steepness at the likely pad (phone inclinometer app). A south-facing gentle slope is ideal for an east-west bar; over 33% slope triggers the R403.1.7 setbacks.",
+  "Check winter sun access: stand on the pad and see whether any ridge, rocks or neighbor structures block the low southern sky (about 32 degrees altitude at noon in December).",
+  "Note the prevailing wind direction and dust (ask neighbors about spring wind events) to place the entry and terrace on the sheltered side.",
+  "Mark all Joshua trees within about 50 ft of the candidate pad; a smaller footprint and careful siting may avoid removal permits.",
+  "Look for washes, drainage paths and sand deposition near the pad; keep the slab out of flash-flood flow.",
+  "Dig or probe a test hole to see soil type (sand, caliche, rock) to anticipate grading cost and the soils report.",
+  "Check truck access: can a concrete truck, a SIP or steel delivery truck, or a crane reach the pad (road width, turns, soft sand)?",
+  "Locate the nearest power pole or transformer and estimate the distance to the pad for electrical service and the solar carport location.",
+  "Identify the best views from floor height (sitting eye level about 3 ft) to place low-sill south and east windows.",
+  "Find a flat staging area for materials, the temporary RV or unit, and storage during construction, outside the 0-5 ft zone of the future house."
+ ],
+ "open_questions": [
+  "Did the Yucca Valley Planning Commission or Town Council change the 725 sq ft minimum after the June 9, 2026 meeting? (I could not confirm; the Town website blocked my fetch.)",
+  "Will SB County accept pre-approved ADU Model D as a primary single-family home, with sprinklers and site-specific energy calculations, and does it keep any streamlining?",
+  "Is the parcel in a mapped Fire Hazard Severity Zone (which class, state or local responsibility area), and has the Board of Forestry 'Zone 0' (0-5 ft) rule taken effect for new construction?",
+  "Confirm the energy-code climate zone for the parcel (likely Zone 14) and whether the minimum solar-size exception applies to a 640 sq ft house.",
+  "Can the energy software model an air-to-water heat pump with radiant slab, and how much would electric radiant as supplemental heat cost in compliance?",
+  "Does SB County apply the Title 25 Article 8 'Limited-Density Owner-Built Rural Dwellings' alternatives (referenced in CRC R301.1.1.1), which relax room-size and heating requirements?",
+  "Does a County temporary use permit 'temporary structure' have to be a certified RV or manufactured unit, as in the Town? Is any capsule-style unit on the market HCD, HUD or RV-certified?",
+  "What are real 2026 Morongo Basin bids for slab, SIP or steel shell, and finish work? The shared web-search budget ran out early, so costs here are estimates.",
+  "What do County Fire fire-flow and water-storage requirements look like for a new home on a well in this area?"
+ ]
+}

@@ -1,0 +1,47 @@
+[
+ {
+  "n": 1,
+  "label": "Solar + batteries (service hub)",
+  "phase": 1
+ },
+ {
+  "n": 2,
+  "label": "Water storage + fire-water tank (service hub)",
+  "phase": 1
+ },
+ {
+  "n": 3,
+  "label": "Well site (only if no water district serves the lot)",
+  "phase": 1
+ },
+ {
+  "n": 4,
+  "label": "Pod #1: interim home, a DMV-registered trailer on a temporary permit while the house is built",
+  "phase": 1
+ },
+ {
+  "n": 5,
+  "label": "Storage container (permitted, painted, behind the house)",
+  "phase": 1
+ },
+ {
+  "n": 6,
+  "label": "Permitted house on the west rise",
+  "phase": 2
+ },
+ {
+  "n": 7,
+  "label": "Septic leach field (or sewer lateral)",
+  "phase": 2
+ },
+ {
+  "n": 8,
+  "label": "Kitchen garden",
+  "phase": 2
+ },
+ {
+  "n": 17,
+  "label": "Gate + address post",
+  "phase": 1
+ }
+]

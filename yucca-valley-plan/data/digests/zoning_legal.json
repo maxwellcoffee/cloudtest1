@@ -1,0 +1,445 @@
+{
+ "topic": "zoning_legal",
+ "claim_checks": [
+  {
+   "claim": "An ADU cannot receive a certificate of occupancy before the primary dwelling does (Gov. Code 66328). The only exception, added by AB 462 (Oct 2025), is for disaster-damaged primaries in counties with a state of emergency declared on or after 2/1/2025. So a capsule ADU cannot be legally lived in before the main house is finaled.",
+   "verdict": "confirmed",
+   "correct_statement": "True. Gov. Code 66328(a) bars a certificate of occupancy for an ADU before the primary dwelling gets one. The AB 462 exception (an urgency law, in effect when signed on 10/10/2025) needs a state of emergency declared on or after 2/1/2025 and a primary that was substantially damaged or destroyed. It applies only to detached ADUs (66328(c)), so it does not help this couple.",
+   "sources": [
+    "https://california.public.law/codes/government_code_section_66328",
+    "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/ADU-Handbook-Update.pdf",
+    "https://bbklaw.com/resources/la-110725-governor-newsom-signs-four-new-accessory-dwelling-unit-bills"
+   ]
+  },
+  {
+   "claim": "A tiny home or capsule may legally be lived in only if it is a certified RV or park trailer, a HUD manufactured home, HCD factory-built housing, or a permitted site-built CBSC dwelling. Otherwise occupancy is illegal and subject to enforcement.",
+   "verdict": "confirmed",
+   "correct_statement": "True per HCD Information Bulletin 2016-01, which is still posted and is cited in HCD's March 2026 ADU Handbook. Two additions. The bulletin also lists 'camping cabins', but those are allowed only inside RV parks. And a certified RV or park trailer is legal only 'on an approved location', so a seal alone does not let you live in it on your own land. Park trailers are 'not a year-round or permanent dwelling.'",
+   "sources": [
+    "https://www.hcd.ca.gov/policy-research/docs/hcd-bulletin-tiny-home-ib-2016-01.pdf",
+    "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/ADU-Handbook-Update.pdf"
+   ]
+  },
+  {
+   "claim": "Unincorporated County: living in an RV or travel trailer during construction requires an issued building permit for the residence plus a Temporary Structure Permit (DMV registration required). The checklist gives 12-month terms renewable up to 5 years. The Development Code text (mirror) says 12 months plus one 12-month extension.",
+   "verdict": "confirmed",
+   "correct_statement": "Both sources say what the report says. The County checklist (rev. 6/2025) requires the house permit first, a Temporary Structure Permit and current California DMV registration. It gives 12-month terms with renewals, 'in no case' more than 5 years from first issuance. It also expires if no inspection is called within 180 days. The County Development Code (\u00a784.25.040(e)(1)(D)-(E), official 2014 PDF and current mirror) says up to 12 months after the building permit. It 'may be extended for up to an additional 12 months' on a written request made 14 or more days before expiry. Units must be removed within 30 days of completion. The checklist names only RVs and travel trailers. The County FAQ and fee schedule also mention manufactured homes, while the MH guide says no temporary set-down is allowed. Ask which applies.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/2007-Development-Code-14-04-24.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses",
+    "https://lus.sbcounty.gov/faqs/while-building-a-new-home-can-i-put-a-temporary-mobile-home-on-my-property-to-live-in-while-my-house-is-under-construction"
+   ]
+  },
+  {
+   "claim": "Town of Yucca Valley building permits expire if work is suspended or abandoned past 180 days, with only one 180-day extension. County permits expire after 12 months of suspension, with one 180-day extension.",
+   "verdict": "corrected",
+   "correct_statement": "Mostly right, but the Town clock is more specific. Under the Town's amended CBC 105.5, a permit dies if work does not start within 365 days, stops for 365 days after starting, or goes 180 days past the last required inspection. The Town allows one extension of up to 180 days, and renewal costs half the fee. So in the Town, each passed inspection restarts a 180-day clock. County (official FAQ): start within 12 months; the permit expires if work is suspended or abandoned for 12 months; one written 180-day extension. State law (HSC 18938.6) lets a building official grant 'one or more' 180-day extensions, so ask the County whether more than one is possible.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-8-buildings-and-construction/chapter-8.02-building-codes",
+    "https://lus.sbcounty.gov/faqs/how-long-is-a-building-permit-good-for/",
+    "https://california.public.law/codes/health_and_safety_code_section_18938.6"
+   ]
+  },
+  {
+   "claim": "On County parcels of 5 acres or more, up to 3 accessory units (ADU, JADU, guest house) are allowed. Detached ADUs may be up to 1,200 sq ft and 18 ft tall, with 4-ft side and rear setbacks. A HUD manufactured home can be permitted as a primary dwelling in about 4-5 weeks, with an average application cost of $4,800.",
+   "verdict": "confirmed",
+   "correct_statement": "The County's May 2026 ADU handout confirms these points. On a lot of 5 acres or more, 'up to three units' are allowed (a total across ADU types). Detached ADUs are 200-1,200 sq ft and 18 ft tall, plus 2 ft if the roof pitch matches the main house. Side and rear setbacks are 4 ft. The County's February 2026 MH checklist confirms an 'average cost of an application' of $4,800 and typical processing of 4-5 weeks 'from the acceptance of the application'. The guide calls $4,800 the average total fee. It does not include the home, foundation, septic or utilities. The rule that a JADU and a guest house count within the 3 comes from \u00a784.01.050(a), and I could check it only on a third-party mirror (verify).",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/ADU-Handout-May2026.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/MH_Submittal-Checklist_REV-2-25-2026.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/MH_Quick-Reference-Guide_REV-2-25-2026.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.36-accessory-dwelling-units"
+   ]
+  },
+  {
+   "claim": "County Desert RL setbacks are 25/15/15/15 ft (front, interior side, rear; street side 25) with 20% max coverage.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed by Table 82-9C in the County's own Development Code PDF. Front 25 ft, street side 25 ft, interior side 15 ft (5 ft and 10 ft on lots 75 ft wide or less), rear 15 ft. Max coverage 20% (structures plus impervious surfaces), height 35 ft.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/2007-Development-Code-14-04-24.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-82.04-residential-land-use-zoning-districts"
+   ]
+  },
+  {
+   "claim": "Town RL setbacks are 25 ft front, 15 ft rear and 15 ft each interior side, with 25% max lot coverage.",
+   "verdict": "unverifiable",
+   "correct_statement": "The only source with these numbers is the same third-party code mirror the report used. The Town's website returned HTTP 403, so I could not read the official code or the variance notice the report cites. Treat these as likely but confirm with Town Planning.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.07-residential-and-hillside-reserve-districts"
+   ]
+  },
+  {
+   "claim": "Town Hillside Overlay: full hillside review is triggered by grading over 500 cy per lot, cut/fill slopes over 15 ft in public view, slope width over 150 ft, or disturbance over 50% of the site or 10,000 sq ft.",
+   "verdict": "corrected",
+   "correct_statement": "Review applies where the natural slope is 15% or more and any one trigger is met. The triggers are: grading over 500 cy per lot or 2,000 cy for the whole project; walls or cut/fill slopes over 15 ft that the public can see; slopes wider than 150 ft; or disturbing more than 50% of the site or 10,000 sq ft, 'whichever is less.' On a 5-acre lot, the trigger is therefore 10,000 sq ft (about a quarter acre), which a house, driveway and a few pads can easily exceed. No pad grading is allowed where the average slope is 40% or more.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-9-development-code/chapter-9.20-hillside-overlay-district"
+   ]
+  },
+  {
+   "claim": "AB 1663 and AB 1808 were reported signed 9/30/2026; SB 1062's status is unconfirmed.",
+   "verdict": "corrected",
+   "correct_statement": "CDFW's WJTCA page says the Act 'was amended' in September 2026 and that all three bills (AB 1663, SB 1062 and AB 1808) were enacted. Their effective dates and final details still need checking. Before passage, local news said AB 1808's fee relief covers only properties with occupied homes, not vacant lots or new builds (verify against the final text).",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/WJTCA",
+    "https://z1077fm.com/three-bills-aim-to-ease-cost-and-burden-of-western-joshua-tree-conservation-act-take-fees/"
+   ]
+  },
+  {
+   "claim": "2026 CDFW western Joshua tree in-lieu fees per stem: standard zone $354.75 / $521.75 / $2,609; reduced zone $156.50 / $208.75 / $1,043.50.",
+   "verdict": "unverifiable",
+   "correct_statement": "These figures appear only in the local news article the report used. CDFW's WJTCA page lists no amounts, and the Sept 2026 law changes may alter fees. Ask CDFW (HCPB@wildlife.ca.gov) for the current table and your parcel's fee zone.",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/WJTCA",
+    "https://z1077fm.com/three-bills-aim-to-ease-cost-and-burden-of-western-joshua-tree-conservation-act-take-fees/"
+   ]
+  },
+  {
+   "claim": "The County bars disturbance within 50 ft of a western Joshua tree without a CDFW permit.",
+   "verdict": "corrected",
+   "correct_statement": "The 50-ft rule appears in the County's February 2026 manufactured-home checklist and guide, as a landscape requirement for manufactured-home placements: 'no disturbance within 50 feet of Western Joshua Trees' unless authorized under CESA or the WJTCA. I did not find it stated for site-built houses. Ask the County whether it applies to your project (verify). The same checklist says no land disturbance, including plant or tree removal, before the installation permit is issued.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/MH_Submittal-Checklist_REV-2-25-2026.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/MH_Quick-Reference-Guide_REV-2-25-2026.pdf"
+   ]
+  },
+  {
+   "claim": "County \u00a784.25.070: on parcels of 5 acres or more in RC, AG or RL zones, the owner may camp recreationally no more than 4 days in any 30-day period without a permit.",
+   "verdict": "corrected",
+   "correct_statement": "The current mirror text says this, but the wording varies. The tent/structure clause says 'four consecutive days' in 30, and the vehicle clause says 'a total of four days' in 30. The official 2014 County text tied the exception to the RL-5 (or larger) zone rather than to parcel size. Confirm with the County whether your parcel qualifies and which count applies (verify). The Director can order occupants to vacate 30 days after notice, sooner for health and safety threats.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/2007-Development-Code-14-04-24.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses"
+   ]
+  },
+  {
+   "claim": "FY2026-27 County fees: Temporary Structure Permit $301 initial, $257 renewal, $261 temporary RV site, $603 manufactured home; grading 100-1,000 cy $693 plus $9.12 per extra 100 cy, max $775; PV 15 kW or less roof mount $215 + $226, ground mount $225 + $225.",
+   "verdict": "confirmed",
+   "correct_statement": "All of these match the County fee ordinance effective 7/1/2026. Fees rise each July 1 (for example, the TSP goes to $310 and the grading maximum to $798 in FY2027-28).",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf"
+   ]
+  },
+  {
+   "claim": "County cargo container rules (IB-0002, updated 1/1/2026): ACCR permit per lot; 5 ft from property lines, 10 ft from buildings, not in front setback; max 10 ft tall; no stacking; no utilities; no occupancy; in RL must be painted/blend in and behind the primary.",
+   "verdict": "confirmed",
+   "correct_statement": "IB-0002 confirms the permit, 14-gauge steel or aluminum, setbacks, 10-ft height, no stacking or joining, no utilities, no human occupancy and no hazardous storage. The painting and 'behind the primary structure' rules come from \u00a784.01.050(f)(2) (mirror). The County permits page confirms that an accessory structure without an established primary use needs a Temporary Use Permit.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0002-2025-Cargo-Containers-for-Incidental-Storage.pdf",
+    "https://lus.sbcounty.gov/building-safety-home/permits/",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.01-accessory-structures-and-uses"
+   ]
+  },
+  {
+   "claim": "ADU amnesty (Gov. Code 66311.7, AB 2533) covers only unpermitted ADUs built before 1/1/2020; the 5-year enforcement delay also covers only pre-2020 ADUs and sunsets 1/1/2035.",
+   "verdict": "confirmed",
+   "correct_statement": "True. 66311.7 protects only ADUs and JADUs built before 1/1/2020, and not ones that are substandard under HSC 17920.3. The County ADU handout confirms the 5-year delay is for pre-2020 ADUs and expires 1/1/2035. A pod placed in 2026 gets no amnesty.",
+   "sources": [
+    "https://california.public.law/codes/government_code_section_66311.7",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/ADU-Handout-May2026.pdf"
+   ]
+  },
+  {
+   "claim": "Yucca Valley septic prohibition: Phase 1 by 12/31/2023; Phase 2 by 12/31/2028 if the western Joshua tree is not listed, 12/31/2031 if it is; connect within 180 days of sewer availability; ATUs required for new OWTS on exempt parcels.",
+   "verdict": "confirmed",
+   "correct_statement": "The Regional Water Board's 2021 staff report confirms these deadlines, the 180-day connection rule, deferred parcels and ATUs for exempt parcels. The report's statement that the tree 'was not listed' (which picks 2028 rather than 2031) is not verified here (verify).",
+   "sources": [
+    "https://water.waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/YV2021SR.pdf"
+   ]
+  },
+  {
+   "claim": "Owner-builder (HSC 19825): paying helpers on a job of $500 or more can make you an employer; failing to carry workers' comp can bring civil fines up to $100,000; selling within 1 year of completion shifts the burden of proof to you.",
+   "verdict": "confirmed",
+   "correct_statement": "The statutory owner-builder declaration contains all three statements, and the exemption requires the house to be your personal residence for at least one year before completion.",
+   "sources": [
+    "https://california.public.law/codes/health_and_safety_code_section_19825"
+   ]
+  },
+  {
+   "claim": "2026 state ADU changes: SB 543 bars impact fees on ADUs of 750 sq ft or less and school fees on units of 500 sq ft or less, and requires a 15-business-day completeness decision; AB 1154 requires JADU owner occupancy only if the bathroom is shared; ADUs need no owner occupancy.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed by HCD's March 2026 Handbook and a law firm summary. One small fix: HCD says ADUs 'less than 500' sq ft of interior livable space are exempt from school fees.",
+   "sources": [
+    "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/ADU-Handbook-Update.pdf",
+    "https://bbklaw.com/resources/la-110725-governor-newsom-signs-four-new-accessory-dwelling-unit-bills"
+   ]
+  },
+  {
+   "claim": "AB 518 low-impact camping (effective 1/1/2026) requires a county opt-in ordinance and limits stays to 14 consecutive nights and 28 nights per year per camper; San Bernardino County has not adopted it.",
+   "verdict": "confirmed",
+   "correct_statement": "HCD's bulletin confirms that a county ordinance is required and confirms the 14-night and 28-night limits. That the County has not adopted one is supported only by local news (verify). Either way, AB 518 never allows full-time living.",
+   "sources": [
+    "https://www.hcd.ca.gov/sites/default/files/docs/building-standards/ib-2026-02-ab-518.pdf"
+   ]
+  },
+  {
+   "claim": "Town of Yucca Valley: RV temporary housing while building needs a TUP, 1-year terms up to 4 years total, fee about $469 ($295 in an older outline).",
+   "verdict": "unverifiable",
+   "correct_statement": "The 4-year total and the rule that permits must be issued first appear in the code mirror (\u00a79.39.050(A)). The Town's own TUP outlines and fee could not be fetched (HTTP 403), so the dollar amount is unconfirmed. Ask Town Planning.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures"
+   ]
+  },
+  {
+   "claim": "Town short-term rentals are capped at 10% of single-family homes with a waitlist, max 4-year term.",
+   "verdict": "confirmed",
+   "correct_statement": "The code mirror says the cap is 10% of the Town's detached single-family inventory, with a waitlist and one permit per parcel, and that RVs and tents are excluded. January 2024 news also reports the 10% cap. The term is unclear: the code says up to 4 years, its sample conditions say 24 months, and 2024 news said permits ran 2 years (verify).",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-5-businesses-and-licenses/chapter-5.40-temporary-short-term-vacation-rental-permit",
+    "https://z1077fm.com/yucca-valley-planning-commission-keep-10-str-cap-discusses-longer-term-permits/"
+   ]
+  }
+ ],
+ "other_corrections": [
+  "The Town hillside disturbance trigger is '50% of the site or 10,000 sq ft, whichever is less', plus 2,000 cy for a whole project. On a 5-acre lot that means 10,000 sq ft, which is a much lower bar than the report implies.",
+  "SB 1062 was enacted. CDFW lists AB 1663, SB 1062 and AB 1808 all as enacted when the WJTCA was amended in September 2026.",
+  "The report says 'the Town allows fewer accessory units' than the County, but it never retrieved the Town's ADU section (\u00a79.08.100). That comparison is unsupported until Town Planning confirms it.",
+  "The County's 50-ft Joshua tree no-disturbance rule is documented in the manufactured-home checklist and guide. The report presents it as a general County rule for all building; that is unverified for site-built houses.",
+  "The County gives mixed signals on using a manufactured home as temporary quarters during construction. The FAQ allows 'manufactured homes and travel trailers', and the fee schedule has a $603 manufactured-home line. But the Temporary Structure checklist lists only RVs and travel trailers, and the MH guide says 'No temporary permits are available'. Plan on a registered travel trailer and ask the County.",
+  "The Development Code text does not literally say 'one' 12-month extension. It says the permit 'may be extended for up to an additional 12 months.' The conflict with the checklist's 5-year cap is still real.",
+  "The HUD-home timeline of 4-5 weeks starts when the County accepts a complete application. Septic or perc approval, water will-serve, grading and Joshua tree clearances can add a lot of time before that.",
+  "The County camping exception's current wording (5-acre parcel) differs from the official 2014 text (RL-5 zone or larger), and the 'consecutive' vs 'total' 4-day wording differs between subsections.",
+  "School-fee exemption: HCD says 'less than 500 sq ft' of interior livable space, not '500 or less'.",
+  "Research limits: web search was rate-limited during this check. Every check relied on fetching primary URLs directly, and the Town of Yucca Valley's website returned HTTP 403. Every Town-specific number therefore rests on a third-party code mirror and is marked verify."
+ ],
+ "digest": {
+  "headline": "You can't legally live in an uncertified $20k pod in the Town or the County. Plan to live in a DMV-registered travel trailer once your house permit is issued, or in a small HUD-labeled manufactured home as your legal first house, and favor a lot in unincorporated San Bernardino County, whose rules fit a slow build and a long Bhutan trip better.",
+  "key_points": [
+   "Step zero: find out whether the lot is inside the Town of Yucca Valley or in unincorporated San Bernardino County (Landers, Flamingo Heights, Pioneertown, Joshua Tree and so on). Almost every rule below depends on that answer. Look up the 13-digit APN (parcel number) on the County map viewer.",
+   "The pod problem: California lets you live only in a certified RV or park trailer (RVIA/NFPA 1192 seal), a HUD-labeled manufactured home, HCD factory-built housing, or a permitted site-built house. Most cheap imported pods are none of these. Even a certified RV is legal only with a permit or in an approved place. Treat an uncertified pod as storage or a daytime studio, never a bedroom.",
+   "Legal route A, a trailer during construction (County): get the house building permit issued first. Then get a Temporary Structure Permit for a DMV-registered RV or travel trailer. FY2026-27 fees are $301 plus $261 for the RV site, and $257 per year to renew. Terms run 12 months. The County checklist says renewals can total up to 5 years, but the Development Code reads as 12 months plus up to 12 more (verify which). You must call for an inspection within 180 days of issue. Remove the trailer within 30 days of finishing the house.",
+   "Legal route A in the Town: a Temporary Use Permit for a self-contained RV or manufactured home after building permits are issued. Terms are 1 year, up to 4 years total. The fee is roughly $295-$469 (verify).",
+   "Legal route B, the fastest legal home (County only): permit a small HUD-labeled manufactured home as your 'primary' house. Processing typically takes 4-5 weeks after the County accepts a complete application, and fees average about $4,800. That excludes the home, foundation, septic and utilities. Owner-builders may install it themselves. Then build your modern heated-floor house slowly as a detached ADU (accessory dwelling unit) of up to 1,200 sq ft. The Town requires manufactured homes to be at least 725 sq ft (verify).",
+   "Order matters: by state law (Gov. Code 66328), an ADU cannot get its certificate of occupancy (the final sign-off to move in) before the primary house does. Whatever you finish first must be permitted as the primary.",
+   "'As long as we're making progress' really means the permit clock. County: work must start within 12 months, and the permit dies after 12 months with no work, with one written 180-day extension. Town: the permit dies 180 days after the last required inspection, with only one 180-day extension, and renewal costs half the fee. Plan a passed inspection about every 10 months in the County or every 5 months in the Town. Get any extension approved in writing before leaving for Bhutan.",
+   "Extra small units ('pods'): a County lot of 5+ acres can have up to 3 ADUs. A guest house or JADU (a junior unit inside the house) counts toward that total (verify). Each must be a permitted, code-built or HUD- or HCD-certified unit, 200-1,200 sq ft, 18 ft tall (20 ft if the roof pitch matches the house), and 4 ft from side and rear lines. ADUs of 750 sq ft or less pay no impact fees, and ADUs under 500 sq ft pay no school fees. You do not have to live on site to have an ADU.",
+   "Site layout (County RL zone): setbacks are 25 ft front, 25 ft street side, 15 ft interior side and 15 ft rear. All buildings plus paving may cover at most 20% of the lot, and buildings may be 35 ft tall. Town RL is about the same, with 25% coverage (verify).",
+   "Flattening pads: the County needs a grading permit if cut plus fill exceeds 100 cubic yards (permit fee $693-$775, plus plan review and engineering). In the Town, slopes of 15% or more trigger hillside review once grading passes 500 cubic yards or disturbance passes 10,000 sq ft (about a quarter acre). No building pads are allowed on slopes of 40% or more. Do no machine work before permits.",
+   "Joshua trees: removing or harming one needs a state CDFW permit. 2026 fees reportedly run about $157-$2,609 per stem (verify). County manufactured-home rules say no disturbance within 50 ft of a tree (verify whether this also applies to site-built houses). New laws passed in September 2026 (AB 1663, AB 1808, SB 1062). Their fee relief reportedly helps only existing occupied homes (verify). Put pads in the gaps between trees.",
+   "Storage while in Bhutan: in the County, a shipping container needs an accessory structure (ACCR) permit. It must sit 5 ft or more from property lines and 10 ft or more from buildings, outside the front setback, at most 10 ft tall, with no stacking, no power and no one living in it. In RL it must be painted to blend in and placed behind the house. A container on a vacant lot also needs a Temporary Use Permit. The Town allows one container on RL lots of 2.5+ acres (verify).",
+   "Enforcement: it starts with a complaint, but the consequences can be severe. They include a 30-day order to vacate, a notice recorded on your title, cost-recovery fees, and no new permits until enforcement costs are paid. Amnesty for unpermitted units covers only units built before 2020, so it will not cover a pod placed now.",
+   "Utilities and fire: in the County, you must connect to sewer if a sewer line is within 200 ft of the lot, plus 100 ft for each dwelling. Otherwise you need an approved septic or advanced treatment system and a perc (soil absorption) test no older than 5 years. Town lots may fall under a septic ban with a 12/31/2028 deadline (verify). A new site-built primary house needs fire sprinklers. An ADU does not need them if the primary doesn't.",
+   "Owner-builder: you may build your own home. Paying unlicensed helpers on a job worth $500 or more can make you an employer, with workers' comp fines up to $100,000. Selling within 1 year of completion means you must prove you didn't build it to sell. Hire licensed subcontractors for electrical, plumbing and radiant heat."
+  ],
+  "next_actions": [
+   "Look up the lot's APN on the San Bernardino County map viewer (lus.sbcounty.gov/?p=6170). Write down Town or County, the zone with its suffix (RL, RL-5 and so on) and any Fire Safety, Hillside or Floodplain overlay.",
+   "Call County Land Use Services at (909) 387-8311 or (760) 995-8140, or the Town at (760) 369-6579 ext. 328 (Mon-Thu), with the APN. Ask: is the temporary trailer limit 2 or 5 years; can a HUD home be the primary with the modern house as a later ADU; does the 50-ft Joshua tree rule apply to site-built houses; how many accessory units are allowed; what counts as 'suspended' for permit expiration. Ask for the answers by email.",
+   "Email the pod seller asking for photos of a HUD label, HCD factory-built insignia or RVIA/NFPA 1192 seal, plus the VIN and DMV title. Pay no deposit until you have them.",
+   "Walk the lot with a tape or pacing. Count Joshua trees and stems, flag a 50-ft circle around each, and estimate slope at candidate pads with a phone inclinometer app. Photograph from and into the site.",
+   "Request 2 quotes from a civil engineer or licensed land surveyor for a topographic survey and a cut/fill estimate covering the house and 3 small pads.",
+   "Email CDFW at HCPB@wildlife.ca.gov asking for the parcel's Joshua tree fee zone, the current 2026 fee table, and how the September 2026 laws affect a new house on a vacant lot.",
+   "Ask the listing agent in writing for permit history, any recorded code-enforcement notices, a list of every structure on the lot, and any existing perc test.",
+   "Price 3 used DMV-registered travel trailers and 2 small HUD-labeled manufactured homes, so you can compare them with the pod.",
+   "Draw a one-page timeline showing the Bhutan dates, the permit clock (12 months County, 180 days Town), the inspection to pass right before leaving, and the date to file a written extension request."
+  ],
+  "questions_for_couple": [
+   "If the pod can't be a legal bedroom, which do we prefer: a used travel trailer during construction, or a small HUD home as our first legal house with the modern house built later as an ADU?",
+   "Are we willing to choose an unincorporated County lot over a Town lot because its rules (12-month permit clock, up to 3 ADUs on 5 acres, container rules) fit our plan better?",
+   "What does 'making progress' mean in practice: one passed inspection every few months, and who does the work while we're in Bhutan?",
+   "How long will we be in Bhutan, and can we leave right after an inspection with a written extension in hand? Who will check on the property?",
+   "Would we be happy if our modern house is legally an 'ADU' of 1,200 sq ft or less, with a simpler manufactured home as the 'primary'?",
+   "How many extra small units do we really want, who are they for, and will we pay for code-compliant or certified versions?",
+   "What are our deal-breakers for a lot: Joshua trees on the only flat ground, slopes over 15%, no sewer and a poor perc test, or a long fire-zone driveway?",
+   "What total budget for permits, engineering, Joshua tree fees, septic, sprinklers and water storage would make us walk away?"
+  ],
+  "risks": [
+   {
+    "risk": "Living full-time in an uncertified pod, or in any unit before the permits are issued, leads to a complaint, a 30-day order to vacate, a lien or notice on title, fees, and a freeze on your house permit until enforcement costs are paid.",
+    "severity": "high",
+    "mitigation": "Live legally from day one: a registered travel trailer under a temporary permit after the house permit is issued, or a permitted HUD home as the primary. Use the pod only for storage, or skip it."
+   },
+   {
+    "risk": "The Bhutan trip lets the building permit lapse (Town: 180 days after the last inspection, one extension; County: 12 months), and the temporary-residence permit dies with it.",
+    "severity": "high",
+    "mitigation": "Pass an inspection just before leaving, get a written extension approved before departure, or have a licensed contractor keep work and inspections moving while you're away."
+   },
+   {
+    "risk": "Money spent on an imported pod is lost because it can never be permitted as an ADU, guest house or legal residence.",
+    "severity": "high",
+    "mitigation": "Buy only units with a HUD label, HCD insignia or RVIA seal, or build small ADUs from the County's 3 pre-approved plans."
+   },
+   {
+    "risk": "Joshua trees near the flat spots block pads or add thousands of dollars in CDFW fees.",
+    "severity": "high",
+    "mitigation": "Count trees and stems before making an offer, site pads between trees, and make the purchase contingent on a workable building envelope."
+   },
+   {
+    "risk": "Grading pads without permits (over 100 cy in the County; Town hillside triggers at 15% slope and 10,000 sq ft) brings stop-work orders and engineering fixes.",
+    "severity": "medium",
+    "mitigation": "Get an engineer's cut/fill estimate and pull a grading permit before any machine work."
+   },
+   {
+    "risk": "Relying on the County's 5-year temporary-trailer cap when the code text suggests 2 years.",
+    "severity": "medium",
+    "mitigation": "Get the County's written answer for your APN, or use the HUD-primary route so no temporary permit is needed."
+   },
+   {
+    "risk": "Sewer or septic surprises: a failed perc test, a required advanced treatment unit, or a Town septic ban raise the cost of every dwelling.",
+    "severity": "medium",
+    "mitigation": "Get a perc test or septic feasibility check during escrow. For Town lots, ask Hi-Desert Water District about prohibition status."
+   },
+   {
+    "risk": "Owner-builder liability if paid friends get hurt, since uninsured employers face fines up to $100,000.",
+    "severity": "medium",
+    "mitigation": "Hire licensed subcontractors who carry their own workers' comp, or buy a policy."
+   }
+  ],
+  "costs": [
+   {
+    "item": "County HUD manufactured-home permit (average total fees)",
+    "low_usd": 4800,
+    "high_usd": 4800,
+    "note": "Feb 2026 County checklist. Excludes the home, foundation, septic and utilities."
+   },
+   {
+    "item": "County Temporary Structure Permit (initial + RV site)",
+    "low_usd": 562,
+    "high_usd": 562,
+    "note": "$301 + $261 in FY2026-27; the renewal is $257 per year."
+   },
+   {
+    "item": "Town Temporary Use Permit for RV housing while building",
+    "low_usd": 295,
+    "high_usd": 469,
+    "note": "Could not confirm; ask Town Planning (verify)."
+   },
+   {
+    "item": "County grading permit, 100-1,000 cubic yards (permit portion only)",
+    "low_usd": 693,
+    "high_usd": 775,
+    "note": "Plan review and engineering are extra."
+   },
+   {
+    "item": "CDFW Joshua tree fee per stem",
+    "low_usd": 156.5,
+    "high_usd": 2609,
+    "note": "Reported 2026 figures; the Sept 2026 laws may change them (verify)."
+   },
+   {
+    "item": "County solar PV permit, 15 kW or less",
+    "low_usd": 441,
+    "high_usd": 450,
+    "note": "Roof mount $441, ground mount $450 (FY2026-27)."
+   },
+   {
+    "item": "Workers' comp fines if you employ uninsured helpers",
+    "low_usd": 0,
+    "high_usd": 100000,
+    "note": "Per the HSC 19825 owner-builder declaration."
+   }
+  ],
+  "numbers": [
+   {
+    "label": "County temporary trailer permit term",
+    "value": "12 months; renewals up to 5 years per checklist (code suggests 12 + 12 months; verify)",
+    "source": "County Temporary Structure Permit checklist rev. 6/2025; Dev. Code 84.25.040(e)"
+   },
+   {
+    "label": "Town temporary RV/MH permit maximum",
+    "value": "1-year terms, 4 years total (verify)",
+    "source": "YV Dev. Code 9.39.050(A) (mirror)"
+   },
+   {
+    "label": "County permit expiration",
+    "value": "12 months without work; one 180-day written extension",
+    "source": "County LUS FAQ"
+   },
+   {
+    "label": "Town permit expiration",
+    "value": "180 days after last required inspection; one 180-day extension; renewal half fee",
+    "source": "YV Ch. 8.02 amending CBC 105.5 (mirror)"
+   },
+   {
+    "label": "Max ADUs on a County lot of 5+ acres",
+    "value": "3",
+    "source": "County ADU Handout May 2026"
+   },
+   {
+    "label": "Detached ADU size and height (County)",
+    "value": "200-1,200 sq ft; 18 ft (+2 ft if roof pitch matches)",
+    "source": "County ADU Handout May 2026"
+   },
+   {
+    "label": "County RL setbacks and coverage",
+    "value": "Front 25 / street side 25 / interior side 15 / rear 15 ft; 20% coverage; 35 ft height",
+    "source": "County Dev. Code Table 82-9C"
+   },
+   {
+    "label": "County grading permit threshold",
+    "value": "Over 100 cubic yards cut + fill",
+    "source": "County EZOP grading page; Title 6 Appendix J amendment"
+   },
+   {
+    "label": "Town hillside review triggers",
+    "value": "Slope of 15% or more plus grading over 500 cy/lot or disturbance over 10,000 sq ft; no pads at 40%+",
+    "source": "YV Ch. 9.20 (mirror)"
+   },
+   {
+    "label": "ADU impact-fee exemption",
+    "value": "750 sq ft or less (school fees: under 500 sq ft)",
+    "source": "HCD ADU Handbook March 2026"
+   },
+   {
+    "label": "County sewer connection rule",
+    "value": "Must connect if sewer is within 200 ft + 100 ft per dwelling",
+    "source": "County ADU Handout May 2026"
+   },
+   {
+    "label": "County owner camping allowance on 5-acre RL/AG/RC",
+    "value": "4 days in any 30-day period (verify wording)",
+    "source": "County Dev. Code 84.25.070"
+   }
+  ],
+  "people": [
+   {
+    "role": "County Land Use Services or Town Planning counter planner",
+    "why": "Confirms jurisdiction, zone, overlays, unit counts, temporary-residence rules and container rules for your APN",
+    "when": "Before making an offer; again before design",
+    "cost": "Free"
+   },
+   {
+    "role": "Building and Safety plan-check staff",
+    "why": "Inspection sequence, permit expiration and extensions, owner-builder paperwork, sprinklers, solar and battery",
+    "when": "During design, before submitting plans",
+    "cost": "Free (permit fees apply)"
+   },
+   {
+    "role": "Civil engineer or licensed land surveyor",
+    "why": "Topo survey, pad and cut/fill design, grading plan, Town slope analysis (must be signed by one), setback staking",
+    "when": "During escrow and before any grading",
+    "cost": "Get 2-3 quotes"
+   },
+   {
+    "role": "Desert biologist or native plant specialist",
+    "why": "Joshua tree and stem count, buffers, CDFW permit application",
+    "when": "During due diligence, before choosing pad locations",
+    "cost": "Get quotes"
+   },
+   {
+    "role": "Septic designer / perc tester (or Hi-Desert Water District for Town lots)",
+    "why": "Wastewater approval is required for every dwelling permit",
+    "when": "During escrow",
+    "cost": "Get quotes"
+   },
+   {
+    "role": "HUD manufactured-home dealer or C-47 installer",
+    "why": "Supplies and installs a small HUD-labeled unit if you choose the fast legal-home route",
+    "when": "Right after purchase, if chosen",
+    "cost": "Get quotes"
+   },
+   {
+    "role": "Title officer or real estate / land-use attorney",
+    "why": "Checks for recorded code-enforcement notices, liens and legal access",
+    "when": "During escrow",
+    "cost": "Hourly"
+   },
+   {
+    "role": "San Bernardino County Fire",
+    "why": "Fire Safety overlay, driveway length and turnaround, sprinkler water storage, fuel clearance",
+    "when": "Before design",
+    "cost": "Free (plan review fees may apply)"
+   }
+  ]
+ }
+}

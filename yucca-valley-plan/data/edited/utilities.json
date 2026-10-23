@@ -1,0 +1,81 @@
+{
+ "topic": "utilities",
+ "headline": "You can bring water, septic, power and a fire-safe driveway to a rural Yucca Valley lot. Before you make an offer, find out in writing which water agency serves the exact parcel and what those four will cost. Together they can run from about $25,000 to well over $150,000 (estimate).",
+ "key_points": [
+  "You can get water from a district meter or a permitted private well. A new permitted house can't rely on hauled water. In unincorporated San Bernardino County, a parcel inside a water district's service area must connect if the district can serve it. A well is allowed outside service areas. A written 'cannot serve' letter from the district may also open the well option (ask County Environmental Health Services (EHS)).",
+  "You can get a Hi-Desert Water District (HDWD) meter for $5,418 (5/8-inch, sprinkler-ready) or $10,836 (1-inch). Add a $200 fire-flow fee and installation at cost ($600 minimum). HDWD sets meters within 5-10 days. The meter must go in within 12 months of paying, and new service depends on HDWD's water reserves.",
+  "You can connect in neighboring districts too, usually for more. Bighorn-Desert View Water Agency (BDVWA, Landers and Flamingo Heights) charges $16,201 plus $3,040 for the service line, about $19,241, for parcels within 700 ft of a main. Joshua Basin Water District (JBWD, Joshua Tree) charges $12,928 plus $1,269-$4,500, and possibly a $7,148 wastewater charge. These are 2025 schedules that rise each year, so ask the district for a written quote and a will-serve letter. If no main runs past the lot, you pay the full cost of extending one. That is the biggest water unknown.",
+  "You can drill a private well where the rules allow one, for roughly $25,000-$100,000+ depending on depth and yield (estimate). You need an EHS well permit and a driller with a C-57 well-drilling license. Inside Mojave Water Agency (MWA) boundaries, a Notice of Intent must be filed at least 15 days before drilling. Local groundwater can carry arsenic, uranium, fluoride or nitrate, so budget about $1,500-$6,000 for treatment (estimate).",
+  "You can use septic on most rural lots. You need a passing percolation (perc) test and a County-approved design. The disposal area must slope 25% or less and have a 100% spare area that drains by gravity, since pumps are allowed only as a hardship. So put the house uphill of the leach field. A 1-2 bedroom house uses a 750-gallon tank. Keep the system 100 ft from a private well (150 ft for a seepage pit) and 50 ft from a drainage course. Size it now for the house plus future pods, because adding units later means a new County review.",
+  "You can move a self-contained trailer on before the septic system is built. Once the house permit and temporary permit are issued, the County accepts a sewage pump-out contract instead of a septic hookup.",
+  "You can still install septic in the Town's sewer areas, but only until a deadline. The ban covers only the Town's mapped sewer Phase 1 and Phase 2 areas (check the HDWD sewer map). In Phase 2, plan on Dec 31, 2028 unless HDWD confirms Dec 31, 2031 in writing. The deadline comes earlier if sewer reaches within 200 ft of the house and the lot abuts it. You then have 180 days to connect. A basic system installed less than 36 months before sewer arrives gets 36 months from installation; an advanced nitrogen-removing unit gets 60 months.",
+  "You can get a $3,084 allowance per meter from Southern California Edison (SCE) toward a new power line once you show a building permit or other proof of occupancy. You pay the rest plus a tax gross-up, either as a refundable advance (refunds over 10 years as neighbors connect) or a 50% non-refundable payment. Trenching and conduit are yours, and any easements across neighbors' land must come free to SCE. Seasonal or part-time use can shrink the allowance. If you don't take service within 6 months of SCE being ready, you may owe more. Totals range from a few thousand dollars to six figures (estimate; ask SCE for a written estimate).",
+  "You can budget the standing charges ahead of time. SCE's Base Services Charge is $24.15 a month (since November 2025). Water base charges run roughly $29-$46 a month (estimate; ask the district). JBWD also adds a standby charge of about $12-$35 per acre per year on the tax bill for parcels over 1.25 acres. These keep running while you are away.",
+  "You can go off-grid legally, but the energy code still applies to permits applied for from Jan 1, 2026. Heat-pump space and water heating are the baseline. Solar is required unless the formula gives under 1.8 kilowatts (kW). A 640 sq ft house in Climate Zone 14 comes out near 1.73 kW, so solar is likely optional (confirm with a Title 24 energy consultant). Electrical service over 125 amps must be battery-ready. No 30% federal solar credit applies to systems placed in service after Dec 31, 2025. For the soft heated floor, plan on a hydronic slab fed by an air-to-water heat pump, not whole-floor electric mats (about 3.4-4 kW). Keep the covering at about R-1.4 (2.5 tog) or less.",
+  "You can supply fire sprinklers from a well, using an approved storage tank that refills automatically and a freeze-protected pump. Every new house needs sprinklers. Later accessory dwelling units (ADUs) need them too once the main house has them. Each extra dwelling unit on one meter adds at least 5 gallons per minute of required flow.",
+  "You can build with a gravel driveway on gentle ground. The County needs a letter from an engineer or surveyor saying a two-wheel-drive car can reach the site, plus legal access. If legal access can't be proven, you sign an acknowledgment that is disclosed when you sell. The driveway must be at least 12 ft wide and no steeper than 12% (gravel or native surface only up to 8%). It needs a turnaround if longer than 150 ft, and fire access must reach within 150 ft of every exterior wall. All-weather access must be in place before building materials arrive. Route trenches, the leach field and the driveway more than 50 ft from any western Joshua tree to avoid a state permit."
+ ],
+ "risks": [
+  {
+   "risk": "The parcel sits inside a water district's service area but far from a main, so a costly main extension is required and a cheaper well is ruled out.",
+   "severity": "high",
+   "mitigation": "Get a written service-area answer and a main-extension estimate from the district before removing escrow contingencies. Favor lots that front an existing main."
+  },
+  {
+   "risk": "A well comes in deep, low-yield or contaminated (arsenic, uranium, fluoride, nitrate).",
+   "severity": "high",
+   "mitigation": "Review the nearest state well logs, get two written driller quotes, budget $25,000-$100,000+ plus treatment (estimate), and hold a 20-30% contingency."
+  },
+  {
+   "risk": "Septic is infeasible or expensive (rock, slope over 25%, washes, no gravity-fed spot below the house), or the lot must switch to sewer soon inside the Town.",
+   "severity": "high",
+   "mitigation": "Make a passing perc test an escrow contingency. Get the lot's sewer phase and deadline from HDWD in writing. Site the house uphill of the leach field."
+  },
+  {
+   "risk": "The SCE line extension is expensive, needs neighbor easements, takes months, or gets a smaller allowance because the house sits empty for long stretches.",
+   "severity": "high",
+   "mitigation": "Get a preliminary SCE estimate and pole route during escrow, line up easements early, plan to take service within 6 months of SCE being ready, and price an off-grid system as the fallback."
+  },
+  {
+   "risk": "No provable legal access, or a route a two-wheel-drive car can't drive, blocks or burdens the building permit.",
+   "severity": "high",
+   "mitigation": "Get a preliminary title report, a survey and an engineer's access letter before closing. Negotiate an easement or walk away."
+  },
+  {
+   "risk": "Fixed charges, yearly fee increases and freeze damage add up while you are in Bhutan.",
+   "severity": "medium",
+   "mitigation": "Buy the water meter only once the plan is firm (it must go in within 12 months). Winterize, hire a local caretaker, and set up remote monitoring."
+  }
+ ],
+ "questions_for_couple": [
+  "What is our walk-away number for water, septic, power and the driveway combined?",
+  "Do we want the grid (one SCE payment and a monthly bill) or off-grid (owning and maintaining solar, batteries and a generator)?",
+  "How many pods and guests should we size the septic, water and power for now, knowing that adding units later means a new review?",
+  "Would we rather buy a lot that fronts a water main and pay the meter fee, or a lot where we drill and maintain our own well?",
+  "Would we accept a lot inside the Town's sewer area that must connect to sewer by Dec 31, 2028 (or 2031), or do we want a lot where septic is the long-term answer?",
+  "How long, steep or sandy an access road can we live with, and would we share road upkeep with neighbors?",
+  "While we are in Bhutan, what must keep running (internet, cameras, pump heat, batteries), and who nearby will check on the land?"
+ ],
+ "next_actions": [
+  "Look up the parcel's Assessor's Parcel Number (APN) on the San Bernardino County Assessor map and note whether it is in the Town of Yucca Valley or unincorporated County. @computer",
+  "Enter the APN on the HDWD sewer map (yvsewermap.com) and screenshot whether the lot is in sewer Phase 1, Phase 2, or outside both. @computer",
+  "Call the water agency that serves the area (HDWD: 760-365-8333) with the APN. Ask whether the lot is in its service area, how far the nearest main is, the all-in meter cost, and whether it will issue a will-serve or cannot-serve letter. Ask HDWD to confirm in writing whether the Phase 2 septic deadline is Dec 31, 2028 or Dec 31, 2031. @phone",
+  "Call County Environmental Health Services (800-442-2283). Ask whether a well is allowed on the APN, which contaminants to test for, and whether the May 2025 septic rule update changed tank sizes or setbacks. @phone",
+  "Download the logs of the 5 nearest wells from the California Department of Water Resources (DWR) Well Completion Report map, then email two C-57 licensed well drillers for written all-in quotes. @computer",
+  "Photograph the tag on the nearest SCE pole and pace the distance to the likely house pad. @land",
+  "Call SCE (1-800-655-4555) for a preliminary line-extension estimate. Ask whether the $3,084 allowance is current and how part-time occupancy affects it. @phone",
+  "Call San Bernardino County Fire Community Safety (909-386-8400). Ask what sprinkler water supply or tank a small house on a well needs on this APN, and whether the lot is in a State Responsibility Area. @phone",
+  "Order a preliminary title report and ask the title officer to flag recorded access easements, utility easements and any road maintenance agreement. @email",
+  "Fill in a one-page best-case and worst-case cost sheet with lines for water, septic, power, driveway and access. @together"
+ ],
+ "key_sources": [
+  "https://ehs.sbcounty.gov/programs/safe-drinking-water/",
+  "https://www.hdwd.com/411/New-Construction-Fees",
+  "https://www.hdwd.com/Faq.aspx?QID=110",
+  "https://waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/YV2021RBRes_Attch1upd.pdf",
+  "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/IB-00018-Onsite-Wastewater-Treatment-Systems-Final-Edited-06-20-2024-002-1.pdf",
+  "https://www.sce.com/sites/default/files/inline-files/Rule15.pdf",
+  "https://sbcfire.org/wp-content/uploads/sites/46/2024/12/SBCOFPD-STANDARD-A-1-FIRE-APPARATUS-ACCESS-ROAD-DESIGN-CONSTRUCTION-AND-MAINTENANCE-7.1.23.pdf",
+  "https://sbcfire.org/wp-content/uploads/sites/46/2024/12/SBCOFPD-STANDARD-F-2-FIRE-SPRINKLER-SYSTEMS-IN-ONE-AND-TWO-FAMILY-DWELLINGS-7.1.23.pdf"
+ ]
+}

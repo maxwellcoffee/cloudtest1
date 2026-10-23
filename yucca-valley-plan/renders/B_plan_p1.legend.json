@@ -1,0 +1,32 @@
+[
+ {
+  "n": 1,
+  "label": "Storage container (permitted, painted, behind the house)",
+  "phase": 1
+ },
+ {
+  "n": 2,
+  "label": "Ground-mount solar + batteries (long cable run)",
+  "phase": 1
+ },
+ {
+  "n": 3,
+  "label": "Pod #1: interim home, a DMV-registered trailer on a temporary permit while the house is built",
+  "phase": 1
+ },
+ {
+  "n": 4,
+  "label": "Water tanks on the high point (gravity pressure)",
+  "phase": 1
+ },
+ {
+  "n": 5,
+  "label": "Well site (only if no water district serves the lot)",
+  "phase": 1
+ },
+ {
+  "n": 17,
+  "label": "Gate + address post",
+  "phase": 1
+ }
+]

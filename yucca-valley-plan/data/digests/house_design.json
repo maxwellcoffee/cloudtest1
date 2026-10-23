@@ -1,0 +1,426 @@
+{
+ "topic": "house_design",
+ "claim_checks": [
+  {
+   "claim": "Town of Yucca Valley Development Code 9.07.100(A)(6) requires single-family homes to be at least 725 sq ft measured from the outside walls, with an average width and depth of at least 20 ft. The Planning Commission weighed alternatives in May-June 2026, and the outcome is unknown.",
+   "verdict": "confirmed",
+   "correct_statement": "The codified text (GoCodebook, text as of 2026-10-03) still says 725 sq ft measured from the exterior, with width and depth each averaging at least 20 ft, not counting garages, porches and eaves. No 2026 amendment is noted; the latest ordinance cited in the chapter is Ord. 320 (Nov 2024). On May 26-27, 2026 local news reported that staff wanted to keep 725, that the Commission voted unanimously to bring alternatives back on June 9, and that ADUs and tiny homes on wheels would stay exempt. I could not confirm what happened after June 9: the Town website returned 403 and web search was used up. Code publishers can lag behind adoption, so call the Town.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-9-development-code/chapter-9.07-residential-and-hillside-reserve-districts",
+    "https://z1077fm.com/yucca-valley-planning-commission-pauses-on-recommended-minimum-square-footage-for-single-family-residences/",
+    "https://z1077fm.com/yucca-valley-planning-commission-agenda-how-small-can-a-single-family-residence-be-built/"
+   ]
+  },
+  {
+   "claim": "Unincorporated San Bernardino County sets no minimum house size, and a 'Tiny Home' is allowed if it meets the CRC. The CRC minimum is a 70 sq ft habitable room with no side under 7 ft (R312), so a 400-640 sq ft primary house is legal.",
+   "verdict": "confirmed",
+   "correct_statement": "County Code 84.21.010-.030 has no minimum floor area and says a 'Tiny Home' may be permitted if it meets the minimum standards. RVs will not be approved as dwellings. The 2025 CRC R312.1 requires habitable rooms of at least 70 sq ft (kitchens exempt), and R312.2 requires at least 7 ft in any direction. HCD Bulletin 2016-06 says a dwelling needs only a 70 sq ft habitable room, a bathroom and a kitchen area with a sink, and that local agencies should not apply the larger efficiency-unit rules to detached homes on a foundation. R312.2 also exempts 'limited-density owner-built rural dwellings' (R301.1.1.1), but only if the local agency allows that option.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.21-single-family-residential-dwellings",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r312-minimum-room-areas",
+    "https://www.hcd.ca.gov/sites/default/files/docs/building-standards/ib-2016-06.pdf"
+   ]
+  },
+  {
+   "claim": "Living on site during construction is legal only with a temporary use permit after the building permit is issued. County: 12 months plus one 12-month extension (84.25.040(e)). Town: a manufactured home or self-contained RV, up to 4 years (9.39.050). An uncertified capsule does not qualify.",
+   "verdict": "corrected",
+   "correct_statement": "The County limit is wrong. County Code 85.15.080(f)(4)-(5) allows 12 months after the building permit is issued, then extensions of up to 12 months at a time. 'Multiple extensions may be approved, but in no case shall these extensions exceed a total of five years.' Each extension needs a written request at least 14 days before expiry and a reason such as a delay beyond your control. The County's Temporary Structure Permit sheet (Rev. 6/2025) says the same: 12-month renewals, 5 years maximum. It defines temporary residential quarters as 'a recreational vehicle or travel trailer'; manufactured units also need a setdown permit. The unit cannot be placed until the building permit is issued, and the temporary permit expires if no inspection is called within 180 days. The Town part is right: a manufactured home or self-contained RV, only after construction permits are issued, in 1-year steps up to 4 years, with proof of HCD or HUD approval. Living in an unpermitted structure is prohibited. An uncertified capsule does not qualify in either place. Without a permit, County owner camping on 5+ acres in RL is limited to 4 days in 30 (84.25.070).",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-5-permit-procedures/chapter-85.15-temporary-use-permits",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.25-temporary-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-9-development-code/chapter-9.39-temporary-uses-and-structures",
+    "https://www.hcd.ca.gov/sites/default/files/docs/building-standards/ib-2016-01.pdf"
+   ]
+  },
+  {
+   "claim": "A new primary house must have automatic fire sprinklers (CRC R309.2), and San Bernardino County does not allow hauled water for a new single-family home (IB-0004, citing SB 1263).",
+   "verdict": "corrected",
+   "correct_statement": "The sprinkler part is confirmed. 2025 CRC R309.2 requires an automatic sprinkler system in one- and two-family dwellings. The hauled-water part needs a caveat. IB-0004 (updated Jan 1, 2026) says 'hauled water shall not be permitted per SB 1263', but only where a rec-cabin rebuild is treated as a new home. The County Development Code 84.21.030(j)(3) says no hauled water 'without approval from the Division of Environmental Health Services'. It also requires service from a water purveyor where one can serve, and allows a well outside a service area. In practice, plan on a well or a water-district connection, and confirm with Environmental Health.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r309-automatic-sprinkler-systems",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0004-2025-Homestead-Rec-Cabins-Rev-11.19.25.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.21-single-family-residential-dwellings"
+   ]
+  },
+  {
+   "claim": "The County's four pre-approved plans (560, 735, 1,008 and 1,008 sq ft) are ADU plans. An ADU generally cannot get its certificate of occupancy before the main house (Gov. Code 66328), so the small house should be permitted as the primary dwelling.",
+   "verdict": "confirmed",
+   "correct_statement": "The County guidance page lists four pre-approved detached ADU plans (Models B, C, D and H) and no pre-approved primary-house plan. The County's May 2026 ADU handout says 'three'. Model D's sheets confirm 560 sq ft, 1 bedroom, 2025 CRC and WUI codes, 130 mph wind, Exposure C, Seismic D2 and 30 psf snow. I did not check the sizes of B, C and H. HCD's ADU Handbook (March 2026) says an ADU can get its certificate of occupancy before the primary dwelling only in declared-emergency cases where the primary was destroyed (Gov. Code 66328). The same handbook says ADUs need sprinklers when the primary residence requires them, so ADUs built next to a new sprinklered house will need sprinklers too.",
+   "sources": [
+    "https://lus.sbcounty.gov/building-safety-home/guidance-and-technical-handouts/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Model-D-CRC-2025.pdf",
+    "https://www.hcd.ca.gov/building-standards/adu/handbook",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/LUS-ADU-Handout-2.13.2026.pdf"
+   ]
+  },
+  {
+   "claim": "Floor coverings over radiant heat should total about R-1.5 or less. Traditional 55-60 mm tatami would largely block floor heat, so use thin floor-heating-rated tatami, cork or wool on a thin pad.",
+   "verdict": "confirmed",
+   "correct_statement": "The UK Carpet Foundation says 2.5 tog for carpet plus underlay combined is 'a realistic maximum limit'. 2.5 tog is 0.25 m2K/W, or about R-1.4 in US units, so the target of about R-1.5 holds. Wikipedia confirms traditional tatami is 5.5-6.0 cm thick, with cores of rice straw, wood-chip board or polystyrene foam. The report's tatami R-values (R-3.5 to R-9) are its own estimates and unverified, but any foam- or straw-core mat that thick will be well above the limit. Wool carpet with a felt pad (about R-1.6 to R-2.0 by the report's own numbers) also goes over; use a thin rubber pad or none.",
+   "sources": [
+    "https://www.carpetfoundation.com/underfloor-heating",
+    "https://en.wikipedia.org/wiki/Tatami",
+    "https://en.wikipedia.org/wiki/Underfloor_heating"
+   ]
+  },
+  {
+   "claim": "The 2025 Energy Code applies to permits applied for on or after Jan 1, 2026. Heat pumps are the baseline for heating and hot water, and electric radiant mats can be used as supplemental heat beside a mini-split (build-up B: 3.4-4 kW of mats under a 340 sq ft soft zone).",
+   "verdict": "corrected",
+   "correct_statement": "The date is confirmed. The 2025 Single-Family Compliance Manual says 'Heat pumps are required for prescriptive compliance in all climate zones (150.1(c)6)', and 'Electric resistance and electric radiant heating installations are not allowed as the primary heating system' on the prescriptive (checklist) path. Supplemental heat under the 150.1(c)6 exception must be under 2 kW (7,000 Btu/h) and on a timer of 30 minutes or less. A 3.4-4 kW whole-floor electric mat system on floor thermostats therefore does not fit that exception. It would have to pass a performance (computer) energy model, which may or may not work. An air-to-water heat pump driving a hydronic slab does count as heat-pump heating. Confirm with a Title 24 energy consultant before choosing.",
+   "sources": [
+    "https://www.energy.ca.gov/programs-and-topics/programs/building-energy-efficiency-standards/2025-building-energy-efficiency",
+    "https://www.energy.ca.gov/sites/default/files/2025-06/CEC-400-2025-005.pdf"
+   ]
+  },
+  {
+   "claim": "3-5 kW of rooftop solar is required for a new home.",
+   "verdict": "corrected",
+   "correct_statement": "Solar is required for new single-family homes (150.1(c)14), sized by Equation 150.1-C: kW = (conditioned sq ft x A)/1000 + B. For Climate Zone 14, A = 0.741 and B = 1.26. Exception 2: no solar is required if the result is under 1.8 kWdc. A 640 sq ft house works out to about 1.73 kW, so likely no solar is required. A 748 sq ft house works out to about 1.81 kW, so roughly 1.8 kW is required. The cutoff is about 728 sq ft of conditioned floor area. Anything beyond that is optional (verify with the energy consultant).",
+   "sources": [
+    "https://www.energy.ca.gov/sites/default/files/2025-06/CEC-400-2025-005.pdf"
+   ]
+  },
+  {
+   "claim": "Yucca Valley is almost certainly in energy-code Climate Zone 14.",
+   "verdict": "confirmed",
+   "correct_statement": "The CEC 'Building Climate Zones by ZIP Code' list puts 92284 (Yucca Valley) in Climate Zone 14, along with nearby 92252, 92256, 92268, 92277 and 92285. For a lot near a zone edge, the CEC's address-based map tool decides.",
+   "sources": [
+    "https://www.energy.ca.gov/media/3560",
+    "https://www.energy.ca.gov/sites/default/files/2020-04/BuildingClimateZonesByZIPCode_ada.xlsx"
+   ]
+  },
+  {
+   "claim": "Building permits generally expire if work stops for 180 days, so you need an inspection at least every ~180 days.",
+   "verdict": "corrected",
+   "correct_statement": "The base CRC R105.5 text voids a permit if more than 180 days pass between inspections, with written extensions of up to 180 days each. The California amendment R105.5.1 (Health and Safety Code 18938.5/18938.6) gives 12 months to start work and treats a permit as void if work is suspended or abandoned for 12 months. Which rule the County applies to your permit should be confirmed. The County's temporary structure permit separately expires if no inspection is called within 180 days of issuance. To be safe, pass an inspection at least every 5 months.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-1-scope-and-administration/section-r105-permits"
+   ]
+  },
+  {
+   "claim": "The Town's Rural Living zone requires 2 covered parking spaces (garage or carport, 18' wide x 19' long inside) and 12-inch eaves unless the roof is flat with a parapet. The County shows no covered-parking rule for RL.",
+   "verdict": "confirmed",
+   "correct_statement": "Town Table 2-4 (RL): '2 parking spaces per unit within a garage or carport', at least 18' wide x 19' long inside. 9.07.100(A)(4) requires eaves of at least 12 inches, but flat roofs with parapets are exempt. The County rule (84.21.030(e)(3)) calls for an enclosed garage or carport of at least 10' x 20' inside, but only in RS zones in the Valley and Desert regions; RL is not named.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-9-development-code/chapter-9.07-residential-and-hillside-reserve-districts",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.21-single-family-residential-dwellings"
+   ]
+  },
+  {
+   "claim": "Steel, concrete, masonry or SIP structural elements need plans stamped by a California-licensed architect or engineer (CRC R301.1.3.3). In the 2025 CRC, wildfire construction rules moved to the California Wildland-Urban Interface Code (Title 24 Part 7).",
+   "verdict": "confirmed",
+   "correct_statement": "Both confirmed from the 2025 CRC text. R301.1.3.3 requires stamped approval for cold-formed steel, concrete, masonry or SIP structural elements. R337 now points to Part 7, the California Wildland-Urban Interface Code.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r301-design-criteria",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/chapter-3-building-planning/section-r337-materials-and-construction-methods-for-exterior-wildfire-exposure"
+   ]
+  },
+  {
+   "claim": "California's owner-builder exemption (B&P Code 7044) lets you build your own home without a license, using your own labor or licensed subs. Hiring unlicensed helpers makes you an employer, and selling within 1 year of completion creates a presumption that you built it for sale.",
+   "verdict": "unverifiable",
+   "correct_statement": "I could not fetch the statute: leginfo.legislature.ca.gov and Justia returned 403, and the CSLB owner-builder pages returned 404. The summary matches the generally known rule, but check it with CSLB or the County's owner-builder disclosure form before relying on it.",
+   "sources": [
+    "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=BPC&sectionNum=7044"
+   ]
+  },
+  {
+   "claim": "The 0-5 ft 'Zone 0' ember-resistant rule (AB 3074) may or may not have been adopted by the Board of Forestry as of Oct 2026, and the parcel's Fire Hazard Severity Zone is unknown.",
+   "verdict": "unverifiable",
+   "correct_statement": "Still unconfirmed: web search was used up and I fetched no Board of Forestry or OSFM source. Look up the parcel on the OSFM Fire Hazard Severity Zone map and ask County Fire whether Zone 0 rules apply.",
+   "sources": []
+  }
+ ],
+ "digest": {
+  "headline": "In the County, permit a roughly 560-640 sq ft modern house as your MAIN home. Live in a certified RV, not the uncertified capsule, under a temporary permit (renewable yearly, up to 5 years in the County or 4 in the Town). Make a heat pump the main heat, because a whole-floor electric mat system is not allowed as primary heat on the code's checklist path and may not pass the energy code.",
+  "key_points": [
+   "Town or County decides how small you can build. Inside the Town of Yucca Valley the minimum is 725 sq ft measured from the outside walls. Width and depth must each average 20 ft. You also need a 2-car garage or carport (18' x 19' inside) and 12-inch eaves, unless the roof is flat with a parapet. The Town reconsidered the 725 rule in May-June 2026, but the code text as of Oct 3, 2026 still says 725 (verify).",
+   "In unincorporated San Bernardino County there is no minimum house size. State code only requires one 70 sq ft room (7 ft minimum in any direction), a bathroom and a kitchen sink. A 560-640 sq ft house is legal, and I found no covered-parking rule for RL lots.",
+   "You can live on the land only after the building permit is issued, and only with a temporary permit. County: a certified RV or travel trailer, 12 months at a time, up to 5 years total. Each renewal needs a written request at least 14 days before expiry and a good reason. Town: a self-contained RV or manufactured home with HCD or HUD approval, 1 year at a time, up to 4 years. Without a permit, the County allows owner camping on 5+ acres for only 4 days in 30.",
+   "A $20k capsule without an RV (RVIA), HCD or HUD label is not legal to live in. Use a certified RV or park-model trailer instead, or check the capsule for a label before buying. An unlabeled capsule could only be storage or a studio, and only if the County permits it as an accessory structure (verify).",
+   "Permit the small house as the PRIMARY home, not as an ADU (accessory dwelling unit). An ADU cannot be signed off before the main house, except after declared disasters. The County's free pre-approved ADU Model D (560 sq ft, 1 bedroom, built to the 2025 codes) is a useful template; ask whether it can be filed as a main house with sprinklers added.",
+   "Every new main house needs fire sprinklers, and so will each later ADU, because the main house has them. You also need a real water source (a well or a water district). Plan on no hauled water for a new home: County bulletins say it is not allowed, and the code requires Environmental Health approval (verify).",
+   "The capsule houses can come later as permitted ADUs. On a County lot of 5 acres or more you can have up to 3 detached ADUs (2 on smaller lots). Each must be 200-1,200 sq ft and at most 18 ft tall, with one uncovered parking space. Confirm the lot is at least 5.00 acres.",
+   "Energy code (Climate Zone 14 confirmed for 92284): on the checklist path the main heat must be a heat pump. Electric floor heat counts as 'supplemental' only if it is under 2 kW and runs on a timer of 30 minutes or less. Mats under the whole 340 sq ft soft zone would be 3.4-4 kW, so they would need a computer energy model and might fail (verify). An air-to-water heat pump feeding tubes in the slab does count as heat-pump heating.",
+   "Solar may not be required for a tiny house. The formula for Climate Zone 14 gives about 1.73 kW for 640 sq ft, which is under the 1.8 kW cutoff, so no solar is required. A 748 sq ft house needs about 1.8 kW. The cutoff is about 728 sq ft (verify with the energy consultant). The report's '3-5 kW required' is wrong; that much is optional.",
+   "Soft floor: keep everything above the heat at about R-1.4 (2.5 tog) or less. Thick traditional tatami (5.5-6 cm) will block the heat. Use thin floor-heating tatami, 6-10 mm glue-down cork, or wool carpet with a thin rubber pad. A felt pad pushes wool over the limit.",
+   "Keep the building permit alive by passing an inspection at least every 5 months. The base code uses 180 days, the California version uses 12 months, and the County's temporary RV permit lapses if no inspection is called within 180 days.",
+   "Time the Bhutan trip carefully. Leaving mid-build can stop inspections and kill the permit, and a voluntary trip may not count as a 'reason beyond your control' for extending the RV permit. Go before you pull the permit or after final inspection (verify with the County).",
+   "The flat pad on the slope needs a soils report. Cut into the slope rather than filling: fill deeper than 24 inches (sand or gravel) or 8 inches (earth) needs engineering. Steel or SIP shells need a California engineer's stamp. Design loads are 130 mph wind and Seismic Category D2.",
+   "Costs are estimates only. The report gives owner-built-with-subs numbers that conflict ($144k-240k in the text, $190k-320k in the table, for 640 sq ft), so get 3 local bids."
+  ],
+  "next_actions": [
+   "Get the lot's parcel number and confirm whether it is in the Town or the County. Call SB County Land Use Services at 909-387-8311.",
+   "Call Town of Yucca Valley Planning and ask: 'Is 725 sq ft still the minimum after the June 9, 2026 meeting, and does a solar carport satisfy the 2-space covered parking rule?'",
+   "Call County Building and Safety and ask: 'Can pre-approved ADU Model D be filed as the primary house with sprinklers? How do Temporary Structure Permit renewals work for an RV, and can we extend if we leave the country for months?'",
+   "Ask the water district (Hi-Desert Water District if in its area) and County Environmental Health, using the parcel number: 'Can we get water service or drill a well? Is a standard septic allowed here, or an advanced treatment unit?'",
+   "Email a Title 24 energy consultant: '640 sq ft new home, Climate Zone 14. Does the under-1.8 kW solar exception apply? Can whole-floor electric radiant pass on the performance path, or should we use an air-to-water heat pump with slab tubing?'",
+   "Check the capsule you are considering for an RV (RVIA), HCD or HUD label. Price one certified RV or park model as the alternative.",
+   "Tape out a 20' x 32' rectangle and lie down in the 18' x 19' great-room zone together to test the size.",
+   "Order samples of thin floor-heating tatami, 6 mm and 10 mm cork, and wool loop carpet. Leave them in sun and sand for a week.",
+   "Write a timeline: building-permit date, then 12-month RV-permit renewals, an inspection every 5 months, and the Bhutan window outside the active-build period."
+  ],
+  "questions_for_couple": [
+   "Do we prefer a County lot (no size minimum, likely no required solar) or would we accept 725+ sq ft plus a carport for a Town lot?",
+   "Are we willing to live in a certified RV for 1-5 years instead of the $20k capsule?",
+   "Do we go to Bhutan before pulling the building permit, or after final inspection?",
+   "Heated floor: a heat-pump hydronic slab (about $18k-36k, code-friendly) or electric mats (about $3k-8.5k, but code risk and higher running costs)?",
+   "Real tatami, washi or synthetic tatami, cork, or wool: which would we enjoy cleaning sand off?",
+   "What is our hard budget ceiling, and how many hours a week can each of us build?",
+   "How many ADU capsules do we really want, given each one needs a permit and sprinklers?",
+   "Do we want one chair-height spot for bad-back days?"
+  ],
+  "risks": [
+   {
+    "risk": "Living in an uncertified capsule leads to code enforcement, no utility release and forced removal",
+    "severity": "high",
+    "mitigation": "Use a certified RV or travel trailer under a temporary permit issued after the building permit; keep the capsule only as storage if the County permits it"
+   },
+   {
+    "risk": "The permit or temporary RV permit lapses during a slow build or the Bhutan trip",
+    "severity": "high",
+    "mitigation": "Pass an inspection at least every 5 months; schedule Bhutan outside the active build; ask the County in writing about extensions for long absences"
+   },
+   {
+    "risk": "No legal water source (well or district); hauled water not accepted for a new home",
+    "severity": "high",
+    "mitigation": "Confirm water service or well feasibility and cost during the purchase contingency; budget a sprinkler tank and pump ($3k-8k estimate)"
+   },
+   {
+    "risk": "Whole-floor electric radiant fails the energy code or costs a lot to run",
+    "severity": "medium",
+    "mitigation": "Mini-split or air-to-water heat pump as primary heat; electric only in small zones under 2 kW on timers; run the energy model early"
+   },
+   {
+    "risk": "Town lot: 725 sq ft minimum plus 2-car carport adds cost; septic limits may apply in the Town's groundwater-protection area",
+    "severity": "medium",
+    "mitigation": "Confirm the Town vs County boundary and the septic prohibition map before buying (verify)"
+   },
+   {
+    "risk": "Later ADU capsules cost more than expected because each must be a permitted, sprinklered dwelling",
+    "severity": "medium",
+    "mitigation": "Price one permitted ADU before planning several; confirm the lot is at least 5.00 acres for 3 ADUs"
+   },
+   {
+    "risk": "Thick tatami or carpet blocks floor heat",
+    "severity": "medium",
+    "mitigation": "Keep the total covering at about R-1.4 or less; thin floor-heating tatami, cork, or wool with a thin rubber pad"
+   },
+   {
+    "risk": "Fill settlement or footings too close to the slope",
+    "severity": "medium",
+    "mitigation": "Get a soils report; cut rather than fill; consider a stepped slab"
+   },
+   {
+    "risk": "Wildfire zone rules and insurance",
+    "severity": "medium",
+    "mitigation": "Build to wildfire standards anyway: Class A roof, ember-resistant vents, noncombustible cladding, a clear 0-5 ft ring"
+   }
+  ],
+  "costs": [
+   {
+    "item": "Design drawings (building designer or architect)",
+    "low_usd": 5000,
+    "high_usd": 25000,
+    "note": "Estimate"
+   },
+   {
+    "item": "Structural engineering",
+    "low_usd": 2500,
+    "high_usd": 8000,
+    "note": "Estimate; required for SIP or steel"
+   },
+   {
+    "item": "Title 24 energy calculations and rater",
+    "low_usd": 800,
+    "high_usd": 2500,
+    "note": "Estimate"
+   },
+   {
+    "item": "Soils report",
+    "low_usd": 2000,
+    "high_usd": 5000,
+    "note": "Estimate"
+   },
+   {
+    "item": "Pad grading and drainage",
+    "low_usd": 5000,
+    "high_usd": 25000,
+    "note": "Estimate; slope, rock and caliche drive cost"
+   },
+   {
+    "item": "Fire sprinklers (NFPA 13D)",
+    "low_usd": 4000,
+    "high_usd": 12000,
+    "note": "Estimate; required"
+   },
+   {
+    "item": "Sprinkler tank and pump (on a well)",
+    "low_usd": 3000,
+    "high_usd": 8000,
+    "note": "Estimate"
+   },
+   {
+    "item": "Ductless mini-split heat pump",
+    "low_usd": 4000,
+    "high_usd": 8000,
+    "note": "Estimate"
+   },
+   {
+    "item": "Electric radiant mats, about 340 sq ft",
+    "low_usd": 3000,
+    "high_usd": 8500,
+    "note": "Estimate; energy-code risk at this size"
+   },
+   {
+    "item": "Hydronic slab tubing plus air-to-water heat pump",
+    "low_usd": 18000,
+    "high_usd": 36000,
+    "note": "Estimate; needs a radiant designer"
+   },
+   {
+    "item": "Solar panels",
+    "low_usd": 0,
+    "high_usd": 18000,
+    "note": "Likely $0 required under about 728 sq ft in Climate Zone 14; about 1.8 kW at 748 sq ft; 3-5 kW optional (verify)"
+   },
+   {
+    "item": "Whole house, owner-built with licensed subs, 640 sq ft",
+    "low_usd": 144000,
+    "high_usd": 320000,
+    "note": "Estimate; the report's own figures conflict; excludes well, septic, power, road and fees"
+   },
+   {
+    "item": "Whole house, contractor-built, 640-750 sq ft",
+    "low_usd": 300000,
+    "high_usd": 450000,
+    "note": "Estimate"
+   }
+  ],
+  "numbers": [
+   {
+    "label": "Town minimum house size",
+    "value": "725 sq ft from the exterior; width and depth each average 20 ft or more",
+    "source": "Yucca Valley 9.07.100(A)(6)"
+   },
+   {
+    "label": "Town covered parking (RL)",
+    "value": "2 spaces in a garage or carport, 18' x 19' inside minimum",
+    "source": "Yucca Valley Table 2-4"
+   },
+   {
+    "label": "County minimum house size",
+    "value": "None; CRC 70 sq ft habitable room, 7 ft minimum dimension",
+    "source": "County 84.21.030; CRC R312"
+   },
+   {
+    "label": "County temporary residence during construction",
+    "value": "12 months, renewable up to 5 years total; RV or travel trailer",
+    "source": "County 85.15.080(f); Temporary Structure Permit sheet Rev. 6/2025"
+   },
+   {
+    "label": "Town temporary residence during construction",
+    "value": "1-year steps up to 4 years; manufactured home or self-contained RV",
+    "source": "Yucca Valley 9.39.050"
+   },
+   {
+    "label": "Owner camping without a permit (County, RL, 5+ acres)",
+    "value": "4 days in any 30",
+    "source": "County 84.25.070"
+   },
+   {
+    "label": "ADUs allowed on a County lot of 5+ acres",
+    "value": "Up to 3 detached; 200-1,200 sq ft; 18 ft max height",
+    "source": "SB County ADU handout, May 2026"
+   },
+   {
+    "label": "Energy-code climate zone",
+    "value": "Zone 14 (ZIP 92284)",
+    "source": "CEC ZIP list"
+   },
+   {
+    "label": "Solar required, Climate Zone 14",
+    "value": "kW = sq ft x 0.741/1000 + 1.26; none if under 1.8 kW (about 728 sq ft)",
+    "source": "2025 Single-Family Compliance Manual, Ch. 7"
+   },
+   {
+    "label": "Supplemental heat limit (checklist path)",
+    "value": "Under 2 kW (7,000 Btu/h), on a timer of 30 minutes or less",
+    "source": "2025 Compliance Manual, 150.1(c)6 exception"
+   },
+   {
+    "label": "Max floor-covering insulation over radiant",
+    "value": "2.5 tog = about R-1.4",
+    "source": "Carpet Foundation"
+   },
+   {
+    "label": "Design loads (County plan sheets)",
+    "value": "130 mph wind, Exposure C, Seismic D2, 30 psf snow",
+    "source": "Model D plan set"
+   },
+   {
+    "label": "Noon sun altitude at 34.1 N",
+    "value": "About 79 degrees (June), 56 (equinox), 32.5 (December)",
+    "source": "Calculation"
+   }
+  ],
+  "people": [
+   {
+    "role": "County Land Use Services or Town Planning counter",
+    "why": "Confirm Town vs County, the size minimum, Model D as a primary home, RV permit renewals and long absences",
+    "when": "Before making an offer",
+    "cost": "Free"
+   },
+   {
+    "role": "Water district, County Environmental Health, well driller (C-57)",
+    "why": "Water source and septic or advanced treatment approval",
+    "when": "During the purchase contingency",
+    "cost": "Well cost varies widely (verify locally)"
+   },
+   {
+    "role": "Title 24 energy consultant",
+    "why": "Solar exception, whether whole-floor radiant can pass, window limits",
+    "when": "Before design is fixed",
+    "cost": "$800-2,500 (estimate)"
+   },
+   {
+    "role": "Building designer or architect",
+    "why": "Permit drawings fitted to the slope and soft-floor plan",
+    "when": "Site walk before closing; drawings after closing",
+    "cost": "$5k-25k (estimate)"
+   },
+   {
+    "role": "Soils engineer, then structural engineer",
+    "why": "Pad on the incline; wind and seismic design; stamp for SIP or steel",
+    "when": "Soils during contingency; structural after picking the shell",
+    "cost": "$2k-5k plus $2.5k-8k (estimate)"
+   },
+   {
+    "role": "Fire sprinkler contractor (C-16)",
+    "why": "NFPA 13D design and tank sizing on a well",
+    "when": "Design phase",
+    "cost": "$4k-12k plus tank $3k-8k (estimate)"
+   },
+   {
+    "role": "Radiant or hydronic designer (only if you choose a heat-pump slab)",
+    "why": "Tube layout and water temperatures under soft floors",
+    "when": "Before the slab pour",
+    "cost": "Design $1k-3k (estimate)"
+   }
+  ]
+ },
+ "other_corrections": [
+  "The report's cost figures conflict with each other. The text says owner-builder with subs costs $225-375 per sq ft, which is $144k-240k for 640 sq ft. The cost table says $190k-320k, which it calls about $300-500 per sq ft.",
+  "South glass of 90-110 sq ft is 14-19% of a 585-640 sq ft house, above the report's own 10-15% target. For 640 sq ft, 10-15% is about 64-96 sq ft.",
+  "Build-up B is called the 'recommended default', but 3.4-4 kW of electric mats does not qualify as supplemental heat on the energy code's prescriptive path. That path allows supplemental heat only under 2 kW and on a timer of 30 minutes or less, so B carries real compliance risk.",
+  "The solar items labeled '3-5 kW (required for a new home)' are wrong for a 640 sq ft house in Climate Zone 14: Exception 2 likely applies, because the formula gives about 1.73 kW, under the 1.8 kW cutoff.",
+  "The executive summary says the County allows a temporary residence for 12 months plus one 12-month extension. County 85.15.080(f)(5) and the County Temporary Structure Permit sheet allow multiple 12-month extensions, up to 5 years total.",
+  "The report says a temporary unit must be 'a certified manufactured home or self-contained RV'. That is Town wording. The County sheet says 'recreational vehicle or travel trailer', and manufactured units also need a setdown permit.",
+  "The report says ADUs are exempt from sprinklers only if the main house has none. That is correct, but it means the couple's later capsule ADUs WILL need sprinklers, because a new main house must have them. The report does not say so.",
+  "IB-0004's 'no hauled water' line sits in the section about rebuilding a rec cabin into a new home. The general rule is in County Code 84.21.030(j)(3): no hauled water without Environmental Health approval.",
+  "The County's May 2026 ADU handout says the County offers 'three' pre-approved ADU plan sets, while the guidance page lists four (B, C, D, H).",
+  "Not in the report but decision-relevant: a Regional Water Board septic prohibition covers parts of the Town of Yucca Valley over the Warren Valley groundwater basin. New or replacement septic systems on exempt parcels there need advanced treatment units. Check whether a Town lot falls in that area (verify).",
+  "The County ADU handout allows up to 3 detached ADUs only on lots of 5 acres or more, otherwise 2. A lot advertised as about 5 acres needs to be confirmed at 5.00 acres or more.",
+  "Minor: the executive summary prices installed electric radiant at $12-25 per sq ft, but the cost table says $14-25.",
+  "Web search was used up for this run, so verification relied on fetching primary documents directly. The Town website, leginfo and CSLB pages could not be fetched."
+ ]
+}

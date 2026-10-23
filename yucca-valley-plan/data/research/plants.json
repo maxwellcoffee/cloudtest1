@@ -1,0 +1,626 @@
+{
+ "topic": "plants",
+ "executive_summary": "The planting plan should be the last layer of your site plan. Decide the house pad, septic area, driveway, grading cuts and fire zones first, then plant. Anything planted in the wrong spot will either die in a bulldozer's path or become a protected obstacle. That matters most for western Joshua trees: every stem counts as a separate \"tree\" under state law, and in the standard fee zone a permit to remove one costs $354.75 to $2,609 per stem. The new 2026 relief law (AB 1808, effective immediately as of Sept 29, 2026) applies only to EXISTING single-family homes, not vacant lots or new builds, so plan your pads around the Joshua trees. The climate suits you: USDA Zone 9a on the 2023 map for Yucca Valley, Landers, Joshua Tree and Pioneertown zip codes (9b in Morongo Valley), roughly Sunset Zone 11, last frost around late March and first frost mid-to-late November. Pomegranate, fig, jujube, grapes, pistachio and olive are your most reliable edibles. Apricots and almonds bloom early and often lose the crop to late frost, so plant them mid-slope (cold air drains downhill, and your incline helps here). For hardy shade and windbreaks, use natives: desert willow, honey and screwbean mesquite, catclaw, netleaf hackberry, and four-wing saltbush or quailbush. Keep resinous Arizona cypress, pines and junipers well away from any structure, and skip tamarisk and athel. Water is the real limiter. District water is cheap: about $4.41 per 748-gallon unit in Bighorn-Desert View's area and $5.17 to $9.96 per unit in Hi-Desert Water District's tiers. Hauled water costs many times more, so before you buy, find out whether the lot has a meter. Laundry-to-landscape greywater needs no permit only for a real building with a code-compliant sewer or septic to send water back to. In practice it fits the permitted house later, not the unpermitted pod. For the Bhutan trip: plant natives at least one full growing season before you leave, put the young trees on a gravity-fed drip line from a tank at the top of your slope, and pay someone to check every 1-2 weeks. Consider waiting to plant fruit trees until you're back. One time-sensitive item: the Mojave Desert Land Trust's native plant sale is TOMORROW, Sat Oct 24, 2026, 9am-2pm, in Joshua Tree. It's the best one-stop place to learn which plants work locally.",
+ "findings": [
+  {
+   "title": "Climate: USDA Zone 9a (2023 map) for most Morongo Basin zip codes; frost window roughly late Nov to late March",
+   "detail": "USDA's 2023 map gives Zone 9a (average extreme winter low 20-25\u00b0F) at the zip-code centroids for 92284 (Yucca Valley), 92285 (Landers), 92252 (Joshua Tree) and 92268 (Pioneertown). 92256 (Morongo Valley) is 9b (25-30\u00b0F). The older 2012 map had Yucca Valley at 8b. Plantmaps gives an average last frost of Mar 21-31, first frost of Nov 11-20, and about 30-40 frost days a year. Garden.org gives a 10% chance of a 32\u00b0F frost by Nov 10 and a 50% chance by about Nov 28. Zip centroids average over big areas: higher, colder spots (Pipes Canyon, upper Pioneertown, Rimrock, about 4,000+ ft) and low spots where cold air pools will run colder, probably 8b. Sunset zone: the Mojave high desert is generally Sunset Zone 11 (medium-to-high desert of CA and southern NV). That comes from my own knowledge; I did not confirm it this session. I also could not find a published chill-hour total for Yucca Valley. My estimate is several hundred to about 1,000 hours below 45\u00b0F, so low-confidence. In practice: avoid ultra-low-chill coastal varieties like 'Anna' apple. They break dormancy early and get frozen. Moderate-chill, late-blooming varieties are safer.",
+   "confidence": "medium",
+   "sources": [
+    "https://phzmapi.org/92284.json",
+    "https://phzmapi.org/92285.json",
+    "https://phzmapi.org/92252.json",
+    "https://phzmapi.org/92268.json",
+    "https://phzmapi.org/92256.json",
+    "https://www.plantmaps.com/en/clim/c/us/california/yucca-valley/climate-data",
+    "https://garden.org/apps/frost-dates/Yucca+Valley%2C+CA/",
+    "https://ucanr.edu/node/99010"
+   ],
+   "implication": "Plan on frost-hardy plants rated to at least 15\u00b0F. Buy fruit varieties for a moderate-chill, late-spring-frost climate, not for LA or the low desert. Put a $15-25 min/max thermometer on the lot the first winter to learn your actual microclimate."
+  },
+  {
+   "title": "Joshua trees: still very expensive to remove on a vacant lot or new build. The 2026 relief laws mostly don't apply to you",
+   "detail": "The Western Joshua Tree Conservation Act (2023) requires a CDFW Incidental Take Permit to remove or kill western Joshua trees. Each stem or trunk coming out of the ground is a separate 'tree', and fees apply to dead and living trees alike. Per CDFW's current ITP page, the standard fee area charges $354.75 under 1 m, $521.75 for 1-5 m and $2,609 for 5 m or taller; the reduced fee area charges $156.50, $208.75 and $1,043.50. You pay the fee in effect when CDFW invoices you, and it is adjusted every year (a 2026 adjustment took effect Jan 1, 2026). Three bills were chaptered in Sept 2026. AB 1808 (Ch. 816, Statutes of 2026, chaptered Sept 29, 2026, urgency statute so effective immediately) allows owners of EXISTING single-family homes to trim or remove up to 10 trees within 30 ft of the house or 15 ft of an accessory structure, and lets delegated counties or cities issue permits for that category. It does not cover vacant lots or new homes, and an unpermitted pod almost certainly doesn't count as an 'existing single-family residence'. AB 1663 (Ch. 813) lets an agent apply and allows no-fee removal of certain dead or hazard trees. SB 1062 (Ch. 673) directs CDFW to consider tiered, impact-based fees. CDFW must adopt revised in-lieu fee regulations by June 30, 2027. Example: a clump of 8 small sprouts under 1 m in the standard zone is 8 \u00d7 $354.75 = $2,838.",
+   "confidence": "high",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1808",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1663",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260sb1062",
+    "https://z1077fm.com/three-bills-aim-to-ease-cost-and-burden-of-western-joshua-tree-conservation-act-take-fees/",
+    "https://www.nbcpalmsprings.com/local-and-community/2026/09/30/new-california-law-eases-rules-for-removing-hazardous-joshua-trees"
+   ],
+   "implication": "Before making an offer, count and GPS every Joshua tree stem on the lot. Put the pods, house pad, septic, driveway and grading where there are none. Don't plant new Joshua trees anywhere you might ever build or drive. My inference, to confirm with CDFW: a planted one is likely protected too. Ask CDFW Region 6 (r6cesa@wildlife.ca.gov, 909-484-0167) which fee area the parcel is in, and whether the County or the Town has a delegation agreement."
+  },
+  {
+   "title": "Other protected desert plants: removal and transplant probably need county/town permits (could not verify text this session)",
+   "detail": "From my own knowledge, not verified: on top of the Joshua tree law, the California Desert Native Plants Act (Food & Agricultural Code \u00a780001 et seq.) generally requires a permit or tags from the County Agricultural Commissioner or Sheriff to harvest or move many desert natives, including cacti, yuccas and agaves, mesquite, catclaw, smoke tree, palo verde, ocotillo, ironwood and desert holly. San Bernardino County's Development Code (Plant Protection and Management, Ch. 88.01) and the Town of Yucca Valley's native plant rules also regulate removal of certain desert natives during development. The primary-source pages for all three returned errors (HTTP 403) when I tried to fetch them, and I ran out of web searches before finding alternates.",
+   "confidence": "low",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT"
+   ],
+   "implication": "Before grading, ask County Land Use Services (or the Town, if the lot is incorporated) whether a native plant survey or removal permit is required. Plan to SALVAGE yuccas, cacti and small shrubs from pad areas and replant them as landscaping. It's free plant material, but get the permit or tags first."
+  },
+  {
+   "title": "Fire rules shape where plants can go: the new Zone 0 (0-5 ft) rules ban wood mulch and new trees next to buildings",
+   "detail": "The Board of Forestry adopted the Zone 0 regulations on Aug 19, 2026 and sent them to the Office of Administrative Law on Aug 28, 2026. They take effect only after OAL approves and files them, and as of a Sept 14, 2026 update Fire Safe Marin said they were 'under further review'. I could not confirm they are in force as of Oct 23, 2026. Scope: buildings anywhere in a State Responsibility Area (SRA), at ANY mapped hazard level, plus Local Responsibility Area (LRA) buildings only in Very High zones. A rural 5-acre lot in unincorporated county may well be in an SRA; check the map. Content per the August 2026 summary: no bark, wood chips or other combustible mulch within 5 ft (gravel, rock, pavers, concrete and bare soil are fine). No new trees in Zone 0. Potted plants up to 18 in tall, only in movable noncombustible pots. Lawn and low groundcover kept under 3 in. Small non-woody plants (bulbs, annuals, non-thatching succulents) allowed with spacing. A vegetation-free safety strip at least 1 ft from walls and 2 ft from windows, doors and vents, extended to the eave edge when the eave sticks out more than 1 ft. Tree branches 10 ft from chimneys and 5 ft above roofs. New combustible fencing banned in Zone 0. Outbuildings under 120 sq ft allowed in Zone 0 only if entirely noncombustible. Timing for existing buildings: 3 years for vegetation, up to 5 years for the safety zone. For new construction, Zone 0 applies once the Board posts updated guidance, due within one year of adoption. Separately, state defensible-space law (PRC 4291, my knowledge) requires Zone 1 (0-30 ft, lean and green) and Zone 2 (30-100 ft or to the property line, reduced fuel) in SRA and in Very High LRA zones. San Bernardino County Fire adopted new LRA hazard zone maps on June 10, 2025 (Ord. 4489). A local news report says most of the Morongo Basin is Moderate, areas north of Yucca Valley and Morongo Valley are High, and none is Very High. The Town of Yucca Valley itself was not covered.",
+   "confidence": "medium",
+   "sources": [
+    "https://bbklaw.com/resources/la090926-california-board-of-forestry-adopts-emergency-zone-0-regulations-under-ab-3074",
+    "https://www.rcrcnet.org/general/california-board-of-forestry-and-fire-protection-approves-zone-0-defensible-space-regulations/",
+    "https://firesafemarin.org/new-zone-0-regulations/",
+    "https://sbcfire.org/fire-hazard-severity-zone-map/",
+    "https://z1077fm.com/calfire-and-sb-county-release-fire-hazard-severity-map-and-they-are-looking-for-your-feedback"
+   ],
+   "implication": "Design every pod and the house with a 5-ft gravel or DG ring and nothing woody in it. Put potted herbs on a metal stand, no wood planters against the walls. Keep orchards and windbreaks out past 30 ft (irrigated deciduous fruit trees are fine in Zone 2 with spaced canopies). Use wood-chip mulch only in the orchard, far from structures."
+  },
+  {
+   "title": "Fire-smart species choices: resinous conifers are the main thing to keep away from buildings",
+   "detail": "University of Arizona Extension lists pines, firs, junipers and ARIZONA CYPRESS as typically flammable because of their oils and pitch, regardless of watering. A Rancho Cucamonga fire district list flags Arizona, Tecate and Italian cypress as undesirable in the wildland-urban interface. Hobbyist reports from Mojave windbreaks say Eldarica (Afghan) pine suffers root rot and borers when irrigated (anecdotal). Based on general horticultural knowledge (not verified this session): good lower-flammability choices for near-house zones are saltbushes (four-wing saltbush, quailbush), agaves, prickly pear, globemallow, desert marigold and well-watered deciduous fruit trees. Creosote, cholla and the dead-leaf 'skirts' on yuccas and Joshua trees burn hot. Keep them out of Zone 0 and thinned in Zone 1.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.extension.arizona.edu/sites/default/files/pubs/az1289.pdf",
+    "https://www.cityofrc.us/sites/default/files/2023-03/RCUndesirablePlantsandTreesRevDec2015.pdf",
+    "https://www.tractorbynet.com/forums/threads/windbreak.199953/"
+   ],
+   "implication": "If you want Arizona cypress for a fast evergreen windbreak, plant it only on the far upwind edge of the property, 100+ ft from any pod or the house. Use saltbush and desert willow rows as the windbreak closer in."
+  },
+  {
+   "title": "Windbreaks: native multi-row design. Avoid tamarisk and athel",
+   "detail": "UC Cooperative Extension's list of invasive trees to avoid includes athel (Tamarix aphylla) and suggests alternatives such as desert willow and netleaf hackberry. Cal-IPC rates athel 'Limited' (CDFA 'B'); it has escaped in California desert regions, and tamarisks are groundwater-hungry phreatophytes. Saltcedar (T. ramosissima) is worse. Standard windbreak practice (general USDA/extension knowledge, not fetched this session): the protected area extends downwind about 5-10 times the windbreak's height, best at 2-5\u00d7. Aim for about 40-60% porosity; a solid wall causes turbulence. Use 2-3 rows: an outer shrub row (four-wing saltbush, quailbush/big saltbush, Apache plume), then small trees (desert willow, honey or screwbean mesquite, catclaw, netleaf hackberry). Strong spring winds in the Morongo Basin generally blow from the west/southwest, through San Gorgonio Pass. That's my knowledge; confirm on site from sand drifts and wind-sculpted shrubs. Until plants grow, use 40-50% windbreak fabric on T-posts.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.ucanr.edu/node/109084",
+    "https://www.cal-ipc.org/plants/profile/tamarix-aphylla-profile/",
+    "https://calinvasives.ucdavis.edu/species/tamarix-aphylla"
+   ],
+   "implication": "Run a native windbreak along the upwind (probably W/SW) edge, roughly 50-150 ft from the house site, and plant it in YEAR 1. It's the slowest element and makes everything else easier. Also avoid fountain grass and pull Sahara mustard and red brome; both feed wildfires."
+  },
+  {
+   "title": "Edibles: the most reliable list for about 3,300 ft high desert",
+   "detail": "Most reliable: pomegranate (heat-, drought- and alkaline-tolerant, hardy to about 10-12\u00b0F; e.g., 'Wonderful', 'Parfianka', 'Salavatski'), fig (100-200 chill hours; 'Black Mission', 'Brown Turkey', 'Chicago Hardy'; may die back in a hard freeze but regrows; best against a south-facing wall), jujube (very tough; 'Li', 'Lang', 'Sugar Cane', 'Honey Jar'; root-suckers), grapes (table and wine grapes on a trellis; birds are the main pest), pistachio (needs hot summers and real winter chill; plant male and female trees; slow to bear, 5-7+ years), olive ('Mission' is among the more cold-tolerant; check whether you have pollen allergies), and fruiting mulberry (vigorous but thirsty). Riskier: apricot and almond bloom in Feb-Mar and often lose the crop to late frost. A high-desert extension column names apricot, peach and sweet cherry as the most frost-vulnerable bloomers; apples and pears bloom later. Choose late-blooming varieties and plant them mid-slope, not in low spots. Apples and Asian pears with moderate chill needs are feasible; dry air keeps fire blight down. Citrus is marginal outdoors at this elevation. Vegetables: cool-season crops in Sept-Oct and again Feb-Mar (garlic in Oct-Nov); warm-season crops after mid-April; 30-50% shade cloth for summer; raised beds with 1/2-in hardware-cloth bottoms. Note: most specific variety and hardiness figures are general horticultural knowledge or nursery sources, not a Morongo-specific trial list. I could not find a published high-desert variety list from the San Bernardino County Master Gardeners.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.starnursery.com/StarNotes/SN500B_Desert-Fruit-Trees.pdf",
+    "https://www.starkbros.com/growing-guide/article/thriving-in-the-high-desert-a-guide-to-growing-fruit",
+    "https://www.thefallonpost.org/article/423,the-frustration-of-freezing-fruit-trees",
+    "https://ucanr.edu/node/99010",
+    "https://ucanr.edu/node/105065"
+   ],
+   "implication": "Start with a 'can't-fail five': pomegranate, fig, jujube, grape, plus one pistachio pair or olive. Add apricots and apples only after you've watched a spring frost pattern on the site."
+  },
+  {
+   "title": "Natives that thrive locally, and where to get them",
+   "detail": "Mojave Desert Land Trust (MDLT) grows plants on site in Joshua Tree for restoration and for sale. Past sales included Joshua trees, honey mesquite, silver cholla, desert needlegrass, white sage, smoke tree, jojoba, desert almond and sugarbush. Its 2026 Native Plant Sale is Saturday Oct 24, 2026, 9am-2pm, at MDLT HQ, 60124 Twentynine Palms Hwy, Joshua Tree 92252. It's cashless (cards, Apple/Google Pay, checks), with no holds, no backorders and no returns. Members get 10% off, and staff and volunteers answer questions. MDLT suggests Calscape.org or a local designer for planning. Contact: info@mdlt.org, 760-366-5440. MDLT also runs the Mojave Desert Seed Bank. Good candidates for about 3,300 ft (general knowledge, check against MDLT's 2026 catalog): trees and large shrubs: desert willow, honey and screwbean mesquite, catclaw, netleaf hackberry, desert almond. Accent plants: Mojave yucca, banana yucca, Parry's nolina, silver cholla (keep it away from paths and buildings; pack rats nest in it), beavertail and barrel cactus. Shrubs: creosote, four-wing saltbush, Apache plume, bladderpod, Mojave sage, desert globemallow. Grasses: big galleta, desert needlegrass, Indian ricegrass. Wildflowers to sow in fall: desert marigold, chia, Arizona lupine, Bigelow's coreopsis, desert dandelion. Smoke tree, blue palo verde and brittlebush can be frost-tender at this elevation.",
+   "confidence": "high",
+   "sources": [
+    "https://www.mdlt.org/events",
+    "https://www.mdlt.org/plant-sale-faqs",
+    "https://www.mdlt.org/events/native-plant-sale-2025",
+    "https://z1077fm.com/today-mdlt-native-plant-sale-begins"
+   ],
+   "implication": "Go to the sale tomorrow even if you don't buy, to learn, pick up the planting guide and meet staff. Natives need only 1-2 years of watering and are the right thing to plant before the Bhutan trip."
+  },
+  {
+   "title": "Water cost: district water is cheap, hauled water is the budget-breaker",
+   "detail": "Bighorn-Desert View Water Agency (Landers, Flamingo Heights, Johnson Valley area) adopted a uniform residential rate of $4.41 per hcf (1 hcf = 748 gal, so about $5.90 per 1,000 gal), effective Feb 11, 2026. The bi-monthly fixed charge for a 3/4-in or 1-in meter is $77.76, plus a fire service charge of $59.40. Bulk and hauler water is $12.19/hcf (about $16.30 per 1,000 gal, for the water only). The rates rise each Jan 1 through 2030 (to $4.61/hcf on 1/1/2027). Hi-Desert Water District (Yucca Valley), per its code as excerpted in search results (I could not open the code page): 5/8-in meter fixed charge $29.42/month from July 1, 2026; residential tiers $5.17/hcf for 0-4 units, $8.80 for 5-11, $9.96 for 12+. That works out to roughly $6.90 to $13.30 per 1,000 gal. HDWD: 55439 29 Palms Hwy, 760-365-8333, Mon-Thu 7:30-5. New-meter costs: an undated news report says BDVWA charged a $4,595 basic facilities charge plus $1,785 for a service line. I found no current HDWD connection fee. Hauled water to your door: I found no reliable local per-gallon price. Generic online guides conflict (2\u00a2 to 20\u00a2+ per gallon plus trip fees), so get local quotes. Example budget: Year 1 with 20 young trees plus 100 sq ft of vegetables is about 8,000-15,000 gal/yr, roughly $60-$200 of metered water. A mature 10-tree orchard is about 20,000-55,000 gal/yr, roughly $150-$700 metered, but possibly several thousand dollars if hauled.",
+   "confidence": "medium",
+   "sources": [
+    "https://bdvwa.org/wp-content/uploads/Prop-218-Notice-FINAL.pdf",
+    "https://z1077fm.com/after-a-public-hearing-bighorn-desert-view-water-sets-new-rates",
+    "https://z1077fm.com/new-homes-in-landers-and-flamingo-heights-may-pay-more-for-water-hookup",
+    "https://ecode360.com/50058793",
+    "https://www.hdwd.com/",
+    "https://new.risingsunartscentre.org/news/bulk-water-delivery-cost-per-gallon-2026.html"
+   ],
+   "implication": "Whether the lot has a meter, or one can be installed cheaply, decides whether a fruit orchard is realistic. With hauled water only, scale back to natives plus 3-5 fruit trees until a meter or well exists."
+  },
+  {
+   "title": "Water budget per tree (formula and planning figures)",
+   "detail": "Standard landscape-water formula: gallons/year = ETo (inches) \u00d7 plant factor \u00d7 canopy area (sq ft) \u00d7 0.623. High-desert reference ETo is roughly 65-75 in/yr. That's my estimate; I did not pull CIMIS data this session. Using 70 in: a mature desert willow (15-ft canopy, 177 sq ft, plant factor 0.2) needs about 1,500 gal/yr, and less once established on rain and harvested water. A mature pomegranate (10-ft canopy, plant factor 0.5) needs about 1,700 gal/yr. A mature apricot (15-ft canopy, plant factor 0.7) needs about 5,400 gal/yr. Establishment rule of thumb: natives get about 3-5 gal/week in summer and every 2-4 weeks in winter, weaned off over 1-3 years. Young fruit trees get about 5-15 gal/week in summer. Water deeply and less often (wet the soil 2-3 ft down) so roots grow deep. In decomposed-granite soils, water drains fast and spreads sideways little, so use 2+ emitters per tree and move them outward as the tree grows.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.starnursery.com/StarNotes/SN500B_Desert-Fruit-Trees.pdf"
+   ],
+   "implication": "Use this to size a tank for the Bhutan absence and to decide how many fruit trees you can afford to water. Natives are 3-4 times cheaper to water than deciduous fruit."
+  },
+  {
+   "title": "Laundry-to-landscape greywater needs no permit, but it assumes a real building with a sewer or septic",
+   "detail": "Under the California Plumbing Code (Ch. 15, cited as \u00a71502.1.1; some jurisdictions number it Ch. 16A), a clothes-washer-only system under 250 gal/day needs no construction permit if 11 conditions are met. The user must be able to switch flow to irrigation OR to the building sewer, with a labeled, accessible valve. No potable water connection, and no pump other than the washer's own. Water stays on site, contained in an irrigation field or mulch basins. No ponding or runoff. The outlet is covered by at least 2 in of mulch, rock or soil, or a shield. Minimal human and pet contact. Diaper or infectious laundry and hazardous chemicals go to the sewer. An operation-and-maintenance manual stays with the building. The exemption doesn't override other codes or local ordinances. Greywater can't be used on root crops or the edible parts of food crops; fruit trees are fine. Some agencies still ask you to register or notify. The candid problem: an unpermitted pod with no permitted septic has no 'building sewer' to divert to, so draining a washer or shower onto the land there isn't covered by the exemption. The county or the Regional Water Board could treat it as illegal wastewater discharge.",
+   "confidence": "high",
+   "sources": [
+    "https://santabarbaraca.gov/sites/default/files/documents/Public%20Works/Water%20Conservation/Graywater%20Fact%20Sheet.pdf",
+    "https://www.woodsideca.gov/DocumentCenter/View/114/Submittal-Requirements-for-Graywater-Systems-PDF",
+    "https://rmadocs.venturacounty.gov/building-and-safety/publications/chapter-16a-nonpotable-water-reuse-systems.pdf",
+    "https://www.marincounty.gov/departments/cda/env-health-svcs/prgm-graywater"
+   ],
+   "implication": "Put the washer and a laundry-to-landscape stub-out in the permitted house design (with diverter valve and mulch basins at fruit trees downslope). Until then, irrigate from district water, hauled water or rain tanks. Use plant-friendly, low-sodium, boron-free detergent; desert soils are already alkaline."
+  },
+  {
+   "title": "Rainwater catchment: worth doing, but modest volumes at 4-6 in of rain",
+   "detail": "Physics: 1 inch of rain on 1 sq ft of roof = 0.623 gal. At about 5 in/yr and about 80% capture, a 200-sq-ft pod roof yields about 500 gal/yr, a 600-sq-ft house roof about 1,500 gal/yr, and a 1,000-sq-ft roof about 2,500 gal/yr. Rain comes in winter storms and summer monsoon bursts, so tank size is what limits capture. From memory, not re-verified this session: the CA Plumbing Code exempts from permits rainwater systems for outdoor, non-spray irrigation with 5,000 gal or less of storage, tanks on grade with a height-to-width ratio of 2:1 or less, and no electrical power or makeup-water connection. Confirm with the county building department. Ground catchment (earthworks) usually beats roof catchment in volume on 5 acres.",
+   "confidence": "medium",
+   "sources": [
+    "https://santabarbaraca.gov/sites/default/files/documents/Public%20Works/Water%20Conservation/Graywater%20Fact%20Sheet.pdf"
+   ],
+   "implication": "Gutter the pods and later the house into 1-3 poly tanks placed UPHILL of plantings. The same tanks can store district or hauled water for the automated drip while you're away."
+  },
+  {
+   "title": "Use the slope: earthworks and gravity drip",
+   "detail": "General water-harvesting practice (Brad Lancaster-style; general knowledge): build small on-contour swales or berms and crescent-shaped 'half-moon' basins on the downhill side of each tree. Plant on the berm or basin edge, not in the bottom where water sits. Make each basin about 2-3 times the canopy diameter and mulch it with rock, or with wood chips only away from buildings. Keep basins at least 10 ft from foundations, out of the septic leach field, and never route concentrated runoff onto neighbors or the road. Gravity drip: every 2.31 ft of drop gives 1 psi. A tank 10-20 ft above the trees gives about 4-9 psi, enough for low-pressure or gravity emitters, or add a small solar DC pump. Bury lines 4-6 in deep, or use rigid pipe, because ground squirrels, rabbits and woodrats chew drip tubing. Deep pipes (2-in PVC sleeves 18-24 in deep beside each tree) and unglazed clay ollas push water down where roots should grow.",
+   "confidence": "medium",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Morongo_Basin"
+   ],
+   "implication": "Put the water tank pad at the top of the incline on your site plan, and coordinate swales with the grading and drainage plan for the house pad. Any grading may need county permits and dust control."
+  },
+  {
+   "title": "Wildlife: protect every plant from day one",
+   "detail": "General practice for the Mojave (general knowledge): plant trees in gopher baskets of 1/2-in galvanized hardware cloth (not light chicken wire, which rusts out), about 2 ft deep. Put 1/2-in hardware cloth under raised beds. Cage each young tree above ground, 3-4 ft tall, buried 4-6 in, against jackrabbits and cottontails. Use sturdy cages or wire cylinders for ground squirrels, which also climb and chew drip lines. Woodrats (pack rats) nest in cholla and debris piles and chew wiring and hoses, which matters for pods, vehicles and stored belongings too. Paint young fruit-tree trunks with a 50/50 mix of white interior latex paint and water to prevent sunscald. Stake young trees loosely for the spring winds.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.starkbros.com/growing-guide/article/thriving-in-the-high-desert-a-guide-to-growing-fruit"
+   ],
+   "implication": "Budget about $20-$60 per tree for basket, cage, stake and drip, more than the tree itself costs. Skip this and Year 1 losses can approach 100%."
+  },
+  {
+   "title": "Planting seasons, and how to time the Bhutan trip",
+   "detail": "Natives: plant in fall (Oct-Nov) so winter rains and cool weather set roots before the first summer. That's also when MDLT holds its sale. Bare-root fruit trees: Jan-Feb (dormant), from local or mail-order nurseries. Containerized trees can go in through early spring. Avoid planting May-Aug. Wildflowers: sow seed Oct-Dec ahead of winter rain. A first-summer young tree with no water for 3-4 weeks in July can die. A system you leave alone for months will fail sooner or later: timers die, rodents chew lines, wind knocks over cages. Tank sizing for an absence: 20 young trees \u00d7 10 gal/week \u00d7 13 weeks \u2248 2,600 gal, so a 2,500-3,000-gal tank plus a battery timer roughly covers a summer quarter. Vegetables should be off by then.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.mdlt.org/events",
+    "https://www.mdlt.org/plant-sale-faqs"
+   ],
+   "implication": "Best sequence: plant natives and the windbreak in fall, at least 9-12 months before leaving. Plant fruit trees only if you'll be on site for their first full summer, or put them off until you return. While you're away, pay a local person every 1-2 weeks to check the tank, timer and cages and to send photos."
+  },
+  {
+   "title": "Water-efficient landscape rules may apply to landscaping in the house permit",
+   "detail": "From my knowledge of the state Model Water Efficient Landscape Ordinance (MWELO), not verified locally this session: new construction with 500 sq ft or more of landscape area that needs a building or landscape permit generally must meet MWELO, through a water budget or the simpler prescriptive checklist. Edible gardens and orchards are treated as 'special landscape areas'. I did not confirm how San Bernardino County or the Town apply it to a 5-acre rural lot.",
+   "confidence": "low",
+   "sources": [
+    "https://santabarbaraca.gov/sites/default/files/documents/Public%20Works/Water%20Conservation/Graywater%20Fact%20Sheet.pdf"
+   ],
+   "implication": "When you submit the house permit, ask the plan checker whether MWELO applies and how they treat an orchard or native restoration area. Keep the permitted 'landscape area' small and simple (gravel Zone 0, a few natives) if that avoids extra plan work."
+  },
+  {
+   "title": "Local learning resources",
+   "detail": "UC Master Gardeners of San Bernardino County (mgsb.ucanr.edu) offer a 'Getting Started with Fruit Trees' workshop, and their materials define the High Desert as including the Morongo Basin, Twentynine Palms and Joshua Tree. A search snippet listed magoneill@ucanr.edu as a contact; verify it before relying on it. The Morongo Basin Conservation Association (mbconservation.org) runs a self-guided spring Desert-Wise Landscape Tour (typically April) of native, water-wise gardens in Yucca Valley, Pioneertown, Joshua Tree and Twentynine Palms, with demonstration gardens. Past tickets ran about $10-$25. MDLT's Mojave Desert Discovery Garden is at its Joshua Tree headquarters.",
+   "confidence": "medium",
+   "sources": [
+    "https://class.ucanr.edu/sites/default/files/2024-11/404021.pdf",
+    "https://ucanr.edu/node/105065",
+    "https://z1077fm.com/desert-wise-landscape-tour-showing-off-native-gardens-and-water-conscious-designs-this-sunday-4-21/",
+    "https://www.mdlt.org/in-the-news/la-times-get-ideas-for-your-home-garden-at-these-19-spring-garden-tours-around-la",
+    "https://www.mdlt.org/plant-sale-faqs"
+   ],
+   "implication": "Put three events on the calendar: MDLT sale (Oct 24, 2026), a Master Gardener fruit-tree class (winter), and the MBCA tour (spring 2027). Seeing what survives in neighbors' yards is the best variety research."
+  },
+  {
+   "title": "Soil: decomposed granite is fast-draining, low in organic matter, alkaline, and sometimes has a caliche layer",
+   "detail": "General high-desert soil behavior (general knowledge; no site-specific data): sandy or gravelly decomposed-granite soils drain fast and hold little water. pH is often about 7.5-8.5, and a hard calcium-carbonate layer (caliche) can sit anywhere from inches to feet down, blocking roots and drainage. Natives want UNamended native soil in the planting hole. Fruit trees and vegetables benefit from compost mixed over a wide area, not just the hole, plus mulch. Dig test holes before you commit to orchard locations.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.starkbros.com/growing-guide/article/thriving-in-the-high-desert-a-guide-to-growing-fruit"
+   ],
+   "implication": "On a site visit, dig 2-3 holes 24-30 in deep with a digging bar and do a simple drainage test. If you hit caliche, plan to break through it with a bar or auger under each fruit tree, or use raised beds and berms."
+  }
+ ],
+ "critical_claims": [
+  {
+   "claim": "AB 1808 (Ch. 816, Stats. 2026, urgency statute, chaptered Sept 29, 2026) allows fee- and mitigation-free trimming or removal of up to 10 western Joshua trees only for EXISTING single-family homes (within 30 ft of the residence or 15 ft of an accessory structure). It does not cover vacant lots or new homes, so this couple's new build still needs a WJTCA Incidental Take Permit.",
+   "sources": [
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1808",
+    "https://z1077fm.com/three-bills-aim-to-ease-cost-and-burden-of-western-joshua-tree-conservation-act-take-fees/",
+    "https://www.nbcpalmsprings.com/local-and-community/2026/09/30/new-california-law-eases-rules-for-removing-hazardous-joshua-trees"
+   ]
+  },
+  {
+   "claim": "Current WJTCA take fees per stem: standard fee area $354.75 (<1 m), $521.75 (1-5 m), $2,609 (5 m+); reduced fee area $156.50, $208.75, $1,043.50. Each stem coming out of the ground counts as a separate tree, and fees apply to dead and living trees.",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP"
+   ]
+  },
+  {
+   "claim": "The Zone 0 (0-5 ft) ember-resistant rules were adopted Aug 19, 2026, sent to OAL Aug 28, 2026, and were NOT confirmed in force as of Oct 2026. Once effective they apply to buildings throughout SRA at any hazard level, and to LRA buildings only in Very High zones. They ban combustible mulch and new trees in Zone 0 and limit potted plants to 18 in in noncombustible pots.",
+   "sources": [
+    "https://bbklaw.com/resources/la090926-california-board-of-forestry-adopts-emergency-zone-0-regulations-under-ab-3074",
+    "https://www.rcrcnet.org/general/california-board-of-forestry-and-fire-protection-approves-zone-0-defensible-space-regulations/",
+    "https://firesafemarin.org/new-zone-0-regulations/"
+   ]
+  },
+  {
+   "claim": "The no-permit laundry-to-landscape exemption (CPC Ch. 15, under 250 gpd, 11 conditions) requires that flow can be diverted to the building sewer. In practice it fits a permitted house with septic, not an unpermitted pod with no sewer or septic.",
+   "sources": [
+    "https://santabarbaraca.gov/sites/default/files/documents/Public%20Works/Water%20Conservation/Graywater%20Fact%20Sheet.pdf",
+    "https://www.woodsideca.gov/DocumentCenter/View/114/Submittal-Requirements-for-Graywater-Systems-PDF"
+   ]
+  },
+  {
+   "claim": "District water is inexpensive: BDVWA residential $4.41/hcf (748 gal) from Feb 11, 2026, bulk $12.19/hcf; HDWD FY26/27 residential tiers $5.17/$8.80/$9.96 per hcf. Hauled water delivered to the door is likely far more expensive per gallon (no reliable local price found).",
+   "sources": [
+    "https://bdvwa.org/wp-content/uploads/Prop-218-Notice-FINAL.pdf",
+    "https://ecode360.com/50058793",
+    "https://z1077fm.com/after-a-public-hearing-bighorn-desert-view-water-sets-new-rates"
+   ]
+  },
+  {
+   "claim": "USDA 2023 hardiness zone is 9a (20-25\u00b0F) for zip codes 92284, 92285, 92252 and 92268, and 9b for 92256 (Morongo Valley).",
+   "sources": [
+    "https://phzmapi.org/92284.json",
+    "https://phzmapi.org/92285.json",
+    "https://phzmapi.org/92252.json",
+    "https://phzmapi.org/92268.json",
+    "https://phzmapi.org/92256.json"
+   ]
+  }
+ ],
+ "design_numbers": [
+  "Zone 0: 0-5 ft from walls, attached decks and fences. Noncombustible ground only (gravel, rock, pavers, concrete, bare soil). No wood mulch. No new trees. Potted plants 18 in tall or less, in movable noncombustible pots. Lawn or groundcover under 3 in. Source: firesafemarin.org/new-zone-0-regulations (Aug 2026 summary; not yet confirmed in effect)",
+  "Under-eave safety zone (inside Zone 0): vegetation-free at least 1 ft from exterior walls and 2 ft from windows, doors and vents. Extends to the eave edge if the eave projects more than 1 ft. Extends 5 ft from attached decks, stairs and pergolas. Source: firesafemarin.org",
+  "Tree clearances near structures: branches at least 10 ft from chimneys and stovepipes and at least 5 ft above roofs. Limb up the lower 6 ft of large trees, or the lower 1/3 of small trees. Source: firesafemarin.org",
+  "Noncombustible outbuildings under 120 sq ft are the only ones allowed inside Zone 0. Source: bbklaw.com Zone 0 alert",
+  "Defensible space Zone 1: 0-30 ft (lean, clean, green). Zone 2: 30-100 ft or to the property line (reduced fuel). Source: PRC 4291, my general knowledge; confirm locally",
+  "Windbreak: shelters downwind about 5-10\u00d7 its height (best at 2-5\u00d7). Target 40-60% porosity. Put it on the upwind (likely W/SW) edge, roughly 50-150 ft from the house. Keep resinous conifers (Arizona cypress, pines, junipers) 100+ ft from structures. Source: general USDA/extension practice; flammability per extension.arizona.edu az1289",
+  "Gravity drip: 2.31 ft of elevation = 1 psi. A tank 10-20 ft above the planting area gives about 4-9 psi (low-pressure emitters or a small booster pump)",
+  "Rain harvest: 0.623 gal per sq ft of roof per inch of rain. About 5 in/yr \u00d7 80% capture gives about 2.5 gal per sq ft of roof per year (200 sq ft pod \u2248 500 gal; 600 sq ft house \u2248 1,500 gal)",
+  "Tree water formula: gal/yr = ETo (in, about 65-75 high desert; estimate) \u00d7 plant factor \u00d7 canopy sq ft \u00d7 0.623. Mature desert willow about 1,500 gal/yr; pomegranate about 1,700; apricot about 5,400",
+  "Tank sizing for a summer absence: trees \u00d7 gal/week \u00d7 weeks. Example: 20 trees \u00d7 10 gal \u00d7 13 weeks \u2248 2,600 gal, so use a 2,500-3,000 gal tank",
+  "Fruit tree spacing (general horticulture): pomegranate 10-12 ft; jujube 12-15 ft; fig 15-20 ft; semi-dwarf apple or pear 12-15 ft; pistachio about 20 ft (male and female pair); grapes 6-8 ft on a trellis",
+  "Water-harvest basins: about 2-3\u00d7 canopy diameter on the downhill side of each tree. Keep them at least 10 ft from foundations and out of the septic leach field (verify leach-field setbacks with County Environmental Health)",
+  "Rodent protection: 1/2-in galvanized hardware-cloth gopher baskets about 2 ft deep; 1/2-in hardware cloth under raised beds; rabbit cages 3-4 ft tall, buried 4-6 in",
+  "Laundry-to-landscape (no permit): washer only, under 250 gal/day, at least 2 in of mulch, rock or soil over the outlets, diverter valve to the sewer or septic, no added pump, no root crops. Source: CPC Ch. 15 as summarized by the City of Santa Barbara",
+  "Joshua tree take fees (standard fee area): $354.75 per stem under 1 m; $521.75 for 1-5 m; $2,609 for 5 m+. Reduced fee area: $156.50 / $208.75 / $1,043.50. Source: wildlife.ca.gov WJTCA-ITP",
+  "Climate: USDA 9a (20-25\u00b0F) for 92284/92285/92252/92268; 9b for 92256. Average last frost Mar 21-31; first frost Nov 11-20 (plantmaps); 10% chance of first 32\u00b0F frost by Nov 10 (garden.org)"
+ ],
+ "costs": [
+  {
+   "item": "District water, BDVWA area (Landers, Flamingo Heights, Johnson Valley), 2026",
+   "low_usd": 4.41,
+   "high_usd": 4.61,
+   "notes": "Per hcf (748 gal): $4.41 from Feb 11, 2026 and $4.61 from Jan 1, 2027. Plus a $77.76 bi-monthly fixed charge for a 3/4-1 in meter and a $59.40 bi-monthly fire service charge. Source: BDVWA Prop 218 notice (adopted per Z107.7 report)"
+  },
+  {
+   "item": "District water, Hi-Desert Water District (Yucca Valley), FY26/27",
+   "low_usd": 5.17,
+   "high_usd": 9.96,
+   "notes": "Per hcf, by monthly residential tier (0-4 units / 5-11 / 12+). 5/8-in meter fixed charge $29.42/month from 7/1/2026. Source: HDWD code excerpt in search results; could not open the code page directly"
+  },
+  {
+   "item": "Bulk water at BDVWA bulk meter (water only, before trucking)",
+   "low_usd": 12.19,
+   "high_usd": 12.73,
+   "notes": "Per hcf, about $16.30-$17.00 per 1,000 gal. Rises 1/1/2027"
+  },
+  {
+   "item": "New water service, BDVWA area (basic facilities charge + service line)",
+   "low_usd": 6380,
+   "high_usd": 7100,
+   "notes": "Undated Z107.7 news report: $4,595 facilities charge + $1,785 service line. Another report cited about $2,200-$2,435 for meter install. LOW confidence; get current quote. HDWD connection fee not found"
+  },
+  {
+   "item": "Hauled water delivery per 2,000-3,000 gal load",
+   "low_usd": 100,
+   "high_usd": 400,
+   "notes": "UNVERIFIED rough range. Generic online guides conflict and no local price was found. Get 3 local quotes"
+  },
+  {
+   "item": "Native plants, MDLT or local nursery (each, 1-5 gal)",
+   "low_usd": 8,
+   "high_usd": 45,
+   "notes": "Rough estimate. MDLT's 2026 prices weren't on its FAQ page; check the 2026 catalog. Members get 10% off"
+  },
+  {
+   "item": "Bare-root fruit tree (each)",
+   "low_usd": 35,
+   "high_usd": 75,
+   "notes": "General 2025-26 retail/mail-order estimate; container 5-15 gal trees about $50-$150"
+  },
+  {
+   "item": "Per-tree protection kit (gopher basket, rabbit cage, stake, trunk paint)",
+   "low_usd": 20,
+   "high_usd": 60,
+   "notes": "DIY with 1/2-in galvanized hardware cloth; estimate"
+  },
+  {
+   "item": "Drip system for about 20 trees (filter, pressure regulator, poly line, emitters, battery timer)",
+   "low_usd": 300,
+   "high_usd": 900,
+   "notes": "DIY estimate. Imported timers and pumps may cost more due to 2025 tariffs (not quantified)"
+  },
+  {
+   "item": "Poly water storage tank 1,500-3,000 gal, delivered",
+   "low_usd": 1000,
+   "high_usd": 3500,
+   "notes": "Estimate. Needs a level compacted pad. Ask the building department about permit thresholds"
+  },
+  {
+   "item": "Small solar DC pump kit (optional booster for drip)",
+   "low_usd": 300,
+   "high_usd": 1200,
+   "notes": "Estimate; not needed if the tank sits 10+ ft above the plantings"
+  },
+  {
+   "item": "Raised vegetable bed 4\u00d78 ft with hardware-cloth bottom",
+   "low_usd": 80,
+   "high_usd": 250,
+   "notes": "Galvanized or block; plus soil/compost about $40-$70 per cu yd (estimate)"
+  },
+  {
+   "item": "Shade cloth 30-50% for vegetable area",
+   "low_usd": 50,
+   "high_usd": 250,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Temporary windbreak fabric with T-posts (per 100 linear ft)",
+   "low_usd": 100,
+   "high_usd": 300,
+   "notes": "Estimate: 40-50% porosity fabric plus posts every 8-10 ft"
+  },
+  {
+   "item": "Unglazed clay ollas (each)",
+   "low_usd": 25,
+   "high_usd": 60,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Hired plant-checker while abroad (per visit)",
+   "low_usd": 25,
+   "high_usd": 75,
+   "notes": "Estimate; ask MDLT, neighbors or local landscapers. Every 1-2 weeks"
+  },
+  {
+   "item": "Year 0 total (observe, test, a few natives, thermometer, flags)",
+   "low_usd": 200,
+   "high_usd": 800,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Year 1 total (native windbreak plus 15-25 natives, 5-8 fruit trees, protection, drip, 1 tank, 2-4 raised beds)",
+   "low_usd": 2500,
+   "high_usd": 7500,
+   "notes": "Estimate, excluding a new water meter. Water use about 8,000-15,000 gal"
+  },
+  {
+   "item": "Years 2-5 cumulative (expand to 10-20 fruit trees, house rain tanks, laundry-to-landscape, wildflower seed, mulch)",
+   "low_usd": 3000,
+   "high_usd": 10000,
+   "notes": "Estimate. Mature orchard water about 20,000-55,000 gal/yr"
+  },
+  {
+   "item": "Joshua tree take permit fee (if any stem must be removed)",
+   "low_usd": 156.5,
+   "high_usd": 2609,
+   "notes": "Per stem, depending on size and fee area (CDFW). Can multiply quickly for clumps"
+  }
+ ],
+ "next_actions": [
+  "Go to the Mojave Desert Land Trust Native Plant Sale tomorrow, Sat Oct 24, 2026, 9am-2pm, at 60124 Twentynine Palms Hwy, Joshua Tree (cashless; bring a cart; line up on the west side). Ask staff for their top 5 windbreak and fire-safe natives for about 3,300 ft, and take a hard-copy planting guide.",
+  "Email info@mdlt.org (or call 760-366-5440). Ask for the 2026 plant catalog PDF and names of local native-landscape consultants who do site walks.",
+  "Call Hi-Desert Water District at 760-365-8333 (Mon-Thu 7:30-5) with the parcel APN. Ask: Is it in your service area? Is there an existing meter? What does a new 5/8- or 1-inch meter cost and how long does it take? How far is the nearest main? Is there a bulk-water station for haulers?",
+  "If the lot is in Landers, Flamingo Heights or Johnson Valley, call or visit Bighorn-Desert View Water Agency (1720 N Cherokee Trail, Landers; bdvwa.org). Ask for the current meter-installation and basic facilities charges for that APN.",
+  "Open the OSFM Fire Hazard Severity Zone viewer (linked from sbcfire.org/fire-hazard-severity-zone-map), enter the parcel, and write down: SRA or LRA, and Moderate, High or Very High.",
+  "Email CDFW Region 6 at r6cesa@wildlife.ca.gov. Ask: Which WJTCA fee area is this APN in? Does AB 1808 or AB 1663 help a vacant lot with a planned new house? Do San Bernardino County or the Town of Yucca Valley have a permitting delegation agreement?",
+  "On your next site visit, walk the lot with pin flags. Flag and GPS-photograph every Joshua tree stem and every large yucca, cactus or mesquite, and count the stems in each clump.",
+  "Dig two test holes 24-30 inches deep with a digging bar where you imagine the orchard. Fill each with water twice and time how long the second fill takes to drain. Note any caliche.",
+  "Stand on the lot's high point and note where a water tank pad could go uphill of future plantings. Measure the drop to the planting area (2.31 ft = 1 psi).",
+  "Look at sand drifts and wind-sculpted shrubs on the lot and photograph them to confirm the prevailing wind direction for the windbreak.",
+  "Call three Morongo Basin water haulers for quotes on delivering 2,000-3,000 gallons to the lot's cross streets, and write the per-load prices on one sheet.",
+  "Draw on a printed aerial of the lot, in this order: house pad, pod pads, septic area, driveway, then 5-, 30- and 100-ft fire rings. Only after that, pencil in the windbreak, orchard and garden.",
+  "Write a one-page plant wish list (top 10 edibles, top 10 natives) and circle the 5 you'd plant first.",
+  "Go to mgsb.ucanr.edu and register for the next 'Getting Started with Fruit Trees' workshop, or write down its date.",
+  "Check mbconservation.org for spring 2027 Desert-Wise Landscape Tour dates and put them on the shared calendar.",
+  "Buy a min/max thermometer and mount it on a post at the lot (or at the pod spot) to record the coldest winter night."
+ ],
+ "risks": [
+  {
+   "risk": "Planting in spots later needed for the house pad, septic, driveway, grading or Zone 0, which wastes the trees or creates new protected-plant conflicts",
+   "severity": "high",
+   "mitigation": "Fix the build footprint and fire rings on a site plan first. Put the first plantings only on the far edges (windbreak, native buffer) that won't be touched."
+  },
+  {
+   "risk": "A Joshua tree is damaged or killed during grading or pod placement without a permit: fines, plus per-stem fees of up to $2,609",
+   "severity": "high",
+   "mitigation": "Census and flag every stem before any equipment arrives. Fence off trees near the work area. Design pads to avoid them. Get CDFW's fee-area answer in writing."
+  },
+  {
+   "risk": "Young trees die during months in Bhutan",
+   "severity": "high",
+   "mitigation": "Plant natives at least 9-12 months before leaving. Put off fruit trees or plant only the toughest. Run a gravity drip line from a 2,500-3,000 gal tank with a battery timer. Pay a local checker every 1-2 weeks."
+  },
+  {
+   "risk": "No water meter on the lot: hauled water makes an orchard expensive or impossible",
+   "severity": "high",
+   "mitigation": "Before buying, confirm with the water district whether a meter exists or can be installed and what it costs. If not, scale back to natives, roof and ground catchment, and 3-5 fruit trees."
+  },
+  {
+   "risk": "Rabbits, gophers, ground squirrels and pack rats destroy new plantings and chew drip lines",
+   "severity": "high",
+   "mitigation": "Hardware-cloth baskets and cages on every plant from day one. Bury drip lines or use rigid pipe. Keep cholla and brush piles away from pods and stored belongings."
+  },
+  {
+   "risk": "Late spring frost kills apricot and almond blossoms most years",
+   "severity": "medium",
+   "mitigation": "Favor pomegranate, fig, jujube, grape and pistachio. Plant stone fruit mid-slope, not in low cold pockets, and pick late-blooming varieties."
+  },
+  {
+   "risk": "Spring wind desiccates and breaks young plants",
+   "severity": "medium",
+   "mitigation": "Install temporary 40-50% windbreak fabric in Year 1. Plant a native multi-row windbreak on the upwind side. Stake young trees loosely."
+  },
+  {
+   "risk": "Combustible mulch, wood planters or resinous trees near the pods or house create ember and fire risk, and break Zone 0 rules once they're in force",
+   "severity": "medium",
+   "mitigation": "5-ft gravel ring around every structure. Wood chips only in the orchard more than 30 ft away. Cypress, pine and juniper only 100+ ft out, or not at all."
+  },
+  {
+   "risk": "Greywater from the unpermitted pod (no septic) treated as illegal wastewater discharge",
+   "severity": "medium",
+   "mitigation": "Don't plumb pod greywater to the land. Design laundry-to-landscape for the permitted house with a septic diverter. Irrigate from district, hauled or rain water in the meantime."
+  },
+  {
+   "risk": "Removing or moving protected desert natives (cacti, yuccas, mesquite) without the county or ag-commissioner permit or tags",
+   "severity": "medium",
+   "mitigation": "Ask County Land Use Services or the Town about native-plant removal permits before grading. Get salvage permits and replant the salvaged plants."
+  },
+  {
+   "risk": "Accidentally planting or spreading invasives (tamarisk, athel, fountain grass, Sahara mustard), which raise fire and water risks",
+   "severity": "low",
+   "mitigation": "Buy from MDLT or reputable nurseries. Pull Sahara mustard before it seeds (Feb-Apr)."
+  },
+  {
+   "risk": "Salt and boron buildup from greywater and hard water in alkaline soils",
+   "severity": "low",
+   "mitigation": "Use plant-friendly, low-sodium, boron-free detergents. Rotate greywater outlets. Flush with rainwater or deep watering occasionally."
+  },
+  {
+   "risk": "2025 tariffs push up prices for imported drip parts, timers, pumps and tanks",
+   "severity": "low",
+   "mitigation": "Buy core irrigation parts in one bulk order. Compare local farm-supply prices with online."
+  }
+ ],
+ "brainstorm_prompts": [
+  "Picture year 3: what are the five things we most want to be eating or picking from this land? Which ones can we drop?",
+  "Do we want a small lush 'oasis' around the house and pods, the rest left as open native desert, or plants spread across the whole 5 acres?",
+  "How many hours a week do we each realistically want to spend on plants and the garden, and who owns which jobs?",
+  "Are we willing to wait until after Bhutan to plant fruit trees, and plant only tough natives before we go?",
+  "What's our monthly water budget in dollars? Would we stop planting if the only option is hauled water?",
+  "Who do we know, or could we pay, to check the plants every week or two while we're abroad? What would we pay, and what happens if they flake?",
+  "How do we feel about Joshua trees on the lot: design the house around them as features, or look at a different lot if they're in the only flat spot?",
+  "Which views do we want to keep open, and where would a windbreak block them?",
+  "How much fire risk are we comfortable with? Will we commit to gravel-only 5-ft rings and no wood mulch near anything we live or sleep in?",
+  "Do we want vegetables in Year 1 (more water and daily attention) or wait until we're fully settled?",
+  "Should the laundry room in the permitted house go on the downhill side so greywater can feed the fruit trees by gravity?",
+  "What's our total plant budget for Years 0-1 versus putting that money into finishing the house sooner?",
+  "Do we want to join MDLT and volunteer in its nursery to learn and meet people?"
+ ],
+ "people_to_involve": [
+  {
+   "role": "Mojave Desert Land Trust plant conservation staff and nursery",
+   "why": "Locally grown natives, species advice for the Morongo Basin, the planting guide, a seed bank, and referrals to local designers",
+   "when": "Now: the plant sale is Oct 24, 2026, then before the Year-1 fall planting",
+   "how_to_find": "info@mdlt.org, 760-366-5440; HQ at 60124 Twentynine Palms Hwy, Joshua Tree",
+   "typical_cost": "Free advice at the sale; membership gives 10% off plants",
+   "questions_to_ask": [
+    "Which 5 windbreak species do best at about 3,300 ft with spring west winds?",
+    "Which natives are most fire-resistant for 5-30 ft from a house?",
+    "Which plants here are frost-tender at our elevation?",
+    "Can you recommend a local consultant for a site walk?"
+   ]
+  },
+  {
+   "role": "Water district (Hi-Desert Water District, Bighorn-Desert View Water Agency, or Joshua Basin Water District, depending on location)",
+   "why": "Meter availability and cost decide whether an orchard is feasible",
+   "when": "Before making an offer on the land",
+   "how_to_find": "HDWD 760-365-8333 (55439 29 Palms Hwy); BDVWA bdvwa.org (1720 N Cherokee Trail, Landers)",
+   "typical_cost": "Phone call free; new service possibly several thousand dollars",
+   "questions_to_ask": [
+    "Is there an existing meter on this APN?",
+    "What is the cost and timeline for a new meter and service line?",
+    "Where is the nearest main?",
+    "Is there a bulk station for haulers, and what's the rate?",
+    "Are there landscape or drip rebates?"
+   ]
+  },
+  {
+   "role": "UC Master Gardeners of San Bernardino County",
+   "why": "Free research-based advice on fruit varieties, pests and soil for the High Desert",
+   "when": "Winter, before buying bare-root trees",
+   "how_to_find": "mgsb.ucanr.edu; fruit tree workshop listing (contact reported as magoneill@ucanr.edu; verify)",
+   "typical_cost": "Free to low-cost workshops",
+   "questions_to_ask": [
+    "Which apricot, apple, pistachio and olive varieties have succeeded in the Morongo Basin?",
+    "What's a realistic chill-hour figure for our elevation?",
+    "Which local nurseries carry high-desert-appropriate stock?"
+   ]
+  },
+  {
+   "role": "CDFW Region 6 / Joshua tree permitting",
+   "why": "Fee area, permit path, and whether the 2026 laws apply to a vacant lot",
+   "when": "Before the offer or during due diligence",
+   "how_to_find": "r6cesa@wildlife.ca.gov, (909) 484-0167",
+   "typical_cost": "Permit fees per stem if take is needed",
+   "questions_to_ask": [
+    "Which fee area is our APN in?",
+    "Does a planted (nursery) Joshua tree become protected?",
+    "Does the County or Town have a delegation agreement for single-family permits?"
+   ]
+  },
+  {
+   "role": "Qualified biologist or Joshua tree surveyor",
+   "why": "An accurate census of stems and size classes before design, as typically needed for an ITP application",
+   "when": "During due diligence or design, before grading",
+   "how_to_find": "Ask CDFW Region 6, MDLT, or local planning consultants for referrals",
+   "typical_cost": "Not verified; likely several hundred to a few thousand dollars",
+   "questions_to_ask": [
+    "How many stems are in each size class?",
+    "Which pad locations avoid all take?",
+    "Can small trees be relocated instead of removed?"
+   ]
+  },
+  {
+   "role": "Local native-landscape and water-harvesting designer or installer",
+   "why": "Lays out swales, basins, tank, drip and fire zones to fit the grading plan",
+   "when": "After the house pad and septic locations are set",
+   "how_to_find": "MDLT referrals; MBCA Desert-Wise Landscape Tour garden owners",
+   "typical_cost": "Not verified; consultants often charge hourly",
+   "questions_to_ask": [
+    "Where should the tank go for gravity drip?",
+    "How do we keep swales away from the leach field and foundations?",
+    "How do we make the system safe to leave alone for 3 months?"
+   ]
+  },
+  {
+   "role": "Local plant-checker or caretaker for the Bhutan absence",
+   "why": "Timers, tanks and cages fail; someone needs to check every 1-2 weeks",
+   "when": "Line up 2-3 months before departure",
+   "how_to_find": "Neighbors, MDLT volunteers, local landscapers, community boards",
+   "typical_cost": "Estimate $25-$75 per visit",
+   "questions_to_ask": [
+    "Can you refill the tank or call the hauler if it runs low?",
+    "Will you send photos each visit?",
+    "Can you check on the stored belongings at the same time?"
+   ]
+  },
+  {
+   "role": "Experienced neighbors with gardens",
+   "why": "Best source on frost pockets, wind direction, rodent pressure and which varieties survive",
+   "when": "During due diligence site visits",
+   "how_to_find": "Knock on doors near the lot; MBCA tour hosts",
+   "typical_cost": "Free",
+   "questions_to_ask": [
+    "Where does frost settle?",
+    "What died here, and what thrived?",
+    "Who do you use for water hauling?"
+   ]
+  }
+ ],
+ "site_visit_checks": [
+  "Count, flag and GPS each Joshua tree stem (each sprout counts) and estimate each one's height class (<1 m, 1-5 m, 5 m+).",
+  "Flag other large natives (Mojave yucca, cholla, barrel cactus, mesquite, catclaw, old creosote rings) to salvage or design around.",
+  "Find signs of water flow: washes, rills, sediment fans, debris lines and the upslope drainage area. Decide where swales could catch water without sending it toward pads or neighbors.",
+  "Dig 2-3 test holes 24-30 in deep with a digging bar: soil texture, rocks, caliche layer, and drainage time on a second fill.",
+  "Read wind direction from sand drifts piled on one side of shrubs and wind-sculpted plants.",
+  "Find low spots where cold air pools (frost pockets). Keep fruit trees out of them and plant stone fruit mid-slope.",
+  "Note slope aspect: south- and west-facing parts are hotter and drier; north- and east-facing parts suit fruit trees and gardens better.",
+  "Look for rodent pressure: gopher mounds, ground-squirrel burrows, rabbit droppings, woodrat middens in cholla.",
+  "Look for invasive weeds: Sahara mustard, red brome, Russian thistle (tumbleweed), tamarisk.",
+  "Find the nearest water meter box, hydrant or main, or confirm there isn't one. Check whether a water truck can reach an uphill tank spot.",
+  "Pick the high point for a tank pad and estimate the vertical drop to the planting areas.",
+  "Check views and sun angles from the likely house site so the windbreak and trees don't block what you love.",
+  "Visit neighbors' yards and note which trees and natives are thriving at your elevation."
+ ],
+ "open_questions": [
+  "Is the lot in the Town of Yucca Valley or unincorporated county, and in SRA or LRA? That decides when and whether the Zone 0 rules apply. I couldn't confirm whether OAL has approved Zone 0 as of Oct 23, 2026.",
+  "Which water district serves the lot, does a meter exist, and what does a new connection cost? There's no current HDWD connection fee, and the BDVWA figures come from undated news.",
+  "How many Joshua tree stems are on the lot, and which WJTCA fee area is it in? Do the County or Town have a CDFW delegation agreement?",
+  "What exact text do the San Bernardino County Plant Protection and Management rules (Ch. 88.01), the Town of Yucca Valley native plant rules, and the Desert Native Plants Act use? The primary pages returned HTTP 403 and my web-search budget ran out before I found alternates.",
+  "What is the actual chill-hour total and reference ETo for the parcel's elevation? Neither was confirmed this session.",
+  "What do local haulers charge for delivered water to the lot? No reliable local figure was found.",
+  "How long will the Bhutan trip be, and in which season? That sets the tank size and whether fruit trees should wait.",
+  "Where will the septic leach field go, and what tree setbacks does County Environmental Health require?",
+  "Do the county or town apply MWELO to landscaping in the house permit on a 5-acre rural lot, and how do they treat orchards?",
+  "Is the CPC rainwater-tank permit exemption (5,000 gal or less, on grade) applied the same way locally?"
+ ]
+}

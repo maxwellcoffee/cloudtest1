@@ -1,0 +1,79 @@
+{
+ "topic": "house_design",
+ "headline": "In unincorporated San Bernardino County, you can permit a modern house of about 560-640 sq ft as your main home and heat the whole soft floor with a heat-pump hydronic slab. A lot inside the Town of Yucca Valley needs at least 725 sq ft and two covered parking spaces.",
+ "key_points": [
+  "You can build as small as you like in unincorporated San Bernardino County, because it has no minimum house size. State code asks only for one room of at least 70 sq ft (at least 7 ft in every direction), a bathroom and a kitchen sink. A 560-640 sq ft house is legal. County code shows no covered-parking rule for Rural Living (RL) lots.",
+  "You can also build inside the Town of Yucca Valley, but the house has to be bigger. The Town minimum is 725 sq ft measured from the outside walls, with width and depth each averaging at least 20 ft. You also need two covered parking spaces (a garage or carport at least 18 x 19 ft inside). Eaves must be at least 12 inches unless the roof is flat with a parapet. The Planning Commission revisited the 725 sq ft rule in May-June 2026, and the code text dated Oct 3, 2026 still says 725 (ask Town Planning).",
+  "You can permit the small house as the primary home. Do not permit it as an accessory dwelling unit (ADU), because an ADU cannot get its certificate of occupancy before the main house. The County's pre-approved ADU Model D (560 sq ft, 1 bedroom, drawn to the 2025 codes) makes a good starting template. Ask County Building and Safety whether it can be filed as a main house with sprinklers added.",
+  "Every new house needs automatic fire sprinklers, and each later ADU pod then needs them too. The house also needs a real water source, either a well or a water-district connection, because a new house can't rely on hauled water.",
+  "You can heat the whole soft floor with a hydronic slab: water tubes in the concrete, fed by an air-to-water heat pump. This meets the 2025 California Energy Code, which applies to permits applied for from Jan 1, 2026. A ductless mini-split handles cooling.",
+  "Whole-floor electric mats are a code risk. They draw about 3.4-4 kilowatts (kW). Electric heat counts as 'supplemental' only when it is under 2 kW and on timers of 30 minutes or less. Use electric mats only for small zones, or after a computer energy model passes (ask a Title 24 energy consultant).",
+  "Solar is likely optional at this size. Yucca Valley (ZIP 92284) is in energy Climate Zone 14. For a 640 sq ft house, the state formula gives about 1.73 kW. That is under the 1.8 kW cutoff, so no solar is required. The cutoff falls near 728 sq ft, and a 748 sq ft house needs about 1.8 kW (confirm with a Title 24 energy consultant). Any bigger array is your choice.",
+  "You can lie anywhere on the floor if the soft layer stays thin. Keep everything above the heat at about R-1.4 (2.5 tog) or less. Traditional 55-60 mm tatami blocks too much heat. Use floor-heating tatami (15-30 mm), 6-10 mm glue-down cork, or wool carpet on a thin rubber pad. A felt pad pushes wool over the limit.",
+  "You can keep the open, modern look and still stay cool. For a 640 sq ft house, aim for about 64-96 sq ft of south-facing glass (10-15% of floor area). Size the overhangs for the noon sun, which is about 79 degrees high in June and 32.5 degrees in December. Summer sun then stays out and winter sun comes in (confirm with the energy consultant).",
+  "You can level a pad on the incline. Cut into the slope rather than filling it. Plan on a soils report. The County requires a soils engineer above 20% slope, or in a fault, landslide or liquefaction zone. Steel, concrete, masonry or structural insulated panel (SIP) shells need plans stamped by a California engineer or architect. County plan sheets use 130 mph wind, Seismic Category D2 and a snow load of 30 pounds per square foot.",
+  "You can build it yourselves as owner-builders, including your own electrical and plumbing work under the permit. If you pay helpers, you may become their employer and owe workers' compensation. Anyone you hire for a job over $1,000 must be licensed.",
+  "Costs are estimates only. Owner-built with licensed subcontractors, a 640 sq ft house runs about $144k-320k (estimate), not counting the well, septic, power, driveway and fees. A contractor-built house of 640-750 sq ft runs about $300k-450k (estimate). Get 3 local bids."
+ ],
+ "risks": [
+  {
+   "risk": "No legal water source for the house and its fire sprinklers",
+   "severity": "high",
+   "mitigation": "During due diligence, get a water-district will-serve letter or confirm a well is feasible. On a well, budget a sprinkler tank and pump ($3k-8k, estimate)."
+  },
+  {
+   "risk": "Whole-floor electric mats fail the energy code or cost a lot to run",
+   "severity": "medium",
+   "mitigation": "Plan a heat-pump hydronic slab as the main heat. Keep electric mats to small zones under 2 kW on timers. Have a Title 24 energy consultant run the energy model before the design is fixed."
+  },
+  {
+   "risk": "A Town lot forces a bigger house (725 sq ft minimum) and a two-car carport, and may fall in a sewer area where new septic is banned",
+   "severity": "medium",
+   "mitigation": "Use the parcel number to confirm Town or County before making an offer. Check the Hi-Desert Water District (HDWD) sewer Phase 1 and Phase 2 map. Get Town Planning's answer on the 725 sq ft rule in writing."
+  },
+  {
+   "risk": "Thick tatami or carpet blocks the floor heat",
+   "severity": "medium",
+   "mitigation": "Keep the total soft layer at about R-1.4 (2.5 tog) or less. Use floor-heating tatami (15-30 mm), thin cork, or wool on a thin rubber pad."
+  },
+  {
+   "risk": "Fill settles, or footings sit too close to the slope",
+   "severity": "medium",
+   "mitigation": "Get a soils report. Cut rather than fill, and consider a stepped slab that follows the slope."
+  },
+  {
+   "risk": "Wildfire zone rules or insurance add cost",
+   "severity": "medium",
+   "mitigation": "Look up the parcel on the Office of the State Fire Marshal (OSFM) Fire Hazard Severity Zone map. Ask County Fire whether the 0-5 ft ember-resistant 'Zone 0' rules apply. Build to the California Wildland-Urban Interface Code anyway: Class A roof, ember-resistant vents, noncombustible cladding."
+  }
+ ],
+ "questions_for_couple": [
+  "Would we accept a 725 sq ft house plus a two-car carport to buy a Town lot, or do we look only at County lots?",
+  "How small do we go: about 560 sq ft like Model D, or about 640 sq ft, which is still under the roughly 728 sq ft solar cutoff?",
+  "Heated floor: a heat-pump hydronic slab (about $18k-36k, estimate, code-friendly), or a small electric-mat zone (about $3k-8.5k, estimate) with a mini-split doing most of the heating?",
+  "Which soft floor do we want to lie on and sweep sand off every day: floor-heating tatami, cork, or wool on a thin pad?",
+  "Is the whole floor soft, or do we keep a hard strip at the entry and kitchen, plus one chair-height spot for bad-back days?",
+  "What is our hard budget ceiling for the house, and how many hours a week can each of us build?",
+  "Which jobs do we do ourselves (electrical, plumbing, finishes), and which do we hire licensed trades for?"
+ ],
+ "next_actions": [
+  "@phone Call San Bernardino County Land Use Services (LUS) at (909) 387-8311 with the parcel number. Confirm whether the lot is in the Town or the County, plus its zone and exact acreage. Ask Building and Safety whether pre-approved ADU Model D can be filed as a primary house with sprinklers added.",
+  "@phone If the lot is in the Town, call Town of Yucca Valley Planning. Ask whether 725 sq ft is still the minimum after the June 9, 2026 Planning Commission meeting. Also ask whether a carport with solar panels on top meets the two-space covered-parking rule.",
+  "@email Email a Title 24 energy consultant: '640 sq ft new house, Climate Zone 14. Does the under-1.8 kW solar exception apply? Can a whole-floor electric radiant floor pass a performance model, or should we use an air-to-water heat pump with slab tubing?'",
+  "@computer Download the County's Model D plan set from the LUS guidance and technical handouts page. Sketch your soft-floor zone, kitchen, bathroom and south windows on it.",
+  "@computer Look up the parcel on the Office of the State Fire Marshal (OSFM) Fire Hazard Severity Zone map, and save a screenshot for the designer.",
+  "@together Tape out a 20 x 32 ft rectangle (640 sq ft) in a yard or park. Lie down together in an 18 x 19 ft great-room zone to test the size.",
+  "@computer Order samples of floor-heating tatami, 6 mm and 10 mm cork, and wool loop carpet with a thin rubber pad. Leave them out in sun and sand for a week.",
+  "@phone Call two local fire sprinkler contractors (C-16 license) for a rough price on a National Fire Protection Association (NFPA) 13D system. Include a tank and pump in case you end up on a well."
+ ],
+ "key_sources": [
+  "https://gocodebook.com/library/us/ca/yucca-valley/title-9-development-code/chapter-9.07-residential-and-hillside-reserve-districts",
+  "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.21-single-family-residential-dwellings",
+  "https://www.hcd.ca.gov/sites/default/files/docs/building-standards/ib-2016-06.pdf",
+  "https://lus.sbcounty.gov/building-safety-home/guidance-and-technical-handouts/",
+  "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Model-D-CRC-2025.pdf",
+  "https://www.hcd.ca.gov/building-standards/adu/handbook",
+  "https://www.energy.ca.gov/sites/default/files/2025-06/CEC-400-2025-005.pdf",
+  "https://www.carpetfoundation.com/underfloor-heating"
+ ]
+}

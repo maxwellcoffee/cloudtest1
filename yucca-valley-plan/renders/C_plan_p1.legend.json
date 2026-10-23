@@ -1,0 +1,32 @@
+[
+ {
+  "n": 1,
+  "label": "Pod #1: interim home, a DMV-registered trailer on a temporary permit while the house is built",
+  "phase": 1
+ },
+ {
+  "n": 2,
+  "label": "Storage container (permitted, painted, behind the house) / west wind wall",
+  "phase": 1
+ },
+ {
+  "n": 3,
+  "label": "Ground-mount solar + batteries",
+  "phase": 1
+ },
+ {
+  "n": 4,
+  "label": "Water tanks uphill (gravity pressure)",
+  "phase": 1
+ },
+ {
+  "n": 5,
+  "label": "Well site (only if no water district serves the lot)",
+  "phase": 1
+ },
+ {
+  "n": 17,
+  "label": "Gate + address post",
+  "phase": 1
+ }
+]

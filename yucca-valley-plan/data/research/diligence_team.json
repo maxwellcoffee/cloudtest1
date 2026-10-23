@@ -1,0 +1,930 @@
+{
+ "topic": "diligence_team",
+ "executive_summary": "Do two things before making an offer. First, find out whether the parcel is inside the Town of Yucca Valley or in unincorporated San Bernardino County. Second, confirm water, wastewater, legal access and Joshua trees. Those four things decide whether this lot works and what it will cost. If the lot is inside the Town over the Warren groundwater subbasin, a state Regional Water Board septic ban applies. In Phase 2 a new septic system is allowed only until Dec 31, 2028, or Dec 31, 2031 if the western Joshua tree gets listed, or until sewer is available, whichever is first. After that you have 180 days to connect, so you could pay for septic and then for a sewer hookup too. Since Jan 1, 2018, state law has barred permits for new homes that rely on hauled water. You need either a water-district meter (which needs a main along your frontage) or a permitted well. Every Joshua tree stem counts as a separate tree. Taking one needs a CDFW permit, with 2026 fees of $354.75 to $2,609 per stem in the 'standard' fee area. A local newspaper puts Yucca Valley in that area. The best strategy is to place pads and the driveway away from every tree, with root buffers. The Mojave desert tortoise has been state-endangered since July 15, 2025, so plan on a biologist's pre-construction survey. Your plan to live in an unpermitted capsule is the biggest legal risk. County code does offer a legal version: a Temporary Use Permit for 'Temporary Occupancy \u2013 Residential' during construction. It runs 12 months after the building permit is issued, extensions can add up to 5 years, and the unit must be removed within 30 days of completion. That matches your 'live there as long as we're making progress' idea, but only once a building permit exists. The Bhutan trip has a matching risk: building permits usually expire after 180 days with no inspection. So get an inspection or an extension before you leave. On 5+ acres, county code appears to allow up to three accessory dwelling units, so the 'few capsules' idea can be done legally with certified units. Confirm the lot is at least 5.00 acres. The team, in order: a land-savvy buyer's agent, a title officer, and a visit to the building counter before the offer. During escrow: a surveyor, a perc/septic designer, a biologist, the water district, SCE and a civil engineer. Then the architect, structural engineer, Title 24 consultant, fire plan reviewer and grading contractor. Ask for a 45 to 60 day vacant-land due-diligence period with written contingencies. Note: the shared search limit ran out partway through. The fees and thresholds marked high-confidence come from primary sources I opened. Professional fee ranges are market estimates, so check them against 2 or 3 local quotes.",
+ "findings": [
+  {
+   "title": "Step 1: find out whether the parcel is in the Town or the County, because the rules differ",
+   "detail": "Each Assessor's map page lists the 'City' and the Tax Rate Area, which tells you whether the parcel is inside the incorporated Town of Yucca Valley. The Assessor's govPIMS portal shows parcel data but needs a login, and it says it is 'not intended to be relied upon for classifying actual permitted property use or determining legal ownership.' In unincorporated areas, use the County Digital Zoning Map and the Countywide Plan maps: Land Use LU-1, Military Influence Overlay LU-3, Earthquake Fault Zones HZ-1, Liquefaction/Landslide HZ-2, Flood HZ-4, Fire Hazard Zones HZ-5 and Fire Responsibility Areas HZ-6. County Land Use Services: (909) 387-8311 or (760) 995-8140. Offices: 385 N. Arrowhead Ave., San Bernardino, and 15900 Smoke Tree St. Suite 131, Hesperia. Inside the Town, Yucca Valley's own Development Code (Title 9, residential standards at \u00a79.07.050 Table 2-4) and Town Planning/Building apply, along with the Hi-Desert Water District sewer program. Unincorporated communities (Yucca Mesa, Landers, Flamingo Heights, Pioneertown, Pipes Canyon, Joshua Tree, Morongo Valley, Johnson Valley) follow the County Development Code and the Countywide Plan community pages.",
+   "confidence": "high",
+   "sources": [
+    "https://assessormapviewer.arc.sbcounty.gov",
+    "https://arcpropertyinfo.sbcounty.gov/files/User_Guide.pdf",
+    "https://lus.sbcounty.gov/planning-home/zoning-and-overlay-maps/",
+    "https://experience.arcgis.com/experience/25d639b8e38e4fc7a4d031d2e5a54745",
+    "https://countywideplan.sbcounty.gov/resources/maps-tables-figures/",
+    "https://lus.sbcounty.gov/faqs/4380/"
+   ],
+   "implication": "Do this in the first 15 minutes of your solo hour. Each item below changes depending on the answer. Screenshot the parcel on every hazard map and save the images in one folder."
+  },
+  {
+   "title": "Yucca Valley septic ban (Town, Warren subbasin): new septic is allowed only until a deadline, then you must hook up to sewer",
+   "detail": "Source: the Colorado River Basin Regional Water Quality Control Board's Basin Plan, Yucca Valley OWTS Prohibition, as amended by Resolution R7-2021-0028 (effective Dec 5, 2022). It bans septic discharge in Phase 1 by Dec 31, 2023. In Phase 2 the deadline is Dec 31, 2028, or Dec 31, 2031 if western Joshua tree is listed as threatened or endangered, or earlier when sewer becomes 'available.' Owners must connect within 180 days of their parcel's deadline. For a home, sewer counts as 'available' when the public sewer is less than 200 ft from any existing or proposed building on the parcel, and the parcel abuts and is served by it. New or replacement septic systems may be installed only where the parcel's deadline has not passed. 'Deferred parcels', where sewer isn't yet economical, get their own triggers. One is 80% build-out of the deferred area. Another is 1.7 dwelling units per 100 ft of pipe. A third is 15 years after the phase deadline. Exemptions are case by case. On an exempt parcel, any new septic system must use an Advanced Treatment Unit that removes at least 50% of nitrogen, plus a 100% replacement leach area. Phase 2 construction broke ground Aug 6, 2025, funded by a $103M state grant. The Water Board has issued cease-and-desist orders to owners who failed to connect, and its FAQ was updated Dec 30, 2025.",
+   "confidence": "high",
+   "sources": [
+    "https://waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/2023/yvbpa-wcorr.pdf",
+    "https://www.waterboards.ca.gov/rwqcb7/water_issues/programs/basin_planning/docs/yuccavalley/prohibition-enforcement-faq.pdf",
+    "https://www.waterboards.ca.gov/rwqcb7/board_decisions/adopted_orders/orders/2024/2024_0047nancyann_kennedy_cdo.pdf",
+    "https://z1077fm.com/hi-desert-water-district-begins-construction-on-phase-two-of-sewer-system/"
+   ],
+   "implication": "If the lot is in the Town, ask Hi-Desert Water District in writing before you offer: which phase is the APN in, is it deferred, when is sewer projected to be available, and where is the nearest main? You might pay $12k\u201325k for septic and then a sewer lateral and connection a few years later. Where you place the house affects whether and when the 200-ft trigger applies, and how long the lateral is. Unincorporated lots outside the Warren subbasin go through the County septic program instead (see the perc finding)."
+  },
+  {
+   "title": "Water: no hauled water for a new home, so you need a district meter or a permitted well",
+   "detail": "San Bernardino County Environmental Health (EHS) says California Water Code \u00a7106.4(c) bars issuing building permits for new homes 'where hauled water is the intended water supply' (effective Jan 1, 2018). County policy requires new construction to use an existing water purveyor if one is available, or a well. Wells need an EHS permit and a licensed C-57 driller registered with EHS, and EHS aims to process applications in 10 business days. Since Aug 5, 2024, well applications inside Mojave Water Agency boundaries must include its 'Notice of Intent to Extract or Divert Water.' Example fees from Bighorn-Desert View Water Agency (Landers/Flamingo Heights area): a $2,685 flat service-line plus meter install fee set in March 2024. A late-2025 action was reported (secondary source) to set the 1-inch meter capital fee at about $4,800 and installation at about $1,370. Hi-Desert Water District and Joshua Basin Water District 2026 connection fees were not confirmed. All new homes in California need fire sprinklers (CRC R313, general knowledge), so a well-served home usually also needs a storage tank and a pump that meet the sprinkler demand.",
+   "confidence": "high",
+   "sources": [
+    "https://ehs.sbcounty.gov/?p=4665",
+    "https://bdvwa.org/wp-content/uploads/Resolution-25R-XX-Setting-Service-Line-Installation-fee-10-14-2025-POSTING-003.pdf",
+    "https://z1077fm.com/bighorn-desert-view-water-adjusting-meter-and-connection-fees",
+    "https://jbwd.specialdistrict.org/files/66e3194ef/Rates+and+Fees+02.01.25+revised+01.21.25+with+Standby.pdf"
+   ],
+   "implication": "Only buy if (a) a water main runs along your frontage and the district will issue a will-serve letter, or (b) you've priced a well with a hydrogeologist or driller who knows depths and water quality in that area. Hauling water to the capsule is fine as a stopgap, but it can't be the permitted source for the house. In the Yucca Valley/Warren Valley basin, also ask the water district whether the groundwater adjudication limits a private well (not verified)."
+  },
+  {
+   "title": "Perc test: required before any building permit; slope and grading change where you can test",
+   "detail": "County EHS standards require a perc report 'for all new construction prior to building permit.' It must be done by a Qualified Professional (licensed or state-certified to design septic systems), signed and stamped. The Notice of Intent to Perform Percolation Testing must reach EHS at least 2 working days before testing. A topographic map by a civil engineer or licensed surveyor is required unless the slope is uniform and under 20%. A disposal-area slope of 21\u201330% means more tests. Over 30% is classed as an adverse condition. Borings must go at least 5 ft below the leach-line bottom, or 10 ft below a seepage pit bottom, and 40 ft below if the soil has too few fines. Tests are run at the depth the system will sit after grading, within \u00b12 ft of cut or fill (\u00b15 ft for pits). The plot plan must show the system plus a 100% expansion area. You can ask EHS to search archived perc rates for the parcel (EHS.CustomerService@dph.sbcounty.gov). It costs extra and may turn up nothing. Septic reports are uploaded through the County Building & Safety EZOP online account.",
+   "confidence": "high",
+   "sources": [
+    "https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/percolation-testing-and-reporting-standards-for-onsite-wastewater-treatment-systems.pdf",
+    "https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/owts-flowchart.pdf"
+   ],
+   "implication": "Make the offer contingent on a passing perc report, and give it time. A drill rig and the 2-day notice mean 3\u20136 weeks. Decide roughly where the house pad and leach field go before testing, and keep the leach field on the gentler part of the slope. Ask the seller for any old perc report."
+  },
+  {
+   "title": "Western Joshua trees: every stem needs a permit or must be avoided; 2026 fees",
+   "detail": "Under the Western Joshua Tree Conservation Act (2023), taking a tree needs CDFW authorization. Each stem 'arising from the ground' is counted as a separate tree. CDFW 2026 per-tree fees (effective Jan 1, 2026, inflation-only adjustment). Standard area: under 1 m $354.75; 1 to under 5 m $521.75; 5 m and up $2,609.00. Reduced area: $156.50, $208.75 and $1,043.50. A local paper (Mar 2025, secondary source) lists Yucca Valley, Joshua Tree, Morongo Valley, Pioneertown, Landers and Homestead Valley in the standard area. CDFW must review fees for conservation adequacy by Dec 31, 2026, so 2027 fees may change. Its FAQ cites root spread of about 14 m from a 4.3 m tree and 8.4 m from a 1 m tree. Avoidance buffers are set case by case, and CDFW prefers relocating trees on site, with a recipient site 15 m from an existing tree. Permit applications need a census (CDFW instructions plus a Survey123 link). Work must involve a 'desert native plant specialist': an ISA-certified arborist or someone with 5+ years of desert-plant relocation experience. There is no statutory timeline for an incidental take permit. A 2.25-acre Yucca Valley house lot was approved Feb 25, 2026 for take of 5 trees under a 2025-numbered permit. As of April 2026 no city or county delegation agreements existed, so CDFW Region 6 handles permits: (909) 484-0167, r6cesa@wildlife.ca.gov. AB 1663 (2026) would exempt only parcels owned continuously since July 10, 2023, so even if it passes it would not help a new buyer. Its status as of Oct 2026 was not verified.",
+   "confidence": "high",
+   "sources": [
+    "https://content.govdelivery.com/accounts/CNRA/bulletins/3fdfa9c",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/WJTCA",
+    "https://awpw.assembly.ca.gov/system/files/2026-04/ab-1663-wallis.pdf",
+    "https://sbcsentinel.com/?p=34086",
+    "https://ceqanet.lci.ca.gov/2012111021/11"
+   ],
+   "implication": "On your first visit, GPS-tag every Joshua tree and record stem count and height class. Choose pads, driveway, septic field, capsule spots and trenches that stay well clear of all of them, ideally more than 15\u201320 m from large trees. Ask CDFW whether that avoidance means no permit is needed. A lot with trees scattered across the only flat area can turn into several months' delay and $5k\u201330k in fees."
+  },
+  {
+   "title": "Protected animals: desert tortoise now state-endangered; burrowing owl under review",
+   "detail": "California's Fish and Game Commission page says the Mojave desert tortoise 'was added to the list of endangered species under CESA' on July 15, 2025. It is also federally threatened (general knowledge). Western burrowing owl: a petition was filed Mar 5, 2024, with a Commission notice of findings Oct 15, 2024, and a CDFW status review due Oct 25, 2025. Whether candidate protections cover Morongo Basin owls was not confirmed. Crotch's bumble bee has been a CESA candidate since June 2019. Western Joshua tree has been a candidate since Sept 24, 2020, with final listing consideration postponed until a status review due Jan 1, 2033. The conservation plan was approved in August 2025.",
+   "confidence": "medium",
+   "sources": [
+    "https://fgc.ca.gov/CESA"
+   ],
+   "implication": "Hire a desert biologist to do one combined visit: Joshua tree census, tortoise sign (burrows, scat), burrowing owl burrows and plants. A tortoise on the lot doesn't kill the project. But you can't harm or move one yourself, and a take permit would be expensive and slow. Plan on a pre-construction sweep before grading."
+  },
+  {
+   "title": "County native plant rules: yuccas, creosote rings, mesquite need a removal permit",
+   "detail": "County Development Code Chapter 88.01, via a third-party rendering of the code. Desert Region regulated plants include all Joshua trees, all Agavaceae (yuccas, nolinas), creosote rings 10 ft or more across, smoketree and mesquite with stems of 2 inches or more or height of 6 ft or more, and any part of ironwood, mesquite or palo verde. These plants 'shall not be removed except under a Tree or Plant Removal Permit.' Exemptions include plants within 20 ft of a structure built under a County development permit, and parcels of 20,000 sq ft or less already developed. The County may require an arborist or Desert Native Plant Expert to certify removals. A pre-construction inspection is required where regulated plants exist. The chapter works alongside the state Desert Native Plants Act. Whether the Town of Yucca Valley has a similar ordinance was not confirmed (its code site blocked access).",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-88.01-plant-protection-and-management"
+   ],
+   "implication": "Do not clear brush or 'flatten' ground before you have a permit. Unpermitted clearing is the most common way new desert owners get a code case. Have the biologist map regulated plants along with the Joshua trees."
+  },
+  {
+   "title": "Fire hazard zones: new 2024\u20132025 maps; Town and County adopt them separately",
+   "detail": "CAL FIRE released updated Local Responsibility Area (LRA) maps on March 24, 2025. State Responsibility Areas (SRA) were 'addressed in 2024.' The San Bernardino County Fire Protection District adopted Ordinance No. 4489 on June 10, 2025 for LRA zones within its jurisdiction. State law bars the district from assigning a zone less restrictive than the State Fire Marshal recommends. Local reporting (secondary) says most of the unincorporated Morongo Basin is Moderate, the more mountainous areas north of Morongo Valley and Yucca Valley are High, and none is Very High. Incorporated Yucca Valley wasn't covered by the county list. The Town adopts its own LRA map, and its status was not verified. Your zone affects ignition-resistant construction (CBC/CRC Chapter 7A), defensible space, insurance pricing and seller disclosures.",
+   "confidence": "medium",
+   "sources": [
+    "https://sbcfire.org/fire-hazard-severity-zone-map/",
+    "https://experience.arcgis.com/experience/6a9cb66bb1824cd98756812af41292a0",
+    "https://z1077fm.com/calfire-and-sb-county-release-fire-hazard-severity-map-and-they-are-looking-for-your-feedback",
+    "https://countywideplan.sbcounty.gov/resources/maps-tables-figures/"
+   ],
+   "implication": "Look up both the hazard zone and whether the lot is SRA or LRA (map HZ-6). In an SRA, the state Fire Safe Regulations on road width and dead-end length, plus Chapter 7A, generally apply to new homes in every zone. Ask the fire plan reviewer exactly what applies."
+  },
+  {
+   "title": "Flood, washes and earthquake faults",
+   "detail": "Look up the FEMA flood zone at msc.fema.gov (Search by Address). Rural desert parcels are often Zone X or D (D means undetermined), which can hide real flash-flood risk from washes and alluvial fans. The County's HZ-4 Flood Hazards map adds local data. For earthquakes, use the County's HZ-1 Earthquake Fault Zones map and the HZ-2 Liquefaction/Landslide map. The Pinto Mountain fault runs east-west through the Yucca Valley area, and the 1992 Landers rupture faults (Johnson Valley, Homestead Valley, Emerson) cross the Homestead Valley communities (general knowledge, not verified here). A home inside an Alquist-Priolo Earthquake Fault Zone normally needs a fault investigation by a geologist before a permit. Both hazards show up on the Natural Hazard Disclosure in escrow.",
+   "confidence": "medium",
+   "sources": [
+    "https://msc.fema.gov/portal/search",
+    "https://experience.arcgis.com/experience/c9fbf62ef96140feae2f288ec8f3912f",
+    "https://experience.arcgis.com/experience/aebab6de7e0c4a8db383e05e7ae5b753",
+    "https://experience.arcgis.com/experience/ac848d076766441bb50d49750ba963d6"
+   ],
+   "implication": "On site, look for sandy channels, debris lines, scoured rocks and berms built by neighbors. Never put a pad, septic field or capsule in a wash. If any part of the lot is in a fault zone, keep the house and capsule sites out of it, or budget $5k\u201320k for a fault study."
+  },
+  {
+   "title": "Legal lot, legal access and survey: old desert homestead lots need extra checking",
+   "detail": "Many 2.5- and 5-acre Morongo Basin lots come from federal Small Tract Act ('jackrabbit homestead') patents. In practice: (1) original corner monuments are often missing, and fences and cabins don't always match the lines. (2) Patents commonly reserved a right-of-way of up to 33 ft along the boundaries for roads and utilities (general knowledge, not verified here; the title report will show it). That reservation can cut your net buildable area and affect setbacks. (3) Dirt roads you can drive on may not be legal access, and may not be County-maintained. (4) A lot split off by deed without a parcel map may not be a legal lot. The fix is a Certificate of Compliance under the Subdivision Map Act (Gov. Code \u00a766499.35). Desert patents often reserve minerals or oil and gas to the US. The Assessor's data is explicitly not a statement of legal ownership or permitted use.",
+   "confidence": "medium",
+   "sources": [
+    "https://arcpropertyinfo.sbcounty.gov/files/User_Guide.pdf",
+    "https://lus.sbcounty.gov/faqs/4380/"
+   ],
+   "implication": "Make the offer contingent on: a preliminary title report you've reviewed (with copies of every exception document), recorded legal access to a public road, confirmation of legal-lot status from Planning, and a boundary survey with corners set before closing. Ask the title officer about an access endorsement and an extended-coverage policy. Have the surveyor confirm whether the lot is truly 5.00 acres gross and net, because the ADU allowance and density depend on it."
+  },
+  {
+   "title": "Zoning numbers for drawing a site plan (County RL Desert Region; Town RL)",
+   "detail": "County Rural Living (RL) zone, Desert Region, from Tables 82-8C and 82-9C (third-party rendering of the County Development Code; verify against official code). Base minimum lot is 2.5 acres, but an RL-5/RL-10 suffix changes that. Minimum lot width and depth 150 ft; width-to-depth ratio up to 1:3 under 10 acres. Density 1 unit per 2.5 acres, or as the suffix sets, plus ADUs. Setbacks: front 25 ft, street side 25 ft, interior side 15 ft (lots wider than 75 ft), rear 15 ft. Lot coverage 20%. Maximum height 35 ft. Single dwellings and crop production or orchards are allowed without a planning permit. Temporary structures need a Temporary Use Permit. Town of Yucca Valley RL: residential standards are in Development Code \u00a79.07.050 Table 2-4. Town variance notices show a 15-ft interior side setback in RL districts. The rest of the Town table could not be fetched, and its official code site returned 403.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-82.04-residential-land-use-zoning-districts",
+    "https://www.yucca-valley.org/our-town/departments/community-development/planning/land-development/variance-v-03-25-environmental-assessment-ea-13-25-8140-la-contenta-road",
+    "https://ceqanet.lci.ca.gov/2024050695"
+   ],
+   "implication": "On 5 acres the setbacks rarely constrain you. Slope, washes, Joshua trees, septic area and fire access do. Measure setbacks from the edge of any road easement as well as the property line, and ask Planning which line counts."
+  },
+  {
+   "title": "Living on site legally: the County's temporary-occupancy permit during construction",
+   "detail": "County Development Code \u00a785.15.080(f) (third-party rendering). For projects of four or fewer units, 'a temporary structure and property may be used during the construction phase' as a temporary residence, office or storage. Table 85-4 lists 'Temporary Occupancy \u2013 Residential', issued by the Building Official. Duration: up to 12 months after the companion building permit is issued, or until completion if sooner. Extensions of up to 12 months each are allowed with a written request at least 14 days before expiry, and total extensions may not exceed 5 years. Temporary structures must be removed within 30 days of completion or expiry. A performance security (bond or deposit) guaranteeing removal is required before issuance. RVs and utility hookups are not addressed in the text. Living in an unpermitted capsule without this permit is a code violation. Enforcement is usually complaint-driven, but consequences can include notices, fines, abatement, liens and trouble finalizing later permits. SCE won't energize a permanent meter without a jurisdiction release, and unpermitted dwellings are generally uninsurable. The state's ADU 'amnesty' (AB 2533, effective 2025) covers units built before Jan 1, 2020 (general knowledge), so it would not protect a new capsule. Town of Yucca Valley temporary-occupancy rules were not verified.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-85.15-temporary-use-permits"
+   ],
+   "implication": "The lower-risk version of your plan: buy land, then submit the small-house permit quickly (aim for 3\u20136 months), then get a Temporary Occupancy permit and move into a certified unit (an RV-certified or park-model 'capsule' with its own insignia). Camp in the meantime. This turns 'as long as we're making progress' into a legal 1-to-6-year runway. Ask the building counter to confirm before you buy."
+  },
+  {
+   "title": "Several 'capsule' units on 5 acres: the County ADU allowance",
+   "detail": "County Chapter 84.36, Table 84-0 (third-party rendering). Up to 2 ADUs per lot in aggregate, plus 1 JADU. Note (3): 'on a lot of five acres or more, up to three units are allowed.' Detached ADU maximum is 1,200 sq ft, and an 800 sq ft detached ADU qualifies by-right. Minimum 200 sq ft. Side and rear setbacks 4 ft; 5 ft separation between buildings; detached height 18 ft (+2 ft if the roof pitch matches the main house). Sewer or County EHS septic approval is needed before a permit, and 'Holding tanks shall not be permitted' for ADUs. The code covers ADUs alongside a 'proposed' primary dwelling with an active permit application. Whether an ADU can be permitted before the main house is unclear, so ask the County.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.36-accessory-dwelling-units"
+   ],
+   "implication": "Plan the extra capsules as future permitted ADUs. They'll need certified construction, foundations or tie-downs, septic capacity sized for total bedrooms, and their own Joshua-tree-free pads. Size the septic and SCE service for the full build-out from the start. Confirm the 5.00-acre threshold on the survey."
+  },
+  {
+   "title": "Grading, stormwater and dust: keep total disturbance small",
+   "detail": "General knowledge, verify locally. Most California jurisdictions require a grading permit above about 50 cubic yards (CBC Appendix J model), and grading plans for engineered pads. Disturbing 1 acre or more total (pads, driveway, septic, trenches) triggers coverage under the State Water Board Construction Stormwater General Permit and a SWPPP, which costs thousands. Mojave Desert AQMD fugitive-dust rules apply to construction (its rule pages blocked access). Desert soils can be collapsible or hydro-compactive, and caliche or rock can double excavation cost. A geotechnical report usually catches this. If you grade before mapping, perc test results and pad locations can stop lining up, because perc tests must be done at the post-grading depth.",
+   "confidence": "medium",
+   "sources": [
+    "https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/percolation-testing-and-reporting-standards-for-onsite-wastewater-treatment-systems.pdf",
+    "General knowledge (CBC Appendix J; State Water Board CGP 1-acre threshold); not verified with a primary source this session because the search limit ran out"
+   ],
+   "implication": "Design small, stepped pads that follow the contours instead of 'flattening areas,' and add up disturbed area so you stay under 1 acre. Have the civil engineer do one combined plan for pads, driveway, drainage and septic."
+  },
+  {
+   "title": "Fire access, sprinklers and fire water: easy to underbudget on remote lots",
+   "detail": "General knowledge, verify with the fire plan reviewer. California requires fire sprinklers in all new one- and two-family homes (CRC R313). The baseline Fire Code (CFC 503) requires a fire apparatus access road within 150 ft of every part of the exterior walls: 20 ft wide, 13 ft 6 in clearance, with turnarounds on long dead ends. Local fire departments often relax this for sprinklered single homes. In an SRA, the state Fire Safe Regulations (14 CCR \u00a71270 et seq.) set driveway and road width and dead-end length standards for new construction. Without hydrants, the fire department may require on-site water storage.",
+   "confidence": "medium",
+   "sources": [
+    "https://sbcfire.org/fire-hazard-severity-zone-map/",
+    "General knowledge (CRC R313, CFC 503, 14 CCR 1270); not verified this session"
+   ],
+   "implication": "Ask the fire reviewer early what they require: driveway width, surface, maximum grade, turnaround, and water tank size. A long driveway up an incline can cost more than the house pad."
+  },
+  {
+   "title": "Power, solar and incentives",
+   "detail": "SCE extends lines under CPUC-approved Electric Rules 15 (distribution line) and 16 (service). New extensions are generally underground. Costs beyond SCE's allowance are paid by the customer and depend heavily on distance to the nearest usable pole or transformer. SCE's current per-foot costs and allowances were not verified (searches limited). SCE normally needs the local jurisdiction's inspection release to energize a permanent meter. Title 24 (2025 Energy Code, in effect for permits applied for from Jan 1, 2026) requires solar PV on new single-family homes and favors heat pumps. The federal 25D residential clean energy credit is gone. The IRS says it 'is not available for any property placed in service after December 31, 2025.'",
+   "confidence": "medium",
+   "sources": [
+    "https://webtraining.cpuc.ca.gov/industries-and-topics/electrical-energy/infrastructure/electric-reliability/undergrounding-program-description/rule-20/cpuc-rule-20-undergrounding-programs-current-proceeding-r1705010/electric-tariff-rules-15-and-16-distribution-line-and-service-extensions",
+    "https://www.irs.gov/credits-deductions/residential-clean-energy-credit"
+   ],
+   "implication": "Before the offer, find the nearest SCE pole on the street and measure the distance to the likely house site. During escrow, get an SCE preliminary estimate, or price off-grid solar plus a battery as the alternative. Don't count on a 30% federal tax credit."
+  },
+  {
+   "title": "Neighbors and nuisances: noise, OHV, shooting, dumping, big solar",
+   "detail": "Partly general knowledge and local reputation, low certainty. Marine Corps Air Ground Combat Center (Twentynine Palms) training can be heard across much of the Basin. The County's LU-3 Military Influence Overlay shows where it formally matters. The Johnson Valley OHV area and BLM land bring off-road traffic and recreational shooting to some edges of the Basin. Remote lots draw illegal dumping, abandoned trailers, squatting and theft. Some outlying communities had illegal cannabis grows in recent years. On utility-scale solar: the County adopted a 2019 policy limiting it in Rural Living areas and community-plan areas (general knowledge, verify). The state CEC opt-in certification path (AB 205, 2022) can bypass local rules for large projects.",
+   "confidence": "low",
+   "sources": [
+    "https://experience.arcgis.com/experience/88103d290b574b8fa252860bc5d1f162",
+    "https://countywideplan.sbcounty.gov/community/east-desert-unincorporated/homestead-valley-communities/",
+    "General knowledge; not verified this session"
+   ],
+   "implication": "Visit on a weekday morning, a Saturday afternoon and after dark. Knock on two or three neighbors' doors and ask what they hear, what gets stolen, and who maintains the road. Check County Planning for pending large projects nearby."
+  },
+  {
+   "title": "Property tax, special charges and existing code cases",
+   "detail": "General knowledge, verify on the actual tax bill. Under Prop 13 the base tax is 1% of purchase price, plus voter-approved debt. The total is often roughly 1.1\u20131.3% in the Morongo Basin, plus fixed 'direct charges' such as fire special taxes, water or sewer assessments and school bonds. New construction is reassessed at completion and triggers supplemental bills. Desert lots are sometimes tax-defaulted or carry County abatement liens. Code-enforcement cases and unpermitted structures stay with the land, not the seller.",
+   "confidence": "medium",
+   "sources": [
+    "https://arcpropertyinfo.sbcounty.gov/files/User_Guide.pdf",
+    "General knowledge; not verified this session"
+   ],
+   "implication": "Get the current secured tax bill, which lists the direct charges, from the title officer. Ask County or Town Code Enforcement in writing whether the APN has any open or past cases. Ask Building whether there are any permits or finals on file."
+  },
+  {
+   "title": "Insurance, lending and owner-builder law",
+   "detail": "General knowledge. California's homeowner insurance market is tight. Many remote desert homes end up with a California FAIR Plan fire policy plus a 'difference in conditions' wrap. Unpermitted dwellings, and vacancy beyond about 60 days (relevant to Bhutan), are common exclusions. Land loans usually need 20\u201350% down, and construction loans for owner-builders are scarce, so many owner-builders use cash, a HELOC or a personal loan. Owner-builder rules (Business & Professions Code \u00a77044) let you build your own home without a contractor's license. You must sign the County's owner-builder disclosure and use licensed subs or your own employees (then you're an employer, with workers' comp). Selling within a year of completion creates a presumption you built it for sale.",
+   "confidence": "medium",
+   "sources": [
+    "General knowledge; not verified this session (search limit)"
+   ],
+   "implication": "Get at least one insurance quote for 'vacant land plus future small house in this zone' before you remove contingencies. Decide your financing before the offer. Ask an insurance agent how a long Bhutan absence affects coverage."
+  },
+  {
+   "title": "Due-diligence period strategy",
+   "detail": "Market practice in California: use the C.A.R. Vacant Land Purchase Agreement, not the house contract. Ask for 45\u201360 days with named contingencies, and an option to extend 30 days for a small non-refundable payment if perc or survey scheduling slips. Name these contingencies: (1) title review, including access and easements; (2) a boundary survey with corners set; (3) passing perc, or written sewer availability and phase; (4) water: a will-serve letter with main at frontage, or a well-feasibility opinion; (5) a Joshua tree and biological census showing a buildable envelope that avoids all trees; (6) zoning, legal-lot status and no open code cases; (7) an SCE preliminary estimate or acceptable off-grid cost; (8) insurability; (9) a general feasibility clause covering anything else. Ask the seller for any old perc, survey, well log, or Joshua tree census. Since Aug 2024, buyers sign a written buyer-broker agreement before touring with an agent.",
+   "confidence": "medium",
+   "sources": [
+    "https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/percolation-testing-and-reporting-standards-for-onsite-wastewater-treatment-systems.pdf",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting",
+    "General real-estate practice; not verified this session"
+   ],
+   "implication": "Do as much desktop and phone homework as possible before the offer: jurisdiction, zoning, hazards, water main, nearest pole, tree count. Then the contingency period only covers what needs field work, and your offer looks stronger."
+  },
+  {
+   "title": "Absence (Bhutan) and storage on the property",
+   "detail": "Building permits generally expire if work isn't started, or is suspended, for 180 days without a passed inspection (CRC/CBC \u00a7105.5 model; general knowledge). The temporary-occupancy permit is tied to that building permit. The County's construction-phase provision also allows the property to be used 'for storage' during an approved project (\u00a785.15.080(f)), so a storage container may need to be covered by that permit. County Fire runs an annual weed and fire-hazard abatement program, and missed deadlines bring fines and County-performed cleanup billed to the owner (general knowledge).",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-85.15-temporary-use-permits",
+    "General knowledge; not verified this session"
+   ],
+   "implication": "Time the trip around inspections. Pass one right before you leave, and ask the building official in writing for an extension if you'll be gone longer than about 5 months. Arrange a local caretaker or neighbor, cellular or Starlink cameras, and weed abatement while you're away."
+  }
+ ],
+ "critical_claims": [
+  {
+   "claim": "Inside the Town of Yucca Valley over the Warren subbasin, septic discharge is banned in Phase 1 (since Dec 31, 2023) and in Phase 2 by Dec 31, 2028 (or Dec 31, 2031 if western Joshua tree is listed), or earlier when sewer is 'available.' For a home, that means sewer within 200 ft of a building and the parcel abuts it. Owners must connect within 180 days. New septic is allowed only until the parcel's deadline.",
+   "sources": [
+    "https://waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/2023/yvbpa-wcorr.pdf",
+    "https://www.waterboards.ca.gov/rwqcb7/water_issues/programs/basin_planning/docs/yuccavalley/prohibition-enforcement-faq.pdf"
+   ]
+  },
+  {
+   "claim": "Since Jan 1, 2018, California Water Code \u00a7106.4(c) bars building permits for new homes where hauled water is the intended supply. San Bernardino County requires a purveyor connection, if one is available, or a permitted well.",
+   "sources": [
+    "https://ehs.sbcounty.gov/?p=4665"
+   ]
+  },
+  {
+   "claim": "Each Joshua tree stem counts as a separate tree. 2026 CDFW fees in the standard area are $354.75 (under 1 m), $521.75 (1 to under 5 m) and $2,609 (5 m and up). Yucca Valley and most Morongo Basin communities are in the standard fee area (secondary source). As of April 2026 no local delegation agreements existed, so CDFW Region 6 issues permits.",
+   "sources": [
+    "https://content.govdelivery.com/accounts/CNRA/bulletins/3fdfa9c",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ",
+    "https://sbcsentinel.com/?p=34086",
+    "https://awpw.assembly.ca.gov/system/files/2026-04/ab-1663-wallis.pdf"
+   ]
+  },
+  {
+   "claim": "In unincorporated San Bernardino County, a Temporary Use Permit for 'Temporary Occupancy \u2013 Residential' lets owners live in a temporary structure during construction. It runs 12 months after building permit issuance, extensions can add up to 5 years total, removal is required within 30 days of completion, and a performance security is required.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-85.15-temporary-use-permits"
+   ]
+  },
+  {
+   "claim": "On County lots of 5 acres or more, up to three ADU units are allowed in aggregate. Detached ADUs can be up to 1,200 sq ft (800 sq ft by-right), and holding tanks are not allowed for ADUs.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.36-accessory-dwelling-units"
+   ]
+  },
+  {
+   "claim": "The Mojave desert tortoise has been listed as endangered under CESA since July 15, 2025.",
+   "sources": [
+    "https://fgc.ca.gov/CESA"
+   ]
+  }
+ ],
+ "design_numbers": [
+  "County RL Desert Region setbacks: front 25 ft; street side 25 ft; interior side 15 ft (lots wider than 75 ft; 5 ft/10 ft if 75 ft or narrower); rear 15 ft. Source: County Table 82-9C via https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-82.04-residential-land-use-zoning-districts (verify against official code)",
+  "County RL Desert Region: lot coverage max 20%; max height 35 ft; min lot width and depth 150 ft; width-to-depth ratio no more than 1:3 for lots under 10 acres. Source: same as above",
+  "Town of Yucca Valley RL: interior side setback 15 ft (Dev. Code \u00a79.07.050 Table 2-4, per Town variance notices; other Town numbers not verified). Source: https://www.yucca-valley.org/our-town/departments/community-development/planning/land-development/variance-v-03-25-environmental-assessment-ea-13-25-8140-la-contenta-road",
+  "County ADU: detached max 1,200 sq ft; by-right detached 800 sq ft; min 200 sq ft (JADU 150\u2013500 sq ft); side and rear setbacks 4 ft; 5 ft between buildings; detached height 18 ft (+2 ft if roof pitch matches main house); up to 3 ADU units on lots of 5 acres or more. Source: https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.36-accessory-dwelling-units",
+  "Yucca Valley sewer 'available' (homes): public sewer less than 200 ft from any existing or proposed building on the parcel AND the parcel abuts the sewer; connect within 180 days. Source: https://waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/2023/yvbpa-wcorr.pdf",
+  "Septic on an exempt Yucca Valley parcel: Advanced Treatment Unit removing at least 50% of nitrogen, plus a leach field with a 100% replacement area. Source: same Basin Plan excerpt",
+  "Perc: notify EHS at least 2 working days before testing; topo map needed unless slope is uniform and under 20%; disposal-area slope 21\u201330% means more tests, over 30% is adverse; borings at least 5 ft below leach-line bottom, 10 ft below seepage-pit bottom (40 ft if too few fines); test at final grade within \u00b12 ft (pits \u00b15 ft); show a 100% expansion area. Source: https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/percolation-testing-and-reporting-standards-for-onsite-wastewater-treatment-systems.pdf",
+  "Joshua tree spacing: root spread about 14 m from a 4.3 m tree and 8.4 m from a 1 m tree; relocation site 15 m from an existing tree; each stem counts as one tree. Source: https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ. A newspaper reported work within 186 ft of a tree triggers a permit (secondary, unverified): https://sbcsentinel.com/?p=34086",
+  "County plant protection: creosote rings 10 ft or more across, and mesquite or smoketree with stems of 2 inches or more or height of 6 ft or more, are regulated; exemption for plants within 20 ft of a permitted structure. Source: https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-88.01-plant-protection-and-management",
+  "Temporary occupancy during construction (County): 12 months from building permit; extensions of 12 months each, 5 years total; remove within 30 days of completion; request extensions at least 14 days before expiry. Source: https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-85.15-temporary-use-permits",
+  "Keep total ground disturbance under 1 acre (43,560 sq ft) to avoid State Construction Stormwater General Permit/SWPPP coverage (general knowledge; verify)",
+  "Fire access baseline (CFC 503, general knowledge; local fire may change): access road within 150 ft of all exterior walls; 20 ft min width; 13 ft 6 in vertical clearance; turnaround on long dead ends",
+  "Septic and well separations, California Plumbing Code baseline (general knowledge; County may be stricter): septic tank 5 ft from buildings and 50 ft from a water well; leach field 8 ft from buildings and 100 ft from a water well",
+  "Building permit lapses after 180 days without work or a passed inspection (CRC/CBC \u00a7105.5 model; general knowledge; confirm local rule)"
+ ],
+ "people_to_involve": [
+  {
+   "role": "The two of you: desktop research and a first unaccompanied walk",
+   "why": "Most deal-breakers (jurisdiction, zoning, hazards, water main, nearest power pole, tree count) can be checked free before paying anyone.",
+   "when": "Phase 0 \u2013 before contacting the seller",
+   "how_to_find": "Use the Assessor map viewer, the County Digital Zoning Map, Countywide Plan hazard maps HZ-1 to HZ-6 and LU-3, and FEMA MSC.",
+   "questions_to_ask": [
+    "Town or County? What zoning and suffix?",
+    "Is any part of the lot in a wash, fault zone or High fire zone?",
+    "How many Joshua trees and stems, and where's the flattest tree-free area?",
+    "How far are the nearest water main and SCE pole?"
+   ],
+   "typical_cost": "$0 plus gas"
+  },
+  {
+   "role": "Land-savvy buyer's agent (Morongo Basin vacant land specialist)",
+   "why": "Writes the Vacant Land Purchase Agreement with the right contingencies, gets seller documents (old perc, survey, well log), and knows which roads, water districts and perc engineers are trouble.",
+   "when": "Phase 0 \u2013 before touring or offering (a written buyer agreement is required before touring)",
+   "how_to_find": "Look at who lists and sells the most raw land in Yucca Valley, Landers and Joshua Tree. Ask the title officer and local surveyors who they see closing land deals. Check their license on the CA Department of Real Estate lookup.",
+   "questions_to_ask": [
+    "How many vacant-land deals have you closed in the Morongo Basin in the last 2 years, and how many fell apart and why?",
+    "Which water district serves this APN, and is there a main at the frontage?",
+    "Will you draft perc, survey, water, Joshua-tree and feasibility contingencies with a 45\u201360 day period?",
+    "How is your fee handled, and do you have a minimum on cheap land?"
+   ],
+   "typical_cost": "Often paid from the seller's side. Land deals may need a negotiated flat fee or minimum of roughly $2,500\u20135,000 (estimate)"
+  },
+  {
+   "role": "Building and planning counter (Town of Yucca Valley Community Development or County Land Use Services)",
+   "why": "Free, authoritative answers on legal-lot status, temporary occupancy while building, whether an ADU can come before the main house, setbacks from easements, grading thresholds and permit expiration.",
+   "when": "Phase 0 \u2013 before the offer; again at pre-design for a pre-application meeting",
+   "how_to_find": "County LUS: (909) 387-8311 or (760) 995-8140; 385 N. Arrowhead Ave., San Bernardino, or 15900 Smoke Tree St. Ste 131, Hesperia. Town: Community Development counter at Town Hall (check hours on yucca-valley.org).",
+   "questions_to_ask": [
+    "Is APN ___ a legal lot, or does it need a Certificate of Compliance?",
+    "Can we get a Temporary Occupancy \u2013 Residential permit to live in an RV or certified tiny unit once our house permit is issued? What security deposit is needed?",
+    "Can an ADU be permitted before the main house? How many ADUs on 5 acres?",
+    "At what cubic yards does grading need a permit? Are there hillside standards?",
+    "How long do permits stay active without inspections? Can we get an extension during a 4\u20136 month trip abroad?",
+    "Any open code cases or permit history on this APN?"
+   ],
+   "typical_cost": "Free (pre-application meetings may carry a fee)"
+  },
+  {
+   "role": "Neighbors (two or three nearest occupied homes)",
+   "why": "They know about flooding, wind, noise, theft, road upkeep, well depths and water quality, and who the good local trades are.",
+   "when": "Phase 0 \u2013 on your first or second visit",
+   "how_to_find": "Knock on doors with a short, friendly introduction. Also ask in local community groups.",
+   "questions_to_ask": [
+    "Does water run across this lot in storms?",
+    "How deep is your well, or who serves your water? Any quality issues?",
+    "Who maintains the road? Is there a road agreement?",
+    "What do you hear at night or on weekdays (military, OHV, shooting, dogs, generators)?",
+    "Have you had theft or dumping problems?"
+   ],
+   "typical_cost": "Free (bring cookies)"
+  },
+  {
+   "role": "Title officer and escrow officer",
+   "why": "The preliminary title report shows easements (including old 33-ft patent road reservations), liens, tax defaults, mineral reservations, CC&Rs and access problems. Escrow orders the Natural Hazard Disclosure report.",
+   "when": "Phase 0 (free property profile) and Phase 1 (prelim within about 1 week of opening escrow)",
+   "how_to_find": "Use a title company with a local desert branch. Ask the agent for the title rep who handles the most Morongo Basin land.",
+   "questions_to_ask": [
+    "Please send copies of every exception document, not just the list.",
+    "Is there recorded legal access to a public road? Can you issue an access endorsement?",
+    "Are there patent reservations (road or utility right-of-way, minerals), mining claims or abatement liens?",
+    "Are property taxes current? What direct charges are on the bill?"
+   ],
+   "typical_cost": "Prelim usually included; owner's policy about $500\u20131,500 on a low-price lot; escrow about $800\u20132,000 (estimates)"
+  },
+  {
+   "role": "Insurance agent (independent, with FAIR Plan access)",
+   "why": "Insurability in a fire-hazard zone, coverage while building, and vacancy during the Bhutan trip can change the math.",
+   "when": "Phase 0 quick quote; Phase 1 firm quote before removing contingencies",
+   "how_to_find": "Use an independent agent who writes California FAIR Plan plus difference-in-conditions policies in the Morongo Basin.",
+   "questions_to_ask": [
+    "What would a small new house at this address cost to insure (FAIR plus DIC)?",
+    "Do you offer course-of-construction or builder's risk for owner-builders?",
+    "How does a 4\u20136 month absence affect coverage?",
+    "Can a temporary unit or capsule be covered?"
+   ],
+   "typical_cost": "Free quote; roughly $1,500\u20135,000/yr later (estimate)"
+  },
+  {
+   "role": "Lender (land loan or HELOC)",
+   "why": "Few lenders do raw land or owner-builder construction loans, so financing shapes the offer (cash vs. contingent).",
+   "when": "Phase 0 \u2013 before the offer",
+   "how_to_find": "Local credit unions and banks in the High Desert that advertise land loans; a mortgage broker.",
+   "questions_to_ask": [
+    "Do you lend on raw land with no utilities? What down payment and rate?",
+    "Do you allow owner-builder construction loans or construction-to-perm?",
+    "Will a will-serve letter or perc report be required for the loan?"
+   ],
+   "typical_cost": "Varies; land loans often need 20\u201350% down (estimate)"
+  },
+  {
+   "role": "Water district (HDWD, BDVWA, JBWD or other purveyor)",
+   "why": "Water is the first deal-breaker. In the Town, Hi-Desert Water District also decides your sewer phase and deferred status.",
+   "when": "Phase 0 phone call; Phase 1 written will-serve letter",
+   "how_to_find": "Ask the County or your agent which district serves the APN, or check the district service-area maps (HDWD site, bdvwa.org, Joshua Basin WD site).",
+   "questions_to_ask": [
+    "Is there a main along this APN's frontage? If not, how far, and what would a main extension cost?",
+    "What are the current meter capital and installation fees for a 1-inch meter (for fire sprinklers)?",
+    "(HDWD) Which sewer phase is this APN in? Is it deferred? Projected availability date?",
+    "How do we get a will-serve letter, what does it cost and how long does it take?",
+    "Does the groundwater adjudication restrict private wells here?"
+   ],
+   "typical_cost": "Will-serve letter often a small fee (not verified). BDVWA 2025 example: about $4,800 capital plus about $1,370 install for a 1-inch meter (secondary)"
+  },
+  {
+   "role": "Land surveyor (California Licensed Land Surveyor)",
+   "why": "Finds or sets corners, shows easements, confirms gross and net acreage (the 5.00-acre ADU threshold), and produces the topo map perc and grading need.",
+   "when": "Phase 1 \u2013 order on day 1 of escrow (backlogs of 3\u20138 weeks)",
+   "how_to_find": "Check the Board for Professional Engineers, Land Surveyors, and Geologists license lookup. Ask title and the building counter who files Records of Survey in the Basin.",
+   "questions_to_ask": [
+    "Can you recover or set all four corners and file the Record of Survey?",
+    "Will you plot every recorded easement, including patent reservations?",
+    "Can you add a 1\u20132 ft contour topo of the building area and Joshua tree locations?",
+    "Is the lot 5.00 acres or more, gross and net?"
+   ],
+   "typical_cost": "Boundary with corners set about $3,500\u20139,000; topo about $1,500\u20135,000 (estimates)"
+  },
+  {
+   "role": "Perc/septic designer (Qualified Professional: REHS, PE, PG or CEG)",
+   "why": "A passing perc report is required before any building permit, and it sets septic size and location (and an ATU if needed).",
+   "when": "Phase 1 \u2013 order in week 1 of escrow",
+   "how_to_find": "Ask County EHS which firms submit Morongo Basin perc reports often, and ask the surveyor and civil engineer. Get 3 quotes.",
+   "questions_to_ask": [
+    "Can you test where our pad and leach field will be after grading?",
+    "Leach lines or seepage pits here, and how deep is the boring?",
+    "Sized for how many bedrooms? Can it handle future ADUs?",
+    "If we're in the Yucca Valley prohibition area, what would an ATU option cost?"
+   ],
+   "typical_cost": "About $2,500\u20136,000 for test and report; system install later about $12k\u201325k conventional, $25k\u201345k ATU (estimates)"
+  },
+  {
+   "role": "Desert biologist / desert native plant specialist (ISA arborist or 5+ years desert plant experience)",
+   "why": "Joshua tree census (CDFW Survey123 format), plus tortoise, burrowing owl and native-plant mapping, so you can draw a buildable envelope that needs no take permit.",
+   "when": "Phase 1 \u2013 in the first 2 weeks of escrow; again for a pre-construction sweep",
+   "how_to_find": "Look for consulting biologists who appear on Morongo Basin CEQA and Joshua tree permit filings (ceqanet.lci.ca.gov). Mojave Desert Land Trust and local CNPS chapters can also refer.",
+   "questions_to_ask": [
+    "Can you census all Joshua trees and stems with height classes, and recommend avoidance buffers?",
+    "Any tortoise or burrowing owl sign? Do we need protocol surveys?",
+    "Which other plants need County removal permits?",
+    "If take is unavoidable, can you prepare the CDFW permit application, and how long is it taking now?"
+   ],
+   "typical_cost": "Census about $500\u20132,500; broader biological screen about $1,500\u20135,000 (estimates)"
+  },
+  {
+   "role": "Well driller (C-57) and/or hydrogeologist",
+   "why": "Only needed if there's no water main: depth, yield and water quality (arsenic, fluoride, nitrate) drive a $40k\u2013120k decision.",
+   "when": "Phase 1 (opinion and quote); Phase 3 (permit and drill)",
+   "how_to_find": "CSLB license lookup for C-57; County EHS registered drillers; neighbors' well logs (DWR well completion reports).",
+   "questions_to_ask": [
+    "What depth and yield do nearby wells have?",
+    "Any arsenic, fluoride or nitrate issues locally?",
+    "Total cost with pump, pressure tank and storage tank sized for sprinklers?",
+    "Mojave Water Agency notice of intent and adjudication limits?"
+   ],
+   "typical_cost": "About $40,000\u2013120,000 total (estimate)"
+  },
+  {
+   "role": "SCE service planner",
+   "why": "The cost of bringing power can range from minor to huge depending on pole distance. It also decides grid vs. off-grid.",
+   "when": "Phase 1 \u2013 request a preliminary estimate; Phase 3 \u2013 formal application",
+   "how_to_find": "Apply for new service on sce.com; a planner is assigned.",
+   "questions_to_ask": [
+    "Where's the nearest usable pole or transformer, and what's the estimated customer cost?",
+    "Overhead or underground required?",
+    "What do you need before energizing (jurisdiction release)?",
+    "Can we get temporary construction power?"
+   ],
+   "typical_cost": "Roughly $3,000 to $75,000+ depending on distance (estimate)"
+  },
+  {
+   "role": "Civil engineer (PE)",
+   "why": "Lays out pads, driveway, drainage and wash setbacks, sizes cut and fill, and keeps disturbance under 1 acre. Often signs the grading plan.",
+   "when": "Phase 1 feasibility walk (1\u20132 hours); Phase 2\u20133 grading and drainage plan",
+   "how_to_find": "Ask the surveyor; CA PE license lookup; ask the counter which engineers' plans get through cleanly.",
+   "questions_to_ask": [
+    "Where should pads go to minimize cut and fill and stay out of flow paths?",
+    "Will this need a grading permit, a drainage study or floodplain review?",
+    "Can you combine grading, septic and driveway in one plan?",
+    "Total disturbed area, and do we stay under 1 acre?"
+   ],
+   "typical_cost": "About $3,000\u201315,000 (estimate)"
+  },
+  {
+   "role": "Geotechnical/soils engineer (and engineering geologist if in a fault zone)",
+   "why": "Desert soils can be collapsible; caliche or rock changes excavation cost; fault-zone lots need a fault investigation.",
+   "when": "Phase 2 \u2013 after the pad location is chosen",
+   "how_to_find": "Firms doing High Desert residential soils reports; ask your structural engineer.",
+   "questions_to_ask": [
+    "Collapsible soils or caliche? Any special foundation needs?",
+    "Is the site in an Alquist-Priolo zone, and is a fault trench needed?",
+    "Can one report cover the house and future ADU pads?"
+   ],
+   "typical_cost": "About $2,500\u20137,500; fault study about $5,000\u201320,000 (estimates)"
+  },
+  {
+   "role": "Permit expediter / land-use consultant",
+   "why": "Saves months of resubmittals on temporary occupancy, ADU sequencing, Joshua tree coordination and fire review.",
+   "when": "Phase 2 \u2013 pre-application; optional",
+   "how_to_find": "Ask local designers and the building counter which expediters work Morongo Basin jobs.",
+   "questions_to_ask": [
+    "How many County or Town residential permits have you run in the last year?",
+    "What's the fastest legal path to living on site?",
+    "Flat fee or hourly?"
+   ],
+   "typical_cost": "About $1,500\u201310,000 or $100\u2013200/hr (estimate)"
+  },
+  {
+   "role": "CPA and/or real estate attorney",
+   "why": "Contract review, title ownership form (trust), property-tax reassessment, owner-builder employer obligations, and any rental plans for capsules.",
+   "when": "Phase 1 (contract and title vesting); Phase 3 (owner-builder setup)",
+   "how_to_find": "State Bar certified real estate attorneys in the Inland Empire; CPAs used to small rentals.",
+   "questions_to_ask": [
+    "How should we take title?",
+    "What are our obligations if we hire workers as owner-builders (B&P 7044, workers' comp)?",
+    "Tax and zoning implications of renting a capsule later?"
+   ],
+   "typical_cost": "About $300\u2013600/hr; $500\u20133,000 total (estimate)"
+  },
+  {
+   "role": "Architect or designer (small modern desert homes)",
+   "why": "Designs the minimal house and site plan: orientation for wind and sun, Chapter 7A materials, radiant floors, a soft full-surface floor, and ADU future-proofing.",
+   "when": "Phase 2 \u2013 after the survey, perc and tree census",
+   "how_to_find": "CA Architects Board license lookup; look at built small modern homes in Joshua Tree and Yucca Valley and ask who designed them.",
+   "questions_to_ask": [
+    "Have you permitted a home under 800 sq ft in this jurisdiction?",
+    "How do we do radiant floors with a fully soft floor surface? (Thick padding insulates radiant heat; the floor covering's R-value must be checked.)",
+    "Can you design for permits quickly, with pre-engineered or panelized systems?",
+    "Fee structure and timeline to submittal?"
+   ],
+   "typical_cost": "About $10,000\u201360,000 depending on scope (estimate)"
+  },
+  {
+   "role": "Structural engineer",
+   "why": "Seismic and wind design (high wind, near active faults), foundations on desert soils, and tie-downs for any modular unit.",
+   "when": "Phase 3 \u2013 design development",
+   "how_to_find": "Ask the architect; PE/SE license lookup.",
+   "questions_to_ask": [
+    "Slab-on-grade with in-slab radiant: any special details?",
+    "Wind exposure and design speed for this site?",
+    "Can you also design foundations for future ADUs?"
+   ],
+   "typical_cost": "About $2,000\u20138,000 (estimate)"
+  },
+  {
+   "role": "Title 24 energy consultant",
+   "why": "Energy compliance under the 2025 Energy Code (permits applied for from Jan 1, 2026). Covers required solar PV, heat-pump systems and radiant floor treatment.",
+   "when": "Phase 3 \u2013 with permit drawings",
+   "how_to_find": "CABEC-certified energy analysts; ask the architect.",
+   "questions_to_ask": [
+    "What climate zone is this parcel?",
+    "Can radiant floor heating with a heat pump meet code?",
+    "Minimum PV size required?"
+   ],
+   "typical_cost": "About $300\u20131,500 (estimate)"
+  },
+  {
+   "role": "Fire department plan reviewer (County Fire or the agency serving the Town)",
+   "why": "Sets driveway width, surface, grade and turnaround, sprinkler and water-storage needs, and Chapter 7A or defensible-space requirements.",
+   "when": "Phase 2 \u2013 an early informal question; Phase 3 \u2013 formal review",
+   "how_to_find": "San Bernardino County Fire, Office of the Fire Marshal (via sbcfire.org).",
+   "questions_to_ask": [
+    "Is this lot SRA or LRA, and which hazard zone?",
+    "What access standard applies for a driveway of about ___ ft?",
+    "Is a water storage tank required, and what size?",
+    "Any requirements for temporary dwellings during construction?"
+   ],
+   "typical_cost": "Plan review fees (not verified)"
+  },
+  {
+   "role": "Grading contractor (Class A or C-12)",
+   "why": "Builds the pads and driveway. Equipment on caliche or rock is the big variable.",
+   "when": "Phase 3\u20134 \u2013 after the grading permit; preliminary bid in Phase 2",
+   "how_to_find": "CSLB license lookup (C-12 or A); ask neighbors and the civil engineer.",
+   "questions_to_ask": [
+    "Do you know Joshua tree buffers and the pre-construction biologist sweep?",
+    "Hourly or fixed bid? What if you hit caliche?",
+    "Dust control and stormwater practices?"
+   ],
+   "typical_cost": "About $8,000\u201340,000 for small pads plus driveway (estimate)"
+  },
+  {
+   "role": "General contractor or owner-builder mentor / construction manager",
+   "why": "If owner-building, an hourly mentor catches sequencing and inspection mistakes. A GC is faster but costs more.",
+   "when": "Phase 3 \u2013 before submitting permits; through construction",
+   "how_to_find": "Local builders of small homes; CSLB license lookup (B); retired builders who consult by the hour.",
+   "questions_to_ask": [
+    "Will you do hourly consulting or inspections for an owner-builder?",
+    "Which trades do you recommend locally (C-10, C-36, C-20, radiant installers)?",
+    "Realistic timeline for a home under 600 sq ft?"
+   ],
+   "typical_cost": "Mentor about $75\u2013200/hr; GC typically 15\u201325% markup (estimate)"
+  },
+  {
+   "role": "Solar installer (and battery or off-grid designer)",
+   "why": "PV is required by Title 24. Off-grid may beat a long SCE extension.",
+   "when": "Phase 2 (off-grid vs. grid comparison); Phase 3 (design)",
+   "how_to_find": "CSLB C-10 or C-46 lookup; at least 3 quotes.",
+   "questions_to_ask": [
+    "Grid-tied vs. off-grid cost for our loads (heat pump, radiant)?",
+    "Battery sizing for public safety power shutoffs?",
+    "Note: the federal 25D credit ended for systems placed in service after Dec 31, 2025, so what is the real price?"
+   ],
+   "typical_cost": "About $9,000\u201320,000 for 3\u20135 kW grid-tied; about $25,000\u201360,000 off-grid with batteries (estimate)"
+  },
+  {
+   "role": "Landscape / xeriscape designer",
+   "why": "Orchard and native planting plan that respects defensible space, water budget and wind.",
+   "when": "Phase 2 (master plan) and after occupancy",
+   "how_to_find": "Mojave Desert Land Trust native plant programs (Joshua Tree); UC Master Gardeners (San Bernardino County); local native nurseries.",
+   "questions_to_ask": [
+    "Which fruit trees survive 3,000+ ft cold snaps and spring wind here?",
+    "How do we lay out windbreaks and orchards within defensible space?",
+    "Drip irrigation sized to our water source?"
+   ],
+   "typical_cost": "About $500\u20135,000 (estimate)"
+  },
+  {
+   "role": "Security installer / property caretaker",
+   "why": "Remote lots plus months away in Bhutan mean theft and squatting risk. Weed-abatement deadlines also continue while you're gone.",
+   "when": "Phase 4 \u2013 before storing belongings; before leaving the country",
+   "how_to_find": "Local installers with cellular or Starlink camera systems; neighbors or local property-watch services.",
+   "questions_to_ask": [
+    "Cellular or satellite cameras with off-grid power?",
+    "Monthly drive-by checks and abatement service?",
+    "Response if someone camps or dumps on the lot?"
+   ],
+   "typical_cost": "About $500\u20133,000 equipment plus monthly data; caretaker about $300\u20132,000/yr (estimate)"
+  }
+ ],
+ "site_visit_checks": [
+  "Bring: a phone with a compass and sun-path app (e.g., Sun Seeker or PhotoPills), an inclinometer/clinometer app, a GPS-mapping app for tagging Joshua trees (or the CDFW Survey123 app), 20 surveyor's flags and lath stakes, a 100-ft tape, a shovel and soil probe, a rock hammer, a drone (check airspace near the military base), a camera, a notebook, water, a first-aid kit, and closed-toe boots (rattlesnakes).",
+  "Print the Assessor map page and an aerial image with the parcel lines drawn on. Walk the perimeter and look for corner pipes or monuments. Note fences, tracks or structures that cross the lines.",
+  "Count every Joshua tree: stems, approximate height class (under 1 m, 1\u20135 m, 5 m and up), GPS point and photo. Also flag large creosote rings, yuccas and mesquite.",
+  "Find the flattest tree-free area for the house pad and a separate, gentler area for the septic field. Measure slope with the inclinometer (aim for under 10\u201315% for pads; over 20% means a topo map; over 30% at the leach field is adverse).",
+  "Dig 2\u20133 test holes 18\u201324 inches deep. Note sand vs. caliche (white, cemented layer) vs. rock. Hard caliche means a higher grading and septic cost.",
+  "Look for washes: sandy channels, debris lines, scoured rocks, berms and culverts on neighbors' lots. Note where water would cross the driveway route.",
+  "Drive the full access route from pavement. Note how long it is, how steep, sand traps and washouts, whether it's graded, and whether it crosses other parcels without an obvious easement.",
+  "Locate the nearest SCE pole or transformer and water meter or hydrant. Photograph them and pace or measure the distance to your likely house spot.",
+  "Check cell signal (calls and data) on each carrier at the house spot, and check the sky view for Starlink.",
+  "Visit at three times: weekday daytime (military booms, traffic), Saturday afternoon (OHV, shooting, generators, dogs) and after dark (light pollution, the Highway 62 glow, neighbors' lights, quiet).",
+  "Plan at least one visit in spring (March\u2013May) on a windy afternoon to feel the wind exposure and dust, and note the prevailing direction for orientation and windbreaks.",
+  "Sun and views: use the sun-path app to check winter sun over ridges for solar and passive heat, and summer west sun. Photograph views in all four directions from the pad.",
+  "Look for signs of animals: tortoise burrows (half-moon shaped openings) and scat, and owl burrows with pellets and whitewash. Do not disturb them; note GPS points for the biologist.",
+  "Note dumping, abandoned trailers, old foundations, septic lids or wells on the lot (all are cleanup cost or code-case clues).",
+  "Talk to two or three neighbors: wells and water quality, flooding, theft, road maintenance, noise, good local trades.",
+  "Stake the corners of your imagined house, capsule spots and septic area with flags. Stand inside the 'house' at sunset and decide together how it feels."
+ ],
+ "costs": [
+  {
+   "item": "Buyer's agent (vacant land)",
+   "low_usd": 0,
+   "high_usd": 5000,
+   "notes": "Often paid from the seller's side; land agents may require a minimum. A written buyer agreement is required before touring (post-Aug 2024). Estimate."
+  },
+  {
+   "item": "Preliminary title report + owner's title policy + escrow",
+   "low_usd": 1300,
+   "high_usd": 3500,
+   "notes": "Who pays which is negotiable; extended coverage costs more and needs a survey. Estimate."
+  },
+  {
+   "item": "Natural Hazard Disclosure report",
+   "low_usd": 50,
+   "high_usd": 150,
+   "notes": "Ordered through escrow. Estimate."
+  },
+  {
+   "item": "Boundary survey with corners set + Record of Survey",
+   "low_usd": 3500,
+   "high_usd": 9000,
+   "notes": "Old homestead lots often have missing monuments. Estimate."
+  },
+  {
+   "item": "Topographic survey of building area",
+   "low_usd": 1500,
+   "high_usd": 5000,
+   "notes": "Required for perc if slope is 20% or more, and for grading design. Estimate."
+  },
+  {
+   "item": "Perc test and report",
+   "low_usd": 2500,
+   "high_usd": 6000,
+   "notes": "Requires a Qualified Professional and 2-working-day notice to EHS; a drill rig adds cost. Estimate."
+  },
+  {
+   "item": "Septic system install (conventional / ATU)",
+   "low_usd": 12000,
+   "high_usd": 45000,
+   "notes": "An ATU (at least 50% nitrogen removal) is required on exempt Yucca Valley prohibition parcels. Estimate."
+  },
+  {
+   "item": "Joshua tree census + biological constraints survey",
+   "low_usd": 1000,
+   "high_usd": 7500,
+   "notes": "Census in CDFW Survey123 format; tortoise and owl screening. Estimate."
+  },
+  {
+   "item": "Joshua tree take fees (per stem, 2026 standard area)",
+   "low_usd": 354.75,
+   "high_usd": 2609,
+   "notes": "Primary source (CDFW). Example: 5 stems at 1\u20135 m = $2,608.75. Fees may change after CDFW's review due by Dec 31, 2026."
+  },
+  {
+   "item": "Water meter connection (example: BDVWA 1-inch, 2025)",
+   "low_usd": 2685,
+   "high_usd": 6170,
+   "notes": "$2,685 (2024 flat install) to about $4,800 capital + about $1,370 install (late-2025 report, secondary). A main extension, if no main at frontage, can add $10k\u2013100k+ (estimate)."
+  },
+  {
+   "item": "Private well with pump, pressure and storage tank",
+   "low_usd": 40000,
+   "high_usd": 120000,
+   "notes": "Only if no purveyor. Depth and water quality vary widely. Estimate."
+  },
+  {
+   "item": "Fire water storage tank + pump (if required)",
+   "low_usd": 5000,
+   "high_usd": 20000,
+   "notes": "Depends on the fire department's requirement and sprinkler demand. Estimate."
+  },
+  {
+   "item": "SCE line extension",
+   "low_usd": 3000,
+   "high_usd": 75000,
+   "notes": "Distance to the nearest usable pole drives this; get an SCE preliminary estimate. Estimate."
+  },
+  {
+   "item": "Off-grid solar + battery alternative",
+   "low_usd": 25000,
+   "high_usd": 60000,
+   "notes": "No federal 25D credit after Dec 31, 2025 (IRS). Estimate."
+  },
+  {
+   "item": "Civil engineer grading and drainage plan",
+   "low_usd": 3000,
+   "high_usd": 15000,
+   "notes": "Estimate."
+  },
+  {
+   "item": "Rough grading: pads + driveway",
+   "low_usd": 8000,
+   "high_usd": 40000,
+   "notes": "Caliche or rock and driveway length are the big variables. Keep disturbance under 1 acre. Estimate."
+  },
+  {
+   "item": "Geotechnical/soils report",
+   "low_usd": 2500,
+   "high_usd": 7500,
+   "notes": "Add $5k\u201320k for a fault investigation if in an Alquist-Priolo zone. Estimate."
+  },
+  {
+   "item": "Architect/designer for a small modern house",
+   "low_usd": 10000,
+   "high_usd": 60000,
+   "notes": "Estimate."
+  },
+  {
+   "item": "Structural engineer",
+   "low_usd": 2000,
+   "high_usd": 8000,
+   "notes": "Estimate."
+  },
+  {
+   "item": "Title 24 energy compliance",
+   "low_usd": 300,
+   "high_usd": 1500,
+   "notes": "Estimate."
+  },
+  {
+   "item": "Permit expediter (optional)",
+   "low_usd": 1500,
+   "high_usd": 10000,
+   "notes": "Estimate."
+  },
+  {
+   "item": "Permit, plan check, school and impact fees (small house)",
+   "low_usd": 5000,
+   "high_usd": 20000,
+   "notes": "Not verified. Ask the counter for a fee estimate on a 500\u2013800 sq ft home."
+  },
+  {
+   "item": "Temporary-occupancy performance security (removal bond or deposit)",
+   "low_usd": 500,
+   "high_usd": 5000,
+   "notes": "Required by County \u00a785.15.120(b); amount not verified."
+  },
+  {
+   "item": "Owner-builder mentor / construction manager",
+   "low_usd": 3000,
+   "high_usd": 20000,
+   "notes": "$75\u2013200/hr. Estimate."
+  },
+  {
+   "item": "Insurance (FAIR Plan + DIC), annual",
+   "low_usd": 1500,
+   "high_usd": 5000,
+   "notes": "Estimate; get a real quote during contingencies."
+  },
+  {
+   "item": "Attorney/CPA consults",
+   "low_usd": 800,
+   "high_usd": 4500,
+   "notes": "Estimate."
+  },
+  {
+   "item": "Security cameras + caretaker/weed abatement while abroad (first year)",
+   "low_usd": 800,
+   "high_usd": 5000,
+   "notes": "Estimate."
+  }
+ ],
+ "next_actions": [
+  "Open assessormapviewer.arc.sbcounty.gov, find the parcel's map page, and write down the APN, the 'City' label and the Tax Rate Area to settle Town vs. County.",
+  "Look up the APN on the County Digital Zoning Map (experience.arcgis.com/experience/25d639b8e38e4fc7a4d031d2e5a54745) and write down the zoning and suffix (e.g., RL-5). If it's inside the Town, call Yucca Valley Community Development and ask for the zoning.",
+  "Open Countywide Plan maps HZ-1 (faults), HZ-4 (flood), HZ-5 (fire zone), HZ-6 (SRA/LRA) and LU-3 (military overlay) from countywideplan.sbcounty.gov/resources/maps-tables-figures/ and save a screenshot of the parcel on each into one folder.",
+  "Enter the parcel address or nearest cross street at msc.fema.gov/portal/search and note the flood zone letter.",
+  "Email the water district that serves the area asking: is there a main along APN ___'s frontage, what are 2026 one-inch meter fees, and how do we get a will-serve letter? If it's HDWD, also ask the sewer phase, deferred status and projected availability date.",
+  "Email CDFW Region 6 (r6cesa@wildlife.ca.gov; (909) 484-0167). Ask whether a single-family project that avoids all Joshua trees by a stated buffer needs an incidental take permit, and which fee area APN ___ is in.",
+  "Call County Land Use Services at (909) 387-8311 and ask: is APN ___ a legal lot, can we get a Temporary Occupancy \u2013 Residential permit during construction, can an ADU come before the main house, and how long do permits stay active without inspection?",
+  "Email EHS.CustomerService@dph.sbcounty.gov asking whether a perc design rate is on file for APN ___ and what the archive search costs.",
+  "Ask the listing agent by email for any existing survey, perc report, well log, Joshua tree census, prior permits and the current tax bill.",
+  "Request a free property profile and preliminary title report from a local title rep, and ask for copies of every listed exception document.",
+  "Ask one independent insurance agent for a ballpark quote for a future 600 sq ft house at this address, including how a 4\u20136 month absence affects coverage.",
+  "Write your one-page 'walk-away list', for example: no water main and no well under $X, fails perc, no recorded access, Joshua trees blocking the only flat area.",
+  "Book three site visits on your calendar: a weekday morning, a Saturday afternoon and one evening after dark. Add a windy spring afternoon if the deal timing allows.",
+  "On the first visit, GPS-tag every Joshua tree with stem count and height class, and flag the candidate house pad and septic area.",
+  "Knock on two or three neighbors' doors and ask about water source, flooding, theft, road maintenance and noise. Write the answers in your notebook.",
+  "Check every proposed contractor's license on the CSLB website, and every engineer's or surveyor's on the BPELSG license lookup, before hiring.",
+  "Call three surveyors and three perc engineers and ask each for price, earliest start date and turnaround time. Use these to set the contingency period.",
+  "Draft your contingency list with your agent: title and access, survey, perc or sewer, water, Joshua tree and biological census, zoning and legal lot, SCE estimate, insurability, general feasibility; 45\u201360 days with a paid 30-day extension option.",
+  "Ask the building official in writing how to keep a building permit and temporary-occupancy permit active during a planned trip abroad, and note the answer before booking Bhutan dates."
+ ],
+ "risks": [
+  {
+   "risk": "The lot fails perc, or sits in the Yucca Valley septic-ban area, so you pay for septic and then a forced sewer connection, or need a costly advanced treatment unit.",
+   "severity": "high",
+   "mitigation": "Make the offer contingent on a passing perc test and written sewer phase and availability information from HDWD. Price both septic and sewer paths before removing the contingency."
+  },
+  {
+   "risk": "No legal water source: no main at the frontage, and a well that's deep, low-yield or poor quality. Hauled water can't be used to permit the house.",
+   "severity": "high",
+   "mitigation": "Require a will-serve letter or a well-feasibility opinion during the contingency period. Walk away if water would cost more than your ceiling."
+  },
+  {
+   "risk": "Living in an unpermitted capsule leads to a code case, fines or an abatement order, no SCE meter, no insurance, and friction on the house permit.",
+   "severity": "high",
+   "mitigation": "Submit the house permit first, then get the County Temporary Occupancy \u2013 Residential permit and use a certified (RV or park model) unit. Until then, camp short-term. Confirm Town rules if the lot is inside the Town."
+  },
+  {
+   "risk": "The lot isn't legal (deed split) or has no recorded legal access, which can block financing, title insurance and permits.",
+   "severity": "high",
+   "mitigation": "Ask the title officer for an access endorsement and the County for legal-lot confirmation or a Certificate of Compliance, before closing."
+  },
+  {
+   "risk": "Building permit (and the temporary-occupancy permit tied to it) lapses during the Bhutan trip because 180 days pass without a passed inspection.",
+   "severity": "medium",
+   "mitigation": "Pass an inspection right before leaving, request a written extension, keep the trip under about 5 months, or have a contractor do inspected work while you're away."
+  },
+  {
+   "risk": "Joshua trees in the only buildable area mean months of CDFW permitting and $5k\u201330k in fees; fees may change after the Dec 31, 2026 review.",
+   "severity": "medium",
+   "mitigation": "Census the trees before the offer, design pads and the driveway to avoid them with buffers, and include a Joshua tree contingency."
+  },
+  {
+   "risk": "Desert tortoise or burrowing owl found during construction means stop-work and costly surveys or permits.",
+   "severity": "medium",
+   "mitigation": "Biologist screening during escrow and a pre-construction sweep. Don't clear or grade without permits."
+  },
+  {
+   "risk": "Power line extension costs tens of thousands of dollars.",
+   "severity": "medium",
+   "mitigation": "Measure the distance to the nearest pole before the offer, get an SCE preliminary estimate in escrow, and price off-grid as a fallback."
+  },
+  {
+   "risk": "Fire access, sprinklers and water storage add unplanned cost on a sloped, remote lot.",
+   "severity": "medium",
+   "mitigation": "Ask the fire plan reviewer early, keep the driveway short and gentle, and size water for sprinklers."
+  },
+  {
+   "risk": "Flash flooding through an unrecognized wash, or a fault zone under the pad.",
+   "severity": "medium",
+   "mitigation": "Check FEMA and County HZ-1/HZ-4 maps, have the civil engineer walk the site, and keep building sites out of flow paths and fault zones."
+  },
+  {
+   "risk": "High or unavailable insurance, especially for a vacant property during a long trip.",
+   "severity": "medium",
+   "mitigation": "Get quotes during the contingency period; arrange a caretaker and check vacancy clauses."
+  },
+  {
+   "risk": "Theft, squatting or dumping while you're away and belongings are stored on site.",
+   "severity": "medium",
+   "mitigation": "Locked, permitted storage (covered under the construction-phase permit), cameras, neighbor watch and a caretaker; keep valuables off site."
+  },
+  {
+   "risk": "Grading over 1 acre triggers a state stormwater permit; caliche or rock blows up the grading budget.",
+   "severity": "low",
+   "mitigation": "Use small stepped pads, track total disturbed area, and get a geotech report and a fixed or capped grading bid."
+  },
+  {
+   "risk": "The lot is just under 5.00 acres net, so you lose the third-ADU allowance for future capsules.",
+   "severity": "low",
+   "mitigation": "Confirm gross and net acreage on the survey and ask Planning which figure counts."
+  }
+ ],
+ "brainstorm_prompts": [
+  "What's our all-in ceiling for land, water, power, septic, permits and the small house, and how much cash do we keep in reserve for surprises?",
+  "If this lot turns out to need $40k\u201380k just for water and power, do we still want it, or do we pay more for a lot with utilities at the street?",
+  "Are we willing to camp short-term and only move into a certified unit once the house permit and temporary-occupancy permit exist, instead of risking an unpermitted capsule?",
+  "What does 'making progress' mean to us in concrete milestones (permit submitted by month X, foundation by month Y)?",
+  "How long do we really want to be in Bhutan, and can we schedule it around inspections so permits don't lapse?",
+  "Who could check on the property, handle weed abatement and respond to problems while we're away?",
+  "How do we feel about Joshua trees on the lot: design entirely around them, or accept paying to relocate or remove a few?",
+  "What noise and neighbor situation could we not live with (military booms, OHV, shooting, dogs, generators)?",
+  "Do we want to owner-build, hire an hourly mentor, or hire a GC? How many hours per week can each of us actually give?",
+  "Which matters more: remoteness and views, or a short, easy, County-maintained access road?",
+  "What are our three walk-away conditions during the due-diligence period?",
+  "How do we split roles: who leads research, who leads money and contracts, who leads people and phone calls?",
+  "What's our 5- to 10-year vision for the land (orchard, guests, renting a capsule?), and does it change which lot or zoning we need?",
+  "If a great lot appears, how fast can we decide together, and what must be true before we make an offer?",
+  "What does the smallest house we'd be happy in for 10 years look like: one room plus a bathroom? A sleeping loft?"
+ ],
+ "open_questions": [
+  "Is the specific APN inside the Town of Yucca Valley or unincorporated, and what's its exact zoning and suffix?",
+  "If it's inside the Town: which Hi-Desert Water District sewer phase is it in, is it deferred, and what's the projected sewer availability date?",
+  "Did the Town of Yucca Valley adopt its own 2025 fire hazard zone map, and what zone applies? (Not verified; the Town and OSFM sites blocked automated access.)",
+  "Does the Town of Yucca Valley allow temporary residential occupancy during construction like the County's \u00a785.15.080(f)? On what terms?",
+  "Does the Town have a native plant / Joshua tree ordinance in addition to state law? (Its code site was not reachable.)",
+  "Will the County (or Town) permit an ADU before the main house, and can a certified 'capsule' (RV, park model or HCD factory-built) qualify?",
+  "What is the burrowing owl's current CESA status for the Morongo Basin population after the October 2025 status review?",
+  "Did AB 1663 (Joshua tree exemption for pre-July-2023 owners) pass? (It wouldn't apply to new buyers either way.)",
+  "Will CDFW's fee review due by Dec 31, 2026 change Joshua tree fees for 2027?",
+  "SCE's current Rule 15/16 allowances and per-foot costs for this area (not verified).",
+  "Exact grading permit threshold and hillside standards in the relevant jurisdiction (not verified).",
+  "Does the Warren Valley groundwater adjudication restrict new private domestic wells inside Hi-Desert Water District territory?",
+  "Exact 2026 fees for Hi-Desert Water District and Joshua Basin Water District meters, will-serve letters, and County or Town permits and impact fees.",
+  "The shared web-search limit ran out partway through. Professional fee ranges and some code thresholds marked as general knowledge need a follow-up search or local quotes."
+ ]
+}

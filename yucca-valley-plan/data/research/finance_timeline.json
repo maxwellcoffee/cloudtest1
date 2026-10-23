@@ -1,0 +1,711 @@
+{
+ "topic": "finance_timeline",
+ "executive_summary": "The land is the cheap part. The biggest costs on a small desert build are water, septic, power, grading and the driveway, and together they often cost as much as the house. Asking prices for 5-acre lots in 2026 run from about $25k to $60k for remote dirt-road parcels (Landers, Flamingo Heights) and from $60k to $180k near Yucca Valley with power and water close by. Pioneertown and Pipes Canyon parcels run $225k to $475k. My all-in estimate, including land and a 15-25% contingency, is roughly $215k-$480k for a lean DIY build, $430k-$875k for a balanced build, and $765k-$1.6M for one that is mostly hired out. The point where your plan most clearly breaks the law is living on the land right away. Both the County and the Town only allow living on site in a registered RV or travel trailer, and only after the building permit for the house has been issued. The permit lasts 12 months at a time: the County's own information sheet says up to 5 years in total, its code text says 12 months plus one 12-month extension, and the Town allows up to 4 years. A typical $20k imported \"capsule\" is not an RV and not state-approved factory-built housing, so you cannot legally live in it even with that permit. The lowest-risk version of your plan is: buy the land, design the house, get the permit, then move on site in a DMV-registered trailer while you build, finishing within about 24 months. Keep the capsule for later as a legally permitted accessory structure or accessory unit. Few construction lenders fund owner-builders, so expect to pay cash in phases (land, then infrastructure, then the house) and refinance after the certificate of occupancy. Insurance is thin. The FAIR Plan's 2026 dwelling form covers named perils only, with no theft and no liability, and drops vandalism coverage after 30 days of vacancy. Its rates go up an average of 29.1% for policies renewing on or after Oct 15, 2026. That means belongings left in a container during a long Bhutan trip will be effectively uninsured unless you add a separate policy. The best window for Bhutan is while your plans sit in plan check, before construction starts, and before Aug 31, 2027, when Bhutan's $100/day tourist fee discount ends. Avoid going mid-construction, because the building permit and your temporary living permit lapse if no inspection is called within about 180 days. Fall and late winter are the best seasons to build and plant. Summer heat and spring winds are hard on lightweight units and on whatever is stored in a container. Note: the shared web-search budget ran out partway through. SCE power-line costs, the County's per-square-foot building permit fees, Morongo Unified's school fee rate and current land-loan terms could not be confirmed and are marked as estimates.",
+ "findings": [
+  {
+   "title": "2026 asking prices for ~5-acre lots vary 20x by location, access and utilities",
+   "detail": "Asking prices seen Jun-Oct 2026. Landers: about $24.9k-$49k for 5 ac ($5k-$10k/ac). Examples: 0 Handley Rd $24.9k (water/utilities on the street); Alta Ave $49k (power on the east side, water meter stub-out). A 'build-ready' Reche Rd/Lorraine parcel is $135k ($27k/ac). Yucca Valley / Yucca Mesa / West Flamingo Heights: $25k (Redfin), $36.5k (Lowe Ave), $59k (RL-5, inside Hi-Desert Water District), $80k (3750 Indio Ave, mostly flat), $159k (Aberdeen Dr, 5.14 ac, power available, after a price cut), $179k (Terra Vista mountaintop with a paved road and a water main nearby). Joshua Tree: 0 Arco 5 ac $54.9k. Pipes Canyon/Pioneertown: 52550 Geronimo Trail $225k (after a $100k cut); 1 Dragonfly Ln $475k. A developed 5 ac with a 726 sf 1973 house (56564 Nelson Ave) is asking $777k, which shows how much an existing legal dwelling and utilities add. What drives price: legal recorded access and road type (paved and county-maintained vs. dirt); distance to an SCE pole and a water main; slope and views; zoning (RL-5); how many Joshua trees and washes sit where you would build; inside the Town vs. unincorporated; and whether the gross acreage reaches 5.0. These are asking prices, not sales, and many listings showed price cuts and 90+ days on market.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.landbrokermls.com/property/498921525/vacant-land-in-landers",
+    "https://www.landsearch.com/properties/1631-alta-ave-landers-ca-92285/5476286",
+    "https://www.landsearch.com/properties/landers-ca-92285/5531603",
+    "https://www.redfin.com/CA/Yucca-Valley/NA-92284/home/171409623",
+    "https://www.landbrokermls.com/property/23998177/5-acres-of-land-for-sale-in-yucca-valley-ca",
+    "https://firstteam.com/properties/3750-indio-yucca-valley-ca-us-92352-dw26001104",
+    "https://www.landsearch.com/properties/49-aberdeen-dr-yucca-valley-ca-92284/5299363",
+    "https://www.coldwellbankerhomes.com/ca/joshua-tree/0-arco/pid_73115930/",
+    "https://www.coldwellbanker.com/ca/pioneertown/1-dragonfly-ln/lid-P00800000GzmmRJtlsLQmCCTybouFnZzBjm41frs",
+    "https://www.landsearch.com/properties/56564-nelson-ave-yucca-valley-ca-92284/5176572"
+   ],
+   "implication": "A $40k lot that needs a $60k well and $40k of power can end up costing more than a $120k lot with a water meter stub and a pole on the corner. Compare lots on land price plus infrastructure, not sticker price. Ask the agent for sold comps within 2 miles over the last 12 months, and offer below asking: the market is soft and price cuts are common."
+  },
+  {
+   "title": "Property tax: 1% of purchase price plus bonds and per-parcel charges; the house gets reassessed when finished",
+   "detail": "Under Prop 13, the base tax is 1% of assessed value, which resets to your purchase price. Voter-approved debt (school and college bonds) is added on top, along with flat per-parcel direct charges (fire, special districts, water standby, etc.) that depend on the parcel's Tax Rate Area. Yucca Valley TRAs include 23000, 23003, 23010 and 23019. Third-party effective-rate estimates disagree: Ownwell gives 1.45% with a median bill of $3,141, while propertytaxbyzip gives 0.84% for 92284. Vacant land often pays a higher effective rate because the flat charges are large relative to a low land value. New construction is added to the assessed value as it is built and on completion, and supplemental tax bills follow both the purchase and the completion.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.ownwell.com/trends/california/san-bernardino-county/yucca-valley",
+    "https://propertytaxbyzip.com/california/92284",
+    "https://assessormapviewer.arc.sbcounty.gov/ParcelMaps/PageMaps/0588/36"
+   ],
+   "implication": "Budget roughly 1.1-1.5% of the price plus a few hundred dollars a year in flat charges. On a $60k lot that is about $700-$1,200/yr. After a $200k house is finished, add roughly $2,200-$3,000/yr. Pull the actual bill for your APN (the San Bernardino County Tax Collector is at sbcountyatc.gov) before you make an offer."
+  },
+  {
+   "title": "Financing the land: bank land loans are rare and expensive; seller financing is common but needs to be structured properly",
+   "detail": "Few lenders make loans on unimproved desert land with no utilities. Those that do usually want a large down payment, charge higher rates than a mortgage, and set short terms or balloon payments. Many Morongo Basin listings advertise seller financing (for example, a Morongo Valley lot where the owner may offer terms). Current land-loan terms could not be confirmed because the search budget ran out, so these points are from general market knowledge. If you use seller financing, the safe structure is a grant deed to you, a promissory note, and a recorded deed of trust, closed through escrow with an owner's title policy. Avoid installment 'land contracts' where the seller keeps title (California real property sales contracts, Civil Code 2985 et seq.). Desert land is also widely sold online by flippers at several times its recent sale price with financing at about 9-12%.",
+   "confidence": "low",
+   "sources": [
+    "https://www.landbrokermls.com/property/397544975/lots-land-other-in-morongo-valley",
+    "https://biggerpockets.com/forums/517/topics/1080930-owner-builder-loans-for-sfh-and-adus"
+   ],
+   "implication": "Paying cash for the land, or seller-financing it with a recorded deed of trust, is the realistic route. Before agreeing to any seller financing, compare the asking price with what the seller paid (from the deed history or assessor records). Save loans for after the house has its certificate of occupancy."
+  },
+  {
+   "title": "Financing construction: owner-builder construction loans are scarce, so pay cash in phases and refinance after the certificate of occupancy",
+   "detail": "Construction lenders generally want a licensed general contractor, a fixed bid and a schedule, and they release money in draws. Owner-builder loans are uncommon; a BiggerPockets thread asks whether they still exist in California. California owner-builder permit forms ask you to declare whether a construction lender is involved (one county's form cites Civil Code 3097, now 8172). General lender guides cite credit scores of 620+ and at least 20% down on construction. Unpermitted units add no appraised value and can block loans or force their removal as a condition. Very small houses on 5 acres can be hard to appraise for lack of comparable sales.",
+   "confidence": "medium",
+   "sources": [
+    "https://biggerpockets.com/forums/517/topics/1080930-owner-builder-loans-for-sfh-and-adus",
+    "https://countyofmonterey.gov/home/showpublisheddocument/107416/638490465017130000",
+    "https://www.unitedcapitalsource.com/blog/self-build-construction-loan/",
+    "https://www.cslb.ca.gov/Resources/GuidesAndPublications/OwnerBuilders.pdf"
+   ],
+   "implication": "Fund the project in phases with cash or a HELOC on another property if you own one: (1) land plus studies, (2) permits, septic, water and power, (3) the house shell, (4) finishes. Once the certificate of occupancy is issued, a cash-out refinance can return part of your cash. Keep receipts and lien releases from day one."
+  },
+  {
+   "title": "Legal path for living on site: a registered RV or trailer, only after the house building permit is issued, on 12-month permits",
+   "detail": "COUNTY (Temporary Structure Permit Information Sheet, rev. 6/2025): you may live in 'a recreational vehicle or travel trailer... by an individual constructing a residence', and the building permit for the house must be issued first. Nothing may be placed on site before both permits are issued, or penalty fees and enforcement can follow. The permit runs at most 12 months and can be renewed for 12 months at a time, up to 5 years from first issuance. It expires if no inspection is called within 180 days. You need a site plan, current DMV registration, a sewage pumping contract if the unit is self-contained, and will-serve letters. County code 84.25.040(e)(1) (third-party rendering) reads more strictly: 12 months after the building permit plus one 12-month extension, with removal within 30 days of completion. Fees for FY2026-27 (effective July 1, 2026): temporary structure permit initial application $301, annual renewal $257, temporary RV site $261. TOWN (Development Code 9.39.050(A), 2026-10 rendering): a manufactured home or self-contained RV may be used for construction of the first permanent dwelling once building permits have been issued, for one year with one-year extensions up to 4 years in total. The permit becomes invalid if the building permit is cancelled or the project is completed. Section 9.39.080 makes dwelling in a vehicle or temporary structure without a permit unlawful, and the Director can order you to vacate 30 days after notice. Town Temporary Use Permit fee: $469 in the newer outline, $295 in the older one (Planning: 760-369-6575).",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures",
+    "https://www.yucca-valley.org/home/showpublisheddocument/8760/638798857504300000"
+   ],
+   "implication": "'Living there while we make progress' is legal in a specific form: an issued building permit, a registered RV or trailer, and visible progress. Under the stricter readings that means finishing within 2 years in the County and 4 in the Town. Until the permit is issued, plan to rent nearby or use an RV park. Ask the County in writing which limit it enforces (12+12 months or 5 years)."
+  },
+  {
+   "title": "The ~$20k imported capsule pod probably cannot be lived in legally, and its real cost is higher than the sticker",
+   "detail": "California permits housing only if it is site-built to code, a state-approved factory-built unit (HCD insignia), a HUD-code or HCD-approved manufactured home, or a DMV-registered RV or trailer under a temporary permit. County code 84.25.050(b) requires temporary structures to show HCD approval where applicable. Most imported capsule pods have none of these. The $20k is often a price at the factory, before ocean freight, US tariffs and customs brokerage, trucking, crane placement and electrical work that may not be UL-listed. Tariffs on Chinese goods changed several times in 2025-2026, so get a current delivered, duty-paid (DDP) quote. This is based on general regulatory knowledge; tariff levels in October 2026 were not checked in this session.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf"
+   ],
+   "implication": "Either (a) buy a capsule-style unit built on a VIN'd trailer that DMV can register as an RV or travel trailer (ask for RVIA/ANSI certification), or (b) use a used travel trailer ($8k-$25k) as your legal interim home. Later you can add capsule units as permitted accessory structures or accessory units with engineering. Budget $25k-$40k delivered for a $20k pod."
+  },
+  {
+   "title": "FAIR Plan in 2026: fire-only basics, no theft, no liability, vandalism dropped after 30 days vacant, 29.1% average increase from Oct 15, 2026",
+   "detail": "The FAIR Plan Dwelling policy (form CFP 00 01 05/2026, sample effective 3/17/26) covers named perils only: fire, lightning, internal explosion, smoke, plus optional windstorm/hail, riot, aircraft, vehicles and volcanic eruption. Vandalism/malicious mischief is optional, and that peril excludes theft and burglary. It also excludes loss 'if the dwelling has been vacant or unoccupied for more than 30 consecutive days.' A dwelling under construction counts as 'vacant' if it lacks minimal furnishings, and 'unoccupied' means 'no person residing lawfully in it.' Other structures get up to 10% of Coverage A, but not if they are rented to non-tenants or used for business. Theft, liability, water damage and loss of use need a separate Difference-in-Conditions (DIC) policy. Rates: the CDI approved a 29.1% average increase (35.8% was requested) for policies renewing on or after Oct 15, 2026, with high-fire areas seeing the steepest rises. Policies grew 44% in 2025 to about 668,600 by year-end; 675k-700k were reported in Aug 2026. Secondary-source illustration for a $500k dwelling in a moderate fire zone: FAIR $2.8k-$4.2k plus DIC $1.2k-$2.0k per year. Hardening discounts of up to 16.4% off the wildfire portion apply to policies effective 11/15/2025 or later. Market background: under the Sustainable Insurance Strategy (2025), insurers using CDI-reviewed wildfire models committed to write at least 85% of their statewide market share in distressed areas, but no penalty applies if they don't.",
+   "confidence": "high",
+   "sources": [
+    "https://www.cfpnet.com/wp-content/uploads/2026/01/Dwelling-Fire-Policy_effective-3-17-26.pdf",
+    "https://www.cfpnet.com/policies/dwelling/",
+    "https://www.kqed.org/news/12094860/california-fair-plan-announces-29-1-rate-hike-for-homeowners-this-fall",
+    "https://www.coveragecat.com/blog/california-fair-plan-rate-hikes-2026",
+    "https://www.cfpnet.com/wp-content/uploads/2025/11/Wildfire-Hardening-Discounts-for-Dwelling-Fire-Commercial-Policies-2025.11.15.pdf",
+    "https://www.insurance.ca.gov/0400-news/0100-press-releases/2025/release055-2025.cfm",
+    "https://sites.sandiego.edu/cpil-blog/2025/10/30/department-of-insurance-allows-insurers-to-base-rates-on-wildfire-models-as-a-part-of-the-california-sustainable-insurance-strategy-sis/"
+   ],
+   "implication": "Expect FAIR Plan plus DIC, or a surplus-lines policy. Design the small house to earn every hardening discount from the start. While you are in Bhutan, the FAIR Plan pays nothing for theft and nothing for vandalism after day 30."
+  },
+  {
+   "title": "Insurance for land, construction and unpermitted structures",
+   "detail": "Vacant-land liability: secondary sources quote about $12-$100/month and $1M/$2M limits, with terms of 3-12 months available through surplus lines. Builder's risk / dwelling under construction: the FAIR Plan lists 'buildings under construction from the ground up' as eligible (Amwins). Otherwise coverage comes from a builder's-risk policy or a dwelling-under-construction endorsement, which usually ends at occupancy. Some carriers decline owner-builders. Owner-builders: CSLB warns that you take on taxes, workers' compensation and liability. If you pay unlicensed helpers, you are their employer and must carry workers' compensation. Unpermitted structures: insurers commonly exclude or decline them, and misdescribing an unpermitted dwelling on an application can void coverage. Under the FAIR form, a person living there unlawfully means the dwelling counts as 'unoccupied.' A DMV-registered trailer can usually be insured on an RV 'full-timer' policy (general market knowledge, not confirmed here).",
+   "confidence": "medium",
+   "sources": [
+    "https://completemarkets.com/company/firstchoiceii/Vacant-Land-Insurance/",
+    "https://www.businessinsurance.com/pathpoint-adds-liability-coverage-for-unoccupied-buildings-and-land/",
+    "https://www.amwins.com/resources-and-insights/market-insights/article/changes-to-california-s-fair-plan-complicate-an-already-troubled-market",
+    "https://www.cslb.ca.gov/Resources/GuidesAndPublications/OwnerBuilders.pdf",
+    "https://www.cfpnet.com/wp-content/uploads/2026/01/Dwelling-Fire-Policy_effective-3-17-26.pdf"
+   ],
+   "implication": "Buy $1M vacant-land liability at closing (a few hundred dollars a year). Switch to builder's risk or FAIR under-construction coverage plus liability when the permit is issued. Insure the interim trailer as an RV. Hire only licensed subcontractors and collect their insurance certificates. Disclose every structure honestly to your broker."
+  },
+  {
+   "title": "County fees confirmed from official schedules (FY2025-26 and FY2026-27)",
+   "detail": "Effective July 1, 2026 (Ordinance amending 16.0204): residential grading permit under 100 CY costs nothing. For 100-1,000 CY it is $693 for the first 100 CY plus $9.12 per extra 100 CY, capped at $775. For 1,000-10,000 CY it is $775 plus $9.12 per extra 1,000 CY, capped at $857. Erosion and sediment control permit $369. Residential grading plan review (FY25-26): $0 under 100 CY; $599 plus $10.80 per 100 CY, capped at $696, for 100-1,000 CY; preliminary grading review $608; drainage study deposit $810; SFR drainage review $183 and road review $183. Cargo container for storage only: 1-3 units $156 permit plus $195 plan review. Temporary power pole $156. Ground-mount PV up to 15 kW: $225 review plus $225 permit. Roof PV up to 15 kW: $215 plus $226. Mobile home site prep $491. Manufactured home temporary structure $603. Temporary RV site $261. Temporary structure initial $301, renewal $257. Demolition $234. Intake fee $57. The square-footage fees for a new house sit in a separate 'Construction Fee Schedule' that could not be retrieved (the link returned an error page).",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/LD-Master-Fee-Schedule-25-26.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BNS-Master-Fee-Schedule-25-26.pdf"
+   ],
+   "implication": "Grading permits and side permits are cheap; the grading work itself is the expense. Keep each pad's cut and fill under 100 CY where you can, which also tends to avoid needing an engineered grading plan. Use the County's EZOP online fee estimator for the house permit itself. My placeholder is $3k-$8k, unverified."
+  },
+  {
+   "title": "School developer fees: 2026 state cap of $5.38/sf; small projects may be exempt",
+   "detail": "In January 2026 the State Allocation Board raised the maximum Level I residential fee to $5.38/sf (from $5.17 in 2024). Each district sets its own rate up to that cap. Morongo Unified's adopted rate was not found. Moorpark USD, as an example, states that 'any new additions or construction less than 500 square feet is not subject to a fee' but still requires a Certificate of Compliance. Under California ADU law, ADUs under 750 sf are exempt from local impact fees; school fees are handled separately.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.dgs.ca.gov/-/media/Divisions/OPSC/Resources/CCI-Adjustments/01282026_Index-Adjustment-on-Development_Approved_FINAL.pdf",
+    "https://www.mrpk.org/districtoffice/business-services/fiscal-services/developer-fees"
+   ],
+   "implication": "A 480-sf house would owe about $0-$2,600, and a 600-sf house up to about $3,200. Ask Morongo USD in writing whether a new primary dwelling under 500 sf is exempt. If it is, that supports your 'as small as possible' goal."
+  },
+  {
+   "title": "Western Joshua tree fees per stem (current CDFW table); no local permitting yet; no deadline for CDFW to act",
+   "detail": "The CDFW WJTCA Incidental Take Permit page lists in-lieu fees per stem or trunk, dead or alive, based on the schedule in effect when you pay. Standard fee area: 5 m or taller $2,609; 1-5 m $521.75; under 1 m $354.75. Reduced fee area: $1,043.50, $208.75 and $156.50. Fees are adjusted every year (a Jan 1, 2026 adjustment was announced), and CDFW must adopt fee regulations by Dec 31, 2026. There is no application fee. The process is: tree census, application, CDFW review with no statutory timeline, invoice, payment, then the permit. The FAQ says no county or city has a delegation agreement yet, so permits come from CDFW Region 6, (909) 484-0167, WJT@wildlife.ca.gov. Hazard permits are free. CDFW prefers relocating trees on site to a spot at least 15 m from any other Joshua tree. Roots extend about 14 m from a 4.3 m tree and 8.4 m from a 1 m tree. The CDFW page states the Act was amended in September 2026 (AB 1663, SB 1062, AB 1808); the content of those changes was not reviewed.",
+   "confidence": "high",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/WJTCA",
+    "https://experience.arcgis.com/experience/40690ac231124bccb07cbce42fc95ebd/",
+    "https://content.govdelivery.com/accounts/CNRA/bulletins/3fdfa9c"
+   ],
+   "implication": "Joshua trees affect both money and timing. Pick building pads, the driveway and the septic field so no tree sits within its root zone, and you avoid an ITP and a wait of unknown length. If you can't avoid them, three tall trees cost about $3.1k-$7.8k plus the permit wait. Count stems before you make an offer."
+  },
+  {
+   "title": "Water: connection fees run from about $6k to $19k+ by district; wells and hauled water are the alternatives",
+   "detail": "Hi-Desert Water District (Town area): a 1-inch service, which is the fire-code size, costs $5,418. New service installation is actual cost with a $600 minimum, and main extensions are actual cost. Will-serve letter $40, fire flow $200, plan check $20/lot with a $700 deposit, inspection 2% of costs, annexation $787/acre (phone 760-365-8333). Bighorn-Desert View Water Agency (Landers / Flamingo Heights / Johnson Valley): basic facility charge $16,201 plus a 1-inch installation of $3,040 (effective 12/15/2025), account setup $40, bulk (hauled) water $12.19 per 748 gal (about 1.6 cents/gal), base charge $38.88/mo (phone 760-364-2315). Joshua Basin Water District: base charge $50.20/mo for a 3/4-1 inch meter (2026); capacity fees exist but the amounts were not listed (phone 760-366-8438). Wells: online guides give $25-$65/ft in California, but these come from low-quality aggregators. Morongo Basin wells can be several hundred feet deep, so my unverified estimate is $40k-$100k+ including pump, tank and power.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.hdwd.com/411/New-Construction-Fees",
+    "https://www.hdwd.com/181/Start-Stop-Service",
+    "https://bdvwa.org/customer-service/water-rates-and-fees/",
+    "https://www.jbwd.com/rates-fees",
+    "https://waterfilterguru.com/?p=39761"
+   ],
+   "implication": "A lot with a main in the street is worth paying roughly $20k-$60k more for than one that needs a well. Hauled water into a 2,500-5,000 gal tank is cheap to run, but confirm the County or Town will accept it as the water source for a permitted house before relying on it."
+  },
+  {
+   "title": "Septic, power and solar: high uncertainty, and no federal residential solar credit after 2025",
+   "detail": "Rough estimates, not confirmed this session: a conventional septic system with perc and soils work runs $12k-$30k, and an advanced treatment system $30k-$60k. HDWD has an ongoing Phase II sewer project in Yucca Valley neighborhoods through the end of 2026, and some Town areas have septic restrictions; check your parcel. An SCE line extension costs anywhere from about $5k (pole at the corner) to $60k+ (several poles and a transformer) and takes months; I could not verify SCE's Rule 15/16 allowances. Off-grid solar plus batteries for a small all-electric house: about $20k-$60k installed, or less DIY. The federal 25D 30% residential clean-energy credit ended for spending after Dec 31, 2025 under Public Law 119-21 (July 2025). That is from my own knowledge and was not re-checked here. County solar permits are about $450 (see the fees finding).",
+   "confidence": "low",
+   "sources": [
+    "https://www.hdwd.com/376/Sewer-Project",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf"
+   ],
+   "implication": "Get an SCE estimate and a septic designer's opinion during the escrow contingency period. Together these two can swing your budget by $50k or more. Don't count on a 30% solar credit."
+  },
+  {
+   "title": "Small modern house cost by size, plus radiant heat and a floor soft enough to lie on",
+   "detail": "Estimates only; small houses cost more per square foot because the kitchen, bath and mechanical systems are fixed costs. Lean DIY at about 400 sf and $175-$275/sf: $70k-$110k. Balanced (contractor-built shell, owner finishes) at about 500 sf and $300-$425/sf: $150k-$215k. Mostly hired at about 600 sf and $450-$650/sf: $270k-$390k. Radiant floor: electric mats or cable in or on the slab, $3k-$8k DIY; hydronic with an air-to-water heat pump, $15k-$35k. Soft floor over the whole surface: cork, low-pile wool carpet on a thin dense pad, or tatami-style mats, roughly $8-$30/sf or $3k-$15k for 450 sf. Thick foam or plush pads insulate the floor and work against radiant heat. Radiant makers generally want a low R-value for the floor covering; confirm the limit with your chosen system's manufacturer. Wildfire-resistant (Chapter 7A) materials may apply depending on the fire hazard zone.",
+   "confidence": "low",
+   "sources": [
+    "https://www.cfpnet.com/wp-content/uploads/2025/11/Wildfire-Hardening-Discounts-for-Dwelling-Fire-Commercial-Policies-2025.11.15.pdf"
+   ],
+   "implication": "Choose the soft flooring and the radiant system together. A slab with embedded radiant, plus cork or a thin wool or tatami layer, gives you the warm, lie-anywhere floor without killing the heat output. Every 100 sf you cut saves roughly $20k-$60k."
+  },
+  {
+   "title": "Three-tier all-in budget (2026 dollars, land included)",
+   "detail": "LEAN DIY (remote lot, hauled water or nearby meter, conventional septic, DIY off-grid solar, interim pod or trailer, 400 sf house): subtotal about $189k-$383k; with a 15-25% contingency, about $217k-$479k. Excluding land: about $182k-$391k. BALANCED (lot near utilities, water connection, contractor shell plus owner finishes, 500 sf): subtotal about $376k-$699k; with contingency, about $432k-$874k. MOSTLY HIRED (premium lot, architect, possibly a well, 600 sf): subtotal about $666k-$1.35M; with 15-20% contingency, about $766k-$1.62M. Line items are listed under costs. Verified items: County fees, water district fees, WJT fees, the temporary permit fee and the FAIR Plan form. The rest are labelled estimates. Annual carrying costs during the build: about $2k-$8k a year for property tax, liability and builder's-risk insurance, the temporary permit renewal ($257), utilities and security.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf",
+    "https://www.hdwd.com/411/New-Construction-Fees",
+    "https://bdvwa.org/customer-service/water-rates-and-fees/",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP"
+   ],
+   "implication": "Set one number that is the most you will spend in total, and a smaller checkpoint figure at which you stop and review. On a lean build, the infrastructure plus the interim unit is about as large as the house itself."
+  },
+  {
+   "title": "A 5-acre county parcel allows more accessory units, but only real legal dwellings can be rented short-term",
+   "detail": "County 84.01.050(a) (third-party rendering): parcels of 5 acres or more may have up to three accessory units (ADU, guest house, etc.), versus two on smaller parcels. A guest house must be at least 10 ft from the primary dwelling, must not be rented as a separate dwelling, and may be a short-term rental under 84.28. Accessory structures, including containers, normally need a legally established primary use; before that they require a Temporary Use Permit (84.01.020(b)). A container must sit behind the primary structure, not be prominently visible from the street, and be painted or altered to blend in (84.01.050(f)(2)). STRs (84.28): each dwelling unit needs its own permit; parcels of 2 acres or more can have up to two STR permits; tents, RVs and recreational cabins are not eligible. Occupancy is 4 people for a studio or 1-bedroom. Annual inspections, a contact who can respond within 1 hour, and transient occupancy tax all apply. Town 9.39.050(J): a detached accessory storage structure may go up before the primary use only with a removal bond if the primary use isn't finished within 2 years.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.01-accessory-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.28-short-term-residential-rentals",
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures"
+   ],
+   "implication": "Confirm that the parcel's recorded acreage is at least 5.00; 4.8 net would lose the third unit. Renting the capsule units only works once they are permitted ADUs or guest houses. Paid camping or glamping needs land-use approval. Treat rental income as a phase-2 bonus, not part of how you fund the build."
+  },
+  {
+   "title": "Timeline and where Bhutan fits: during plan check and before Aug 31, 2027",
+   "detail": "Bhutan's tourist fee (SDF) is US$100 per adult per day with a 50% discount for children 6-12, plus a one-time $40 visa fee. The discount runs from Sept 1, 2023 to Aug 31, 2027, after which the government 'may discontinue' it and revert to $200. For two people that is $6,000 for 30 days, rising to $12,000 at $200. Building-side constraints: the County temporary permit lapses if no inspection is called within 180 days, and both the County and Town temporary living permits end if the building permit is cancelled. Desert seasons (general knowledge): summer highs reach the upper 90s to 100s from June to September, with monsoon flash floods in July-September. Spring brings strong winds, and winter nights freeze. October-November and February-April are the best months for site work and planting. A realistic schedule: Nov-Dec 2026 research and site visits; Jan-Feb 2027 offer with a 45-60 day due-diligence contingency; Mar-Apr 2027 close; Mar-Jun 2027 design and submit plans; Apr-Jul 2027 in Bhutan while plan check runs (spring winds at home, SDF still $100); Aug-Nov 2027 corrections, permit issued, temporary RV permit, move on site and begin grading, septic and utilities in the fall; Nov 2027-Jun 2028 foundation, framing, dry-in; summer 2028 interior work; late 2028-mid 2029 final inspections and certificate of occupancy. That is about 24-30 months from offer to occupancy. Plant trees in fall 2027 or early spring 2028 once there is water.",
+   "confidence": "medium",
+   "sources": [
+    "https://bhutan.travel/visa",
+    "https://bhutan.travel/announcements",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures"
+   ],
+   "implication": "Go to Bhutan after you submit plans and before the permit is issued. That way no permit clock is running and nobody needs to live on site. Book before Aug 31, 2027 if the SDF matters to you. Don't leave for 6 months in the middle of construction."
+  },
+  {
+   "title": "Storing belongings on the property while abroad: physical and insurance realities",
+   "detail": "A steel container in the high desert can reach very high internal temperatures in summer (general knowledge), which damages electronics, photos, vinyl, candles and adhesives. Rural vacant lots are exposed to theft and dumping. The FAIR Plan form excludes theft entirely and drops vandalism after 30 days vacant, and other policies usually have vacancy limits too. On a county lot with no primary dwelling, a container needs a Temporary Use Permit plus a $156 permit and $195 plan review. In the Town it may need a removal bond.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.cfpnet.com/wp-content/uploads/2026/01/Dwelling-Fire-Policy_effective-3-17-26.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.01-accessory-structures-and-uses"
+   ],
+   "implication": "Leave bulky, low-value items in a permitted, insulated and vented container on site with a cellular camera. Put valuables, documents and anything heat-sensitive in a climate-controlled unit in town with its own insurance. A short trip, under 30 days, is much easier to insure."
+  }
+ ],
+ "critical_claims": [
+  {
+   "claim": "In both unincorporated San Bernardino County and the Town of Yucca Valley, living on a lot during construction is allowed only in a registered RV or travel trailer (Town: also a manufactured home), only after the house building permit is issued, on 12-month permits. The County information sheet says up to 5 years total, the County code says 12 months plus one 12-month extension, and the Town allows up to 4 years. An unregistered, non-HCD capsule pod does not qualify.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures"
+   ]
+  },
+  {
+   "claim": "The California FAIR Plan dwelling policy (CFP 00 01 05/2026) is named-peril and excludes theft. Its vandalism coverage excludes loss after 30+ consecutive days vacant or unoccupied, and a dwelling under construction without furnishings counts as vacant. A 29.1% average rate increase applies to policies renewing on or after Oct 15, 2026.",
+   "sources": [
+    "https://www.cfpnet.com/wp-content/uploads/2026/01/Dwelling-Fire-Policy_effective-3-17-26.pdf",
+    "https://www.kqed.org/news/12094860/california-fair-plan-announces-29-1-rate-hike-for-homeowners-this-fall",
+    "https://www.coveragecat.com/blog/california-fair-plan-rate-hikes-2026"
+   ]
+  },
+  {
+   "claim": "Bhutan's tourist fee (SDF) is $100 per adult per day through Aug 31, 2027, after which it may revert to $200. The visa fee is $40.",
+   "sources": [
+    "https://bhutan.travel/announcements",
+    "https://bhutan.travel/visa"
+   ]
+  },
+  {
+   "claim": "Western Joshua tree in-lieu fees are $156.50-$2,609 per stem depending on height and fee area. No local agency can issue the permits yet, and CDFW has no statutory deadline to act on them.",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ"
+   ]
+  },
+  {
+   "claim": "New water service costs about $5,418 plus at least $600 to install (HDWD), or $16,201 plus $3,040 (BDVWA), before any main extension, which is billed at actual cost.",
+   "sources": [
+    "https://www.hdwd.com/411/New-Construction-Fees",
+    "https://bdvwa.org/customer-service/water-rates-and-fees/"
+   ]
+  },
+  {
+   "claim": "County parcels of 5 acres or more may have up to three accessory units (versus two below 5 acres). RVs, tents and recreational cabins cannot get short-term rental permits.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.01-accessory-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.28-short-term-residential-rentals"
+   ]
+  }
+ ],
+ "next_actions": [
+  "Open the San Bernardino County Assessor parcel map viewer (assessormapviewer.arc.sbcounty.gov), find the lot's APN, and write down its recorded acreage (is it 5.00 or more?), Tax Rate Area number, and whether it is inside Town of Yucca Valley limits.",
+  "Look up the APN's most recent tax bill on the County Tax Collector site (sbcountyatc.gov) and list every fixed charge and special assessment in your budget spreadsheet.",
+  "Call the water district for the lot (HDWD 760-365-8333, BDVWA 760-364-2315 or JBWD 760-366-8438). Ask: 'Is there a main fronting APN ___? How far is the nearest main? What is the all-in cost of a new 1-inch service? Can I get a will-serve letter?'",
+  "Open CDFW's Joshua tree fee map (experience.arcgis.com/experience/40690ac231124bccb07cbce42fc95ebd/) and note whether the lot is in the reduced or standard fee area.",
+  "Email WJT@wildlife.ca.gov: 'For APN ___, is a WJTCA permit needed if all work stays outside tree root zones, and what did the September 2026 amendments (AB 1663, SB 1062, AB 1808) change for single-family homes?'",
+  "Find three FAIR Plan-registered brokers using the CDI tool (interactive.web.insurance.ca.gov/apex_extprd/f?p=400:50) and ask each for written quotes on: $1M vacant-land liability; FAIR plus DIC for a dwelling under construction; an RV policy for the interim trailer; and coverage for a storage container's contents during a 60-90 day absence.",
+  "Email the capsule seller: 'Does the unit have a VIN that California DMV can register as an RV or travel trailer? Is it RVIA/ANSI or HCD certified? Please give a delivered, duty-paid (DDP) price to ZIP 92284 including tariffs, freight and crane.'",
+  "Call County Land Use Services Building & Safety (or Town Building & Safety). Ask for the estimated permit and plan-check fees for a ~450 sf single-family house, the current plan-check turnaround, and whether the temporary RV permit limit is 12+12 months or 5 years in practice.",
+  "Email Morongo Unified School District's business office: 'What is your current residential developer fee per sq ft, and is a new primary dwelling under 500 sq ft exempt?'",
+  "Call SCE and request a ballpark line-extension and service estimate for the APN. Before you call, record how far the nearest pole is from the lot during your next site visit.",
+  "Call one local credit union or bank and one land-loan broker. Ask the down payment, rate, term and balloon terms for a 5-acre unimproved desert lot without utilities.",
+  "Email the listing agent asking for: seller-financing terms, any existing survey, perc or soils reports, any code-enforcement history, and sold comps within 2 miles from the last 12 months.",
+  "Build a budget spreadsheet using the three tiers here. Enter your real cash on hand, then set a total ceiling and a stop-and-review checkpoint.",
+  "Put a calendar reminder for Aug 31, 2027 (end of the Bhutan $100 SDF discount) and block a tentative Bhutan window of April-July 2027."
+ ],
+ "risks": [
+  {
+   "risk": "Living in an unpermitted capsule before a building permit exists leads to a code-enforcement complaint, a notice to vacate (Town: 30 days after notice), citations, and fees for work done without permits. It can also sour relations with the planners who will review your house.",
+   "severity": "high",
+   "mitigation": "Rent nearby or use an RV park until the permit is issued, then live in a DMV-registered trailer under a temporary permit. Use the capsule for storage or studio space only once it is permitted."
+  },
+  {
+   "risk": "Building permit and temporary living permit expire during a long absence, because no inspection was called within about 180 days.",
+   "severity": "high",
+   "mitigation": "Travel during design and plan check. If you must leave mid-build, pass an inspection right before leaving, keep the trip under about 5 months, and ask Building & Safety in writing for an extension."
+  },
+  {
+   "risk": "Belongings stored on site while abroad are stolen or heat-damaged and not covered (the FAIR Plan has no theft coverage, and vandalism is excluded after 30 days vacant).",
+   "severity": "high",
+   "mitigation": "Keep valuables in climate-controlled storage in town with its own insurance. Use an insulated, vented container with a cellular or Starlink camera, a lock box and a neighbor check-in. Buy a DIC or contents policy that explicitly covers the absence."
+  },
+  {
+   "risk": "Infrastructure overruns (well depth, SCE extension, septic type, driveway or fire access) exceed the cost of the house itself.",
+   "severity": "high",
+   "mitigation": "Get estimates from SCE, the water district or a well driller, and a septic designer during the due-diligence contingency. Favor lots with a water stub and power at the lot line, and carry a 20-25% contingency."
+  },
+  {
+   "risk": "Overpaying for land from online flippers, or getting stuck in a land contract where the seller keeps title.",
+   "severity": "medium",
+   "mitigation": "Check sold comps and the deed history. Close through escrow with an owner's title policy and a recorded deed of trust."
+  },
+  {
+   "risk": "Joshua trees in the building areas trigger fees and a CDFW review with no deadline.",
+   "severity": "medium",
+   "mitigation": "Count stems before the offer, choose pads and septic locations outside root zones (8-14 m), and make the purchase contingent on a feasible tree-free building envelope."
+  },
+  {
+   "risk": "Insurance premiums jump or policies aren't renewed (FAIR +29.1% from Oct 2026), or an insurer refuses the property because of unpermitted structures.",
+   "severity": "medium",
+   "mitigation": "Build to all 12 FAIR Plan hardening criteria and keep no unpermitted structures. Join or start a Firewise USA site with neighbors, and re-shop the admitted market every year."
+  },
+  {
+   "risk": "A very small house is hard to appraise or refinance, which traps your cash.",
+   "severity": "medium",
+   "mitigation": "Ask lenders about refinance appraisals for a 400-600 sf house on 5 acres before you design. Consider a size that sells locally, and keep finishes durable."
+  },
+  {
+   "risk": "Owner-builder liability: a helper is injured and you are treated as their employer without workers' compensation.",
+   "severity": "medium",
+   "mitigation": "Hire licensed, insured subcontractors only and collect their insurance certificates. If you pay helpers, get workers' compensation coverage through your broker."
+  },
+  {
+   "risk": "The parcel's recorded acreage is under 5.00, which loses the third accessory unit and changes your multi-capsule plan.",
+   "severity": "medium",
+   "mitigation": "Verify the recorded acreage on the assessor map and in the survey before removing contingencies."
+  },
+  {
+   "risk": "Tariffs, freight and electrical or code compliance push the capsule well above $20k, or the unit arrives unusable as a permitted structure.",
+   "severity": "medium",
+   "mitigation": "Get a DDP quote and certification documents first, or buy a used US travel trailer for the interim."
+  },
+  {
+   "risk": "Bhutan's SDF reverts to $200/day after Aug 31, 2027, doubling the cost of a long stay.",
+   "severity": "low",
+   "mitigation": "Schedule the trip for spring or early summer 2027, or budget at $200/day."
+  },
+  {
+   "risk": "No federal 30% solar credit after 2025 inflates the cost of going off-grid compared with older online guides.",
+   "severity": "low",
+   "mitigation": "Budget solar at full cost, and compare it with an SCE extension estimate."
+  }
+ ],
+ "brainstorm_prompts": [
+  "What is the most we will spend in total, including land and contingency? At what checkpoint figure do we pause and re-plan?",
+  "Are we OK renting nearby, or staying in an RV park, for the 6-12 months before the building permit is issued, so that we live on the land legally?",
+  "Which tasks do each of us actually want to do with our own hands (grading, framing, flooring, tile, solar), and which do we want to pay a professional for?",
+  "How small can our house really be? Could about 400-480 sf with a soft floor instead of furniture work for both of us? Is staying under 500 sf worth it to possibly avoid school fees?",
+  "If we could fund only one big infrastructure item in year 1 (water connection or well, grid power or solar, septic), which unlocks the most for us?",
+  "Do we go to Bhutan in spring or summer 2027 while plans are in plan check (SDF $100/day), or in fall 2027 for better weather but possibly $200/day?",
+  "What do we leave on the land while we're away, and what goes to storage in town? Which possessions would we be heartbroken to lose?",
+  "What is our 'progress pledge', for example one passed inspection every 60-90 days, and how will we keep each other to it?",
+  "Is renting out a legal guest house or ADU part of our long-term plan? Do we want to be on call within an hour for guests?",
+  "What happens to the plan if one of us loses income, gets sick, or we discover we hate July in the desert?",
+  "Which matters more to us: a cheaper remote lot with more DIY infrastructure, or a pricier lot with water and power at the lot line?",
+  "How will we make money decisions mid-project? A monthly budget meeting? A dollar threshold above which we must both agree?",
+  "What does 'done' look like for phase 1 (certificate of occupancy), and how will we celebrate it?"
+ ],
+ "costs": [
+  {
+   "item": "5-acre land purchase",
+   "low_usd": 25000,
+   "high_usd": 300000,
+   "notes": "Lean $30k-$70k (Landers/Flamingo Heights dirt roads); balanced $70k-$140k (Yucca Valley/Yucca Mesa near utilities); premium $140k-$300k+ (Pipes Canyon listings up to $475k). Asking prices, Jun-Oct 2026."
+  },
+  {
+   "item": "Buyer closing costs (escrow, owner's title policy, recording)",
+   "low_usd": 2000,
+   "high_usd": 8000,
+   "notes": "Estimate; get an escrow estimate."
+  },
+  {
+   "item": "Due-diligence studies (boundary/topo survey, perc/soils, geotech, Joshua tree census, biology)",
+   "low_usd": 5000,
+   "high_usd": 30000,
+   "notes": "Estimate. Schedule during the escrow contingency period."
+  },
+  {
+   "item": "Design and engineering (stock/prefab plans to architect; structural; Title 24 energy)",
+   "low_usd": 4000,
+   "high_usd": 60000,
+   "notes": "Lean $4k-$10k; balanced $10k-$25k; hired $25k-$60k. Estimate."
+  },
+  {
+   "item": "Permits and agency fees (building, grading, erosion, temp RV, container, solar, septic, school fee)",
+   "low_usd": 6000,
+   "high_usd": 25000,
+   "notes": "Confirmed: grading permit $693-$775 for 100-1,000 CY plus $599-$696 plan review; erosion $369; temp RV $261; temp structure $301 + $257/yr; container $156 + $195; ground PV $450. School fee $0-$5.38/sf. House permit itself unverified; estimated $3k-$8k."
+  },
+  {
+   "item": "Western Joshua tree in-lieu fees (if unavoidable)",
+   "low_usd": 0,
+   "high_usd": 10000,
+   "notes": "Per stem: reduced area $156.50-$1,043.50; standard area $354.75-$2,609. $0 if all impacts are avoided."
+  },
+  {
+   "item": "Grading for 2-3 pads (house, interim unit, container/parking)",
+   "low_usd": 4000,
+   "high_usd": 60000,
+   "notes": "Lean (DIY with rented equipment) $4k-$12k; balanced $10k-$25k; engineered with compaction and retaining walls $25k-$60k. Estimate."
+  },
+  {
+   "item": "Driveway / fire access (gravel or decomposed granite)",
+   "low_usd": 3000,
+   "high_usd": 40000,
+   "notes": "Depends on length and slope; estimate."
+  },
+  {
+   "item": "Water: hauled tank system, district connection, or well",
+   "low_usd": 5000,
+   "high_usd": 100000,
+   "notes": "Tank and pump about $5k; HDWD $5,418 + $600 minimum + main extension; BDVWA $16,201 + $3,040; well $40k-$100k+ (estimate)."
+  },
+  {
+   "item": "Septic system (conventional to advanced treatment)",
+   "low_usd": 12000,
+   "high_usd": 60000,
+   "notes": "Estimate; check sewer and septic restrictions for Town parcels."
+  },
+  {
+   "item": "Power: SCE extension or off-grid solar plus batteries",
+   "low_usd": 15000,
+   "high_usd": 80000,
+   "notes": "SCE unverified ($5k to $60k+). Solar has no 25D credit after 2025. Estimate."
+  },
+  {
+   "item": "Interim unit (legal registered travel trailer, or capsule landed cost)",
+   "low_usd": 8000,
+   "high_usd": 90000,
+   "notes": "Used travel trailer $8k-$25k; $20k capsule likely $25k-$40k delivered; certified park model $40k-$90k. Estimates."
+  },
+  {
+   "item": "Storage container (20-40 ft used, delivered, painted) plus permit",
+   "low_usd": 3000,
+   "high_usd": 10000,
+   "notes": "County permit $156 + $195 plan review (1-3 units); a Temporary Use Permit is needed if there is no dwelling yet."
+  },
+  {
+   "item": "Permitted house, lean DIY ~400 sf",
+   "low_usd": 70000,
+   "high_usd": 110000,
+   "notes": "$175-$275/sf estimate."
+  },
+  {
+   "item": "Permitted house, balanced ~500 sf",
+   "low_usd": 150000,
+   "high_usd": 215000,
+   "notes": "$300-$425/sf estimate."
+  },
+  {
+   "item": "Permitted house, mostly hired ~600 sf",
+   "low_usd": 270000,
+   "high_usd": 390000,
+   "notes": "$450-$650/sf estimate."
+  },
+  {
+   "item": "Radiant floor heat",
+   "low_usd": 3000,
+   "high_usd": 35000,
+   "notes": "Electric DIY $3k-$8k; hydronic with air-to-water heat pump $15k-$35k. Estimate."
+  },
+  {
+   "item": "Soft whole-floor finish (cork / low-pile wool / tatami-style)",
+   "low_usd": 2000,
+   "high_usd": 20000,
+   "notes": "About $8-$30/sf; keep the covering's R-value low so radiant heat still works. Estimate."
+  },
+  {
+   "item": "Landscaping, drip irrigation, fruit and native trees",
+   "low_usd": 1500,
+   "high_usd": 30000,
+   "notes": "Mostly DIY; plant Oct-Nov or Feb-Mar. Estimate."
+  },
+  {
+   "item": "Security (cellular/Starlink cameras, gate, lighting)",
+   "low_usd": 1000,
+   "high_usd": 12000,
+   "notes": "Estimate."
+  },
+  {
+   "item": "Contingency",
+   "low_usd": 30000,
+   "high_usd": 270000,
+   "notes": "15-25% of subtotal."
+  },
+  {
+   "item": "TOTAL lean DIY tier (land + 15-25% contingency)",
+   "low_usd": 217000,
+   "high_usd": 479000,
+   "notes": "Excluding land: about $182k-$391k."
+  },
+  {
+   "item": "TOTAL balanced tier (land + 15-25% contingency)",
+   "low_usd": 432000,
+   "high_usd": 874000,
+   "notes": "Excluding land: about $351k-$699k."
+  },
+  {
+   "item": "TOTAL mostly-hired tier (land + 15-20% contingency)",
+   "low_usd": 766000,
+   "high_usd": 1620000,
+   "notes": "Excluding land: about $605k-$1.26M."
+  },
+  {
+   "item": "Annual carrying costs during the build (tax, liability/builder's-risk insurance, temp permit renewal, utilities)",
+   "low_usd": 2000,
+   "high_usd": 8000,
+   "notes": "Estimate. Property tax about 1.1-1.5% plus flat charges."
+  },
+  {
+   "item": "Annual insurance after completion (FAIR + DIC for a small house)",
+   "low_usd": 2000,
+   "high_usd": 6000,
+   "notes": "Secondary-source ranges scaled down; get broker quotes."
+  },
+  {
+   "item": "Bhutan SDF for 2 adults, 60 nights",
+   "low_usd": 12000,
+   "high_usd": 24000,
+   "notes": "$100/day through Aug 31, 2027; $200/day if it reverts. Plus $40 visa each; flights and lodging extra."
+  }
+ ],
+ "design_numbers": [
+  "County grading: under 100 cubic yards = no grading permit fee and $0 plan review; 100-1,000 CY = $693 + $9.12 per extra 100 CY (max $775) permit [FY26-27] plus $599 + $10.80 per 100 CY (max $696) plan review [FY25-26] (lus.sbcounty.gov fee schedules)",
+  "Guest house must be at least 10 ft from the primary dwelling (SB County 84.01.050(a)(3))",
+  "Accessory unit cap: up to 3 on parcels of 5 acres or more, 2 on parcels under 5 acres; recorded acreage must be at least 5.00 (SB County 84.01.050(a))",
+  "Storage container (county RL/AG): behind the primary structure, not prominently visible from the street, painted to blend (84.01.050(f)(2)); needs a Temporary Use Permit if no primary dwelling yet (84.01.020(b))",
+  "FAIR Plan hardening discount siting: combustible sheds and outbuildings (including capsule units and containers) more than 30 ft from the dwelling; noncombustible zone within 5 ft of the dwelling; 6 in. of noncombustible material at the base of exterior walls; Class A roof; enclosed eaves; ember-resistant vents; multi-pane windows (cfpnet.com discounts PDF, 11/2025)",
+  "Joshua tree root zone: about 14 m from a 4.3 m tree and 8.4 m from a 1 m tree; relocation site at least 15 m from an existing tree (CDFW WJT FAQ)",
+  "Water service: HDWD requires a 1-inch service for fire code ('1 inch meets Fire Code (5/8 meter use)') (hdwd.com New Construction Fees)",
+  "Temporary living permit: 12-month terms; County max 5 years per the Building & Safety sheet (code text: 12 + 12 months); Town max 4 years total; inspection must be called within 180 days of issuance (County checklist rev. 6/2025; YV 9.39.050)",
+  "School developer fee threshold to verify: under 500 sq ft may be exempt; 2026 state cap $5.38/sf (DGS SAB Jan 2026; Moorpark USD example)",
+  "STR occupancy if a legal unit is later rented: studio or 1BR = 4 guests; 2BR = 6; up to 2 STR permits on parcels of 2 acres or more (SB County 84.28.060, 84.28.040)"
+ ],
+ "open_questions": [
+  "Is the lot inside the Town of Yucca Valley or in unincorporated County? This changes the temporary-living permit length, fees and rental rules.",
+  "Is the recorded (assessor) acreage at least 5.00, or does a road easement bring the net below 5?",
+  "Which water district serves the lot, how far is the nearest main, and will the County or Town accept hauled water for a permitted house?",
+  "Is the parcel in an area with sewer requirements or septic restrictions (HDWD Phase II/III areas)?",
+  "What is the County's actual building permit and plan-check fee for a ~450 sf house? The construction fee schedule PDF could not be retrieved.",
+  "What is Morongo USD's current developer fee rate, and is a primary dwelling under 500 sf exempt?",
+  "What would SCE charge to extend service, and how long would it take?",
+  "Does the County enforce the 12+12-month code limit or the 5-year limit on its information sheet for temporary RV living?",
+  "Can the specific capsule model be DMV-registered as an RV, and what is its delivered, duty-paid cost under current 2026 tariffs?",
+  "What did the September 2026 WJTCA amendments (AB 1663, SB 1062, AB 1808) change?",
+  "Is the lot in the reduced or standard Joshua tree fee area, and how many stems are in the planned building areas?",
+  "What land-loan terms do local lenders offer today? (Not verified: the web search budget was exhausted.)",
+  "What are the Town and County transient occupancy tax rates and STR permit fees?",
+  "Which Bhutan visa category applies to a sponsored visit, and does the SDF apply to sponsored visitors? (Covered by the Bhutan research topic.)",
+  "Which Fire Hazard Severity Zone is the lot in under the 2024-2025 CAL FIRE maps, and how does that affect premiums and building materials?"
+ ],
+ "people_to_involve": [
+  {
+   "role": "Buyer's agent who specializes in desert land",
+   "why": "Pulls sold comps (not asking prices), knows which roads flood, negotiates contingencies and seller financing",
+   "when": "Before the first offer",
+   "how_to_find": "Ask for agents with many recent Morongo Basin vacant-land closings; check MLS listing histories",
+   "questions_to_ask": [
+    "Show me sold 5-acre comps within 2 miles from the last 12 months",
+    "Who has power or water stubs nearby?",
+    "Will the seller carry a note with a recorded deed of trust?"
+   ],
+   "typical_cost": "Usually paid from the seller's side commission; confirm in writing"
+  },
+  {
+   "role": "Escrow and title officer",
+   "why": "Makes sure you get clean title, recorded access, and that any seller financing is recorded properly",
+   "when": "At offer and opening escrow",
+   "how_to_find": "Through your agent or a local title company",
+   "questions_to_ask": [
+    "Is there legal recorded access?",
+    "Any easements across the building area?",
+    "Any recorded code violations or liens?"
+   ],
+   "typical_cost": "$2k-$8k total closing costs (estimate)"
+  },
+  {
+   "role": "Licensed land surveyor (PLS)",
+   "why": "Corner monuments, acreage confirmation (5.00 or more), and topography for pads and grading",
+   "when": "During the due-diligence contingency",
+   "how_to_find": "Local surveyors; ask other owner-builders",
+   "questions_to_ask": [
+    "Can you stake the corners and do a 2-ft contour topo of the building area?",
+    "Is the net acreage at least 5.00?"
+   ],
+   "typical_cost": "$2.5k-$10k (estimate)"
+  },
+  {
+   "role": "Septic designer / soils engineer (perc test)",
+   "why": "Septic type and cost can swing the budget by $10k-$40k",
+   "when": "During the contingency",
+   "how_to_find": "Ask County Environmental Health for qualified local consultants",
+   "questions_to_ask": [
+    "Conventional or advanced system for this soil?",
+    "Where should the field go relative to the pads and trees?"
+   ],
+   "typical_cost": "$1.5k-$5k for testing (estimate)"
+  },
+  {
+   "role": "Biologist (Joshua tree census)",
+   "why": "Stem counts, heights and root-zone avoidance plan for CDFW",
+   "when": "Before removing the contingency",
+   "how_to_find": "Consultants who regularly do WJTCA census work",
+   "questions_to_ask": [
+    "Can our pads and septic avoid all root zones?",
+    "Reduced or standard fee area?"
+   ],
+   "typical_cost": "$500-$3k (estimate)"
+  },
+  {
+   "role": "Insurance broker registered with the FAIR Plan",
+   "why": "Vacant-land liability, builder's risk, RV policy for the interim unit, DIC, and coverage while you're abroad",
+   "when": "Before closing and again before the permit is issued",
+   "how_to_find": "CDI Find a Broker: interactive.web.insurance.ca.gov/apex_extprd/f?p=400:50",
+   "questions_to_ask": [
+    "What is covered while we're away for 60-90 days?",
+    "Is theft covered for container contents?",
+    "How do you treat any unpermitted structure?"
+   ],
+   "typical_cost": "Broker paid by commission; premiums vary"
+  },
+  {
+   "role": "Water district engineer / customer service (HDWD, BDVWA or JBWD)",
+   "why": "Main location, connection cost, will-serve letter",
+   "when": "Before the offer",
+   "how_to_find": "HDWD 760-365-8333; BDVWA 760-364-2315; JBWD 760-366-8438",
+   "questions_to_ask": [
+    "Distance to the main?",
+    "All-in cost for a 1-inch service?",
+    "Main extension estimate?"
+   ],
+   "typical_cost": "Will-serve letter $40 (HDWD)"
+  },
+  {
+   "role": "SCE service planner",
+   "why": "Line-extension cost and timeline",
+   "when": "During the contingency",
+   "how_to_find": "SCE new-service / builder services line on sce.com",
+   "questions_to_ask": [
+    "Ballpark cost to serve this APN?",
+    "How many poles? Is a transformer needed?",
+    "Lead time?"
+   ],
+   "typical_cost": "Estimate requests may carry a design fee (unverified)"
+  },
+  {
+   "role": "County LUS or Town Building & Safety / Planning counter staff",
+   "why": "Fees, plan-check turnaround, temporary RV permit rules, container rules",
+   "when": "Before the offer (phone) and at design start (pre-application)",
+   "how_to_find": "County EZOP portal wp.sbcounty.gov/ezop/; Town Planning 760-369-6575",
+   "questions_to_ask": [
+    "Which temporary RV limit do you enforce?",
+    "Estimated fees for a ~450 sf house?",
+    "Can a container go on site before the house?"
+   ],
+   "typical_cost": "Free phone inquiries; pre-application meetings may carry a fee"
+  },
+  {
+   "role": "Local lender or credit union loan officer",
+   "why": "Land-loan terms and later refinance after the certificate of occupancy",
+   "when": "Before the offer",
+   "how_to_find": "Local credit unions and banks; mortgage brokers who do rural or land loans",
+   "questions_to_ask": [
+    "Down payment, rate and term on raw land?",
+    "Will you refinance a 400-600 sf house on 5 acres?"
+   ],
+   "typical_cost": "Application and appraisal fees vary"
+  },
+  {
+   "role": "Licensed general contractor or construction consultant (balanced tier)",
+   "why": "Prices the shell, sequences trades, reality-checks the owner-builder plan",
+   "when": "During design",
+   "how_to_find": "Verify the license and insurance on the CSLB site ((800) 321-2752)",
+   "questions_to_ask": [
+    "Fixed price for slab, framing and dry-in?",
+    "Which pieces can we realistically DIY?"
+   ],
+   "typical_cost": "Varies"
+  },
+  {
+   "role": "Well driller (C-57 license), only if no water main nearby",
+   "why": "Depth and cost from nearby well logs",
+   "when": "During the contingency",
+   "how_to_find": "Local C-57 licensed drillers",
+   "questions_to_ask": [
+    "Depths of nearby wells?",
+    "All-in quote including pump, tank and power?"
+   ],
+   "typical_cost": "Free estimate; wells about $40k-$100k+ (estimate)"
+  }
+ ],
+ "site_visit_checks": [
+  "Measure the distance from the lot to the nearest SCE pole or transformer, and photograph the pole tag numbers for SCE.",
+  "Look along the road for water meter boxes, fire hydrants or blue reflectors that suggest a main is nearby.",
+  "Count every Joshua tree stem in and near the likely house, interim and container pads and the driveway route; estimate heights (under 1 m, 1-5 m, 5 m or taller).",
+  "Drive in with a normal car and note road surface, ruts, sand traps, wash crossings, and whether the road looks county-maintained.",
+  "Use a phone inclinometer to find 2-3 flattest areas about 40x60 ft; note the slope percentage and which areas need cut or fill.",
+  "Visit on a windy spring afternoon and a hot summer day if you can; note blowing sand, shade and wind exposure for lightweight units.",
+  "Look for washes, debris lines or erosion channels that suggest flash-flood paths; keep pads out of them.",
+  "Check cell signal and open sky to the north for Starlink, which security cameras will need.",
+  "Look for signs of theft, dumping, off-roading or squatting on and near the lot, and code-enforcement notices on neighboring parcels.",
+  "Find survey monuments or corner markers, and confirm that fences and neighbors' improvements don't encroach.",
+  "Note how close neighbors' homes are and which way they face; this affects privacy, complaint risk and future short-term rentals.",
+  "Take photos from each candidate pad toward the views at sunrise and sunset to plan the house's windows and passive solar."
+ ]
+}

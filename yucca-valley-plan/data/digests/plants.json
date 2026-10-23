@@ -1,0 +1,445 @@
+{
+ "topic": "plants",
+ "claim_checks": [
+  {
+   "claim": "AB 1808 (Ch. 816, Stats. 2026, urgency statute, chaptered Sept 29, 2026) allows fee- and mitigation-free trimming or removal of up to 10 western Joshua trees only for EXISTING single-family homes (within 30 ft of the residence or 15 ft of an accessory structure). It does not cover vacant lots or new homes, so this couple's new build still needs a WJTCA Incidental Take Permit.",
+   "verdict": "corrected",
+   "correct_statement": "Chapter 816, the Sept 29, 2026 date and the urgency clause are confirmed, and the law does not cover a vacant lot or a new house. But it is not fee-free. A county or city may issue the permit with no mitigation, for a fee that covers its administrative costs (a local report put it at about 90% below today's fees). It applies only to an owner-occupant of an existing single-family home. Covered trees are those within 30 ft of the home, within 15 ft of an existing accessory structure, or inside or within 15 ft of a NEW accessory structure proposed for that home. So once the couple lives in the permitted house, later pods could qualify (verify the local issuing agency). The law also covers public works and commercial or industrial projects.",
+   "sources": [
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1808",
+    "https://z1077fm.com/three-bills-aim-to-ease-cost-and-burden-of-western-joshua-tree-conservation-act-take-fees/"
+   ]
+  },
+  {
+   "claim": "Current WJTCA take fees per stem: standard fee area $354.75 (<1 m), $521.75 (1-5 m), $2,609 (5 m+); reduced fee area $156.50, $208.75, $1,043.50. Each stem coming out of the ground counts as a separate tree, and fees apply to dead and living trees.",
+   "verdict": "confirmed",
+   "correct_statement": "CDFW's permit page lists exactly these per-tree fees. It defines a tree as any stem or trunk coming out of the ground, and charges for dead and living trees alike. Fees change every year, and you pay the schedule in effect when CDFW invoices you. The page has an interactive map showing which fee area a parcel is in. Permits have no statutory deadline. An application needs a tree census, plans, and CEQA paperwork (a Notice of Determination plus a filing-fee receipt) before the permit is issued.",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP"
+   ]
+  },
+  {
+   "claim": "The Zone 0 (0-5 ft) ember-resistant rules were adopted Aug 19, 2026, sent to OAL Aug 28, 2026, and were NOT confirmed in force as of Oct 2026. Once effective they apply to buildings throughout SRA at any hazard level, and to LRA buildings only in Very High zones. They ban combustible mulch and new trees in Zone 0 and limit potted plants to 18 in in noncombustible pots.",
+   "verdict": "corrected",
+   "correct_statement": "The Board adopted the rules Aug 19, 2026, and the emergency package went to OAL as File No. 2026-0828-03E. It was WITHDRAWN on Sept 8, 2026, so Zone 0 is not in force as of Oct 23, 2026. A resubmission is possible (verify). The adopted draft matches the report: it covers SRA at all hazard levels and LRA only in Very High zones, bans combustible mulch and new trees within 5 ft, and allows potted plants up to 18 in in movable noncombustible pots. Sources disagree on timing for new construction. Fire Safe Marin and RCRC say immediately. BB&K says delayed up to one year until the Board posts guidance.",
+   "sources": [
+    "https://oal.ca.gov/emergency_regulations/Recent_Actions_Taken_on_Emergency_Regulations/",
+    "https://bbklaw.com/resources/la090926-california-board-of-forestry-adopts-emergency-zone-0-regulations-under-ab-3074",
+    "https://firesafemarin.org/new-zone-0-regulations/",
+    "https://www.rcrcnet.org/general/california-board-of-forestry-and-fire-protection-approves-zone-0-defensible-space-regulations/"
+   ]
+  },
+  {
+   "claim": "The no-permit laundry-to-landscape exemption (CPC Ch. 15, under 250 gpd, 11 conditions) requires that flow can be diverted to the building sewer. In practice it fits a permitted house with septic, not an unpermitted pod with no sewer or septic.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed. The California Plumbing Code requires every graywater system, including the permit-exempt washer-only system, to have a labeled diverter valve that sends flow to the building sewer, and diaper or infectious loads must go to the sewer. An unpermitted pod with no sewer or septic can't meet that. Minor fixes: the 250 gal/day figure is the ceiling for a 'simple' system, not a condition of the washer exemption. The number of conditions is 11 or 12 depending on code edition. Shower or sink ('simple') systems need a construction permit under state code unless the local agency exempts them.",
+   "sources": [
+    "https://santabarbaraca.gov/sites/default/files/documents/Public%20Works/Water%20Conservation/Graywater%20Fact%20Sheet.pdf",
+    "https://www.woodsideca.gov/DocumentCenter/View/114/Submittal-Requirements-for-Graywater-Systems-PDF",
+    "https://rmadocs.venturacounty.gov/building-and-safety/publications/chapter-16a-nonpotable-water-reuse-systems.pdf"
+   ]
+  },
+  {
+   "claim": "District water is inexpensive: BDVWA residential $4.41/hcf (748 gal) from Feb 11, 2026, bulk $12.19/hcf; HDWD FY26/27 residential tiers $5.17/$8.80/$9.96 per hcf. Hauled water delivered to the door is likely far more expensive per gallon (no reliable local price found).",
+   "verdict": "corrected",
+   "correct_statement": "HDWD is confirmed from its own Water Rates page. From July 1, 2026: $29.42/month fixed for a 5/8-in meter ($62.29 for 1-in), plus $5.17, $8.80 or $9.96 per 748-gal unit for 0-4, 5-11 or 12+ units per month. The BDVWA figures ($4.41/hcf residential, $12.19 bulk, $77.76 bi-monthly fixed) come from a Prop 218 notice of PROPOSED maximum rates, with a hearing on Feb 10, 2026. I found no source confirming adoption. The Z107.7 article the report cites is from April 2021 and covers an earlier rate change. BDVWA's $59.40 fire service charge applies only to separate fire-sprinkler or hydrant connections, not to every customer. The hauled-water price is still unverified.",
+   "sources": [
+    "https://www.hdwd.com/407/Water-Rates",
+    "https://bdvwa.org/wp-content/uploads/Prop-218-Notice-FINAL.pdf",
+    "https://z1077fm.com/after-a-public-hearing-bighorn-desert-view-water-sets-new-rates"
+   ]
+  },
+  {
+   "claim": "USDA 2023 hardiness zone is 9a (20-25\u00b0F) for zip codes 92284, 92285, 92252 and 92268, and 9b for 92256 (Morongo Valley).",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed for all five zip codes from the phzmapi.org data feed, which republishes USDA's 2023 PRISM-based zone data. I could not open USDA's own lookup tool. Wikipedia gives Yucca Valley about 3,260 ft elevation, 4.8 in of rain a year, and average Dec-Jan lows around 36-38\u00b0F, which fits Zone 9a. These are zip-code centroids, so colder spots on a given lot may be 8b.",
+   "sources": [
+    "https://phzmapi.org/92284.json",
+    "https://phzmapi.org/92285.json",
+    "https://phzmapi.org/92252.json",
+    "https://phzmapi.org/92268.json",
+    "https://phzmapi.org/92256.json",
+    "https://en.wikipedia.org/wiki/Yucca_Valley,_California"
+   ]
+  },
+  {
+   "claim": "AB 1663 (Ch. 813) lets an agent apply and allows no-fee removal of certain dead or hazard trees; SB 1062 (Ch. 673) directs CDFW to consider tiered, impact-based fees; CDFW must adopt revised fee regulations by June 30, 2027.",
+   "verdict": "corrected",
+   "correct_statement": "AB 1663 was chaptered Sept 29, 2026 (Ch. 813). Its main changes let a property owner's agent apply, drop the signed-attestation requirement, and widen tribal agreements. No-fee removal of qualifying dead trees was already in the 2023 law; a local news report says the bill also waives fees for hazard and dead trees (verify). SB 1062 was chaptered Sept 27, 2026 (Ch. 673) and requires CDFW to consider proportionate, tiered fees. AB 1808 moved the fee-regulation deadline from Dec 31, 2026 to June 30, 2027.",
+   "sources": [
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1663",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260sb1062",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1808"
+   ]
+  },
+  {
+   "claim": "San Bernardino County Development Code Ch. 88.01 and the Desert Native Plants Act regulate removal of desert natives including cacti, yuccas, agaves, mesquite, catclaw, smoke tree, palo verde, ocotillo, ironwood and desert holly (report rated low confidence).",
+   "verdict": "corrected",
+   "correct_statement": "Checked against the County Development Code (2014 consolidated PDF; check the current online version). Section 88.01.060 requires a County Tree or Plant Removal Permit in the Desert Region for: all yuccas, nolinas and agaves; all Joshua trees; mesquite and smoke tree with a stem of 2 in+ or height of 6 ft+; creosote rings 10 ft or wider; and any part, living or dead, of ironwood, mesquite or palo verde. The County's list does not include cacti, catclaw, ocotillo or desert holly; the state Desert Native Plants Act may (verify). The removal permit is usually folded into the building or grading permit, and a preconstruction inspection is required where regulated plants exist. Plants within 20 ft of a structure built under a County permit are exempt; unpermitted pods don't qualify. For Joshua trees, the County must find that trees will be transplanted where possible. The Town of Yucca Valley's rules were not checked.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/2007-Development-Code-14-04-24.pdf",
+    "https://lus.sbcounty.gov/planning-home/development-code/"
+   ]
+  },
+  {
+   "claim": "No current HDWD (Yucca Valley) new-connection fee could be found.",
+   "verdict": "corrected",
+   "correct_statement": "HDWD's New Construction Fees page lists a $5,418 meter charge for 5/8-in meter use (in a row labeled '1 inch meets Fire Code'), $10,836 for a 1-in meter, and a $200 fire-flow fee. Materials, labor and the meter itself are extra, and service installation is charged at actual cost with a $600 minimum. A new meter is therefore likely $6,200+ (verify with an estimate).",
+   "sources": [
+    "https://www.hdwd.com/411/New-Construction-Fees",
+    "https://www.hdwd.com/409/Miscellaneous-Fees-Charges"
+   ]
+  },
+  {
+   "claim": "BDVWA new water service costs about $6,380-$7,100 ($4,595 basic facilities charge + $1,785 service line).",
+   "verdict": "unverifiable",
+   "correct_statement": "The cited Z107.7 article (Jan 30, 2023) mentions neither figure. It reports a PROPOSED $2,435 service-line installation for meters up to 1 in (up from $2,200), with a vote set for Feb 14, 2023, and no facilities charge. The current BDVWA new-service cost is unknown; get a written quote.",
+   "sources": [
+    "https://z1077fm.com/new-homes-in-landers-and-flamingo-heights-may-pay-more-for-water-hookup"
+   ]
+  },
+  {
+   "claim": "MDLT 2026 Native Plant Sale is Saturday Oct 24, 2026, 9am-2pm at MDLT HQ, 60124 Twentynine Palms Hwy, Joshua Tree; cashless; no holds, backorders or returns; members 10% off.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed on MDLT's events and FAQ pages. Line up on the west side of the building and enter through the north-side wooden gate. Street parking is on Olympic. You can bring a cart. The deadline to check membership status (Oct 21) has passed.",
+   "sources": [
+    "https://www.mdlt.org/events",
+    "https://www.mdlt.org/plant-sale-faqs"
+   ]
+  },
+  {
+   "claim": "CDFW Region 6 Joshua tree permitting contact is r6cesa@wildlife.ca.gov, 909-484-0167.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed on CDFW's permit page: Region 6 (covers San Bernardino County), r6cesa@wildlife.ca.gov, (909) 484-0167, 3602 Inland Empire Blvd, Suite C-220, Ontario, CA 91764.",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP"
+   ]
+  },
+  {
+   "claim": "San Bernardino County Fire adopted new LRA Fire Hazard Severity Zone maps June 10, 2025 (Ord. 4489); most of the Morongo Basin is Moderate, areas north of Yucca Valley and Morongo Valley are High, none Very High.",
+   "verdict": "confirmed",
+   "correct_statement": "The adoption on June 10, 2025 (Ord. 4489) is confirmed by SBC Fire. The Moderate/High/no-Very-High description comes from an April 21, 2025 article about the DRAFT maps. It covers unincorporated LRA only, not the Town or SRA land. Check the parcel in the map viewer.",
+   "sources": [
+    "https://sbcfire.org/fire-hazard-severity-zone-map/",
+    "https://z1077fm.com/calfire-and-sb-county-release-fire-hazard-severity-map-and-they-are-looking-for-your-feedback"
+   ]
+  },
+  {
+   "claim": "The CA Plumbing Code exempts from permits rainwater systems for outdoor non-spray irrigation with 5,000 gal or less of storage, on-grade tanks with height-to-width ratio 2:1 or less, and no power or makeup water.",
+   "verdict": "unverifiable",
+   "correct_statement": "I could not open the code text (UpCodes needs a login, and the Ventura PDF had no rainwater section). Ask County Building and Safety before buying a tank larger than about 2,500-3,000 gal or adding a pump.",
+   "sources": [
+    "https://up.codes/viewer/california/ca-plumbing-code-2022/chapter/16/nonpotable-water-systems"
+   ]
+  }
+ ],
+ "digest": {
+  "headline": "Plant last, not first: put the house pad, pods, septic, driveway and fire rings where there are no Joshua trees (up to $2,609 per stem to remove, and the 2026 relief law doesn't cover a vacant lot or a new house), and confirm a water meter (about $6,200+ for a new Hi-Desert Water District hookup) before you plan an orchard.",
+  "key_points": [
+   "Joshua trees decide your layout. Every stem coming out of the ground counts as one tree, dead or alive. Removing one needs a CDFW permit and a per-stem fee. Standard fee area: $354.75 under 1 m (about 3 ft), $521.75 for 1-5 m, $2,609 for 5 m+. Reduced fee area: $156.50, $208.75, $1,043.50. A clump of 8 small sprouts is $2,838. The permit needs a tree census, plans and CEQA paperwork (CEQA is the state environmental review), and CDFW has no deadline to act.",
+   "The new 2026 law (AB 1808, in effect since Sept 29, 2026) helps only owner-occupants of an EXISTING house. They can remove up to 10 trees within 30 ft of the home, within 15 ft of an accessory structure, or inside the footprint of a new accessory structure, with no mitigation and only an admin fee, through a county or city permit. It won't help the vacant lot or the new house. It may help place later pods once you live in the permitted house (verify the County or Town issues these).",
+   "County native-plant rules also apply (unincorporated land, Desert Region). You need a County Tree or Plant Removal Permit to remove any yucca, nolina or agave; any Joshua tree; mesquite or smoke tree with a 2 in+ stem or 6 ft+ height; creosote rings 10 ft+ wide; or any part of ironwood, mesquite or palo verde. It is usually bundled with the building or grading permit. Plants within 20 ft of a County-PERMITTED structure are exempt; unpermitted pods are not. Salvage and replant these plants rather than bulldozing them. The Town's rules were not checked (verify).",
+   "Fire 'Zone 0' (the first 5 ft around buildings) is NOT law yet. The state package was withdrawn from review on Sept 8, 2026. Design to it anyway: a 5-ft gravel or rock ring around every pod and the house, no wood mulch or wood planters, no new trees there, and pots only up to 18 in in metal or ceramic. A pod under 120 sq ft within 5 ft of the house would have to be fully noncombustible. Keep a lean, green zone out to 30 ft and reduced fuel out to 100 ft (state defensible-space law; confirm whether your parcel is State Responsibility Area, SRA, or Local, LRA).",
+   "Climate: USDA Zone 9a (winter lows of 20-25\u00b0F) for Yucca Valley, Joshua Tree, Landers and Pioneertown zip codes; 9b in Morongo Valley. About 3,260 ft elevation and about 4.8 in of rain a year. Last frost is around late March and first frost mid-to-late November (verify). Low spots and higher ground can be a zone colder (8b), so buy plants rated to 15\u00b0F.",
+   "Reliable edibles: pomegranate, fig, jujube, grapes, olive, and a male-plus-female pistachio pair (5-7+ years to bear). Apricot, almond and peach bloom early and often lose the crop to late frost. Plant them mid-slope, never in a low spot where cold air pools.",
+   "Native shade and windbreak plants: desert willow, honey and screwbean mesquite, catclaw, netleaf hackberry, four-wing saltbush and quailbush. Plant 2-3 rows on the upwind side, probably W/SW (confirm from sand drifts), 50-150 ft from the house. Never plant tamarisk or athel. Keep Arizona cypress, pines and junipers 100+ ft from any building, or skip them.",
+   "Water decides the orchard. Hi-Desert Water District (Yucca Valley), from July 1, 2026: $29.42/month fixed for a 5/8-in meter, plus $5.17, $8.80 or $9.96 per 748-gallon unit for 0-4, 5-11 or 12+ units in a month. A NEW meter: $5,418 (5/8-in use) or $10,836 (1-in), plus a $200 fire-flow fee, plus installation at cost ($600 minimum). Bighorn-Desert View (Landers and Flamingo Heights area) proposed $4.41/unit and $77.76 every two months fixed (adoption not confirmed; verify). Hauled water has no verified price, so get quotes.",
+   "Water budget: Year 1, 20 young trees plus a small vegetable bed use about 8,000-15,000 gal, roughly $55-$200 of metered water. The fixed meter charge (about $350-$470 a year) costs more than the water. A mature 10-tree orchard uses about 20,000-55,000 gal a year. Natives use about a third to a quarter as much water as fruit trees.",
+   "Greywater: a washer-only 'laundry-to-landscape' system needs no permit only if a labeled valve can switch flow to a sewer or septic. That fits the permitted house, not the unpermitted pod. Shower or sink greywater needs a permit under state code. Draining pod water onto the land could be treated as illegal discharge. Build a washer stub-out and valve into the house design, on the uphill side of fruit trees.",
+   "Bhutan timing: plant natives and the windbreak in fall (Oct-Nov), at least 9-12 months before you leave. Wait on fruit trees unless you'll be home for their first summer. Size the tank as trees \u00d7 gallons per week \u00d7 weeks: 20 trees \u00d7 10 gal \u00d7 13 weeks \u2248 2,600 gal, so a 2,500-3,000 gal tank. Set it uphill: every 2.31 ft of drop gives 1 psi, so 10-20 ft of drop gives about 4-9 psi for gravity drip. Pay someone to check every 1-2 weeks.",
+   "Protect every plant from day one: a 1/2-in galvanized hardware-cloth gopher basket about 2 ft deep, a rabbit cage 3-4 ft tall, and buried drip lines. Budget about $20-$60 per tree. Skip this and Year 1 losses can approach 100%.",
+   "Soil is fast-draining decomposed granite, alkaline (pH about 7.5-8.5), and may have a hard caliche layer. Dig two holes 24-30 in deep and do a double-fill drainage test before choosing orchard spots.",
+   "Mojave Desert Land Trust native plant sale: TOMORROW, Sat Oct 24, 2026, 9am-2pm, 60124 Twentynine Palms Hwy, Joshua Tree. Cashless, no holds, no returns. Staff answer questions, and there are hard-copy planting guides."
+  ],
+  "next_actions": [
+   "Go to the Mojave Desert Land Trust plant sale Sat Oct 24, 9am-2pm (line up on the west side; cards only). Ask staff for their top 5 windbreak and fire-safe natives for about 3,300 ft, and take a planting guide.",
+   "Open CDFW's 'Reduced Fee Area and Standard Fee Area Interactive Map' on the WJTCA permit page, look up the parcel, and write down its fee area.",
+   "Email CDFW Region 6 (r6cesa@wildlife.ca.gov) with the parcel number. Ask: which fee area, whether the County or Town has a delegation agreement, and whether AB 1808 could later cover pods next to the permitted house.",
+   "Call Hi-Desert Water District (760-365-8333, Mon-Thu 7:30-5, closed 11:30-12:30) with the parcel number. Ask: is it in your service area, is there an existing meter, and what is the written estimate for a new 5/8-in or 1-in service?",
+   "Call San Bernardino County Land Use Services Planning (909-387-8311). Ask whether grading the pads and driveway will need a Tree or Plant Removal Permit and a preconstruction inspection, and whether the County now issues Joshua tree permits.",
+   "Look up the parcel in the fire hazard map viewer linked from sbcfire.org. Write down SRA or LRA, and Moderate, High or Very High.",
+   "On the next site visit, walk the lot with pin flags. GPS-photograph every Joshua tree stem by size class (under 1 m, 1-5 m, 5 m+), plus every yucca, nolina, mesquite and creosote ring 10 ft or wider.",
+   "Dig two 24-30 in test holes where an orchard might go. Fill each twice and time how long the second fill takes to drain. Note any caliche.",
+   "Call three Morongo Basin water haulers for quotes on a 2,000-3,000 gal delivery to the lot, and write the prices on one sheet.",
+   "Draw on a printed aerial, in this order: house pad, pod pads, septic, driveway, then 5-, 30- and 100-ft fire rings. Only then sketch the windbreak, orchard and garden."
+  ],
+  "questions_for_couple": [
+   "Will we plant only tough natives and a windbreak before Bhutan, and wait to plant fruit trees until we're back?",
+   "If the only flat spot has Joshua trees, do we design around them, pay the per-stem fee, or walk away from this lot?",
+   "What's our monthly water budget? Would we cut back to natives plus 3-5 fruit trees if there's no meter and we'd have to haul water?",
+   "Do we want a small green 'oasis' near the house and pods with the rest left as open desert, or plantings spread across all 5 acres?",
+   "Who will check plants, tanks and stored belongings every 1-2 weeks while we're away? What will we pay, and what's our backup if they flake?",
+   "Will we commit to gravel-only 5-ft rings and no wood mulch around everything we sleep in?",
+   "Do we want vegetables in Year 1 (more water, daily care), or wait until the house is underway?",
+   "How much of our Year 0-1 money goes to plants and water versus finishing the permitted house sooner?"
+  ],
+  "risks": [
+   {
+    "risk": "A Joshua tree or a County-regulated native (yucca, mesquite, big creosote ring) is damaged during pod placement, grading or driveway work without a permit",
+    "severity": "high",
+    "mitigation": "Census and flag every stem before any equipment arrives, fence off nearby trees, design pads to avoid them, and get CDFW's fee area and the County's removal-permit answer in writing."
+   },
+   {
+    "risk": "Planting in spots later needed for the house pad, septic, driveway, grading or the 5-ft fire ring",
+    "severity": "high",
+    "mitigation": "Fix the build footprint and fire rings on a site plan first. Plant first only on far edges that won't be touched (windbreak, native buffer)."
+   },
+   {
+    "risk": "No water meter on the lot; a new HDWD meter costs about $6,200+ and hauled water is expensive",
+    "severity": "high",
+    "mitigation": "Get a written meter estimate before making an offer. If there's no meter, scale back to natives, rain and ground catchment, and 3-5 fruit trees."
+   },
+   {
+    "risk": "Young trees die during the Bhutan absence",
+    "severity": "high",
+    "mitigation": "Plant natives at least 9-12 months before leaving, delay fruit trees, use a 2,500-3,000 gal uphill tank with gravity drip and a battery timer, and pay a checker every 1-2 weeks."
+   },
+   {
+    "risk": "Rabbits, gophers, ground squirrels and pack rats destroy plantings and chew drip lines",
+    "severity": "high",
+    "mitigation": "Hardware-cloth baskets and cages on every plant from day one, buried or rigid drip lines, and keep cholla and brush piles away from pods and stored belongings."
+   },
+   {
+    "risk": "Assuming the AB 1808 relief or Zone 0 status is settled when it isn't (local issuer for AB 1808 unknown; Zone 0 package withdrawn and could return)",
+    "severity": "medium",
+    "mitigation": "Design to Zone 0 anyway (gravel ring, no woody plants within 5 ft). Re-check CDFW, County and Board of Forestry status before grading and before placing later pods."
+   },
+   {
+    "risk": "Greywater from the unpermitted pod is treated as illegal wastewater discharge",
+    "severity": "medium",
+    "mitigation": "Don't plumb pod greywater onto the land. Put a laundry-to-landscape stub-out with a sewer or septic diverter in the permitted house design."
+   },
+   {
+    "risk": "Late spring frost kills apricot and almond blossoms",
+    "severity": "medium",
+    "mitigation": "Favor pomegranate, fig, jujube, grape and pistachio. Plant stone fruit mid-slope with late-blooming varieties."
+   },
+   {
+    "risk": "Resinous trees, wood mulch or wood planters near the pods or house raise ember and fire risk",
+    "severity": "medium",
+    "mitigation": "Gravel ring around every structure, wood chips only in the orchard 30+ ft out, and cypress, pine or juniper only 100+ ft away, or none."
+   },
+   {
+    "risk": "Spring winds dry out and break young plants",
+    "severity": "medium",
+    "mitigation": "Put up 40-50% windbreak fabric on T-posts in Year 1, plant the native windbreak upwind, and stake trees loosely."
+   }
+  ],
+  "costs": [
+   {
+    "item": "Joshua tree removal fee, per stem (CDFW)",
+    "low_usd": 156.5,
+    "high_usd": 2609,
+    "note": "Reduced area $156.50-$1,043.50; standard area $354.75-$2,609 by size. Adjusted yearly; dead trees count."
+   },
+   {
+    "item": "New HDWD water service (5/8-in meter use)",
+    "low_usd": 6218,
+    "high_usd": 8000,
+    "note": "$5,418 meter charge + $200 fire-flow fee + installation at cost ($600 minimum) + materials and meter. 1-in is $10,836 before install. High end is an estimate; get a written quote."
+   },
+   {
+    "item": "HDWD fixed meter charge, per year (5/8-in)",
+    "low_usd": 353,
+    "high_usd": 353,
+    "note": "$29.42/month from July 1, 2026, owed even with zero use."
+   },
+   {
+    "item": "Metered water, Year 1 (about 8,000-15,000 gal)",
+    "low_usd": 55,
+    "high_usd": 200,
+    "note": "Using HDWD tier 1 ($5.17/748 gal); summer months may hit $8.80-$9.96 tiers."
+   },
+   {
+    "item": "Hauled water, per 2,000-3,000 gal load",
+    "low_usd": 100,
+    "high_usd": 400,
+    "note": "UNVERIFIED; get 3 local quotes."
+   },
+   {
+    "item": "Native plants, each (1-5 gal)",
+    "low_usd": 8,
+    "high_usd": 45,
+    "note": "Estimate; check MDLT's 2026 catalog."
+   },
+   {
+    "item": "Bare-root fruit tree, each",
+    "low_usd": 35,
+    "high_usd": 75,
+    "note": "Estimate; container trees about $50-$150."
+   },
+   {
+    "item": "Protection kit per tree (gopher basket, cage, stake, trunk paint)",
+    "low_usd": 20,
+    "high_usd": 60,
+    "note": "DIY estimate."
+   },
+   {
+    "item": "Drip system for about 20 trees",
+    "low_usd": 300,
+    "high_usd": 900,
+    "note": "DIY estimate."
+   },
+   {
+    "item": "Poly tank 1,500-3,000 gal, delivered",
+    "low_usd": 1000,
+    "high_usd": 3500,
+    "note": "Estimate; needs a level compacted pad; ask about permit limits (verify)."
+   },
+   {
+    "item": "Plant checker while abroad, per visit",
+    "low_usd": 25,
+    "high_usd": 75,
+    "note": "Estimate; every 1-2 weeks."
+   },
+   {
+    "item": "Year 1 planting total (windbreak, 15-25 natives, 5-8 fruit trees, protection, drip, 1 tank, 2-4 beds)",
+    "low_usd": 2500,
+    "high_usd": 7500,
+    "note": "Estimate; excludes a new water meter."
+   }
+  ],
+  "numbers": [
+   {
+    "label": "Joshua tree fee, standard area (per stem)",
+    "value": "$354.75 (<1 m) / $521.75 (1-5 m) / $2,609 (5 m+)",
+    "source": "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP"
+   },
+   {
+    "label": "Joshua tree fee, reduced area (per stem)",
+    "value": "$156.50 / $208.75 / $1,043.50",
+    "source": "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP"
+   },
+   {
+    "label": "AB 1808 limit (existing owner-occupied home only)",
+    "value": "Up to 10 trees within 30 ft of the home or 15 ft of an existing or new accessory structure",
+    "source": "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1808"
+   },
+   {
+    "label": "County-regulated desert plants",
+    "value": "All yuccas, nolinas, agaves and Joshua trees; mesquite or smoke tree with a 2 in+ stem or 6 ft+ height; creosote rings 10 ft+ wide",
+    "source": "San Bernardino County Development Code 88.01.060"
+   },
+   {
+    "label": "County exemption",
+    "value": "Regulated plants within 20 ft of a County-permitted structure",
+    "source": "San Bernardino County Development Code 88.01.030(k)"
+   },
+   {
+    "label": "Zone 0 (not in force; withdrawn Sept 8, 2026)",
+    "value": "0-5 ft: no wood mulch, no new trees, pots up to 18 in noncombustible; outbuildings under 120 sq ft there must be fully noncombustible",
+    "source": "https://oal.ca.gov/emergency_regulations/Recent_Actions_Taken_on_Emergency_Regulations/"
+   },
+   {
+    "label": "Defensible space",
+    "value": "0-30 ft lean and green; 30-100 ft reduced fuel (verify for your zone)",
+    "source": "PRC 4291 (general knowledge)"
+   },
+   {
+    "label": "USDA hardiness zone",
+    "value": "9a (20-25\u00b0F) for 92284/92285/92252/92268; 9b for 92256",
+    "source": "https://phzmapi.org/92284.json"
+   },
+   {
+    "label": "Yucca Valley rainfall and elevation",
+    "value": "About 4.8 in/yr; about 3,260 ft",
+    "source": "https://en.wikipedia.org/wiki/Yucca_Valley,_California"
+   },
+   {
+    "label": "HDWD rates from 7/1/2026",
+    "value": "$29.42/mo fixed (5/8-in); $5.17 / $8.80 / $9.96 per 748 gal (0-4 / 5-11 / 12+ units per month)",
+    "source": "https://www.hdwd.com/407/Water-Rates"
+   },
+   {
+    "label": "HDWD new meter charge",
+    "value": "$5,418 (5/8-in use) or $10,836 (1-in), + $200 fire-flow fee + $600 minimum install",
+    "source": "https://www.hdwd.com/411/New-Construction-Fees"
+   },
+   {
+    "label": "BDVWA proposed 2026 rates",
+    "value": "$4.41 per 748 gal; $77.76 bi-monthly fixed (3/4-1 in); bulk $12.19 (adoption unverified)",
+    "source": "https://bdvwa.org/wp-content/uploads/Prop-218-Notice-FINAL.pdf"
+   },
+   {
+    "label": "Gravity drip pressure",
+    "value": "2.31 ft of drop = 1 psi; 10-20 ft of drop \u2248 4-9 psi"
+   },
+   {
+    "label": "Roof rain harvest",
+    "value": "0.623 gal per sq ft per inch of rain; about 2.5 gal per sq ft per year at 5 in and 80% capture"
+   },
+   {
+    "label": "Tank for a summer away",
+    "value": "20 trees \u00d7 10 gal/wk \u00d7 13 wk \u2248 2,600 gal"
+   }
+  ],
+  "people": [
+   {
+    "role": "Mojave Desert Land Trust nursery and plant staff",
+    "why": "Local native plants, species advice, planting guide, referrals to site-walk consultants",
+    "when": "Now: sale is Oct 24, 2026; again before the fall planting",
+    "cost": "Free advice; members get 10% off plants"
+   },
+   {
+    "role": "Water district (HDWD, BDVWA or Joshua Basin WD, depending on parcel)",
+    "why": "Whether there's a meter and what a new one costs, which decides whether an orchard is realistic",
+    "when": "Before making an offer",
+    "cost": "Free call; a new HDWD meter is about $6,200+"
+   },
+   {
+    "role": "CDFW Region 6 (r6cesa@wildlife.ca.gov, 909-484-0167)",
+    "why": "Joshua tree fee area, permit path, local delegation, whether AB 1808 helps later",
+    "when": "During due diligence, before the offer if possible",
+    "cost": "Free to ask; fees per stem if any tree must go"
+   },
+   {
+    "role": "San Bernardino County Land Use Services, Planning (909-387-8311)",
+    "why": "Tree or Plant Removal Permit, preconstruction inspection, whether the County issues Joshua tree permits",
+    "when": "Before any grading or pod placement",
+    "cost": "Permit fees not checked (verify)"
+   },
+   {
+    "role": "Qualified biologist or Joshua tree census surveyor",
+    "why": "CDFW requires a census with data, photos and a map for any removal permit",
+    "when": "During design, before grading",
+    "cost": "Not verified; likely several hundred to a few thousand dollars"
+   },
+   {
+    "role": "UC Master Gardeners of San Bernardino County",
+    "why": "Fruit varieties, chill hours and pests for the High Desert",
+    "when": "Winter, before buying bare-root trees",
+    "cost": "Free to low-cost workshops"
+   },
+   {
+    "role": "Local plant and property checker",
+    "why": "Timers, tanks and cages fail; someone must check every 1-2 weeks while you're in Bhutan",
+    "when": "Line up 2-3 months before leaving",
+    "cost": "About $25-$75 per visit (estimate)"
+   },
+   {
+    "role": "Neighbors with gardens",
+    "why": "Frost pockets, wind direction, rodent pressure, what actually survives, which water hauler they use",
+    "when": "Every site visit",
+    "cost": "Free"
+   }
+  ]
+ },
+ "other_corrections": [
+  "Web search was out of budget for this session (shared limit reached), so every check here used direct page fetches. Several primary pages blocked me (403): leginfo, the Board of Forestry, OSFM, ecode360, Town of Yucca Valley, garden.org and plantmaps. Town of Yucca Valley native-plant rules, the state Desert Native Plants Act text, frost dates, chill hours, ETo and the rainwater-tank exemption remain unverified.",
+  "Zone 0 status is now known: OAL File No. 2026-0828-03E ('Zone 0 Defensible Space') was WITHDRAWN on Sept 8, 2026. It was not approved and is not in force. The report's 'under further review' should read 'withdrawn; possible resubmission'.",
+  "The BDVWA rates are proposed maximums from a Prop 218 notice (hearing Feb 10, 2026). The report calls them 'adopted per Z107.7 report', but that Z107.7 article is dated April 14, 2021 and covers an earlier rate change.",
+  "The cost table adds BDVWA's $59.40 bi-monthly fire service charge as if every customer pays it. It applies only to properties with a separate fire-sprinkler or hydrant connection.",
+  "The BDVWA new-service figures ($4,595 facilities charge + $1,785 service line, $6,380-$7,100 total) are not in the cited article. That article (Jan 30, 2023) gives only a proposed $2,435 service-line installation for meters up to 1 in.",
+  "The report says no HDWD connection fee was found, but HDWD's New Construction Fees page lists $5,418 (5/8-in use) or $10,836 (1-in), plus a $200 fire-flow fee and installation at cost ($600 minimum).",
+  "AB 1808 is described as 'fee-free'. It removes mitigation but keeps an administrative permit fee, and it requires an owner-occupant. It also covers trees in or near the footprint of a NEW accessory structure proposed for an existing home, which matters for adding pods after the permitted house is lived in.",
+  "AB 1663: no-fee removal of qualifying dead trees already existed in the 2023 Act. The bill's confirmed change is letting an agent apply and dropping the attestation requirement. SB 1062 was chaptered Sept 27, 2026, not Sept 29.",
+  "The claim that a '2026 fee adjustment took effect Jan 1, 2026' is unverified. CDFW's page says only that fees are adjusted annually under Fish and Game Code 1927.8(b).",
+  "The County native-plant section was low-confidence and listed catclaw, cacti, ocotillo and desert holly as County-regulated. The County code (88.01.060) doesn't list them; it lists Agavaceae, Joshua trees, mesquite, smoke tree, creosote rings 10 ft+, ironwood and palo verde. The state Desert Native Plants Act may cover the others (verify). The code also has a 20-ft exemption around County-permitted structures, which the report missed.",
+  "The County LUS planning page still carries an old notice that 'the County cannot issue a permit to take' western Joshua trees. That suggests no County delegation exists yet (verify with CDFW).",
+  "CDFW Joshua tree permits have no statutory processing deadline, and they require CEQA documentation (a Notice of Determination and filing-fee receipt) before issuance. The report doesn't mention either, and both matter for build timing.",
+  "The water-cost examples leave out fixed meter charges (about $353/yr at HDWD, or about $467/yr at BDVWA if adopted), which exceed the cost of the water itself at Year 1 volumes. HDWD tiers reset monthly, so summer orchard watering on top of household use will reach the $8.80-$9.96 tiers.",
+  "The Fire Safe Marin, RCRC and BB&K summaries disagree on when Zone 0 would apply to new construction (immediately vs. after Board guidance up to a year later). The withdrawal makes this moot for now.",
+  "Laundry-to-landscape: the 250 gal/day figure defines a 'simple' system, not the washer exemption. Simple shower or sink systems need a construction permit under state code unless the local agency exempts them, so pod shower water would need a permit regardless.",
+  "Possible issue to check, not verified: the Colorado River Basin Regional Water Board has a septic-discharge prohibition covering parts of Yucca Valley. If the parcel is inside it, septic options for the permitted house (and greywater diversion) could change."
+ ]
+}

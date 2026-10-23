@@ -1,0 +1,534 @@
+{
+ "topic": "diligence_team",
+ "claim_checks": [
+  {
+   "claim": "Inside the Town of Yucca Valley over the Warren subbasin, septic discharge is banned in Phase 1 (since Dec 31, 2023) and in Phase 2 by Dec 31, 2028 (or Dec 31, 2031 if western Joshua tree is listed), or earlier when sewer is 'available' (sewer within 200 ft of a building and the parcel abuts it). Owners must connect within 180 days. New septic is allowed only until the parcel's deadline.",
+   "verdict": "corrected",
+   "correct_statement": "The dates, the 200-ft/abutting test and the 180-day hookup window are right. But the ban covers only the Phase 1 and 2 areas mapped in Basin Plan Appendix C, not every parcel in the Town. The report also missed one rule: a new basic septic system installed less than 36 months before sewer arrives can keep running until 36 months after it was installed (60 months for an advanced unit that removes at least 50% of nitrogen), and then the 180 days start. The 2031 date applies only if the Fish and Game Commission lists the Joshua tree. That decision is on hold until a status review due Jan 1, 2033, so plan on Dec 31, 2028. The Water Board FAQ (updated Dec 30, 2025) confirms Phase 1 closed Dec 31, 2023 and owners had 6 months to connect.",
+   "sources": [
+    "https://waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/2023/yvbpa-wcorr.pdf",
+    "https://www.waterboards.ca.gov/rwqcb7/water_issues/programs/basin_planning/docs/yuccavalley/prohibition-enforcement-faq.pdf",
+    "https://fgc.ca.gov/CESA"
+   ]
+  },
+  {
+   "claim": "Since Jan 1, 2018, California Water Code \u00a7106.4(c) bars building permits for new homes where hauled water is the intended supply. San Bernardino County requires a purveyor connection if one is available, or a permitted well.",
+   "verdict": "corrected",
+   "correct_statement": "The hauled-water ban is confirmed. County Environmental Health cites Water Code \u00a7106.4(c), effective Jan 1, 2018: no building permits for new homes that rely on hauled water. A home approved before then may be rebuilt after a fire or disaster. That same page says well work needs an EHS permit and an EHS-registered driller, and well applications inside Mojave Water Agency boundaries filed on or after Aug 5, 2024 need MWA's Notice of Intent. The page does not mention a rule that you must use a water district when one is available. Treat that part as unverified and ask EHS.",
+   "sources": [
+    "https://ehs.sbcounty.gov/?p=4665"
+   ]
+  },
+  {
+   "claim": "Each Joshua tree stem counts as a separate tree. 2026 CDFW fees in the standard area are $354.75 (under 1 m), $521.75 (1 to under 5 m) and $2,609 (5 m and up). Reduced area: $156.50, $208.75, $1,043.50.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed. CDFW's FAQ says each stem or trunk counts as a separate tree under Fish & Game Code \u00a71927.3(b). The state bulletin lists exactly these 2026 fees, effective Jan 1, 2026, as an inflation-only change. The FAQ also says a project designed to fully avoid impacts to Joshua trees does not need a CDFW permit.",
+   "sources": [
+    "https://content.govdelivery.com/accounts/CNRA/bulletins/3fdfa9c",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ"
+   ]
+  },
+  {
+   "claim": "Yucca Valley and most Morongo Basin communities are in the Joshua tree 'standard' (higher) fee area.",
+   "verdict": "unverifiable",
+   "correct_statement": "Only a local newspaper (San Bernardino County Sentinel, Mar 21, 2025) puts Yucca Valley, Joshua Tree, Morongo Valley, Landers, Pioneertown and Flamingo Heights in the standard area. The CDFW pages I could open link to a fee map but don't list towns. Ask CDFW Region 6 which fee area your APN is in.",
+   "sources": [
+    "https://sbcsentinel.com/?p=34086",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ"
+   ]
+  },
+  {
+   "claim": "No city or county delegation agreements exist, so CDFW Region 6 issues Joshua tree permits ((909) 484-0167, r6cesa@wildlife.ca.gov).",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed. The CDFW FAQ says no counties, cities or towns have signed delegation agreements, and an April 2026 Assembly analysis says the same. The Region 6 phone number and email are correct. Incidental take permits have no deadline set in law.",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting",
+    "https://awpw.assembly.ca.gov/system/files/2026-04/ab-1663-wallis.pdf"
+   ]
+  },
+  {
+   "claim": "AB 1663 (2026) would exempt only parcels owned continuously since July 10, 2023; its status as of Oct 2026 was not verified.",
+   "verdict": "corrected",
+   "correct_statement": "CDFW's WJTCA page says that in September 2026 the act was amended and three bills became law: AB 1663, SB 1062 and AB 1808. I could not read the final text. As amended on March 16, 2026, AB 1663 exempts single-family-home parcels only if the same owner has held them since on or before July 10, 2023, or got them later by gift or inheritance. That would not help a new buyer. Have CDFW confirm what SB 1062 and AB 1808 changed.",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/WJTCA",
+    "https://awpw.assembly.ca.gov/system/files/2026-04/ab-1663-wallis.pdf"
+   ]
+  },
+  {
+   "claim": "CDFW must review Joshua tree fees for conservation adequacy by Dec 31, 2026, so 2027 fees may change.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed. The Assembly analysis adds that CDFW's first review found total fees too low to meet the law's standard. CDFW staff have also said they may lower the fee burden for single-family homes. 2027 fees could go up or down for a small house project.",
+   "sources": [
+    "https://awpw.assembly.ca.gov/system/files/2026-04/ab-1663-wallis.pdf",
+    "https://content.govdelivery.com/accounts/CNRA/bulletins/3fdfa9c"
+   ]
+  },
+  {
+   "claim": "In unincorporated San Bernardino County, a Temporary Use Permit for 'Temporary Occupancy \u2013 Residential' lets owners live in a temporary structure during construction: 12 months after building permit issuance, extensions up to 5 years total, removal within 30 days of completion, and a performance security.",
+   "verdict": "confirmed",
+   "correct_statement": "The code text says this. \u00a785.15.080(f) covers projects of 4 or fewer homes. The permit lasts up to 12 months after the building permit is issued, or until completion if sooner. The Director can grant 12-month extensions if you ask in writing at least 14 days before expiry, up to 5 years of extensions in total. Everything must be removed within 30 days of completion or expiry, whichever comes first, and \u00a785.15.120(b) requires a removal security first. The Building Official issues it (Table 85-4). Caveat: I read this on an unofficial copy of the code (gocodebook), because the official code site blocked access. The code doesn't mention RVs or utility hookups. Confirm at the County counter.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-85.15-temporary-use-permits",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-82.04-residential-land-use-zoning-districts"
+   ]
+  },
+  {
+   "claim": "On County lots of 5 acres or more, up to three ADU units are allowed in aggregate; detached ADUs up to 1,200 sq ft (800 sq ft by-right); holding tanks not allowed for ADUs.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed by the County's own ADU ordinance redline: 'On a lot five acres or greater, up to three units are allowed.' Detached ADUs can be up to 1,200 sq ft, and one of 800 sq ft with 4-ft side and rear setbacks can't be blocked. Minimum size is 200 sq ft, and holding tanks are not allowed. Two more points. Every ADU needs a full kitchen. An ADU may go with a 'proposed primary dwelling', which the ordinance defines as a house with an active building permit application or approval. So ADUs can be permitted once the house permit is filed, but probably not before.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/ADU-and-JADU-Ordinance-Redline-Copy.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.36-accessory-dwelling-units"
+   ]
+  },
+  {
+   "claim": "The Mojave desert tortoise has been listed as endangered under CESA since July 15, 2025.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed. CDFW's October 2026 list of state and federally listed animals shows the Mojave desert tortoise as State Endangered from 2025-07-15 (state Threatened since 1989) and Federally Threatened since 1990-04-02.",
+   "sources": [
+    "https://fgc.ca.gov/CESA",
+    "https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=109405"
+   ]
+  },
+  {
+   "claim": "Western burrowing owl: petition under review; whether candidate protections cover Morongo Basin owls was not confirmed.",
+   "verdict": "corrected",
+   "correct_statement": "CDFW's October 2026 list shows the burrowing owl as a State Candidate since Oct 10, 2024. Under CESA a candidate gets the same protection from harm as a listed species. Have the biologist confirm whether the Morongo Basin population is covered (verify).",
+   "sources": [
+    "https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=109405",
+    "https://fgc.ca.gov/CESA"
+   ]
+  },
+  {
+   "claim": "BDVWA water meter example: $2,685 flat install (Mar 2024); a late-2025 action set the 1-inch meter capital fee at about $4,800 and install at about $1,370.",
+   "verdict": "refuted",
+   "correct_statement": "The $4,800 and $1,370 figures come from a May 28, 2019 news article about a proposal, not from late 2025. BDVWA's resolution posted Sept 30, 2025 raises the service-line-and-meter install fee for 3/4-inch and 1-inch meters from $2,685 (set Mar 12, 2024) to $3,040. The capacity fee (BDVWA calls it a 'basic facilities charge') is charged separately, and I did not verify its current amount.",
+   "sources": [
+    "https://bdvwa.org/wp-content/uploads/Resolution-25R-XX-Setting-Service-Line-Installation-fee-10-14-2025-POSTING-003.pdf",
+    "https://z1077fm.com/bighorn-desert-view-water-adjusting-meter-and-connection-fees"
+   ]
+  },
+  {
+   "claim": "A water meter connection costs roughly $2,685 to $6,170 (cost table).",
+   "verdict": "corrected",
+   "correct_statement": "That range is far too low for some districts. Joshua Basin Water District's fee sheet (effective Feb 1, 2025) for a 1-inch meter: connection $1,269 on a tract lot, or $2,583 to $4,500 on a non-tract lot. Add a water capacity charge of $12,928, and the sheet also lists a wastewater capacity charge of $7,148 per home (check whether it applies). That is roughly $14,000 to $24,600. A JBWD will-serve letter costs $33. Hi-Desert Water District fees were not verified.",
+   "sources": [
+    "https://jbwd.specialdistrict.org/files/66e3194ef/Rates+and+Fees+02.01.25+revised+01.21.25+with+Standby.pdf"
+   ]
+  },
+  {
+   "claim": "County perc rules: a perc report is required for all new construction before a building permit; 2 working days' notice; a topo map unless the slope is uniform and under 20%; a 21\u201330% disposal-area slope needs more testing; over 30% is adverse; test at the post-grading depth (\u00b12 ft, \u00b15 ft for pits); show a 100% expansion area.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed in the County EHS perc standards. One addition: slopes over 30% also need a slope stability report, which the county geologist reviews. The standards call a 21\u201330% slope 'moderate' and over 30% 'severe'.",
+   "sources": [
+    "https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/percolation-testing-and-reporting-standards-for-onsite-wastewater-treatment-systems.pdf"
+   ]
+  },
+  {
+   "claim": "CAL FIRE released updated LRA fire hazard maps on March 24, 2025; SRAs were addressed in 2024; County Fire adopted Ordinance No. 4489 on June 10, 2025.",
+   "verdict": "corrected",
+   "correct_statement": "County Fire's page confirms Ordinance No. 4489 (June 10, 2025) for Local Responsibility Areas in the Fire District's area, and says all State Responsibility Areas were addressed in 2024. That page does not give the March 24, 2025 release date, and I did not verify it. Whether the Town of Yucca Valley has adopted its own map is also unverified.",
+   "sources": [
+    "https://sbcfire.org/fire-hazard-severity-zone-map/"
+   ]
+  },
+  {
+   "claim": "The federal 25D residential clean energy credit is not available for property placed in service after Dec 31, 2025.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed. The IRS says: 'The credit is not available for any property placed in service after December 31, 2025.'",
+   "sources": [
+    "https://www.irs.gov/credits-deductions/residential-clean-energy-credit"
+   ]
+  },
+  {
+   "claim": "The 2025 Energy Code applies to permits applied for from Jan 1, 2026.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed. The CEC says buildings whose permit applications are filed on or after Jan 1, 2026 must meet the 2025 Energy Code. I did not re-check the solar requirement on that page, but solar has been required on new single-family homes since the 2019 code (verify the details with the Title 24 consultant).",
+   "sources": [
+    "https://www.energy.ca.gov/programs-and-topics/programs/building-energy-efficiency-standards/2025-building-energy-efficiency"
+   ]
+  },
+  {
+   "claim": "County RL (Desert Region) standards: 2.5-acre base minimum lot (suffix may change it); setbacks 25 ft front, 25 ft street side, 15 ft interior side, 15 ft rear; 20% lot coverage; 35 ft height; single homes and orchards need no planning permit; temporary structures need a TUP.",
+   "verdict": "confirmed",
+   "correct_statement": "The code text matches (Tables 82-7, 82-8C, 82-9C). It comes from the same unofficial code copy, since the official site blocked access, so confirm at the counter. Lot coverage of 20% counts structures and impervious surfaces together.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-82.04-residential-land-use-zoning-districts"
+   ]
+  },
+  {
+   "claim": "County Land Use Services: (909) 387-8311 or (760) 995-8140; 385 N. Arrowhead Ave., San Bernardino; 15900 Smoke Tree St. Ste 131, Hesperia. The County Digital Zoning Map covers unincorporated areas.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed on the County LUS pages. The zoning map covers only unincorporated areas. For a parcel inside the Town, contact Yucca Valley directly.",
+   "sources": [
+    "https://lus.sbcounty.gov/faqs/4380/",
+    "https://lus.sbcounty.gov/planning-home/zoning-and-overlay-maps/"
+   ]
+  },
+  {
+   "claim": "Hi-Desert Water District Phase 2 sewer construction broke ground Aug 6, 2025 with a $103M state grant.",
+   "verdict": "unverifiable",
+   "correct_statement": "I could not verify the start date or the grant amount. HDWD's sewer page shows Phase 2 work underway in October 2026 in the Sky Harbor and Storey Park/south of Onaga Trail areas, continuing to the end of 2026. HDWD: 760-365-8333, www.hdwd.com/phase2sewer.",
+   "sources": [
+    "https://www.hdwd.com/376/Sewer-Project"
+   ]
+  },
+  {
+   "claim": "Building permits lapse after 180 days without work or a passed inspection.",
+   "verdict": "unverifiable",
+   "correct_statement": "This is the standard model-code rule (CBC/CRC \u00a7105.5). I could not confirm the County's or the Town's local version. Ask the building official in writing before booking the Bhutan trip.",
+   "sources": [
+    "General knowledge; County/Town building code pages not reachable this session"
+   ]
+  },
+  {
+   "claim": "Since Aug 2024, buyers sign a written buyer-broker agreement before touring with an agent.",
+   "verdict": "unverifiable",
+   "correct_statement": "Likely overstated. The national Realtor (NAR) rule from Aug 2024 requires a written agreement before touring a home. California law (AB 2992, effective Jan 1, 2025) is understood to require a written buyer agreement no later than when you sign an offer, with a term of up to 3 months (verify). For vacant land, ask the agent what they need and when.",
+   "sources": [
+    "General knowledge; web search budget was exhausted so this was not checked against a primary source"
+   ]
+  }
+ ],
+ "digest": {
+  "headline": "Before you offer, confirm five things: Town or County, a legal water source (no hauled water), the septic or sewer situation, recorded legal access, and a building area clear of Joshua trees. Plan to live on the land legally only after a building permit is issued, under the County's temporary-occupancy permit.",
+  "key_points": [
+   "Settle Town vs. County first. Inside the Town of Yucca Valley, Town zoning and the Hi-Desert Water District sewer program apply. In unincorporated areas, County rules apply. Zoning, the rules for living on site and the sewer rules all change with the answer.",
+   "Septic in the Town's sewer area (Phase 1 and 2 zones only; check yvsewermap.com): Phase 2 septic use ends Dec 31, 2028, or sooner if sewer reaches you. The 2031 date applies only if the Joshua tree gets listed, which is on hold until a 2033 review. After your deadline you have 180 days to hook up. Sewer counts as 'available' when the main is less than 200 ft from a building and your lot touches it.",
+   "Softer than it looks: if you install a new septic less than 3 years before sewer arrives, you can keep using it until 3 years after you installed it (5 years for an advanced nitrogen-removal unit). Paying twice is still possible, but the timing is less brutal. HDWD is building Phase 2 now, through the end of 2026.",
+   "No hauled water for the permitted house (state law since Jan 1, 2018). You need a water-district meter or a permitted well. Hauling water to a temporary unit is a stopgap only.",
+   "Meter costs vary a lot by district. Bighorn-Desert View: about $3,040 to install, plus a separate capacity fee (verify). Joshua Basin (Feb 2025): about $14,000 to $24,600 for a 1-inch meter including capacity charges. Hi-Desert: unknown (ask). No main at your frontage can add $10k to $100k+ for an extension (estimate). A well is about $40k to $120k (estimate).",
+   "Joshua trees: every stem counts as a tree. 2026 removal fees in the standard area are $354.75 (under 1 m), $521.75 (1 to 5 m) and $2,609 (5 m and up). Yucca Valley is probably in the standard area (verify with CDFW). If your design fully avoids the trees, CDFW says no permit is needed. Fees are under review by Dec 31, 2026. The September 2026 exemption law (AB 1663) helps only people who owned before July 10, 2023, not new buyers (verify final text).",
+   "Animals: the desert tortoise has been state-endangered since July 15, 2025. The burrowing owl has been a state 'candidate' since Oct 2024, which already means it is protected. Hire a biologist to survey before any clearing or grading, and never move a tortoise yourself.",
+   "Living on site legally (County): a 'Temporary Occupancy \u2013 Residential' permit lets you live in a temporary unit during construction, but only after the house building permit is issued. It lasts 12 months, plus extensions of up to 5 years total. You post a removal bond and must remove the unit within 30 days of finishing. Living in an unpermitted $20k capsule before then risks fines, a code case, no power meter and no insurance. Town rules are unknown (verify).",
+   "More capsules later: the County allows up to 3 ADUs (accessory dwelling units, i.e. permitted extra homes) on lots of 5 acres or more. Detached ADUs can be 200 to 1,200 sq ft (800 sq ft can't be refused). Each needs a full kitchen, septic or sewer approval (no holding tanks) and code-built construction. They can be permitted once the main-house permit application is active. The survey must show the lot is truly 5.00 acres or more.",
+   "Perc test (septic soil test) is required before any building permit. EHS needs 2 working days' notice. A topo map is required if the slope is 20% or more. A septic area on a 21\u201330% slope means more testing, and over 30% needs a slope stability study. Tests are done at the final graded depth, so don't grade first.",
+   "'Flattening' the slope: don't clear or grade before permits. County rules protect yuccas, creosote rings 10 ft or more across, and larger mesquite and smoketree. Use small stepped pads and keep total disturbed ground under 1 acre (43,560 sq ft) to avoid a state stormwater permit (verify the local grading threshold).",
+   "County Rural Living zoning (unofficial code copy, verify): setbacks are 25 ft front and street side, 15 ft interior side and rear. Max 20% coverage, 35 ft height. A house and an orchard need no planning permit.",
+   "Bhutan timing: building permits usually lapse after 180 days with no passed inspection, and the temporary-occupancy permit depends on the building permit (verify locally). Pass an inspection right before you leave and get any extension in writing. Line up a caretaker, cameras and weed-abatement coverage. Storage on site should fall under the construction-phase permit.",
+   "Power and energy: permits applied for from Jan 1, 2026 follow the 2025 Energy Code (solar required on new homes). The 30% federal solar credit ended for systems placed in service after Dec 31, 2025. Bringing in SCE power costs roughly $3k to $75k+ depending on pole distance (estimate). For the soft heated floor, thick padding blocks radiant heat, so the designer must check the floor covering's insulation value."
+  ],
+  "next_actions": [
+   "Look up the parcel on assessormapviewer.arc.sbcounty.gov and write down the APN, the 'City' label and the Tax Rate Area to settle Town vs. County.",
+   "Check the zoning and suffix (e.g., RL-5) on the County Digital Zoning Map, or call Yucca Valley Community Development if the lot is in the Town.",
+   "Screenshot the parcel on County maps HZ-1 (faults), HZ-4 (flood), HZ-5 (fire zone), HZ-6 (state vs. local fire area) and LU-3 (military), plus the FEMA flood zone at msc.fema.gov, and save them in one folder.",
+   "Email the water district for the APN. Ask: is there a main at the frontage, what are all 2026 fees for a 1-inch meter including capacity charges, and how do we get a will-serve letter? If it's Hi-Desert (760-365-8333), also ask the sewer phase, deferred status and projected sewer date.",
+   "Call County Land Use Services at (909) 387-8311. Ask: is it a legal lot, what are the Temporary Occupancy \u2013 Residential terms and removal bond amount, can ADUs be permitted with the house application, and how do we keep permits alive during a 4\u20136 month trip abroad?",
+   "Email CDFW Region 6 (r6cesa@wildlife.ca.gov). Ask which fee area the APN is in, what buffer counts as 'full avoidance' so no permit is needed, and what the September 2026 bills changed.",
+   "Ask the listing agent by email for any old perc report, survey, well log, Joshua tree census, permits and the current tax bill.",
+   "Write a one-page walk-away list with dollar ceilings for water, power and septic, plus deal-killers such as no recorded access or trees covering the only flat area.",
+   "Book three site visits (weekday morning, Saturday afternoon, after dark). On the first, GPS-tag every Joshua tree stem with its height class.",
+   "Call three surveyors and three perc engineers for price and earliest start date, and use the answers to set a 45\u201360 day due-diligence period."
+  ],
+  "questions_for_couple": [
+   "What is our all-in ceiling for land, water, power, septic, permits and the small house, and how much do we hold in reserve?",
+   "If water and power alone cost $40k to $80k on this lot, do we still want it, or do we pay more for a lot with utilities at the street?",
+   "Will we wait to move in until the house permit and temporary-occupancy permit exist, camping on short visits until then, instead of risking an unpermitted capsule?",
+   "What does 'making progress' mean to us in dated milestones (permit filed by month X, foundation by month Y)?",
+   "How long do we really want to be in Bhutan, and can we schedule it around inspections so permits don't lapse?",
+   "Do we design entirely around the Joshua trees, or accept paying to remove or relocate a few?",
+   "Will we owner-build, hire an hourly mentor, or hire a general contractor, and how many hours a week can each of us give?",
+   "What are our three walk-away conditions during due diligence?"
+  ],
+  "risks": [
+   {
+    "risk": "Septic is approved now but sewer arrives soon after, forcing a paid hookup (Town Phase 2 area, deadline Dec 31, 2028 or sooner).",
+    "severity": "high",
+    "mitigation": "Get HDWD's written phase, deferred status and projected date before offering. Price both paths. Remember the 3-year (5-year advanced unit) grace for a newly installed septic."
+   },
+   {
+    "risk": "No legal water source: no main at the frontage and a costly or poor well. Hauled water can't permit the house.",
+    "severity": "high",
+    "mitigation": "Make the deal contingent on a will-serve letter with all fees itemized, or a well-feasibility opinion. Walk away above your ceiling."
+   },
+   {
+    "risk": "Living in an unpermitted capsule leads to a code case, fines, no SCE meter, no insurance and friction on the house permit.",
+    "severity": "high",
+    "mitigation": "File the house permit quickly, then get the County Temporary Occupancy \u2013 Residential permit with a certified unit. Camp short-term until then. Confirm Town rules if the lot is in the Town."
+   },
+   {
+    "risk": "The lot isn't a legal lot or has no recorded legal access.",
+    "severity": "high",
+    "mitigation": "Get a title access endorsement and County legal-lot confirmation (or a Certificate of Compliance) before closing."
+   },
+   {
+    "risk": "Building and temporary-occupancy permits lapse during the Bhutan trip (usually 180 days without a passed inspection; verify).",
+    "severity": "medium",
+    "mitigation": "Pass an inspection just before leaving, get a written extension, or have a contractor do inspected work while you're away."
+   },
+   {
+    "risk": "Joshua trees in the only buildable area mean months of CDFW permitting and per-stem fees that may change in 2027.",
+    "severity": "medium",
+    "mitigation": "Census the trees early, design for full avoidance with buffers, and include a Joshua tree contingency."
+   },
+   {
+    "risk": "A desert tortoise (endangered) or burrowing owl (candidate) is found, stopping work.",
+    "severity": "medium",
+    "mitigation": "Biologist screening in escrow and a pre-construction sweep. Never clear or grade without permits."
+   },
+   {
+    "risk": "Water meter capacity fees, power extension and fire-access driveway costs are underbudgeted (each can run $15k to $75k+).",
+    "severity": "medium",
+    "mitigation": "Get written district fees, an SCE preliminary estimate and early fire-reviewer input during the contingency period."
+   },
+   {
+    "risk": "Flash flooding through a wash, or a fault zone under the pad.",
+    "severity": "medium",
+    "mitigation": "Check the FEMA and County HZ-1/HZ-4 maps, have the civil engineer walk the site, and keep pads out of flow paths."
+   },
+   {
+    "risk": "Theft, squatting or dumping while you're abroad with belongings stored on site.",
+    "severity": "medium",
+    "mitigation": "Locked storage covered by the construction-phase permit, cameras, a caretaker and neighbor watch. Keep valuables off site."
+   },
+   {
+    "risk": "The lot measures just under 5.00 acres, losing the third ADU.",
+    "severity": "low",
+    "mitigation": "Confirm gross and net acreage on the survey and ask Planning which figure counts."
+   }
+  ],
+  "costs": [
+   {
+    "item": "Water meter connection incl. capacity charges (district-dependent)",
+    "low_usd": 3040,
+    "high_usd": 24600,
+    "note": "BDVWA install $3,040 plus a separate capacity fee (verify); JBWD 1-inch about $14k\u2013$24.6k (Feb 2025 sheet). HDWD not verified."
+   },
+   {
+    "item": "Water main extension if no main at frontage",
+    "low_usd": 10000,
+    "high_usd": 100000,
+    "note": "Estimate; get a district quote."
+   },
+   {
+    "item": "Private well with pump and storage",
+    "low_usd": 40000,
+    "high_usd": 120000,
+    "note": "Only if no district service. Estimate."
+   },
+   {
+    "item": "Perc test and report",
+    "low_usd": 2500,
+    "high_usd": 6000,
+    "note": "Estimate; 2 working days' notice to EHS required."
+   },
+   {
+    "item": "Septic system (conventional to advanced unit)",
+    "low_usd": 12000,
+    "high_usd": 45000,
+    "note": "Estimate."
+   },
+   {
+    "item": "Boundary survey plus topo",
+    "low_usd": 5000,
+    "high_usd": 14000,
+    "note": "Estimate; topo required if slope is 20% or more."
+   },
+   {
+    "item": "Biologist: Joshua tree census plus tortoise/owl screen",
+    "low_usd": 1000,
+    "high_usd": 7500,
+    "note": "Estimate."
+   },
+   {
+    "item": "Joshua tree removal fee per stem (2026, standard area)",
+    "low_usd": 354.75,
+    "high_usd": 2609,
+    "note": "CDFW 2026 schedule; may change in 2027."
+   },
+   {
+    "item": "SCE line extension",
+    "low_usd": 3000,
+    "high_usd": 75000,
+    "note": "Estimate; depends on pole distance."
+   },
+   {
+    "item": "Off-grid solar plus battery alternative",
+    "low_usd": 25000,
+    "high_usd": 60000,
+    "note": "Estimate; no federal 25D credit after 2025."
+   },
+   {
+    "item": "Civil engineer plus rough grading (pads and driveway)",
+    "low_usd": 11000,
+    "high_usd": 55000,
+    "note": "Estimate; caliche and driveway length drive cost."
+   },
+   {
+    "item": "Permit, plan check and impact fees for a small house",
+    "low_usd": 5000,
+    "high_usd": 20000,
+    "note": "Not verified; ask the counter."
+   },
+   {
+    "item": "Title, escrow and hazard disclosure",
+    "low_usd": 1350,
+    "high_usd": 3650,
+    "note": "Estimate."
+   },
+   {
+    "item": "Insurance (FAIR Plan plus DIC), per year",
+    "low_usd": 1500,
+    "high_usd": 5000,
+    "note": "Estimate; get a quote in escrow."
+   }
+  ],
+  "numbers": [
+   {
+    "label": "Town sewer area Phase 2 septic deadline",
+    "value": "Dec 31, 2028 (2031 only if Joshua tree is listed), or sooner when sewer is available; then 180 days to connect",
+    "source": "https://waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/2023/yvbpa-wcorr.pdf"
+   },
+   {
+    "label": "Sewer 'available' test (homes)",
+    "value": "Main less than 200 ft from any existing or proposed building AND the lot abuts and is served by it",
+    "source": "https://waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/2023/yvbpa-wcorr.pdf"
+   },
+   {
+    "label": "Grace for a newly installed septic",
+    "value": "Installed less than 36 months before sewer arrives: usable until 36 months after install (60 months for a 50%-nitrogen-removal unit)",
+    "source": "https://waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/2023/yvbpa-wcorr.pdf"
+   },
+   {
+    "label": "Joshua tree fees 2026, standard area",
+    "value": "$354.75 (<1 m), $521.75 (1\u2013<5 m), $2,609 (5 m+) per stem",
+    "source": "https://content.govdelivery.com/accounts/CNRA/bulletins/3fdfa9c"
+   },
+   {
+    "label": "Temporary occupancy during construction (County)",
+    "value": "12 months from building permit; 12-month extensions up to 5 years total; remove within 30 days of completion",
+    "source": "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-85.15-temporary-use-permits"
+   },
+   {
+    "label": "ADUs on 5+ acres (County)",
+    "value": "Up to 3; detached 200\u20131,200 sq ft (800 sq ft by right); 4-ft side/rear setbacks; 18 ft height; full kitchen; no holding tanks",
+    "source": "https://lus.sbcounty.gov/wp-content/uploads/sites/48/ADU-and-JADU-Ordinance-Redline-Copy.pdf"
+   },
+   {
+    "label": "County RL desert setbacks / coverage / height",
+    "value": "25 ft front and street side, 15 ft interior side and rear; 20% coverage; 35 ft",
+    "source": "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-82.04-residential-land-use-zoning-districts"
+   },
+   {
+    "label": "Perc slope thresholds",
+    "value": "Topo map if 20% or more; 21\u201330% = more tests; over 30% = slope stability report",
+    "source": "https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/percolation-testing-and-reporting-standards-for-onsite-wastewater-treatment-systems.pdf"
+   },
+   {
+    "label": "Ground disturbance limit to avoid state stormwater permit",
+    "value": "Under 1 acre (43,560 sq ft) (verify)",
+    "source": "General knowledge"
+   },
+   {
+    "label": "JBWD will-serve letter fee",
+    "value": "$33",
+    "source": "https://jbwd.specialdistrict.org/files/66e3194ef/Rates+and+Fees+02.01.25+revised+01.21.25+with+Standby.pdf"
+   },
+   {
+    "label": "Key phone numbers",
+    "value": "County LUS (909) 387-8311 / (760) 995-8140; HDWD 760-365-8333; CDFW Region 6 (909) 484-0167",
+    "source": "https://lus.sbcounty.gov/faqs/4380/"
+   }
+  ],
+  "people": [
+   {
+    "role": "The two of you (desk research plus first site walk)",
+    "why": "Most deal-breakers can be checked for free: jurisdiction, zoning, hazards, water main, nearest pole, tree count.",
+    "when": "Before contacting the seller",
+    "cost": "$0 plus gas"
+   },
+   {
+    "role": "Land-savvy buyer's agent",
+    "why": "Writes the Vacant Land Purchase Agreement with the right contingencies and gets the seller's old documents.",
+    "when": "Before touring or offering",
+    "cost": "Often seller-paid; land minimum about $2,500\u20135,000 (estimate)"
+   },
+   {
+    "role": "County or Town building and planning counter",
+    "why": "Free answers on legal lot, temporary occupancy, ADU timing, grading limits and permit expiry.",
+    "when": "Before the offer",
+    "cost": "Free"
+   },
+   {
+    "role": "Water district (HDWD, BDVWA or JBWD)",
+    "why": "Water is the first deal-breaker. In the Town, HDWD also controls sewer timing.",
+    "when": "Phone call before the offer; will-serve letter in escrow",
+    "cost": "Will-serve letter about $33 (JBWD); meter $3k\u2013$25k"
+   },
+   {
+    "role": "Title officer",
+    "why": "Shows easements, old homestead road reservations, liens and access problems.",
+    "when": "Free profile pre-offer; prelim in week 1 of escrow",
+    "cost": "$1,300\u20133,500 with escrow (estimate)"
+   },
+   {
+    "role": "Licensed land surveyor",
+    "why": "Sets corners, confirms 5.00+ acres and provides the topo the perc test and grading need.",
+    "when": "Day 1 of escrow",
+    "cost": "$5,000\u201314,000 boundary plus topo (estimate)"
+   },
+   {
+    "role": "Perc/septic designer (Qualified Professional)",
+    "why": "A passing perc report is required before any building permit.",
+    "when": "Week 1 of escrow",
+    "cost": "$2,500\u20136,000 (estimate)"
+   },
+   {
+    "role": "Desert biologist / native plant specialist",
+    "why": "Joshua tree census, tortoise and burrowing owl screening, and a buildable area that needs no take permit.",
+    "when": "First 2 weeks of escrow; again before grading",
+    "cost": "$1,000\u20137,500 (estimate)"
+   },
+   {
+    "role": "Civil engineer",
+    "why": "Plans stepped pads, driveway and drainage, and keeps disturbance under 1 acre.",
+    "when": "Feasibility walk in escrow; plans before permits",
+    "cost": "$3,000\u201315,000 (estimate)"
+   },
+   {
+    "role": "SCE service planner",
+    "why": "Pole distance decides between grid and off-grid and can cost tens of thousands.",
+    "when": "Preliminary estimate in escrow",
+    "cost": "$3,000\u201375,000+ extension (estimate)"
+   },
+   {
+    "role": "Fire plan reviewer (County Fire)",
+    "why": "Sets driveway width and grade, turnaround and water-tank needs.",
+    "when": "Early informal question; formal review at permit",
+    "cost": "Plan review fee (not verified)"
+   },
+   {
+    "role": "Architect/designer for a small modern home",
+    "why": "Minimal house, radiant plus soft-floor detailing, ADU-ready site plan.",
+    "when": "After survey, perc and tree census",
+    "cost": "$10,000\u201360,000 (estimate)"
+   },
+   {
+    "role": "Caretaker / security installer",
+    "why": "Theft, squatting and weed-abatement deadlines while you're in Bhutan.",
+    "when": "Before storing belongings and leaving",
+    "cost": "$800\u20135,000 first year (estimate)"
+   }
+  ]
+ },
+ "other_corrections": [
+  "Web search was unavailable (the shared search budget was used up), so all checks were done by fetching primary pages and PDFs directly. Items marked unverifiable could not be opened.",
+  "The Yucca Valley septic ban covers only the Phase 1 and 2 areas mapped in Basin Plan Appendix C, not 'the Town over the Warren subbasin' in general. Check the parcel at yvsewermap.com or with HDWD.",
+  "The report missed the Basin Plan's 'Recent OWTS Installations' alternative deadline: a basic septic installed less than 36 months before sewer arrives can run until 36 months after installation (60 months for an advanced unit with at least 50% nitrogen removal). This softens the 'pay twice' risk.",
+  "The 2031 Phase 2 date requires the Fish and Game Commission to list the Joshua tree. That decision is postponed until a status review due Jan 1, 2033, so Dec 31, 2028 is the realistic deadline.",
+  "Burrowing owl is already a CESA State Candidate (since Oct 10, 2024, per CDFW's October 2026 list), not just 'under review', and candidates are protected like listed species.",
+  "Crotch's bumble bee: CDFW's list shows its candidacy dated Sept 30, 2022 (re-advanced after litigation), not continuously since June 2019. Minor.",
+  "The BDVWA '$4,800 capital / $1,370 install' figures are from a May 2019 article, not late 2025. The Sept/Oct 2025 resolution sets a $3,040 service-line and meter install fee, up from $2,685, with the capacity fee separate.",
+  "The water-meter cost row ($2,685\u2013$6,170) is too low. Joshua Basin WD's Feb 2025 fees for a 1-inch meter total about $14k\u2013$24.6k with capacity charges.",
+  "AB 1663 status is no longer unknown. CDFW says it became law in September 2026, along with SB 1062 and AB 1808. As amended in March 2026 it only helps parcels owned since on or before July 10, 2023 (or inherited or gifted), so it doesn't help a new buyer. Final text not verified.",
+  "CDFW's first fee review found total Joshua tree fees too low to meet the law's standard, but staff signaled possible relief for single-family homes, so 2027 fees could move either way.",
+  "The open question 'Can an ADU be permitted before the main house?' is partly answered. The County ordinance allows ADUs with a 'proposed primary dwelling', defined as a house with an active building permit application or approval. Every ADU also needs a full kitchen.",
+  "The County EHS hauled-water page does not state a rule that new construction must use a water district 'if one is available'. That part is unverified.",
+  "The newspaper claim that work within 186 ft of a Joshua tree requires a permit conflicts with CDFW's FAQ, which sets buffers case by case and says projects that fully avoid impacts need no permit. Ask CDFW.",
+  "County Fire's hazard-map page confirms Ordinance 4489 (June 10, 2025) and the 2024 SRA maps, but not the 'March 24, 2025' LRA release date.",
+  "Perc standards add that disposal-area slopes over 30% need a slope stability report reviewed by the county geologist, which matters for the sloped lot.",
+  "The buyer-broker 'before touring' statement reflects the NAR rule for homes. California's AB 2992 (effective 2025) is understood to require a written buyer agreement by the time you sign an offer, with a term of up to 3 months (verify)."
+ ]
+}

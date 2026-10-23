@@ -1,0 +1,667 @@
+<title>Yucca Valley Land Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: a field notebook bound to a plan set. A sticky sheet index on the left, one reading
+   column, and site "plates" (the Blender renders) that break out wider than the text. */
+:root {
+  --paper: #eef0ea;
+  --panel: #e2e6dc;
+  --card: #f7f8f4;
+  --ink: #1c2520;
+  --ink-2: #4b564e;
+  --rule: #c6ccbf;
+  --flag: #c92a64;          /* survey flagging tape */
+  --contour: #8a6a43;       /* USGS contour brown */
+  --water: #2b6fc2;
+  --p1: #c2410c;            /* phase colours match the numbered markers on the renders */
+  --p2: #1d4ed8;
+  --p3: #15803d;
+  --high: #b42318;
+  --med: #b45309;
+  --low: #4b564e;
+  --focus: #c92a64;
+  --f-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --step-0: 1rem;
+  --step-1: 1.2rem;
+  --step-2: 1.5rem;
+  --step-3: clamp(1.8rem, 1.3rem + 2vw, 2.6rem);
+  --step-4: clamp(2.2rem, 1.4rem + 3.6vw, 3.9rem);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121815; --panel: #1b231e; --card: #171e1a; --ink: #e5ebe2; --ink-2: #a3aea5; --rule: #2f3a33;
+    --flag: #f06595; --contour: #cfa671; --water: #74aef5; --p1: #fb923c; --p2: #86a8ff; --p3: #4ade80;
+    --high: #f87171; --med: #fbbf24; --low: #a3aea5; --focus: #f06595; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121815; --panel: #1b231e; --card: #171e1a; --ink: #e5ebe2; --ink-2: #a3aea5; --rule: #2f3a33;
+  --flag: #f06595; --contour: #cfa671; --water: #74aef5; --p1: #fb923c; --p2: #86a8ff; --p3: #4ade80;
+  --high: #f87171; --med: #fbbf24; --low: #a3aea5; --focus: #f06595; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+body {
+  background: var(--paper); color: var(--ink); font: 400 var(--step-0)/1.6 var(--f-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 96px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+a { color: var(--ink); text-decoration-color: var(--flag); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+a:hover { color: var(--flag); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3, h4 { font-family: var(--f-display); font-stretch: 112%; text-wrap: balance; line-height: 1.12; margin: 0; }
+h2 { font-size: var(--step-3); font-weight: 760; letter-spacing: -0.01em; }
+h3 { font-size: var(--step-2); font-weight: 700; }
+h4 { font-size: var(--step-1); font-weight: 700; font-stretch: 105%; }
+p { margin: 0; max-width: 68ch; }
+.mono, code { font-family: var(--f-mono); font-size: 0.9em; }
+.num { font-variant-numeric: tabular-nums; }
+
+.shell { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 40px; max-width: 1240px; margin: 0 auto; }
+nav.index { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; padding-block: 28px; max-height: 100vh; overflow: auto; }
+nav.index .brand { font-family: var(--f-display); font-stretch: 125%; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 18px; line-height: 1.2; }
+nav.index ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
+nav.index a { display: grid; grid-template-columns: 44px 1fr; gap: 6px; padding: 6px 8px; border-radius: 6px; text-decoration: none; color: var(--ink-2); font-size: 0.92rem; line-height: 1.3; }
+nav.index a .code { font-family: var(--f-mono); font-size: 0.78rem; color: var(--ink-2); padding-top: 1px; }
+nav.index a.on, nav.index a:hover { background: var(--panel); color: var(--ink); }
+nav.index a.on .code { color: var(--flag); }
+main { min-width: 0; padding-block: 28px; display: grid; gap: 88px; }
+
+.sheet { display: grid; gap: 22px; min-width: 0; }
+.sheet > header { display: grid; gap: 10px; border-top: 2px solid var(--ink); padding-top: 14px; }
+.sheet-code { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--flag); display: flex; gap: 14px; flex-wrap: wrap; }
+.sheet-code span + span { color: var(--ink-2); }
+.lede { font-size: var(--step-1); color: var(--ink-2); max-width: 62ch; }
+.col { max-width: 760px; display: grid; gap: 16px; min-width: 0; }
+.sheet > *, .scheme > *, .col > *, .plate > *, .hero > * { min-width: 0; }
+img { height: auto; max-width: 100%; }
+
+/* hero */
+.hero { display: grid; gap: 22px; padding-top: 8px; }
+.hero h1 { font-size: var(--step-4); font-weight: 800; font-stretch: 118%; letter-spacing: -0.02em; max-width: 18ch; }
+.hero .meta { font-family: var(--f-mono); font-size: 0.82rem; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.hero figure { margin: 0; }
+.hero img { width: 100%; border-radius: 10px; display: block; }
+figcaption { font-size: 0.86rem; color: var(--ink-2); margin-top: 8px; }
+
+/* the five-step strip from the book */
+.npm { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border: 1.5px solid var(--ink); border-radius: 10px; overflow: hidden; }
+.npm a { display: grid; gap: 4px; padding: 12px 14px; text-decoration: none; border-right: 1.5px solid var(--ink); min-width: 0; }
+.npm a:last-child { border-right: 0; }
+.npm a:hover { background: var(--panel); color: var(--ink); }
+.npm .n { font-family: var(--f-mono); font-size: 0.78rem; color: var(--flag); }
+.npm .t { font-family: var(--f-display); font-weight: 700; font-stretch: 108%; line-height: 1.15; }
+@media (max-width: 760px) { .npm { grid-template-columns: 1fr; } .npm a { border-right: 0; border-bottom: 1.5px solid var(--ink); } .npm a:last-child { border-bottom: 0; } }
+
+/* key facts */
+.facts { display: grid; gap: 12px; }
+.fact { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding: 14px 16px; background: var(--card); border: 1px solid var(--rule); border-radius: 10px; }
+.fact .k { font-family: var(--f-mono); font-weight: 600; color: var(--flag); }
+.fact b { font-weight: 700; }
+
+/* worksheet */
+.ws-status { font-family: var(--f-mono); font-size: 0.78rem; color: var(--ink-2); display: inline-flex; align-items: center; gap: 8px; }
+.ws-status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ink-2); }
+.ws-status[data-mode="shared"]::before { background: var(--p3); }
+.ws-status[data-mode="local"]::before { background: var(--med); }
+.step { display: grid; gap: 14px; padding: 20px; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; scroll-margin-top: 80px; }
+.step.live { border-color: var(--flag); box-shadow: 0 0 0 2px var(--flag) inset; }
+.step-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.step-head .clock { font-family: var(--f-mono); font-size: 0.82rem; color: var(--ink-2); }
+.step-head .tag { font-family: var(--f-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--flag); }
+.step ul, .step ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; max-width: 68ch; }
+.field { display: grid; gap: 6px; }
+.field label { font-weight: 600; font-size: 0.95rem; }
+.field .hint { font-size: 0.85rem; color: var(--ink-2); }
+textarea, input[type="text"] {
+  width: 100%; font: 400 0.98rem/1.5 var(--f-body); color: var(--ink); background: var(--paper);
+  border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; resize: vertical; min-height: 44px;
+}
+textarea { min-height: 88px; }
+textarea:focus, input[type="text"]:focus { outline: 2px solid var(--flag); outline-offset: 0; border-color: transparent; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 760px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 0.82rem; padding: 3px 10px; border: 1px solid var(--rule); border-radius: 999px; background: var(--paper); }
+
+/* timer */
+.timerbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--ink); color: var(--paper);
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.timerbar[hidden] { display: none !important; }
+.timerbar .tb-name { font-family: var(--f-display); font-weight: 700; font-stretch: 110%; min-width: 0; flex: 1 1 200px; }
+.timerbar .tb-name small { display: block; font-family: var(--f-mono); font-weight: 400; font-size: 0.75rem; opacity: 0.75; }
+.timerbar .tb-time { font-family: var(--f-mono); font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.timerbar .tb-bar { position: absolute; left: 0; top: 0; height: 3px; background: var(--flag); width: 0; }
+.timerbar button { background: transparent; color: var(--paper); border: 1px solid color-mix(in srgb, var(--paper) 45%, transparent); }
+button {
+  font: 600 0.9rem/1 var(--f-body); color: var(--ink); background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 10px 14px; cursor: pointer; min-height: 40px;
+}
+button:hover { border-color: var(--flag); }
+button.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+button.primary:hover { background: var(--flag); border-color: var(--flag); }
+.btnrow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* plates (renders) */
+.plate { display: grid; gap: 12px; margin: 0; min-width: 0; }
+.plate img { width: 100%; display: block; border-radius: 10px; background: var(--panel); }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabs button { padding: 8px 12px; min-height: 36px; font-size: 0.85rem; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.legend { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px 18px; }
+.legend li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; font-size: 0.88rem; line-height: 1.35; align-items: start; }
+.legend .dot { width: 22px; height: 22px; border-radius: 50%; color: #fff; font: 700 0.72rem/22px var(--f-body); text-align: center; }
+.ph1 { background: var(--p1); } .ph2 { background: var(--p2); } .ph3 { background: var(--p3); }
+.phasekey { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.85rem; color: var(--ink-2); }
+.phasekey span { display: inline-flex; gap: 6px; align-items: center; }
+.phasekey i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.proscons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.proscons > div { padding: 14px 16px; border-radius: 10px; background: var(--card); border: 1px solid var(--rule); }
+.proscons h4 { font-size: 0.95rem; margin-bottom: 6px; }
+.proscons ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; font-size: 0.92rem; }
+@media (max-width: 760px) { .proscons { grid-template-columns: 1fr; } }
+.scheme { display: grid; gap: 16px; padding-top: 18px; border-top: 1px solid var(--rule); min-width: 0; }
+.scheme h3 { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.scheme h3 .code { font-family: var(--f-mono); font-size: 0.85rem; color: var(--flag); font-weight: 500; }
+.badge { font-family: var(--f-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 4px; background: var(--flag); color: var(--paper); }
+
+/* topic cards */
+.topics { display: grid; gap: 10px; }
+details.topic { background: var(--card); border: 1px solid var(--rule); border-radius: 12px; }
+details.topic > summary { list-style: none; cursor: pointer; padding: 16px 18px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
+details.topic > summary::-webkit-details-marker { display: none; }
+details.topic > summary h3 { font-size: var(--step-1); }
+details.topic > summary p { grid-column: 1 / -1; color: var(--ink-2); font-size: 0.95rem; }
+details.topic > summary::after { content: "+"; font: 600 1.4rem/1 var(--f-mono); color: var(--flag); grid-row: 1; grid-column: 2; }
+details.topic[open] > summary::after { content: "\2212"; }
+.topic-body { padding: 0 18px 20px; display: grid; gap: 16px; min-width: 0; }
+.topic-body > * { min-width: 0; }
+.topic-body a, .legend span, td { overflow-wrap: anywhere; }
+.topic-body ul { margin: 0; padding-left: 1.15em; display: grid; gap: 7px; max-width: 72ch; }
+.topic-body h4 { font-size: 0.82rem; font-family: var(--f-mono); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); }
+.sev { font-family: var(--f-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 1px 6px; border-radius: 4px; border: 1px solid currentColor; margin-right: 6px; white-space: nowrap; }
+.sev.high { color: var(--high); } .sev.medium { color: var(--med); } .sev.low { color: var(--low); }
+
+/* tables */
+.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; min-width: 640px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+th { font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-2); background: var(--panel); position: sticky; top: 0; }
+tr:last-child td { border-bottom: 0; }
+td.money { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stage { font-family: var(--f-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--flag); }
+
+/* checklists */
+.checklist { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.checklist li label { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; padding: 8px 10px; border-radius: 8px; cursor: pointer; align-items: start; }
+.checklist li label:hover { background: var(--panel); }
+.checklist input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--flag); }
+.checklist input:checked + span { text-decoration: line-through; color: var(--ink-2); }
+.ctx { font-family: var(--f-mono); font-size: 0.75rem; color: var(--flag); margin-right: 6px; }
+
+.callout { padding: 16px 18px; border-left: 4px solid var(--flag); background: var(--card); border-radius: 0 10px 10px 0; display: grid; gap: 8px; }
+.timeline { display: grid; gap: 0; border-left: 2px solid var(--ink); margin-left: 8px; }
+.tl { display: grid; gap: 4px; padding: 0 0 18px 22px; position: relative; }
+.tl::before { content: ""; position: absolute; left: -8px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+.tl .when { font-family: var(--f-mono); font-size: 0.8rem; color: var(--flag); }
+.tl p { color: var(--ink-2); font-size: 0.95rem; }
+.sources { font-size: 0.82rem; color: var(--ink-2); columns: 2 280px; column-gap: 28px; }
+.sources a { word-break: break-word; }
+.sources div { break-inside: avoid; margin-bottom: 6px; }
+
+@media (max-width: 980px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  nav.index { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 15; background: var(--paper); padding-block: 8px; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px)); border-bottom: 1px solid var(--rule); max-height: none; }
+  nav.index .brand { display: none; }
+  nav.index ol { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; scrollbar-width: none; }
+  nav.index a { grid-template-columns: auto auto; }
+  main { gap: 64px; }
+}
+</style>
+
+<div class="shell">
+<nav class="index" aria-label="Sheets">
+  <div class="brand">Yucca Valley<br>Land Plan</div>
+  <ol>
+    <li><a href="#overview"><span class="code">G-0</span>Overview</a></li>
+    <li><a href="#solo"><span class="code">P-1</span>Your solo hour</a></li>
+    <li><a href="#meeting"><span class="code">P-2</span>Meeting together</a></li>
+    <li><a href="#considerations"><span class="code">C-1</span>Everything to think about</a></li>
+    <li><a href="#team"><span class="code">T-1</span>People to bring</a></li>
+    <li><a href="#schemes"><span class="code">S-1</span>Site schemes</a></li>
+    <li><a href="#house"><span class="code">A-1</span>The house</a></li>
+    <li><a href="#bhutan"><span class="code">X-1</span>Bhutan</a></li>
+    <li><a href="#money"><span class="code">M-1</span>Money + timeline</a></li>
+    <li><a href="#next"><span class="code">N-1</span>Next actions</a></li>
+  </ol>
+</nav>
+
+<main>
+{{OVERVIEW}}
+
+<section class="sheet" id="solo" aria-labelledby="solo-h">
+  <header>
+    <div class="sheet-code"><span>P-1</span><span>60 minutes, alone</span></div>
+    <h2 id="solo-h">Your solo hour</h2>
+    <p class="lede">Five timed blocks that walk the five steps of David Allen's Natural Planning Model from <i>Getting Things Done</i>. This hour is for getting your own thoughts out of your head so you can listen well in the meeting, not for arriving with answers. Offer your wife the same hour if she'd like it. If not, keep your notes to yourself in the meeting until she has spoken.</p>
+  </header>
+  <div class="col">
+    <div class="btnrow">
+      <button class="primary" type="button" data-timer-start="solo">Start the 60-minute timer</button>
+      <span class="ws-status" data-ws-status>Connecting worksheet…</span>
+    </div>
+    <p style="color:var(--ink-2);font-size:.9rem">Everything you type here saves as you go, to a worksheet you can both see. For anything you'd rather keep private for now, use a paper notebook.</p>
+
+    <article class="step" id="solo-1" data-step="solo:0">
+      <div class="step-head"><span class="tag">Step 1 · Purpose + principles</span><span class="clock">0:00 – 0:10 · 10 min</span></div>
+      <h3>Why do I want this, and what are my standards?</h3>
+      <ul>
+        <li>Write the reason you want this land. Then ask "why does that matter?" up to four more times. Stop when you hit an answer that makes you feel something, and circle it.</li>
+        <li>Finish the sentence "I'd give someone else total freedom to run this project as long as they…" 5 to 7 times. These are your principles: the standards and boundaries you'd hold no matter who did the work.</li>
+        <li>Write your limits: what you won't do or risk. Examples, if they fit: borrow more than $___; live rough for more than ___ months; live in a pod the County could order removed; cut down a Joshua tree.</li>
+      </ul>
+      <div class="field"><label for="solo-why">Why (stop when it rings true)</label><textarea id="solo-why" data-ws="solo-why" placeholder="I want land because… which matters because…"></textarea></div>
+      <div class="field"><label for="solo-principles">"…as long as they…"</label><textarea id="solo-principles" data-ws="solo-principles" placeholder="…kept us legal enough to sleep at night&#10;…never borrowed more than we could repay if the house never got built&#10;…left the place so we can lock up and leave for months"></textarea></div>
+      <div class="field"><label for="solo-not">My limits</label><textarea id="solo-not" data-ws="solo-not"></textarea></div>
+    </article>
+
+    <article class="step" id="solo-2" data-step="solo:1">
+      <div class="step-head"><span class="tag">Step 2 · Outcome visioning</span><span class="clock">0:10 – 0:20 · 10 min</span></div>
+      <h3>See it going well</h3>
+      <ul>
+        <li>Write a postcard from October 2029 (5 min). Be concrete: what you hear at dawn, what the floor feels like, where the pods sit, what's growing, who is visiting.</li>
+        <li>Sketch the 5 acres on paper (5 min): road at the bottom, where the sun sets, where the wind comes from, where you'd want to sit.</li>
+        <li>If time is left, fill in the three snapshots.</li>
+      </ul>
+      <div class="field"><label for="solo-postcard">Postcard from 2029</label><textarea id="solo-postcard" data-ws="solo-postcard" rows="5"></textarea></div>
+      <div class="grid3">
+        <div class="field"><label for="solo-v1">First night on the land</label><textarea id="solo-v1" data-ws="solo-v1"></textarea></div>
+        <div class="field"><label for="solo-v2">House passes final inspection</label><textarea id="solo-v2" data-ws="solo-v2"></textarea></div>
+        <div class="field"><label for="solo-v3">Five years in</label><textarea id="solo-v3" data-ws="solo-v3"></textarea></div>
+      </div>
+    </article>
+
+    <article class="step" id="solo-3" data-step="solo:2">
+      <div class="step-head"><span class="tag">Step 3 · Brainstorming</span><span class="clock">0:20 – 0:38 · 18 min</span></div>
+      <h3>Empty your head: about a minute per trigger</h3>
+      <p>Write every question, worry, idea, person and errand that comes up. No judging and no organizing yet; volume is the goal. Give each trigger below about a minute, skip any that are empty, and spend leftover time on whichever ones you have the most to say about. Only after that, skim the <a href="#considerations">considerations sheet</a> to catch anything you missed.</p>
+      <div class="chips" aria-label="Brainstorm triggers">{{TRIGGER_CHIPS}}</div>
+      <div class="field"><label for="solo-brainstorm">Brainstorm</label><textarea id="solo-brainstorm" data-ws="solo-brainstorm" rows="12" placeholder="- Is the lot in the Town or the County?&#10;- Who do we call about water?&#10;- Where do we each go for time alone in a tiny space?&#10;- …"></textarea></div>
+    </article>
+
+    <article class="step" id="solo-4" data-step="solo:3">
+      <div class="step-head"><span class="tag">Step 4 · Organizing</span><span class="clock">0:38 – 0:50 · 12 min</span></div>
+      <h3>Sort by stage, then mark who answers it</h3>
+      <p>Sort everything into the stages you'll also use together: <b>before an offer</b>, <b>during escrow</b> (after an offer is accepted, before you close), <b>before moving onto the land</b>, <b>while building</b>, <b>before Bhutan</b>, <b>later</b>. Mark an item ★ if only the two of you can answer it, or ? if a professional should (County counter, surveyor, well driller, insurer). Optionally tag the part of the project it belongs to: land + legal, utilities, interim living, house, plants, Bhutan, money, us.</p>
+      <p>Then number the "before an offer" items in the order they have to happen, and circle the three questions you most want your wife's view on.</p>
+      <div class="grid2">
+        <div class="field"><label for="solo-o1">Before an offer (numbered)</label><textarea id="solo-o1" data-ws="solo-o1"></textarea></div>
+        <div class="field"><label for="solo-o2">Other stages</label><textarea id="solo-o2" data-ws="solo-o2"></textarea></div>
+        <div class="field"><label for="solo-o3">Questions for my wife</label><textarea id="solo-o3" data-ws="solo-o3"></textarea></div>
+        <div class="field"><label for="solo-o4">Later / someday</label><textarea id="solo-o4" data-ws="solo-o4"></textarea></div>
+      </div>
+    </article>
+
+    <article class="step" id="solo-5" data-step="solo:4">
+      <div class="step-head"><span class="tag">Step 5 · Next actions</span><span class="clock">0:50 – 1:00 · 10 min</span></div>
+      <h3>Decide the very next physical action</h3>
+      <ul>
+        <li>For the top five "before an offer" items, write the next thing you could physically do, starting with a verb. Tag it with where you'll be or what you'll need: <span class="mono">@phone</span> Call County Land Use Services and ask whether parcel number (APN) ___ is in the Town or the County.</li>
+        <li>Pick up to three fact-finding actions for this week: look-ups and phone calls only, nothing that commits money or contacts the seller. Put them on your next-actions list; use the calendar only for things tied to a specific day.</li>
+        <li>Ask your wife for a time when neither of you is tired, and send the note in the meeting sheet a few days ahead. A café in town and then a walk on the lot works better than writing on a phone in desert sun and wind.</li>
+      </ul>
+      <div class="field"><label for="solo-next">My next actions</label><textarea id="solo-next" data-ws="solo-next" rows="6" placeholder="@phone  …&#10;@computer  …&#10;@land  …"></textarea></div>
+      <div class="field"><label for="solo-meet">Meeting: when, where, what to bring</label><input type="text" id="solo-meet" data-ws="solo-meet" placeholder="Saturday 9am, coffee in town, then drive out to the lot"></div>
+    </article>
+  </div>
+</section>
+
+<section class="sheet" id="meeting" aria-labelledby="meeting-h">
+  <header>
+    <div class="sheet-code"><span>P-2</span><span>90 minutes, together · one of you facilitates</span></div>
+    <h2 id="meeting-h">Meeting together</h2>
+    <p class="lede">The same five steps, run as a conversation. The facilitator protects the process: keeps time, makes sure you both write before you talk, and keeps decisions out of the brainstorm. Nothing about buying gets decided today; you're deciding what you need to find out. Ask whether your wife would like to facilitate a step, or the next session.</p>
+  </header>
+  <div class="col">
+    <div class="grid2">
+      <div class="field"><label for="mtg-name-a">Partner A (facilitator today)</label><input type="text" id="mtg-name-a" data-ws="mtg-name-a" placeholder="Name"></div>
+      <div class="field"><label for="mtg-name-b">Partner B</label><input type="text" id="mtg-name-b" data-ws="mtg-name-b" placeholder="Name"></div>
+    </div>
+    <div class="btnrow">
+      <button class="primary" type="button" data-timer-start="meeting">Start the 90-minute meeting timer</button>
+      <span class="ws-status" data-ws-status>Connecting worksheet…</span>
+    </div>
+
+    <div class="callout">
+      <h4>Send this a few days ahead</h4>
+      <p id="invite-text">"I've been thinking a lot about the Yucca Valley land and I'd love to plan it with you properly, not just talk about it in passing. Could we find about 90 minutes this week, at a time and place that suit you? I'd like to use the five-step planning method from Getting Things Done: why we want this, what it would look like if it went well, everything we're excited or worried about, what comes first, and a few small next steps. We won't decide whether to buy anything. I've already spent an hour writing down my own thoughts; if you'd like to do the same, here's the page I used. If not, just bring whatever's on your mind, doubts included. And if you'd like to run it differently, tell me."</p>
+      <div class="btnrow"><button type="button" data-copy="invite-text">Copy note</button></div>
+    </div>
+
+    <article class="step">
+      <div class="step-head"><span class="tag">How to run it</span></div>
+      <h3>Ground rules for two</h3>
+      <ul>
+        <li><b>Write first, then talk.</b> For the big questions (why, principles, numbers), both of you write silently for 2 to 3 minutes before anyone speaks. Partner B chooses who goes first (B by default), so the facilitator's ideas don't set the frame.</li>
+        <li><b>Private answers go on paper first.</b> Rankings and numbers: write them on paper, reveal at the same moment, then type them in. The worksheet is shared and saves as you type.</li>
+        <li><b>The facilitator shares last</b> and writes the other person's points in their words, then reads them back: "Did I get that right?"</li>
+        <li><b>"Yes, and" while brainstorming.</b> No evaluating until step 4. Worries count as ideas.</li>
+        <li><b>Sort every disagreement.</b> Is it a fact (one of you finds out, by a date), a preference (take turns or trade), or a value (slow down, and each say what's underneath it)? If it still feels big once the facts are in, treat it as a value.</li>
+        <li><b>The timer serves you.</b> Before moving on, ask "Anything else?" and wait. Either of you can add two minutes, or say "pause" with no reason needed; you breathe and stretch and nobody asks why. You can stop and finish another day.</li>
+        <li><b>A parking lot</b> for anything off-topic. At the close, pick one item from it for your next weekly review.</li>
+      </ul>
+      <div class="field"><label for="mtg-parking">Parking lot</label><textarea id="mtg-parking" data-ws="mtg-parking"></textarea></div>
+    </article>
+
+    <article class="step" id="mtg-0" data-step="meeting:0">
+      <div class="step-head"><span class="tag">Open</span><span class="clock">0:00 – 0:05 · 5 min</span></div>
+      <h3>Check in</h3>
+      <p>Each of you, B first: How are you feeling right now? On a scale of 1 to 10, how much do you want this land today, and how nervous does it make you? Neither number is wrong and neither gets argued with. Then: what would make these 90 minutes worth it, and is there anything on the agenda you'd change or skip?</p>
+      <div class="field"><label for="mtg-checkin">How we're feeling + what we want from today</label><textarea id="mtg-checkin" data-ws="mtg-checkin"></textarea></div>
+    </article>
+
+    <article class="step" id="mtg-1" data-step="meeting:1">
+      <div class="step-head"><span class="tag">Step 1 · Purpose + principles</span><span class="clock">0:05 – 0:20 · 15 min</span></div>
+      <h3>Why this land, why now?</h3>
+      <ul>
+        <li>Write silently (3 min): "Why do I want this?" Share, B first. Listen for the overlap.</li>
+        <li>B drafts one shared purpose sentence from what you both said; A may suggest one change. Keep it short enough to remember on a hard day.</li>
+        <li>Principles (each writes for 3 min, then read aloud, B first): "We'll be happy with this project as long as…" and "I'd be unhappy if…". Write them as standards, not numbers, for example "we never borrow more than we could repay if the house never got built." Specific budget and risk numbers wait for step 4.</li>
+        <li>Note where you differ. You don't need to settle it now; put it in the parking lot.</li>
+      </ul>
+      <div class="field"><label for="mtg-purpose">Our purpose, in one sentence</label><textarea id="mtg-purpose" data-ws="mtg-purpose"></textarea></div>
+      <div class="field"><label for="mtg-principles">Our principles</label><textarea id="mtg-principles" data-ws="mtg-principles" rows="6"></textarea></div>
+    </article>
+
+    <article class="step" id="mtg-2" data-step="meeting:2">
+      <div class="step-head"><span class="tag">Step 2 · Outcome visioning</span><span class="clock">0:20 – 0:32 · 12 min</span></div>
+      <h3>Tell each other what "going well" looks like</h3>
+      <ul>
+        <li>Each of you describes a day in October 2029 on the land, in the present tense, for two minutes, B first. The listener asks only "What else?"</li>
+        <li>Together, write down the moments from both stories that you'd both love.</li>
+        <li>Glance at the <a href="#schemes">four site schemes</a> only for what draws you ("I love the courtyard"), not to pick one. Choosing waits until you have survey facts.</li>
+      </ul>
+      <div class="field"><label for="mtg-v-both">Moments we'd both love</label><textarea id="mtg-v-both" data-ws="mtg-v-both" rows="5"></textarea></div>
+      <div class="grid3">
+        <div class="field"><label for="mtg-v1">First night on the land</label><textarea id="mtg-v1" data-ws="mtg-v1"></textarea></div>
+        <div class="field"><label for="mtg-v2">House passes final inspection</label><textarea id="mtg-v2" data-ws="mtg-v2"></textarea></div>
+        <div class="field"><label for="mtg-v3">Five years in</label><textarea id="mtg-v3" data-ws="mtg-v3"></textarea></div>
+      </div>
+      <div class="field"><label for="mtg-draws">What draws us in the schemes</label><input type="text" id="mtg-draws" data-ws="mtg-draws"></div>
+    </article>
+
+    <article class="step" id="mtg-3" data-step="meeting:3">
+      <div class="step-head"><span class="tag">Step 3 · Brainstorming</span><span class="clock">0:32 – 0:50 · 18 min</span></div>
+      <h3>Everything on the table</h3>
+      <ul>
+        <li><b>Silent write (8 min):</b> each of you lists everything that comes to mind, using the triggers as prompts. About 30 seconds per trigger; skip any that are empty.</li>
+        <li><b>Round-robin (10 min):</b> take turns reading one item at a time, B first, until both lists are empty. New ideas sparked by the other person are welcome. No discussing or fixing: the only reply is "Good, add it."</li>
+        <li>Whoever did the solo hour keeps those notes closed until the round-robin is finished, then adds anything still missing.</li>
+      </ul>
+      <div class="chips">{{TRIGGER_CHIPS}}</div>
+      <div class="grid2">
+        <div class="field"><label for="mtg-bs-a">Partner A's list</label><textarea id="mtg-bs-a" data-ws="mtg-bs-a" rows="10"></textarea></div>
+        <div class="field"><label for="mtg-bs-b">Partner B's list</label><textarea id="mtg-bs-b" data-ws="mtg-bs-b" rows="10"></textarea></div>
+      </div>
+      <div class="field"><label for="mtg-people">People we might need (see the <a href="#team">team sheet</a>)</label><textarea id="mtg-people" data-ws="mtg-people"></textarea></div>
+    </article>
+
+    <article class="step" id="mtg-4" data-step="meeting:4">
+      <div class="step-head"><span class="tag">Break</span><span class="clock">0:50 – 0:55 · 5 min</span></div>
+      <h3>Stand up, refill, look at the horizon</h3>
+      <p>Facilitator: ask "How is this going for you so far?"</p>
+    </article>
+
+    <article class="step" id="mtg-5" data-step="meeting:5">
+      <div class="step-head"><span class="tag">Step 4 · Organizing</span><span class="clock">0:55 – 1:15 · 20 min</span></div>
+      <h3>Put it in order, then look at the big questions</h3>
+      <p><b>Sort (8 min):</b> put each brainstorm item into a stage: before an offer, during escrow (after an offer is accepted and before you close), before moving onto the land, while building, before Bhutan, later. Star the three "before an offer" items that matter most.</p>
+      <div class="field"><label for="mtg-stages">Sorted by stage</label><textarea id="mtg-stages" data-ws="mtg-stages" rows="8"></textarea></div>
+      <p><b>The five big questions (7 min).</b> Don't try to settle them today. For each one, write "agreed: ___", "need a fact first: who finds out, by when", or "needs its own conversation". Book <a href="#money-hour">a separate hour just for money</a>.</p>
+      <div class="field"><label for="mtg-d1">1. Is our lot in the Town or the County, and does that change whether we still want it? (How long a permit stays alive without a passed inspection, how many pods we can have, whether storage containers are allowed.)</label><textarea id="mtg-d1" data-ws="mtg-d1"></textarea></div>
+      <div class="field"><label for="mtg-d2">2. Where do we live while we build: a certified RV or park model (a small, certified, towable home, legal on a temporary permit), or the cheaper uncertified pod (which the County could order off the land)? How much of that risk is each of us comfortable with?</label><textarea id="mtg-d2" data-ws="mtg-d2"></textarea></div>
+      <div class="field"><label for="mtg-d3">3. What would make us walk away from this lot? For example: no water meter at the road and no proven well nearby, failing the perc test (the soil test that shows whether a septic system will work), or Joshua trees across the only flat ground.</label><textarea id="mtg-d3" data-ws="mtg-d3"></textarea></div>
+      <div class="field"><label for="mtg-d4">4. Budget: each of us writes a total ceiling on paper, then we reveal at the same moment. Which way do we lean: lean DIY, balanced, or mostly hired?</label><textarea id="mtg-d4" data-ws="mtg-d4"></textarea></div>
+      <div class="field"><label for="mtg-d5">5. Bhutan: when, for how long, and how (a guided trip, staying as someone's personal guest, a volunteer role, or a residence in Gelephu Mindfulness City)? Does the timing keep our permit alive, ideally going while plans are in review?</label><textarea id="mtg-d5" data-ws="mtg-d5"></textarea></div>
+    </article>
+
+    <article class="step" id="mtg-6" data-step="meeting:6">
+      <div class="step-head"><span class="tag">Step 5 · Next actions</span><span class="clock">1:15 – 1:25 · 10 min</span></div>
+      <h3>Three each, with dates</h3>
+      <ul>
+        <li>Each of you picks three next actions from the <a href="#next">next-actions sheet</a> or your own lists. Write each one as something you could physically do in one sitting, starting with a verb ("Call the water district and ask whether there's a meter at the road for parcel ___", not "figure out water"), plus the owner and a by-when date.</li>
+        <li>Book a first walk of the land with a local land agent. A surveyor usually comes in after your offer is accepted, during due diligence.</li>
+        <li>Note anything you're now waiting on from someone else, and since when.</li>
+        <li>Set a standing 30-minute weekly review (what moved, what's stuck, what's next) and take turns leading it.</li>
+      </ul>
+      <div class="grid2">
+        <div class="field"><label for="mtg-next-a">Partner A's next actions</label><textarea id="mtg-next-a" data-ws="mtg-next-a" rows="5"></textarea></div>
+        <div class="field"><label for="mtg-next-b">Partner B's next actions</label><textarea id="mtg-next-b" data-ws="mtg-next-b" rows="5"></textarea></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label for="mtg-waiting">Waiting for (who, since when)</label><textarea id="mtg-waiting" data-ws="mtg-waiting"></textarea></div>
+        <div class="field"><label for="mtg-review">Weekly review: day, time, who leads first</label><input type="text" id="mtg-review" data-ws="mtg-review" placeholder="Sundays 5pm"></div>
+      </div>
+    </article>
+
+    <article class="step" id="mtg-7" data-step="meeting:7">
+      <div class="step-head"><span class="tag">Close</span><span class="clock">1:25 – 1:30 · 5 min</span></div>
+      <h3>Appreciate, then let it settle</h3>
+      <p>Each of you, B first: one thing you appreciated about how the other showed up today, one thing you're excited about, and one worry you'll hold lightly. The listener says only "Thank you." Last question: is there anything we said today that you want to think about more before it counts? Pick one parking-lot item for the weekly review.</p>
+      <div class="field"><label for="mtg-close">Closing round</label><textarea id="mtg-close" data-ws="mtg-close"></textarea></div>
+    </article>
+
+    <details class="topic">
+      <summary><h3>Bigger conversations for another evening</h3><p>Questions that deserve their own time, ideally once the first facts are in. Good material for a second session on or near the land.</p></summary>
+      <div class="topic-body">
+        <ul>
+          <li>If we stop halfway (money, health, or we find we don't like desert life), what do we do with a part-built lot, and could we sell it?</li>
+          <li>Whose names go on the title, and how (joint tenancy, community property with right of survivorship, a trust)? What happens if one of us dies or we separate?</li>
+          <li>Is our money shared or separate, and if one of us puts in more, how do we record that?</li>
+          <li>How will we earn money while living there and building? Is the internet reliable enough for remote work? How many hours a week can each of us really give the build?</li>
+          <li>Who does what: physical labor, paperwork and inspections, dealing with contractors? What's the plan if one of us gets hurt?</li>
+          <li>How will two people share a tiny trailer, possibly for years: privacy, time alone, where each of us goes after an argument, showers and laundry?</li>
+          <li>Have we both spent a July heat wave and a windy winter night on or near the land? How far is the nearest hospital?</li>
+          <li>Does the plan still work if family life changes: children, ageing parents, pets, visitors?</li>
+          <li>What would make us pause or stop (costs 25% over, a year's slip), and on what dates will we formally re-decide?</li>
+          <li>What happens to where we live now, and when, relative to closing and moving onto the land?</li>
+          <li>What would each of us need to feel safe living there day to day: lighting, locks, cell coverage, a reliable vehicle, a plan for being alone on site?</li>
+          <li>Does either of us have a veto (spending over a set amount, legal risk), and is there a cooling-off rule before big commitments?</li>
+          <li>How will we know the build is straining us as a couple, and what will we do when it does?</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="topic" id="money-hour">
+      <summary><h3>The money hour</h3><p>A separate 60-minute session, same rules: write first, reveal together, Partner B speaks first.</p></summary>
+      <div class="topic-body">
+        <ol>
+          <li><b>0:00 – 0:10 · Numbers on paper.</b> Each writes three numbers privately: the most you'd spend in total, the reserve you won't touch, and the most you're comfortable carrying each month while you build. Reveal at the same moment. No arguing with a number, only "tell me more".</li>
+          <li><b>0:10 – 0:25 · Walk the line items</b> in the <a href="#money">money sheet</a>. Mark each one known, estimate or unknown, and who will turn an unknown into a quote.</li>
+          <li><b>0:25 – 0:40 · Where the money comes from.</b> Savings, sale or rent of where you live now, a home-equity line, cash flow during the build. Is it shared or separate, and how do you record it if one of you puts in more?</li>
+          <li><b>0:40 – 0:50 · Stop rules.</b> What makes you pause and re-decide (for example costs 25% over, or a 6-month slip)? Is there a spending level where either of you can say no?</li>
+          <li><b>0:50 – 1:00 · Next actions.</b> Three each, with dates. Put the stop rules into your "Our lot" walk-away field.</li>
+        </ol>
+        <div class="field"><label for="money-notes">Money hour notes</label><textarea id="money-notes" data-ws="money-notes" rows="5"></textarea></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+{{CONSIDERATIONS}}
+
+{{TEAM}}
+
+{{SCHEMES}}
+
+{{HOUSE}}
+
+{{BHUTAN}}
+
+{{MONEY}}
+
+{{NEXT}}
+
+{{SOURCES}}
+</main>
+</div>
+
+<div class="timerbar" id="timerbar" hidden role="timer" aria-live="off">
+  <div class="tb-bar" id="tb-bar"></div>
+  <div class="tb-name"><small id="tb-session">Solo hour</small><span id="tb-step">Step 1</span></div>
+  <div class="tb-time" id="tb-time">08:00</div>
+  <div class="btnrow">
+    <button type="button" id="tb-pause">Pause</button>
+    <button type="button" id="tb-next">Next step</button>
+    <button type="button" id="tb-stop">Stop</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  // ---------- timers for the solo hour and the meeting
+  const SESSIONS = {
+    solo: { name: 'Solo hour', steps: [
+      ['Step 1 · Purpose + principles', 10], ['Step 2 · Outcome visioning', 10], ['Step 3 · Brainstorming', 18],
+      ['Step 4 · Organizing', 12], ['Step 5 · Next actions', 10]] },
+    meeting: { name: 'Meeting together', steps: [
+      ['Check in', 5], ['Step 1 · Purpose + principles', 15], ['Step 2 · Outcome visioning', 12], ['Step 3 · Brainstorming', 18],
+      ['Break', 5], ['Step 4 · Organizing', 20], ['Step 5 · Next actions', 10], ['Close', 5]] },
+  };
+  const bar = document.getElementById('timerbar');
+  const el = id => document.getElementById(id);
+  let run = null, tick = null, wake = null;
+  const fmt = s => { s = Math.max(0, Math.round(s)); return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
+  function highlight() {
+    document.querySelectorAll('.step.live').forEach(n => n.classList.remove('live'));
+    if (!run) return;
+    const node = document.querySelector(`[data-step="${run.key}:${run.i}"]`);
+    if (node) node.classList.add('live');
+    return node;
+  }
+  function show() {
+    if (!run) { bar.hidden = true; highlight(); return; }
+    const S = SESSIONS[run.key], [label, mins] = S.steps[run.i];
+    const total = mins * 60, left = run.left;
+    el('tb-session').textContent = `${S.name} · ${run.i + 1} of ${S.steps.length}`;
+    el('tb-step').textContent = left <= 0 ? label + ' · time is up' : label;
+    el('tb-time').textContent = fmt(left);
+    el('tb-bar').style.width = `${(1 - left / total) * 100}%`;
+    el('tb-pause').textContent = run.paused ? 'Resume' : 'Pause';
+    el('tb-next').textContent = run.i === S.steps.length - 1 ? 'Finish' : 'Next step';
+    bar.hidden = false;
+  }
+  async function lock() { try { if (navigator.wakeLock) wake = await navigator.wakeLock.request('screen'); } catch (e) { wake = null; } }
+  function start(key, i = 0) {
+    run = { key, i, left: SESSIONS[key].steps[i][1] * 60, paused: false, last: performance.now() };
+    clearInterval(tick);
+    tick = setInterval(() => {
+      if (!run || run.paused) return;
+      const now = performance.now(); run.left -= (now - run.last) / 1000; run.last = now; show();
+    }, 250);
+    lock(); show();
+    const node = highlight(); if (node) node.scrollIntoView({ block: 'start' });
+  }
+  document.querySelectorAll('[data-timer-start]').forEach(b => b.addEventListener('click', () => start(b.dataset.timerStart)));
+  el('tb-pause').addEventListener('click', () => { if (!run) return; run.paused = !run.paused; run.last = performance.now(); show(); });
+  el('tb-next').addEventListener('click', () => {
+    if (!run) return;
+    if (run.i < SESSIONS[run.key].steps.length - 1) start(run.key, run.i + 1);
+    else el('tb-stop').click();
+  });
+  el('tb-stop').addEventListener('click', () => { run = null; clearInterval(tick); try { wake && wake.release(); } catch (e) {} show(); });
+
+  // ---------- copy buttons
+  document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+    const src = el(b.dataset.copy); const text = src.textContent.trim();
+    try { await navigator.clipboard.writeText(text); b.textContent = 'Copied'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(src); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected: press Copy'; }
+    setTimeout(() => b.textContent = 'Copy note', 2200);
+  }));
+
+  // ---------- scheme image tabs
+  document.querySelectorAll('[data-tabs]').forEach(group => {
+    const img = document.getElementById(group.dataset.tabs);
+    const leg = document.getElementById(group.dataset.tabs + '-legend');
+    group.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+      group.querySelectorAll('button').forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
+      img.src = b.dataset.src; img.alt = b.dataset.alt;
+      if (leg) {
+        const show = (b.dataset.show || '').split(',');
+        leg.querySelectorAll('li').forEach(li => li.hidden = !show.includes(li.dataset.n));
+      }
+    }));
+  });
+
+  // ---------- sheet index highlighting
+  const links = [...document.querySelectorAll('nav.index a')];
+  const targets = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id)); });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  targets.forEach(t => io.observe(t));
+  const h = location.hash.slice(1); if (h && document.getElementById(h)) document.getElementById(h).scrollIntoView();
+
+  // ---------- worksheet: shared db when available, this-device storage otherwise
+  const fields = [...document.querySelectorAll('[data-ws]')];
+  const checks = [...document.querySelectorAll('[data-check]')];
+  const statuses = [...document.querySelectorAll('[data-ws-status]')];
+  const LS = 'yv-land-plan:';
+  const lsGet = k => { try { return localStorage.getItem(LS + k); } catch (e) { return null; } };
+  const lsSet = (k, v) => { try { localStorage.setItem(LS + k, v); } catch (e) {} };
+  const setStatus = (mode, text) => statuses.forEach(s => { s.dataset.mode = mode; s.textContent = text; });
+  fields.forEach(f => { const v = lsGet('f:' + f.dataset.ws); if (v != null) f.value = v; });
+  checks.forEach(c => { c.checked = lsGet('c:' + c.dataset.check) === '1'; });
+  setStatus('local', 'Saving on this device');
+  let db = null, readOnly = false;
+  const timers = {}, pending = {}, writing = {};
+  async function write(path, body) {
+    if (!db || readOnly) return;
+    if (writing[path]) { pending[path] = body; return; }
+    writing[path] = true;
+    try { await db.doc(path).set(body); setStatus('shared', 'Saved to your shared worksheet'); }
+    catch (e) {
+      if (e && e.code === 'invalid_argument') { readOnly = true; setStatus('local', 'View-only here: saving on this device'); }
+      else if (e && e.code === 'quota_exceeded') setStatus('local', 'Shared worksheet is full: saving on this device');
+    }
+    writing[path] = false;
+    if (pending[path]) { const b = pending[path]; delete pending[path]; write(path, b); }
+  }
+  fields.forEach(f => f.addEventListener('input', () => {
+    lsSet('f:' + f.dataset.ws, f.value);
+    clearTimeout(timers[f.dataset.ws]);
+    timers[f.dataset.ws] = setTimeout(() => write('answers/' + f.dataset.ws, { text: f.value, field: f.dataset.ws, label: (document.querySelector(`label[for="${f.id}"]`) || {}).textContent || f.dataset.ws }), 700);
+  }));
+  checks.forEach(c => c.addEventListener('change', () => {
+    lsSet('c:' + c.dataset.check, c.checked ? '1' : '0');
+    write('checks/' + c.dataset.check, { done: c.checked, text: c.closest('label').textContent.trim().slice(0, 300) });
+  }));
+  (async () => {
+    const api = window.claude && window.claude.use ? await window.claude.use('db').catch(() => null) : null;
+    if (!api) { setStatus('local', 'Saving on this device'); return; }
+    db = api;
+    setStatus('shared', 'Shared worksheet connected');
+    db.collection('answers').onSnapshot(snap => {
+      snap.docs.forEach(d => {
+        const f = fields.find(x => x.dataset.ws === d.id); const body = d.data() || {};
+        if (f && document.activeElement !== f && typeof body.text === 'string' && f.value !== body.text) { f.value = body.text; lsSet('f:' + d.id, body.text); }
+      });
+    }, () => setStatus('local', 'Saving on this device'));
+    db.collection('checks').onSnapshot(snap => {
+      snap.docs.forEach(d => { const c = checks.find(x => x.dataset.check === d.id); if (c) c.checked = !!(d.data() || {}).done; });
+    }, () => {});
+  })();
+})();
+</script>

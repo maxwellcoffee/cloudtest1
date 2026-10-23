@@ -1,0 +1,81 @@
+{
+ "topic": "diligence_team",
+ "headline": "You can rule this lot in or out mostly for free before making an offer. Settle five things first: Town or County, legal water, sewer or septic, recorded access, and a building area clear of Joshua trees. Then bring a surveyor, a perc engineer and a biologist to the land in the first two weeks of a 45-60 day due-diligence period.",
+ "key_points": [
+  "Settle Town or County first, for free on the County assessor map, because the answer changes almost every rule. Unincorporated County land has no minimum house size. There, owners of 5+ acres in Rural Living (RL), Agriculture (AG) or Resource Conservation (RC) zones may camp up to 4 days in any 30. Inside the Town of Yucca Valley, a new house must be at least 725 sq ft, with a 20-ft average width and two covered parking spaces, and camping is not allowed (ask Town Planning whether the mid-2026 review changed this). In both places you can live in a trailer on site only after the house permit is issued.",
+  "You can permit the house with a water-district meter. Where no district can serve the lot, a permitted well works instead. A new house cannot rely on hauled water. Get a will-serve letter from the district before you commit.",
+  "Water hookup costs depend on the district. Hi-Desert Water District (HDWD) charges $5,418 for a 5/8-inch sprinkler-ready service or $10,836 for a 1-inch one, plus a $200 fire-flow fee and installation at cost ($600 minimum). Joshua Basin Water District charges about $14,000-$24,600 for a 1-inch meter with capacity charges (Feb 1, 2025 fee sheet). Bighorn-Desert View Water Agency charges a $3,040 install fee plus a separate capacity fee (ask the agency). If no main runs along your frontage, an extension can add $10,000-$100,000+ (estimate). A private well runs about $25,000-$100,000+ (estimate). New houses need fire sprinklers, so ask which meter size they need.",
+  "You can use septic on most lots once you pass a percolation (perc) test and get a County-approved design. The septic ban covers only the Town's mapped sewer Phase 1 and Phase 2 areas, so check the parcel on the HDWD sewer map. In Phase 2, plan on septic ending Dec 31, 2028, or sooner if sewer reaches the lot. HDWD says Dec 31, 2031, but plan on 2028 unless HDWD confirms 2031 in writing. Once your deadline arrives, you have 180 days to connect. Keep the septic field 100 ft from any private well and 50 ft from any drainage course.",
+  "You can order the perc test as soon as escrow opens. County Environmental Health Services (EHS) needs a perc report before any building permit, and 2 working days' notice before the test. You need a topographic (topo) map unless the slope is uniform and under 20%. A septic area on a 21-30% slope needs more testing. Over 30% needs a slope stability report, which the county geologist reviews. Tests are run at the final graded depth, so do not grade first.",
+  "You can skip state Joshua tree permitting entirely. Keep every pad, trench, driveway and fence more than 50 ft from every Joshua tree, including trees on neighboring lots. Count every stem on your first visit, because each stem counts as a tree. If you cannot avoid the trees, the California Department of Fish and Wildlife (CDFW) Region 6 issues the permit. 2026 fees run $354.75 to $2,609 per stem, and CDFW must re-set them by June 30, 2027. The September 2026 laws are unlikely to help a new buyer of vacant land (ask CDFW Region 6).",
+  "You can keep wildlife from stopping the project by having a desert biologist survey the lot before any clearing. The Mojave desert tortoise has been state-endangered since July 15, 2025. The western burrowing owl (since Oct 2024) and Bendire's and LeConte's thrashers (since April 2026) are state candidates, which are protected like listed species. Never move a tortoise yourself.",
+  "You can flatten the slope with small stepped pads instead of one big cut. In the County you need a grading permit above 100 cubic yards of cut plus fill. Hillside standards apply at a natural slope of 15% or more. A soils engineer is required above 20% slope, or in a fault, landslide or liquefaction zone. Disturbing 1 acre or more needs a state stormwater permit. Fire access shapes the driveway: at least 12 ft wide, no steeper than 12% (8% if gravel or native surface), and a turnaround if it is longer than 150 ft. Do not clear or grade before you have permits.",
+  "You can confirm the lot is buildable with a title report and a County legal-lot check (or a Certificate of Compliance). Look for recorded legal access, easements and old road reservations. In the County's Rural Living zone, setbacks are 25 ft front and street side and 15 ft interior side and rear. Buildings plus paving may cover up to 20% of the lot, and the height limit is 35 ft. These figures come from an unofficial code copy, so confirm them with County Land Use Services (LUS). Have the surveyor confirm the lot is 5.00 acres or more. At that size the County allows up to 3 accessory units and the 4-in-30-day camping allowance.",
+  "You can choose grid or off-grid once you know how far the nearest pole is. Bringing in Southern California Edison (SCE) power costs about $3,000-$75,000+, depending on distance (estimate). Off-grid solar with batteries costs about $25,000-$60,000 (estimate). The 30% federal residential solar credit ended for systems placed in service after Dec 31, 2025.",
+  "You can check most deal-breakers before paying anyone. Before the offer, the team is: the two of you (desk research and a first walk), a buyer's agent who knows land, the County or Town planning and building counter (free), the water district, and a title officer for a free property profile. In California, expect to sign a written buyer agreement by the time you make an offer (ask the agent what they need for vacant land).",
+  "You can bring the paid team to the land in the first two weeks of a 45-60 day due-diligence period: offer in Jan-Feb 2027, close in Mar 2027. The team is a licensed land surveyor for boundary and topo ($5,000-$14,000), a qualified perc and septic professional ($2,500-$6,000), a desert biologist ($1,000-$7,500), a civil engineer for pads, driveway and drainage ($3,000-$15,000), an SCE service planner and the County Fire plan reviewer (all estimates). After the survey, perc test and tree count, add an architect or designer for the small house ($10,000-$60,000, estimate) and a consultant for Title 24, California's energy code. Before any trip away, add a caretaker."
+ ],
+ "risks": [
+  {
+   "risk": "No legal water source: no main along the frontage, and a costly or low-yield well. Hauled water cannot get the house permitted.",
+   "severity": "high",
+   "mitigation": "Make the offer contingent on a will-serve letter with every fee itemized. If there is no district service, make it contingent on a well driller's feasibility opinion backed by nearby state well logs. Walk away if the cost goes above your ceiling."
+  },
+  {
+   "risk": "The lot is in the Town's sewer Phase 2 area, so a new septic system may need a paid sewer hookup soon after it goes in.",
+   "severity": "high",
+   "mitigation": "Before you offer, get HDWD's written phase and projected sewer date, and price both paths. A septic system installed less than 36 months before sewer arrives can keep running until 36 months after installation (60 months for an advanced nitrogen-removal unit). Ask HDWD how this applies to the parcel."
+  },
+  {
+   "risk": "The parcel is not a legal lot, or has no recorded legal access.",
+   "severity": "high",
+   "mitigation": "Before closing, get a title access endorsement and a County legal-lot confirmation (or a Certificate of Compliance)."
+  },
+  {
+   "risk": "Joshua trees or protected wildlife sit in the only flat, buildable area.",
+   "severity": "medium",
+   "mitigation": "Count every tree stem and screen for wildlife in the first two weeks of escrow. If no layout fits the pad, septic field and driveway 50 ft from every tree, walk away or budget for the CDFW permit and per-stem fees."
+  },
+  {
+   "risk": "Site costs are underbudgeted. Water, power, grading and the fire-access driveway can each run $15,000-$75,000+ (estimate).",
+   "severity": "medium",
+   "mitigation": "During the contingency period, get written district fees, an SCE preliminary estimate, a civil engineer's grading estimate and early input from County Fire."
+  },
+  {
+   "risk": "A wash floods across the lot, or a fault zone runs under the pad.",
+   "severity": "medium",
+   "mitigation": "Check the Federal Emergency Management Agency (FEMA) flood map and County hazard maps HZ-1 and HZ-4. Have the civil engineer walk the site, and keep pads and the septic field out of flow paths."
+  }
+ ],
+ "questions_for_couple": [
+  "What is our all-in ceiling for land, water, power, septic, permits and the small house, and how much do we keep in reserve?",
+  "If water and power alone cost $40,000-$80,000 on this lot, do we still want it, or do we pay more for a lot with utilities at the street?",
+  "Would we build to the Town's 725 sq ft minimum to be inside the Town, or look only at County lots where the house can be as small as we like?",
+  "Do we design entirely around the Joshua trees, or accept a CDFW permit and per-stem fees to put the house where we want it?",
+  "How much due-diligence money (about $8,500-$27,500 for survey, perc test and biologist, estimate) are we willing to lose if the lot fails?",
+  "Will we owner-build, hire an hourly mentor, or hire a general contractor, and how many hours a week can each of us give?",
+  "What are our three walk-away conditions during due diligence?"
+ ],
+ "next_actions": [
+  "@computer Look up the parcel on the County Assessor Map Viewer (assessormapviewer.arc.sbcounty.gov). Write down the Assessor's Parcel Number (APN), the 'City' label and the Tax Rate Area to settle Town or County.",
+  "@computer Check the zoning and suffix (for example RL-5) on the County Digital Zoning Map (lus.sbcounty.gov/planning-home/zoning-and-overlay-maps). Screenshot the parcel on County maps HZ-1 (faults), HZ-4 (flood), HZ-5 (fire zone), HZ-6 (state or local fire area) and LU-3 (military), plus the FEMA flood map at msc.fema.gov. Save everything in one folder.",
+  "@phone Call the water district that serves the APN (HDWD: 760-365-8333). Ask whether a main runs along the frontage, what every 2026 fee is for the meter size sprinklers need, and how to get a will-serve letter. If it is HDWD, also ask for the sewer phase, the projected sewer date, and the Phase 2 septic deadline in writing.",
+  "@phone Call County Land Use Services at (909) 387-8311 (Hesperia office: (760) 995-8140). Ask whether the parcel is a legal lot, whether its zone suffix allows camping 4 days in any 30, and whether small stepped pads stay under the 100-cubic-yard grading permit threshold. If the lot is in the Town, ask Town of Yucca Valley Planning the same questions.",
+  "@email Email CDFW Region 6 at r6cesa@wildlife.ca.gov with the APN (phone: (909) 484-0167). Ask them to confirm that a site plan keeping all work 50 ft from every Joshua tree needs no permit, and whether the September 2026 laws change anything for a new buyer.",
+  "@email Ask the listing agent for any old perc report, survey, well log, Joshua tree count or permits, plus the current tax bill.",
+  "@land Walk the lot on a weekday morning in Nov-Dec 2026. GPS-tag every Joshua tree stem with its height class (under 1 m, 1-5 m, 5 m+), and note washes, the nearest power pole and any water meters on the road. Book two more visits: one on a Saturday afternoon and one after dark.",
+  "@computer Request a preliminary line-extension estimate from SCE for the APN, with the nearest pole from the site walk marked on a map.",
+  "@phone Call three licensed land surveyors and three perc engineers for prices and earliest start dates. Use the answers to set a 45-60 day due-diligence period in the Jan-Feb 2027 offer.",
+  "@together Write a one-page walk-away list with dollar ceilings for water, power, septic and grading. Add deal-killers such as no recorded access, or Joshua trees covering the only flat area."
+ ],
+ "key_sources": [
+  "San Bernardino County Land Use Services contacts: https://lus.sbcounty.gov/faqs/4380/",
+  "County zoning and overlay maps: https://lus.sbcounty.gov/planning-home/zoning-and-overlay-maps/",
+  "County Environmental Health, hauled water and wells: https://ehs.sbcounty.gov/?p=4665",
+  "County EHS percolation testing standards: https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/percolation-testing-and-reporting-standards-for-onsite-wastewater-treatment-systems.pdf",
+  "Hi-Desert Water District sewer project: https://www.hdwd.com/376/Sewer-Project",
+  "Yucca Valley septic prohibition, Basin Plan amendment: https://waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/2023/yvbpa-wcorr.pdf",
+  "CDFW western Joshua tree FAQ: https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ",
+  "CDFW state and federally listed animals (Oct 2026): https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=109405"
+ ]
+}

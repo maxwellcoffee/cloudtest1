@@ -1,0 +1,499 @@
+{
+ "topic": "utilities",
+ "claim_checks": [
+  {
+   "claim": "Hauled water cannot be the water supply for a new permitted house in San Bernardino County or the Town: Water Code 106.4, effective Jan 1, 2018, plus the SB County EHS FAQ.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed. Water Code 106.4(b) bars cities and counties from issuing a building permit for new residential development that relies on hauled, bottled or vended water, and SB County EHS says hauled water is not allowed for new construction and the source must be a water purveyor or a well. EHS adds that additions or remodels that count as new construction can't use hauled water either. The section was added by SB 1263 (Stats. 2016, ch. 843). EHS says the ban has applied since Jan 1, 2018. Either way it is in force now.",
+   "sources": [
+    "https://ehs.sbcounty.gov/faqs/can-i-install-a-water-storage-tank-and-haul-water-instead-of-drilling-a-well/",
+    "https://ehs.sbcounty.gov/programs/safe-drinking-water/",
+    "https://california.public.law/codes/water_code_section_106.4",
+    "https://leginfo.ca.gov/pub/15-16/bill/sen/sb_1251-1300/sb_1263_bill_20160929_chaptered.pdf"
+   ]
+  },
+  {
+   "claim": "In unincorporated SB County, a new single-family home must connect to a water district if the parcel is in its service area and it can serve. A private well is allowed only outside district service areas (Dev. Code 84.21.030(j)(3)).",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed from the code text. 84.21.030(j)(3)(A) says a purveyor connection is 'required when in the service area of a water purveyor and the purveyor can supply the water'. (B) allows a well outside a service area if setbacks are met. (C) allows no hauled water without EHS approval, and state law now forbids it for new homes anyway. Nuance: the rule turns on whether the district 'can supply'. A written 'cannot serve' or non-interference letter may open the well option, so ask. BDVWA's capacity fee applies to parcels within 700 ft of a main. Parcels farther out face a main extension.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.21-single-family-residential-dwellings",
+    "https://bdvwa.org/wp-content/uploads/Resolution-25R-XX-Modifying-BFC-10-14-2025-POSTING.pdf"
+   ]
+  },
+  {
+   "claim": "In the Town of Yucca Valley's sewer Phase 2 area, new septic systems may discharge only until the parcel's prohibition deadline (Dec 31, 2028, or Dec 31, 2031 if western Joshua tree is listed; HDWD states 2031) or until sewer is within 200 ft and abuts the parcel, whichever comes first. You must then connect within 180 days, with 36/60-month grace periods for recently installed systems.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed in Resolution R7-2021-0028. Phase 2 is prohibited by Dec 31, 2028 if the western Joshua tree is not listed, Dec 31, 2031 if it is listed, or earlier when sewer becomes available. For homes, 'available' means the sewer is less than 200 ft from any existing or proposed building or exterior drain and the parcel abuts and is served by it. You must connect within 180 days of your individual deadline. A basic septic system installed less than 36 months before sewer arrives gets 36 months from installation, and an advanced unit with at least 50% nitrogen removal gets 60 months. New septic systems may be permitted under normal rules until the deadline. HDWD says the Regional Board extended Phase 2 to Dec 31, 2031. I could not confirm whether the Joshua tree has been formally listed (verify).",
+   "sources": [
+    "https://waterboards.ca.gov/coloradoriver/water_issues/programs/basin_planning/docs/YV2021RBRes_Attch1upd.pdf",
+    "https://www.hdwd.com/Faq.aspx?QID=110"
+   ]
+  },
+  {
+   "claim": "SCE's residential line/service extension allowance is $3,084 per meter. It requires evidence of a building permit or occupancy, and costs above it are paid by the applicant (refundable advance or a 50% non-refundable option, plus ITCC tax). This figure comes from a Rule 15 sheet effective Jan 1, 2017 and may have been revised since.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed on the Rule 15 tariff posted at sce.com: $3,084 per meter or residential dwelling unit, on a sheet effective Jan 1, 2017. To qualify you must show a building permit, a home purchase contract, a lease, or equivalent evidence of occupancy, plus evidence that construction will proceed promptly. Above the allowance you choose a refundable advance (refunds run 10 years as new customers connect) or a 50% non-refundable payment. Either way you add the ITCC income-tax gross-up, and you pay for trenching, conduit and protective structures. SCE builds only where easements come at no cost to SCE. Two additions matter for you. Seasonal or intermittent loads get an allowance computed by formula, which may be smaller, and emergency-only service gets none. And if you don't take service within 6 months of SCE being ready, you may owe more. Check whether a newer sheet exists (verify).",
+   "sources": [
+    "https://www.sce.com/sites/default/files/inline-files/Rule15.pdf"
+   ]
+  },
+  {
+   "claim": "SB County Fire Standard A-1: driveways serving no more than 2 homes must be at least 12 ft wide; gravel or native surface is OK only at 8% grade or less; maximum grade is 12% (14-16% up to 500 ft with approval); a turnaround is required beyond 150 ft; and all-weather access must be in place before combustibles arrive.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed in A-1 (rev. July 1, 2023): 12 ft minimum width and 14 ft 6 in vertical clearance. Native or gravel surface (85% compaction) is allowed only at 8% grade or less. Maximum grade is 12%. 14% is allowed for up to 500 ft with approval, and 16% for up to 500 ft on driveways serving 1-2 homes, but only where the County or Town code allows it and the fire official approves. A turnaround is required beyond 150 ft (a hammerhead is OK for a private driveway), and dead ends max out at 600 ft (350 ft in a Fire Safety Overlay). Cross slope can be no more than 5%. Access must reach within 150 ft of all exterior walls. All-weather access must be in place before combustibles arrive.",
+   "sources": [
+    "https://sbcfire.org/wp-content/uploads/sites/46/2024/12/SBCOFPD-STANDARD-A-1-FIRE-APPARATUS-ACCESS-ROAD-DESIGN-CONSTRUCTION-AND-MAINTENANCE-7.1.23.pdf"
+   ]
+  },
+  {
+   "claim": "Water connection fees: BDVWA $16,201 capacity fee + $3,040 service line (adopted Oct 14, 2025); JBWD $12,928 capacity charge + $1,269-$4,500 connection for a 1-inch meter (Feb 2025); HDWD $5,418 acquisition charge for a 1-inch fire-code meter, plus installation and meter at actual cost.",
+   "verdict": "confirmed",
+   "correct_statement": "The numbers match the published documents. HDWD lists '1 inch meets Fire Code (5/8 meter use)' at $5,418, a regular 1-inch at $10,836, installation at actual cost with a $600 minimum, and mains at actual cost. BDVWA's posted resolutions show $16,201 (3/4- or 1-inch) plus $3,040 for the service line and meter, dated Oct 14, 2025 and effective 60 days later. The posting is still numbered '25R-XX', and the capacity fee applies only to parcels within 700 ft of a main. JBWD's Feb 1, 2025 schedule shows $1,269 inside a tract, $2,583-$4,500 outside, plus $12,928 capacity and a $7,148 per-EDU wastewater capacity charge 'as applicable'. BDVWA indexes its fee to construction costs every year (+3.289% in 2025), and JBWD escalates on Feb 1. Expect 2026 figures a few percent higher (verify).",
+   "sources": [
+    "https://www.hdwd.com/411/New-Construction-Fees",
+    "https://bdvwa.org/wp-content/uploads/Resolution-25R-XX-Modifying-BFC-10-14-2025-POSTING.pdf",
+    "https://bdvwa.org/wp-content/uploads/Resolution-25R-XX-Setting-Service-Line-Installation-fee-10-14-2025-POSTING-003.pdf",
+    "https://jbwd.specialdistrict.org/files/66e3194ef/Rates+and+Fees+02.01.25+revised+01.21.25+with+Standby.pdf"
+   ]
+  },
+  {
+   "claim": "County Temporary Structure Permit: an RV or travel trailer may be occupied by someone building a home only after the house permit is issued; 12 months, renewable, maximum 5 years; DMV registration; final inspection of hookups. The interim living quarters should be hooked to the permanent water/septic.",
+   "verdict": "corrected",
+   "correct_statement": "Mostly right. The Rev. 6/2025 checklist defines temporary residential quarters as an RV or travel trailer, requires the house permit first, and forbids placing the unit before permits are issued. It lasts 12 months, is renewable, and caps at 5 years. You need DMV registration, and the final inspection covers electrical, gas, sewer and water hookups. Corrections: a self-contained unit may use a sewage pumping contract instead of a septic hookup, and the permit expires if no inspection is called within 180 days. The County FAQ also allows a manufactured home (with a setdown permit) as temporary quarters. County code says RVs are never approved as permanent dwellings. A 'tiny home' can be permitted only if it meets the California Residential Code or the state manufactured-housing standards.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://lus.sbcounty.gov/faqs/while-building-a-new-home-can-i-put-a-temporary-mobile-home-on-my-property-to-live-in-while-my-house-is-under-construction",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.21-single-family-residential-dwellings"
+   ]
+  },
+  {
+   "claim": "Town of Yucca Valley Temporary Use Permit for an RV during construction: 12 months at a time, up to 5 years, $469 fee.",
+   "verdict": "corrected",
+   "correct_statement": "Town code 9.72.030(C) confirms each permit lasts at most 12 months, with extensions up to 5 years total unless the Planning Commission acts. Before the final period you need an approved plan to remove the temporary use, and an expired temporary use counts as a public nuisance. The chapter text I read does not mention RVs or a fee. The RV rule and the $469 fee come from a Town guide I did not verify.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.72-temporary-use-permits"
+   ]
+  },
+  {
+   "claim": "County physical access must be certified (2WD sedan) by an engineer or surveyor letter, and recorded legal access is required.",
+   "verdict": "corrected",
+   "correct_statement": "The 2WD-sedan physical-access letter from an engineer or surveyor is required. Legal access is normally required too, but if it can't be proven for an existing legal parcel that has physical access, the owner can sign an agreement with the County. The agreement acknowledges the gap, must be disclosed to future buyers, and is noted on the permit. So missing recorded access is a serious risk, but it does not automatically block a permit.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.21-single-family-residential-dwellings"
+   ]
+  },
+  {
+   "claim": "The 30% federal residential solar credit (25D) ended for expenses after Dec 31, 2025.",
+   "verdict": "confirmed",
+   "correct_statement": "IRS: the Residential Clean Energy Credit is not available for property placed in service after Dec 31, 2025. A system installed in 2026 or later gets no federal credit.",
+   "sources": [
+    "https://www.irs.gov/credits-deductions/residential-clean-energy-credit"
+   ]
+  },
+  {
+   "claim": "Since Nov 2025, SCE residential bills carry a $24.15/month Base Services Charge in exchange for about 10% lower per-kWh rates.",
+   "verdict": "confirmed",
+   "correct_statement": "SCE: the standard residential Base Services Charge is $24.15/month ($6 CARE, $12.08 FERA), effective November 2025, and per-kWh charges drop about 10%.",
+   "sources": [
+    "https://www.sce.com/customer-service-center/help-center/rate-plans-pricing/base-services-charge/understanding-base-services-charge"
+   ]
+  },
+  {
+   "claim": "2025 Title 24 (effective Jan 1, 2026): heat-pump space heating is the prescriptive standard in all climate zones; battery-ready required over 125A service; solar not required if the minimum is under 1.8 kW; battery allows 25% less solar.",
+   "verdict": "corrected",
+   "correct_statement": "The CEC's 'What's New for 2025 Single-Family' confirms heat-pump heating as the prescriptive baseline in all climate zones (or you meet the performance path instead), plus battery-ready wiring for service over 125A unless a battery is installed. The 1.8 kW exemption and the 25% battery reduction are not in that document. They are likely carried over from the 2022 code but are unverified here (verify with a Title 24 energy consultant).",
+   "sources": [
+    "https://www.energy.ca.gov/sites/default/files/2025-03/Whats_New_for_2025_Single-Family_ada.pdf"
+   ]
+  },
+  {
+   "claim": "SB County requires a grading permit for more than 100 cubic yards of cut plus fill (one page says 50).",
+   "verdict": "confirmed",
+   "correct_statement": "The County's 'Purpose of Grading Program' (Nov 2023) says a grading permit is required for any grading over 100 cubic yards. The building official can also require one for safety reasons or in environmentally sensitive areas. I did not verify the 50 cubic yard reference or the 2:1-slope trigger.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/Purpose-of-Grading-Program-20231106.pdf"
+   ]
+  },
+  {
+   "claim": "County septic rules: perc test by a qualified professional; 1/2 acre per dwelling; 100% expansion area; disposal slope no more than 25%; leach field 60 MPI or faster; seepage pit 1.1-4 gal/sq ft/day; 1-2 bedrooms = 750 gal tank; 100 ft (tank/leach) and 150 ft (seepage pit) from a private well; adding units counts as new development.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed in IB-00018 (2024) and the County LAMP (the County's septic rulebook). One addition matters on a sloped lot: the 100% replacement area must be gravity-fed, and pumped systems are allowed only as a hardship exception. Put the house uphill of the leach field. The County has 3 bedrooms at 670 gal/day with a 1,000 gal tank. The Regional Board approved a revised LAMP in May 2025, so confirm current numbers.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/IB-00018-Onsite-Wastewater-Treatment-Systems-Final-Edited-06-20-2024-002-1.pdf",
+    "https://countywideplan.sbcounty.gov/wp-content/uploads/sites/125/2021/02/SBC_LAMP.pdf?x23421"
+   ]
+  },
+  {
+   "claim": "New wells need an EHS permit with a C-57 driller; inside Mojave Water Agency boundaries, applications since Aug 5, 2024 must include MWA's Notice of Intent filed at least 15 days before drilling.",
+   "verdict": "confirmed",
+   "correct_statement": "SB County EHS confirms the permit, the C-57 licensed and EHS-registered driller, a 10-business-day processing target, and the MWA Notice of Intent for applications on or after Aug 5, 2024. MWA confirms the 15-day advance filing, with fines up to $500.",
+   "sources": [
+    "https://ehs.sbcounty.gov/programs/safe-drinking-water/",
+    "https://www.mojavewater.org/well-permitting/"
+   ]
+  },
+  {
+   "claim": "SB County Fire Standard F-2: all new homes need NFPA 13D sprinklers; where no adequate water district supply exists, a private well, tank or self-contained system is allowed; tanks must be approved, sized to NFPA 13D, refill automatically; pumps freeze-protected.",
+   "verdict": "confirmed",
+   "correct_statement": "Confirmed in F-2 (July 1, 2023). It also says multiple dwelling units (ADUs) on one meter need at least 5 gpm of extra flow per unit, which matters if capsules become permitted units.",
+   "sources": [
+    "https://sbcfire.org/wp-content/uploads/sites/46/2024/12/SBCOFPD-STANDARD-F-2-FIRE-SPRINKLER-SYSTEMS-IN-ONE-AND-TWO-FAMILY-DWELLINGS-7.1.23.pdf"
+   ]
+  },
+  {
+   "claim": "HDWD meters are installed within 5-10 calendar days, must be installed within 12 months of paying, and are subject to water-reserve availability.",
+   "verdict": "confirmed",
+   "correct_statement": "HDWD's Development Planning page confirms 5 days (levels 1-2) or 10 days (levels 3-4), a 12-month window after paying (refund minus an admin fee if not installed), and limits tied to water reserves.",
+   "sources": [
+    "https://www.hdwd.com/154/Development-Planning"
+   ]
+  },
+  {
+   "claim": "A complete private well costs about $25,000-$63,000 at 150-600+ ft; drilling $60-$100/ft.",
+   "verdict": "unverifiable",
+   "correct_statement": "The only source is one local driller's marketing blog. No independent source checked, and web search was unavailable (search budget used up). Treat it as a rough range and get two written driller quotes plus nearby DWR well logs.",
+   "sources": [
+    "https://scwellservice.com/blog/well-drilling-yucca-valley.html"
+   ]
+  },
+  {
+   "claim": "SCE line extension costs roughly $10k-$30k per added pole span; water main extensions roughly $100-$300 per foot.",
+   "verdict": "unverifiable",
+   "correct_statement": "No utility publishes these prices, and both are national or industry guesses. Get a written SCE estimate and a written water-main estimate for the specific parcel.",
+   "sources": [
+    "https://utilitycostguide.com/cost-to-run-power-to-property/",
+    "https://www.hdwd.com/411/New-Construction-Fees"
+   ]
+  },
+  {
+   "claim": "The western Joshua tree listing status determines whether the Phase 2 deadline is 2028 or 2031.",
+   "verdict": "unverifiable",
+   "correct_statement": "The Basin Plan does tie the date to listing. HDWD now states Phase 2 was extended to Dec 31, 2031. CDFW's Western Joshua Tree page does not state the listing status, so plan on Dec 31, 2031 at the latest, and earlier if sewer reaches the lot first (verify with HDWD in writing).",
+   "sources": [
+    "https://www.hdwd.com/Faq.aspx?QID=110",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT"
+   ]
+  }
+ ],
+ "other_corrections": [
+  "Executive summary says the County 'requires recorded legal access'. Code 84.21.030(j)(1) lets the owner of an existing legal parcel with physical access sign an acknowledgment agreement if legal access can't be proven. It is a risk, not an automatic bar.",
+  "The report says temporary quarters must hook to the permanent septic. The County checklist allows a self-contained RV with a sewage pumping contract, so the permanent septic system does not have to come before move-in.",
+  "The County Temporary Structure Permit also expires if no inspection is called within 180 days of issuance. This is not in the report and matters for timing around the Bhutan trip.",
+  "SCE Rule 15 C.5: allowances for seasonal or intermittent loads are computed by formula (possibly lower), and emergency-only service gets none. A place left empty for months may not get the full $3,084. Missing from the report.",
+  "BDVWA's capacity fee applies only to parcels within 700 ft of a mainline. The report doesn't mention this limit.",
+  "BDVWA and JBWD fees escalate every year (BDVWA +3.289% in 2025; JBWD each Feb 1). The 2025 numbers are probably a few percent low for 2026.",
+  "BDVWA resolutions are public-posting versions numbered '25R-XX'. Adoption on Oct 14, 2025 is printed but the final resolution number wasn't confirmed.",
+  "Water Code 106.4 was added by SB 1263 (Stats. 2016, ch. 843). The original exemption covered only natural disasters; the current text covers 'fire or natural disaster'. SB County EHS dates the ban from Jan 1, 2018.",
+  "JBWD standby charges for parcels over 1.25 acres range from about $12 to $35 per acre per year depending on zone, not only $20-$35.",
+  "The cost line labeled 'County Temporary Use Permit for RV during construction (Town of Yucca Valley)' mixes agencies. $469 is the Town figure (unverified), and the County fee is set by its Master Fee Schedule.",
+  "Septic on a slope: the County LAMP requires the replacement area to be gravity-fed and allows pumped systems only as a hardship. The report doesn't flag this, and it drives where the house sits relative to the leach field.",
+  "Fire Standard A-1 says 'all-weather paved access' before combustibles arrive, but native or gravel surfaces are allowed for driveways serving 2 or fewer homes at 8% grade or less. So gravel is OK only on gentle grades.",
+  "Starlink prices, local water-hauler prices, the Pioneertown CSA 70 W-4 rate increases and the Climate Zone 14 assignment were not independently verified. Web search was unavailable (search budget exhausted), so I checked only by fetching primary documents directly."
+ ],
+ "digest": {
+  "headline": "Before you make an offer, find out in writing which water agency (if any) serves this exact parcel and what water, septic, power and driveway will cost. On a rural Yucca Valley lot those four can total $40,000 to well over $150,000 and decide whether the whole plan works.",
+  "key_points": [
+   "Water comes first. State law (Water Code 106.4) and SB County Environmental Health (EHS) forbid trucked-in ('hauled') water as the supply for any new permitted home or addition. You need either a water-district meter or a permitted well.",
+   "In unincorporated County areas you don't get to choose. If the parcel is inside a district's service area and the district can supply water, you must connect. A well is allowed outside service areas, or possibly if the district gives you a written 'cannot serve' or non-interference letter.",
+   "District meter fees (2025 schedules, likely a few percent higher in 2026, verify): Hi-Desert Water District (Town of Yucca Valley) is $5,418 for the standard sprinkler-ready meter plus installation at cost (minimum $600). Bighorn-Desert View (Landers, Flamingo Heights) is $16,201 + $3,040 = $19,241, for parcels within 700 ft of a main. Joshua Basin (Joshua Tree) is $12,928 + $1,269-$4,500, plus possibly $7,148 for wastewater. If no main runs past the lot, you pay the full cost of extending it. That is the biggest water unknown, so get a written estimate.",
+   "A private well is a rough $25k-$65k (one local driller's figure, verify) for wells 150-600+ ft deep. You need an EHS permit, a licensed C-57 driller, a Mojave Water Agency notice filed at least 15 days before drilling, a pump test and lab tests. Local groundwater can carry arsenic, uranium, fluoride or nitrate, so budget $1.5k-$6k for treatment.",
+   "Septic (unincorporated County rules): a percolation ('perc') test by a qualified professional, disposal area slope of 25% or less, a 100% spare area, and gravity flow (pumps are allowed only as a hardship). A 1-2 bedroom house needs a 750-gal tank. Keep the tank and leach field 100 ft from a private well (150 ft for a seepage pit). Size it for the house plus future pods, because adding units later means a new County review.",
+   "Inside the Town's sewer Phase 2 area, septic must stop by Dec 31, 2031 (per HDWD), or sooner once sewer is under 200 ft away and abuts your lot. You then have 180 days to connect. A new basic septic system installed less than 36 months before sewer arrives gets 36 months from installation.",
+   "Power: SCE credits $3,084 per meter toward new lines and wants a building permit (or equivalent proof) first. You pay the rest plus a tax gross-up, either as a refundable advance (refunds over 10 years if neighbors connect) or 50% non-refundable. Trenching is yours, and any easements across neighbors' land must come free to SCE. Part-time or seasonal use can shrink the credit, and if you don't take service within 6 months of SCE being ready you may owe more. Total cost ranges from a few thousand dollars to six figures (verify with a written estimate).",
+   "Fixed monthly bills keep running while you're away: SCE $24.15/mo (since Nov 2025), Joshua Basin $45.55/mo, HDWD about $29/mo (verify), plus water standby charges on the tax bill.",
+   "Off-grid is legal, but the 2025 energy code still applies. Heat-pump heating is the default, solar is required unless the calculated minimum is tiny (under about 1.8 kW, verify), and service over 125A must be battery-ready. There is no 30% federal solar credit for systems installed after Dec 31, 2025.",
+   "Living on site legally: the County allows a DMV-registered RV or travel trailer (or a manufactured home with a setdown permit) only after the house permit is issued. The permit lasts 12 months, renews up to 5 years, and lapses if no inspection is called within 180 days. A self-contained RV can use a pump-out contract instead of septic. The Town works the same way: 12 months at a time, up to 5 years. A $20k capsule with no DMV registration or state certification fits neither route. It is permittable only if it meets the California Residential Code or state manufactured or factory-built standards, so ask before you buy one.",
+   "Access: the County needs a signed letter from an engineer or surveyor saying a normal 2-wheel-drive car can reach the site. It also needs legal access. If that can't be proven, you sign an acknowledgment that gets disclosed when you sell, which is a real resale risk.",
+   "Driveway (County Fire, also covers the Town): at least 12 ft wide with 14 ft 6 in clearance. Gravel is OK only at 8% grade or less, otherwise it must be paved. Maximum grade is 12% (14-16% for up to 500 ft with approval). A turnaround is needed if the driveway is over 150 ft, and fire access must reach within 150 ft of every wall. All-weather access must be in place before lumber arrives. On your slope, lay out the driveway first, then the house and pod pads.",
+   "Flattening pads plus a driveway will almost certainly exceed 100 cubic yards of earthwork, which triggers a County grading permit and engineered plans.",
+   "Every new house needs fire sprinklers. On a well, that means an approved tank that refills automatically and a freeze-protected pump. Each extra dwelling unit on the same meter adds 5 gpm of required flow. Joshua trees near trenches, leach fields or the driveway may need a state permit, so map them first.",
+   "Soft radiant floors: thick cushioning insulates the heat. Keep the total soft covering around R-1.5 to R-2.5 (manufacturer guidance, verify with your designer) and use a heat-pump hot-water system."
+  ],
+  "next_actions": [
+   "Look up the parcel number (APN) on the SB County Assessor map and write down whether it is in the Town of Yucca Valley or unincorporated County.",
+   "If it's in the Town, enter the APN at yvsewermap.com and screenshot whether it's in sewer Phase 2, deferred, or outside.",
+   "Call the water agency for that area (HDWD 760-365-8333) with the APN. Ask: Is it in your service area? How far is the nearest main? What's the all-in cost of a meter? Will you issue a will-serve letter or a cannot-serve letter?",
+   "Call SB County EHS (800-442-2283). Ask whether a well is allowed on this APN, which contaminants to test for, and whether the 2025 septic rule update changed anything.",
+   "Pull the logs of the 5 nearest wells from the California DWR Well Completion Report map, then ask two C-57 well drillers for all-in quotes.",
+   "Photograph the nearest SCE pole tag and pace the distance to your likely pad. Then call SCE (1-800-655-4555) and ask for a preliminary line-extension estimate.",
+   "Call SB County Fire Community Safety (909-386-8400). Ask what sprinkler water or tank a small house on a well needs on this APN, and whether it's in a State Responsibility Area.",
+   "Order a preliminary title report and ask the title officer to point out recorded access easements and any road maintenance agreement.",
+   "Before buying a capsule, call SB County Building & Safety (909-387-8311) or Town Planning (760-369-6575) and ask whether that exact model can be permitted, either as a dwelling or as temporary quarters.",
+   "Fill in a one-page best-case/worst-case cost sheet with lines for water, septic, power, access/driveway and grading."
+  ],
+  "questions_for_couple": [
+   "What's our maximum all-in budget for water, septic, power and driveway before we walk away from this lot?",
+   "Will we start in a DMV-registered RV or travel trailer (legal once the house permit is issued), or does the capsule matter enough to check first whether it can be permitted?",
+   "Grid or off-grid: pay SCE once and get a monthly bill, or own and maintain solar, batteries and a generator?",
+   "How many pods, guests or future units should we size the septic, water and power for now?",
+   "Would we rather have a Town lot that must hook up to sewer by 2031, or a County lot where we own the septic system forever?",
+   "How long, steep or sandy an access road can we live with, and would we split road costs with neighbors?",
+   "While we're in Bhutan, what must keep running (internet, cameras, well heat, batteries), and who locally will check on the property and handle permit renewals?",
+   "How soft do the floors really need to be? Would a thinner, firmer soft surface that keeps the radiant heat working be OK?"
+  ],
+  "risks": [
+   {
+    "risk": "Parcel is inside a water district but far from a main, forcing a costly main extension and ruling out a cheaper well.",
+    "severity": "high",
+    "mitigation": "Get a written service-area determination and a main-extension estimate before removing escrow contingencies. Favor lots that front an existing main."
+   },
+   {
+    "risk": "Well comes in deep, low-yield, or contaminated (arsenic, uranium, fluoride, nitrate).",
+    "severity": "high",
+    "mitigation": "Review neighboring DWR well logs, get two driller quotes, budget $30k-$65k plus treatment, and keep a 20-30% contingency."
+   },
+   {
+    "risk": "Septic is infeasible or expensive (rock, slope over 25%, washes, Joshua trees, no gravity-fed spot below the house) or will be forced onto sewer soon inside the Town.",
+    "severity": "high",
+    "mitigation": "Make a perc test an escrow contingency. Confirm sewer phase status with HDWD in writing. Site the house uphill of the leach area."
+   },
+   {
+    "risk": "SCE extension is expensive, needs neighbor easements, takes months, or gets a smaller credit because the house sits empty for long periods.",
+    "severity": "high",
+    "mitigation": "Get a preliminary SCE estimate and pole route during escrow. Plan permanent occupancy timing around SCE's 6-month compliance window, or price a permitted off-grid system."
+   },
+   {
+    "risk": "Living in an unpermitted capsule brings code enforcement, no utility service, no legal sewage disposal, and delays to the real house permit.",
+    "severity": "high",
+    "mitigation": "Pull the house permit first, then use a DMV-registered RV or travel trailer on a temporary permit. Get written confirmation before buying any capsule."
+   },
+   {
+    "risk": "No provable legal access, or the route isn't passable in a 2WD car, so the permit is blocked or burdened.",
+    "severity": "high",
+    "mitigation": "Get a title report, a survey and an engineer's access letter before closing. Negotiate an easement or walk away."
+   },
+   {
+    "risk": "Slope makes the 8% gravel or 12-16% maximum driveway grade and the turnaround hard to meet, pushing up grading and paving costs.",
+    "severity": "medium",
+    "mitigation": "Have a civil engineer sketch the driveway profile first, then place the pads where the driveway stays at 8% or less."
+   },
+   {
+    "risk": "Temporary permit lapses (12-month renewals, 180-day first inspection) or pipes freeze while you're in Bhutan.",
+    "severity": "medium",
+    "mitigation": "Time renewals and inspections around the trip, hire a local caretaker, winterize, and set up remote monitoring."
+   },
+   {
+    "risk": "Fees rise every year (water capacity fees indexed annually, solar tariffs, no federal credit).",
+    "severity": "medium",
+    "mitigation": "Lock in will-serve letters and meter purchases once the plan is firm. Get current quotes."
+   },
+   {
+    "risk": "Thick soft flooring chokes radiant heat and raises power and battery needs.",
+    "severity": "low",
+    "mitigation": "Keep the total covering around R-2.5 or less and size the heat pump for it."
+   }
+  ],
+  "costs": [
+   {
+    "item": "HDWD water meter (sprinkler-ready 1-inch), no main extension",
+    "low_usd": 6000,
+    "high_usd": 12000,
+    "note": "$5,418 fee + installation at cost (minimum $600); 2025 page"
+   },
+   {
+    "item": "BDVWA new 3/4- or 1-inch connection",
+    "low_usd": 19241,
+    "high_usd": 20000,
+    "note": "$16,201 + $3,040; parcels within 700 ft of a main; indexed yearly"
+   },
+   {
+    "item": "JBWD new 1-inch connection",
+    "low_usd": 14197,
+    "high_usd": 24576,
+    "note": "Includes possible $7,148 wastewater capacity charge; Feb 2025 schedule"
+   },
+   {
+    "item": "Water main extension, per 100 ft",
+    "low_usd": 10000,
+    "high_usd": 30000,
+    "note": "Unverified estimate; districts bill actual cost"
+   },
+   {
+    "item": "Private well, complete",
+    "low_usd": 25000,
+    "high_usd": 63000,
+    "note": "Single local driller's figure (verify)"
+   },
+   {
+    "item": "Well water treatment if needed",
+    "low_usd": 1500,
+    "high_usd": 6000,
+    "note": "Unverified"
+   },
+   {
+    "item": "Perc test + engineer report",
+    "low_usd": 1500,
+    "high_usd": 5000,
+    "note": "Estimate"
+   },
+   {
+    "item": "Conventional septic system",
+    "low_usd": 10000,
+    "high_usd": 30000,
+    "note": "Estimate"
+   },
+   {
+    "item": "SCE line extension beyond $3,084 credit",
+    "low_usd": 0,
+    "high_usd": 100000,
+    "note": "Highly site-specific; get written estimate"
+   },
+   {
+    "item": "Code-required grid-tied solar, small house (3-5 kW)",
+    "low_usd": 7500,
+    "high_usd": 13000,
+    "note": "No federal credit after 2025"
+   },
+   {
+    "item": "Off-grid solar + battery + generator",
+    "low_usd": 35000,
+    "high_usd": 90000,
+    "note": "Low confidence"
+   },
+   {
+    "item": "Fire sprinklers incl. tank/pump on a well",
+    "low_usd": 6000,
+    "high_usd": 20000,
+    "note": "Low confidence"
+   },
+   {
+    "item": "Driveway ~300 ft gravel with hammerhead",
+    "low_usd": 6000,
+    "high_usd": 25000,
+    "note": "Paving needed if over 8% grade"
+   },
+   {
+    "item": "Engineered grading plans",
+    "low_usd": 3000,
+    "high_usd": 10000,
+    "note": "Excludes earthwork and plan-check fees"
+   },
+   {
+    "item": "Engineer/surveyor 2WD access letter",
+    "low_usd": 500,
+    "high_usd": 2000,
+    "note": "Estimate"
+   }
+  ],
+  "numbers": [
+   {
+    "label": "SCE residential line-extension credit",
+    "value": "$3,084 per meter",
+    "source": "SCE Rule 15"
+   },
+   {
+    "label": "SCE fixed monthly charge",
+    "value": "$24.15/month since Nov 2025",
+    "source": "sce.com"
+   },
+   {
+    "label": "Yucca Valley Phase 2 septic end date",
+    "value": "Dec 31, 2031, or earlier when sewer is under 200 ft away; connect within 180 days",
+    "source": "HDWD FAQ; Basin Plan R7-2021-0028"
+   },
+   {
+    "label": "Driveway minimum width / gravel max grade / absolute max grade",
+    "value": "12 ft / 8% / 12% (14-16% up to 500 ft with approval)",
+    "source": "SB County Fire A-1"
+   },
+   {
+    "label": "Turnaround required beyond",
+    "value": "150 ft",
+    "source": "SB County Fire A-1"
+   },
+   {
+    "label": "Grading permit threshold",
+    "value": "Over 100 cubic yards",
+    "source": "SB County Building & Safety"
+   },
+   {
+    "label": "Septic tank for 1-2 bedrooms",
+    "value": "750 gal",
+    "source": "SB County IB-00018"
+   },
+   {
+    "label": "Septic setback from private well",
+    "value": "100 ft (150 ft seepage pit)",
+    "source": "SB County IB-00018"
+   },
+   {
+    "label": "Maximum disposal-area slope",
+    "value": "25%",
+    "source": "SB County LAMP"
+   },
+   {
+    "label": "Temporary RV permit",
+    "value": "12 months, renewable to 5 years max",
+    "source": "SB County Temporary Structure Permit checklist"
+   },
+   {
+    "label": "MWA well notice lead time",
+    "value": "At least 15 days before drilling",
+    "source": "mojavewater.org"
+   }
+  ],
+  "people": [
+   {
+    "role": "Water agency (HDWD, BDVWA, JBWD or County Special Districts)",
+    "why": "Service area, distance to main, all-in meter cost, will-serve or cannot-serve letter",
+    "when": "Before offer or first week of escrow",
+    "cost": "Will-serve letter $33-$40"
+   },
+   {
+    "role": "SB County Environmental Health (EHS)",
+    "why": "Well permission, contaminant tests, septic rules",
+    "when": "Due diligence",
+    "cost": "Call is free; permits per fee schedule"
+   },
+   {
+    "role": "Licensed C-57 well driller",
+    "why": "Local depth and yield, quote, permit filing",
+    "when": "Quote in escrow; drill after closing",
+    "cost": "$25k-$63k complete (verify)"
+   },
+   {
+    "role": "Perc-test professional (civil engineer, geologist or environmental health specialist)",
+    "why": "Required test and septic siting with gravity flow and a spare area",
+    "when": "In escrow",
+    "cost": "$1.5k-$5k (estimate)"
+   },
+   {
+    "role": "Land surveyor / civil engineer",
+    "why": "Access letter, topo survey, driveway profile, grading plan",
+    "when": "Due diligence and design",
+    "cost": "$500-$2k letter; $3k-$10k+ plans"
+   },
+   {
+    "role": "SCE new-service planner",
+    "why": "Line-extension estimate, pole route, easements, timing",
+    "when": "Preliminary in escrow; formal after building permit",
+    "cost": "Estimate usually free"
+   },
+   {
+    "role": "SB County Fire Community Safety",
+    "why": "Driveway, turnaround, sprinkler water and tank, fire-zone status",
+    "when": "Before designing pads",
+    "cost": "Plan review fees"
+   },
+   {
+    "role": "Title officer",
+    "why": "Recorded access, road agreements, easements",
+    "when": "Opening escrow",
+    "cost": "Included in title policy"
+   },
+   {
+    "role": "County Building & Safety or Town Planning",
+    "why": "Temporary RV permit and whether a capsule can be permitted",
+    "when": "Before buying any capsule",
+    "cost": "Town temporary permit about $469 (verify)"
+   },
+   {
+    "role": "Title 24 energy consultant + solar/off-grid installer",
+    "why": "Solar sizing, heat-pump radiant floor, code compliance",
+    "when": "House design",
+    "cost": "$500-$1.5k calcs (estimate)"
+   }
+  ]
+ }
+}

@@ -1,0 +1,42 @@
+[
+ {
+  "n": 1,
+  "label": "Compacted gravel base, 4-6 in",
+  "phase": 2
+ },
+ {
+  "n": 2,
+  "label": "15-mil vapor barrier (keeps ground moisture out of the tatami)",
+  "phase": 2
+ },
+ {
+  "n": 3,
+  "label": "2 in rigid foam under the whole slab + edges (R-10): heat goes up, not into the ground",
+  "phase": 2
+ },
+ {
+  "n": 4,
+  "label": "Radiant heat: PEX loops about 9 in apart, fed by an air-to-water heat pump",
+  "phase": 2
+ },
+ {
+  "n": 5,
+  "label": "4 in concrete slab = thermal battery (stores heat for cold desert nights)",
+  "phase": 2
+ },
+ {
+  "n": 6,
+  "label": "Hard zones (kitchen, bath, entry): porcelain tile, same heat",
+  "phase": 2
+ },
+ {
+  "n": 7,
+  "label": "1/4 in cork underlay (adds cushion, low R-value)",
+  "phase": 2
+ },
+ {
+  "n": 8,
+  "label": "Soft top: floor-heating tatami (15-30 mm) or wool felt; keep everything above the heat at about R-1.4 or less",
+  "phase": 2
+ }
+]

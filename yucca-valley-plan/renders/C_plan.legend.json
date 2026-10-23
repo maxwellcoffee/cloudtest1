@@ -1,0 +1,82 @@
+[
+ {
+  "n": 2,
+  "label": "Storage container (permitted, painted, behind the house) / west wind wall",
+  "phase": 1
+ },
+ {
+  "n": 3,
+  "label": "Ground-mount solar + batteries",
+  "phase": 1
+ },
+ {
+  "n": 4,
+  "label": "Water tanks uphill (gravity pressure)",
+  "phase": 1
+ },
+ {
+  "n": 5,
+  "label": "Well site (only if no water district serves the lot)",
+  "phase": 1
+ },
+ {
+  "n": 6,
+  "label": "Permitted house closes the north side",
+  "phase": 2
+ },
+ {
+  "n": 7,
+  "label": "Septic leach field (or sewer lateral)",
+  "phase": 2
+ },
+ {
+  "n": 8,
+  "label": "Courtyard kitchen garden",
+  "phase": 2
+ },
+ {
+  "n": 9,
+  "label": "ADU pod on the old interim pad (permitted unit)",
+  "phase": 3
+ },
+ {
+  "n": 10,
+  "label": "Guest-house pod (no kitchen)",
+  "phase": 3
+ },
+ {
+  "n": 11,
+  "label": "Studio pod (art / meditation, no sleeping)",
+  "phase": 3
+ },
+ {
+  "n": 12,
+  "label": "Ramada / outdoor kitchen + long table",
+  "phase": 3
+ },
+ {
+  "n": 13,
+  "label": "Ofuro soaking tub",
+  "phase": 3
+ },
+ {
+  "n": 14,
+  "label": "Native windbreak: mesquite, desert willow, saltbush",
+  "phase": 3
+ },
+ {
+  "n": 15,
+  "label": "Orchard near the road (easy water + access)",
+  "phase": 3
+ },
+ {
+  "n": 16,
+  "label": "Sunset lookout: a bench on the rocks, no clearing",
+  "phase": 3
+ },
+ {
+  "n": 17,
+  "label": "Gate + address post",
+  "phase": 1
+ }
+]

@@ -1,0 +1,502 @@
+{
+ "topic": "bhutan",
+ "executive_summary": "As of 23 Oct 2026, US citizens visiting Bhutan as tourists apply online at immi.gov.bt (or through a tour operator or hotel). They pay a one-time US$40 visa fee and a Sustainable Development Fee (SDF) of US$100 per adult per night, paid in advance. Bhutan's Department of Tourism says that rate is locked only until 31 August 2027, and nothing has been announced for after that. Travelling before September 2027 is the single biggest cost lever: at the full rate it would be US$200 per night. You do not need a tour operator, but the official FAQ says a licensed guide is required at all times. Tourist visas allow up to 90 days. Travel insurance has not been mandatory since 23 April 2024, but you should still buy coverage that includes evacuation. In Bhutan's system a \"sponsor\" is a host behind a non-tourist visa: a government agency, a registered organization or company, a school or university, or, for a \"personal guest\" visa, an individual Bhutanese citizen. Since June 2023 the SDF has not applied to non-tourist categories. Personal-guest rules are strict. The host must be at least 18, be in Bhutan during your visit, and prove they already know you. Each host can invite at most two guests a year (so the two of you use up their whole allowance), and stays are capped at 30 days. Treat any offer to \"sponsor you for a fee\" to avoid the SDF as fraud: the host's signed declaration makes them pay the SDF plus penalties if you turn out to be tourists. For a multi-month stay, the realistic legal routes are: a 90-day tourist visa (SDF alone would be about US$18,000 for two of you); a real volunteer, teaching or consulting role with a registered Bhutanese organization; or the Gelephu Mindfulness City \"Digital Nomad Residence\" launched 22 Jan 2026 (about US$2,800 a year plus a US$10,000 refundable deposit). That residence is run by a private company called NomadClub, so confirm it directly with the city's authority (info@gmc.bt) before paying anything. A normal guided 2-week trip for two costs roughly US$10,000-18,000 including flights from the US; 6 weeks costs roughly US$25,000-45,000. The best seasons are autumn (late Sept-Nov) and spring (March-mid April). Caveat: Bhutan's immigration and foreign-ministry websites (doi.gov.bt, mfa.gov.bt, immi.gov.bt) were unreachable during this research. The personal-guest and non-tourist rules below come from official documents as excerpted in search results, plus the Department of Tourism site, so confirm them before acting. The shared web-search budget also ran out partway through, so a few items stay unverified and are flagged.",
+ "findings": [
+  {
+   "title": "Tourist visa process for US citizens (current Oct 2026)",
+   "detail": "Every nationality except India, Bangladesh and the Maldives needs a visa before travelling. You apply online at immi.gov.bt yourself, or a licensed tour operator or hotel applies for you. The steps: sign the 'Pledge of Friendship', create an account, enter passport scan, recent digital photo and arrival/departure dates, then pay the one-time, non-refundable US$40 visa fee plus the full SDF for every night. Complete applications are reviewed within 5 working days. Your passport must be valid for at least 6 months beyond your departure from Bhutan.",
+   "confidence": "high",
+   "sources": [
+    "https://bhutan.travel/visa",
+    "https://bhutan.travel/faqs",
+    "https://bhutan.travel/visit"
+   ],
+   "implication": "Getting the visa is simple. The real constraint is paying all SDF nights up front, so decide your trip length before applying. Check both passports' expiry dates now."
+  },
+  {
+   "title": "SDF is US$100/adult/night until 31 Aug 2027; nothing announced after that",
+   "detail": "The 25 Aug 2023 Department of Tourism press release cut the SDF 50%, from US$200 to an effective US$100 per person per night for USD-paying tourists. It runs from 1 Sept 2023 and 'shall remain effective for four years till 31 August 2027'. The government kept the right to review it. Children 6 to under 12 pay US$50 per night; under-6s pay nothing. The SDF is refunded, minus bank charges, for cancelled or shortened trips: you request it through the visa portal after leaving Bhutan. Secondary sources dated Aug 2026 (The Nation, 28 Aug 2026; Little Bhutan, 25 Aug 2026) confirm the rate is still US$100 and that no post-2027 rate has been announced. I found no official general long-stay discount still in force. A 2023 proposal to waive the SDF after a set number of days was reported but never confirmed as implemented.",
+   "confidence": "high",
+   "sources": [
+    "https://bhutan.travel/announcements",
+    "https://bhutan.travel/faqs",
+    "https://thebhutanese.bt/sdf-to-be-usd-100-per-day-for-next-4-years/",
+    "https://www.nationthailand.com/news/tourism/40070380",
+    "https://littlebhutan.com/travel-guide/bhutan-sdf/",
+    "https://thebhutanese.bt/?p=32133"
+   ],
+   "implication": "For two adults, every night costs US$200 in SDF alone, and it could be US$400 per night after 31 Aug 2027. If your land timeline allows, hold the Bhutan trip before September 2027, or budget for the full rate. Ask the Department of Tourism how a trip that crosses 31 Aug 2027 will be charged."
+  },
+  {
+   "title": "Guide is mandatory; tour operator is not; accommodation must be certified",
+   "detail": "The Department of Tourism FAQ says a guide is mandatory at all times, including for self-drive guests and land arrivals who go beyond the border towns. Since 6 Mar 2023, route permits are not needed if you have a certified guide. Since the 23 Sep 2022 reopening, a tour operator is not required, only recommended. Treks must use an accredited operator or guide. There are no self-drive rental cars; you hire a car with driver. On 22 Oct 2026 the Department announced that accommodation providers, including village homestays, need prior clearance and certification, and it publishes a 'Certified Village Home Stays 2026' list. One operator (Little Bhutan) says a guide is needed 'for most sites beyond Thimphu and Paro', which suggests the in-town rule is applied loosely. That conflicts with the official FAQ.",
+   "confidence": "medium",
+   "sources": [
+    "https://bhutan.travel/faqs",
+    "https://bhutan.travel/announcements",
+    "https://bhutan.travel/travel-trade",
+    "https://bhutan.travel/visit",
+    "https://littlebhutan.com/bhutan-trip-cost/"
+   ],
+   "implication": "As a tourist you cannot simply rent a room and drift for weeks on your own. Budget for a guide and driver on every day you are touring. For a slower, cheaper stay, ask operators about long-stay packages built around certified village homestays, with fewer driving days."
+  },
+  {
+   "title": "Travel insurance optional since 23 Apr 2024; maximum tourist stay is 90 days",
+   "detail": "A 23 Apr 2024 Department of Tourism notice withdrew compulsory travel insurance for visa processing 'with immediate effect'; insurance is still recommended. The FAQ gives a maximum stay of 90 days from entry. You must apply to extend before the visa expires. The FAQ contradicts itself on how: one section says to extend online with your original login and pay the fee plus the daily SDF; another says to go in person to the Department of Immigration and pay in USD.",
+   "confidence": "high",
+   "sources": [
+    "https://bhutan.travel/announcements",
+    "https://bhutan.travel/faqs"
+   ],
+   "implication": "Buy medical and evacuation coverage anyway: hospitals outside Thimphu are limited and Paro flights are weather-dependent. For anything near 90 days, ask your operator or the Department of Tourism in writing how extensions currently work."
+  },
+  {
+   "title": "What a 'sponsor' means: non-tourist visas, and since June 2023 no SDF for them",
+   "detail": "The Department of Immigration's 'Revised list of non-tourist categories of foreigners' took effect 1 June 2023, and a DoI notification of 8 June 2023 says the SDF does not apply to non-tourist categories. This followed the Prime Minister's April 2023 statement that the SDF 'will not be applicable for those who are travelling for non-tourist activities'. Each category has a vetting agency and supporting documents. The categories visible in excerpts and secondary sources include official guests of government agencies, business visitors (sponsored by a licensed company), students, expatriate workers with work permits, volunteers and guests of registered NGOs/CSOs, foreigners married to Bhutanese citizens and their children, and personal guests of Bhutanese citizens. All non-tourist applications go to the Visa Division, Department of Immigration, Thimphu, and all except personal guest are filed electronically. Non-tourist entrants cannot apply for immigrant status or citizenship. I could not open the PDFs myself because doi.gov.bt returned 503 errors and connection resets, so the full category list and duration limits are unconfirmed.",
+   "confidence": "medium",
+   "sources": [
+    "https://doi.gov.bt/wp-content/uploads/2023/05/revised_non_tourist-categories_Public.pdf",
+    "https://doi.gov.bt/wp-content/uploads/2025/04/GENERAL-INFORMATION.pdf",
+    "https://www.doi.gov.bt/?p=2169",
+    "https://thebhutanese.bt/?p=32133",
+    "https://visaatlas.org/visas/bhutan"
+   ],
+   "implication": "A real sponsor saves you US$200 a night as a couple, but only if the visit really is for a non-tourist purpose such as work, volunteering, study or visiting a friend. In practice the sponsor is an organization or a citizen who files paperwork and vouches for you. It is not someone you pay."
+  },
+  {
+   "title": "Personal guest of a Bhutanese citizen: 2 guests a year, 30 days maximum",
+   "detail": "A DoI notice from around July 2025, as excerpted in search results, sets the host rules. The host must be at least 18, be in Bhutan during the visit, and 'establish acquaintance with the guest through documentary evidence'. Visas are limited to 'a maximum of two persons in a year', and the duration is 'the actual duration or a maximum of thirty days whichever is less'. Someone invited as a personal guest in the previous 3 years generally cannot be invited again unless they are a relative. Documents: signed application, host's citizenship ID copy, guest passport valid 6+ months, itinerary, and proof of acquaintance. The host submits in person. An older (2023) form adds that the host must have lived in Bhutan for at least a year. That form's host declaration also commits the host to 'deposit the Sustainable Development Fee... and bear the applicable fines and penalties' if the guest turns out to be a tourist. A 2022 DoI exemption list says the SDF is waived for personal guests (maximum 2 per year). A newer 'Personal Guest Requirements' PDF (uploaded May 2026) exists, but I could not open it.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.doi.gov.bt/wp-content/uploads/2026/05/Personal-Guest-Requirements.pdf",
+    "https://doi.gov.bt/wp-content/uploads/2025/03/check-list-for-PG.pdf",
+    "https://www.doi.gov.bt/wp-content/uploads/2024/01/Checklist-for-Personal-Guest-of-Bhutanese.pdf",
+    "https://www.doi.gov.bt/wp-content/uploads/2023/06/Personal-Guest-Application-Form-for-Bhutanese.pdf",
+    "https://www.doi.gov.bt/wp-content/uploads/2022/10/SDF_others_Approved-List.pdf"
+   ],
+   "implication": "Only use this route if you already have a real Bhutanese friend who lives in Bhutan, will be there, and can show proof you know each other (messages, photos). Because the two of you would use their entire yearly quota, it is a large favour to ask. It also covers only one visit of up to 30 days."
+  },
+  {
+   "title": "Gelephu Mindfulness City (GMC) and its Digital Nomad Residence (launched 22 Jan 2026)",
+   "detail": "GMC is a Special Administrative Region in southern Bhutan on the Assam border, about 4,046 km\u00b2. Per the official site it was established by Royal Charter, has its own legal system, and lists 8 priority sectors, including Spiritual, Health & Wellness, Education, and Agri-Tech & Forestry. The official gmc.bt site, as fetched, does not describe any residency or visa program. The 'Digital Nomad Visa / Residence' is marketed at partners.digitalgmc.com by NomadClub, which calls itself the 'sole authorized operator' in 'official collaboration' with the GMC Authority. Its terms: US$2,800 non-refundable programme fee (labelled 'yearly'); at least US$10,000 deposited in TER, a gold-backed token, at DK Bank, refundable on exit; 12 months, renewable up to 24; eligibility for professionals, entrepreneurs and self-employed people in GMC-aligned sectors, with the US$2,500/month income threshold waived. It claims the SDF is waived and approval takes 48-72 hours. It contradicts itself on whether you may live only in GMC or anywhere in Bhutan. Stamped Nomad notes that neither the GMC Authority nor the Royal Government has published the program rules, and that a 183-day stay can make you a tax resident under Bhutan's Income Tax Act 2025. Unclear: whether one fee covers a spouse.",
+   "confidence": "medium",
+   "sources": [
+    "https://gmc.bt/",
+    "https://gmc.bt/contact",
+    "https://partners.digitalgmc.com/",
+    "https://www.stampednomad.com/visas/bhutan-gelephu-mindfulness-city-residency",
+    "https://freakingnomads.com/news/bhutan-launches-digital-nomad-residence-programme/"
+   ],
+   "implication": "On paper this is the cheapest legal way to stay for months. One year would cost about US$2,800 (or US$5,600 if each of you pays) plus a US$10,000 refundable deposit, versus about US$18,000 in SDF for a 90-day tourist stay for two. Before paying, get written confirmation from info@gmc.bt that NomadClub is authorized, that holders really are SDF-exempt outside Gelephu, and whether a spouse is covered."
+  },
+  {
+   "title": "GMC border-town waiver and Project 108 volunteering",
+   "detail": "The Department of Tourism FAQ says visitors staying up to 24 hours inside the designated zones of Samtse, Phuentsholing, Gelephu and Samdrup Jongkhar pay no SDF from 2 June 2026 through August 2027. This waiver cannot be combined with other SDF incentives. GMC's Project 108 will build 108 chortens (about 15 m each) along the Mau Chhu river, all completed together on 1 Nov 2026. It expects about 40,000 volunteers and has a registration form that accepts non-Bhutanese and international supporters. Contact: 108@gmc.bt, +975 17525480. GMC careers: jobs@gmc.bt.",
+   "confidence": "high",
+   "sources": [
+    "https://bhutan.travel/faqs",
+    "https://108.gmc.bt/",
+    "https://gmc.bt/contact"
+   ],
+   "implication": "Project 108 is 9 days away, so it is almost certainly too soon for you. It does show that GMC welcomes foreign volunteers for spiritual and community builds, which is worth asking about for future projects. Gelephu can be reached overland from India for a day trip without SDF, but US citizens would need an Indian visa for that routing."
+  },
+  {
+   "title": "Legitimate ways to find a host or sponsor",
+   "detail": "Places to start, all verified to exist: (1) Bhutan Foundation, a US 501(c)(3) running since 1986, Washington DC plus a Thimphu office. It works on conservation, rural health, cultural preservation and CSO development but advertises no volunteer program. Contact: info@bhutanfound.org, +1 202 609 7363. (2) Tarayana Foundation, a Bhutanese rural-development NGO in Thimphu: tarayana@tarayanafoundation.org, +975 2 329-333. (3) Royal University of Bhutan, Office of the Vice Chancellor: info.ovc@rub.edu.bt, +975 2 336454; it has an 'Internationalisation' page and colleges listed at rub.edu.bt/academics. (4) GMC careers (jobs@gmc.bt), for its agri-tech, forestry, green-energy and wellness sectors. (5) The Department of Tourism hosts team, hosts@tourism.gov.bt, +975 17661974, for referrals to licensed operators. The Bhutan Canada Foundation is a long-running teacher-placement charity, but its domain bhutancanada.org currently serves an online-casino page, so I could not verify its current program; do not enter personal information there. Paid 'voluntourism' packages through tour operators usually still bring you in as tourists who pay the SDF.",
+   "confidence": "medium",
+   "sources": [
+    "https://bhutanfound.org/",
+    "https://www.tarayanafoundation.org/",
+    "https://www.rub.edu.bt/",
+    "https://gmc.bt/contact",
+    "https://bhutan.travel/visit",
+    "https://www.bhutancanada.org/"
+   ],
+   "implication": "Your design, construction and permaculture skills are the strongest door-opener. Lead with a specific, modest, unpaid offer (for example: 'two weeks helping a rural homestay design rainwater harvesting and a kitchen garden') and let the organization decide whether it fits a volunteer visa. Expect slow replies and months of lead time."
+  },
+  {
+   "title": "Approaching people respectfully; red flags",
+   "detail": "Respectful approach: build the relationship first; do not open by asking someone to file a visa for you; be clear that you will pay your own costs; offer reciprocity such as skills, hosting them in California, or a donation to their organization. Diaspora caution: many people in the US who identify as Bhutanese are ethnic-Nepali (Lhotshampa) refugees resettled after the 1990s expulsions. Most are not Bhutanese citizens and could not sponsor you, and the subject is politically painful, so do not assume. A personal-guest host must hold Bhutanese citizenship and be in Bhutan. Red flags: anyone selling 'sponsorship' or 'personal guest letters' for a fee; claims you can avoid the SDF while touring; requests to wire money to individuals; programs that use official-sounding language but are not confirmed on a .gov.bt or gmc.bt site; compromised or look-alike domains such as the current bhutancanada.org.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.doi.gov.bt/wp-content/uploads/2023/06/Personal-Guest-Application-Form-for-Bhutanese.pdf",
+    "https://partners.digitalgmc.com/",
+    "https://www.bhutancanada.org/"
+   ],
+   "implication": "Misrepresenting a tourist trip as a personal or volunteer visit exposes your host to SDF back-payments and fines, and you to visa refusal later. In a small country where reputation travels fast, the honest route is also the practical one."
+  },
+  {
+   "title": "Flights into Paro (as of Oct 2026)",
+   "detail": "Paro is the only international airport. Drukair serves Bangkok, Delhi, Kolkata, Guwahati, Bagdogra, Gaya, Dhaka, Kathmandu, Singapore (via Guwahati, 3 times weekly from 7 Apr 2026) and Dubai, plus domestic Bumthang, Gelephu (3 times weekly from 2 Sep 2026 to Jan 2027) and Yonphula. Paro-Guwahati-Bangkok resumed 2 Apr 2026, twice weekly. Bhutan Airlines advertises Kolkata, Kathmandu, Delhi and Bangkok. Approximate one-way economy fares (Little Bhutan, Jul 2026): Kathmandu US$200-280, Delhi US$220-340, Bangkok US$360-490, Singapore about US$550. Fares are largely fixed, so booking early secures a seat rather than a lower price. Drukair: maximum 32 kg per checked piece; reconfirm 72 hours before departure; interline with Thai, Turkish and Air India. Domestic baggage allowance is 20 kg in economy.",
+   "confidence": "high",
+   "sources": [
+    "https://www.drukair.com.bt/",
+    "https://www.bhutanairlines.bt/",
+    "https://bhutan.travel/visit",
+    "https://littlebhutan.com/bhutan-trip-cost/"
+   ],
+   "implication": "From California, the usual routing is LAX/SFO to Bangkok or Delhi, overnight there, then Paro. Bangkok avoids India-visa questions; Kathmandu gives the famous Himalaya-view approach. Leave a buffer day each way, since weather delays are common."
+  },
+  {
+   "title": "Budget for a 2-6 week visit (2026 dollars, couple)",
+   "detail": "Fixed government fees: US$80 in visas for two, plus SDF of US$200 per night for two (14 nights = US$2,800; 28 = US$5,600; 42 = US$8,400). Operator 'all-in' daily rates, covering SDF, private guide, car and driver, 3-star hotel and 3 meals: US$250-450 per person per day (Little Bhutan) or US$250-300 per day (Nepal Nomad, Aug 2026), with longer trips cheaper per night (about US$340 per night for an 11-day trip). Luxury lodges add US$400-900+ per night. For two people: 2 weeks about US$7,000-12,600 on the ground; 6 weeks about US$21,000-37,800 before any long-stay discount. Add regional Paro flights (about US$800-2,000 round trip for two) and US-to-Asia flights (my estimate, about US$1,800-3,600 for two).",
+   "confidence": "medium",
+   "sources": [
+    "https://bhutan.travel/faqs",
+    "https://littlebhutan.com/bhutan-trip-cost/",
+    "https://www.nepalnomad.com/blog/bhutan-tour-cost",
+    "https://www.drukair.com.bt/"
+   ],
+   "implication": "A realistic guided trip for two is about US$10,000-18,000 for 2 weeks or US$25,000-45,000 for 6 weeks. Set this against the land budget: 6 weeks in Bhutan costs about the same as one or two capsule units. A volunteer or GMC route changes the math dramatically."
+  },
+  {
+   "title": "Health (CDC page updated 25 Aug 2026)",
+   "detail": "The CDC recommends hepatitis A and typhoid for most travellers. It recommends Japanese encephalitis for stays of a month or more or rural/camping trips, and says to discuss rabies pre-exposure shots, since rabid dogs occur and post-exposure care may only exist in larger towns. Malaria is a risk in some parts of Bhutan, chiefly the southern lowlands near India, which would include the Gelephu area (that last point is my inference; CDC does not name districts). The Department of Tourism warns about stray dogs, occasional floods and landslides. Emergency numbers: 112 ambulance, 110 fire, 113 police. Altitude: Paro and Thimphu sit around 2,200-2,600 m and passes and treks go much higher (general knowledge, not from these pages). Yucca Valley at about 1,000 m gives little acclimatization.",
+   "confidence": "medium",
+   "sources": [
+    "https://wwwnc.cdc.gov/travel/destinations/traveler/none/bhutan",
+    "https://bhutan.travel/faqs"
+   ],
+   "implication": "Book a travel-medicine visit 6-8 weeks before departure, since the rabies and JE series take weeks. Buy insurance that includes evacuation."
+  },
+  {
+   "title": "Connectivity, money, seasons and etiquette",
+   "detail": "Connectivity: hotel Wi-Fi is common, but a local SIM (B-Mobile/Bhutan Telecom or TashiCell, sold at the Paro airport visitor centre) is more reliable; data can be expensive. Money: Visa and Mastercard work at banks, ATMs and urban shops, but less so outside towns. Tell your bank first, since US banks may block Bhutan payments. The goBoB and MyPay wallets can link to foreign cards. USD and INR cash are widely accepted, the ngultrum is pegged 1:1 to the Indian rupee, and you may bring up to US$10,000 cash. Seasons: autumn (late Sept/early Oct to late Nov) is sunny with festivals; spring (early March to mid-April) is the bloom season; winter (late Nov to March) is clear and cold, with snow above 3,000 m; monsoon (late June to late Sept) brings landslide and transport disruption, mostly in the south. Festival dates for 2025-2027 are posted on bhutan.travel/travel-trade. Etiquette: long sleeves and covered legs at temples; remove shoes and hats; no photos inside sacred sites; ask before photographing people; sit cross-legged with elders or monks; greetings 'Kuzu zangpo la' (hello) and 'Kadrin chey la' (thank you).",
+   "confidence": "high",
+   "sources": [
+    "https://bhutan.travel/faqs",
+    "https://bhutan.travel/visit",
+    "https://bhutan.travel/travel-trade"
+   ],
+   "implication": "If you want to work remotely from Bhutan, test speeds in Thimphu or Paro before committing to a rural base. Autumn 2027 falls after the SDF lock ends, so spring 2027 or summer 2027 may be the sweet spot if you want the US$100 rate."
+  },
+  {
+   "title": "Routes to a multi-month stay, compared",
+   "detail": "(a) Tourist visa up to 90 days: guide required, SDF about US$18,000 for two for 90 nights at the current rate, plus daily guide and car. (b) Personal guest: at most 30 days, one visit, needs a real citizen friend; SDF waived per the 2022 list. (c) Volunteer, consultant or teaching role through a registered Bhutanese organization or institution: a non-tourist category, so no SDF since June 2023; duration set by the role and the vetting agency; needs a genuine host organization and usually months of lead time. (d) GMC Digital Nomad Residence: 12 months, renewable to 24; about US$2,800 a year plus a US$10,000 refundable deposit; operator-run and unverified. (e) Study, such as Buddhist or Dzongkha courses at an RUB college: a student category, so you would need admission first. I could not confirm whether you can switch status inside Bhutan (for example, tourist to volunteer). Assume you cannot unless told otherwise.",
+   "confidence": "medium",
+   "sources": [
+    "https://bhutan.travel/faqs",
+    "https://doi.gov.bt/wp-content/uploads/2025/04/GENERAL-INFORMATION.pdf",
+    "https://partners.digitalgmc.com/",
+    "https://www.stampednomad.com/visas/bhutan-gelephu-mindfulness-city-residency"
+   ],
+   "implication": "For 'a while' (months), the best-value legal path is either a real skills-based role with a Bhutanese organization or a confirmed GMC residence. A 2-4 week guided tourist trip first is a good way to build the relationships that make either possible."
+  },
+  {
+   "title": "US consular coverage",
+   "detail": "The US has no embassy in Bhutan; the US Embassy in New Delhi covers US citizens there. This is general knowledge: the State Department country page returned 403 when I tried to fetch it, so I could not confirm it today. Bhutan has no embassy in Washington; for consular questions, Bhutan's Permanent Mission to the UN in New York is the usual point of contact (medium confidence, not verified).",
+   "confidence": "medium",
+   "sources": [
+    "https://travel.state.gov/content/travel/en/international-travel/International-Travel-Country-Information-Pages/Bhutan.html"
+   ],
+   "implication": "Enroll in STEP (step.state.gov) once your dates are set, and carry copies of your passports. Lost-passport help means dealing with New Delhi."
+  }
+ ],
+ "critical_claims": [
+  {
+   "claim": "Bhutan's SDF for US-dollar-paying adult tourists is US$100 per person per night, locked only until 31 August 2027 (previously US$200). No post-August-2027 rate has been announced as of Oct 2026.",
+   "sources": [
+    "https://bhutan.travel/announcements",
+    "https://bhutan.travel/faqs",
+    "https://www.nationthailand.com/news/tourism/40070380"
+   ]
+  },
+  {
+   "claim": "A licensed guide is mandatory for tourists at all times; a tour operator is not mandatory; tourist visas allow a maximum stay of 90 days; travel insurance has not been mandatory since 23 April 2024.",
+   "sources": [
+    "https://bhutan.travel/faqs",
+    "https://bhutan.travel/announcements"
+   ]
+  },
+  {
+   "claim": "Since June 2023 the SDF does not apply to non-tourist visa categories (official, business, volunteer, student, work, personal guest, and others), each of which needs a sponsoring agency, organization or citizen.",
+   "sources": [
+    "https://doi.gov.bt/wp-content/uploads/2023/05/revised_non_tourist-categories_Public.pdf",
+    "https://thebhutanese.bt/?p=32133",
+    "https://www.doi.gov.bt/wp-content/uploads/2022/10/SDF_others_Approved-List.pdf"
+   ]
+  },
+  {
+   "claim": "Personal guest visa rules: the host must be a Bhutanese citizen aged 18+ who is in Bhutan during the visit and has documented prior acquaintance; maximum 2 guests per host per year; maximum 30 days; no repeat invitation within 3 years unless a relative.",
+   "sources": [
+    "https://www.doi.gov.bt/wp-content/uploads/2026/05/Personal-Guest-Requirements.pdf",
+    "https://doi.gov.bt/wp-content/uploads/2025/03/check-list-for-PG.pdf"
+   ]
+  },
+  {
+   "claim": "The GMC Digital Nomad Residence (launched 22 Jan 2026) costs a US$2,800 non-refundable yearly fee plus at least a US$10,000 refundable TER deposit at DK Bank; it lasts 12 months, renewable to 24; and the private operator NomadClub claims holders are SDF-exempt. The GMC Authority itself has not published the rules.",
+   "sources": [
+    "https://partners.digitalgmc.com/",
+    "https://www.stampednomad.com/visas/bhutan-gelephu-mindfulness-city-residency",
+    "https://gmc.bt/"
+   ]
+  },
+  {
+   "claim": "All tourist accommodation, including village homestays, must have Department of Tourism clearance and certification (announcement dated 22 Oct 2026).",
+   "sources": [
+    "https://bhutan.travel/announcements",
+    "https://bhutan.travel/travel-trade"
+   ]
+  }
+ ],
+ "costs": [
+  {
+   "item": "Visa fee, 2 adults (one-time per trip)",
+   "low_usd": 80,
+   "high_usd": 80,
+   "notes": "US$40 each, non-refundable (bhutan.travel/visa)."
+  },
+  {
+   "item": "SDF, 2 adults x 14 nights",
+   "low_usd": 2800,
+   "high_usd": 5600,
+   "notes": "Low figure is US$100/night through 31 Aug 2027; high figure assumes it reverts to US$200 after that (not announced)."
+  },
+  {
+   "item": "SDF, 2 adults x 42 nights (6 weeks)",
+   "low_usd": 8400,
+   "high_usd": 16800,
+   "notes": "Same rate assumption as above."
+  },
+  {
+   "item": "SDF, 2 adults x 90 nights (maximum tourist stay)",
+   "low_usd": 18000,
+   "high_usd": 36000,
+   "notes": "Shows why sponsored, volunteer or GMC routes matter for long stays."
+  },
+  {
+   "item": "Guided trip on the ground, 2 people x 14 days (incl. SDF, guide, car, 3-star hotel, meals)",
+   "low_usd": 7000,
+   "high_usd": 12600,
+   "notes": "US$250-450 per person per day (Little Bhutan, Nepal Nomad, Aug 2026). These are operator marketing figures."
+  },
+  {
+   "item": "Guided trip on the ground, 2 people x 42 days",
+   "low_usd": 21000,
+   "high_usd": 37800,
+   "notes": "Long-stay discounts are negotiable; ask operators for homestay-based pricing."
+  },
+  {
+   "item": "Regional round-trip flights to Paro, 2 people",
+   "low_usd": 800,
+   "high_usd": 2000,
+   "notes": "From Kathmandu, Delhi or Bangkok; one-way about US$200-490 per person (Jul 2026)."
+  },
+  {
+   "item": "US West Coast to Bangkok/Delhi round trip, 2 people",
+   "low_usd": 1800,
+   "high_usd": 3600,
+   "notes": "My estimate, not sourced; check current fares."
+  },
+  {
+   "item": "Travel medical and evacuation insurance, 2 people, 2-6 weeks",
+   "low_usd": 200,
+   "high_usd": 1000,
+   "notes": "My estimate; not mandatory since Apr 2024 but strongly advised."
+  },
+  {
+   "item": "Travel vaccines (Hep A, typhoid, rabies pre-exposure, possibly JE), 2 people",
+   "low_usd": 600,
+   "high_usd": 2500,
+   "notes": "My estimate of US clinic prices; insurance coverage varies."
+  },
+  {
+   "item": "GMC Digital Nomad Residence, first year",
+   "low_usd": 12800,
+   "high_usd": 15600,
+   "notes": "US$2,800 fee (US$5,600 if each spouse pays separately; unclear) plus US$10,000 TER deposit, which is refundable on exit, so the true cost is US$2,800-5,600 plus currency/token risk. Operator figures, unverified."
+  }
+ ],
+ "people_to_involve": [
+  {
+   "role": "Department of Tourism 'hosts' team (Royal Government of Bhutan)",
+   "why": "The official source for SDF timing across 31 Aug 2027, the guide requirement on long stays, the extension procedure, and referrals to licensed operators.",
+   "when": "Now, before choosing dates.",
+   "how_to_find": "hosts@tourism.gov.bt, +975 17661974 (from bhutan.travel/faqs and /visit)",
+   "questions_to_ask": [
+    "If our visa is issued before 31 Aug 2027 but our nights continue past it, which SDF rate applies?",
+    "Is a guide required every day for a 4-8 week stay based in one certified homestay?",
+    "What is the current extension procedure, online or in person, and its fee?",
+    "Has any post-August-2027 SDF rate been announced?"
+   ],
+   "typical_cost": "Free"
+  },
+  {
+   "role": "Licensed Bhutanese tour operator (get 3 quotes)",
+   "why": "Files the visa, supplies the mandatory guide and driver, books certified lodging, and can design a slower long-stay itinerary.",
+   "when": "6-9 months before travel.",
+   "how_to_find": "Department of Tourism referrals (hosts@tourism.gov.bt); check the operator is registered with the Department (bhutan.travel/travel-trade lists registration systems).",
+   "questions_to_ask": [
+    "Per-day breakdown for 14 and 28 days for two, using certified village homestays",
+    "Long-stay discount after day 10?",
+    "Guide-free days allowed in Thimphu/Paro?",
+    "Refund policy and SDF refund handling"
+   ],
+   "typical_cost": "US$250-450 per person per day all-in, including SDF"
+  },
+  {
+   "role": "A genuine Bhutanese friend or acquaintance (possible personal-guest host)",
+   "why": "The only individual who can sponsor you, for up to 30 days, with the SDF waived.",
+   "when": "Only if the relationship already exists; raise it 3+ months ahead.",
+   "how_to_find": "People you already know: classmates, colleagues, people met on a first trip. Do not buy or solicit this from strangers.",
+   "questions_to_ask": [
+    "Would hosting us use your two-guest allowance for the year, and is that OK?",
+    "What proof of acquaintance would you need from us?",
+    "Will you be in Bhutan during our dates?"
+   ],
+   "typical_cost": "No fee. Offer reciprocity and cover your own costs."
+  },
+  {
+   "role": "Gelephu Mindfulness City Authority",
+   "why": "To confirm whether the NomadClub Digital Nomad Residence is official, SDF-exempt, and covers a spouse, and to ask about volunteer or skills roles in agri-tech, forestry and green building.",
+   "when": "Before paying any program fee.",
+   "how_to_find": "info@gmc.bt; careers jobs@gmc.bt; Project 108 108@gmc.bt / +975 17525480 (gmc.bt/contact, 108.gmc.bt)",
+   "questions_to_ask": [
+    "Is partners.digitalgmc.com / NomadClub your authorized operator?",
+    "Are residence holders exempt from the SDF when travelling outside GMC?",
+    "Is one fee per person or per household?",
+    "Are there short-term volunteer or skills programs for construction, design or permaculture?"
+   ],
+   "typical_cost": "Free to ask; program US$2,800/yr plus US$10,000 refundable deposit"
+  },
+  {
+   "role": "Bhutan Foundation (US charity)",
+   "why": "A US-based, long-standing bridge to Bhutanese NGOs and CSOs that could introduce a genuine host organization.",
+   "when": "After you have written your skills offer.",
+   "how_to_find": "info@bhutanfound.org, +1 202 609 7363, 1050 Connecticut Ave NW #66013, Washington DC 20036 (bhutanfound.org)",
+   "questions_to_ask": [
+    "Do any of your Bhutan partners host skilled short-term volunteers in construction, design or agriculture?",
+    "Could you make an introduction if we donate or support a project?"
+   ],
+   "typical_cost": "Free; a donation is customary goodwill"
+  },
+  {
+   "role": "Tarayana Foundation (Bhutanese rural-development NGO)",
+   "why": "Works on rural housing and livelihoods, where your building and planting skills are relevant; a possible volunteer sponsor.",
+   "when": "After an introduction or with a concise skills offer.",
+   "how_to_find": "tarayana@tarayanafoundation.org, +975 2 329-333 (tarayanafoundation.org)",
+   "questions_to_ask": [
+    "Do you accept foreign volunteers or interns, and through which visa category?",
+    "Is there a project where rainwater, earth-building or kitchen-garden help is wanted?"
+   ],
+   "typical_cost": "Free"
+  },
+  {
+   "role": "Royal University of Bhutan (Office of the Vice Chancellor)",
+   "why": "Possible route to guest lectures, workshops or short courses; RUB's architecture and engineering college (I believe the College of Science and Technology; verify) relates to your building interests.",
+   "when": "6+ months ahead.",
+   "how_to_find": "info.ovc@rub.edu.bt, +975 2 336454 (rub.edu.bt)",
+   "questions_to_ask": [
+    "Do colleges host visiting practitioners or short courses for foreigners, and who sponsors the visa?"
+   ],
+   "typical_cost": "Free"
+  },
+  {
+   "role": "Travel-medicine clinic",
+   "why": "Vaccines (Hep A, typhoid, rabies, JE), malaria advice for the southern lowlands such as Gelephu, and altitude planning.",
+   "when": "6-8 weeks before departure.",
+   "how_to_find": "County health travel clinic or your insurer's travel clinic.",
+   "questions_to_ask": [
+    "Do we need the rabies pre-exposure series?",
+    "JE for a stay of a month or more?",
+    "Malaria prophylaxis if we visit Gelephu?"
+   ],
+   "typical_cost": "US$300-1,250 per person (estimate)"
+  },
+  {
+   "role": "Tax preparer familiar with expats",
+   "why": "A residence of 183+ days can trigger Bhutanese tax residency (Income Tax Act 2025, per a secondary source), and there are US filing implications.",
+   "when": "Only if you pursue a long residence.",
+   "how_to_find": "Referral; a US expat tax specialist",
+   "questions_to_ask": [
+    "What are our obligations if we hold a 12-month GMC residence while earning US income?"
+   ],
+   "typical_cost": "US$200-800 consult (estimate)"
+  }
+ ],
+ "risks": [
+  {
+   "risk": "The SDF discount ends 31 Aug 2027 and may revert to US$200 per night, doubling costs if land and building delays push the trip later.",
+   "severity": "high",
+   "mitigation": "Pick a target window before September 2027, or budget at US$200 per night. Email hosts@tourism.gov.bt about trips that cross the cutoff. Set a reminder to check announcements in March 2027."
+  },
+  {
+   "risk": "'Sponsor-for-a-fee' or fake personal-guest arrangements to avoid the SDF: the host is liable for SDF plus fines, you risk visa refusal, and you damage relationships.",
+   "severity": "high",
+   "mitigation": "Use only real relationships or registered organizations. Never pay an individual for a letter. Verify any program on a .gov.bt or gmc.bt site or by email."
+  },
+  {
+   "risk": "The GMC Digital Nomad Residence is run by a private operator; rules are not published by the GMC Authority or the government; it requires a US$10,000 deposit in a gold-backed token, and the SDF waiver is unconfirmed.",
+   "severity": "medium",
+   "mitigation": "Get written confirmation from info@gmc.bt before paying. Ask about the deposit's refund mechanics and currency risk. Do not move money until confirmed."
+  },
+  {
+   "risk": "Official immigration sites (doi.gov.bt, immi.gov.bt, mfa.gov.bt) were unreachable during research, so the personal-guest and non-tourist details rest on excerpts and may have changed (a May 2026 requirements PDF exists).",
+   "severity": "medium",
+   "mitigation": "Have your host or tour operator download the current PDFs from doi.gov.bt, or try from a different network, before relying on these rules."
+  },
+  {
+   "risk": "Look-alike or compromised domains: bhutancanada.org currently serves casino content.",
+   "severity": "low",
+   "mitigation": "Do not submit personal data on unexpected pages. Reach organizations through a verified email or a referral."
+  },
+  {
+   "risk": "Health: rabies from dogs, malaria in the southern lowlands, altitude, and limited advanced care outside Thimphu; insurance is not mandatory, so it is easy to skip.",
+   "severity": "medium",
+   "mitigation": "Travel-medicine visit 6-8 weeks out; buy policies that include medical evacuation; carry prescriptions."
+  },
+  {
+   "risk": "Card payments blocked or cash unavailable outside towns.",
+   "severity": "low",
+   "mitigation": "Tell your banks; set up goBoB or MyPay; carry USD cash under US$10,000; keep a backup card."
+  },
+  {
+   "risk": "Flight disruptions at Paro (weather, schedule changes) causing missed connections and extra SDF nights.",
+   "severity": "medium",
+   "mitigation": "Buffer days at hubs; reconfirm 72 hours ahead; give Drukair your WhatsApp for alerts; avoid peak monsoon."
+  },
+  {
+   "risk": "Being away for months stalls house permits and leaves your stored belongings and pod unattended (covered in other topics).",
+   "severity": "medium",
+   "mitigation": "Coordinate trip timing with the permit and inspection schedule from the land topics. Arrange a caretaker or neighbour check-ins before booking."
+  }
+ ],
+ "next_actions": [
+  "Open bhutan.travel/faqs and bhutan.travel/visa, save the pages as PDFs dated 2026-10-23, and put them in your shared 'Bhutan' folder.",
+  "Check the expiry date on both passports and write it on your planning sheet; renew any passport that expires within 6 months of your latest possible Bhutan departure.",
+  "Email hosts@tourism.gov.bt asking: (1) which SDF rate applies to nights after 31 Aug 2027 on a visa issued before then, (2) whether a guide is required every day on a 4-8 week homestay-based stay, (3) the current visa-extension procedure.",
+  "Email info@gmc.bt asking whether NomadClub (partners.digitalgmc.com) is the authorized operator of the Digital Nomad Residence, whether holders are SDF-exempt outside Gelephu, and whether one fee covers a married couple.",
+  "Write down every Bhutanese citizen either of you actually knows (name, how you met, what proof of acquaintance you have); if the list is empty, cross the personal-guest route off.",
+  "Write a 150-word 'skills offer' describing your design, construction and permaculture skills and the dates you're available, to paste into outreach emails.",
+  "Email info@bhutanfound.org with your skills offer, asking whether any Bhutan partner organization hosts skilled short-term volunteers and how the visa is sponsored.",
+  "Email tarayana@tarayanafoundation.org with your skills offer, asking whether they accept foreign volunteers and under which visa category.",
+  "Request written quotes from 3 Department-of-Tourism-licensed operators for 14-day and 28-day trips for two in spring 2027 (March-April) using certified village homestays, with a per-day cost breakdown.",
+  "Download the 2027 festival-dates PDF from bhutan.travel/travel-trade and circle 2-3 candidate travel windows before 31 Aug 2027.",
+  "Check Drukair (drukair.com.bt) schedules for Bangkok-Paro and Delhi-Paro in your candidate windows and note the days of the week flights operate.",
+  "Book a travel-medicine appointment for both of you 8 weeks before your earliest candidate date.",
+  "Add a calendar reminder for 2027-03-01: 'Check bhutan.travel/announcements for the post-August-2027 SDF rate.'",
+  "Once dates are set, enroll both of you in STEP at step.state.gov."
+ ],
+ "open_questions": [
+  "What SDF rate applies after 31 Aug 2027, and how are nights that cross the cutoff charged?",
+  "Exact current text of the May 2026 'Personal Guest Requirements' and the full non-tourist category list with duration limits (doi.gov.bt was unreachable).",
+  "Is the GMC Digital Nomad Residence officially sanctioned by the GMC Authority, is it really SDF-exempt, and is the fee per person or per household?",
+  "Can a visitor switch status inside Bhutan (tourist to volunteer, or GMC resident), or must they leave and re-enter?",
+  "Is the 'guide at all times' rule enforced for long, slow stays in one place, or do operators offer reduced-guide long-stay packages?",
+  "Does Bhutan Canada Foundation still operate, and at what web address?",
+  "Which Bhutanese organizations formally host volunteers in construction, design or permaculture? (The web-search budget for this run ran out before this could be explored further; a follow-up session could continue.)",
+  "Current US State Department advisory level for Bhutan (page returned 403)."
+ ],
+ "brainstorm_prompts": [
+  "What do we each want Bhutan to be: a pilgrimage or retreat, a sightseeing trip, a skills exchange, or scouting a possible longer life there?",
+  "Is going before 31 Aug 2027 (while the SDF is US$100 a night) worth reshaping our land and pod timeline, or are we fine paying possibly double later?",
+  "Two-week guided trip now and a longer stay later, or one long stay? What is our total Bhutan budget ceiling?",
+  "Do we genuinely know any Bhutanese citizens? Would it feel right to ask them to use their whole two-guest yearly allowance on us?",
+  "What skills could we honestly offer a Bhutanese organization, and are we willing to commit to a real role with schedules and obligations rather than free travel?",
+  "Would we be comfortable putting US$10,000 into a gold-backed token deposit for the GMC residence if it is officially confirmed? What is our risk tolerance?",
+  "How do we feel about having a guide with us every day?",
+  "Spring blooms (March-April) or autumn festivals (Oct-Nov)? Which matters more to us?",
+  "What has to be true on the land before we leave (pod secured, belongings stored, someone checking in, permit clock not expiring)?",
+  "If Bhutan becomes something we want to return to for years, how would that change what we build in Yucca Valley (smaller, lock-and-leave, more storage)?"
+ ]
+}

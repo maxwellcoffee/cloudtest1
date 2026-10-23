@@ -1,0 +1,599 @@
+{
+ "topic": "interim_storage_security",
+ "executive_summary": "Plain version: in both the Town of Yucca Valley and unincorporated San Bernardino County it is illegal to live in a ~$20k imported \"space capsule\" pod, and there is no permit path that makes it legal as delivered. Both codes ban living in any temporary structure or vehicle unless a permit authorizes it (County Dev. Code 84.25.070; Town Dev. Code 9.39.080). The only interim housing either one allows is a DMV-registered RV or travel trailer (County) or a self-contained RV or manufactured home (Town), and only after the building permit for the real house has been issued. So the step that unlocks living on site is getting the small house permitted, not buying the pod.\n\nOnce that permit exists, the County issues a Temporary Structure Permit for a year at a time; its 2025 checklist says renewals can run up to 5 years total, while the code text says 12 months plus one 12-month extension, so get the answer in writing. The Town allows 1 year plus 1-year extensions, up to 4 years. Before any permit, County owners of 5+ acres zoned RL may camp up to 4 days in any 30. I found no such allowance in the Town.\n\nImported capsules land at roughly 2-3x the advertised price. As of Oct 2026, China-origin prefab buildings (HTS 9406.90) carry about 28-53% in duties; a dedicated 25% China tariff (Section 301 code 9903.88.03) is the confirmed core, and aggregator sites disagree on the add-ons. Add flat-rack ocean freight, oversize trucking and a crane. These units also normally lack the California HCD insignia, HUD label or RVIA seal, and their wiring is usually CE-marked rather than UL-listed. An inspector cannot approve them as dwellings.\n\nTo keep the pod dream at lower risk: live in a used self-contained travel trailer under the temporary permit while building. Treat any capsule as non-sleeping storage, studio space or a future guest unit that must be permitted. Make later pods legal products: HUD-code or HCD-labeled units, or code-built units. County rules allow 3 ADUs plus 1 junior ADU on parcels of 5+ acres, and ADUs can be short-term rentals in the Desert Region.\n\nFor storage while away: a used 20' container from the LA depot starts around $1,800. In the County it needs an accessory-structure permit (IB-0002, updated Jan 1, 2026) and must be painted or altered to blend in, and before a house exists it can only go in under a Temporary Use Permit. Summer heat inside an unshaded steel box and pack rats are the main threats to belongings; anything heat-sensitive belongs in a climate-controlled unit in town (listed from about $84-131/mo).\n\nFor the trip: County building permits expire after 12 months of no work, with one written 180-day extension possible. The RV permit dies with the building permit, so pass an inspection right before leaving. Under SB 602 (2023), you can file a notarized trespass authorization with the Sheriff covering up to 12 months of absence. A caretaker might legally live on site under the \"temporary security quarters\" permit category. Expect standard insurance to limit vandalism and theft coverage on property left vacant.\n\nCaveat: the shared web-search budget ran out mid-research. Product prices, local crime levels and insurance figures below are partly estimates and are labeled.",
+ "findings": [
+  {
+   "title": "An imported capsule pod cannot be legally lived in, in either jurisdiction",
+   "detail": "County Development Code 84.25.070(a)(1) and (c)(1): living in any temporary structure or vehicle requires a Temporary Use Permit or other approval. Town Code 9.39.080 makes it unlawful to 'place, install, build, maintain, use, or occupy any temporary structure' for dwelling without a temporary use permit or land use approval. That covers makeshift enclosures and unfinished buildings, and vehicles of every kind. Only two kinds of unit can be approved as temporary living quarters: RVs/travel trailers (County Temporary Structure Permit) and manufactured homes or self-contained RVs (Town 9.39.050.A). A permanent dwelling has to carry the California HCD factory-built insignia (Health & Safety Code 19980, applied in an HCD-approved plant after plan approval) or a HUD label, or be built on site under the 2025 California Residential Code, which the County adopted. Chinese capsule homes are typically CE-marked and carry none of these; no seller I found showed one. The ADU amnesty in AB 2533 (2024) only protects ADUs built before Jan 1, 2020, so it will not cover a pod placed in 2026.",
+   "confidence": "high",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures",
+    "https://www.hcd.ca.gov/building-standards/fbh/insignia",
+    "https://www.hcd.ca.gov/building-standards/mh/insignia/background",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-6-building-regulations/division-3-building-regulations/chapter-1.5-california-residential-code",
+    "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB2533"
+   ],
+   "implication": "Don't make an unpermitted pod your legal home address or your only shelter. If you buy one, plan for it to be storage, a studio or a future permitted unit, and sleep in a permitted RV or trailer."
+  },
+  {
+   "title": "The legal interim path in the County: an RV or travel trailer under a Temporary Structure Permit after the house permit is issued",
+   "detail": "County Building & Safety checklist (Rev. 6/2025), 'Temporary Residential Quarters': an RV or travel trailer may be lived in by 'an individual constructing a residence on a property', and the building permit for the residence must be issued first. The unit can't be placed until the building permit and the Temporary Structure Permit are issued; placing it earlier risks penalty fees. Term: 12 months, with a 12-month renewal requested before expiry and a 5-year cap from first issuance. The permit expires automatically if no inspection is called for within 180 days of issuance. Final inspection covers the electrical, gas and sewer/water hookups, and Fire, Environmental Health and Public Works sign-offs if required. Submittal: site plan, current CA DMV registration, a sewage pumping contract if the unit is self-contained, and water/sewer will-serve letters if applicable. Discrepancy: Development Code 84.25.040(e) says 12 months after the building permit is issued plus one Director extension of up to 12 months (request at least 14 days before expiry). The permit becomes invalid if the building permit is cancelled, completed or expires, and everything must be removed within 30 days of completion. Fee: per the County Master Fee Schedule, not confirmed.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses",
+    "https://wp.sbcounty.gov/ezop/permits/temporary-use-permit/"
+   ],
+   "implication": "Order of work: design the smallest house, get the permit issued, then apply for the Temporary Structure Permit and move in. Budget time on the 2-year (code) reading unless the County confirms the 5-year checklist reading in writing."
+  },
+  {
+   "title": "The Town of Yucca Valley path: Temporary Use Permit, 1 year plus 1-year extensions, 4 years maximum",
+   "detail": "Town Code 9.39.050.A: manufactured homes and self-contained RVs may be temporary residential quarters for people building the first permanent dwelling on the parcel, once building permits are issued. Permits run 'not to exceed one year with one year extensions' and 'not to exceed an aggregate total of four (4) years'. They become invalid when the building permit is cancelled or construction is completed. Removal and site restoration may require performance security (9.39.060.A.2). The Town's application outline (seen only in search results; the Town site returned 403 to automated fetches) lists a fee of $469 (older version: $295) and requires valid RV registration; Planning Division staff approve it. The phone number listed is 760-369-6575. A notice to vacate can give 30 days, or less if there is an immediate hazard (9.39.080.E). I found no Town allowance for camping before a permit.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures",
+    "https://yucca-valley.org/home/showpublisheddocument/8170/638550971409370000",
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.72-temporary-use-permits"
+   ],
+   "implication": "In the Town, the RV must be self-contained, or you use a manufactured home. A small HUD-code unit could be temporary quarters first and later a permanent ADU, which a travel trailer never can."
+  },
+  {
+   "title": "Before any permit, County parcels of 5+ acres get limited camping; the Town gets none",
+   "detail": "County 84.25.070(c)(2): with no permit, an owner of 5 acres or more in the RC, AG or RL zones may use a temporary structure for recreational camping for up to four days in any 30-day period. Town 9.39.080 has no matching allowance.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures"
+   ],
+   "implication": "On an unincorporated RL lot you can legally do weekend camp-outs while designing and permitting. Confirm the zoning first; this is not a way to move in."
+  },
+  {
+   "title": "What the '$20k capsule' really costs and delivers in 2026",
+   "detail": "Capsule homes are mostly steel-frame shells with aluminum-alloy or composite skins, foam or mineral-wool insulation, large glazed ends and 'smart' systems, made in China and sold on Alibaba, Amazon, eBay and through US resellers. Secondary pricing: one guide gives about $15,000 for a starter unit up to about $90,000 for a double-decker, with freight and crane adding $4,000-12,000 (thepricer.org, reviewed Feb 2026). A US eBay listing for a 'Max Luxury Space Capsule House' asked $94,999 delivered to California (ended). The European Ecocapsule SPACE started at \u20ac49,900 (circa-2020 price). Most wide panoramic models exceed container dimensions and ship on flat-racks or as break-bulk; domestic oversize trucking runs about $2.50-3.50 per mile plus permits for loads wider than 8'6\" (tinyheirloom.com). Alibaba buyer reviews describe price escalation after deposit, defective or missing features, and Trade Assurance protection lasting only 30 days. I found no capsule-specific US owner reviews before the search budget ran out. My estimate (not verified): a unit advertised at $15-25k FOB China lands at $35-65k once you add duty, freight, customs brokerage, drayage, oversize trucking, crane ($1.5-4k), foundation and tie-downs ($1.5-5k), and possibly California use tax. Plan on 3-5 months from order to placement.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.thepricer.org/how-much-does-capsule-castle-cost/",
+    "https://www.ebay.de/itm/335480848675",
+    "https://newatlas.com/tiny-houses/ecocapsule-space-launch/?amp=true",
+    "https://www.tinyheirloom.com/faqs/what-is-the-current-average-cost-for-land-transportation-of-a-tiny-home-rv-travel-trailer-within-the-united-states",
+    "https://www.trustpilot.com/review/Alibaba.com"
+   ],
+   "implication": "Budget $40-65k, not $20k, for a landed imported pod. For the same money you can buy a used trailer plus a legal HUD-code or ADU unit later."
+  },
+  {
+   "title": "Tariffs on a China-built capsule as of October 2026",
+   "detail": "CBP rulings classify steel prefab housing units and microhomes from China under HTS 9406.90 (e.g., 9406.90.01.30) at a 2.9% base rate plus the 25% Section 301 China tariff (9903.88.03). The Supreme Court struck down the IEEPA tariffs on Feb 20, 2026 (higher China rates ended Feb 24). The temporary Section 122 tariff expired July 24, 2026. New Section 301 tariffs took effect the same day, with China in the 12.5% group, on top of the legacy Section 301 duties (SEC filings, 2026). One aggregator shows a 52.9% total for China under 9406.90.01.30 (2.9% + 25% for 9903.88.03 + 25% steel/aluminum derivative under 9903.82.09). Another lists different steel-tariff (Section 232) lines. US duty is charged on the customs (transaction/FOB) value, plus small processing and harbor fees.",
+   "confidence": "low",
+   "sources": [
+    "https://tariffs.wove.com/us/tariff/9406.90.01.30",
+    "https://tariffs.tandom.ai/hts-catalog/9406.90.01.30/other",
+    "https://www.tarifflens.ai/rulings/N304647",
+    "https://www.sec.gov/Archives/edgar/data/0000916789/000091678926000138/hele-20260831.htm"
+   ],
+   "implication": "Assume 30-55% duty on the factory price and get a written estimate from a licensed customs broker before paying any deposit."
+  },
+  {
+   "title": "Electrical certification and high-desert fitness are the technical deal-breakers",
+   "detail": "Mean July high in Yucca Valley is about 102F (low about 72F). Mean December/January lows are about 36-39F, and outlying basins get colder; annual precipitation is about 4.8 in. The County's own pre-approved 2025 ADU plans are designed for 130 mph ultimate wind speed (Exposure C) and 30 psf ground snow load. The California Electrical Code requires approved or listed equipment, and imported pods often ship with CE-marked 220V/50Hz components and no UL/ETL listing, so an inspector would reject them or demand a field evaluation. The County requires an approved tie-down or foundation system for manufactured units. Panoramic glazing plus thin walls means very high cooling loads in summer. Solar works with any pod if you specify US 120/240V split-phase 60Hz; 50Hz motors (AC compressors, fridges) can misbehave on 60Hz. Parts of this are my engineering judgment, not a published finding.",
+   "confidence": "medium",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Yucca_Valley,_California",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Model-D-CRC-2025.pdf",
+    "https://lus.sbcounty.gov/building-safety-home/manufactured-mobilehome-permitting/"
+   ],
+   "implication": "If you still buy a pod, ask for US-spec 60Hz wiring with UL/ETL-listed panel and fixtures, insulation values, glazing specs and a wind/tie-down rating in writing. Without them, it is storage or a studio, not housing."
+  },
+  {
+   "title": "Legal alternatives at a similar cost",
+   "detail": "(a) Used self-contained travel trailer or fifth-wheel: roughly $8-25k (my market estimate, not verified this session). It is the cheapest fit for the County and Town temporary permits. (b) Park-model RV (a 'park trailer' of 400 sq ft or less): roughly $45-120k new, $25-60k used (estimate). Usually not self-contained, so it needs the approved septic hookup at final inspection, and it can never become an ADU. (c) Tiny house on wheels: legal only as a registered RV, so it works only as temporary quarters. (d) HUD-code or HCD-labeled small unit: BOXABL's Casita page lists 361 sq ft at $60,000 unit-only plus $8-15/mile shipping, or $150,000 turnkey; the page did not state its certification, so verify the HUD label. County 84.36.030(a) lets a manufactured home serve as an ADU. (e) County pre-approved ADU plans built on site: Model D is 560 sq ft, Model B 735 sq ft, Models C and H 1,008 sq ft.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://www.boxabl.com/learn-more/casita-studio",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.36-accessory-dwelling-units",
+    "https://lus.sbcounty.gov/building-safety-home/"
+   ],
+   "implication": "Best value: a $10-20k used self-contained trailer now (resell it later). Spend 'pod money' on units that can become permanent, legal guest units or ADUs."
+  },
+  {
+   "title": "Future pods can become legal ADUs, a guest house or short-term rentals, if they are code-compliant products",
+   "detail": "County Ch. 84.36 (Table 84-0): up to 2 ADUs per lot, 3 on lots of 5+ acres, plus 1 junior ADU. Detached ADUs can be up to 1,200 sq ft (800 sq ft by right), with a 200 sq ft minimum. Setbacks: 4 ft side and rear; detached units 18 ft tall, with 5 ft separation. A concurrent application with a new primary dwelling is allowed, with review possibly delayed until the primary is approved (84.36.050(b)). Short-term rentals: an ADU may rent for under 30 days only in the Mountain and Desert Regions, only under Ch. 84.28, and only if it was not built through the by-right path in 84.36.080(b). Under 84.28: up to 2 STR permits on parcels of 2+ acres; tents, RVs and 'recreational cabins' are excluded (they can only be a campground use). One guest house is allowed, at least 10 ft from the primary, and it may be a short-term rental (84.01.050(a)(3)). Town Ch. 5.40: STR permits are capped at 10% of the Town's detached single-family stock, with a waitlist and one permit per parcel group. Only permitted dwellings and habitable accessory structures qualify; RVs and tents are banned. The local contact must respond within 15 minutes and be on site within 30. Fines are $1,500, $3,500 and $5,000.",
+   "confidence": "high",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.36-accessory-dwelling-units",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.28-short-term-residential-rentals",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.01-accessory-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/yucca-valley/title-5-businesses-and-licenses/chapter-5.40-temporary-short-term-vacation-rental-permit"
+   ],
+   "implication": "An unincorporated 5-acre lot is much friendlier to 'a few pods plus a rental income' than the Town. Pick sites for future ADUs now (septic capacity, 4-ft setbacks, separation) and choose pod products that can pass plan check."
+  },
+  {
+   "title": "What happens if code enforcement finds an occupied unpermitted pod",
+   "detail": "County: a notice to vacate on 30 days' notice, or less if health or safety is threatened (84.25.070(e)). Administrative citations are $100, then $200, then $500 within a year, with 50% late penalties at 30 and 60 days. Paying does not cure the violation. Building permits are withheld until past-due enforcement costs are paid (County Code 63.0807). Code Enforcement can be reached at (909) 884-4056, with a Low Desert office at 63665 Twentynine Palms Hwy, Joshua Tree. Town: an order to vacate after 30 days (9.39.080.E). Practical knock-on effects: an open case can stall the house permit you need, insurers can deny claims tied to unpermitted structures, and buyers or lenders will find it. I could not confirm how often enforcement happens in the Morongo Basin; it is commonly reported to be complaint-driven, which is not verified.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/code-enforcement-home/admin-citations/",
+    "https://lus.sbcounty.gov/code-enforcement-home/",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-6-building-regulations/division-3-building-regulations/chapter-8-general-provisions-for-california-building-standards-code",
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures"
+   ],
+   "implication": "The biggest cost isn't the fine; it's losing your path to the permitted house. Protect the house permit above all."
+  },
+  {
+   "title": "Shipping container storage in unincorporated County: permit required, no occupancy, must blend in",
+   "detail": "Information Bulletin IB-0002 (updated Jan 1, 2026) requires an Accessory Structure (ACCR) permit for each lot; one application can cover multiple containers. Requirements: a site plan; steel or aluminum of at least 14 gauge; the unit may sit on flat ground if graded to drain; no human occupancy; at least 5 ft from property lines and 10 ft from buildings, outside easements and front setbacks; 10 ft maximum height; no stacking or joining; no utilities connected; no flammables or hazmat. Development Code 84.01.050(f)(2) (AG and RL zones): the container must be painted or altered to look like the primary structure or blend with the environment, placed behind the primary structure, and not prominently visible from the street. This is decided through a Compatibility Determination filed on the EZOP portal; structures over 400 sq ft need a County Fire letter. 84.01.020(b): accessory structures need a legal primary use, otherwise only a Temporary Use Permit (Ch. 84.25) is possible. 84.25.040(l) requires a removal bond if the primary use isn't finished within 2 years. Contractor construction yards for an approved project are exempt from the Temporary Use Permit (84.25.030(a)), and a temporary structure may store equipment and tools during construction (84.25.040(e)).",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0002-2025-Cargo-Containers-for-Incidental-Storage.pdf",
+    "https://wp.sbcounty.gov/ezop/?p=212292",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.01-accessory-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses"
+   ],
+   "implication": "Pull the container permit after or alongside the house permit, paint it desert tan, and place it behind the future house site. The 'no utilities' rule rules out grid-powered fans or AC; ask whether a stand-alone solar vent is acceptable."
+  },
+  {
+   "title": "Shipping containers in the Town of Yucca Valley",
+   "detail": "According to local news, Town code requires containers on residential parcels under 2.5 acres to be permanently attached to a foundation and architecturally treated so they don't look like containers. Planning Commission Resolution PC 26-04 (adopted April 2026) requires at least 3 matching treatments, such as paint scheme, facade, residential windows, pitched roof or non-reflective cladding, on lots under 2.5 acres. I did not confirm the rules for 2.5+ acres, the permit type or the fee from the Code itself.",
+   "confidence": "medium",
+   "sources": [
+    "https://z1077fm.com/yucca-valley-planning-commission-to-look-at-shipping-container-requirements-tuesday-at-6pm/",
+    "https://z1077fm.com/yucca-valley-planning-commission-defines-aesthetic-for-residential-shipping-containers"
+   ],
+   "implication": "A 5-acre Town parcel may escape the foundation and 3-treatment rule, but ask Planning before buying. The Town also likely requires an existing primary use."
+  },
+  {
+   "title": "Container price and delivery logistics",
+   "detail": "BOXHUB's Los Angeles depot lists 'from' prices: used wind-and-watertight 20' $1,800, used 40' $2,200, new one-trip 20' $2,700, new 40' $4,500. Standard delivery is within 5 business days; the delivery fee isn't listed. Secondary guides put a delivered and set used 20' at about $3,500-7,000. My estimate for delivery to Yucca Valley (about 130 miles from LA): $500-1,500 by tilt-bed. A 40' container needs roughly a 100+ ft straight approach, firm ground and about 14 ft overhead clearance (typical dealer guidance, not verified).",
+   "confidence": "medium",
+   "sources": [
+    "https://www.boxhub.com/shipping-containers-for-sale/los-angeles-ca",
+    "https://new.risingsunartscentre.org/news/20ft-shipping-container-cost-guide-2026.html"
+   ],
+   "implication": "Budget about $3,000-5,500 delivered for a used 20' (enough for a household of stuff), plus permit, paint and security hardware."
+  },
+  {
+   "title": "Heat, rodents and dust are the real threats to stored belongings",
+   "detail": "An unshaded steel container in 100F+ sun commonly runs far above ambient inside; my estimate is 130-150F (not measured). Items at risk: lithium batteries and electronics, aerosols, candles and wax, vinyl, film, photos and art, cosmetics and medicines, wine, adhesives, and solid-wood furniture and instruments, which crack in the very dry air. Pack rats (desert woodrats) and deer mice nest in and under containers, vehicles and stored furniture. CDC clean-up guidance: air out cabins and sheds for 30 minutes before entering and vehicles for 20 minutes; spray with 1 part bleach to 9 parts water (1.5 cups per gallon) and let it soak 5 minutes; never sweep or vacuum droppings or nests; wear gloves. Fine dust comes in through door gaskets during windstorms.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html",
+    "https://www.cdc.gov/hantavirus/prevention/index.html",
+    "https://en.wikipedia.org/wiki/Yucca_Valley,_California"
+   ],
+   "implication": "Shade the container (a free-standing shade roof with an air gap, or white elastomeric roof coating), set it on a cleared gravel pad with no hiding spots, put steel mesh on the vents and snap traps inside, pack in sealed plastic totes, and send heat-sensitive valuables to climate-controlled storage."
+  },
+  {
+   "title": "Self-storage in town as the alternative or complement",
+   "detail": "storage.com shows Yucca Valley facilities listed 'starting at' $84/mo (Purely Storage, Hopi Trail) and $131/mo (Purely Storage, Yucca Trail), with unit sizes not specified. Desert Hot Springs facilities start at $29-75/mo. My estimate for a 10x20 is $150-250/mo; climate control costs more.",
+   "confidence": "low",
+   "sources": [
+    "https://www.storage.com/self-storage/california/yucca-valley/"
+   ],
+   "implication": "For a 3-6 month trip, $500-1,500 of climate-controlled storage for valuables and electronics is cheap insurance next to an on-site container for tools, totes and outdoor gear."
+  },
+  {
+   "title": "Break-in hardening for containers and the site",
+   "detail": "Standard practice (secondary and general knowledge, not verified this session): a welded lock box that shrouds the padlock, a shielded-shackle 'puck' disc lock, an optional internal or cross-bar lock, doors facing a camera and away from the road, and no visible logos or contents. Simple tube gate and posted no-trespassing signs. Under SB 602 (Ch. 404, Stats. 2023), an owner can submit a notarized written request asking law enforcement to act against trespassers. Requests based on the owner's absence can now cover up to 12 months instead of 30 days, and agencies may accept them electronically. The Morongo Basin Sheriff's Station (63665 29 Palms Hwy, Joshua Tree; 760-366-4175; desert non-emergency dispatch 760-956-5001) covers both the Town and the unincorporated communities and has 7 Citizen Patrol units. A vacation-check program wasn't listed online.",
+   "confidence": "medium",
+   "sources": [
+    "https://calmatters.digitaldemocracy.org/bills/ca_202320240sb602",
+    "https://wp.sbcounty.gov/sheriff/patrol-stations/morongo-basin/",
+    "https://wp.sbcounty.gov/sheriff/programs/crime-prevention/"
+   ],
+   "implication": "Before leaving: file the 12-month trespass request with the Morongo Basin station, ask about Citizen Patrol drive-bys, and fit a lock box and puck lock (about $80-250)."
+  },
+  {
+   "title": "Unattended-property security: cameras, caretaker and a legal caretaker option",
+   "detail": "I couldn't retrieve Morongo Basin crime statistics before the search budget ran out. Local anecdotes, unverified and low confidence, cite theft from unattended construction sites (tools, solar panels, batteries, copper), squatting in vacant cabins, off-road trespass and illegal dumping on vacant lots; the Sheriff's site links to Crime Mapping. Options: solar-powered LTE cameras (about $150-400 each plus $10-30/mo data, estimate) if cell signal exists; Starlink for a hub (pricing not verified; check current plans and any low-cost standby tier); a trusted neighbor; or a paid property-check service (estimate $50-150 per visit). Legal angle: the County checklist's 'Temporary Security Quarters' category and Town 9.39.050.A.2 allow temporary quarters for 'security personnel' on construction projects with active building permits. A caretaker might lawfully live in your trailer while you're abroad, which needs confirming.",
+   "confidence": "low",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures",
+    "https://wp.sbcounty.gov/sheriff/programs/crime-prevention/"
+   ],
+   "implication": "A real person checking weekly beats cameras alone. Ask Building & Safety whether a house-sitter qualifies as 'security personnel' under a security-quarters permit."
+  },
+  {
+   "title": "Insurance for a vacant, under-construction or unpermitted property",
+   "detail": "The California FAIR Plan Dwelling policy is a named-peril, last-resort policy (fire, lightning, internal explosion, smoke). Vandalism and malicious mischief is an optional add-on, and you can only get it through a broker after the traditional market declines you. Wildfire-hardening discounts were added Nov 2025. Industry practice (general knowledge, medium-low confidence): standard dwelling forms exclude or limit vandalism, glass and theft after about 60 consecutive days of vacancy, and carriers generally won't insure unpermitted living structures. Coverages to price: vacant-land liability, builder's risk for owner-builders, and an RV policy with full-timer coverage for the trailer.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.cfpnet.com/policies/dwelling/",
+    "https://www.cfpnet.com/how-to-apply/"
+   ],
+   "implication": "Before the Bhutan trip, tell your broker the exact dates and get a vacancy permit or endorsement in writing. Never let the only insurable structure be one you can't disclose."
+  },
+  {
+   "title": "Permit clocks keep running while you're abroad",
+   "detail": "County Building & Safety FAQ: permits expire if work isn't started within 12 months of issuance, or if work is 'suspended or abandoned' for 12 months. The building official may grant a written 180-day extension 'for justifiable cause'. The RV Temporary Structure Permit separately expires if no inspection is called for within 180 days of issuance, must be renewed before its 12-month expiry, and is void if the building permit dies. Town: I didn't confirm local amendments; the model code baseline (CRC R105.5) is 180 days of suspension or abandonment, with 180-day written extensions.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/faqs/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses"
+   ],
+   "implication": "Schedule and pass an inspection the week before you fly. If you'll be gone more than about 5 months (Town) or 10 months (County), file the written extension request before leaving and calendar every expiry date."
+  },
+  {
+   "title": "Water, batteries and vehicles while away",
+   "detail": "General best practice (not from a primary source this session): for winter absences (nights below 20F in outlying areas), drain or bypass the plumbing and put RV antifreeze in the traps. Strap poly water tanks down, because an empty tank can blow away in 60+ mph gusts; leave them full or anchored, then flush or shock-chlorinate on return. LiFePO4 batteries: leave the solar charge controller connected and loads off, or store at about 50-60% charge. Don't charge below 32F unless the batteries are self-heating, and shade and ventilate the battery box against summer heat. Vehicles: battery maintainer or disconnect, fuel stabilizer, tire covers, and pack-rat deterrence (hood open, cleared ground, rodent-deterrent wire tape). Air out per CDC before starting.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html",
+    "https://en.wikipedia.org/wiki/Yucca_Valley,_California"
+   ],
+   "implication": "Write a one-page 'shutdown and startup' checklist and have the caretaker follow it."
+  }
+ ],
+ "critical_claims": [
+  {
+   "claim": "San Bernardino County lets an RV or travel trailer be lived in during construction only after the building permit for the residence is issued. The Temporary Structure Permit runs 12 months, renewable, with a 5-year cap per the Rev. 6/2025 checklist; the Development Code 84.25.040(e) says 12 months plus one 12-month extension.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses"
+   ]
+  },
+  {
+   "claim": "Town of Yucca Valley 9.39.050.A allows manufactured homes or self-contained RVs as temporary quarters once building permits are issued, for 1 year plus 1-year extensions, up to 4 years total. 9.39.080 prohibits living in any other temporary structure or vehicle.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures"
+   ]
+  },
+  {
+   "claim": "County building permits expire if work isn't started within 12 months or is suspended or abandoned for 12 months, with one written 180-day extension possible.",
+   "sources": [
+    "https://lus.sbcounty.gov/faqs/"
+   ]
+  },
+  {
+   "claim": "Imported Chinese capsule homes generally lack the HCD factory-built insignia, HUD label and RVIA seal, and California law requires the HCD insignia on factory-built housing sold to first users (Health & Safety Code 19980). So they can't be approved as dwellings as delivered.",
+   "sources": [
+    "https://www.hcd.ca.gov/building-standards/fbh/insignia",
+    "https://www.hcd.ca.gov/building-standards/mh/insignia/background"
+   ]
+  },
+  {
+   "claim": "As of Oct 2026, China-origin prefab buildings under HTS 9406.90 pay a 2.9% base rate plus 25% Section 301 (9903.88.03) plus other layers: a new 12.5% Section 301 rate from July 24, 2026, and possibly a 25% steel-derivative tariff. That totals roughly 28-53%.",
+   "sources": [
+    "https://tariffs.wove.com/us/tariff/9406.90.01.30",
+    "https://tariffs.tandom.ai/hts-catalog/9406.90.01.30/other",
+    "https://www.sec.gov/Archives/edgar/data/0000916789/000091678926000138/hele-20260831.htm"
+   ]
+  },
+  {
+   "claim": "County cargo containers need an Accessory Structure (ACCR) permit (IB-0002, updated Jan 1, 2026): no occupancy, no utilities, 5 ft from property lines and 10 ft from buildings, 10 ft maximum height. In RL and AG zones they must be painted or altered to blend in and sit behind the primary structure, and without a primary use they're allowed only under a Temporary Use Permit.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0002-2025-Cargo-Containers-for-Incidental-Storage.pdf",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county/title-8-development-code/division-4-standards-for-specific-land-uses-and-activities/chapter-84.01-accessory-structures-and-uses"
+   ]
+  }
+ ],
+ "design_numbers": [
+  "5-acre parcel = 217,800 sq ft. A square lot is about 467 x 467 ft (perimeter about 1,867 ft); the common 330 x 660 ft desert lot has a 1,980 ft perimeter (geometry).",
+  "County cargo container: at least 5 ft from any property line, at least 10 ft from buildings, outside easements and front-yard setback, 10 ft maximum height, no stacking or joining, no utilities, ground graded to drain away (IB-0002, updated 1/1/2026).",
+  "County RL/AG container placement: behind the primary structure and not prominently visible from the street (Dev. Code 84.01.050(f)(2)).",
+  "Town of Yucca Valley container on residential lots under 2.5 acres: permanent foundation plus at least 3 architectural treatments (PC Res. 26-04, Apr 2026, per Z107.7 news).",
+  "Shipping container footprints: 20' is about 8 ft x 20 ft (160 sq ft); 40' is about 8 ft x 40 ft (320 sq ft). Allow about 3 ft of clearance around and a delivery approach (about 60 ft straight for a 20', about 100+ ft for a 40'). Clearances are dealer rule-of-thumb, not verified.",
+  "County ADUs: up to 3 ADUs on lots of 5+ acres plus 1 JADU; detached up to 1,200 sq ft (800 sq ft by right); minimum 200 sq ft; JADU up to 500 sq ft; 4 ft side and rear setbacks; 18 ft maximum height for detached (+2 ft if the roof pitch matches); 5 ft separation between detached units (Ch. 84.36, Table 84-0).",
+  "County guest house: one per parcel, at least 10 ft from the primary dwelling (84.01.050(a)(3)).",
+  "County pre-approved ADU plans (CRC 2025): Model D 560 sq ft, Model B 735 sq ft, Models C and H 1,008 sq ft; design basis 130 mph ultimate wind (Exposure C) and 30 psf ground snow.",
+  "County exempt shed: 120 sq ft or less, no utilities, under 14 ft tall, setbacks still apply (LUS FAQ).",
+  "Temporary RV pad (estimate): about 12-14 ft x 40-45 ft level gravel pad, plus a sewer/septic or pump-out access path, within reach of the water hookup.",
+  "Climate design: mean July high about 102F, mean January low about 38.5F, about 4.8 in of rain per year; elevation about 3,224-3,300 ft at the town center (Wikipedia/Weatherbase).",
+  "Yucca Valley STR occupancy: studio 2 overnight; 1 BR 4. County STR: studio or 1 BR 4, 12 maximum. County: up to 2 STR permits on parcels of 2+ acres."
+ ],
+ "costs": [
+  {
+   "item": "Imported China capsule pod, landed and placed (unit + duty + freight + broker + oversize truck + crane + tie-downs)",
+   "low_usd": 35000,
+   "high_usd": 65000,
+   "notes": "Estimate built from a $15-25k FOB unit. Duty about 28-53% on FOB value (low-confidence tariff data). Excludes septic, solar and permits."
+  },
+  {
+   "item": "US-stock capsule pod, delivered",
+   "low_usd": 40000,
+   "high_usd": 100000,
+   "notes": "Secondary: thepricer.org gives $15-90k plus $4-12k freight and crane; an ended eBay listing asked $94,999 delivered to CA."
+  },
+  {
+   "item": "Used self-contained travel trailer or fifth-wheel for temporary-permit living",
+   "low_usd": 8000,
+   "high_usd": 25000,
+   "notes": "Market estimate, not verified this session; resellable later."
+  },
+  {
+   "item": "Park-model RV (400 sq ft or less)",
+   "low_usd": 25000,
+   "high_usd": 120000,
+   "notes": "Estimate (used to new). Usually needs a septic hookup; cannot become an ADU."
+  },
+  {
+   "item": "BOXABL Casita (361 sq ft), unit only + shipping (about 200-300 mi at $8-15/mi)",
+   "low_usd": 61600,
+   "high_usd": 64500,
+   "notes": "$60,000 unit-only and $150,000 turnkey per BOXABL page; certification not stated, so verify the HUD label."
+  },
+  {
+   "item": "Town of Yucca Valley Temporary Use Permit (RV during construction)",
+   "low_usd": 295,
+   "high_usd": 469,
+   "notes": "$469 in the newer Town application outline, $295 in the older one; confirm."
+  },
+  {
+   "item": "County Temporary Structure Permit, ACCR container permit, Compatibility Determination",
+   "low_usd": 0,
+   "high_usd": 0,
+   "notes": "Fees are set in the County fee schedule; not confirmed (use the EZOP fee search or call 909-387-8311)."
+  },
+  {
+   "item": "Used 20' container (LA depot) + delivery to Yucca Valley",
+   "low_usd": 2300,
+   "high_usd": 3300,
+   "notes": "From $1,800 used (BOXHUB LA) plus an estimated $500-1,500 delivery."
+  },
+  {
+   "item": "New one-trip 40' container + delivery",
+   "low_usd": 5000,
+   "high_usd": 6500,
+   "notes": "From $4,500 (BOXHUB LA) plus estimated delivery."
+  },
+  {
+   "item": "Container hardening: lock box, puck lock, vents, rodent mesh, desert paint",
+   "low_usd": 300,
+   "high_usd": 1200,
+   "notes": "Estimate."
+  },
+  {
+   "item": "Container shade roof or cool-roof coating",
+   "low_usd": 300,
+   "high_usd": 4000,
+   "notes": "Estimate; coating at the low end, steel or wood shade structure at the high end (it may need its own permit)."
+  },
+  {
+   "item": "Climate-controlled self-storage in Yucca Valley, per month",
+   "low_usd": 84,
+   "high_usd": 250,
+   "notes": "Listings 'start at' $84-131/mo, sizes unspecified; a 10x20 is estimated."
+  },
+  {
+   "item": "Solar LTE camera (each) + data per month",
+   "low_usd": 150,
+   "high_usd": 430,
+   "notes": "Estimate: $150-400 hardware plus $10-30/mo data."
+  },
+  {
+   "item": "Property-check service, per visit",
+   "low_usd": 50,
+   "high_usd": 150,
+   "notes": "Estimate; ask local property managers."
+  },
+  {
+   "item": "Perimeter fence for 5 acres (about 1,870-1,980 lf): T-post/wire vs chain link",
+   "low_usd": 4000,
+   "high_usd": 56000,
+   "notes": "Estimate $2-5/ft for wire, $15-30/ft for chain link; a gate plus partial fencing is the usual compromise."
+  },
+  {
+   "item": "Administrative citation fines (County), 1st/2nd/3rd within a year",
+   "low_usd": 100,
+   "high_usd": 500,
+   "notes": "Per citation, plus 50% late penalties at 30 and 60 days; separate from abatement or re-permit costs."
+  },
+  {
+   "item": "Insurance: vacant-land liability, builder's risk, RV full-timer (annual, combined)",
+   "low_usd": 800,
+   "high_usd": 5000,
+   "notes": "Rough estimate; get broker quotes."
+  }
+ ],
+ "next_actions": [
+  "Look up the parcel's APN on the County Assessor or Land Use Services parcel map, and write on one index card whether it's inside Town of Yucca Valley limits and what zone it is (RL?).",
+  "Call County Land Use Services at 909-387-8311 (desert-area Building & Safety: 760-995-8140) and ask: 'For APN ___, is the RV Temporary Structure Permit limited to 12+12 months (Dev. Code 84.25.040(e)) or renewable to 5 years (checklist)?' Write down the answer and the staff member's name.",
+  "If the lot is in the Town, call Yucca Valley Planning at 760-369-6575. Ask about the current Temporary Use Permit fee, whether a 5-acre parcel is exempt from the container foundation/3-treatment rule, the local building-permit expiration period, and whether any camping is allowed before a permit.",
+  "Email County Building & Safety three yes/no questions: (1) Does a DMV-registered trailer-mounted pod with holding tanks count as a 'travel trailer' for the Temporary Structure Permit? (2) Can a house-sitter qualify under 'Temporary Security Quarters' while we're abroad? (3) Can a 560 sf pre-approved plan (Model D) be used as the primary dwelling?",
+  "Send any capsule seller a written spec request: UL/ETL listing numbers for the panel and fixtures, 120/240V 60Hz option, RVIA seal / HCD insignia / HUD label (yes or no), wind and tie-down rating, wall and roof R-values, glazing U-value, HTS code and Incoterms.",
+  "Email a licensed customs broker asking for a written duty and fee estimate for one prefab building, HTS 9406.90.01.30, China origin, $20,000 FOB, entering Long Beach in 2027.",
+  "Get two delivered quotes for a used 20' wind-and-watertight container to the parcel (BOXHUB LA plus one local dealer), stating the road surface and approach length.",
+  "Download County bulletin IB-0002 and hand-sketch a site plan placing the container 5 ft or more from the lines, 10 ft or more from the future house, behind the house site, and outside easements.",
+  "Call two FAIR Plan-registered insurance brokers and ask for quotes on vacant-land liability, owner-builder builder's risk and an RV full-timer policy, plus the exact vacancy clause wording (days).",
+  "Call the Morongo Basin Sheriff's Station at 760-366-4175 and ask for the SB 602 trespass-authorization form and whether Citizen Patrol does vacation checks in your area.",
+  "Call Purely Storage Yucca Valley and ask the current monthly rate for a 10x10 and 10x20, climate-controlled versus not.",
+  "Stand on each planned pad on your next site visit and record cell bars for Verizon, AT&T and T-Mobile in your notes app.",
+  "Create a calendar entry 'Pass an inspection + file written extension' 3 weeks before your Bhutan departure date.",
+  "Knock on the doors of the two nearest occupied neighbors on your next visit, trade phone numbers, and ask what theft or dumping they've seen."
+ ],
+ "risks": [
+  {
+   "risk": "Living in an unpermitted pod draws a complaint: a 30-day notice to vacate, citations, and a stalled or blocked house permit until enforcement costs are paid.",
+   "severity": "high",
+   "mitigation": "Sleep in a self-contained RV under a Temporary Structure Permit (County) or Temporary Use Permit (Town) once the house permit is issued. Use the pod only as storage or a studio until it can be permitted."
+  },
+  {
+   "risk": "The building permit expires during a long Bhutan trip, which voids the RV permit and makes on-site living illegal on return.",
+   "severity": "high",
+   "mitigation": "Pass an inspection right before leaving, file a written extension request, keep trips under the clock (12 months County, likely 180 days Town), and give a local agent authority to schedule inspections."
+  },
+  {
+   "risk": "The imported pod costs 2-3x the sticker price (tariffs, oversize freight) and arrives with non-listed 220V/50Hz electrical that no inspector will approve.",
+   "severity": "high",
+   "mitigation": "Get written specs, a customs broker estimate and listed US-spec electrical before any deposit, or skip import in favor of HUD/HCD/RVIA products."
+  },
+  {
+   "risk": "Seller fraud or defects on Alibaba-type orders, with only a short Trade Assurance window (30 days in buyer reports).",
+   "severity": "medium",
+   "mitigation": "Pay through escrow, hire a third-party factory inspection before shipment, and keep the deposit at 30% or less."
+  },
+  {
+   "risk": "Theft or vandalism of the container, solar panels, batteries or tools while you're away; squatters in the trailer.",
+   "severity": "medium",
+   "mitigation": "Lock box and puck lock, cameras, a weekly caretaker or property check, the SB 602 12-month trespass authorization, no valuables on site, and a gate with signage."
+  },
+  {
+   "risk": "Heat and rodents destroy stored goods; hantavirus exposure when you reopen.",
+   "severity": "medium",
+   "mitigation": "Shade or white-coat the container, sealed totes, traps, cleared gravel pad, climate-controlled storage for sensitive items, and the CDC airing and bleach protocol on return."
+  },
+  {
+   "risk": "Insurance gaps: vacancy exclusions after about 60 days, no coverage for unpermitted structures, FAIR Plan named-peril only.",
+   "severity": "medium",
+   "mitigation": "Disclose travel dates, buy a vacancy endorsement, add vandalism coverage, insure the RV separately, and keep everything that's lived in permitted."
+  },
+  {
+   "risk": "Empty water tanks, unsecured pods or containers moved by 60+ mph gusts.",
+   "severity": "low",
+   "mitigation": "Engineered tie-downs, keep tanks full or strapped, and position units out of the prevailing wind corridor."
+  },
+  {
+   "risk": "The Temporary Structure Permit lifespan turns out to be the 2-year code reading, not 5 years, and the owner-build runs longer.",
+   "severity": "medium",
+   "mitigation": "Get the County's interpretation in writing. Design the smallest possible house (e.g., about 560 sf) so it gets finaled within 24 months."
+  }
+ ],
+ "brainstorm_prompts": [
+  "If the law says we can't sleep in the pod but can sleep in a used trailer, does the trailer still feel like 'the dream'? If not, what part of the pod matters most to us: the look, the views, the cost?",
+  "Are we willing to delay moving onto the land until the house permit is issued? What's our realistic timeline and budget to get there?",
+  "What's the smallest house we'd truly be happy finishing in 24 months? Could a 560 sf pre-approved plan be the start?",
+  "Do we want the future pods as guests-only, long-term rentals or short-term rentals? Does that make an unincorporated parcel more attractive than one in the Town?",
+  "How long do we want to be in Bhutan, and how does that fit the permit clocks? Would we split the trip in two?",
+  "What would we store on site versus in a climate-controlled unit versus give away before leaving?",
+  "Who could we trust to check on the land weekly? A neighbor, a friend in a trailer as caretaker, a paid service? What would we pay?",
+  "What's our tolerance for legal risk on a scale of 1-10, and does it differ between us?",
+  "How much of the $20k pod budget would we redirect to a legal unit that becomes a permanent ADU?",
+  "What's our plan if we come back and find squatters, theft or dumping? Who do we call first?"
+ ],
+ "people_to_involve": [
+  {
+   "role": "County Land Use Services planner and Building & Safety permit technician (or Town of Yucca Valley Planning)",
+   "why": "Confirms the parcel's jurisdiction and zoning, temporary permit terms, container rules and permit expiration in writing",
+   "when": "Before making an offer, and again before the house permit application",
+   "how_to_find": "County 909-387-8311 / desert B&S 760-995-8140 / EZOP portal; Town Planning 760-369-6575",
+   "questions_to_ask": [
+    "Is the Temporary Structure Permit 12+12 months or renewable to 5 years?",
+    "Can a caretaker qualify under Temporary Security Quarters?",
+    "Is a container allowed before the house exists, and what bond applies?",
+    "Can a pre-approved ADU plan be used as the primary dwelling?"
+   ],
+   "typical_cost": "Free at the counter or phone; permit fees per the fee schedule"
+  },
+  {
+   "role": "Licensed customs broker / freight forwarder with flat-rack and oversize experience",
+   "why": "Real duty math (HTS 9406.90), freight and port logistics for any imported pod",
+   "when": "Before any deposit on an imported unit",
+   "how_to_find": "Long Beach / LA brokers; CBP licensed broker listings",
+   "questions_to_ask": [
+    "Total duty and fees on $X FOB, China origin, entering in 2027?",
+    "Flat-rack vs container shipping for these dimensions?",
+    "Door-to-site oversize trucking quote to Yucca Valley?"
+   ],
+   "typical_cost": "Estimate $150-600 per entry plus bond; freight quoted separately"
+  },
+  {
+   "role": "Independent insurance broker registered for the California FAIR Plan",
+   "why": "Vacant-land liability, builder's risk, RV full-timer policy and vacancy endorsements for long trips",
+   "when": "Before closing on the land, and again before the trip",
+   "how_to_find": "CA Department of Insurance broker locator linked from cfpnet.com/how-to-apply",
+   "questions_to_ask": [
+    "What exactly does the vacancy clause exclude, and after how many days?",
+    "Will any carrier cover a structure that isn't permitted?",
+    "Does the FAIR Plan cover a parcel with only a trailer?"
+   ],
+   "typical_cost": "No broker fee; premiums roughly $800-5,000/yr combined (estimate)"
+  },
+  {
+   "role": "C-10 electrician and/or CA-licensed engineer",
+   "why": "Evaluates any pod's wiring and tie-down design; may provide a field evaluation path",
+   "when": "Before buying any pod, and before placing it",
+   "how_to_find": "CSLB license lookup; local Morongo Basin contractors",
+   "questions_to_ask": [
+    "Can this unit's electrical be field-evaluated or rewired to pass?",
+    "What tie-down design meets the County's 130 mph Exposure C basis?"
+   ],
+   "typical_cost": "Estimate $150-300/hr; field evaluation $1,500-4,000+"
+  },
+  {
+   "role": "Container dealer",
+   "why": "Delivered price and access requirements for a storage container",
+   "when": "After the house permit path is clear",
+   "how_to_find": "BOXHUB LA depot and local high-desert dealers",
+   "questions_to_ask": [
+    "Delivered price to the parcel?",
+    "Truck approach length and ground needed?",
+    "Can you paint it a desert color before delivery?"
+   ],
+   "typical_cost": "$1,800-4,500 plus delivery"
+  },
+  {
+   "role": "Morongo Basin Sheriff's Station / Citizen Patrol",
+   "why": "Trespass authorization (SB 602), patrol checks, local crime picture",
+   "when": "When you first occupy, and before each long trip",
+   "how_to_find": "63665 29 Palms Hwy, Joshua Tree; 760-366-4175",
+   "questions_to_ask": [
+    "Do you have an SB 602 trespass-request form, and can it be submitted electronically?",
+    "Do Citizen Patrol volunteers do vacation checks?",
+    "What crimes are most common near this parcel?"
+   ],
+   "typical_cost": "Free"
+  },
+  {
+   "role": "Caretaker / house-sitter or property-check service",
+   "why": "Weekly eyes on site, storm and rodent checks, inspection access",
+   "when": "Lined up 2-3 months before the trip",
+   "how_to_find": "Neighbors, local property managers, house-sitting networks",
+   "questions_to_ask": [
+    "Weekly visit cost?",
+    "Will you photograph the container seals, tanks and batteries each visit?",
+    "Can you meet an inspector if needed?"
+   ],
+   "typical_cost": "Estimate $50-150 per visit, or free rent in the trailer under a permitted security-quarters arrangement"
+  },
+  {
+   "role": "Neighbors",
+   "why": "Best early warning on squatting, dumping and theft; also the people most likely to file code complaints",
+   "when": "Every site visit before buying",
+   "how_to_find": "Knock on doors near the parcel",
+   "questions_to_ask": [
+    "What problems have you seen on vacant lots here?",
+    "Would you text us if you see activity?"
+   ],
+   "typical_cost": "Free (bring cookies)"
+  },
+  {
+   "role": "Pest control / rodent exclusion contractor",
+   "why": "Pack rats and mice in containers, vehicles and trailer",
+   "when": "After placement, and before and after trips",
+   "how_to_find": "Local Yucca Valley pest companies",
+   "questions_to_ask": [
+    "Exclusion plan for the container and trailer?",
+    "Pre-trip treatment?"
+   ],
+   "typical_cost": "Estimate $150-400 per service"
+  }
+ ],
+ "site_visit_checks": [
+  "Is the parcel inside Town limits or unincorporated? Bring an APN printout and zoning map.",
+  "Cell signal per carrier at each future pad and container spot; is the southern sky clear for Starlink?",
+  "Truck access for a container or pod: road surface (sand, washboard, wash crossings), turning room, overhead power lines, straight approach of 60-100+ ft.",
+  "A flat or easily graded spot behind the future house site, out of view of the road, for the container (5 ft from lines, 10 ft from buildings, out of easements).",
+  "Signs of squatting, dumping, cut fences, off-road tracks or recent burn piles on or near the lot.",
+  "Pack rat middens, burrows, deer mouse droppings in any existing shed or debris.",
+  "Any existing unpermitted structures or trailers left by the seller (you would inherit the violation).",
+  "Wind exposure: sand drifts, scoured soil, which direction gusts come from, natural windbreaks.",
+  "Soil firmness for tie-downs and container footings (sand vs caliche); where water drains during storms.",
+  "Neighbors with a direct view of the property who could act as watchers.",
+  "Location of the nearest SCE pole or meter, and any existing water meter or well."
+ ],
+ "open_questions": [
+  "Which jurisdiction is the parcel in, and what is its exact zoning?",
+  "Is the County RV Temporary Structure Permit really renewable to 5 years (checklist), or capped at 12+12 months (code 84.25.040(e))?",
+  "Does the Town of Yucca Valley amend the 180-day permit expiration, and what is the current Temporary Use Permit fee ($469 vs $295)?",
+  "Can a caretaker live in the trailer as 'security personnel' while the owners are abroad?",
+  "Does a DMV-registered trailer-mounted capsule with holding tanks count as an RV/travel trailer for temporary living permits?",
+  "Does Town code (9.08 or definitions) restrict containers on parcels of 2.5+ acres, and does it require an existing primary use?",
+  "What does the County charge for the Temporary Structure Permit, ACCR and Compatibility Determination (fee schedule)?",
+  "Is the BOXABL Casita HUD-labeled or HCD-approved for California installation?",
+  "Exact current tariff stack for a China-origin 9406.90 unit on the planned entry date (the Section 301 12.5% layer and the steel-derivative tariff)?",
+  "How common is theft, squatting and dumping near this specific parcel? (Local data wasn't retrieved because the shared web-search budget ran out; this needs a follow-up search or local inquiry.)",
+  "Can an ADU get a certificate of occupancy before the primary dwelling is finaled in this jurisdiction?"
+ ]
+}

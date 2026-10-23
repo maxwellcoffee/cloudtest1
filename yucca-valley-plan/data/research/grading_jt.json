@@ -1,0 +1,630 @@
+{
+ "topic": "grading_jt",
+ "executive_summary": "Research note: the web-search budget for this run was already used up when this topic started. Everything below comes from fetching primary sources directly (CDFW, SB County Land Use Services, Fish and Game Commission, EPA, State Water Board, and CDFW's fee-map data layer). The Town of Yucca Valley and Mojave Desert AQMD websites blocked access (HTTP 403), so Town-specific grading and native-plant rules and the full Rule 403.2 text are unverified. Cost figures are labelled estimates.\n\nJoshua trees are the biggest constraint on where you can build, so count them before you buy. SB County's rule: if any western Joshua tree is within 50 ft of ANY ground disturbance, you need CDFW approval first. That includes pads, septic, trenches, fences, solar and driveways, and trees on a neighbor's land count too. The whole Morongo Basin, Yucca Valley included, is in CDFW's STANDARD fee area. In 2026 a take permit costs $2,609 per tree 5 m or taller, $521.75 for 1-5 m, and $354.75 under 1 m. It also needs a census, CEQA paperwork, and has no deadline for CDFW to decide.\n\nThe 2026 law changes help mostly after you live there. AB 1808 (Ch. 816, effective Sept 29, 2026) lets an owner-occupant of an EXISTING single-family home remove up to 10 trees near the house or near new accessory structures. So: put the permitted house on a Joshua-tree-free spot first, then use AB 1808 for later capsules. No city or county has a delegation agreement with CDFW yet, so CDFW handles every Joshua tree permit, inside the Town and out.\n\nUnincorporated SB County requires a grading permit above 100 cubic yards. A small house pad, a few capsule pads and a driveway on a gentle slope can easily total 60-200 cy, but the permit fee is modest (about $693-$775 for FY2026-27). The more important thresholds are slope: hillside standards apply at 15% or more, and a soils report at more than 20%. Disturbing 1 acre or more triggers a state stormwater permit. County desert rules also limit clearing to pads, driveways, landscaping and agriculture, so do not blade the whole lot.\n\nWashes and flash floods decide where pads can go. Keep pads out of washes and alluvial-fan flow paths, and do not push your runoff onto neighbors. Changing a wash bed needs a CDFW streambed (Lake and Streambed Alteration) notification. Wildlife adds timing limits: the Mojave desert tortoise became state-endangered on July 15, 2025, the burrowing owl has been a state candidate since October 2024, and Bendire's and LeConte's thrashers became candidates in April 2026. Plan biologist surveys before any clearing.\n\nThe two biggest collisions with your plan are (1) grading or setting a capsule near Joshua trees without permits, which can be prosecuted, and (2) leaving for Bhutan with open permits or bare graded soil. Building permits generally expire after 180 days with no inspected progress, and bare soil blows and erodes. The lower-risk route: survey, census and site-plan first; keep disturbance small; get the inexpensive county erosion-control or grading permit; stabilize everything before you travel.",
+ "findings": [
+  {
+   "title": "Joshua trees decide where you can build: SB County's 50-ft rule",
+   "detail": "SB County's Western Joshua Tree Quick Reference Guide (Feb 2026): 'If Western Joshua Trees are within 50 ft or less of any land disturbance, approval from CDFW is required.' The guide counts these as structures: residence, ADU, garage, carport, pool, patio, storage shed, gazebo, septic tank, sewer connection, solar panels, fence and paved driveway. It also says: 'There cannot be any activity such as grading, brush clearing, construction or other ground disturbance within the WJT buffer radius.' Every EZOP permit application in potential habitat needs the county's Joshua Tree Acknowledgment form (rev 8-11-26). You declare one of five statements. Trees on ABUTTING parcels count. The 50-ft buffer includes the entire construction zone. You take responsibility for tree ID and measurements. CDFW's own census covers the project site plus a 15 m (about 50 ft) buffer. CDFW also notes roots reached 8.4 m (27.6 ft) from a 1 m tree and 14 m (45.9 ft) from a 4.3 m tree. Disturbing the root zone can count as 'take' needing fees even if the tree stays standing. Each stem coming out of the ground counts as a separate tree.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/WJT_Quick-Reference-Guide_REV-2-25-2026.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Joshua_Tree_Acknowledgment_REV-8-11-26.pdf",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/Census-Instructions"
+   ],
+   "implication": "Before you make an offer, GPS-map every Joshua tree on the lot and within 50 ft beyond its lines. Draw 50-ft circles around each one and see what tree-free areas remain. The house pad, capsule pads, driveway, septic tank and leach field, trenches, solar, fence and storage container must all fit in those areas, or you need a CDFW permit. A lot with no clear building area is a much more expensive and slower lot."
+  },
+  {
+   "title": "CDFW take permit (ITP): fees, census, CEQA and timing. Yucca Valley is in the standard fee area",
+   "detail": "2026 in-lieu fees, effective Jan 1, 2026, per tree. Standard area: $2,609.00 (5 m or taller), $521.75 (1 m to under 5 m), $354.75 (under 1 m). Reduced area: $1,043.50, $208.75, $156.50. I queried CDFW's 'Reduced Fee Area' map layer directly. It extends no farther south than latitude 34.44 N and no farther east than longitude 116.94 W, covering the Victorville/Hesperia/Apple Valley/Adelanto and Lancaster areas. Points at Yucca Valley, Landers, Flamingo Heights, Pioneertown, Pipes Canyon, Rimrock, Joshua Tree, Morongo Valley and Johnson Valley all returned 'not in reduced area', so they pay STANDARD fees. You pay the fee schedule in effect when you pay, not when you apply. The application needs a signed form, project description, plans and maps, CEQA documents, and a census with data, one photo per tree, and a map (hand-drawn is OK for under 10 trees). Mail it to Region 6. Don't send money with the application. Because the permit is discretionary, CEQA applies: CDFW wants a Notice of Determination and a filing-fee receipt before it issues. There is no statutory processing deadline. Relocation may be required for projects over 10 acres or more than 75 trees killed. For scale: as of March 2026 CDFW had issued 106 ITPs and 742 hazard permits, and single-family ITPs averaged 41 trees each. In FY24-25, 29 of 41 ITPs were in SB County. Hazard Management Permits are free but cover only dead trees, or trimming live ones that have fallen within 30 ft of a structure, lean on a structure, or pose an imminent threat. They cannot authorize removing a live tree.",
+   "confidence": "high",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP",
+    "https://content.govdelivery.com/accounts/CNRA/bulletins/3fdfa9c",
+    "https://experience.arcgis.com/experience/40690ac231124bccb07cbce42fc95ebd/",
+    "https://services2.arcgis.com/Uq9r85Potqm3MfRV/arcgis/rest/services/WJT_leg_bound_rev_June_23_gdb/FeatureServer/0",
+    "https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=247117",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/Hazard-Management",
+    "https://leginfo.legislature.ca.gov/faces/billAnalysisClient.xhtml?bill_id=202520260AB1663"
+   ],
+   "implication": "Budget realistically. Avoiding 3 mid-size trees costs nothing; taking them costs about $1,565 plus CEQA filing costs, consultant time and months of waiting. Avoid every tree you can. Treat any take permit as a Phase-2 item, not something on the critical path to moving in."
+  },
+  {
+   "title": "2026 law changes: AB 1808 helps owners of EXISTING homes; fees will be re-set by mid-2027",
+   "detail": "AB 1808 (Chapter 816, Statutes of 2026) is an urgency statute, effective when chaptered on Sept 29, 2026. An owner-occupant of an EXISTING single-family residence may remove or trim up to 10 western Joshua trees that are within 30 ft of the home, within 15 ft of an existing accessory structure, or within or 15 ft from the footprint of a NEW accessory structure for that home. Through CDFW you pay the in-lieu fees. Through a county or city with a delegation agreement, the permit has no mitigation, only an admin fee, and must be decided within 60 days. These permits are CEQA-exempt until a CDFW program EIR is certified or Jan 1, 2032. AB 1808 also moves CDFW's deadline for the fee-adjustment rules from Dec 31, 2026 to June 30, 2027. SB 1062 (Ch. 673, signed Sept 27, 2026) requires CDFW to consider proportionate, tiered fees by project type and size. AB 1663 (Ch. 813) lets an owner's agent file hazard-permit requests, drops the signed-attestation requirement, and expands tribal agreements. SB 1061 (fee-free relocation of up to 10 trees) was held in committee on Aug 13, 2026. SB 1063 (fee-free take for utility connections) failed in committee on Apr 21, 2026. Earlier, the Assembly analysis noted CDFW found current fees insufficient but would 'seriously explore reducing the fee burden on small impact projects' such as single-family homes. CDFW opened a Program EIR (NOP Nov 2025, SCH 2025110649) to streamline CEQA for small projects. No delegation agreements had been approved as of the 2025 Legislative Report and the April 2026 analysis.",
+   "confidence": "medium",
+   "sources": [
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1808",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260sb1062",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1663",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260sb1061",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260sb1063",
+    "https://content.govdelivery.com/accounts/CNRA/bulletins/409a2c0",
+    "https://content.govdelivery.com/accounts/CNRA/bulletins/3fc3768",
+    "https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=247117"
+   ],
+   "implication": "Phase strategically. (1) Build and occupy the permitted house in a fully clear spot. (2) After you are owner-occupants of an existing home, use the AB 1808 path for later accessory capsules or storage that would crowd a few trees. Also watch the 2027 fee rule, which may raise or lower small-project fees. The bill details here come from the CalMatters/Digital Democracy summary, not the chaptered text. Confirm how CDFW is implementing it (forms, owner-occupancy proof) before relying on it."
+  },
+  {
+   "title": "No local Joshua-tree permitting yet, inside the Town or out; county also regulates yuccas and other desert plants",
+   "detail": "The WJTCA lets CDFW delegate limited permitting to cities and counties: up to 10 trees for single-family homes and accessory structures, and 40 for public works. The SB County guide says these 'are not San Bernardino County permits'. The county enforces the state rule through its grading checklist, which lists a CDFW HMP or ITP under 'other approvals' needed before grading plan approval. CDFW's Permitting page lists no local agreements. Separately, the county's own Desert Native Plant Protection rule (Dev. Code 88.01.060, as compiled in 2014; check for amendments) requires a county Tree or Plant Removal Permit for: all Joshua trees; ALL plants in the Agavaceae family (yuccas such as Mojave yucca, nolinas, agaves); creosote rings 10 ft or more across; smoke tree and mesquite with stems 2 in or more thick or 6 ft or taller; and any part of ironwood, mesquite or palo verde. One county exemption is removal within 20 ft of a structure built under a county permit (88.01.030(k)). That exemption does NOT override the state Joshua tree law. Removals must also comply with the state Desert Native Plants Act. The Town of Yucca Valley probably has a similar native-plant ordinance, but I could not verify it (Town site returned 403).",
+   "confidence": "medium",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/WJT_Quick-Reference-Guide_REV-2-25-2026.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/2007-Development-Code-14-04-24.pdf",
+    "https://codelibrary.amlegal.com/codes/sanbernardino/latest/sanberncty_ca/0-0-0-166578"
+   ],
+   "implication": "Map Mojave yuccas, cacti, creosote rings and any smoke trees along with the Joshua trees. They can trigger a county permit too. If the lot is inside the Town, ask the Town for its native-plant and Joshua tree procedures in writing."
+  },
+  {
+   "title": "SB County grading permit: over 100 cubic yards; fees are small",
+   "detail": "SB County's Grading Program Guide (based on CBC Appendix J, J103) requires a grading permit for any grading over 100 cy. The building official can also require one for public-safety reasons or in an environmentally sensitive area. Exemptions include an isolated, self-contained area that won't affect neighbors, construction excavation that doesn't change drainage or add fill, agricultural purposes, and wells and utility trenches. A drainage study is required if you add impervious surface that affects drainage, change drainage patterns, encroach on a drainage course, or are in a FEMA floodway. Reviews use the 2025 CBC Appendix J with county amendments, and plans must be signed by a licensed design professional. Grading plan reviews expire 180 days after filing. Residential grading permit fee under County Code \u00a716.0204(e), effective July 1, 2026: under 100 cy, no charge. 100-1,000 cy: $693 for the first 100 cy plus $9.12 per additional 100 cy, max $775. 1,000-10,000 cy: $775 plus $9.12 per additional 1,000 cy, max $857. Rates step up July 1, 2027 and 2028. When a site has 100 cy or more of both cut and fill, the fee is based on TOTAL volume. Separate plan-review fees apply but were not captured. Land clearing without a grading or building permit needs an Erosion and Sediment Control permit: $369 residential, with two reviews and two inspections.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/Purpose-of-Grading-Program-20231106.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf",
+    "https://lus.sbcounty.gov/land-development-home/grading-and-erosion-control/",
+    "San Bernardino County Fee Ordinance, County Code \u00a716.0204(e)-(f), effective July 1, 2026 (PDF retrieved in research; confirm current schedule with LUS 909.387.8311)"
+   ],
+   "implication": "The permit itself is cheap. The real costs are the engineer-stamped plan, survey and testing. If the only early work is clearing a small pad for a storage container or capsule, the $369 erosion-control permit may be the legal, low-cost route. Ask LUS. Do not split work artificially to stay under 100 cy; the county looks at total site activity."
+  },
+  {
+   "title": "Slope thresholds: hillside rules at 15%, soils report above 20%, 2:1 slopes, 90% compaction",
+   "detail": "SB County Hillside Grading Standards (Dev. Code 83.08.040) apply where the natural slope over the graded area is 15% or more. Then: cut and fill slopes no steeper than 2:1; manufactured slopes no taller than 30 ft; driveways no steeper than 20%, with landings for driveways over 10%; walls visible from the street no taller than 3 ft; cut and fill slopes revegetated within 3 months; and a Chapter 88.02 dust control plan. Full Hillside Grading Review also kicks in if, on top of the 15% slope, you exceed 500 cy per lot, have walls or slopes over 15 ft in public view, have slopes wider than 150 ft (Desert Region), or disturb more than 50% of the site or more than 10,000 sf, whichever is less. A soils engineer is not needed for a single-family project on existing grade of 20% or less outside earthquake, landslide and liquefaction zones. With slope under 5:1 (20%), IB-0005 allows prescriptive foundations without a soils report: footings 24 in deep exterior and 18 in interior, 1,500 psf bearing, slab soil pre-saturated 18 in. The inspector can still require compaction testing. County Grading Notes: maximum cut and fill slope 2:1 and 30 ft tall unless a geotech justifies more; fill at least 90% relative compaction; over-excavate at least 24 in below footings; final grading certification by the Engineer of Record; final soils grading report with density tests. In flood areas, fill to 95% (ASTM D-698). Driveways over 12% need Fire Dept approval.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/LandDevelopment/Grading-Notes-3-13-24.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0005-2025-Residential-Concrete-Foundation.pdf"
+   ],
+   "implication": "A 'modest incline' under 15% avoids hillside review, and under 20% usually avoids a soils report. Measure slope at each candidate pad before buying, using Google Earth elevation profiles or a phone inclinometer. Prefer the flattest Joshua-tree-free spots over flattening steeper ones."
+  },
+  {
+   "title": "Retaining walls: over 4 ft needs its own permit; no-soils-report designs only up to 6 ft",
+   "detail": "The county retaining-wall handout covers walls 4 ft or less: no permit for the basic case (Fig. 1), a permit for the surcharged case (Fig. 2). These walls cannot be built where the slope below is steeper than 1:5 (20%). Footings go 18 in into natural ground. Stacked-block, wood or rubble walls are not allowed without a current ICC report. No cross-property drainage. Grading Notes: walls over 4 ft (bottom of footing to top of wall) need a separate retaining-wall permit and are not inspected under the grading permit. IB-0001 allows walls up to 6 ft to be designed without a soils report: 1,500 psf bearing, friction 0.25, passive 150 psf, equivalent fluid pressures by backslope, plus a 2-ft vehicle surcharge if cars park above. The architect or engineer certifies the backfill before the foundation inspection.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SB-Retaining-wall-handout.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0001-2025-Retaining-Wall-Design-Requirements-without-a-Soils-Report.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/LandDevelopment/Grading-Notes-3-13-24.pdf"
+   ],
+   "implication": "Design terraces with walls of 3-4 ft or less, or with 2:1 or flatter planted slopes. Use wall height as a design limit to avoid engineering costs. Low boulder walls of on-site granite fit the look but still have to meet the code rules above."
+  },
+  {
+   "title": "Drainage and flash floods: site pads out of washes; don't send water onto neighbors",
+   "detail": "County checklist requirements: show natural drainage courses and blueline streams. Discharge concentrated flow only to an approved location. Show no increase in discharge to adjacent properties (CBC J109.4). Slope ground 5% away from foundations for 10 ft on pervious surfaces and 2% on impervious, with swales at least 2% within 10 ft (CBC 1804.4). Use interceptor drains, terraces, riprap outlets, and detention per county criteria where needed. Show the FEMA zone (A, AE, AO, X shaded or unshaded, or D) AND the DWR Best Available Map awareness floodplain. In Zones A, AE, AO and X-shaded, pads must be raised above the base flood elevation or highest adjacent grade, fill certified and compacted to 95%, and an Elevation Certificate provided. Grading Notes: existing drainage courses may not be blocked, altered or diverted without county approval, and a CDFW Streambed Alteration Agreement may be needed. CDFW says LSA notification (Fish and Game Code 1602) covers intermittent and ephemeral waterways 'dry for periods of time'. File through EPIMS; CDFW has 30 days to deem it complete and 60 days to issue a draft agreement. LSA fees rose 2.53% on Jan 1, 2026 (amounts not captured). Physical reality: Morongo Basin storms, both summer monsoon and winter, send sudden sheet flow and debris down washes and alluvial fans. Grading that concentrates flow can cut new gullies and dump water on neighbors. (General knowledge, not separately verified.)",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/LandDevelopment/Grading-Notes-3-13-24.pdf",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/LSA",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/LSA/Fees",
+    "https://msc.fema.gov/portal/home",
+    "https://gis.bam.water.ca.gov/bam"
+   ],
+   "implication": "Put pads on the high ground between washes, never in a wash or at the mouth of a fan channel. Put shallow diversion swales and rock-lined outlets on the uphill side of each pad. Leave washes alone so you don't need an LSA. Direct roof and pad runoff into planting basins for the orchard and natives rather than off-site."
+  },
+  {
+   "title": "Dust: MDAQMD Rule 403, county desert clearing limits, and the 1-acre stormwater trigger",
+   "detail": "MDAQMD Rule 403 (Fugitive Dust), as approved into the state air plan for the SB County portion: (a) construction dust may not stay visible beyond the property line; (b) take 'every reasonable precaution' to minimize dust from excavation, grading and land clearing; (c) no more than 100 \u00b5g/m3 difference between upwind and downwind at the property line; (d) prevent track-out onto public roads. (a) and (c) don't apply when instantaneous wind exceeds 25 mph. MDAQMD's current rulebook, including Rule 403.2 for the Mojave Desert Planning Area and its Dust Control Plan thresholds, could not be retrieved (site blocked). I believe formal dust control plans are only for very large sites, but that is unverified. SB County Dev. Code 88.02.040 (Dust Control, Desert Region) applies to residential desert parcels of 1 acre or more. Land may be cleared only for building pads, driveways, landscaping, agriculture or other normal residential uses, with approval such as a development permit. More extensive clearing needs a Site Plan Permit. The state 2022 Construction General Permit (Order 2022-0057-DWQ, effective Sept 1, 2023) applies when disturbance is 1 acre or more, or part of a larger common plan. That means filing a Notice of Intent, preparing a SWPPP, and showing the WDID number on grading plans.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.epa.gov/system/files/documents/2022-08/epa-approved-mdaqmd-compiled-rules-and-regulations-san-bernardino-county.pdf",
+    "https://www.epa.gov/air-quality-implementation-plans/mojave-desert-aqmd",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/2007-Development-Code-14-04-24.pdf",
+    "https://www.waterboards.ca.gov/water_issues/programs/stormwater/construction.html",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/LandDevelopment/Grading-Notes-3-13-24.pdf"
+   ],
+   "implication": "Keep total disturbance under 1 acre (43,560 sf) across all phases if you can: pads, driveway, septic, staging. Water before and during work, stop on windy days, and gravel the site entrance. Don't blade the whole lot for fire clearance or 'cleanup'. Also call MDAQMD and confirm whether Rule 403.2 or a dust control plan applies to a small residential site."
+  },
+  {
+   "title": "Wildlife: tortoise is now state-endangered; burrowing owl and two thrashers are candidates; nesting birds",
+   "detail": "Fish and Game Commission CESA page: Mojave desert tortoise listed ENDANGERED under CESA effective July 15, 2025; it has been federally threatened since 1990. Western burrowing owl: the Commission accepted the petition at its Oct 9-10, 2024 meeting, and the notice of Oct 15, 2024 makes it a CESA candidate statewide. The status review was due Oct 25, 2025, and no final decision is posted. Bendire's and LeConte's thrashers: CESA candidates under a notice of April 29, 2026. These desert-scrub and Joshua-tree-woodland nesters are relevant to Morongo Basin sites. Candidate species are protected like listed ones, so take is prohibited without CDFW authorization. Tortoise activity peaks March-June and September-October (USFWS). Separately, Fish and Game Code 3503/3513 protect active bird nests. That is a general rule; the usual Feb-Aug nesting window is typical practice, not verified here. CDFW's 2012 burrowing owl staff report buffer table (from memory, not re-verified): during breeding season, 200 m for low-disturbance and 500 m for medium-to-high-disturbance work near occupied burrows.",
+   "confidence": "medium",
+   "sources": [
+    "https://fgc.ca.gov/CESA",
+    "https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=227089&inline",
+    "https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=245100&inline",
+    "https://www.fws.gov/species/mojave-desert-tortoise-gopherus-agassizii"
+   ],
+   "implication": "Have a qualified desert biologist do a pre-construction sweep for tortoise sign, owl burrows and active nests, ideally in one visit together with the Joshua tree census. Schedule vegetation clearing for fall or early winter, outside nesting season, and do it within days of a clean survey. If a tortoise or owl turns up, stop work and call CDFW Region 6."
+  },
+  {
+   "title": "Storage container pad for the Bhutan trip: needs a permit; no living in it",
+   "detail": "SB County IB-0002 (updated July 29, 2026): storage containers need an Accessory Structure (ACCR) permit per lot. One application can cover several containers. A site plan is required. The container may sit directly on flat ground graded to drain away (CRC R401.3). Rules: at least 5 ft from property lines and 10 ft from buildings; not in the front setback or easements; no taller than 10 ft; no stacking or joining; no utilities connected; no human occupancy; no hazardous or flammable storage; not in a Special Flood Hazard Area, a geologic hazard area or a snow-load area. Development Code compatibility and painting rules may apply. The container pad is also 'land disturbance' for the 50-ft Joshua tree rule.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0002-Cargo-Containers-for-Incidental-Storage2026.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/WJT_Quick-Reference-Guide_REV-2-25-2026.pdf"
+   ],
+   "implication": "A permitted container on a small gravel pad, outside wash and flood zones and Joshua tree buffers, is a legal and low-risk way to store your belongings while you're in Bhutan. Leave room for truck delivery: a tilt-bed truck needs a long, straight, firm approach."
+  },
+  {
+   "title": "Earthwork math: orient pads along the contours; capsules on piers barely touch the 100-cy line",
+   "detail": "For a balanced cut-and-fill pad, cut volume is about L x s x W^2 / 8 cubic feet. L is the pad length along the contour, W the width downslope, s the slope as a decimal. Fill is roughly equal. A 50x40 ft house pad (long side along the contour) at 8% slope: about 800 cf, or 30 cy cut plus 30 cy fill, roughly 60 cy total, with a maximum cut of only 1.6 ft. At 12% it is about 45+45 cy. Turn the pad the wrong way (long side downslope) and volume rises about 25%. A 20x40 ft capsule pad at 8% is about 6 cy each way. Add a driveway, over-excavation under footings (County Notes: 24 in), and fill shrinkage, and a house plus 2-3 capsule pads plus driveway lands around 80-200 cy, right at the county's 100-cy permit line. Capsules on adjustable piers or helical screw piles need almost no grading and also avoid cutting root zones. These are engineering estimates from geometry, not quotes.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/Purpose-of-Grading-Program-20231106.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/LandDevelopment/Grading-Notes-3-13-24.pdf"
+   ],
+   "implication": "Design pads long along the contour, put capsules on piers, and fit them to existing flat benches and old roads. Budget for a grading permit for the house phase anyway; an engineer will count over-excavation and the driveway. Heavy prefab capsules (often several tons) also need a firm truck and crane setup area and an access road about 12-14 ft wide (practical estimate)."
+  },
+  {
+   "title": "Permits lapse without progress, which matters for the Bhutan trip",
+   "detail": "County checklist: grading plan reviews expire 180 days from filing. Under the California building code's standard rule (CBC/CRC 105.5), a permit expires if work doesn't start within 180 days, or if it is suspended or abandoned for 180 days. The building official may grant extensions. I did not confirm the county's or Town's exact local extension practice. County hillside standards require cut and fill slopes to be revegetated within 3 months, and erosion-control measures must be in place before grading or building permits are issued. Bare desert soil left graded will blow and gully in monsoon and winter storms.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf",
+    "https://lus.sbcounty.gov/pre-construction-erosion-control/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Erosion-and-Sediment-Control-Form.pdf"
+   ],
+   "implication": "Time the trip around inspections. Get an inspection signed off, or a written extension, before you leave. Don't leave pads half-graded: finish, gravel or DG, and stabilize them. Leaving with an active permit and no inspections for 6+ months risks expiration and re-paying fees."
+  },
+  {
+   "title": "Earthquake faults and survey rules can add studies",
+   "detail": "Per the county checklist, a soils engineer is required for single-family projects in earthquake, landslide or liquefaction zones, even on gentle slopes. The Morongo Basin has mapped faults: the Pinto Mountain fault near Yucca Valley and the 1992 Landers rupture faults near Landers and Flamingo Heights. Whether a given parcel falls in an Alquist-Priolo zone was not checked. State law broadly exempts single wood- or steel-frame homes of up to two stories that aren't part of a 4+ unit development from AP fault studies (from memory; verify). IB-0006: a licensed surveyor's survey is required when lot corners can't be found or verified and construction will be within 5 ft of a property line, among other triggers. Foundation inspection waits until property lines and setbacks are verified.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0006-2025-Survey-Requirements.pdf"
+   ],
+   "implication": "Check the parcel in the California Geological Survey's EQ Zapp map before buying. Get a boundary survey with corner pins set early; rural desert lots often have lost monuments, and you need corners to measure Joshua tree buffers on the neighbor's side."
+  },
+  {
+   "title": "Town of Yucca Valley rules: unverified",
+   "detail": "The Town of Yucca Valley's website and its code-hosting site returned HTTP 403 every time, so I could not confirm the Town's grading permit threshold, grading fees, native-plant protection ordinance, hillside rules or flood rules. State laws apply the same inside the Town: the Joshua tree act, CESA, Fish and Game Code 1602, the Construction General Permit, and MDAQMD rules. There is no CDFW delegation agreement with the Town. Town building codes are based on the same 2025 California Building Code, so Appendix J-type grading rules are likely but not confirmed.",
+   "confidence": "low",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting",
+    "https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=247117"
+   ],
+   "implication": "If the parcel is inside the Town, call or visit Town Community Development, Building and Engineering, and get the grading threshold, fee schedule, native-plant permit process and any Joshua tree acknowledgment form in writing."
+  },
+  {
+   "title": "DIY rental vs a grading contractor (estimates)",
+   "detail": "I could not verify current local rental rates or contractor prices (search budget exhausted). Typical Southern California 2025-26 ranges from general experience: skid steer about $250-450/day and mini-excavator about $300-550/day, plus about $150-400 delivery each way; small dozer about $600-1,200/day. A contractor with operator runs about $110-250/hr plus $300-1,000 mobilization. On-site cut and fill is about $4-15/cy, imported fill $30-70/cy delivered, and a water truck $100-175/hr. Under California's license law, earthwork above the minor-work limit (raised to $1,000 in 2025, from memory) needs a licensed contractor (e.g., Class A or C-12) if you hire someone. Owner-builders can do their own work.",
+   "confidence": "low",
+   "sources": [
+    "No source verified this session: estimates only. Check CSLB https://www.cslb.ca.gov and local rental yards in Yucca Valley and Joshua Tree"
+   ],
+   "implication": "Hiring a local operator who knows desert soils, boulders and Joshua tree flagging for 1-2 days is often cheaper and safer than renting, especially near protected trees, where one wrong cut becomes a legal problem. Renting a skid steer or mini-ex makes sense for later trenching, planting basins and DG spreading, well away from trees."
+  }
+ ],
+ "critical_claims": [
+  {
+   "claim": "The Morongo Basin (Yucca Valley, Landers, Flamingo Heights, Pioneertown, Pipes Canyon, Joshua Tree, Morongo Valley, Johnson Valley) is in CDFW's STANDARD western Joshua tree fee area. 2026 in-lieu fees per tree: $2,609 (5 m or taller), $521.75 (1 m to under 5 m), $354.75 (under 1 m), effective Jan 1, 2026.",
+   "sources": [
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP",
+    "https://content.govdelivery.com/accounts/CNRA/bulletins/3fdfa9c",
+    "https://services2.arcgis.com/Uq9r85Potqm3MfRV/arcgis/rest/services/WJT_leg_bound_rev_June_23_gdb/FeatureServer/0"
+   ]
+  },
+  {
+   "claim": "In unincorporated SB County, CDFW approval is required if any western Joshua tree, including on abutting parcels, is within 50 ft of any land disturbance. Disturbance includes septic, fences, solar, paved driveways and sheds.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/WJT_Quick-Reference-Guide_REV-2-25-2026.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Joshua_Tree_Acknowledgment_REV-8-11-26.pdf"
+   ]
+  },
+  {
+   "claim": "SB County requires a grading permit above 100 cy. Hillside standards apply at a natural slope of 15% or more. A soils engineer is not required for a single-family home on existing grade of 20% or less outside earthquake, landslide and liquefaction zones. The residential grading permit fee is $693-$775 for 100-1,000 cy (FY2026-27).",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/Purpose-of-Grading-Program-20231106.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf",
+    "San Bernardino County Code \u00a716.0204(e), fee ordinance effective July 1, 2026"
+   ]
+  },
+  {
+   "claim": "AB 1808 (Ch. 816, Stats. 2026, urgency, effective Sept 29, 2026) lets an owner-occupant of an EXISTING single-family home remove up to 10 western Joshua trees within 30 ft of the home, within 15 ft of an existing accessory structure, or within or 15 ft from a new accessory structure's footprint. It does not cover building the first house on vacant land. It moves the fee-regulation deadline to June 30, 2027.",
+   "sources": [
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1808"
+   ]
+  },
+  {
+   "claim": "No CDFW delegation agreements with any city or county had been approved as of the 2025 legislative report and the April 2026 Assembly analysis, so CDFW, not the Town or County, issues all Joshua tree permits.",
+   "sources": [
+    "https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=247117",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting",
+    "https://leginfo.legislature.ca.gov/faces/billAnalysisClient.xhtml?bill_id=202520260AB1663"
+   ]
+  },
+  {
+   "claim": "The Mojave desert tortoise became CESA-endangered effective July 15, 2025. The western burrowing owl has been a CESA candidate since October 2024. Bendire's and LeConte's thrashers became CESA candidates in April 2026.",
+   "sources": [
+    "https://fgc.ca.gov/CESA",
+    "https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=227089&inline",
+    "https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=245100&inline"
+   ]
+  }
+ ],
+ "design_numbers": [
+  "SB County grading permit trigger: more than 100 cubic yards (cut + fill activity). Under 100 cy: no grading fee (County Grading Program Guide; Code \u00a716.0204(e))",
+  "Hillside Grading Standards trigger: natural slope 15% or more over the graded area (SBC 83.08.020/040)",
+  "Hillside Grading Review extra triggers (with 15%+ slope): more than 500 cy per lot; walls or slopes over 15 ft in public view; slope width over 150 ft (Desert Region); disturbance over 50% of site or over 10,000 sf, whichever is less (County grading checklist)",
+  "Soils engineer not required: single-family home on existing grade of 20% or less and not in an earthquake, landslide or liquefaction zone (County grading checklist)",
+  "Prescriptive foundation without soils report: ground slope under 5:1 (20%); exterior footing 24 in deep, interior 18 in; 12 in wide (1-story); 1,500 psf bearing; slab soil pre-saturated 18 in (IB-0005)",
+  "Max cut and fill slope 2:1 (H:V); max height 30 ft without geotech justification (County Grading Notes #7)",
+  "Hillside: banks over 25 ft tall need variable gradients; driveway max 20%; landings for driveways over 10%; walls visible from the street max 3 ft (SBC 83.08.040)",
+  "Fire Dept approval needed for driveway grades over 12% (County grading checklist)",
+  "Fill compaction at least 90% relative compaction (County Grading Notes #9); fill in flood areas 95% per ASTM D-698 (SBC 82.14.050(c))",
+  "Over-excavation at least 24 in below bottom of footings unless the geotech says otherwise (County Grading Notes #11)",
+  "Finish grade away from foundation: 5% for 10 ft (pervious), 2% (impervious); swales at least 2% within 10 ft (CBC 1804.4; IB-0005)",
+  "Retaining walls: over 4 ft (bottom of footing to top of wall) need a separate permit; 4 ft or less with no surcharge OK per county standard; not where slope below is steeper than 1:5; footing 18 in into natural ground (County handout rev 8/2026; Grading Notes #15)",
+  "Retaining wall without soils report: up to 6 ft; 1,500 psf bearing, friction 0.25, passive 150 psf; add 2 ft vehicle surcharge (IB-0001)",
+  "Existing topo for grading plans: contours at 2-ft max interval, extending at least 15 ft beyond property lines; finished contours 1 ft for slopes under 10% and 5 ft for 10% or more (County checklist)",
+  "Western Joshua tree county buffer: CDFW approval needed if a WJT is within 50 ft of any land disturbance, including on abutting parcels (SB County WJT QRG and Acknowledgment form)",
+  "CDFW census area: project footprint plus a 15 m (about 50 ft) buffer; size classes A under 1 m, B 1 m to under 5 m, C 5 m or more; each stem is a separate tree (CDFW Census Instructions)",
+  "WJT root extent: 8.4 m (27.6 ft) for a 1 m tree; 14 m (45.9 ft) for a 4.3 m tree (CDFW FAQ)",
+  "WJT relocation recipient site at least 15 m from existing WJTs (CDFW FAQ / Aug 2025 Relocation Guidelines)",
+  "AB 1808 owner-occupant removal: up to 10 WJTs within 30 ft of an existing home, 15 ft of an existing accessory structure, or within or 15 ft from a new accessory structure footprint (Ch. 816, Stats. 2026)",
+  "Delegated local permits (if ever established): max 10 trees for single-family homes and accessory structures; 40 for public works (CDFW FAQ)",
+  "Storage container: at least 5 ft from property line, at least 10 ft from buildings, not in front setback, max 10 ft tall, no stacking, no utilities, not in SFHA; ACCR permit (IB-0002)",
+  "County desert clearing (SBC 88.02.040): on residential parcels of 1 acre or more, clear only for pads, driveways, landscaping, agriculture or accessory uses",
+  "County desert native plants needing a removal permit (SBC 88.01.060): all Joshua trees; all yuccas, agaves and nolinas; creosote rings 10 ft or more across; smoke tree and mesquite with 2 in or larger stems or 6 ft or taller; any part of ironwood, mesquite or palo verde. Exemption within 20 ft of a permitted structure (county only)",
+  "State Construction General Permit trigger: 1 acre (43,560 sf) or more of disturbance, or part of a common plan (Order 2022-0057-DWQ)",
+  "MDAQMD Rule 403 (SIP version): no visible dust beyond the property line; 100 \u00b5g/m3 upwind/downwind limit; exemption when instantaneous wind exceeds 25 mph",
+  "Pad-volume rule of thumb: cut is about L x slope x W^2 / 8 cubic ft (L along contour, W downslope); e.g., 50x40 ft pad at 8% is about 30 cy cut + 30 cy fill (engineering estimate)",
+  "Survey required if construction is under 5 ft from a property line and corners can't be verified; foundation inspection only after lines and setbacks are verified by a PLS or RCE (IB-0006)",
+  "Grading plan review expires 180 days from filing (County checklist)"
+ ],
+ "costs": [
+  {
+   "item": "CDFW WJT in-lieu fee per tree 5 m or taller (standard area, 2026)",
+   "low_usd": 2609,
+   "high_usd": 2609,
+   "notes": "Fee in effect when paid; CDFW fee regulation due by June 30, 2027 may change it (AB 1808, SB 1062)"
+  },
+  {
+   "item": "CDFW WJT in-lieu fee per tree 1 m to under 5 m (standard area, 2026)",
+   "low_usd": 521.75,
+   "high_usd": 521.75,
+   "notes": "Source: CDFW ITP page and Dec 5, 2025 bulletin"
+  },
+  {
+   "item": "CDFW WJT in-lieu fee per tree under 1 m (standard area, 2026)",
+   "low_usd": 354.75,
+   "high_usd": 354.75,
+   "notes": "Small sprouts under shrubs count; each stem is a separate tree"
+  },
+  {
+   "item": "CDFW Hazard Management Permit (dead or fallen trees, trimming)",
+   "low_usd": 0,
+   "high_usd": 0,
+   "notes": "Free; cannot authorize removing live trees"
+  },
+  {
+   "item": "SB County residential grading permit fee, 100-1,000 cy (FY2026-27)",
+   "low_usd": 693,
+   "high_usd": 775,
+   "notes": "Plus separate plan-review fees not captured; rises to $713-$798 on July 1, 2027"
+  },
+  {
+   "item": "SB County residential erosion and sediment control permit (land clearing without a grading or building permit)",
+   "low_usd": 369,
+   "high_usd": 369,
+   "notes": "Includes 2 reviews and 2 inspections (FY2026-27)"
+  },
+  {
+   "item": "Boundary survey and corner staking by a PLS",
+   "low_usd": 2000,
+   "high_usd": 6000,
+   "notes": "Estimate; not verified this session"
+  },
+  {
+   "item": "Topographic survey of building envelope (1-2 acres)",
+   "low_usd": 1500,
+   "high_usd": 5000,
+   "notes": "Estimate; ask for 1-ft contours over pad areas"
+  },
+  {
+   "item": "Civil engineer grading and drainage plan (small residential)",
+   "low_usd": 2500,
+   "high_usd": 10000,
+   "notes": "Estimate; needed if over 100 cy or if a drainage study is triggered"
+  },
+  {
+   "item": "Geotechnical/soils report (if required)",
+   "low_usd": 2500,
+   "high_usd": 6000,
+   "notes": "Estimate; often avoidable at 20% slope or less outside hazard zones"
+  },
+  {
+   "item": "Compaction testing and pad certification",
+   "low_usd": 800,
+   "high_usd": 3000,
+   "notes": "Estimate"
+  },
+  {
+   "item": "WJT census by consultant or desert native plant specialist",
+   "low_usd": 500,
+   "high_usd": 3000,
+   "notes": "Estimate; owners may prepare it themselves (CDFW lists the property owner as a possible preparer)"
+  },
+  {
+   "item": "Biologist pre-construction surveys (tortoise, burrowing owl, nesting birds)",
+   "low_usd": 800,
+   "high_usd": 4000,
+   "notes": "Estimate; combine with the WJT census visit"
+  },
+  {
+   "item": "Skid steer rental per day",
+   "low_usd": 250,
+   "high_usd": 450,
+   "notes": "Estimate; plus delivery about $150-400 each way"
+  },
+  {
+   "item": "Mini-excavator rental per day",
+   "low_usd": 300,
+   "high_usd": 550,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Grading contractor with operator, per hour",
+   "low_usd": 110,
+   "high_usd": 250,
+   "notes": "Estimate; plus mobilization about $300-1,000"
+  },
+  {
+   "item": "On-site cut/fill earthwork per cubic yard",
+   "low_usd": 4,
+   "high_usd": 15,
+   "notes": "Estimate; boulders or caliche raise cost"
+  },
+  {
+   "item": "Imported fill delivered per cubic yard",
+   "low_usd": 30,
+   "high_usd": 70,
+   "notes": "Estimate; usually avoidable with balanced pads"
+  },
+  {
+   "item": "Water truck for dust control, per hour",
+   "low_usd": 100,
+   "high_usd": 175,
+   "notes": "Estimate"
+  },
+  {
+   "item": "SWPPP/Construction General Permit compliance if 1 acre or more is disturbed",
+   "low_usd": 3000,
+   "high_usd": 12000,
+   "notes": "Estimate; avoid by keeping disturbance under 1 acre"
+  }
+ ],
+ "people_to_involve": [
+  {
+   "role": "Licensed land surveyor (PLS)",
+   "why": "Find or set lot corners, do topo of pad areas, and verify setbacks. Needed to measure 50-ft Joshua tree buffers next to neighbors and for the county foundation inspection (IB-0006).",
+   "when": "During purchase due diligence (boundary), then before site planning (topo)",
+   "how_to_find": "California Land Surveyors Association directory; ask Morongo Basin builders and title companies for referrals",
+   "questions_to_ask": [
+    "Can you find or set all 4 corners, and are there lost monuments here?",
+    "Can you do 1-ft contours over just the 1-2 acre building envelope instead of all 5 acres?",
+    "Can you shoot GPS points for every Joshua tree in WGS84 decimal degrees as you go?"
+   ],
+   "typical_cost": "$2,000-6,000 boundary; $1,500-5,000 topo (estimates)"
+  },
+  {
+   "role": "Desert biologist / desert native plant specialist (ISA-certified arborist or 5+ years of desert restoration)",
+   "why": "WJT census, check for tortoise, burrowing owl and thrasher nests, required for any WJT trimming or relocation; advise on root-zone buffers",
+   "when": "Before purchase (census), and again within days before any clearing",
+   "how_to_find": "ISA 'Find an Arborist'; local consultants who file CDFW WJT permits; ask CDFW Region 6 for names of qualified people",
+   "questions_to_ask": [
+    "How many trees and size classes are on the lot and within 50 ft beyond it?",
+    "Is there any tortoise or owl sign, or thrasher habitat?",
+    "What is the best season to clear?",
+    "Would a CDFW ITP likely add relocation or seed-collection conditions?"
+   ],
+   "typical_cost": "$500-4,000 depending on scope (estimate)"
+  },
+  {
+   "role": "Civil engineer (RCE)",
+   "why": "Grading and drainage plan if over 100 cy; drainage and hydrology if you touch drainage; Engineer of Record for final grading certification",
+   "when": "After survey and census, before the permit application",
+   "how_to_find": "Local civil engineers who regularly submit to SB County Land Development or Town Engineering",
+   "questions_to_ask": [
+    "Can the house, capsule pads and driveway total under 100 cy?",
+    "Does my parcel need a drainage study?",
+    "Is it in a FEMA or DWR floodplain?",
+    "Can we keep total disturbance under 1 acre?"
+   ],
+   "typical_cost": "$2,500-10,000 (estimate)"
+  },
+  {
+   "role": "Geotechnical engineer",
+   "why": "Soils report if slope is over 20% or the parcel is in a hazard zone; compaction testing and final soils grading report",
+   "when": "Design phase (if needed), then during grading",
+   "how_to_find": "Ask your civil engineer",
+   "questions_to_ask": [
+    "Can IB-0005 prescriptive foundations work here?",
+    "What compaction testing do we need for pads that will carry heated slabs?"
+   ],
+   "typical_cost": "$2,500-6,000 report; $800-3,000 testing (estimates)"
+  },
+  {
+   "role": "CDFW Region 6 (Inland Deserts) and the WJT program",
+   "why": "All Joshua tree permits (no local delegation), AB 1808 implementation, Streambed Alteration questions",
+   "when": "Before purchase, with APN and a draft site plan",
+   "how_to_find": "(909) 484-0167, AskRegion6@wildlife.ca.gov; WJT@wildlife.ca.gov; WJTHazardPermit@wildlife.ca.gov",
+   "questions_to_ask": [
+    "If all work stays more than 50 ft from every WJT, do we need anything from CDFW?",
+    "How will AB 1808 permits work for owner-occupants adding accessory structures later?",
+    "What are current ITP processing times for single-family projects?"
+   ],
+   "typical_cost": "Free to ask"
+  },
+  {
+   "role": "SB County Land Use Services (Building and Safety / Land Development) or Town of Yucca Valley Building and Engineering",
+   "why": "Grading and erosion permits, container ACCR permit, flood review, the Joshua Tree Acknowledgment form, permit expiration rules",
+   "when": "Before purchase and before any clearing",
+   "how_to_find": "County LUS 909.387.8311; Jerry Lewis High Desert Government Center, 15900 Smoke Tree St, Suite 131, Hesperia. Town phone not verified; use the Town website.",
+   "questions_to_ask": [
+    "Is 100 cy counted as cut plus fill for the whole site across phases?",
+    "Does the $369 erosion and sediment control permit cover clearing a container or capsule pad?",
+    "How do permit extensions work if we're abroad 6-12 months?"
+   ],
+   "typical_cost": "Permit fees per schedule"
+  },
+  {
+   "role": "Licensed grading contractor (CSLB Class A or C-12) familiar with desert sites",
+   "why": "Efficient pads, compaction, swales and riprap; experienced with tree flagging and dust control",
+   "when": "After permits are issued",
+   "how_to_find": "CSLB license lookup at cslb.ca.gov; referrals from Morongo Basin builders",
+   "questions_to_ask": [
+    "Price per hour or per cy, and mobilization?",
+    "Do you bring a water truck?",
+    "How will you protect flagged Joshua tree buffers?",
+    "Will you work in lifts and coordinate compaction testing?"
+   ],
+   "typical_cost": "$110-250/hr plus mobilization (estimate)"
+  },
+  {
+   "role": "DigAlert (811)",
+   "why": "Legally required utility locate before excavation",
+   "when": "At least 2 working days before digging",
+   "how_to_find": "Call 811 or digalert.org",
+   "questions_to_ask": [
+    "Which buried lines are on or near the parcel?"
+   ],
+   "typical_cost": "Free"
+  },
+  {
+   "role": "Mojave Desert AQMD",
+   "why": "Confirm Rule 403/403.2 and dust-plan applicability for a small residential grading job",
+   "when": "Before grading",
+   "how_to_find": "mdaqmd.ca.gov (site blocked during research, so contact not verified)",
+   "questions_to_ask": [
+    "Does Rule 403.2 apply in the Morongo Basin?",
+    "Is any dust control plan or notice required for under 1 acre of disturbance?"
+   ],
+   "typical_cost": "Free to ask"
+  },
+  {
+   "role": "Downhill neighbors",
+   "why": "Drainage and dust affect them; trees within 50 ft of your work may be on their land, and the census may need their permission",
+   "when": "Early, before site planning",
+   "how_to_find": "Knock on doors; county assessor parcel viewer",
+   "questions_to_ask": [
+    "Where does water run in storms?",
+    "May our biologist count trees within 50 ft of the shared line?"
+   ],
+   "typical_cost": "Free"
+  }
+ ],
+ "site_visit_checks": [
+  "Flag and photograph every Joshua tree, including small sprouts hidden under creosote or other shrubs and dead or fallen ones. Note the size class (under 1 m, 1-5 m, 5 m or more) and get a GPS point for each.",
+  "Walk 50 ft beyond each property line and note Joshua trees on neighboring parcels that would put a buffer onto your lot.",
+  "Pace or measure out 50-ft circles around the trees nearest each candidate pad, driveway, septic and leach field, and container location.",
+  "Measure slope at each candidate pad with a phone inclinometer or tape and level. Note whether it is under 15% and under 20%.",
+  "Look for washes: sandy or gravel channels, flood debris lines, scour, small cut banks, lines of desert willow or catclaw. Mark where water enters and leaves the lot.",
+  "Look for alluvial-fan sheet-flow signs (braided shallow channels) upslope of the candidate pads.",
+  "Look for existing flat benches, old roads or cleared areas you could reuse instead of grading new ground.",
+  "Check for tortoise burrows (half-moon shaped openings), scat or shell fragments. Check for burrowing owl burrows with whitewash or pellets. Look for active nests in cholla, creosote or Joshua trees.",
+  "Note boulders, granite outcrops and caliche hardpan. Dig a small hand test hole away from any Joshua tree to see the soil.",
+  "Find survey corner pins or monuments and note fences or encroachments.",
+  "Check the access road and driveway route: grade (12% or more needs Fire approval), width for a truck and crane carrying a capsule, and a place to gravel the entrance against track-out.",
+  "Note the prevailing wind direction for dust and for orienting pads and outdoor rooms.",
+  "Identify Mojave yuccas, cacti and creosote rings 10 ft or more across (county-regulated plants).",
+  "Look for signs of prior unpermitted grading, dumping or structures that could become your code-enforcement problem.",
+  "Note the downslope neighbors and where your runoff would go after you build pads and a roof.",
+  "Spot candidate low areas where pad and roof runoff could feed orchard and native planting basins."
+ ],
+ "next_actions": [
+  "Look up the parcel's APN in the SB County public map viewer (https://sbcounty.maps.arcgis.com/apps/MapSeries/index.html?appid=f5a50c44766b4c36a3ae014497aa430d) and write down whether it is inside the Town of Yucca Valley or unincorporated.",
+  "Enter the parcel address on FEMA's Map Service Center (https://msc.fema.gov/portal/home) and on DWR's Best Available Maps (https://gis.bam.water.ca.gov/bam); save screenshots of any flood zone.",
+  "Check the parcel in the California Geological Survey EQ Zapp map for earthquake fault, landslide and liquefaction zones; screenshot the result.",
+  "Download and read the SB County Western Joshua Tree Quick Reference Guide and the Joshua Tree Acknowledgment form (both linked in the findings); pick which of the 5 statements would apply today.",
+  "Download CDFW's WJT Census Instructions and the ITP application form (https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=215337) and print the census data columns as a field sheet.",
+  "Spend one morning on the lot with a phone GPS app: flag, photograph and size-class every Joshua tree, then drop the points into Google Earth and draw 50-ft (15 m) circles.",
+  "Sketch on that Google Earth map where the house pad, 1-2 capsule pads, storage container, driveway, septic and leach field could fit fully outside the 50-ft circles and outside washes.",
+  "Draw an elevation profile in Google Earth across each candidate pad and note the % slope next to it.",
+  "Email AskRegion6@wildlife.ca.gov with the APN, the tree map and your sketch, asking whether work kept more than 50 ft from all trees needs any CDFW authorization and how AB 1808 will work for later accessory structures.",
+  "Call SB County LUS at 909.387.8311 and ask (1) whether the 100-cy grading threshold counts cut plus fill for the whole site across phases, and (2) whether the $369 erosion and sediment control permit covers clearing a pad for a storage container.",
+  "If the parcel is in the Town, call Town of Yucca Valley Community Development and ask for the grading threshold, fee schedule, native-plant and Joshua tree permit process, and permit-extension policy in writing.",
+  "Request written quotes from 2 licensed land surveyors for a boundary survey with corners set and 1-ft topo of the building envelope.",
+  "Request a quote from a desert biologist for a combined WJT census plus tortoise, burrowing owl and nesting bird survey.",
+  "Add a due-diligence contingency to your purchase offer covering the WJT census, survey, flood zone and fault zone results.",
+  "Subscribe to CDFW's Western Joshua Tree email updates (https://public.govdelivery.com/accounts/CNRA/signup/37570) so you see the 2027 fee regulation when it's proposed.",
+  "Get one day-rate and one per-cubic-yard quote from a licensed local grading contractor for a roughly 100 cy house pad and driveway.",
+  "Call 811 (DigAlert) at least 2 working days before any digging, test holes included."
+ ],
+ "risks": [
+  {
+   "risk": "Grading, clearing or setting a capsule, container or septic within 50 ft of a western Joshua tree without CDFW authorization. That is unauthorized 'take' under Fish and Game Code 1927.2, enforceable by CDFW (CalTIP), and the county may hold your permits.",
+   "severity": "high",
+   "mitigation": "Census and map the trees before buying. Fence or flag 50-ft buffers before any equipment arrives. Get written CDFW confirmation for any work near a buffer. Never 'tidy up' around trees."
+  },
+  {
+   "risk": "Buying a lot so dense with Joshua trees that no 50-ft-clear building area exists. That means ITP fees of $354-$2,609 per tree plus CEQA, consultant costs and open-ended timing (the average single-family ITP took 41 trees).",
+   "severity": "high",
+   "mitigation": "Make the purchase contingent on a census showing tree-free pad areas. Walk away or renegotiate the price if not."
+  },
+  {
+   "risk": "Siting pads, the house or storage in or below a wash or alluvial-fan path. Flash floods damage structures, wash out pads and stored belongings while you're in Bhutan.",
+   "severity": "high",
+   "mitigation": "Check FEMA and DWR BAM maps. Have the civil engineer review drainage. Site on high ground, add upslope diversion swales and rock outlets, raise finished floors, and leave washes untouched."
+  },
+  {
+   "risk": "Permits expiring, or bare graded soil eroding and blowing, while you're away in Bhutan.",
+   "severity": "medium",
+   "mitigation": "Schedule and pass an inspection or get a written extension before leaving. Finish and stabilize all pads (gravel or DG, soil binder, replanting). Don't start grading you can't finish before the trip."
+  },
+  {
+   "risk": "Total disturbance creeping to 1 acre or more through pads, driveway, septic, orchard prep and staging. That triggers the state Construction General Permit (SWPPP, NOI, WDID, ongoing fees).",
+   "severity": "medium",
+   "mitigation": "Keep a running square-footage budget of disturbed area. Use piers for capsules, narrow driveways, and plant the orchard in hand-dug basins instead of blading."
+  },
+  {
+   "risk": "Encountering a desert tortoise (state-endangered since July 2025), burrowing owl or thrasher nest (state candidates) mid-project, forcing a stop and CDFW consultation.",
+   "severity": "medium",
+   "mitigation": "Do a biologist sweep before clearing. Clear outside nesting season. Keep a written stop-work-and-call-CDFW plan."
+  },
+  {
+   "risk": "Concentrating runoff or dust onto neighbors, leading to civil liability, county or MDAQMD complaints, and violation of Rule 403 or the 'no increase in discharge' rule.",
+   "severity": "medium",
+   "mitigation": "Disperse runoff on site into planting basins. Water during grading. Stop when winds exceed 25 mph. Gravel the construction entrance."
+  },
+  {
+   "risk": "Retaining walls or terraces growing over 4 ft, or a slope over 20% that forces a soils report and engineering.",
+   "severity": "low",
+   "mitigation": "Pick flatter pad areas. Keep walls 4 ft or less, or use 2:1 planted slopes."
+  },
+  {
+   "risk": "Relying on AB 1808 or a future fee cut that doesn't apply to your situation (it covers existing owner-occupied homes only) or arrives later than planned. CDFW also says current fees are insufficient, so fees could rise in 2027.",
+   "severity": "medium",
+   "mitigation": "Plan Phase 1 with zero tree take. Treat any later take as uncertain and budget the 2026 standard fees plus a cushion."
+  },
+  {
+   "risk": "Town of Yucca Valley rules (grading threshold, native-plant permits) differ from the county numbers here and were not verified.",
+   "severity": "medium",
+   "mitigation": "Get Town requirements in writing before closing if the parcel is inside Town limits."
+  }
+ ],
+ "brainstorm_prompts": [
+  "If our favorite house spot has a Joshua tree within 50 ft, would we move the house, pay roughly $350-$2,600 per tree plus months of permitting, or walk away from this lot?",
+  "Which 3-5 Joshua trees on the land do we love most, and how could the house and capsules frame views of them instead of competing with them?",
+  "What is the smallest set of pads we need on day one (house, one capsule, storage container, parking), and what can wait?",
+  "Are we willing to put the capsules on piers or screw piles so we barely grade, even if that costs a little more up front?",
+  "Do we let the land's existing flat spots decide the layout, or are we attached to a specific layout we'd have to grade for?",
+  "Which jobs do we want to do ourselves (Joshua tree census, flagging, planting basins, gravel) and which do we hire out (surveyor, biologist, grading operator)?",
+  "How much of our total budget are we willing to put into site work (survey, biology, grading, drainage) before the house itself?",
+  "What has to be finished, inspected and stabilized before we leave for Bhutan, and how long must we stay on site before that date?",
+  "How would we feel living next to a wash that runs a few times a year? Is that a feature or a deal-breaker?",
+  "Where should the orchard and native plantings go so they catch runoff from the roof and pads but stay out of Joshua tree buffers?",
+  "What is our plan if a biologist finds a tortoise or owl burrow where we want to build?",
+  "Would we rather wait for the house to be finished and use the new 2026 law (AB 1808) for later capsules, or design the capsules to avoid all trees from the start?"
+ ],
+ "open_questions": [
+  "Is the parcel inside the Town of Yucca Valley or unincorporated? If in the Town: what are its grading permit threshold, fees, native-plant/Joshua-tree ordinance and hillside rules? (Town site blocked during research.)",
+  "Does MDAQMD Rule 403.2 (Mojave Desert Planning Area) apply in the Morongo Basin, and at what size is a Dust Control Plan required? (MDAQMD site blocked.)",
+  "How is CDFW implementing AB 1808: forms, proof of owner-occupancy, fees? Will SB County or the Town sign a delegation agreement?",
+  "What will CDFW's fee regulation (due June 30, 2027 under AB 1808, with SB 1062's tiered-fee directive) set for single-family projects?",
+  "For a single new house needing an ITP before CDFW's Program EIR is certified, what CEQA document and filing fee will CDFW require, and what is a realistic processing time?",
+  "Has the Fish and Game Commission made a final listing decision on the western burrowing owl (status review was due Oct 2025)?",
+  "Does SB County count the 100-cy threshold per phase or for the whole site over time, and does the 'isolated, self-contained area' exemption ever apply to small capsule pads?",
+  "Is the parcel in an Alquist-Priolo fault zone, a FEMA SFHA or the County Floodplain Safety Review Area?",
+  "What are current local equipment rental rates and grading contractor prices in Yucca Valley and Joshua Tree? (Not verified; search budget exhausted.)",
+  "What permit-extension process do the County and Town offer for owner-builders traveling abroad for 6-12 months?"
+ ]
+}

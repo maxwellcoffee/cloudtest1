@@ -1,0 +1,21 @@
+{
+ "1": {
+  "cut_cy": 113,
+  "fill_cy": 96,
+  "disturbed_sqft": 7650,
+  "disturbed_acres": 0.18
+ },
+ "2": {
+  "cut_cy": 264,
+  "fill_cy": 211,
+  "disturbed_sqft": 12311,
+  "disturbed_acres": 0.28
+ },
+ "99": {
+  "cut_cy": 348,
+  "fill_cy": 443,
+  "disturbed_sqft": 22168,
+  "disturbed_acres": 0.51
+ },
+ "drive_ft": 243
+}
