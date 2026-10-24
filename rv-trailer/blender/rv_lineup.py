@@ -13,13 +13,13 @@ s.pad_gravel(48.0, 8.0, y=0.0)
 z = s.pad_z
 GAP, T = 3.0, 1.15                       # gap between trailers; A-frame tongue length
 TRAILERS = [  # (title, subtitle, body length, builder)
-    ('Molded fiberglass, Oliver class', 'Small, tough, four-season shell; one-piece hulls', 6.05,
+    ('Molded fiberglass, Oliver class', 'One-piece fiberglass hulls', 6.05,
      lambda t, x: s.shell_trailer(t, x, 0.0, L=6.05, W=2.13, kind='oliver')),
-    ('Aluminum Airstream', 'Riveted aluminum; holds value; premium price', 6.83,
+    ('Aluminum Airstream', 'Riveted aluminum; best resale', 6.83,
      lambda t, x: s.shell_trailer(t, x, 0.0, L=6.83, W=2.59, kind='airstream')),
-    ('New four-season trailer', 'Laminated fiberglass; slide-out; dual-pane option', 7.9,
+    ('New four-season trailer', 'Slide-out; dual-pane option', 7.9,
      lambda t, x: s.box_trailer(t, x, 0.0, L=7.9, style='modern')),
-    ('Used trailer, about 2017-2019', 'Laminated fiberglass; check roof, floor and seals', 7.4,
+    ('Used trailer, about 2017-2019', 'Check roof, floor and seals', 7.4,
      lambda t, x: s.box_trailer(t, x, 0.0, L=7.4, style='classic')),
 ]
 total = sum(L + T for (_, _, L, _) in TRAILERS) + GAP * (len(TRAILERS) - 1)

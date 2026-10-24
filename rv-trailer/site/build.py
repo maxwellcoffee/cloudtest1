@@ -30,6 +30,7 @@ def legend(name):
 def page(body):
     css = open(os.path.join(HERE, '..', '..', 'gazebo-spa', 'site', 'style.css')).read()
     extra = '''
+figure > .zoom > img { display: block; width: 100%; height: auto; }
 .tiers .scheme-letter { font-size: 2.6rem; }
 .money { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
 .money div { background: var(--wash); padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
