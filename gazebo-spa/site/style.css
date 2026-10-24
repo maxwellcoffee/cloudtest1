@@ -46,9 +46,10 @@ section { padding-block: 56px; }
 .stack-lg { display: flex; flex-direction: column; gap: 32px; }
 
 /* the coral lattice (changsal) frame */
-.lattice { padding: 12px; background:
-  repeating-linear-gradient(0deg, var(--coral) 0 2px, transparent 2px 11px),
-  repeating-linear-gradient(90deg, var(--coral) 0 2px, transparent 2px 11px); }
+.lattice { padding: 20px; outline: 2px solid var(--coral); outline-offset: -2px; background:
+  repeating-linear-gradient(0deg, var(--coral) 0 2px, transparent 2px 9px),
+  repeating-linear-gradient(90deg, var(--coral) 0 2px, transparent 2px 9px); }
+.lattice > figure, .lattice > button { background: var(--paper); padding: 3px; }
 .lattice > img, .lattice > button > img { display: block; width: 100%; height: auto; }
 .wave { height: 14px; color: var(--coral); display: block; margin: 0 auto; width: 120px; }
 
@@ -62,6 +63,8 @@ section { padding-block: 56px; }
 .toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
 .toc ul { list-style: none; margin: 0 auto; padding: 10px 0; display: flex; gap: 6px 18px; flex-wrap: wrap; max-width: 1180px; }
+@media (max-width: 700px) { .toc ul { flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; scrollbar-width: none; } }
+section, article { scroll-margin-top: 56px; }
 .toc a { color: var(--ink); text-decoration: none; font-size: 0.86rem; letter-spacing: 0.04em; }
 .toc a:hover { color: var(--coral); }
 
