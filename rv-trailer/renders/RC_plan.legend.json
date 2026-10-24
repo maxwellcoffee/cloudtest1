@@ -1,0 +1,47 @@
+[
+ {
+  "n": 1,
+  "label": "Airstream Flying Cloud, about 26 ft",
+  "phase": 0
+ },
+ {
+  "n": 2,
+  "label": "Black steel ramada, 39 x 23 ft, cedar-slat west end",
+  "phase": 0
+ },
+ {
+  "n": 3,
+  "label": "Cedar deck, 12 x 12 ft",
+  "phase": 3
+ },
+ {
+  "n": 4,
+  "label": "Coral lattice screens",
+  "phase": 3
+ },
+ {
+  "n": 5,
+  "label": "Outdoor shower",
+  "phase": 1
+ },
+ {
+  "n": 6,
+  "label": "1,550-gal water tank + pump",
+  "phase": 2
+ },
+ {
+  "n": 7,
+  "label": "250-gal propane tank",
+  "phase": 2
+ },
+ {
+  "n": 8,
+  "label": "12 kW solar + 20 kWh battery (moves to the house)",
+  "phase": 2
+ },
+ {
+  "n": 9,
+  "label": "Storage shed, 10 x 12 ft",
+  "phase": 1
+ }
+]

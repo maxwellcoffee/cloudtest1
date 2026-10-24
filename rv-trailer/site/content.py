@@ -113,7 +113,7 @@ def looks(img, legend):
   <p>All three use the same spot: a level gravel pad south-east of the house site, the trailer's long side
   east-west with the narrow back end into the west wind, and the door, deck and shade on the south. The house
   framing is going up about 90 ft to the north-west.</p></div>
-  {img('RL_lineup', 'Four kinds of trailer at the same scale: fiberglass double-hull (24 ft), aluminum Airstream (26 ft), new four-season (30 ft), older used (28 ft)', 'span2', w=2400, h=820)}
+  {img('RL_lineup', 'Four kinds of trailer at the same scale: fiberglass double-hull (24 ft), aluminum Airstream (26 ft), new four-season (30 ft), older used (28 ft)', 'span2', w=2400, h=443)}
   {cards}
 </div></section>'''
 

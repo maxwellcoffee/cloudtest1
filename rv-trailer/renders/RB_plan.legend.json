@@ -1,0 +1,47 @@
+[
+ {
+  "n": 1,
+  "label": "New 30-ft four-season travel trailer",
+  "phase": 0
+ },
+ {
+  "n": 2,
+  "label": "Steel RV cover, 24 x 41 ft, 14 ft legs",
+  "phase": 0
+ },
+ {
+  "n": 3,
+  "label": "Freestanding 8 x 12 ft deck",
+  "phase": 3
+ },
+ {
+  "n": 4,
+  "label": "Coral lattice privacy screen",
+  "phase": 3
+ },
+ {
+  "n": 5,
+  "label": "1,550-gal water tank + pump",
+  "phase": 2
+ },
+ {
+  "n": 6,
+  "label": "250-gal propane tank",
+  "phase": 2
+ },
+ {
+  "n": 7,
+  "label": "6 kW ground solar + 10 kWh battery",
+  "phase": 2
+ },
+ {
+  "n": 8,
+  "label": "Temporary power pole + 50 A pedestal",
+  "phase": 2
+ },
+ {
+  "n": 9,
+  "label": "Storage shed, 10 x 12 ft",
+  "phase": 1
+ }
+]

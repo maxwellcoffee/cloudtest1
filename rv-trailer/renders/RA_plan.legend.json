@@ -1,0 +1,47 @@
+[
+ {
+  "n": 1,
+  "label": "Used 28-ft travel trailer (about 2017-2019)",
+  "phase": 0
+ },
+ {
+  "n": 2,
+  "label": "Vinyl skirting (keeps out cold + rodents)",
+  "phase": 0
+ },
+ {
+  "n": 3,
+  "label": "Shade sail on the west + door side",
+  "phase": 0
+ },
+ {
+  "n": 4,
+  "label": "Freestanding 8 x 8 ft deck + steps",
+  "phase": 3
+ },
+ {
+  "n": 5,
+  "label": "1,550-gal water tank + pump",
+  "phase": 2
+ },
+ {
+  "n": 6,
+  "label": "Inverter generator (backup for A/C)",
+  "phase": 2
+ },
+ {
+  "n": 7,
+  "label": "Starter solar: 6 panels + battery",
+  "phase": 2
+ },
+ {
+  "n": 8,
+  "label": "Starlink dish",
+  "phase": 2
+ },
+ {
+  "n": 9,
+  "label": "Storage shed, 10 x 12 ft (no permit if no power)",
+  "phase": 1
+ }
+]
