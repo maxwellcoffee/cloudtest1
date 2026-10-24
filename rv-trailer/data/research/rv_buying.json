@@ -1,0 +1,572 @@
+{
+ "topic": "rv_buying",
+ "summary": "Where and how to buy a trailer to live in on a high-desert lot near Yucca Valley while owner-building, as of 2026-10-24.\n\nTHE SHORT ANSWER: Buy a 20-25 ft travel trailer with real insulation. Buy used if you can, because you will likely resell it after the house is done. Pay cash or take a short loan. Have it inspected by an NRVIA-certified inspector. Have the dealer or a uShip tow-away driver deliver it, since you have no tow vehicle. Insure it on a full-timer or stationary-trailer policy, not a normal travel-trailer policy. This is a good month to buy: Airstream's site already shows 2027 pricing, so dealers are discounting leftover 2026 units.\n\nWHERE TO BUY:\n- Airstream: the Airstream So Cal group, with Airstream Los Angeles at 1212 E Las Tunas Dr, San Gabriel, and Airstream Inland Empire at 27969 Jefferson Ave, Temecula.\n- Closest full-line dealer: Blue Compass RV Palm Desert, 77840 Varner Rd, about 45 mi from Yucca Valley (my estimate). It has new entry trailers listed from $17,690 and used from $21,495.\n- Other dealers: Giant RV (Colton, Downey, Montclair, Murrieta; it also takes consignments of 2015-or-newer RVs), Camping World Riverside, Mike Thompson's RV (Santa Fe Springs, Colton, Fountain Valley, Cathedral City), and in the High Desert I-15 RV, Pop RVs and National Vehicle.\n- Former rental units: Cruise America's LA sales center in Carson sells ex-rental Class C motorhomes and a Coachmen Apex 16 travel trailer. El Monte RV sells ex-rental motorhomes only.\n- Private sale: RV Trader, RVT.com, RVUSA, RV Universe, Airstream Classifieds, Facebook Marketplace, and the Inland Empire, Palm Springs and LA Craigslist sites.\n- Auctions (IAA has RV and trailer categories; GovDeals and GSA for government surplus) are high-risk because units are sold as-is and often have salvage titles.\n\nPRICE TIERS:\n- Used conventional trailer: about $12k-$30k (estimate, anchored on Palm Desert listings).\n- 2027 Airstream starting prices: World Traveler $64,400, Basecamp $69,900, Bambi $75,400, Caravel $92,400, Flying Cloud $115,900.\n- Leftover 2026 discounts seen: a Bambi 16RB at $61,997 against a $74,400 MSRP, and a Flying Cloud 25FB Twin at $94,900 against $114,450.\n- Oliver Legacy Elite II (double-hull fiberglass, rated all-season): from $85,000.\n\nCALIFORNIA RULES:\n- Trailers over 16 ft long or 8 ft wide are 'trailer coaches'. They are registered every year: $76 registration fee, plus a vehicle license fee of 0.65% of value, plus other fees. Trailers 16 ft or shorter use the permanent trailer ID program: $20 once, then $10 every 5 years.\n- Private-party purchases owe use tax, collected by DMV at registration. For trailer coaches the rate follows where the trailer sits: about 7.75% in unincorporated areas such as Joshua Tree, and 8.75% inside the Town of Yucca Valley.\n- The buyer reports the transfer within 10 days. The seller files a release of liability within 5 days.\n- Trailers have no engine, so no smog check.\n\nDELIVERY: uShip averages $3.39/mi for moves under 100 miles and $0.95/mi under 1,000 miles. A move from LA or Temecula is likely about $300-$800 (estimate).\n\nFINANCING: Loans run up to 20 years, but only on large balances. USAA requires $35k for 180 months and $100k for 240 months. Expect 10-20% down and roughly 7.5-8.5% APR. Example: $50k over 15 years at 8.5% is about $492 a month, with about $38.6k total interest.\n\nINSURANCE: You must buy liability separately. Progressive says a normal travel-trailer policy has no liability because the tow vehicle's policy covers it, and you have no tow vehicle. Foremost's agent sheet (6/2020) says it covers full-timer, primary-residence and stationary trailers, with liability that extends to the site and coverage for decks and sheds.\n\nEXTENDED WARRANTIES: Third-party plans cover towables 15 model years old or newer. They are usually poor value for a 2-3 year stay.\n\nRESEARCH LIMITS: My web-search allowance ran out partway through. After that I could only fetch known primary pages, not search. As a result, these rest on fewer sources: insurance premiums, extended-warranty prices, best-month data, dedicated SoCal consignment lots, auction and bank-repo listings, and RV show dates. A follow-up run could fill these in.",
+ "findings": [
+  {
+   "title": "Airstream dealers serving the area: Airstream So Cal group (San Gabriel + Temecula)",
+   "detail": "Airstream Los Angeles is at 1212 East Las Tunas Drive, San Gabriel, in a former auto dealership building with a 14,000 sq ft service department (Trailer Life article reprinted on rv.com, undated). Airstream Inland Empire is at 27969 Jefferson Ave, Temecula, CA 92590 (Bank of America RV dealer-network listing), and Airstream named it a top West touring-coach dealer in 2021. The dealer's own RV Trader and rental copy says it belongs to 'Airstream So Cal', with locations in San Gabriel, Westminster, Midway City and Temecula, CA, plus Las Vegas. That claim is the seller's own copy, and airstreamlosangeles.com blocked automated fetches. Approximate driving distance to Yucca Valley (my estimate, not measured): Temecula about 95 mi, San Gabriel about 125 mi. Use airstream.com's dealer locator to confirm hours and inventory.",
+   "confidence": "medium",
+   "sources": [
+    "https://rv.com/archive/airstream-opens-fifth-la-area-dealership/",
+    "https://dealer-network.bankofamerica.com/rv-dealers/ca/temecula/vehicle-loans-temecula-ca-0122880003.html",
+    "https://dealer-network.bankofamerica.com/rv-dealers/ca/sangabriel/vehicle-loans-san-gabriel-ca-0122880001.html",
+    "https://rv-pro.com/news/airstream-announces-top-2021-dealers/",
+    "https://www.outdoorsy.com/rv-rental/san-gabriel_ca/2019_airstream_sport_56095-listing",
+    "https://www.airstream.com/dealers/"
+   ]
+  },
+  {
+   "title": "Official 2027 Airstream starting prices (the new-trailer budget ceiling)",
+   "detail": "Airstream's travel-trailer page lists these base prices: World Traveler $64,400; Basecamp $69,900; Bambi $75,400; Basecamp Xe $88,900; Caravel $92,400; Flying Cloud $115,900; International $128,900; Trade Wind $134,400; Globetrotter $147,400; Stetson 6666 edition $176,900; Frank Lloyd Wright Usonian edition $189,900; Classic $195,400. The model pages confirm these are 2027 model-year prices.\n- World Traveler: 17-22 ft, 2 floor plans, sleeps 4.\n- Bambi: 16-22 ft, single axle, sleeps 4.\n- Caravel: 16, 20 or 22 ft, single axle, sleeps 5.\n- Flying Cloud: 23-30 ft, 2 axles, 5 floor plans, sleeps 8.\n- Basecamp: 20 ft, sleeps up to 4.\nThe pages do not state insulation values.",
+   "confidence": "high",
+   "sources": [
+    "https://www.airstream.com/travel-trailers/",
+    "https://www.airstream.com/travel-trailers/world-traveler/",
+    "https://www.airstream.com/travel-trailers/bambi/",
+    "https://www.airstream.com/travel-trailers/caravel/",
+    "https://www.airstream.com/travel-trailers/flying-cloud/",
+    "https://www.airstream.com/travel-trailers/basecamp/"
+   ]
+  },
+  {
+   "title": "Leftover 2026 Airstreams are discounted now (model-year changeover)",
+   "detail": "With 2027 pricing live, dealers are listing 2026 units below MSRP:\n- 2026 Bambi 16RB: MSRP $74,400-$76,100 at dealers (RVGuide and AutoTrader show a $63,400 start price). Airstream of DFW lists one at $61,997, which it says is $12,403 off.\n- 2026 Flying Cloud 25FB Twin: Blue Compass lists one at $94,900 against a $114,450 MSRP.\n- 2026 Flying Cloud 25FBT: Campers Inn sale prices are $108,205-$117,995 against a $124,800 MSRP.\nAll prices exclude tax, tags and title. Listings change daily.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.lazydays.com/rvs/tucson-az/travel-trailer/new/2026/airstream-bambi-114323",
+    "https://www.rvguide.com/specs/airstream/travel-trailer/2026/bambi/16rb.html",
+    "https://www.bluecompassrv.com/product/new-2026-airstream-flying-cloud-25fb-twin-3488492-29",
+    "https://www.campersinn.com/product/new-2026-airstream-flying-cloud-25fbt-3443180-29",
+    "https://www.campersinn.com/product/new-2026-airstream-flying-cloud-25fbt-3441904-29"
+   ]
+  },
+  {
+   "title": "Mainstream new/used dealers near Yucca Valley, Inland Empire and High Desert",
+   "detail": "- Blue Compass RV Palm Desert, 77840 Varner Rd (formerly Holland RV Center). The closest full dealer, about 45 mi away (my estimate). Carries Jayco, Forest River, Keystone and Grand Design. Example listings: new 16 ft, 2,705 lb trailer at $17,690 sale (MSRP $24,964, stock T136560); used 26 ft, 4,796 lb trailer at $21,495 (stock UT920440).\n- Giant RV: Colton (1300 E Santo Antonio Dr), Downey (11111 Florence Ave), Montclair (9150 Benson Ave), Murrieta (24700 Madison Ave). Sells new and used travel trailers and fifth wheels, and takes consignments. Brands include Coachmen, Forest River/Rockwood, Alliance, Travel Lite and Winnebago. Phone (909) 473-4151 for financing and service.\n- Camping World Riverside, 10717 Indiana Ave, Riverside 92503, off CA-91; claims 250+ campers. A BBB directory also lists a San Bernardino Camping World with an F rating, but that location is unconfirmed.\n- Mike Thompson's RV: Santa Fe Springs (13940 Firestone Blvd), Colton, Fountain Valley and Cathedral City. Cathedral City is about 35 mi away (my estimate). Mostly press-release sourcing.\n- High Desert (about 70 mi via SR-247, my estimate): I-15 RV in Hesperia (lightweight Forest River and Coachmen towables, per its own June 2026 press release), plus Pop RVs (Victorville) and National Vehicle (Hesperia) used units on aggregators.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.bluecompassrv.com/locations/california/palm-desert/used-rvs-for-sale",
+    "https://www.bluecompassrv.com/locations/california/palm-desert/new-rvs-for-sale",
+    "https://www.rvusa.com/rv-dealers/blue-compass-rv-palm-desert-palm desert-ca-92211-d42183",
+    "https://giantrv.com/",
+    "https://giantrv.com/rv-parts-service/",
+    "https://rv.campingworld.com/dealer/riverside-ca",
+    "https://www.bbb.org/us/ca/santa-fe-springs/profile/rv-dealers/mike-thompsons-rv-superstores-1216-24710",
+    "https://lifestyle.kbew98country.com/story/254853/southern-california-rv-inventory-expanded-at-mike-thompsons-rv-service-parts/",
+    "https://smb.americanpress.com/article/I-15-RV-Expands-2026-Inventory-Across-Southern-California-Locations/6a43e2f3dcc45f000247d214",
+    "https://www.rvusa.com/used-eclipse-rvs-for-sale-in-hinkley-california"
+   ]
+  },
+  {
+   "title": "Consignment: buy owner units through a dealer",
+   "detail": "Giant RV says it accepts consignments, listing travel trailers and fifth wheels, with a 2015-or-newer requirement for working units. Buying a consigned unit means the dealer handles paperwork, financing and DMV, but the owner sets the floor price, so it is negotiable. Consigned trailers may sit on lots with less care and security (Outdoorsy). I could not verify a dedicated consignment-only lot in the Inland Empire or desert, because my search budget ran out. Ask Blue Compass, Giant and Mike Thompson which units on their lots are consigned.",
+   "confidence": "low",
+   "sources": [
+    "https://giantrv.com/",
+    "https://www.outdoorsy.com/blog/understanding-rv-consignment",
+    "https://blog.campersinn.com/blog/options-to-sell-your-rv"
+   ]
+  },
+  {
+   "title": "Buying from rental fleets / rent-to-own",
+   "detail": "- Cruise America sells refurbished ex-rental units. Its used page lists a Coachmen Apex 16 travel trailer plus Thor Majestic and Winnebago Minnie Winnie Class C motorhomes. The only SoCal sales center is Los Angeles (Carson). It advertises 'flybuy' and 'renttobuy' rebates. Prices exclude government fees, taxes, registration and dealer document fees.\n- El Monte RV sells used motorhomes (Class A, B, C) but no travel trailers, from Santa Fe Springs and Dublin, CA. Its 'Try Before You Buy' credits up to $2,000 of a rental toward a pre-owned motorhome. It advertises an annual end-of-season fleet reduction of 30-35%.\n- A self-driving ex-rental Class C solves the no-tow-vehicle problem. But a gas motorhome brings smog and engine upkeep, and is a poorer stationary home than a trailer.\n- Outdoorsy and RVezy hosts in Yucca Valley offer delivered rentals. A short delivered rental can bridge the gap while you shop. I found no formal sales program on those platforms.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.cruiseamerica.com/buy-used-rvs",
+    "https://www.cruiseamerica.com/trip-inspiration/southern-california-rv-dealers",
+    "https://www.elmonterv.com/",
+    "https://clients.automanager.com/024828",
+    "https://www.outdoorsy.com/rv-rental/california/yucca-valley/motorhome"
+   ]
+  },
+  {
+   "title": "Private-sale marketplaces to watch",
+   "detail": "National listing sites: RV Trader (rvtrader.com), RVT.com, RVUSA (rvusa.com), RV Universe (rvuniverse.com), and Airstream Classifieds (airstreamclassifieds.com). Each responds to browsers; they block bots, so I did not verify individual listings.\nLocal: Facebook Marketplace and Craigslist (inlandempire, palmsprings and losangeles sites), plus Airforums (airforums.com) for Airstreams.\nUse the FTC's rules:\n- Get an independent inspection even on certified units.\n- A history report does not replace a mechanical inspection.\n- Get every promise in writing.\nIn California, the purchase price must appear on the title or a bill of sale for DMV use tax.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.rvtrader.com/",
+    "https://www.rvt.com/",
+    "https://www.rvusa.com/",
+    "https://www.airstreamclassifieds.com/",
+    "https://www.craigslist.org/area/inlandempire",
+    "https://www.facebook.com/marketplace/",
+    "https://consumer.ftc.gov/articles/buying-used-car-dealer",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/use-tax/calculating-use-tax-amount/"
+   ]
+  },
+  {
+   "title": "Auctions and bank repos: cheap but highest risk",
+   "detail": "IAA (iaai.com) lists 'Rvs' and 'Trailers' categories and has a 'Public Auctions' section. Many units are insurance salvage. Only its Gov Auctions are described as clean-title. Government surplus sells through GovDeals and GSA Auctions; both sites exist, but I did not verify current trailer listings. For bank and credit-union repos, ask RV lenders (credit unions, Bank of America's dealer network) whether they keep repossessed-unit lists. Expect as-is sales, limited or no inspection, buyer premiums, short pickup deadlines and possible salvage branding. Not recommended for a first trailer you must live in through 100F summers and freezing nights.",
+   "confidence": "low",
+   "sources": [
+    "https://www.iaai.com/",
+    "https://www.govdeals.com/",
+    "https://www.gsaauctions.gov/",
+    "https://www.copart.com/"
+   ]
+  },
+  {
+   "title": "Pre-purchase inspection: NRVIA certified, about $200-$1,200",
+   "detail": "NRVIA certifies inspectors to its Standards of Practice. Its 'Find an RV Inspector' link now redirects to RV Help (rvhelp.com). You can search by ZIP within 100 or 250 miles. NRVIA office: 855-472-9948.\nCosts: a guide gives a typical range of $200-$1,200 and 3-8 hours. Others say quality inspections start around $500. Forum quotes include $500 vs $1,000, and $950 for a large coach. NRVIA-certified inspectors run higher.\nSoCal NRVIA inspectors (from third-party directories; verify membership):\n- Approved RV, Thousand Oaks (LA, Ventura, Santa Barbara, Orange counties), 805-367-1640.\n- Black Diamond RV Inspections, Oceanside (San Diego, south Orange, south Riverside counties; useful for Temecula).\n- Enjoy The Journey Mobile RV Services, Santa Clarita.\n- Full Armor Mobile RV, Moorpark.\nExpect a travel fee for Palm Desert or the High Desert. The FTC says that if a dealer refuses an independent inspection, consider another dealer.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.nrvia.org/",
+    "https://nrvia.org/locate/",
+    "https://camperreport.com/how-much-does-an-rv-inspection-cost/",
+    "https://camperfaqs.com/community/topic/how-much-does-an-rv-inspection-typically-cost",
+    "https://www.homegauge.com/shgi/ApprovedRV",
+    "https://www.homegauge.com/shgi/jdoumak",
+    "https://consumer.ftc.gov/articles/buying-used-car-dealer"
+   ]
+  },
+  {
+   "title": "Water-damage and delamination checks (do these before paying for an inspection)",
+   "detail": "Water intrusion is the top used-RV killer. Wholesale Warranties lists the signs: soft spots, musty odor, bubbling walls, ceiling stains, delamination and mold. Sources are roof, window and plumbing leaks. Soft or warped floors and cabinets mean widespread damage.\nYour own walk-through (standard practice, not from one source):\n- Press the floor at the entry door, bathroom, kitchen sink, front bedroom and wheel wells.\n- Look along the fiberglass sidewalls for waves or bubbles (delamination). Sight down the wall in low-angle light.\n- Check ceiling corners, roof vents, the AC shroud and the front cap for stains.\n- Check under every sink and around the water heater, pump and toilet.\n- Inspect sealant on every roof seam and window. Cracked lap sealant is a big issue under desert UV.\n- Ask the inspector to take moisture-meter readings around every penetration.\n- On Airstreams: look for popped or 'working' rivets, rear floor rot, rear frame rust and belly-pan damage.\nAlso:\n- Read the tire DOT date code (last four digits are week and year). Check for sidewall cracking, brakes and suspension rust.\n- Test every appliance: AC, furnace, fridge on both power sources, water heater, converter and pump.\n- Missing maintenance records are a red flag.",
+   "confidence": "medium",
+   "sources": [
+    "https://wholesalewarranties.com/blog/costly-mistakes-used-rv-buyers-make/",
+    "https://camperreport.com/how-much-does-an-rv-inspection-cost/"
+   ]
+  },
+  {
+   "title": "California DMV class: most living-size trailers are 'trailer coaches' with annual registration",
+   "detail": "A camp trailer (VC 242) is 16 ft or shorter overall, or 8 ft wide or narrower. It uses the Permanent Trailer Identification (PTI) program: $20 original, $10 every 5 years, $7 transfer, $28 paper title.\nLarger travel trailers and fifth wheels are trailer coaches (VC 635, body type CCH). They cannot use PTI and are 'subject to annual registration as usual'. Legal size limits:\n- Bumper-pull trailer coach: 8.5 ft (102 in) wide by 40 ft (480 in) long.\n- Fifth wheel: up to 48 ft, kingpin to rear.\nPark trailers (400 sq ft or less, ANSI A119.5) are also DMV-titled but move only by Caltrans permit. HUD manufactured homes are titled by the state housing department, not DMV.\nRenewal notices for trailer coaches carry a 'situs' address, the county where the trailer is located.",
+   "confidence": "high",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/permanent-trailer-identification-pti/trailers-excluded/",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/miscellaneous-originals/7-015-camp-trailers-vc-%c2%a7242/",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/renewals/trailer-coach-and-vessel-situs/",
+    "https://www.dmv.ca.gov/portal/vehicle-registration/registration-fees/"
+   ]
+  },
+  {
+   "title": "Registration fees and Vehicle License Fee (VLF)",
+   "detail": "DMV fee components:\n- Registration fee: $76.\n- CHP fee: $34.\n- VLF: 0.65% of purchase price or value, declining over 11 renewal years.\n- Transfer fee: $15.\n- Transportation Improvement Fee: $33 under $5k; $66 for $5k-$24,999; $132 for $25k-$34,999; $198 for $35k-$59,999; $231 for $60k and up.\n- County fees vary.\nRevenue and Taxation Code 10751-10752 apply the 0.65% license fee to trailer coaches. The DMV page does not itemize which fees apply to trailer coaches (CHP and TIF applicability unconfirmed), so run the DMV fee calculator with the VIN.\nExample VLF: $20k trailer about $130/yr; $60k about $390/yr.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/vehicle-registration/registration-fees/",
+    "https://california.public.law/codes/revenue_and_taxation_code_section_10752",
+    "https://law.justia.com/codes/california/code-rtc/division-2/part-5/chapter-2/article-1/section-10751"
+   ]
+  },
+  {
+   "title": "Title transfer steps (private party)",
+   "detail": "- The seller signs the California Certificate of Title.\n- The buyer submits it with the transfer fee. DMV says ownership changes must be reported within 10 days.\n- The seller files a Notice of Transfer and Release of Liability within 5 days.\n- A lost title needs REG 227 from the seller.\n- Put the purchase price on the title or a bill of sale. A REG 256 Statement of Facts explains any price discrepancy, otherwise DMV taxes the higher value.\n- Out-of-state or unregistered trailers also need REG 343 (application) and REG 31 (VIN verification). Secondary sources list these.\nIf the trailer has a lien, insist the payoff and lien release happen at the lender or a bank branch before money changes hands.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/vehicle-registration/titles/title-transfers-and-changes/",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/use-tax/calculating-use-tax-amount/",
+    "https://legaltemplates.net/form/bill-of-sale/trailer/california-ca/"
+   ]
+  },
+  {
+   "title": "Sales tax vs use tax, and which rate applies",
+   "detail": "Dealers charge sales tax. Private-party, out-of-state and consigned-without-dealer-tax purchases owe use tax, which DMV usually collects at registration. If DMV is skipped, it must be paid to CDTFA by the end of the month after purchase.\nFor trailer coaches, the DMV handbook says use tax 'is based on the situs county and city', meaning where the trailer is located. CDTFA says the rate is based on the address where you register.\nRates (third-party tables; confirm on CDTFA's address lookup):\n- Town of Yucca Valley: 8.75% (6% state + 0.25% county + 1% city + 1.5% district).\n- Unincorporated areas such as Joshua Tree: 7.75%.\n- ZIP-based tables (92284, 92285, 92268) can mislabel unincorporated parcels.\nThe taxable price for a trailer coach excludes the value of awnings, skirting, carport, patio, in-place location and unattached furnishings. Purchases from parents, children or a spouse are generally exempt.\nExample: $60,000 trailer is $4,650 tax at 7.75% or $5,250 at 8.75%.",
+   "confidence": "medium",
+   "sources": [
+    "https://cdtfa.ca.gov/industry/vehicles-vessels-aircraft/vehicles.htm",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/use-tax/use-tax-basis/",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/use-tax/transactions-subject-to-use-tax/",
+    "https://www.salestaxhandbook.com/california/rates/yucca-valley",
+    "https://www.salestaxhandbook.com/california/rates/joshua-tree"
+   ]
+  },
+  {
+   "title": "Smog: none for trailers; matters only if you buy a motorhome instead",
+   "detail": "Trailers have no engine and are not smog-tested. DMV's smog page puts 'This includes motorcycles and trailers' in its exemption list, though the wording sits next to the 1975-or-older gasoline bullet.\nFor the motorhome alternative:\n- Gas vehicles less than 8 model years old are exempt.\n- Diesels over 14,000 lb GVWR are exempt.\n- Sellers must give the buyer a valid smog certificate on transfer.\n- DMV's partial-biennial-smog ZIP list for San Bernardino County (revised Nov 2011) does not include 92284, 92252 or 92285. Confirm the transfer-smog rule for your ZIP before buying a gas motorhome.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/vehicle-registration/smog-inspections/",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/appendix-1c-partial-biennial-smog-counties-zip-codes/"
+   ]
+  },
+  {
+   "title": "Delivery and setup with no tow vehicle",
+   "detail": "Options:\n1) Negotiate dealer delivery into the deal, in writing, including setup and leveling.\n2) Book a tow-away driver on uShip or a similar marketplace.\n3) Hire a local tow operator.\nuShip's travel-trailer page averages $3.39/mi under 100 miles and $0.95/mi under 1,000 miles. Tow-away is 'often the cheapest' but adds tire wear. You must give dimensions and weight, disclose defects, secure contents and tie down awnings. Recent uShip jobs ran about $441-$5,000.\nCitizenShipper puts travel trailers at $1.50-$3.50/mi and local moves at $150-$300, with insurance adding 5-10%. Its page shows a 2023 update date.\nRental delivery benchmark (El Monte RV): $150 for a 30-mile round trip, $5/mi beyond, and $175 campsite setup.\nYucca Valley towing: Becks MC Tow on 29 Palms Hwy exists, but whether it moves RVs is unverified.\nEstimated deliveries (my estimate): Palm Desert $150-$400; Colton, Riverside or Hesperia $250-$600; Temecula or San Gabriel $300-$800.\nConfirm the access road and turnaround on the lot can take a 25-30 ft trailer plus truck.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.uship.com/trailer-transport",
+    "https://citizenshipper.com/blog/rv-transport-cost/",
+    "https://www.amerifreight.net/blog/rv-shipping-costs-what-to-expect",
+    "https://www.elmonterv.com/rv-delivery",
+    "https://www.jaycoowners.com/threads/typical-dealer-destination-charges.470613/latest"
+   ]
+  },
+  {
+   "title": "RV financing terms (2026)",
+   "detail": "- USAA: $5k minimum; 36-72 months from $5k; 84-120 months from $10k; 180 months from $35k; 240 months from $100k; $500k maximum. Its payment example uses 8.50% APR over 180 months.\n- Navy Federal: terms 12-180 months; $25k minimum for 61-84 months and $30k for over 84 months. 'As low as' 7.45% APR as of April 7, 2026, per search snippet; page blocked to fetch.\n- First Horizon: $10k minimum; up to 240 months on $100k or more.\n- Bank of America via Airstream: terms up to 20 years, simple interest, no prepayment penalty, apply through the dealer. Its calculator example uses 8.5% APR.\n- Typical lender asks: 660+ credit score, 10-20% down. Bish's dealer examples use 10% down under $9,999 and 20% above.\nPayment examples (8.5%): $25k over 10 years is $310/mo ($12.2k interest); $50k over 15 years is $492/mo ($38.6k interest); $48k over 7 years is $760/mo ($15.9k interest).\nFor a 2-3 year temporary home you will resell, long terms create negative equity. Prefer cash or the shortest term you can carry.",
+   "confidence": "medium",
+   "sources": [
+    "https://mobile.usaa.com/banking/loans/rv/",
+    "https://www.navyfederal.org/loans-cards/auto-loans/rv-loans.html",
+    "https://www.firsthorizon.com/Personal/Products-and-Services/Borrowing/RV-Loans",
+    "https://www.airstream.com/financial-services/",
+    "https://joingerald.com/learn/debt--credit/finding-best-rv-loan-rates-2026",
+    "https://www.bishs.com/product/new-2026-coachmen-rv-apex-246barv-3311447-29"
+   ]
+  },
+  {
+   "title": "Insurance: you need full-timer / stationary-trailer liability",
+   "detail": "- Progressive defines full-timer as living in a motorhome or travel trailer more than 6 months a year. The add-on covers personal liability while parked, guest medical payments, and RV-association loss assessment up to $5,000.\n- Progressive also notes liability is not included on travel-trailer policies because the tow vehicle's liability extends to the trailer. You have no tow vehicle, so buy separate liability.\n- USAA says an auto policy won't cover a trailer used as a permanent residence.\n- Foremost's agent sheet (6/2020) covers Full-Timer, Primary Residence and Stationary Travel Trailers, in or out of parks. It adds liability 'similar to a Homeowners policy' that extends to the site, additional living expense, adjacent structures (sheds, decks, carports), replacement-cost personal property and a diminishing deductible. Confirm it still writes this in California.\n- Describe the use honestly ('parked on our lot as a temporary residence during owner-build'). Misdescribing it risks a denied claim.\n- The house under construction needs separate builder's risk coverage.\nI found no verified premiums.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.progressive.com/rv/rv-insurance-coverages-full-timers/",
+    "https://www.progressive.com/answers/full-time-rv-insurance/",
+    "https://usaa.com/insurance/vehicles/travel-trailer",
+    "https://www.foremostagent.com/assets/marketing/AgentMarketingMaterials/Casualty/pdf/Full-Timer-Travel-Trailer-Selling-Sheet.pdf",
+    "https://www.forestriverforums.com/threads/insurance.269915/"
+   ]
+  },
+  {
+   "title": "Extended warranties: optional, buy third-party later if at all",
+   "detail": "Wholesale Warranties covers towables 15 model years old or newer. It offers Exclusionary plans (all mechanical except listed exclusions) and Comprehensive plans (listed components such as AC, water system, fridge and electrical). It publishes no prices; one customer review cites a $5,379 'Gold plan' (unverified). Its quote form asks whether you are a full-timer and whether you bought private-party, dealer or consignment.\nDealer plans are sold only at signing and may carry hidden commissions and repair-shop limits. Third-party plans can be bought later. Coverage gets more expensive once the factory warranty lapses and the model year rolls.\nFor a 2-3 year stationary home, a warranty is usually low value. Keep a repair fund instead, or buy only if purchasing new and keeping it.",
+   "confidence": "medium",
+   "sources": [
+    "https://wholesalewarranties.com/rv-warranty/travel-trailer-or-5th-wheel/",
+    "https://wholesalewarranties.com/blog/cost-of-rv-warranty/",
+    "https://wholesalewarranties.com/blog/dealer-vs-third-party-rv-warranties/",
+    "https://wholesalewarranties.com/blog/should-i-wait-to-buy/"
+   ]
+  },
+  {
+   "title": "Best time to buy: now through winter (model-year changeover)",
+   "detail": "Airstream's site already shows 2027 model-year pricing, and dealers are discounting leftover 2026 units by roughly $12k-$20k on some Bambi and Flying Cloud listings. El Monte RV runs an annual end-of-season fleet reduction of 30-35% of its fleet to make room for next year's models. Wholesale Warranties notes prices step up with each new model year.\nGeneral industry advice is that October-February is the off-season with the best leverage (not independently sourced in this run).\nDesert-specific (my reasoning, low confidence): Coachella Valley demand rises with winter snowbirds, while summer heat suppresses private-party showings. Private-party deals may be best in July-September, dealer leftovers in October-January.\nAlso watch the Fairplex (Pomona) RV show schedule; I could not verify dates.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.airstream.com/travel-trailers/",
+    "https://clients.automanager.com/024828",
+    "https://wholesalewarranties.com/blog/should-i-wait-to-buy/",
+    "https://www.bluecompassrv.com/product/new-2026-airstream-flying-cloud-25fb-twin-3488492-29"
+   ]
+  },
+  {
+   "title": "New California CARS Act (effective Oct 1, 2026): ask if it applies to your trailer",
+   "detail": "From Oct 1, 2026, licensed CA dealers selling light-duty vehicles under 10,000 lb must:\n- Disclose the total price in ads and in their first written communication.\n- State that add-ons are optional, verbally and in writing.\n- Not sell 'valueless' add-ons.\n- Give an automatic 3-business-day cancellation right on used vehicles priced at $50,000 or less (mileage and condition limits apply).\nThe DMV summary does not say whether trailer coaches are covered. Ask the dealer in writing whether the CARS Act cancellation right applies, and ask for an itemized out-the-door price either way.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/new-vehicles-sold-by-california-dealers/key-dealer-requirements-under-the-cars-act/"
+   ]
+  },
+  {
+   "title": "Desert-fit trailer types to shortlist (insulation and build)",
+   "detail": "- Oliver Legacy Elite II: from $85,000; 24 ft; about 4,900 lb dry; 7,000 lb GVWR. Insulated double-hull fiberglass shell 'rated for all-season camping', plumbing enclosed between the shells with heat, dual-pane windows, ducted LP furnace. Built in Tennessee and sold factory-direct.\n- Lance travel trailers: 1475 to 2565, 14'10\" to 25'6\" floor length, 2,905-6,400 lb dry; no prices online. Lance's 'Four Seasons' package ducts heat to individually insulated tanks and adds dual-pane acrylic windows and insulated hatch covers. Lance says it is standard on all but its lightweight 650 model.\n- Outdoors RV (La Grande, OR): Creekside 19-22 ft and Timber Ridge 22-28 ft (6,000-7,750 lb dry), marketed for four seasons. Insulation claims were not on the fetched page.\n- Airstream: aluminum monocoque with no rubber roof membrane to fail under UV. Insulation specs were not stated on the model pages.\nFor 100F+ summers, look for dual-pane windows, a high-SEER or heat-pump AC (two ACs need 50A service), heated or enclosed tanks for freezing nights, and a white or aluminum roof.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.olivertraveltrailers.com/legacy-elite-ii/",
+    "https://www.lancecamper.com/travel-trailers",
+    "https://www.lancecamper.com/four-seasons",
+    "https://outdoorsrvmfg.com/",
+    "https://www.airstream.com/travel-trailers/"
+   ]
+  },
+  {
+   "title": "Questions to ask sellers (dealer and private)",
+   "detail": "Title and money:\n- Is the title in your name, in hand, and lien-free? If there's a lien, can we close at your lender's branch?\n- What is the out-the-door price itemized: doc fee, prep, delivery, add-ons, tax, DMV?\n- Will you deliver to Yucca Valley and level it? Cost in writing?\nCondition and history:\n- Any water leaks, roof repairs, delamination or floor repairs, ever? Can I see receipts?\n- When was roof and window sealant last redone?\n- How has it been stored: covered, indoor, desert sun?\n- Has it been lived in full-time? Any pets or smoking?\n- Tire DOT dates? Brake and bearing service date?\n- Any open recalls (VIN)?\n- Has it been winterized? Any freeze damage? Any rodent issues or chewed wiring?\nSystems and fit:\n- Which systems don't work or have been replaced: AC, furnace, fridge, water heater, converter, inverter, solar, batteries?\n- 30A or 50A service? How many ACs? Tank sizes? Dry weight and GVWR? Exact length and width (decides PTI vs trailer coach)?\nInspection and sale terms:\n- Will you allow an NRVIA inspection with a moisture meter on site, and hook it to water and power for testing?\n- Is it sold as-is, or with any warranty? Does the CARS Act 3-day cancellation apply?\n- Was this a rental or consignment unit?",
+   "confidence": "high",
+   "sources": [
+    "https://consumer.ftc.gov/articles/buying-used-car-dealer",
+    "https://wholesalewarranties.com/blog/costly-mistakes-used-rv-buyers-make/",
+    "https://www.dmv.ca.gov/portal/vehicle-registration/titles/title-transfers-and-changes/"
+   ]
+  }
+ ],
+ "products": [
+  {
+   "name": "2027 Airstream World Traveler (17-22 ft, sleeps 4)",
+   "category": "new travel trailer (entry Airstream)",
+   "condition": "new",
+   "price_low": 64400,
+   "price_high": 64400,
+   "specs": "Starting price; 2 floor plans; 17-22 ft; sleeps 4; optional solar/lithium. UVW, GVWR and tanks not on overview page.",
+   "source": "https://www.airstream.com/travel-trailers/world-traveler/",
+   "why": "Lowest-cost new Airstream. Iconic aluminum look fits the black-and-white desert aesthetic."
+  },
+  {
+   "name": "2027 Airstream Basecamp (20 ft)",
+   "category": "new travel trailer",
+   "condition": "new",
+   "price_low": 69900,
+   "price_high": 88900,
+   "specs": "Basecamp $69,900; Basecamp Xe $88,900; 20 ft; sleeps up to 4; lift kit option.",
+   "source": "https://www.airstream.com/travel-trailers/",
+   "why": "Compact and rugged. Small for two people living in it for 1-2 years."
+  },
+  {
+   "name": "2027 Airstream Bambi (16-22 ft, single axle)",
+   "category": "new travel trailer",
+   "condition": "new",
+   "price_low": 75400,
+   "price_high": 75400,
+   "specs": "Starting price; 3 floor plans; 16-22 ft; 1 axle; sleeps 4.",
+   "source": "https://www.airstream.com/travel-trailers/bambi/",
+   "why": "The 20-22 ft plans are a workable couple's home with strong resale."
+  },
+  {
+   "name": "2026 Airstream Bambi 16RB (leftover model year)",
+   "category": "new travel trailer (discounted)",
+   "condition": "new",
+   "price_low": 61997,
+   "price_high": 76100,
+   "specs": "16 ft rear bath. Dealer MSRP $74,400-$76,100; Airstream of DFW listing $61,997; RVGuide start price $63,400. Excludes tax, tags, title.",
+   "source": "https://www.lazydays.com/rvs/tucson-az/travel-trailer/new/2026/airstream-bambi-114323",
+   "why": "Shows how much leftover 2026 units are discounted now. Ask Airstream So Cal for the same."
+  },
+  {
+   "name": "2027 Airstream Caravel (16/20/22 ft)",
+   "category": "new travel trailer",
+   "condition": "new",
+   "price_low": 92400,
+   "price_high": 92400,
+   "specs": "Starting price; 3 floor plans; single axle; sleeps 5.",
+   "source": "https://www.airstream.com/travel-trailers/caravel/",
+   "why": "Best Airstream size-to-livability for a couple in 20-22 ft."
+  },
+  {
+   "name": "2027 Airstream Flying Cloud (23-30 ft)",
+   "category": "new travel trailer",
+   "condition": "new",
+   "price_low": 115900,
+   "price_high": 115900,
+   "specs": "Starting price; 5 floor plans; 2 axles; sleeps 8.",
+   "source": "https://www.airstream.com/travel-trailers/flying-cloud/",
+   "why": "Most comfortable Airstream for long-term living. Holds value for resale after the house is done."
+  },
+  {
+   "name": "2026 Airstream Flying Cloud 25FB / 25FB Twin (dealer leftovers)",
+   "category": "new travel trailer (discounted)",
+   "condition": "new",
+   "price_low": 94900,
+   "price_high": 142050,
+   "specs": "25 ft front bedroom. MSRPs $114,450-$142,050; Blue Compass sale $94,900 against a $114,450 MSRP; Campers Inn 25FBT $108,205-$117,995 against $124,800.",
+   "source": "https://www.bluecompassrv.com/product/new-2026-airstream-flying-cloud-25fb-twin-3488492-29",
+   "why": "About 17% off MSRP on some units during the changeover."
+  },
+  {
+   "name": "Oliver Legacy Elite II",
+   "category": "new travel trailer (four-season fiberglass)",
+   "condition": "new",
+   "price_low": 85000,
+   "price_high": 85000,
+   "specs": "From $85,000; 24 ft; about 4,900 lb dry; 7,000 lb GVWR; insulated double-hull fiberglass; plumbing heated between shells; dual-pane windows; ducted LP furnace.",
+   "source": "https://www.olivertraveltrailers.com/legacy-elite-ii/",
+   "why": "Best-insulated small trailer found, for 100F days and freezing nights. A clean white shell fits the high-key photo style."
+  },
+  {
+   "name": "Blue Compass RV Palm Desert, new 16 ft entry trailer (stock T136560)",
+   "category": "new travel trailer (budget)",
+   "condition": "new",
+   "price_low": 17690,
+   "price_high": 24964,
+   "specs": "16 ft; 2,705 lb; sleeps 3; sale $17,690 against $24,964 MSRP (listing snapshot; changes often).",
+   "source": "https://www.bluecompassrv.com/locations/california/palm-desert/new-rvs-for-sale",
+   "why": "Closest dealer to the lot. Shows the cheapest new tier, but a thin-wall, single-pane budget trailer will struggle in desert extremes."
+  },
+  {
+   "name": "Blue Compass RV Palm Desert, used 26 ft travel trailer (stock UT920440)",
+   "category": "used travel trailer (budget)",
+   "condition": "used",
+   "price_low": 21495,
+   "price_high": 21495,
+   "specs": "26 ft; 4,796 lb; sleeps 4 (listing snapshot).",
+   "source": "https://www.bluecompassrv.com/locations/california/palm-desert/used-rvs-for-sale",
+   "why": "Typical used conventional price point. Have it inspected for water damage before buying."
+  },
+  {
+   "name": "NRVIA-certified pre-purchase inspection",
+   "category": "service",
+   "condition": "either",
+   "price_low": 200,
+   "price_high": 1200,
+   "specs": "3-8 hours; roof, seals, electrical, plumbing, LP, appliances, tires, frame. Quality inspections often start around $500, plus a possible travel fee to the desert.",
+   "source": "https://camperreport.com/how-much-does-an-rv-inspection-cost/",
+   "why": "The single best protection against hidden water damage."
+  },
+  {
+   "name": "uShip tow-away trailer transport (marketplace)",
+   "category": "service",
+   "condition": "either",
+   "price_low": 150,
+   "price_high": 800,
+   "specs": "Average $3.39/mi under 100 mi and $0.95/mi under 1,000 mi. The $150-$800 range is my estimate for 40-150 mi SoCal moves to Yucca Valley.",
+   "source": "https://www.uship.com/trailer-transport",
+   "why": "Gets the trailer to the lot without owning a tow truck."
+  }
+ ],
+ "design_numbers": [
+  "Camp trailer (PTI program): 16 ft (192 in) or shorter overall, or 8 ft (96 in) wide or narrower. Fees: $20 original, $10 every 5 years, $7 transfer, $28 paper title.",
+  "Trailer coach (annual registration): bumper-pull max 8.5 ft (102 in) wide by 40 ft (480 in) long. Fifth wheel max 48 ft, kingpin to rear.",
+  "Park trailer: 400 sq ft or less, 14 ft max width, ANSI A119.5, moved by Caltrans permit only.",
+  "CA registration: $76 registration fee; $34 CHP fee; $15 transfer fee; VLF 0.65% of price/value, declining over 11 years.",
+  "Transportation Improvement Fee tiers: $33 / $66 / $132 / $198 / $231 at $0-4,999 / $5k-24,999 / $25k-34,999 / $35k-59,999 / $60k and up.",
+  "Sales/use tax: about 7.75% unincorporated San Bernardino County (Joshua Tree); about 8.75% inside the Town of Yucca Valley. Trailer coach use tax follows situs (where the trailer is located).",
+  "Deadlines: buyer reports the transfer to DMV within 10 days; seller files the release of liability within 5 days; use tax not paid via DMV is due to CDTFA by the end of the month after purchase.",
+  "Transport: uShip average $3.39/mi under 100 mi and $0.95/mi under 1,000 mi. El Monte rental delivery benchmark: $150 base (30-mi round trip) + $5/mi + $175 setup.",
+  "Approximate one-way drive to Yucca Valley (my estimate, not measured): Cathedral City 35 mi; Palm Desert 45 mi; Colton 65 mi; Hesperia 70 mi; Riverside 75 mi; Temecula 95 mi; San Gabriel 125 mi; Carson 150 mi.",
+  "Loan minimums by term: USAA 36-72 mo from $5k; 84-120 mo from $10k; 180 mo from $35k; 240 mo from $100k. Navy Federal $25k for 61-84 mo, $30k for over 84 mo, max 180 mo.",
+  "Payments at 8.5% APR: $25k over 120 mo is about $310/mo; $50k over 180 mo about $492/mo ($38.6k interest); $80k over 240 mo about $694/mo ($86.6k interest).",
+  "Full-timer insurance threshold (Progressive): living in the RV more than 6 months a year. Loss assessment up to $5,000.",
+  "Third-party extended warranty eligibility: towables 15 model years old or newer (Wholesale Warranties).",
+  "Oliver Legacy Elite II: 24 ft long; about 4,900 lb dry; 7,000 lb GVWR.",
+  "Lance trailers: 1475 (14'10\", 2,905 lb) to 2465 (24'11\", 6,400 lb) floor length and dry weight.",
+  "Airstream lengths: World Traveler 17-22 ft; Bambi 16-22 ft; Caravel 16/20/22 ft; Basecamp 20 ft; Flying Cloud 23-30 ft.",
+  "RV shore power (industry standard, not from this run's sources): 30A = 120V TT-30, about 3.6 kW; 50A = 120/240V NEMA 14-50, about 12 kW. Two rooftop ACs generally need 50A.",
+  "Inspection takes about 3-8 hours and costs $200-$1,200."
+ ],
+ "costs": [
+  {
+   "item": "Trailer, used conventional (budget tier)",
+   "low_usd": 12000,
+   "high_usd": 30000,
+   "notes": "Estimate. Anchored on a Blue Compass Palm Desert used 26 ft at $21,495 and a new 16 ft at $17,690. Budget units usually have single-pane windows and thin walls."
+  },
+  {
+   "item": "Trailer, new mid-tier or four-season (Oliver, Lance, Outdoors RV class)",
+   "low_usd": 45000,
+   "high_usd": 90000,
+   "notes": "Estimate. Oliver Legacy Elite II is verified at $85,000. Lance and Outdoors RV prices were not published on the fetched pages."
+  },
+  {
+   "item": "Trailer, new Airstream 20-25 ft",
+   "low_usd": 62000,
+   "high_usd": 125000,
+   "notes": "2027 starting prices: World Traveler $64,400, Bambi $75,400, Caravel $92,400, Flying Cloud $115,900. Leftover 2026 units seen at $61,997 (Bambi 16RB) and $94,900 (Flying Cloud 25FB Twin)."
+  },
+  {
+   "item": "Trailer, used Airstream 20-25 ft",
+   "low_usd": 35000,
+   "high_usd": 85000,
+   "notes": "Unverified estimate; listing sites blocked automated fetches. Check Airstream Classifieds and RV Trader before budgeting."
+  },
+  {
+   "item": "Sales or use tax",
+   "low_usd": 930,
+   "high_usd": 10900,
+   "notes": "7.75%-8.75% of price. Examples: $12k at 7.75% = $930; $60k = $4,650 (7.75%) or $5,250 (8.75%); $125k at 8.75% = $10,938."
+  },
+  {
+   "item": "DMV first-year registration + VLF + TIF + transfer (trailer coach)",
+   "low_usd": 250,
+   "high_usd": 1200,
+   "notes": "$76 registration + 0.65% VLF + $15 transfer + TIF ($33-$231) + possibly $34 CHP + county fees. Use the DMV fee calculator."
+  },
+  {
+   "item": "NRVIA pre-purchase inspection (plus travel fee)",
+   "low_usd": 300,
+   "high_usd": 1200,
+   "notes": "Published ranges $200-$1,200; quality inspections often $500 or more. Desert travel may add a fee (estimate)."
+  },
+  {
+   "item": "Delivery to the lot (tow-away or dealer)",
+   "low_usd": 150,
+   "high_usd": 800,
+   "notes": "Estimate from uShip averages ($3.39/mi under 100 mi; $0.95/mi under 1,000 mi) and CitizenShipper local moves ($150-$300). Ask dealers to include it."
+  },
+  {
+   "item": "On-site setup (leveling, hookups, system check)",
+   "low_usd": 175,
+   "high_usd": 500,
+   "notes": "$175 is El Monte's rental campsite-setup fee. The upper end is my estimate for a mobile RV tech."
+  },
+  {
+   "item": "Full-timer / stationary trailer insurance per year",
+   "low_usd": 500,
+   "high_usd": 2000,
+   "notes": "Unverified rough estimate; no premiums found. Get quotes from Foremost, Progressive, National General/Good Sam and an independent agent."
+  },
+  {
+   "item": "Third-party extended warranty (optional)",
+   "low_usd": 1500,
+   "high_usd": 5500,
+   "notes": "Unverified. Providers don't publish prices; one review cites a $5,379 plan. Usually skip for a 2-3 year stationary use."
+  },
+  {
+   "item": "Loan interest, if financing $50k at 8.5% for 15 years",
+   "low_usd": 33000,
+   "high_usd": 38700,
+   "notes": "$462/mo at 7.45% to $492/mo at 8.5% (my calculation). A shorter term or cash avoids this."
+  }
+ ],
+ "risks": [
+  {
+   "risk": "Hidden water damage or delamination in a used trailer: rot, mold, failing walls",
+   "severity": "high",
+   "mitigation": "Do your own walk-through, then an NRVIA inspection with moisture-meter readings. Walk away from soft floors, wall waves, stains or musty odor. Make the sale contingent on the inspection."
+  },
+  {
+   "risk": "Private-sale and online scams: fake listings, 'escrow' or shipping schemes, title not in seller's name, undisclosed liens",
+   "severity": "high",
+   "mitigation": "See the trailer in person. Match the VIN on the trailer to the title and the seller's ID. Close at a bank or DMV-registration service. Never wire money or use gift cards. Get lien payoff and release done at the lender."
+  },
+  {
+   "risk": "Insurance gap: travel-trailer policies have no liability because the tow vehicle's policy covers it, and you have no tow vehicle. Auto policies exclude permanent-residence use.",
+   "severity": "high",
+   "mitigation": "Buy a full-timer or stationary-trailer policy with personal liability before delivery. Describe the use truthfully. Add builder's risk separately for the house."
+  },
+  {
+   "risk": "A budget trailer can't handle 100F+ summers, freezing nights and dust: AC overwhelmed, frozen lines, UV-cracked sealant",
+   "severity": "high",
+   "mitigation": "Prioritize dual-pane windows, heated or enclosed tanks, good insulation, 50A with two ACs or a heat pump, and an aluminum or white roof. Shade the trailer and skirt it."
+  },
+  {
+   "risk": "Auction or salvage units: as-is, no inspection, salvage title complications",
+   "severity": "medium",
+   "mitigation": "Avoid auctions for the primary home. If you bid, buy only clean-title units you can inspect, and budget for repairs and DMV salvage steps."
+  },
+  {
+   "risk": "Negative equity from a long RV loan on a trailer you plan to sell in 2-3 years",
+   "severity": "medium",
+   "mitigation": "Pay cash or use the shortest term you can afford. Choose a brand with strong resale (e.g., Airstream). Buy used to avoid first-year depreciation."
+  },
+  {
+   "risk": "Delivery problems: dirt access, soft sand, no turnaround, high winds on delivery day",
+   "severity": "medium",
+   "mitigation": "Walk the access route with the driver beforehand. Grade a pad and turnaround. Schedule outside spring wind events. Confirm the transporter's insurance."
+  },
+  {
+   "risk": "Dealer add-ons and fees inflating the price; uncertainty whether the new CARS Act protections cover trailers",
+   "severity": "medium",
+   "mitigation": "Get an itemized out-the-door price in writing. Decline add-ons. Ask in writing whether the CARS Act 3-day cancellation applies."
+  },
+  {
+   "risk": "Wrong sales/use tax rate: town vs unincorporated situs",
+   "severity": "low",
+   "mitigation": "Look up the parcel's exact address on CDTFA's rate lookup. Make sure the DMV situs address matches where the trailer sits."
+  },
+  {
+   "risk": "Ex-rental units have heavy wear; El Monte sells only motorhomes, which bring engine and smog upkeep",
+   "severity": "low",
+   "mitigation": "Inspect ex-rental units like any used unit. Prefer a trailer over a motorhome for stationary living."
+  },
+  {
+   "risk": "Research gaps: web-search budget ran out (insurance premiums, warranty prices, consignment lots, auction listings, show dates)",
+   "severity": "low",
+   "mitigation": "Run a follow-up search pass on these items before final budgeting."
+  }
+ ],
+ "next_actions": [
+  "@computer: Decide your must-haves (length 20-25 ft, dual-pane windows, heated tanks, 50A/2 ACs, rear or front bedroom, budget cap) and set saved alerts on RV Trader, RVT.com, Airstream Classifieds, Facebook Marketplace and the Inland Empire and Palm Springs Craigslist sites.",
+  "@computer: Look up the lot's exact address on CDTFA's tax-rate lookup (7.75% vs 8.75%), and run the DMV fee calculator for one sample trailer VIN.",
+  "@phone: Call Airstream So Cal (San Gabriel and Temecula). Ask for leftover 2026 Bambi, Caravel and Flying Cloud units, out-the-door prices with delivery to Yucca Valley, and whether the CARS Act 3-day cancellation applies.",
+  "@phone: Call Blue Compass Palm Desert and Giant RV Colton. Ask for used 20-26 ft trailers 2016 or newer with dual-pane windows, and which units are consignment.",
+  "@phone: Get 2-3 insurance quotes for a 'stationary travel trailer used as a temporary residence on our own land during construction' (Foremost via an independent agent, Progressive full-timer, National General/Good Sam).",
+  "@computer: Get a pre-approval or rate quote (credit union, USAA if eligible, Navy Federal if eligible) only if you are financing. Compare a 5-7 year term with cash.",
+  "@computer: Find 2 NRVIA inspectors on rvhelp.com (ZIP 92284, 250-mi radius). Get quotes including the travel fee to Palm Desert, Temecula or the High Desert.",
+  "@errands: Visit the Palm Desert dealer on a weekday to walk through 3-4 floor plans and test how livable each feels. Take photos for your style board.",
+  "@computer: Request uShip quotes from each likely pickup city to the lot, and ask dealers to match or include delivery.",
+  "@site: Confirm a truck plus 25-30 ft trailer can reach and turn around on the lot. Flag a level pad location, then coordinate with the County temporary-occupancy permit requirements (septic, power, water).",
+  "@anywhere: When you find a unit, send the seller questions, schedule the inspection, and make the offer contingent on the inspection and a clear title.",
+  "@errands: At closing, get the signed title (and lien release if needed), a bill of sale with price, and a receipt. Register at DMV within 10 days and confirm the seller filed the release of liability within 5 days.",
+  "@waiting: Confirm the insurance policy is bound before the delivery date. Track the dealer delivery appointment.",
+  "@calendar: Set a reminder for annual trailer-coach registration renewal, and one at house completion to decide whether to sell the trailer or keep it as a guest unit."
+ ],
+ "design_ideas": [
+  "Hero option, a polished-aluminum Airstream (Caravel 22 or Flying Cloud 25): it reads as a bright, reflective object in high-key black-and-white desert photos, and the aluminum shell doesn't rely on a UV-sensitive rubber roof.",
+  "Clean-white option, an Oliver Legacy Elite II: a seamless white fiberglass shell, black window frames and black wheels give a crisp graphic silhouette against pale sand, and it is the best-insulated choice for 100F days and freezing nights.",
+  "Skirting: removable panels in a coral (#ec4639) changsal/key-fret lattice around the base. It hides tanks and hoses, cuts wind and dust under the trailer, keeps pack rats out with mesh behind, and photographs as the brand ornament. Keep it on its own frame so it never touches the trailer.",
+  "Entry deck: a low black-stained wood deck at the door with a coral lattice privacy screen on the west side, plus a shade sail or slatted ramada over the trailer's sunny side to cut AC load.",
+  "Interior softening: blush pink (#f2d1d1) and peach (#fec6b4) bedding, cushions and curtains against white walls. Swap the factory valances for simple flat panels. Black hardware and black serif type on small signage, such as a house-number plate on the lattice.",
+  "Removable key-fret vinyl band in coral along the belt line or on the front stone guard. Use removable vinyl so it doesn't affect resale or the warranty.",
+  "Siting for photos and comfort: long axis roughly east-west, the main window side facing north or toward the best view, the door away from prevailing spring winds, and the trailer set off from the future house pad so construction can proceed.",
+  "Night look: warm, low-glare string or sconce lighting under the shade structure with coral lattice shadows on the sand. It suits the dark-sky desert setting and the brand photography."
+ ]
+}

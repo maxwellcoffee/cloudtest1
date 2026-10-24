@@ -1,0 +1,460 @@
+{
+ "topic": "korean_program",
+ "summary": "Scope note first: the user's request for this run asks for an RV trailer project (where to get the trailer, what it could look like, new and used budgets). This worker was assigned the Korean backyard spa program. The session task list shows a spa track alongside the RV track, so I did the spa research. It is mostly separate from the trailer question. The only links are a trailer-phase build-out order and the 120 V options described below. The orchestrator should check that this section belongs in the RV deliverable.\n\nPROGRAM (2 people plus guests): use a roofed gazebo about 16 x 24 ft in three 8 x 16 ft bays.\n- Bay 1 (WASH/SCRUB) is a drained wet bay. It has 2 seated wash stations and a 30 x 76 in scrub table.\n- Bay 2 (SOAK) holds one 2\u20133 person hot tub. Candidate tubs are about 6 x 6 ft (Hot Spring TX, 6'x6'x29\") or 76 x 66 x 32 in (Jacuzzi J-215, 220 gal).\n- Bay 3 (REST) is the dry, warm \"ondol\" bay. It has a 7 x 8 ft heated platform, plants, the robe and shoe bench, and a sikhye/egg station.\n- Outside the roof, 8\u201312 ft away, sit a cedar sauna and the cold plunge. Sauna options are a barrel (Almost Heaven Watoga, 78x59 in, 6 kW, about $6.2k list) or a 7x7 ft interior cabin (Dundalk Georgian, 8 kW, $7,998 sale). The cabin's 83.75 in back bench is long enough to lie on, which suits the Korean habit of lying in heat. The cold plunge (Ice Barrel 500 tub, or a chilled Plunge) or a cold shower goes on a shaded pad between the sauna door and the gazebo.\n\nSEQUENCE (about 2\u20132.5 h):\n1. Shoes off and hair tied up.\n2. Full seated wash.\n3. Soak 10\u201315 min at 38\u201340 \u00b0C / 100\u2013104 \u00b0F.\n4. 2\u20133 rounds of sauna (80\u201390 \u00b0C, 8\u201312 min), then cold (14\u201318 \u00b0C, 30 s\u20132 min, head out of the water), then rest 10\u201315 min with water.\n5. Once a week only: partner scrub with an Italy towel after a soak, then rinse.\n6. Final rest with sikhye and baked eggs.\n\nKorean bathhouse norms put the hot tub (ontang) at 41\u201343 \u00b0C and the cold tub (naengtang) at 14\u201318 \u00b0C. A home tub should be capped at the US CPSC limit of 104 \u00b0F / 40 \u00b0C. The heat dose follows the Mayo Clinic Proceedings review (80\u2013100 \u00b0C, 10\u201320% relative humidity, 5\u201320 min) and Harvard Health (15\u201320 min maximum, 2\u20134 glasses of water afterwards). Korean press advice for kiln saunas is 10 minutes or less per round and about 30 minutes total.\n\nDesert adjustments:\n- In summer, run the tub as a \"warm tub\" at 36\u201338 \u00b0C, use the spa at dawn or night, and plan on a chiller for the cold plunge from May to October.\n- In winter, ambient cold water does the job.\n- Dust and wind call for a strapped ASTM F1346 cover.\n\nCode numbers from a 2023 NEC handout:\n- Disconnect at least 5 ft from the tub and within sight.\n- Receptacle 6\u201320 ft from the tub, GFCI protected.\n- No new light fixture within 5 ft horizontally of the tub unless it is 12 ft or more above the water. This matters under a gazebo roof.\n\nCalifornia HSC 115922 requires 2 of 7 drowning-prevention features; an F1346 cover counts as one.\n\nGaps: the web-search budget for this turn ran out. I could not check CDC water-chemistry values or hot-tub behavior in summer heat, and I found no published Korean scrub-table or bath-stool dimensions. Those sizes below are estimates based on US spa wet tables and Japanese hinoki stools.",
+ "findings": [
+  {
+   "title": "Scope mismatch with the relayed user request",
+   "detail": "The user request relayed for this workflow asks for an RV trailer project: where to get the trailer, what it could look like, and used and new budgets. This computed step asks for a Korean spa program. The parent's task list shows a separate spa track ('Spa: build Blender toolkit and 4 gazebo schemes'), so I completed the step. I also added a trailer-phase build-out order: wet slab and wash station first, then a 120 V plug-in tub, then the 240 V sauna. That ties the spa back to temporary occupancy. The orchestrator should confirm the spa section belongs in this RV deliverable.",
+   "confidence": "high",
+   "sources": [
+    "(workflow harness relayed request text)"
+   ]
+  },
+  {
+   "title": "What mogyoktang and jjimjilbang are, and their core facilities",
+   "detail": "Mogyoktang is the gender-separated, nude bathing area. It has hot and cold tubs and rows of washing stations with plastic stools, and some have staff who scrub guests. Jjimjilbang adds unisex heat rooms entered in provided clothing (jjimjilbok, a T-shirt and shorts), ondol heated-floor lounging and sleeping areas, and snack bars. Themed rooms include salt, charcoal, ice, jade, loess (hwangto) and kiln (hanjeungmak/bulgama). Signature refreshments are maekbanseok eggs, slow-cooked for hours in the hot area, and cold sikhye, a sweet rice-malt drink. Hanjeungmak is a pine-fired stone dome kiln. It first appears as 'hanjeungso' in the 15th-century Annals of Sejong, run by Buddhist monks for medicinal use, with separate men's and women's facilities from 1429. Bulgama is a hotter variant.",
+   "confidence": "high",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Jjimjilbang",
+    "https://www.saunahouse.com/blogs/wellness-guide/step-inside-a-visit-to-a-korean-bathhouse",
+    "https://busanhaps.com/culture/jjimjilbang-explained/",
+    "https://www.koreaherald.com/article/1864232",
+    "https://www.seoultourism.org/seoul-wellness-spa-guide/"
+   ]
+  },
+  {
+   "title": "Korean temperature conventions by element",
+   "detail": "- Korean health press puts the hot tub (ontang) at 41\u201343 \u00b0C and the cold tub (naengtang) at 14\u201318 \u00b0C; one article says 14\u201315 \u00b0C.\n- Travel guides give tubs of about 38\u201345 \u00b0C and cold tubs of about 15 \u00b0C.\n- Hwangto (loess) rooms run about 40 \u00b0C with moist heat, and bulgama runs close to 100 \u00b0C dry.\n- General jjimjilbang rooms are 40\u201370 \u00b0C, dry saunas 70\u2013100 \u00b0C, and hanjeungmak 70\u2013130 \u00b0C.\n- The Korea Herald gives ondol floors at 36.5 \u00b0C and kiln rooms at 50 \u00b0C or more.\n- The brief's ranges (ontang 40\u201342 \u00b0C, naengtang 16\u201320 \u00b0C) sit at the gentle end of these figures. That end suits a home setup because of the US 104 \u00b0F limit.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.hankyung.com/amp/201808283492f",
+    "https://kormedi.com/1217211/",
+    "https://busanhaps.com/culture/jjimjilbang-explained/",
+    "https://www.koreaherald.com/article/1864232",
+    "https://bunniktours.com.au/blog/step-by-step-guide-for-visiting-a-korean-bathhouse"
+   ]
+  },
+  {
+   "title": "Bathing ritual order and etiquette",
+   "detail": "- Universal rules: remove shoes, wash fully before entering any tub, tie long hair up so it never touches the water, keep towels out of the tubs, and no phones or cameras in the nude zone. Jjimjil clothing is worn in the co-ed heat rooms.\n- Locals alternate hot and cold freely. No source gives a fixed order.\n- One guide gives about 20 minutes as the usual soak, with the heart kept above the water.\n- Korean press describes a 'naengonyok' contrast routine: 1 min cold and 1 min hot, about 10 times, ending cold. The same press warns people with hypertension or angina to splash cold water instead of plunging.\n- Scrubbing comes after soaking, when the skin is softened.",
+   "confidence": "medium",
+   "sources": [
+    "https://bunniktours.com.au/blog/step-by-step-guide-for-visiting-a-korean-bathhouse",
+    "https://www.lonelyplanet.com/articles/first-time-korean-bathhouse",
+    "https://www.hankyung.com/amp/201808283492f",
+    "https://en.wikipedia.org/wiki/Italy_towel"
+   ]
+  },
+  {
+   "title": "Seshin / Italy towel facts",
+   "detail": "Ttaemiri is the act of scrubbing, and seshin is the full professional scrub-down. The Italy towel is a viscose-rayon mitt; other versions use sisal or nylon. Green is the standard coarseness, pink the softest and blue the coarsest. Scrub staff advise once a week at most, never on the face, and only after several minutes of soaking. Sources disagree on the origin. Wikipedia currently says Busan, 1967, Kim Won-jo of Hanil Textile. A search snippet of an earlier version gave 1962 and Kim Pil-gon. Either way the name comes from Italian viscose fabric.",
+   "confidence": "medium",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Italy_towel",
+    "https://linguasia.com/korean-body-scrub"
+   ]
+  },
+  {
+   "title": "Hot tub temperature limit (US CPSC)",
+   "detail": "CPSC (1979 release): 'Hot tub water temperatures should never exceed 104 degrees Fahrenheit.' It treats 100 \u00b0F as safe for healthy adults. Water above 102 \u00b0F can cause fetal damage in the first trimester, so pregnant women should stay at or below 100 \u00b0F. Alcohol and drowsiness-causing medications raise the risk of drowning. Korean ontang (41\u201343 \u00b0C, i.e. 106\u2013109 \u00b0F) is therefore hotter than US guidance, so the home tub should be capped at 40 \u00b0C / 104 \u00b0F. The figures are old but are still the US benchmark.",
+   "confidence": "high",
+   "sources": [
+    "https://www.cpsc.gov/Newsroom/News-Releases/1980/CPSC-Warns-Of-Hot-Tub-Temperatures"
+   ]
+  },
+  {
+   "title": "Sauna heat dose and contraindications (Mayo Clinic Proceedings 2018)",
+   "detail": "- A Finnish sauna is 80\u2013100 \u00b0C at head height, cooler at the floor, with 10\u201320% relative humidity.\n- Stays are usually 5\u201320 min, with cooling breaks of a swim, a shower or room air. The typical habit is 2\u20133 times a week. Heart rate rises to 120\u2013150 bpm.\n- Contraindications: unstable angina, recent heart attack, uncontrolled hypertension, decompensated heart failure and severe aortic stenosis. People with orthostatic hypotension or valve disease should be cautious.\n- In a Finnish series, about 26% of hospital burns were sauna-related and 40% of those involved alcohol.\n- Deaths have been recorded from diving head-first into cold water straight after a sauna. Hot-then-cold contrast is 'generally safe for healthy persons' but not recommended for people with cardiovascular disease.\n- Harvard Health adds: no more than 15\u201320 min, cool down gradually, drink 2\u20134 glasses of water after each session, and avoid alcohol before and after.",
+   "confidence": "high",
+   "sources": [
+    "https://espalibrary.eu/documents/360/8b4198ff-9e9a-4480-a387-4e0b4d5aedcd-piis0025619618302751.pdf",
+    "https://www.health.harvard.edu/staying-healthy/saunas-and-your-health"
+   ]
+  },
+  {
+   "title": "Korean kiln-sauna rounds and who should skip",
+   "detail": "Seoul Shinmun (2001) recommends about 3 entries of no more than 10 min each, with total high-heat exposure under 30 min. It says to avoid the kiln within 2 hours of drinking, when hungry or just after a big meal, or when exhausted. People with hypertension, diabetes, severe obesity, chest pain or breathlessness should avoid it, and contrast bathing is prohibited for them. A commercial Korean spa page adds pregnancy, recent surgery, fever and skin lesions. That page contradicts itself on session length, so its numbers are weak.",
+   "confidence": "medium",
+   "sources": [
+    "https://m.seoul.co.kr/news/2001/03/05/20010305014001",
+    "https://www.twosevenths.com/en/therapy/spring-hanjeungmak-basic/"
+   ]
+  },
+  {
+   "title": "Cold plunge cautions",
+   "detail": "- Cold shock causes gasping, a breathing rate 4\u20135 times resting, and spikes in heart rate and blood pressure, with the most risk in the first 0\u20132 to 0\u20135 min.\n- Immersing the face while holding the breath can set off arrhythmias ('autonomic conflict').\n- The response fades after about 4 immersions.\n- Australia's Royal Life Saving position statement: get screened if you have heart, circulation, blood-pressure or Raynaud's problems; start short and build up; keep the head and neck out.\n- AHA News (2022): benefits are 'not established', and the cardiologist quoted advises anyone with a cardiac history against plunging. It also quotes the warning that sudden immersion below 60 \u00b0F can kill in under a minute.\n- Program implications: step in feet first and slowly, keep the head out, never plunge alone or after alcohol, and keep it to 30 s\u20132 min at 14\u201318 \u00b0C.\n- I did not find an authoritative duration-by-temperature table.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.heart.org/en/news/2022/12/09/youre-not-a-polar-bear-the-plunge-into-cold-water-comes-with-risks",
+    "https://www.royallifesaving.com.au/research-and-policy/policy/position-statements/cold-water-immersion-therapy",
+    "https://pure.port.ac.uk/ws/portalfiles/portal/58597102/Cold_water_therapies_minimising_risks.pdf",
+    "https://www.vims.edu/research/units/centerspartners/map/_docs/youngfishermenworkshops/uscg-presentation.pdf"
+   ]
+  },
+  {
+   "title": "Hot tub candidates sized for two",
+   "detail": "- Hot Spring TX (Hot Spot line): 2 people, 11 jets, open seating, 6' x 6' x 29\", runs on 115 or 230 V. A 115 V plug-in is useful during the trailer phase.\n- Jacuzzi J-215 (US page): up to 3 adults with a lounge seat, 76 x 66 x 32 in, 220 gal, 19 jets. Electrical is 120 V/15 A GFCI cord or 240 V at 30 or 40 A. A dealer lists 517 lb dry and 2,352 lb filled.\n- Neither maker publishes a price. Jacuzzi's page shows only bands: Entry $4,000\u20137,999, Mid $8,000\u201311,999.",
+   "confidence": "high",
+   "sources": [
+    "https://www.hotspring.com/wp-content/uploads/2022/09/hot-spring-hot-spot-spec-sheets-tx-60-hz-en-es-fr-1.pdf",
+    "https://www.jacuzzi.com/en-us/j-215-classic-hot-tub-with-lounge-seat/6E331MGDPLM.html",
+    "https://everythingbilliards.net/hot-tubs/j-215"
+   ]
+  },
+  {
+   "title": "Cedar sauna candidates and geometry",
+   "detail": "- Almost Heaven Watoga barrel: $6,183 list. Exterior 78\"W x 59\"D x 75-3/8\"H, interior 75-1/4 x 51-1/4 x 69-1/4. Rustic red cedar, Harvia 6 kW KIP heater, 240 V/30 A hardwired. Benches are only 51-1/4 in long, so you cannot lie down.\n- Dundalk Georgian cabin CTC88W: $7,998 sale ($10,397 list). Interior 7' x 7', eastern white cedar, 8 kW electric or wood-fired heater. Parts list includes a 19-1/4 x 83-3/4 in back bench, long enough to lie on, which suits the Korean habit of lying in heat.\n- Design norms: about 2 ft of upper bench per bather. Finnleo gives 84 in as the average ceiling and 96 in as the maximum. Upper bench 36\u201342 in below the ceiling. Harvia 6 kW US listing: 170\u2013300 ft\u00b3 room, 3.5 ft ceiling distance.",
+   "confidence": "high",
+   "sources": [
+    "https://almostheaven.com/products/watoga-2-4-person-barrel-sauna-kit",
+    "https://www.homeandheat.com/products/dundalk-georgian-cabin-sauna",
+    "https://cdn.shopify.com/s/files/1/0717/2014/1088/files/GeorgianPartsList.pdf",
+    "https://finnleo.com/sauna-construction",
+    "https://www.harvia.com/en-US/products/JH60B2401M/kip60b-60-kw-240v-black-ul",
+    "https://finnmarksauna.com/blogs/sauna-how-to-guides/sauna-bench-sizes-and-specifications-the-complete-guide-for-2026"
+   ]
+  },
+  {
+   "title": "Cold plunge options for a 100 \u00b0F+ desert",
+   "detail": "- Ice Barrel 500: 57.6 x 30.7 x 42.1 in, 94 gal, 104 lb empty and about 886 lb full. No chiller (3/4\" NPT chiller ports). $1,749.99\u2013$2,499.99 depending on retailer.\n- Plunge All-In: about 105 gal, down to 37 \u00b0F, 1 HP, 120 V/20 A, about 1,100 lb filled. $7,990 sale vs $9,990 MSRP.\n- Plunge Pro Chiller Gen 2: $3,490, 0.75 HP, down to 37 \u00b0F, needs a dedicated 120 V/15 A circuit. Rated for ambient up to 120 \u00b0F, which covers Yucca Valley summers.\n- Without a chiller, the plunge only works cold from about Nov to Apr.",
+   "confidence": "high",
+   "sources": [
+    "https://plunge.com/en-ca/pages/tech-specs",
+    "https://plunge.com/products/standard-chiller",
+    "https://www.thepoolnerd.com/best-cold-plunges",
+    "https://www.roguefitness.com/ice-barrel-500-black",
+    "https://leisuretimeinc.com/products/ice-barrel-500"
+   ]
+  },
+  {
+   "title": "Scrub table and wash-station sizing (proxies)",
+   "detail": "I found no published Korean seshin-bed or bath-stool dimensions. As proxies:\n- US spa wet tables are 29\u201336 in wide by 70\u201383 in long, 24\u201338 in high. Examples: Neptune stationary, 36 x 83 in at 25\u201333 in high; Oakworks Marina, 31 x 72 in; Napa La Mer teak, 29 x 70.25 in at 26\u201338 in.\n- Vichy wet rooms are about 9x12 to 10x12 ft with 3 ft clear on all sides.\n- Japanese hinoki wash stools are 9\u201310 in standard and 11.75\u201315.75 in tall; Kohler's Stillness stool is 10-1/8 in high and $456.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.americanspa.com/business/specifications-vichy-shower",
+    "https://purespadirect.com/products/neptune-stationary-wet-table-by-touchamerica-yk-918113",
+    "https://www.purespadirect.com/collections/vendors/products/marina-wet-table-battery-powered-adjustable-height-by-oakworks-gx-700121",
+    "https://purespadirect.com/Napa-La-Mer-trade-Spa-and-Salon-Table-with-Teak-B-p/hn-760535.htm",
+    "https://umamimart.com/products/hinoki-stool",
+    "https://www.finnishdesignshop.com/en-us/product/bath-stool-hinoki-cypress-wood",
+    "https://www.build.com/kohler-k-31409/s1853021"
+   ]
+  },
+  {
+   "title": "Heated rest platform (ondol) options",
+   "detail": "- Target surface is about 36.5 \u00b0C, the figure the Korea Herald gives for jjimjilbang floors.\n- Option A, Navien Mate EQM 350 water-heated mattress pad (Korean maker): $369, 1\u00b0F steps, dual-zone in Queen/King. Lay it on a wood platform under a cotton yo mat.\n- Option B, SunTouch 120 V radiant mats (10\u201312 W/ft\u00b2, 34 BTU/hr/ft\u00b2). The UnderFloor product is rated for interior use only, so it must not go in an exposed outdoor platform without a listed outdoor or damp-location product. Check with the maker.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.koreaherald.com/article/1864232",
+    "https://www.navienoptisleep.com/products/navien-mate-eqm-350",
+    "https://www.warmyourfloor.com/suntouch-tapemat-kit-10-sq-ft-12000524-kit-wv.html",
+    "https://www.supplyhouse.com/Suntouch-1201216U2ST-12-x-16-Suntouch-Underfloor-Mat-120V-9283000-p"
+   ]
+  },
+  {
+   "title": "Electrical rules for a hot tub under a gazebo roof (2023 NEC)",
+   "detail": "From a 2023 NEC / ISPSC permit handout. It is a Colorado document; California's electrical code is based on the NEC, but the County must confirm.\n- Hardwired tub: disconnect readily accessible, within sight, and at least 5 ft from the tub's inside walls (NEC 680.13).\n- All receptacles within 20 ft are GFCI. One general receptacle must sit 6\u201320 ft from the tub and no higher than 6.5 ft. No other receptacle closer than 6 ft (680.22(A)).\n- New light fixtures or fans over the tub or within 5 ft horizontally must be at least 12 ft above maximum water level (680.22(B)(1)). Fixtures 5\u201310 ft away need GFCI unless more than 5 ft up and rigidly attached.\n- Switches at least 5 ft away. Metal within 5 ft gets bonded (680.26).\n- Spas with an ASTM F1346 safety cover are exempt from the ISPSC barrier.\n- Sauna heater: 30 A double-pole breaker at 240 V for 4.5\u20136 kW Harvia-based units, and the manual says no GFCI. This comes from a search summary of the Almost Heaven/Harvia manual, so verify it.",
+   "confidence": "medium",
+   "sources": [
+    "https://broomfield.org/DocumentCenter/View/2525/Swimming-Pools-Hot-tubs-or-Spas",
+    "https://www.ecmweb.com/nec/code-qa-6",
+    "https://images.thdstatic.com/catalog/pdfImages/b6/b6fef185-a808-4d41-8359-e45aef761649.pdf"
+   ]
+  },
+  {
+   "title": "California drowning-prevention rule for a new spa",
+   "detail": "HSC 115922 applies when a building permit is issued for a new or remodeled pool or spa at a private single-family home. It requires at least 2 of 7 features. Options seen: an enclosure isolating the spa from the home (per 115923); removable mesh fencing to ASTM F2286 with a self-closing, self-latching gate; or a safety cover to ASTM F1346-91. From memory, not fetched: the remaining options are exit alarms, self-closing/self-latching doors with the release at 54 in or higher, a pool alarm, and other equivalent means. Assume the hot tub counts and plan for a lockable F1346 cover plus a second feature, such as a self-closing gate on the gazebo screen. Confirm with San Bernardino County Building & Safety.",
+   "confidence": "medium",
+   "sources": [
+    "https://law.justia.com/codes/california/code-hsc/division-104/part-10/chapter-5/article-2-5/section-115922",
+    "https://legiscan.com/CA/text/SB442/2017"
+   ]
+  },
+  {
+   "title": "Themed rooms: what is evidence-based vs. atmosphere",
+   "detail": "Health claims for heated loess or clay ('far-infrared, detox') come mainly from marketing and patents. One 2024 Bioengineering paper on loess bio-balls is mechanistic only, and I found no controlled human trials of clay rooms. Salt and jade rooms are similar. Treat them as material and atmosphere choices, not therapy:\n- earthen clay plaster on the rest-alcove wall\n- warm river or jade pebbles on the platform\n- a salt-brick panel in the sauna\nFor the salt panel, ask the heater maker in writing about clearance and warranty. Almost Heaven's Himalaya saunas pair salt walls with Harvia heaters, so it can be done.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.citedrive.com/en/discovery/characteristics-of-far-infrared-ray-emitted-from-functional-loess-bio-balls-and-its-effect-on-improving-blood-flow",
+    "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/7252844",
+    "https://almostheaven.com/products/himalaya-indoor-sauna",
+    "https://havenofheat.com/products/himalayan-salt-wall-panels"
+   ]
+  },
+  {
+   "title": "Sikhye and baked eggs at home",
+   "detail": "Sikhye (Maangchi's method): settle barley-malt powder (yeotgireum) in water for 2\u20133 h, pour the clear liquid over cooked short-grain rice, and hold at 50\u201365 \u00b0C for about 4 h in a rice cooker on 'warm'. Then boil, sweeten and chill. Jjimjilbang-style eggs: rest eggs at room temperature for 2 h, then cook in a Korean rice cooker for about 50 min with 3/4 cup water and 1/2 tsp salt. Readers report about 70 min in a high-pressure cooker or about 3 h in a crock pot. Do not cook food in the sauna itself; that is my recommendation, not a sourced rule.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.maangchi.com/recipe/sikhye",
+    "https://mykoreankitchen.com/how-to-make-korean-sauna-style-eggs/",
+    "https://www.aeriskitchen.com/2017/08/korean-sauna-egg-with-electric-pressure-cooker/"
+   ]
+  },
+  {
+   "title": "Research gaps (search budget exhausted)",
+   "detail": "The web-search budget for this turn ran out before I could verify:\n- CDC hot-tub sanitizer and pH ranges\n- hot-tub behavior when ambient air tops 100 \u00b0F (a tub cannot cool water below ambient without a chiller; that is reasoning, not sourced)\n- Morongo Basin prevailing wind direction\n- current San Bernardino County spa permit and drain rules\n- current hot tub street prices\nThe user can send a follow-up to continue searching.",
+   "confidence": "high",
+   "sources": [
+    "(tool limit message this session)"
+   ]
+  }
+ ],
+ "products": [
+  {
+   "name": "Hot Spring TX (Hot Spot Collection) 2-person hot tub",
+   "category": "hot tub",
+   "condition": "new",
+   "price_low": 5000,
+   "price_high": 8000,
+   "specs": "2 people, 11 jets, open seating, 6' x 6' x 29\", 115 V or 230 V. PRICE IS AN ESTIMATE: no dealer price was captured; get a quote.",
+   "source": "https://www.hotspring.com/wp-content/uploads/2022/09/hot-spring-hot-spot-spec-sheets-tx-60-hz-en-es-fr-1.pdf",
+   "why": "The smallest footprint, and the 115 V option allows a plug-in tub during the trailer phase before 240 V service."
+  },
+  {
+   "name": "Jacuzzi J-215 Classic hot tub with lounge seat",
+   "category": "hot tub",
+   "condition": "new",
+   "price_low": 4000,
+   "price_high": 11999,
+   "specs": "Up to 3 adults, 76 x 66 x 32 in, 220 gal, 19 jets. 120 V/15 A GFCI cord or 240 V at 30/40 A. About 2,352 lb filled (dealer figure). PRICE RANGE = Jacuzzi's own Entry-to-Mid pricing bands, not a model price; get a quote.",
+   "source": "https://www.jacuzzi.com/en-us/j-215-classic-hot-tub-with-lounge-seat/6E331MGDPLM.html",
+   "why": "Seats 2 with room for a guest; a lounge seat suits long soaks; dual voltage."
+  },
+  {
+   "name": "Almost Heaven Watoga 2-4 person barrel sauna kit",
+   "category": "sauna",
+   "condition": "new",
+   "price_low": 6183,
+   "price_high": 6183,
+   "specs": "78\"W x 59\"D x 75-3/8\"H exterior, 75-1/4 x 51-1/4 x 69-1/4 interior. Rustic red cedar, 1-3/8\" staves. Harvia 6 kW KIP Smart heater with Fenix controller, 240 V/30 A hardwired. Benches are 51-1/4 in long (seated only).",
+   "source": "https://almostheaven.com/products/watoga-2-4-person-barrel-sauna-kit",
+   "why": "The least expensive cedar sauna for two, with a compact pad."
+  },
+  {
+   "name": "Dundalk LeisureCraft Canadian Timber Georgian cabin sauna CTC88W",
+   "category": "sauna",
+   "condition": "new",
+   "price_low": 6922,
+   "price_high": 7998,
+   "specs": "7' x 7' interior, eastern white cedar, 2-tier back bench (19-1/4 x 83-3/4 in) plus an L return bench, 2\u20136 people. 8 kW electric or wood heater (heater price extra; not captured). Exterior about 95 x 87 x 100.5 in; figures vary by retailer. List price $10,397.",
+   "source": "https://www.homeandheat.com/products/dundalk-georgian-cabin-sauna",
+   "why": "A lying-length bench lets you recline in heat as in a jjimjilbang kiln; its room for 4\u20136 covers guests."
+  },
+  {
+   "name": "Ice Barrel 500 cold plunge tub",
+   "category": "cold plunge",
+   "condition": "new",
+   "price_low": 1749.99,
+   "price_high": 2499.99,
+   "specs": "57.6 x 30.7 x 42.1 in, 94 gal, 104 lb empty and about 886 lb full. No built-in chiller (3/4\" NPT ports for adding one).",
+   "source": "https://www.thepoolnerd.com/best-cold-plunges",
+   "why": "A cheap, upright plunge that keeps the head out of the water. Cold from Nov to Apr on ambient water; needs a chiller in summer."
+  },
+  {
+   "name": "Plunge Pro Chiller Gen 2",
+   "category": "cold plunge chiller",
+   "condition": "new",
+   "price_low": 3490,
+   "price_high": 3490,
+   "specs": "0.75 HP, down to 37 \u00b0F, dedicated 120 V/15 A circuit, ambient up to 120 \u00b0F.",
+   "source": "https://plunge.com/products/standard-chiller",
+   "why": "Rated for desert summer ambient temperatures; holds the 14\u201318 \u00b0C naengtang target from May to Oct."
+  },
+  {
+   "name": "Plunge All-In (built-in chiller)",
+   "category": "cold plunge",
+   "condition": "new",
+   "price_low": 7990,
+   "price_high": 9990,
+   "specs": "About 105 gal, down to 37 \u00b0F, 1 HP, 120 V/20 A, 270 lb empty and about 1,100 lb filled, indoor or outdoor.",
+   "source": "https://plunge.com/en-ca/pages/tech-specs",
+   "why": "An all-in-one premium option if budget allows."
+  },
+  {
+   "name": "Navien Mate EQM 350 water-heated mattress pad",
+   "category": "heated rest platform",
+   "condition": "new",
+   "price_low": 369,
+   "price_high": 369,
+   "specs": "1 mm water-heated pad, 1 \u00b0F steps, dual-zone in Queen/King, 2-year warranty.",
+   "source": "https://www.navienoptisleep.com/products/navien-mate-eqm-350",
+   "why": "A Korean-made 'ondol' warmth layer for the rest platform with no hard wiring. Use 1\u20132 pads on a 7x8 ft platform."
+  },
+  {
+   "name": "Korean Italy towel exfoliating mitts (4-pack, green)",
+   "category": "scrub supplies",
+   "condition": "new",
+   "price_low": 7.6,
+   "price_high": 11.99,
+   "specs": "Viscose mitts; green is standard coarseness.",
+   "source": "https://www.ebay.de/itm/365768340246",
+   "why": "The core tool for the seshin ritual."
+  },
+  {
+   "name": "Kohler Stillness freestanding bath stool (hinoki)",
+   "category": "wash station",
+   "condition": "new",
+   "price_low": 456,
+   "price_high": 456,
+   "specs": "22 x 12-1/2 x 10-1/8 in high.",
+   "source": "https://www.build.com/kohler-k-31409/s1853021",
+   "why": "Designer low wash stool. Generic hinoki stools are 9\u201310 in high (price not captured)."
+  }
+ ],
+ "design_numbers": [
+  "Gazebo (proposed): 16 x 24 ft roofed pavilion, about 384 ft\u00b2, in three 8 x 16 ft bays: WASH/SCRUB (wet), SOAK (hot tub), REST (dry/warm). Eave about 9\u201310 ft. Estimate based on the element sizes below.",
+  "Hot tub: 6' x 6' x 29\" (Hot Spring TX) or 76 x 66 x 32 in (Jacuzzi J-215, 220 gal, about 2,352 lb filled, about 68 lb/ft\u00b2 before people). Leave at least 3 ft of service access on the equipment side plus a step. Set it on a level reinforced slab or compacted base per the maker's spec.",
+  "Hot tub temperature: 38\u201340 \u00b0C / 100\u2013104 \u00b0F, never above 104 \u00b0F (CPSC); 100 \u00b0F or less for anyone pregnant. Summer 'warm tub' mode 36\u201338 \u00b0C. Soak 10\u201315 min, heart above the water. Korean ontang 41\u201343 \u00b0C is NOT used at home.",
+  "Sauna: 80\u201390 \u00b0C (176\u2013194 \u00b0F) at head height, 10\u201320% RH, 8\u201312 min per round, 2\u20133 rounds, total high heat 30 min or less. Mayo range is 80\u2013100 \u00b0C and 5\u201320 min; Korean kiln rule is 10 min or less per round and 30 min total.",
+  "Sauna geometry: 2 ft of upper bench per bather; ceiling about 84 in (96 in max per Finnleo); upper bench top 36\u201342 in below the ceiling; lying bench 72 in or more (Georgian back bench 83-3/4 in). Harvia 6 kW: 170\u2013300 ft\u00b3, 3.5 ft heater-to-ceiling distance on the US listing.",
+  "Sauna electrical: 6 kW on 240 V/30 A double-pole, hardwired (Watoga); 8 kW heaters are typically 40 A (Fairmont listing). Use the heater manual's breaker and GFCI rules.",
+  "Cold plunge: 14\u201318 \u00b0C (57\u201364 \u00b0F) target, matching the Korean naengtang norm; 30 s\u20132 min; head and neck out; enter feet first; never alone. Ice Barrel 500 is 57.6 x 30.7 x 42.1 in, so allow a 4 x 7 ft pad. A chiller needs a dedicated 120 V/15 A circuit (Plunge Pro Chiller) and is rated to 120 \u00b0F ambient.",
+  "Cold plunge or shower placement: within about 6\u201310 steps (12\u201320 ft) of the sauna door, with a rinse shower beside it. Estimate.",
+  "Wash stations: 2 stations at 36\u201342 in center to center (estimate; no Korean standard found). Low stool seat 9\u201312 in. Handheld shower on a slide bar plus a fixed tap about 24\u201330 in above the floor. Mirror centered about 36 in above the floor for seated eye level. Basin 12\u201314 in diameter. Shelf at about 30 in. Estimate.",
+  "Wet-bay floor: slope to a trench drain, typically 1/4 in per ft (plumbing-code shower slope recalled from memory, not fetched). Slip-resistant tile or brushed concrete.",
+  "Scrub table: 30 x 76 in top at 26\u201328 in high, so a seated or standing scrubber can work (proxy from US wet tables: 29\u201336 W x 70\u201383 L x 24\u201338 H). Leave 30\u201336 in clear on both long sides and the head end, giving a zone of about 8 x 10 ft. Drained or slatted teak or marine-vinyl top.",
+  "Rest (ondol) platform: 7 x 8 ft (84 x 96 in) for 2 lying adults plus a seated guest, 16\u201318 in high so it doubles as a bench. Surface target about 36.5 \u00b0C (Korea Herald jjimjilbang floor). Keep it at 40 \u00b0C or below for long lying; my engineering estimate is that low-temperature burns are possible with hours of contact at about 44 \u00b0C (recalled, not fetched).",
+  "Electrical clearances (2023 NEC handout): spa disconnect at least 5 ft from the inside walls and within sight. GFCI on receptacles within 20 ft. One receptacle 6\u201320 ft from the tub, no higher than 6.5 ft. No new light fixture or fan within 5 ft horizontally unless at least 12 ft above water. Fixtures 5\u201310 ft away need GFCI unless more than 5 ft up and rigid. Switches at least 5 ft away. Bond metal within 5 ft.",
+  "Drowning prevention: CA HSC 115922 requires 2 of 7 features for a permitted new spa at a single-family home; a lockable ASTM F1346 cover is one. Glazing within 60 in of the water edge and less than 60 in above a walking surface must be safety glazing (IRC R324.4.5, per the handout).",
+  "Water volumes: hot tub about 190\u2013220 gal fill; plunge 94\u2013105 gal. Hauled or well water and drain-down disposal need County approval (not researched).",
+  "Session clock (2 people, about 2\u20132.5 h): wash 10 min, then soak 10\u201315, then 3x(sauna 8\u201312, cold 0.5\u20132, rest 10\u201315), then scrub 15\u201320 per person, then rinse 5, then final rest 20\u201330 with sikhye and eggs."
+ ],
+ "costs": [
+  {
+   "item": "Hot tub, 2\u20133 person, new",
+   "low_usd": 4000,
+   "high_usd": 11999,
+   "notes": "Jacuzzi's published Entry ($4,000\u20137,999) and Mid ($8,000\u201311,999) bands; no model price published. Delivery, pad and electrical extra."
+  },
+  {
+   "item": "Barrel sauna (Almost Heaven Watoga)",
+   "low_usd": 6183,
+   "high_usd": 6183,
+   "notes": "List price including 6 kW Harvia heater; freight, pad and 240 V circuit extra."
+  },
+  {
+   "item": "Cabin sauna (Dundalk Georgian CTC88W)",
+   "low_usd": 6922,
+   "high_usd": 7998,
+   "notes": "Retailer sale prices ($10,397 list); 8 kW heater NOT included and its price was not captured."
+  },
+  {
+   "item": "Cold plunge tub, no chiller (Ice Barrel 500)",
+   "low_usd": 1749.99,
+   "high_usd": 2499.99,
+   "notes": "Retailer range."
+  },
+  {
+   "item": "Add-on chiller (Plunge Pro Chiller Gen 2)",
+   "low_usd": 3490,
+   "high_usd": 3490,
+   "notes": "Manufacturer sale price; dedicated 120 V/15 A circuit."
+  },
+  {
+   "item": "All-in chilled plunge (Plunge All-In)",
+   "low_usd": 7990,
+   "high_usd": 9990,
+   "notes": "Sale vs MSRP; alternative to tub plus chiller."
+  },
+  {
+   "item": "Heated rest pads (Navien Mate EQM 350, x1\u20132)",
+   "low_usd": 369,
+   "high_usd": 738,
+   "notes": "Manufacturer price per pad."
+  },
+  {
+   "item": "Italy towels, stools, basins, robes, jjimjil sets",
+   "low_usd": 200,
+   "high_usd": 1200,
+   "notes": "ESTIMATE. Italy towels $7.60\u201311.99 per pack are sourced; Kohler hinoki stool $456 is sourced; the rest is estimated."
+  },
+  {
+   "item": "Scrub table (DIY teak slat or marine vinyl on a drained frame)",
+   "low_usd": 300,
+   "high_usd": 1500,
+   "notes": "ESTIMATE; commercial wet tables were not priced in this research."
+  },
+  {
+   "item": "Electrical: 240 V sauna circuit, spa circuit/disconnect, GFCI receptacles, chiller circuit",
+   "low_usd": 2000,
+   "high_usd": 6000,
+   "notes": "ESTIMATE; depends on distance from service and trenching. Not sourced."
+  },
+  {
+   "item": "Gazebo/pavilion 16x24 ft with slab, trench drain and lattice screens",
+   "low_usd": 12000,
+   "high_usd": 35000,
+   "notes": "ESTIMATE only; owner-built vs kit vs contractor varies widely. Not sourced."
+  }
+ ],
+ "risks": [
+  {
+   "risk": "Overheating, fainting or drowning in the hot tub, especially in summer ambient heat or after alcohol",
+   "severity": "high",
+   "mitigation": "Cap at 104 \u00b0F (CPSC). Summer warm-tub mode 36\u201338 \u00b0C. Soak 15 min or less with the heart above water. No alcohol or drowsy medications. Never bathe alone. Schedule summer sessions at dawn or night."
+  },
+  {
+   "item": "",
+   "risk": "Cardiac events from sauna-to-cold contrast in people with heart disease or hypertension",
+   "severity": "high",
+   "mitigation": "Screen guests (unstable angina, recent heart attack, uncontrolled hypertension, decompensated heart failure, severe aortic stenosis). Offer a cold rinse or splash instead of a plunge. Enter feet first and slowly with the head out. Never dive head-first after the sauna (Mayo-documented fatalities)."
+  },
+  {
+   "risk": "Burns from the sauna heater or a too-hot rest platform",
+   "severity": "medium",
+   "mitigation": "Heater guard rail. Keep heater clearances per the manual. No alcohol (40% of Finnish sauna burns involved alcohol). Keep the platform at 40 \u00b0C or below and use mats or textiles."
+  },
+  {
+   "risk": "Child or guest drowning; permit non-compliance",
+   "severity": "high",
+   "mitigation": "Lockable ASTM F1346 cover plus a second HSC 115922 feature, such as a self-closing, self-latching gate in the screen. Pull the permit with San Bernardino County."
+  },
+  {
+   "risk": "Electrical shock from lights, receptacles or switches near the tub under a roofed gazebo",
+   "severity": "high",
+   "mitigation": "Follow NEC 680. No fixture within 5 ft horizontally unless 12 ft or more above water. GFCI within 20 ft. Disconnect 5 ft or more away. Bonding. Licensed electrician."
+  },
+  {
+   "risk": "Cold plunge too warm in summer (desert ambient over 100 \u00b0F) or freezing in winter",
+   "severity": "low",
+   "mitigation": "Use a chiller rated to 120 \u00b0F ambient. Shade the pad. Insulated cover. Freeze protection in winter."
+  },
+  {
+   "risk": "Wood-fired sauna heater in a dry, windy, fire-prone landscape",
+   "severity": "medium",
+   "mitigation": "Choose an electric heater. If wood-fired, use a spark arrester and defensible space and check County or fire-district burn rules (not researched)."
+  },
+  {
+   "risk": "Skin damage from over-scrubbing",
+   "severity": "low",
+   "mitigation": "Italy towel at most once a week, after a soak, never on the face, sunburn or broken skin."
+  },
+  {
+   "risk": "Wind and dust damage and water contamination",
+   "severity": "medium",
+   "mitigation": "Strap down the tub cover. Put solid screens on the windward side (wind direction not verified). Maintain sanitizer per the tub manual; CDC values not verified this session."
+  }
+ ],
+ "next_actions": [
+  "Orchestrator: confirm this spa section belongs in the RV trailer deliverable the user asked for. If it does, put the trailer-phase build order next to the RV budget (wet slab and wash station first, then the 120 V tub, then the 240 V sauna).",
+  "Get dealer quotes for Hot Spring TX and Jacuzzi J-215 (California high-desert dealers); confirm 115/120 V operation in winter (heater output is limited on 120 V; not verified).",
+  "Call San Bernardino County Building & Safety: is a permit needed for a portable spa? HSC 115922 features; whether a roofed gazebo is treated as indoor or outdoor for NEC 680; hot-tub drain-down disposal on a septic lot.",
+  "Decide the sauna type. Barrel ($6,183, seated only) vs cabin ($7,998 plus heater, lying bench). Prefer an electric heater for fire safety.",
+  "Pick the cold strategy. Ice Barrel only (cold Nov\u2013Apr), Ice Barrel plus Pro Chiller (year-round), or a cold rinse shower only for guests with cardiac risk.",
+  "Run a follow-up search (budget exhausted this turn) on: CDC hot-tub sanitizer and pH, Morongo Basin prevailing wind direction, outdoor-rated radiant heat for the platform, and current California Electrical Code edition."
+ ],
+ "design_ideas": [
+  "Flow is the Korean order of clean, wet, hot, cold, rest. Enter at the dry robe and shoe bench (shoes off, as in a jjimjilbang). Then the wash stations, the hot tub, out to the sauna, the cold plunge on the way back, and finally the warm rest platform. Wet and dry bays never cross.",
+  "Bay layout west to east: WASH/SCRUB bay against a solid back wall (plumbing wall, privacy), SOAK bay in the middle, REST bay on the calm side with the best view. Sauna and plunge sit outside the roof, linked by a short path of black pavers.",
+  "Coral (#ec4639) changsal / key-fret lattice screens, 6\u20137 ft high, as privacy walls on the road and wind sides. CNC-cut exterior plywood or cedar slats, set on black steel frames. They cast patterned shadows in high-key desert light, which fits the black-and-white photography brand.",
+  "Materials: black slate or charcoal concrete wet floor, white-plastered or blush (#f2d1d1) clay-plaster walls in the rest bay (a nod to the hwangto room), cedar sauna, hinoki stools, brass (yugi-style) basins at the wash stations.",
+  "Rest platform as a modern pyeongsang: a 7x8 ft low wood platform with Navien water-heated pads under cotton yo mats. Add a tray of warm river or jade pebbles, and peach (#fec6b4) jjimjil T-shirt-and-shorts sets for guests so the space can be mixed-gender.",
+  "A 'salt room' and 'jade room' as accents, not rooms: a small Himalayan salt-brick panel in the sauna away from the heater (heater-maker approval first) and pebbles on the platform. Label them as atmosphere, not therapy.",
+  "Sikhye and egg station on the rest bay: under-counter fridge for sikhye in glass bottles; a rice cooker for maekbanseok-style eggs (about 50 min); a coral enamel tray.",
+  "Plants: large frost-tolerant potted desert plants inside the open pavilion and along the screens. Shade-loving pots move into the house or trailer on freeze nights. Planting list not researched.",
+  "Lighting: no fixtures within 5 ft horizontally of the tub. Use the tub's own lights, plus GFCI damp-rated fixtures over the rest bay, and low lanterns on the sauna path. Warm 2700K, dimmable.",
+  "Guest etiquette card in brand typography: wash before soaking, hair tied up, towels out of the water, no phones in the bathing area, swimsuits or jjimjil sets for mixed company, no alcohol before or between rounds, and a water glass after every round.",
+  "Trailer-phase version: pour the wet-bay slab with trench drain first. Install the 2 wash stations as the trailer's outdoor bathing area and a 120 V tub. Add the roof, sauna and plunge when 240 V service is in."
+ ]
+}

@@ -1,0 +1,910 @@
+{
+ "topic": "rv_budget",
+ "summary": "Three budgets for living 1-3 years in a trailer on a raw 5-acre high-desert lot near Yucca Valley while owner-building a 640 sq ft house. All figures are 2025-2026 USD. Anything not tied to a cited listing or agency page is labeled as an estimate.\n\nThe rules come from San Bernardino County's Temporary Structure Permit (TSP), which allows an RV or travel trailer as temporary quarters for someone building a house on the same lot:\n- The house building permit has to be issued first.\n- You need a current California DMV registration, a sewage pumping contract (if the trailer is self-contained), and will-serve letters where they apply.\n- Final inspection covers the electrical hookup, gas lines, and sewer and water connections.\n- The permit runs 12 months, renews 12 months at a time, and caps at 5 years. An inspection must be called within 180 days.\n- FY2026-27 fees: $301 initial application, $261 temporary RV site, $257 renewal. A temporary power span-pole permit is $156, plus a $57 intake fee.\n- Putting the trailer on the lot before the permits are issued can bring penalties.\n\nTier summaries (all estimates built from the cited prices):\n- **(A) Used lean, trailer about $12-28k.** Best picks are a 2015-2019 four-season Northwood (Arctic Fox or Nash) or a mainstream Jayco or Grand Design Imagine. Upfront cost is about $23-58k (midpoint about $40k). Running cost is about $1,150/month while sewage is pumped out, or about $700/month once a septic system is in. Summer AC runs mostly on a generator.\n- **(B) Mid-range, about $35-65k.** For example, a new 2026 Grand Design Imagine 2600RB (MSRP $58,587, advertised at $37,989), a used 2026 Lance 2185 ($49,900), or a used 2016 Airstream Flying Cloud (J.D. Power average retail $58,800). Upfront cost is about $69-130k (midpoint about $93k). This includes a certified steel RV cover and a 6 kW / 10 kWh solar-and-battery system that can later serve the house.\n- **(C) Premium new, about $85-150k street price.** For example, a 2026 Airstream Flying Cloud 25FB (MSRP $121,900-135,200), an Oliver Legacy Elite II ($85-100k, no haggle), or an Arctic Fox NXT 22GT ($73,900 vs $89,900 MSRP). Upfront cost is about $140-263k (midpoint about $193k).\n\nEstimated 2-year net cost, after resale and after the value of items reused for the house: about $47k (A), $63k (B), $92k (C). If the house's septic system goes in first and the trailer connects to it, each tier drops about $11k: about $36k, $52k, $81k.\n\nCost drivers:\n- The biggest monthly cost is sewage pump-out. The trailers' tanks hold only 39-82 gallons each.\n- The biggest upfront lever is shade: a ramada over the trailer. It also cuts the AC load, which matters because rooftop units draw about 1,500 W each and give only an 18-25\u00b0F temperature drop at the vents.\n- The 30% federal solar credit ended for systems placed in service after 12/31/2025, so it doesn't apply to these budgets.\n\nMy web-search limit ran out before I could verify prices for propane, insurance, inspection, transport, septic installation, and cameras. Those lines are labeled estimates.",
+ "findings": [
+  {
+   "title": "County Temporary Structure Permit is the legal path; strict sequencing and documents",
+   "detail": "From the county information sheet (Rev. 6/2025):\n- What it allows: a recreational vehicle or travel trailer occupied as temporary residential quarters by an individual constructing a residence on the property.\n- Sequencing: a permit for the residence must be issued before the Temporary Structure Permit is approved. Placing the unit before permits are issued may result in penalty fees and enforcement.\n- Residential submittals: site/plot plan; current California DMV registration for the unit; a copy of a sewage pumping contract if the unit is self-contained; will-serve letters from the water department and sewer district if applicable.\n- Final inspection includes electrical hookup, gas lines, sewer/water connections, and any Fire, Environmental Health or Public Works approvals.\n- Term: 12 months, renewable 12 months at a time, maximum 5 years from original issuance. The permit expires if no inspection is called within 180 days.\n\nBudget implications:\n- An out-of-state trailer must be registered in California.\n- A pump-out contract must be in hand at application.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf"
+   ]
+  },
+  {
+   "title": "County permit fees (FY2026-27 ordinance, effective July 1, 2026)",
+   "detail": "Temporary structure permit fees:\n- Initial application: $301\n- Annual renewal: $257\n- Temporary RV site / temporary office trailer: $261\n- Manufactured homes / commercial coaches: $603\n\nOther relevant fees:\n- Temporary power with span poles (electrical permit): $156. An intake processing fee of $57 applies to electrical permits.\n- Ground-mounted residential PV: plan review $225. In FY2025-26 the permit fee was $225 and the intake fee was waived for solar.\n\nFY2025-26 equivalents for comparison: $279 initial, $242 renewal, $242 RV site, $151 span pole.\n\nThe schedule does not say whether both the initial-application and RV-site lines apply to one trailer. Budget about $560-$620 for year 1, then $257/yr.\n\nPatio covers, carports, decks and awnings are priced under U-occupancy construction valuation.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BNS-Master-Fee-Schedule-25-26.pdf"
+   ]
+  },
+  {
+   "title": "Taxes and DMV registration",
+   "detail": "DMV fees (from the DMV fee page):\n- Registration: $76\n- CHP fee: $34\n- Vehicle License Fee: 0.65% of purchase price or value\n- Transportation Improvement Fee by value: $33 (<$5k), $66 ($5-25k), $132 ($25-35k), $198 ($35-60k), $231 ($60k+)\n- County/district fees vary.\n\nThe DMV manual treats trailer coaches as regularly registered vehicles. Only non-coach trailers use the PTI five-year fee.\n\nFirst-year DMV fees, computed from these rates (excluding county fees, which are small): about $306 on a $20k trailer, $633 on $50k, $1,056 on $110k, $1,316 on $150k.\n\nSales and use tax:\n- The Town of Yucca Valley rate is 8.75% (6% state, 0.25% county, 1% city, 1.5% special), per Avalara and SalesTaxHandbook.\n- Unincorporated addresses with a Yucca Valley mailing address may carry a different, likely lower rate. Confirm with the CDTFA address lookup.\n- CDTFA collects use tax at DMV registration on private-party and out-of-state purchases, and presumes California use if the trailer enters the state within 12 months of purchase.",
+   "confidence": "high",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/vehicle-registration/registration-fees/",
+    "https://qr.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/collection-and-payment-of-fees-and-penalties/registration-fees/",
+    "https://www.avalara.com/us/en/taxrates/state-rates/california/cities/yucca-valley.html",
+    "https://www.salestaxhandbook.com/california/rates/yucca-valley",
+    "https://cdtfa.ca.gov/industry/vehicles-vessels-aircraft/vehicles.htm"
+   ]
+  },
+  {
+   "title": "Where to get the trailer (Inland Empire dealers + used market)",
+   "detail": "Mainstream and mid-range brands:\n- Mike Thompson's RV, Colton (RV Center Dr, Colton 92324; sources list both 902 and 910). A 2026 partner announcement calls it 'Colton/Palm Springs'.\n- Camping World, Colton.\n- Giant RV, 1300 E Santo Antonio Dr, Colton.\nColton is roughly an hour from Yucca Valley (estimate).\n\nAirstream:\n- Airstream Inland Empire, 27969 Jefferson Ave, Temecula. This comes from a directory listing, so confirm it.\n- Airstream Los Angeles, 1212 E Las Tunas Dr, San Gabriel (the brand's fifth standalone store).\n\nOther brands:\n- Oliver sells factory-direct at no-haggle prices.\n- Northwood (Arctic Fox/Nash) four-season trailers mostly come through Arizona, Colorado and Northwest dealers. A good used four-season unit often means a transport bill from MT, ID or AZ.\n\nUsed listings near the lot are thin:\n- A 2006 Fleetwood Pioneer 190FQ in Yucca Valley was listed at $7,500 (listing last updated Sep 2025, probably stale).\n- A 2021 Keystone Bullet 243BHS appeared at $22,900 (location unclear).",
+   "confidence": "medium",
+   "sources": [
+    "https://rvshare.com/blog/rvs-for-sale/dealers-california/",
+    "https://www.rvnews.com/grech-rv-announces-partnership-with-mike-thompsons-rv/",
+    "https://rv.campingworld.com/rvclass/used-motorhome-rvs/dealer/colton-california",
+    "https://www.rvusa.com/2017-airstream-interstate-ext-grand-tour-class-b-5256373",
+    "https://rv.com/archive/airstream-opens-fifth-la-area-dealership/",
+    "https://www.rvpark.com/rvs/6950694-2006-pioneer-190fq-for-sale-in-yucca-valley-ca",
+    "https://www.rvusa.com/joshua-tree-ca-rental-travel-trailer-rv-2017-airstream-international-r52439"
+   ]
+  },
+  {
+   "title": "Tier A (used lean) trailer prices",
+   "detail": "Asking prices from listings:\n- 2017 Jayco Jay Flight: $11,985-$17,995, median $13,999 (Searchshop, all floorplans).\n- 2019 Grand Design Imagine: $16,209-$28,995, median $19,878.\n- 2018 Northwood Arctic Fox 25Y (four-season): $29,000 (Helena MT), $29,500 (Dalton Gardens ID), $34,999 (Portal AZ).\n\nDepreciation benchmark from J.D. Power:\n- 2017 Jayco White Hawk 24MBH: average retail $15,850 vs $30,278 original MSRP.\n- 2018 Arctic Fox Silver Fox 35-5Z (fifth wheel): average retail $45,700 vs $82,631 MSRP.\nOlder Northwoods hold value better than entry brands.\n\nRecommended target: a $15-28k four-season or well-built rig plus a $1-2.5k repair reserve for tires, roof reseal and AC service (estimate).",
+   "confidence": "medium",
+   "sources": [
+    "https://searchshop.com/rv/model/jayco/jay-flight/2017",
+    "https://searchshop.com/rv/model/grand-design/imagine/2019",
+    "https://www.rvpark.com/rvs/6914385-2018-arctic-fox-25-y-for-sale-in-helena-mt",
+    "https://www.rvpark.com/rvs/7020809-2018-arctic-fox-25-y-for-sale-in-dalton-gardens-id",
+    "https://www.rvusa.com:443/2018-northwood-arctic-fox-25y-travel-trailer-4089321",
+    "https://www.jdpower.com/rvs/2017/jayco/m-24-mbh/6567539/values",
+    "https://www.jdpower.com/rvs/2018/arctic-fox/m-35-5z/6579650/values"
+   ]
+  },
+  {
+   "title": "Tier B (newer used / new mid-range) trailer prices",
+   "detail": "New:\n- 2026 Grand Design Imagine 2600RB at Lazydays: MSRP $58,587, sale $37,989 (includes a $2,000 finance-contingent incentive). Specs: 29 ft 8 in, 6,624 lb dry, tanks 45 fresh / 82 gray / 45 black gal, heated enclosed underbelly with Four Seasons package, 50 A service, wired and framed for a 2nd A/C. Other dealers list MSRP $58,523-$59,652.\n- 2026 Arctic Fox NXT 22GT: $73,900 vs $89,900 MSRP (Traveland). 23.9 ft, 5,910 lb, true four-season heated tanks. This is just above the tier ceiling.\n\nUsed:\n- 2026 Lance 2185: $49,900 at Blue Compass.\n- 2016 Airstream Flying Cloud 25FB: J.D. Power average retail $58,800.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.lazydays.com/rvs/tampa-fl/travel-trailer/new/2026/grand-design-imagine-109343",
+    "https://www.campersinn.com/product/new-2026-grand-design-imagine-2600rb-3477964-29",
+    "https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-22gt-3585295-29",
+    "https://www.bluecompassrv.com/product/used-2026-lance-lance-travel-trailers-2185-3776056-29",
+    "https://www.jdpower.com/rvs/2016/airstream/m-25fb/6549744/values"
+   ]
+  },
+  {
+   "title": "Tier C (premium new) trailer prices",
+   "detail": "2026 Airstream:\n- Flying Cloud 25FB Queen (rear hatch): J.D. Power MSRP $121,900. Dealer MSRPs $132,200-$135,200.\n- Flying Cloud 27FB Twin: $122,500.\n- Globetrotter 25FBQ: MSRP $151,150. Globetrotter 27FB: $141,900.\n- Classic 28RB: $184,300-$193,100. Classic 30RB: $198,400-$207,400.\n- Blue Compass discounted a Classic 30RB from $200,900 to $146,995, about 27% off. Street prices well below MSRP are common.\n\nFlying Cloud 25FB dealer specs:\n- 26 ft 2 in long, 8 ft 6 in wide.\n- About 5,650 lb dry, GVWR 7,300 lb.\n- Tanks: 39 gal fresh / 39 gray / 39 black.\n- 15,000 BTU A/C (some listings mention a 2nd A/C).\n\nOliver Legacy Elite II (2027 lineup):\n- $85,000 Standard / $90,000 Premium / $100,000 Platinum, no haggle.\n- 24 ft, 4,900 lb, GVWR 7,000 lb, double-hull fiberglass.\n- Up to 1,360 W solar and 640 Ah lithium optional.\n- Oliver's claimed 30% tax credit on solar add-ons no longer applies: the IRS says the residential clean energy credit is not available for property placed in service after Dec 31, 2025.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.jdpower.com/rvs/2026/airstream/m-25fb-queen-rear-hatch/6644305/values",
+    "https://www.jdpower.com/rvs/2026/airstream/m-27fb-twin/6644310/values",
+    "https://www.jdpower.com/rvs/2026/airstream/m-28rb-twin/6644345/values",
+    "https://www.jdpower.com/rvs/2026/airstream/m-30rb-queen/6644346/values",
+    "https://www.lazydays.com/rvs/tucson-az/travel-trailer/new/2026/airstream-globetrotter-114337",
+    "https://www.rvusa.com/2026-airstream-globetrotter-27fb-travel-trailer-5228184",
+    "https://www.rvuniverse.com/listing/for-sale/255466989/2026-airstream-classic-30rb-travel-trailers",
+    "https://www.rvuniverse.com/listing/for-sale/257279247/2026-airstream-flying-cloud-25fb-travel-trailers?print=1",
+    "https://olivertraveltrailers.com/?p=30727",
+    "https://olivertraveltrailers.com/blog/oliver-legacy-elite-ii-vs-forest-river-ibex/",
+    "https://www.irs.gov/credits-deductions/residential-clean-energy-credit"
+   ]
+  },
+  {
+   "title": "Resale / depreciation",
+   "detail": "No rigorous study exists. Blog and industry estimates:\n- Year-1 loss of 10-30%.\n- One travel-trailer table shows about 20% / 12% / 8% in years 1-3.\n- Another estimate: about 25% cumulative over 3 years.\n- Airstream and molded-fiberglass brands depreciate more slowly (qualitative only).\n\nJ.D. Power average retail for used Airstream Flying Clouds:\n- 2016 25FB: $58,800.\n- 2022 25FB Twin: $83,000.\n- 2023 International 25FB: $99,600.\n\nMy resale estimates, as a share of purchase price:\n- A (already depreciated): about 85-90% after 1 yr, 75-85% after 2, 65-80% after 3.\n- B new mainstream: about 80% / 70% / 64%.\n- C Airstream/Oliver: about 85% / 78% / 72%.\nFull-time desert UV wear, and the need for new tires before resale, push toward the low end.",
+   "confidence": "low",
+   "sources": [
+    "https://campersmarts.com/rv-depreciation",
+    "https://www.recnationstorage.com/blog/do-rvs-hold-their-value-everything-you-need-to-know/",
+    "https://blog.campingworld.com/selling-trading/rv-depreciation/",
+    "https://www.jdpower.com/rvs/2016/airstream/m-25fb/6549744/values",
+    "https://www.jdpower.com/rvs/2022/airstream/m-25fb-twin-rear-hatch/6613866/values",
+    "https://www.jdpower.com/rvs/2023/airstream/m-25fb-queen-rear-hatch/6621105/values"
+   ]
+  },
+  {
+   "title": "Pad, grading and wind anchoring",
+   "detail": "Grading permits:\n- The county requires a grading permit above 100 cubic yards of cut and fill (grading pages and handout).\n- The county's erosion-control page cites 50 cubic yards, and an erosion-control permit may be needed even when no grading permit is.\n- A gravel RV pad is far below 100 cubic yards.\n\nPad costs (vendor and content-site figures, low quality):\n- Typical gravel RV pad: $1-3/sq ft, or $1,500-6,000 total.\n- Grading: $300-2,500.\n- Crushed base: $15-30/ton, delivery $50-150 or $2-5/mile.\n- Recommended depth: 4-6 in compacted.\n\nWind:\n- NWS issued Morongo Basin wind advisories in spring 2026 with SW gusts to 40-50 mph.\n\nAnchoring products:\n- Tractor Supply sells a 4-pack of 3/4 in x 48 in Tie Down earth anchors with 8 ft straps and bolts for $119.99.\n- The 48 in anchors are rated for soil classes 4A/4B.\n- Strap to the frame, not the body. Plan 6-8 anchors (estimate).",
+   "confidence": "medium",
+   "sources": [
+    "https://wp.sbcounty.gov/ezop/permits/grading/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/Purpose-of-Grading-Program-20231106.pdf",
+    "https://wp.sbcounty.gov/ezop/?p=209964",
+    "https://hellogravel.com/guides/gravel-delivery-costs-complete-2025-pricing-guide/",
+    "https://partner.kurlon.com/news/gravel-rv-pad-cost-price-guide-8211-adnan-painting-and-remodeling.html",
+    "https://tgftp.cp.ncep.noaa.gov/data/raw/ww/wwus75.kvef.npw.vef.txt",
+    "https://tgftp.ncep.noaa.gov/data/forecasts/zone/ca/caz525.txt",
+    "https://www.tractorsupply.com/tsc/product/tie-down-mobile-home-anchors-kit-4-pack-of-3-4-in-x-48-in-earth-anchors-with-straps-and-bolts-6067848",
+    "https://www.lowes.com/pd/48-Inch-Steel-Painted-Mobile-Home-Anchor-for-RVs-and-Mobile-Homes-Soil-Class-4A-Optimal-Helix-Design-Double-Headed-Strength/3437954"
+   ]
+  },
+  {
+   "title": "Shade ramada/RV cover is the highest-value desert upgrade, and it needs a permit",
+   "detail": "Steel RV cover prices:\n- Carport Central: RV covers up to 18 ft wide start at $8,442; 20-24 ft wide start at $7,254 (20x40).\n- Listed leg heights: 12-14 ft.\n- Certified (engineered for local loads) units cost more, and Carport Central says prices vary by state and freight.\n- Keen's: 18x40 enclosed lean-to A-frame, $12,895 installed.\n- A forum owner reports an 18x40x14 cover rated 140 mph / 35 psf at $9,611, plus about $4,000 of pad work (Arkansas).\n\nCounty permit and design rules:\n- A Residential Accessory permit is required for accessory structures over 120 sq ft, and patio covers are listed as permit items.\n- Bulletin IB-0003 (updated 1/1/2026) requires minimum wind Exposure C countywide and wind loads per CBC 1609 or ASCE 7-22 (120 mph where a special wind region is listed).\n- Expect stamped engineering and real footings.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.carportcentral.com/metal-rv-carport-prices",
+    "https://keensbuildings.com/metal-carports/18x40-carport/",
+    "https://www.mygrandrv.com/goto/post?id=738780",
+    "https://wp.sbcounty.gov/ezop/permits/residential-accessory/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0003-2025-Rainfall-Water-Flow.pdf"
+   ]
+  },
+  {
+   "title": "Skirting options",
+   "detail": "Vendor prices:\n- EZ Snap no-drill travel-trailer kits: $899-$2,099 (vendor).\n- Custom upholstery-shop skirts: about $3,000-$7,000 (vendor's claim).\n- AirSkirts inflatable: $1,899 (smallest) to $3,199 (45 ft).\n- Airstream-specific AirSkirts kit at Airstream Supply Co: $1,958.\n\nIn this climate, skirting mainly serves winter freeze protection, dust and rodent exclusion. In summer it should be vented.\n\nFor rodents, a rigid metal or hardware-cloth perimeter is more durable than vinyl or inflatable. DIY cost about $600-1,200 (estimate).",
+   "confidence": "medium",
+   "sources": [
+    "https://ezsnapdirect.com/collections/travel-trailer-skirting",
+    "https://ezsnapdirect.com/rv-skirting-the-how-to-and-what-is-questions-and-answers/",
+    "https://rvinspiration.com/cold-weather-rving/airskirts-review/",
+    "https://airstreamsupplycompany.com/collections/all/products/airstream-inflatable-skirt-kits-by-airskirts"
+   ]
+  },
+  {
+   "title": "Power: solar/battery vs generator vs temporary grid",
+   "detail": "Load:\n- A 15k BTU rooftop A/C runs about 12.3-13.4 A (roughly 1,500 W), with 63-70 A locked-rotor current (owner and forum data).\n- Two units running 10-12 hr/day is about 30-36 kWh/day (my calculation).\n\nSolar kits:\n- Santan Solar EG4 6000XP + 10.24 kWh + 5.8 kW PV: $6,057. With a 7.2 kW array: $7,310.\n- Signature Solar 2x6000XP + 20.48 kWh + 12.8 kW PV: $12,866.86.\n\nPortable and generator options:\n- EcoFlow DELTA Pro 3: $2,399 on Amazon (Jul 2026), list $3,699.\n- Honda EU2200i: about $799-$1,000. EU3200i: about $2,349 (listings).\n\nGrid temporary power:\n- Fixr's national estimate: $1,700-4,500 for a temporary pole, plus a $450-750 utility hookup.\n- The county span-pole electrical permit is $156 plus $57 intake.\n- I found no SCE-specific price, and the line-extension cost to a raw lot is unknown.\n\nThe 30% federal residential solar credit expired for systems placed in service after 12/31/2025.",
+   "confidence": "medium",
+   "sources": [
+    "https://community.goodsam.com/discussions/technicalissues/newer-heat-pumps-and-generator-use/3021602",
+    "https://community.goodsam.com/discussions/technicalissues/need-help-diagnosing-roof-ac/2482622",
+    "https://www.santansolar.com/?p=105017",
+    "https://www.santansolar.com/product-category/solar-kits/off-grid-kits",
+    "https://signaturesolar.com/complete-all-in-one-off-grid-solar-kit-kit-e0000",
+    "https://camelcamelcamel.com/product/B0D14FMFZD",
+    "https://www.ebay.com/itm/358366256605",
+    "https://www.fixr.com/costs/temporary-power",
+    "https://www.irs.gov/credits-deductions/residential-clean-energy-credit"
+   ]
+  },
+  {
+   "title": "Water until meter or well",
+   "detail": "Storage and pumping:\n- 1,550-gal vertical poly tank: $1,599.99 at Tractor Supply, $1,955.15 at Gregson Clark (freight).\n- Shurflo 4008 3.0 GPM 12 V pump: $69-$101.56.\n- Seaflo 42-series 4.0 GPM pump: $68.99.\n\nHauling:\n- I found no Hi-Desert Water District bulk or hauling rate. Call HDWD at 760-365-8333.\n- Benchmarks from elsewhere: $104 per 2,000 gal (a Colorado district); $150-300 per 2,500 gal delivery (Fresno, 2014).\n\nThe permit may require a water will-serve letter. A two-person RV household using 30-50 gal/day needs one 2,000-gal delivery a month or less (estimate).",
+   "confidence": "medium",
+   "sources": [
+    "https://tractorsupply.com/tsc/product/liquid-storage-tank-1550-gal",
+    "https://gregsonclark.com/collections/all/products/1500-gallon-vertical-tank",
+    "https://www.walmart.com/c/brand/shurflo-collection",
+    "https://www.walmart.com/c/kp/seaflo",
+    "https://rainbowvalleywd.colorado.gov/cost-of-water-deliveries",
+    "https://abc30.com/218373",
+    "https://www.hdwd.com/"
+   ]
+  },
+  {
+   "title": "Sewage: pump-out contract vs early septic; Yucca Valley septic prohibition",
+   "detail": "Pump-out:\n- The county requires a pumping contract for a self-contained unit.\n- Directory-listed local pumpers: Desert Septic Systems, ACE Pumping, Action Pumping, ASAP Pumping, and Roto-Rooter (Yucca Valley). Confirm each will service RV or holding tanks.\n- Mobile pump-out cost is only available from generic sources: about $100-$650 per visit.\n- Trailer tanks are small (39 gal black/gray on the Flying Cloud; 45 black / 82 gray on the Imagine). A larger auxiliary holding tank, or frequent visits, will be needed. Budget $250-700/month (estimate).\n\nSeptic:\n- County OWTS approval runs through Environmental Health. EHS observation of perc tests is billed hourly, and the report is submitted via EZOP.\n- Installing the house's septic first and connecting the trailer to it (if EHS approves) removes most of the monthly pump-out cost.\n\nTown of Yucca Valley:\n- The Regional Water Board's Septic Tank Prohibition (2011) applies to the Town. HDWD is entering Phase II sewer. Check the lot at yvsewermap.com.\n- Separately, a lot inside Town limits falls under the Town's permits, not the County's.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://www.mylocalservices.com/Desert+Septic+Systems-Yucca+Valley-California-21231541.html",
+    "https://www.fixr.com/costs/septic-tank-cleaning",
+    "https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/percolation-testing-and-reporting-standards-for-onsite-wastewater-treatment-systems.pdf",
+    "https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/owts-flowchart.pdf",
+    "https://www.waterboards.ca.gov/rwqcb7/water_issues/programs/basin_planning/docs/yuccavalley/prohibition-enforcement-faq.pdf"
+   ]
+  },
+  {
+   "title": "Internet (Starlink) pricing, Oct 2026",
+   "detail": "Starlink Residential (affiliate review updated Oct 6, 2026):\n- 100 Mbps: $55/mo.\n- 200 Mbps: $85/mo.\n- MAX: $130/mo.\n- Standard kit: $349, or free rental in select regions (must be returned on cancel).\n\nRoam plans: 100 GB $55, 300 GB $80, Unlimited $175.\n\nCongestion surcharges of $100-$1,500 may apply in some areas. Prices vary by address, so confirm at checkout.\n\nFor a fixed lot, Residential beats Roam.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.satelliteinternet.com/providers/starlink/",
+    "https://usmobile.com/blog/starlink-cost"
+   ]
+  },
+  {
+   "title": "Cooling: limits of RV A/C and upgrade costs",
+   "detail": "How much rooftop A/C can do:\n- Rooftop units typically drop the air passing through them 18-25\u00b0F (RVTravel).\n- One dealer says a single 13.5k unit struggles above 95\u00b0F, especially in rigs over 25 ft.\n- Airxcel's manual says when a temperature can't be held, heat gain exceeds capacity, and recommends shade.\n\nUpgrade prices:\n- Coleman Mach 15: $1,063-$1,313.\n- Furrion Chill Cube 18K heat pump: $1,299-$1,714 (ducted kit).\n- Dicor white EPDM roof coating: $109/gal. Dicor 401-CK-D kit: $243. Dicor Roof Renew kit: $515.\n- Do not put acrylic over silicone coatings.\n\nShade from a ramada does more than any roof coating.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.rvtravel.com/how-well-is-your-rv-air-conditioner-working/",
+    "https://www.thorforums.com/threads/ac-temperature.407457/",
+    "https://www.elmonterv.com/rv-sales/blog/essential-rv-features-socal-heat",
+    "https://forestriverinc.com/files/Component-Manuals/Heating%20-%20Air%20Conditioning/RVP%20(Airxcel)%20-%20Air%20Conditioner%20Model%2048000%20Series%20Operation%20Manual.pdf",
+    "https://www.campingworld.com/coleman-mach-15-air-conditioner-signature-series-roughneck-15k-btu-122255.html",
+    "https://www.etrailer.com/p-CM49RR.html",
+    "https://elkhartrvparts.com/products/furrion-chill-cube-variable-speed-rv-rooftop-air-conditioner-18k-btu-heat-pump-black-ducted-2025008215",
+    "https://www.walmart.com/c/brand/dicor-collection",
+    "https://shopliquidrubber.com/pages/rv-camper-trailer-roof-coating-faq"
+   ]
+  },
+  {
+   "title": "Budget roll-up and net cost (estimates built from cited prices)",
+   "detail": "Upfront cost (trailer + tax + DMV + inspection + transport + repairs + permits + site setup):\n- A: about $23-58k (mid about $40k).\n- B: about $69-130k (mid about $93k).\n- C: about $140-263k (mid about $193k).\n\nMonthly running cost (pump-out, water hauling, propane, fuel, insurance, Starlink, maintenance reserve, prorated permit renewal and DMV):\n- With pump-out: about $1,150 (A), $1,085 (B), $1,180 (C).\n- With septic first: about $700 / $635 / $730.\n\nNet cost = upfront + running \u2212 trailer resale \u2212 value of infrastructure reused for the house. Reused value: A about $5k; B about $24k (solar, tank, pad, part of the ramada); C about $40k.\n\nNet cost with pump-out:\n- A: 1 yr about $31k, 2 yr about $47k, 3 yr about $62k.\n- B: 1 yr about $46k, 2 yr about $63k, 3 yr about $79k.\n- C: 1 yr about $70k, 2 yr about $92k, 3 yr about $113k.\n\nA septic-first plan cuts about $5.4k per year from each tier.\n\nTier C ties up about $190k in cash during the house build.",
+   "confidence": "low",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf",
+    "https://www.dmv.ca.gov/portal/vehicle-registration/registration-fees/",
+    "https://www.carportcentral.com/metal-rv-carport-prices",
+    "https://www.santansolar.com/?p=105017",
+    "https://tractorsupply.com/tsc/product/liquid-storage-tank-1550-gal",
+    "https://www.satelliteinternet.com/providers/starlink/"
+   ]
+  },
+  {
+   "title": "Desert failure points and fixes",
+   "detail": "1. Roof seals:\n- UV breaks down lap sealant at vents, A/C and skylight penetrations, and EPDM chalks.\n- Fix: inspect every season, reseal with a compatible sealant, recoat with a reflective EPDM-compatible coating ($109/gal), and above all shade the roof.\n\n2. Tires:\n- UV and ozone crack tires even when the trailer is parked.\n- Fix: use tire covers, take weight off tires with frame jack stands (not stabilizers), and replace before moving the trailer (general guidance: 5-7 yr age limit, estimate $600-1,200).\n\n3. A/C capacity:\n- Rooftop units only manage an 18-25\u00b0F drop at the vents.\n- Fix: ramada shade, a second A/C (Imagine is prewired), a soft-start for generator or inverter use, reflective window inserts, and sealing gaps.\n\n4. Black-tank smell in heat:\n- Heat speeds gas production, and dry air empties P-traps fast.\n- Fix: keep the black valve closed until about 2/3 full, use plenty of water and enzyme treatment, add an anti-downdraft vent cap, run water in traps or fit waterless trap valves, and check the toilet seal (general practice).\n\n5. Rodents (pack rats and mice) chew wiring and propane hoses:\n- Fix: 1/4 in hardware-cloth skirting buried 6-12 in, copper mesh and foam at penetrations, no outdoor food, clear brush, and traps.\n\n6. Wind (40-50 mph gusts):\n- Never leave a power awning out unattended, anchor the frame, and point the hitch into the prevailing SW/W wind.\n\n7. Freezing nights:\n- Use heated, enclosed tanks (Imagine, Arctic Fox), a heated fresh-water hose, and skirting in winter.\n- Lithium batteries must not charge below freezing; keep them in a shaded, insulated, ventilated box.\n\n8. Dust:\n- Clean A/C and furnace filters monthly and lubricate slide seals.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.rvtravel.com/how-well-is-your-rv-air-conditioner-working/",
+    "https://shopliquidrubber.com/pages/rv-camper-trailer-roof-coating-faq",
+    "https://tgftp.cp.ncep.noaa.gov/data/raw/ww/wwus75.kvef.npw.vef.txt",
+    "https://www.lazydays.com/rvs/tampa-fl/travel-trailer/new/2026/grand-design-imagine-109343",
+    "https://ezsnapdirect.com/rv-skirting-the-how-to-and-what-is-questions-and-answers/"
+   ]
+  },
+  {
+   "title": "Items NOT verified (search budget exhausted): labeled estimates",
+   "detail": "I could not verify these against sources, so the budgets use my estimates:\n- Propane: SoCal delivered or refill, assumed $3.50-5.00/gal. Winter furnace use about 1-3 gal/day; 1 gal is about 91,500 BTU.\n- Full-time RV insurance: A $50-100, B $80-150, C $125-250 per month.\n- Independent NRVIA-type inspection: $400-1,200.\n- RV transport: about $2-4/mile; local dealer delivery $300-1,500.\n- Conventional septic installation in the high desert: roughly $15-35k.\n- Cellular or solar security cameras: $150-350 each, plus $5-15/mo data.\n- Generator fuel: about 0.2-0.3 gal/hr for a 3-4.5 kW inverter generator at mid load.\n\nGet quotes before committing.",
+   "confidence": "low",
+   "sources": []
+  }
+ ],
+ "products": [
+  {
+   "name": "2026 Airstream Flying Cloud 25FB Queen (Rear Hatch)",
+   "category": "Tier C trailer",
+   "condition": "new",
+   "price_low": 121900,
+   "price_high": 135200,
+   "specs": "26 ft 2 in L x 8 ft 6 in W; about 5,650 lb dry; GVWR 7,300 lb; tanks 39 fresh / 39 gray / 39 black gal; 15k BTU A/C",
+   "source": "https://www.jdpower.com/rvs/2026/airstream/m-25fb-queen-rear-hatch/6644305/values ; https://www.rvuniverse.com/listing/for-sale/257279247/2026-airstream-flying-cloud-25fb-travel-trailers?print=1",
+   "why": "Riveted aluminum shell, good resale, a classic high-key silver look; right size for two people. Price range is MSRP; street price runs lower."
+  },
+  {
+   "name": "2026 Airstream Globetrotter 25FBQ / 27FB",
+   "category": "Tier C trailer",
+   "condition": "new",
+   "price_low": 141900,
+   "price_high": 151150,
+   "specs": "Prices are MSRPs from dealer listings (Tucson, Jacksonville)",
+   "source": "https://www.lazydays.com/rvs/tucson-az/travel-trailer/new/2026/airstream-globetrotter-114337 ; https://www.rvusa.com/2026-airstream-globetrotter-27fb-travel-trailer-5228184",
+   "why": "Upgraded Airstream finishes; a stretch option for Tier C."
+  },
+  {
+   "name": "2026 Airstream Classic 30RB",
+   "category": "Tier C+ trailer",
+   "condition": "new",
+   "price_low": 146995,
+   "price_high": 207400,
+   "specs": "MSRP $198,400 (J.D. Power) to $207,400; Blue Compass sale price $146,995 against a $200,900 MSRP",
+   "source": "https://www.jdpower.com/rvs/2026/airstream/m-30rb-queen/6644346/values ; https://www.rvuniverse.com/listing/for-sale/255466989/2026-airstream-classic-30rb-travel-trailers",
+   "why": "Shows how deep Airstream dealer discounts can go; above budget at MSRP."
+  },
+  {
+   "name": "Oliver Legacy Elite II (2027 lineup)",
+   "category": "Tier C trailer",
+   "condition": "new",
+   "price_low": 85000,
+   "price_high": 100000,
+   "specs": "24 ft; 4,900 lb; GVWR 7,000 lb; tandem axle; double-hull fiberglass; Standard $85k / Premium $90k / Platinum $100k, no haggle; up to 1,360 W solar and 640 Ah lithium optional",
+   "source": "https://olivertraveltrailers.com/?p=30727 ; https://olivertraveltrailers.com/blog/oliver-legacy-elite-ii-vs-forest-river-ibex/",
+   "why": "Seamless fiberglass hull resists UV leaks and rodent entry better than stick-and-tin; holds value. Sold factory-direct, so add transport."
+  },
+  {
+   "name": "2026 Northwood Arctic Fox NXT 22GT",
+   "category": "Tier B/C four-season trailer",
+   "condition": "new",
+   "price_low": 73900,
+   "price_high": 89900,
+   "specs": "23.9 ft; 5,910 lb; true four-season heated and enclosed tanks",
+   "source": "https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-22gt-3585295-29",
+   "why": "Best insulation for 100\u00b0F+ summers and freezing nights at a mid price."
+  },
+  {
+   "name": "2026 Grand Design Imagine 2600RB",
+   "category": "Tier B trailer",
+   "condition": "new",
+   "price_low": 37989,
+   "price_high": 59652,
+   "specs": "29 ft 8 in; 6,624 lb dry; tanks 45 fresh / 82 gray / 45 black gal; heated enclosed underbelly; 50 A service; prewired for 2nd A/C; 30k BTU furnace",
+   "source": "https://www.lazydays.com/rvs/tampa-fl/travel-trailer/new/2026/grand-design-imagine-109343 ; https://www.campersinn.com/product/new-2026-grand-design-imagine-2600rb-3477964-29",
+   "why": "Large discount off MSRP; big gray tank; 2nd A/C ready. Sale price includes a finance-contingent incentive."
+  },
+  {
+   "name": "Lance 2185 (2026, used)",
+   "category": "Tier B trailer",
+   "condition": "used",
+   "price_low": 49900,
+   "price_high": 49900,
+   "specs": "Blue Compass list price",
+   "source": "https://www.bluecompassrv.com/product/used-2026-lance-lance-travel-trailers-2185-3776056-29",
+   "why": "Well-built aluminum-frame trailer, nearly new."
+  },
+  {
+   "name": "2016 Airstream Flying Cloud 25FB",
+   "category": "Tier B trailer",
+   "condition": "used",
+   "price_low": 48800,
+   "price_high": 58800,
+   "specs": "J.D. Power low retail $48,800 / average retail $58,800",
+   "source": "https://www.jdpower.com/rvs/2016/airstream/m-25fb/6549744/values",
+   "why": "Airstream look and resale at a mid-tier price."
+  },
+  {
+   "name": "2018 Northwood Arctic Fox 25Y",
+   "category": "Tier A/B four-season trailer",
+   "condition": "used",
+   "price_low": 29000,
+   "price_high": 34999,
+   "specs": "Asking prices in MT, ID and AZ",
+   "source": "https://www.rvpark.com/rvs/6914385-2018-arctic-fox-25-y-for-sale-in-helena-mt ; https://www.rvpark.com/rvs/7020809-2018-arctic-fox-25-y-for-sale-in-dalton-gardens-id ; https://www.rvusa.com:443/2018-northwood-arctic-fox-25y-travel-trailer-4089321",
+   "why": "Four-season build at a used price; budget transport to California."
+  },
+  {
+   "name": "2019 Grand Design Imagine (various floorplans)",
+   "category": "Tier A trailer",
+   "condition": "used",
+   "price_low": 16209,
+   "price_high": 28995,
+   "specs": "Median asking price $19,878 (6 listings)",
+   "source": "https://searchshop.com/rv/model/grand-design/imagine/2019",
+   "why": "Mainstream build with good parts availability."
+  },
+  {
+   "name": "2017 Jayco Jay Flight (various floorplans)",
+   "category": "Tier A trailer",
+   "condition": "used",
+   "price_low": 11985,
+   "price_high": 17995,
+   "specs": "Median asking price $13,999",
+   "source": "https://searchshop.com/rv/model/jayco/jay-flight/2017",
+   "why": "Lowest entry cost; plan for roof and seal work."
+  },
+  {
+   "name": "Tie Down 3/4 in x 48 in earth anchor kit (4-pack with straps and bolts)",
+   "category": "Wind anchoring",
+   "condition": "new",
+   "price_low": 119.99,
+   "price_high": 119.99,
+   "specs": "Double-head double-helix anchors (59086), 8 ft G-60 straps, slotted bolts; soil class 4A/4B",
+   "source": "https://www.tractorsupply.com/tsc/product/tie-down-mobile-home-anchors-kit-4-pack-of-3-4-in-x-48-in-earth-anchors-with-straps-and-bolts-6067848",
+   "why": "Buy two kits for 6-8 frame tie-downs against 40-50 mph gusts."
+  },
+  {
+   "name": "EZ Snap travel trailer skirting kit",
+   "category": "Skirting",
+   "condition": "new",
+   "price_low": 899,
+   "price_high": 2099,
+   "specs": "No-drill, cut-to-fit; 46 in or 60 in heights",
+   "source": "https://ezsnapdirect.com/collections/travel-trailer-skirting",
+   "why": "Removable winter and dust skirt."
+  },
+  {
+   "name": "AirSkirts inflatable skirt (Airstream kit)",
+   "category": "Skirting",
+   "condition": "new",
+   "price_low": 1899,
+   "price_high": 3199,
+   "specs": "Airstream kit $1,958 at Airstream Supply Co; 5-yr warranty",
+   "source": "https://airstreamsupplycompany.com/collections/all/products/airstream-inflatable-skirt-kits-by-airskirts ; https://rvinspiration.com/cold-weather-rving/airskirts-review/",
+   "why": "Insulating winter skirt; check UV and rodent durability."
+  },
+  {
+   "name": "Carport Central steel RV cover (20x40 to 24x41)",
+   "category": "Shade structure",
+   "condition": "new",
+   "price_low": 7254,
+   "price_high": 12895,
+   "specs": "12-14 ft leg heights; certified versions cost more. Upper figure is Keen's 18x40 enclosed lean-to, installed",
+   "source": "https://www.carportcentral.com/metal-rv-carport-prices ; https://keensbuildings.com/metal-carports/18x40-carport/",
+   "why": "Shades the roof and A/C; needs an Exposure C engineered design and a county accessory permit."
+  },
+  {
+   "name": "EG4 6000XP + 10.24 kWh LiFePO4 + 5.8-7.2 kW PV kit",
+   "category": "Solar + battery",
+   "condition": "new",
+   "price_low": 6057,
+   "price_high": 7310,
+   "specs": "6 kW 48 V inverter, 8 kW PV input, 10.24 kWh battery",
+   "source": "https://www.santansolar.com/?p=105017 ; https://www.santansolar.com/product-category/solar-kits/off-grid-kits",
+   "why": "Whole-home-grade system that can move to the 640 sq ft house later."
+  },
+  {
+   "name": "EG4 2x6000XP + 20.48 kWh + 12.8 kW PV kit",
+   "category": "Solar + battery",
+   "condition": "new",
+   "price_low": 12866.86,
+   "price_high": 12866.86,
+   "specs": "About 12 kW inverter capacity; 20.48 kWh storage",
+   "source": "https://signaturesolar.com/complete-all-in-one-off-grid-solar-kit-kit-e0000",
+   "why": "Tier C: runs two A/Cs on summer days and carries over to the house."
+  },
+  {
+   "name": "EcoFlow DELTA Pro 3",
+   "category": "Portable power station",
+   "condition": "new",
+   "price_low": 1998.99,
+   "price_high": 3699,
+   "specs": "4,096 Wh, 4,000 W output (8,000 W surge), expandable",
+   "source": "https://camelcamelcamel.com/product/B0D14FMFZD",
+   "why": "Plug-and-play Tier A option for nights and fridge loads."
+  },
+  {
+   "name": "Honda EU2200i / EU3200i inverter generators",
+   "category": "Generator",
+   "condition": "new",
+   "price_low": 799,
+   "price_high": 2349,
+   "specs": "2.2 kW and 3.2 kW; listing prices",
+   "source": "https://www.ebay.com/itm/358366256605 ; https://www.cherrypicksreviews.com/generators/honda",
+   "why": "Backup power until the grid connection; one 15k A/C needs a soft-start on the 2.2."
+  },
+  {
+   "name": "Coleman Mach 15 rooftop A/C",
+   "category": "Cooling",
+   "condition": "new",
+   "price_low": 1062.8,
+   "price_high": 1313.33,
+   "specs": "15,000 BTU",
+   "source": "https://www.etrailer.com/p-CM49RR.html ; https://www.campingworld.com/coleman-mach-15-air-conditioner-signature-series-roughneck-15k-btu-122255.html",
+   "why": "Second or replacement A/C for heat above 100\u00b0F."
+  },
+  {
+   "name": "Furrion Chill Cube 18K variable-speed heat pump",
+   "category": "Cooling",
+   "condition": "new",
+   "price_low": 1299,
+   "price_high": 1713.72,
+   "specs": "18,000 BTU; heat pump; ducted and non-ducted versions",
+   "source": "https://elkhartrvparts.com/products/furrion-chill-cube-variable-speed-rv-rooftop-air-conditioner-18k-btu-heat-pump-black-ducted-2025008215",
+   "why": "More capacity, and the heat pump cuts propane use on winter nights."
+  },
+  {
+   "name": "Dicor white EPDM roof coating / roof kits",
+   "category": "Roof maintenance",
+   "condition": "new",
+   "price_low": 109.43,
+   "price_high": 514.73,
+   "specs": "1-gal coating $109; 401-CK-D kit $243; RP-RRK-30 Renew kit $515",
+   "source": "https://www.walmart.com/c/brand/dicor-collection",
+   "why": "Reflective recoat and resealing for UV-damaged roofs."
+  },
+  {
+   "name": "1,550-gal vertical poly water tank",
+   "category": "Water",
+   "condition": "new",
+   "price_low": 1599.99,
+   "price_high": 1955.15,
+   "specs": "Tie-down slots, gallon indicators, vented lid",
+   "source": "https://tractorsupply.com/tsc/product/liquid-storage-tank-1550-gal ; https://gregsonclark.com/collections/all/products/1500-gallon-vertical-tank",
+   "why": "About a month of hauled water for two people; buy dark-colored and shade it."
+  },
+  {
+   "name": "Shurflo 4008 3.0 GPM 12 V pump / Seaflo 42-series 4.0 GPM",
+   "category": "Water",
+   "condition": "new",
+   "price_low": 68.99,
+   "price_high": 101.56,
+   "specs": "12 V diaphragm on-demand pumps",
+   "source": "https://www.walmart.com/c/brand/shurflo-collection ; https://www.walmart.com/c/kp/seaflo",
+   "why": "Pumps water from the tank to the trailer."
+  },
+  {
+   "name": "Starlink Residential (100 / 200 / MAX)",
+   "category": "Internet",
+   "condition": "new",
+   "price_low": 55,
+   "price_high": 130,
+   "specs": "Per month; kit $349 or free rental in select regions",
+   "source": "https://www.satelliteinternet.com/providers/starlink/",
+   "why": "Fixed-address plan is cheaper than Roam."
+  }
+ ],
+ "design_numbers": [
+  "Temporary Structure Permit: 12-month term, renewable in 12-month steps, max 5 years; inspection must be called within 180 days; requires an issued house building permit first",
+  "SB County FY2026-27 fees: TSP initial $301; renewal $257; temporary RV site $261; manufactured home/coach $603; temporary power span pole $156; intake processing $57; ground-mount PV plan review $225 (FY25-26 permit fee $225)",
+  "Grading permit trigger: more than 100 cu yd cut+fill (county grading pages); erosion-control page cites 50 cu yd",
+  "Accessory structure permit: required above 120 sq ft (a ramada or RV cover over a trailer is about 700-1,000 sq ft)",
+  "County IB-0003 (1/1/2026): minimum wind Exposure C; wind per CBC 1609 / ASCE 7-22; special wind region 120 mph where listed; rainfall 2.5 in/hr (100-yr)",
+  "NWS Morongo Basin wind advisories, spring 2026: SW 20-30 mph with gusts to 40-50 mph",
+  "DMV: registration $76 + CHP $34 + VLF 0.65% of value + TIF $33/$66/$132/$198/$231 by value band + county fees",
+  "Sales tax, Town of Yucca Valley: 8.75%; unincorporated rate may differ (confirm with CDTFA)",
+  "Rooftop A/C 15k BTU: about 12.3-13.4 A running (about 1,500 W), 63-70 A locked rotor; vent temperature drop 18-25\u00b0F",
+  "Two A/Cs running 10-12 hr/day: about 30-36 kWh/day (estimate)",
+  "Airstream Flying Cloud 25FB: 26 ft 2 in L, 8 ft 6 in W, about 5,650 lb dry, GVWR 7,300 lb, tanks 39/39/39 gal",
+  "Grand Design Imagine 2600RB: 29 ft 8 in L, 6,624 lb dry, tanks 45/82/45 gal, 50 A, prewired for 2nd A/C",
+  "Oliver Legacy Elite II: 24 ft, 4,900 lb, GVWR 7,000 lb",
+  "Arctic Fox NXT 22GT: 23.9 ft, 5,910 lb",
+  "Suggested pad: about 16 x 50 ft trailer bay plus a 12 x 24 ft deck zone; 4-6 in compacted crushed base; 1,200 sq ft x 4 in is about 15 cu yd, about 20-22 tons (estimate)",
+  "RV cover/ramada: 24 x 41 ft with 13-14 ft legs to clear rooftop A/C and vent heat; extend 8-10 ft past the trailer's door side to shade the deck (estimate)",
+  "Anchors: 48 in helix earth anchors (soil class 4A/4B); 6-8 frame tie-downs (estimate)",
+  "Water: 1,550-gal tank holds about 30-50 days for two people at 30-50 gal/day (estimate)",
+  "Holding-tank math: black about 5 gal/day + gray about 25 gal/day, about 900 gal/month for two people (estimate)",
+  "Starlink Residential: $55 / $85 / $130 per month; kit $349 or free rental",
+  "Propane: 1 gal is about 91,500 BTU; a 30k BTU RV furnace at about 33% duty for 12 hr uses about 1.3 gal/night (estimate)",
+  "EG4 6000XP: 6 kW AC output, 8 kW PV input, 48 V battery bus"
+ ],
+ "costs": [
+  {
+   "item": "Tier A - used trailer purchase",
+   "low_usd": 12000,
+   "high_usd": 28000,
+   "notes": "Jay Flight median about $14k; Imagine 2019 median about $19.9k; Arctic Fox 25Y $29-35k (listings)"
+  },
+  {
+   "item": "Tier A - sales/use tax (about 8.75%)",
+   "low_usd": 1050,
+   "high_usd": 2450,
+   "notes": "Town of Yucca Valley rate; unincorporated may be lower"
+  },
+  {
+   "item": "Tier A - DMV first-year fees",
+   "low_usd": 250,
+   "high_usd": 400,
+   "notes": "$76 + $34 + 0.65% VLF + TIF + county"
+  },
+  {
+   "item": "Tier A - independent inspection",
+   "low_usd": 400,
+   "high_usd": 800,
+   "notes": "Estimate, not verified"
+  },
+  {
+   "item": "Tier A - transport to lot",
+   "low_usd": 300,
+   "high_usd": 3000,
+   "notes": "Estimate; the high end covers an out-of-state four-season unit"
+  },
+  {
+   "item": "Tier A - immediate repairs (tires, reseal, A/C service)",
+   "low_usd": 800,
+   "high_usd": 2500,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Tier A - county permits (TSP + RV site + temp power)",
+   "low_usd": 600,
+   "high_usd": 800,
+   "notes": "FY26-27 fee schedule"
+  },
+  {
+   "item": "Tier A - pad and gravel",
+   "low_usd": 1500,
+   "high_usd": 2500,
+   "notes": "DIY with rental equipment (estimate from guides)"
+  },
+  {
+   "item": "Tier A - tie-downs",
+   "low_usd": 300,
+   "high_usd": 500,
+   "notes": "2 x $119.99 kits + jack stands"
+  },
+  {
+   "item": "Tier A - skirting (DIY metal + hardware cloth)",
+   "low_usd": 600,
+   "high_usd": 1200,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Tier A - shade (shade-cloth ramada on posts)",
+   "low_usd": 1500,
+   "high_usd": 4000,
+   "notes": "Estimate; must be engineered for wind"
+  },
+  {
+   "item": "Tier A - deck and steps",
+   "low_usd": 600,
+   "high_usd": 1500,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Tier A - power (inverter generator + power station or small solar)",
+   "low_usd": 1500,
+   "high_usd": 4500,
+   "notes": "Honda $799-2,349; DELTA Pro 3 about $2,399"
+  },
+  {
+   "item": "Tier A - water tank + pump",
+   "low_usd": 800,
+   "high_usd": 2000,
+   "notes": "$1,600 tank or totes; $69 pump"
+  },
+  {
+   "item": "Tier A - sewage setup (aux tank/hoses) + pump-out contract",
+   "low_usd": 300,
+   "high_usd": 1500,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Tier A - propane, Starlink kit, cooling extras, security",
+   "low_usd": 850,
+   "high_usd": 2450,
+   "notes": "Starlink kit $0-349; other items estimated"
+  },
+  {
+   "item": "Tier A - TOTAL upfront",
+   "low_usd": 23000,
+   "high_usd": 58000,
+   "notes": "Midpoint about $40k"
+  },
+  {
+   "item": "Tier B - trailer purchase",
+   "low_usd": 35000,
+   "high_usd": 65000,
+   "notes": "Imagine 2600RB $37,989 sale; Lance 2185 used $49,900; 2016 Flying Cloud about $58,800"
+  },
+  {
+   "item": "Tier B - tax + DMV + inspection + delivery",
+   "low_usd": 4300,
+   "high_usd": 8900,
+   "notes": "8.75% tax; DMV about $550-850; delivery estimate"
+  },
+  {
+   "item": "Tier B - 2nd A/C + permits (TSP, temp power, PV)",
+   "low_usd": 2300,
+   "high_usd": 4500,
+   "notes": "Mach 15 / Chill Cube $1.06-1.71k; county fees"
+  },
+  {
+   "item": "Tier B - pad, tie-downs, EZ Snap skirting",
+   "low_usd": 4100,
+   "high_usd": 7300,
+   "notes": "EZ Snap $899-2,099"
+  },
+  {
+   "item": "Tier B - certified steel RV cover 20x40, installed, with permit/engineering",
+   "low_usd": 8500,
+   "high_usd": 15500,
+   "notes": "From $7,254 (Carport Central); Keen's $12,895 installed; permit and footings estimated"
+  },
+  {
+   "item": "Tier B - deck and steps",
+   "low_usd": 2500,
+   "high_usd": 5000,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Tier B - solar 5.8-7.2 kW + 10.24 kWh + install + backup generator",
+   "low_usd": 7000,
+   "high_usd": 16000,
+   "notes": "Kit $6,057-7,310 + install estimate"
+  },
+  {
+   "item": "Tier B - water 1,550 gal system",
+   "low_usd": 2200,
+   "high_usd": 3500,
+   "notes": "Tank $1,600-1,955 + plumbing and heat trace"
+  },
+  {
+   "item": "Tier B - sewage, propane, Starlink, cooling extras, security",
+   "low_usd": 1800,
+   "high_usd": 4450,
+   "notes": "Mostly estimates"
+  },
+  {
+   "item": "Tier B - TOTAL upfront",
+   "low_usd": 69000,
+   "high_usd": 130000,
+   "notes": "Midpoint about $93k"
+  },
+  {
+   "item": "Tier C - trailer purchase",
+   "low_usd": 85000,
+   "high_usd": 150000,
+   "notes": "Oliver $85-100k; Flying Cloud MSRP $121.9-135.2k (street lower); Globetrotter MSRP $141.9-151.2k"
+  },
+  {
+   "item": "Tier C - tax + DMV + inspection + delivery",
+   "low_usd": 8700,
+   "high_usd": 20300,
+   "notes": "8.75% tax; DMV about $800-1,400; Oliver transport from the factory is the high end"
+  },
+  {
+   "item": "Tier C - site: pad, anchors, skirting, permits",
+   "low_usd": 7100,
+   "high_usd": 12000,
+   "notes": "AirSkirts Airstream kit $1,958"
+  },
+  {
+   "item": "Tier C - 24x41 ramada / custom shade with lattice screens",
+   "low_usd": 13000,
+   "high_usd": 30000,
+   "notes": "Steel cover plus custom screens; estimate"
+  },
+  {
+   "item": "Tier C - deck",
+   "low_usd": 6000,
+   "high_usd": 12000,
+   "notes": "Estimate"
+  },
+  {
+   "item": "Tier C - solar 12.8 kW + 20.48 kWh installed",
+   "low_usd": 13000,
+   "high_usd": 22000,
+   "notes": "Kit $12,867 + install estimate"
+  },
+  {
+   "item": "Tier C - water, sewage, propane, Starlink, cooling, security",
+   "low_usd": 5400,
+   "high_usd": 13350,
+   "notes": "Mostly estimates"
+  },
+  {
+   "item": "Tier C - TOTAL upfront",
+   "low_usd": 140000,
+   "high_usd": 263000,
+   "notes": "Midpoint about $193k"
+  },
+  {
+   "item": "Monthly - sewage pump-out (holding-tank scenario)",
+   "low_usd": 250,
+   "high_usd": 700,
+   "notes": "Generic $100-650 per visit; about 900 gal/month (estimate)"
+  },
+  {
+   "item": "Monthly - hauled water",
+   "low_usd": 100,
+   "high_usd": 300,
+   "notes": "Benchmarks: $104/2,000 gal (CO); $150-300/2,500 gal (Fresno 2014)"
+  },
+  {
+   "item": "Monthly - propane",
+   "low_usd": 20,
+   "high_usd": 250,
+   "notes": "Summer low, winter high (estimate)"
+  },
+  {
+   "item": "Monthly - generator fuel",
+   "low_usd": 0,
+   "high_usd": 400,
+   "notes": "Tier A summer high end; B and C near zero with solar or grid (estimate)"
+  },
+  {
+   "item": "Monthly - insurance",
+   "low_usd": 50,
+   "high_usd": 250,
+   "notes": "A $50-100; B $80-150; C $125-250 (estimate, not verified)"
+  },
+  {
+   "item": "Monthly - Starlink",
+   "low_usd": 55,
+   "high_usd": 130,
+   "notes": "Residential tiers"
+  },
+  {
+   "item": "Monthly - permit renewal + DMV (prorated) + maintenance reserve",
+   "low_usd": 75,
+   "high_usd": 250,
+   "notes": "$257/yr renewal; DMV $300-1,300/yr"
+  },
+  {
+   "item": "Monthly TOTAL, holding-tank scenario",
+   "low_usd": 650,
+   "high_usd": 1700,
+   "notes": "Midpoints about $1,150 A / $1,085 B / $1,180 C"
+  },
+  {
+   "item": "Monthly TOTAL, septic-first scenario",
+   "low_usd": 400,
+   "high_usd": 1100,
+   "notes": "Midpoints about $700 A / $635 B / $730 C"
+  },
+  {
+   "item": "Tier A - resale after 2 yrs",
+   "low_usd": 10000,
+   "high_usd": 24000,
+   "notes": "About 75-85% of purchase price (estimate)"
+  },
+  {
+   "item": "Tier B - resale after 2 yrs",
+   "low_usd": 25000,
+   "high_usd": 45000,
+   "notes": "About 70% of purchase price (estimate)"
+  },
+  {
+   "item": "Tier C - resale after 2 yrs",
+   "low_usd": 66000,
+   "high_usd": 117000,
+   "notes": "About 78% of purchase price (estimate)"
+  },
+  {
+   "item": "Tier A - NET cost 1 / 2 / 3 yrs (pump-out)",
+   "low_usd": 31000,
+   "high_usd": 62000,
+   "notes": "About $31k / $47k / $62k; septic-first saves about $5.4k/yr"
+  },
+  {
+   "item": "Tier B - NET cost 1 / 2 / 3 yrs (pump-out)",
+   "low_usd": 46000,
+   "high_usd": 79000,
+   "notes": "About $46k / $63k / $79k after resale and about $24k reused infrastructure"
+  },
+  {
+   "item": "Tier C - NET cost 1 / 2 / 3 yrs (pump-out)",
+   "low_usd": 70000,
+   "high_usd": 113000,
+   "notes": "About $70k / $92k / $113k after resale and about $40k reused infrastructure"
+  }
+ ],
+ "risks": [
+  {
+   "risk": "Placing or occupying the trailer before the house building permit and Temporary Structure Permit are issued brings penalty fees and enforcement",
+   "severity": "high",
+   "mitigation": "Get the house permit issued first, then file the TSP in EZOP with the DMV registration, pumping contract and will-serve letters. Call the first inspection within 180 days."
+  },
+  {
+   "risk": "Lot is inside the Town of Yucca Valley: different permitting authority, a different tax rate, and the Septic Tank Prohibition area",
+   "severity": "high",
+   "mitigation": "Confirm jurisdiction from the APN. Check yvsewermap.com. Ask HDWD (760-365-8333) about sewer availability."
+  },
+  {
+   "risk": "Dangerous indoor heat: one rooftop A/C can't keep up above about 95-100\u00b0F, and off-grid solar or a small generator can't run two A/Cs all day",
+   "severity": "high",
+   "mitigation": "Build the ramada first, run two A/Cs, and get a temporary grid pole early (county span-pole permit $156). Size solar at 6-12 kW with 10-20 kWh of battery, or plan generator fuel costs. Have a heat-emergency plan."
+  },
+  {
+   "risk": "Wind damage (40-50 mph gusts) to awnings, slide-outs, shade sails and the trailer",
+   "severity": "high",
+   "mitigation": "Frame tie-downs with 48 in anchors, hitch into the prevailing SW/W wind, never leave awnings out unattended, and use an engineered Exposure C structure, not shade sails."
+  },
+  {
+   "risk": "Pump-out costs higher than budgeted because of small tanks and gray-water volume",
+   "severity": "medium",
+   "mitigation": "Install the house septic first and connect the trailer to it (with EHS approval). Otherwise use an auxiliary holding tank, a composting toilet, and water conservation. Get written quotes from local pumpers."
+  },
+  {
+   "risk": "Hidden water damage or delamination in a used trailer",
+   "severity": "high",
+   "mitigation": "Hire an independent inspection with a moisture meter and roof check before buying; walk away from soft floors or roof stains."
+  },
+  {
+   "risk": "Faster-than-expected depreciation from UV and full-time wear",
+   "severity": "medium",
+   "mitigation": "Shade structure, tire covers, a twice-yearly roof and seal routine, keep records; replace tires before selling."
+  },
+  {
+   "risk": "Insurance or warranty won't cover full-time or stationary use",
+   "severity": "medium",
+   "mitigation": "Disclose full-time stationary use when quoting. Check the manufacturer warranty for full-time-use exclusions before buying new."
+  },
+  {
+   "risk": "House build runs past the 5-year permit cap",
+   "severity": "medium",
+   "mitigation": "Phase the build so occupancy is reached inside the window; renew each year before expiration."
+  },
+  {
+   "risk": "Theft or vandalism of trailer, solar panels or batteries on a remote lot",
+   "severity": "medium",
+   "mitigation": "Cellular or Starlink cameras, a hitch or wheel lock, a locked battery enclosure, a gate, and good relations with neighbors."
+  },
+  {
+   "risk": "Several cost lines are unverified estimates (propane, insurance, inspection, transport, septic installation, cameras)",
+   "severity": "medium",
+   "mitigation": "Get 2-3 local quotes for each before committing to a tier."
+  },
+  {
+   "risk": "Rodents chew wiring and propane lines",
+   "severity": "medium",
+   "mitigation": "Hardware-cloth skirting buried 6-12 in, seal penetrations, no outdoor food, clear brush, monthly underbelly checks."
+  }
+ ],
+ "next_actions": [
+  "Confirm whether the parcel is in unincorporated San Bernardino County or the Town of Yucca Valley. This sets the permit authority, the sales tax rate, and whether the septic prohibition applies.",
+  "Call SB County Building & Safety (909-387-8311). Ask whether both the $301 TSP fee and the $261 RV-site fee apply, whether an auxiliary holding tank or a temporary connection to a new septic system is allowed, and how a temporary RV electrical hookup is inspected.",
+  "Decide septic-first vs pump-out: order the perc test through EHS, have the OWTS designed for the house with an RV cleanout near the pad, and compare that cost against 24-36 months of pump-outs ($3-8k per year).",
+  "Ask SCE for a temporary service and line-extension estimate. Pull the $156 county span-pole permit as soon as the house permit is issued.",
+  "Get pump-out quotes and a written service contract (Desert Septic Systems, ACE Pumping, Action Pumping, ASAP Pumping, Roto-Rooter Yucca Valley). Confirm each handles RV holding tanks.",
+  "Get water-hauling quotes and a will-serve or availability letter from HDWD or the local provider.",
+  "Shop trailers. Tier A/B: Mike Thompson's, Camping World and Giant RV in Colton. Tier C: Airstream Inland Empire (Temecula), Airstream Los Angeles (San Gabriel), Oliver factory-direct. Check J.D. Power values, and buy during October-December model-year clearance.",
+  "Hire an independent RV inspector before buying any used unit.",
+  "Get 2-3 quotes for an Exposure C engineered RV cover or ramada with 13-14 ft legs. Ask about a version designed to carry solar panels later (a solar ramada).",
+  "Size the power system for summer A/C loads (30-36 kWh/day for two A/Cs) and choose a 48 V system that can move to the house.",
+  "Get full-time stationary RV insurance quotes for the chosen tier.",
+  "Order site work in this sequence: survey and staking, pad and anchors, ramada, utilities (water tank, power, sewage), trailer delivery, skirting and deck."
+ ],
+ "design_ideas": [
+  "Siting: run the trailer's long axis east-west with the hitch pointing west into the prevailing SW/W wind. The door side then faces north, which puts the deck in all-day shade.",
+  "Ramada as house infrastructure: a matte-black steel 24x41 ft cover with 13-14 ft legs that later becomes the 640 sq ft house's carport or outdoor room. Its roof can carry the PV array, giving shade and power together.",
+  "Brand screens: coral-red (#ec4639) powder-coated aluminum or laser-cut steel panels in a changsal (Korean lattice) or key-fret pattern on the west and south faces of the ramada. They block low sun and wind gusts and cast lattice shadows on the trailer, good material for high-key black-and-white photos.",
+  "Tier C look: a polished silver Airstream as the high-key object on a white decomposed-granite pad under the black ramada, with a black composite deck and blush-pink (#f2d1d1) and peach (#fec6b4) cushions, door mat and planters.",
+  "Tier A/B look: paint or wrap the trailer's lower band black, and add a black corrugated-metal skirt with coral lattice cutouts backed by 1/4 in hardware cloth. Simple, graphic, and keeps rodents out.",
+  "Deck: a 12x24 ft deck under the ramada overhang, kept under 30 in high, with a coral lattice railing infill, low-voltage step lights, and an outdoor kitchen corner so cooking heat stays out of the trailer.",
+  "Utility yard: put the black 1,550-gal water tank, battery or inverter cabinet and propane cylinders on the shaded north-east side, screened by one lattice panel and kept out of the photo axis.",
+  "Heat details: reflective window inserts, a white or EPDM-coated roof, a second A/C, and a ductless mini-split option (Tier B/C) that could later serve a studio or shed.",
+  "Dust and wind landscaping: a low gabion or rammed-earth wind break on the west, a DG pad stabilized with binder, and native low plants. Keep a 5-10 ft clear zone around the trailer against pack rats.",
+  "Lighting for photos: warm 2700K string lights under the ramada and coral-filtered uplights on the lattice screens for night shots against the desert sky."
+ ]
+}

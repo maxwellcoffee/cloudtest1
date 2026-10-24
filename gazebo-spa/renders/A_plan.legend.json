@@ -1,0 +1,72 @@
+[
+ {
+  "n": 1,
+  "label": "Glass pool house, 24 x 18 ft",
+  "phase": 0
+ },
+ {
+  "n": 2,
+  "label": "In-ground hot tub, 9.5 x 7 ft, 104 F max",
+  "phase": 1
+ },
+ {
+  "n": 3,
+  "label": "Seated wash + seshin scrub table",
+  "phase": 1
+ },
+ {
+  "n": 4,
+  "label": "Planter: ferns, bird of paradise, snake plant",
+  "phase": 3
+ },
+ {
+  "n": 5,
+  "label": "Potted fan palm",
+  "phase": 3
+ },
+ {
+  "n": 6,
+  "label": "Hanging pothos",
+  "phase": 3
+ },
+ {
+  "n": 7,
+  "label": "Wood sling chairs",
+  "phase": 3
+ },
+ {
+  "n": 8,
+  "label": "Cedar cabin sauna, 7 x 7 ft (2-4 people)",
+  "phase": 2
+ },
+ {
+  "n": 9,
+  "label": "Cold plunge (stock tank + chiller)",
+  "phase": 1
+ },
+ {
+  "n": 10,
+  "label": "Rinse shower",
+  "phase": 1
+ },
+ {
+  "n": 11,
+  "label": "Vine pergola",
+  "phase": 3
+ },
+ {
+  "n": 12,
+  "label": "Heated rest platform (ondol-style)",
+  "phase": 3
+ },
+ {
+  "n": 13,
+  "label": "Loungers",
+  "phase": 3
+ },
+ {
+  "n": 14,
+  "label": "Fan palms (The Spring planting)",
+  "phase": 3
+ }
+]

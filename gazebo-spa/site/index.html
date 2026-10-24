@@ -1,0 +1,318 @@
+<title>Garden Bathhouse Plans</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fondamento&family=Inknut+Antiqua:wght@600&family=Inter+Tight:wght@400;600;700&display=swap">
+<style>/* Layout: one reading column (~68ch) with full-bleed image bands; renders sit in coral changsal-lattice frames.
+   Palette and type follow the brief: blush, peach, coral, black on white; a calligraphic display face,
+   a heavy serif for figures, a clean grotesque for reading. */
+:root {
+  --paper: #ffffff;
+  --wash: #fbf2ef;
+  --blush: #f2d1d1;
+  --peach: #fec6b4;
+  --coral: #d9483b;
+  --ink: #161312;
+  --muted: #6c605d;
+  --line: #ead9d4;
+  --bar: #d9483b;
+  --display: "Fondamento", "Iowan Old Style", Georgia, serif;
+  --figure: "Inknut Antiqua", Georgia, "Times New Roman", serif;
+  --body: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121010; --wash: #1c1615; --blush: #3a2727; --peach: #4a3129; --coral: #f06a5c;
+    --ink: #f5ece9; --muted: #b9aaa6; --line: #3a2d2b; --bar: #e8594b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121010; --wash: #1c1615; --blush: #3a2727; --peach: #4a3129; --coral: #f06a5c;
+  --ink: #f5ece9; --muted: #b9aaa6; --line: #3a2d2b; --bar: #e8594b; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+.wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.col { max-width: 72ch; margin: 0 auto; }
+.wide { max-width: 1180px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); letter-spacing: 0.01em; }
+h2 { font-size: clamp(1.9rem, 4.2vw, 2.7rem); }
+h3 { font-size: 1.45rem; }
+p { margin: 0; }
+a { color: var(--coral); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+.eyebrow { font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.lede { font-size: 1.18rem; color: var(--ink); }
+.muted { color: var(--muted); }
+.small { font-size: 0.88rem; }
+section { padding-block: 56px; }
+.stack { display: flex; flex-direction: column; gap: 18px; }
+.stack-lg { display: flex; flex-direction: column; gap: 32px; }
+
+/* the coral lattice (changsal) frame */
+.lattice { padding: 12px; background:
+  repeating-linear-gradient(0deg, var(--coral) 0 2px, transparent 2px 11px),
+  repeating-linear-gradient(90deg, var(--coral) 0 2px, transparent 2px 11px); }
+.lattice > img, .lattice > button > img { display: block; width: 100%; height: auto; }
+.wave { height: 14px; color: var(--coral); display: block; margin: 0 auto; width: 120px; }
+
+/* hero */
+.hero { padding-block: 28px 8px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 36px; align-items: center; }
+.hero-text { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+
+/* section nav */
+.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.toc ul { list-style: none; margin: 0 auto; padding: 10px 0; display: flex; gap: 6px 18px; flex-wrap: wrap; max-width: 1180px; }
+.toc a { color: var(--ink); text-decoration: none; font-size: 0.86rem; letter-spacing: 0.04em; }
+.toc a:hover { color: var(--coral); }
+
+/* image galleries */
+.zoom { all: unset; cursor: zoom-in; display: block; }
+.zoom:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+.shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.shots figure { margin: 0; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.shots img { width: 100%; height: auto; display: block; }
+.shots .span2 { grid-column: 1 / -1; }
+figcaption { font-size: 0.84rem; color: var(--muted); }
+@media (max-width: 640px) { .shots { grid-template-columns: 1fr; } }
+
+/* scheme blocks */
+.scheme { border-top: 1px solid var(--line); padding-block: 48px; display: flex; flex-direction: column; gap: 24px; }
+.scheme-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 20px; align-items: baseline; }
+.scheme-letter { font-family: var(--figure); font-size: 3.4rem; line-height: 1; color: var(--coral); grid-row: span 2; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px 28px; }
+.facts > div { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.facts h4 { margin: 0; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.facts ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; }
+.plan-row { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 760px) { .plan-row { grid-template-columns: 1fr; } }
+.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; }
+.legend li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; align-items: start; }
+.legend .n { width: 24px; height: 24px; border-radius: 50%; color: #fff; font-size: 0.75rem; font-weight: 700; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.pill { display: inline-block; padding: 3px 10px; border-radius: 99px; background: var(--blush); color: var(--ink); font-size: 0.8rem; font-weight: 600; }
+
+/* callouts and tables */
+.note { background: var(--wash); padding: 22px 24px; display: flex; flex-direction: column; gap: 12px; border-left: 3px solid var(--coral); }
+.note ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 6px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.figure { font-family: var(--figure); font-size: 1.05rem; }
+
+/* the bathing round */
+.round { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; counter-reset: step; }
+.round li { background: var(--wash); padding: 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.round li::before { counter-increment: step; content: counter(step); font-family: var(--figure); color: var(--coral); font-size: 1.6rem; line-height: 1; }
+.round .t { font-family: var(--display); font-size: 1.3rem; }
+@media (max-width: 860px) { .round { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .round { grid-template-columns: 1fr; } }
+
+/* next actions */
+.actions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.actions li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; }
+.actions input { margin-top: 5px; accent-color: var(--coral); width: 16px; height: 16px; }
+.ctx { font-size: 0.75rem; letter-spacing: 0.08em; color: var(--coral); font-weight: 700; margin-right: 6px; }
+
+/* lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 20; background: rgba(10, 8, 8, 0.92); display: grid; place-items: center;
+  padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lightbox img { max-width: 100%; max-height: 88vh; width: auto; height: auto; }
+.lightbox p { color: #f5ece9; font-size: 0.9rem; margin-top: 10px; text-align: center; }
+.lightbox button { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); background: none; border: 1px solid #f5ece9; color: #f5ece9; padding: 6px 12px; cursor: pointer; font: inherit; }
+.sources { font-size: 0.82rem; color: var(--muted); overflow-wrap: anywhere; }
+.sources ol { padding-left: 1.3em; display: flex; flex-direction: column; gap: 4px; margin: 0; }
+footer { padding-block: 40px; border-top: 1px solid var(--line); }
+@media (prefers-reduced-motion: no-preference) { .zoom img { transition: filter 0.2s; } .zoom:hover img { filter: brightness(1.04); } }
+</style>
+
+<header class="wrap hero">
+  <div class="wide hero-grid">
+    <div class="hero-text">
+      <p class="eyebrow">Yucca Valley lot &middot; bathhouse plans &middot; October 2026</p>
+      <h1>The Garden Bathhouse</h1>
+      <p class="lede">Five plans for a Korean-style bathhouse on the land: one hot tub under a roof with plants inside,
+      a cedar sauna a few steps away, then cold water and a warm floor to rest on. The starting point is the enclosed
+      pool house at The Spring in Desert Hot Springs.</p>
+      <p class="muted">Every image is a Blender render of the real lot model: same slope, same Joshua trees, same
+      mountains to the north. Prices are 2025-2026 list prices or labeled estimates.</p>
+    </div>
+    <div class="lattice"><button class="zoom" type="button" data-full="img/A_hero_bw.jpg" data-cap="Scheme A, the Spring Glass House, in black and white">
+      <img src="img/A_hero_bw.jpg" alt="Scheme A, the Spring Glass House, in black and white" width="1600" height="900"></button></div>
+  </div>
+</header><nav class="toc wrap" aria-label="Sections"><ul><li><a href="#spring">The Spring</a></li><li><a href="#ritual">The bathing round</a></li><li><a href="#schemes">Five plans</a></li><li><a href="#compare">Compare</a></li><li><a href="#plants">Plants</a></li><li><a href="#rules">Rules</a></li><li><a href="#budget">Budget</a></li><li><a href="#next">Next actions</a></li></ul></nav>
+<section class="wrap" id="spring"><div class="col stack">
+  <p class="eyebrow">The precedent</p>
+  <h2>What The Spring's gazebo really is</h2>
+  <p>The "gazebo" at The Spring Resort &amp; Spa is an enclosed pool house at one end of the main pool, which one
+  guide calls "the pool inside the greenhouse". The resort keeps that pool "slightly above body temperature"
+  (guides say about 101F) and the outdoor soaking pool at 104F. The hotel opened in 1957 as The Moors and is
+  adults-only. Reconstructed from the resort's own photos, the pool house is:</p>
+  <ul>
+    <li>A one-story timber post-and-beam room under a low-slope roof with exposed rafter tails. Posts are roughly 6 ft apart, about 8 ft to the top plate.</li>
+    <li>Walls in three bands: a solid knee wall about 3 ft high, glass with a frosted privacy stripe, and an open band of painted vertical slats under the header.</li>
+    <li>A dark-bronze sliding glass door to the main pool.</li>
+    <li>Inside: a freeform pool about 4 ft deep with a blue mosaic band at the waterline, a pebble-finish deck, wood sling chairs, boulders, potted yucca and snake plant, and fan palms just outside.</li>
+    <li>Around it: pergolas of rough-sawn posts with vines and hanging rusted cone planters, fan palms, and black pebble mulch.</li>
+  </ul>
+  <div class="note"><p><b>What these plans borrow:</b> the glass room that stops the wind, warm water a little
+  above body temperature, plants growing right beside the tub, a slatted band that lets steam out, and a pergola
+  with vines. <b>What they add:</b> the Korean order of wash, soak, sauna, cold and rest; coral lattice in place of
+  frosted glass; and blush, peach and black against white plaster and cedar.</p></div>
+  <p class="small muted">Dimensions are estimates from photos; review sites blocked automated reading.</p>
+</div></section>
+<section class="wrap" id="ritual" style="background:var(--wash)"><div class="wide stack-lg">
+  <div class="col stack">
+    <p class="eyebrow">How you would use it</p>
+    <h2>The bathing round</h2>
+    <p>A Korean bathhouse (mogyoktang) and its rest halls (jjimjilbang) follow one order: clean, hot, cold, rest.
+    For two people at home a full round takes about 2 to 2.5 hours. Steps 3 and 4 repeat two or three times.</p>
+  </div>
+  <ol class="round">
+    <li><span class="t">Wash</span><span>Seated shower on a low stool, about 10 minutes. Hair tied up. Nobody gets in the tub unwashed.</span></li>
+    <li><span class="t">Soak</span><span>10 to 15 minutes at 100-104F, heart above the water. In summer run it as a warm tub at 97-100F.</span></li>
+    <li><span class="t">Sauna</span><span>8 to 12 minutes at 176-194F. About 30 minutes of high heat in total.</span></li>
+    <li><span class="t">Cold</span><span>30 seconds to 2 minutes at 57-64F, head out, feet first, never alone. In winter the water is cold enough on its own.</span></li>
+    <li><span class="t">Rest</span><span>10 to 15 minutes lying on the warm floor (about 97F) with a glass of water.</span></li>
+  </ol>
+  <div class="col stack">
+    <svg class="wave" viewBox="0 0 120 14" aria-hidden="true"><path d="M0 7 Q10 0 20 7 T40 7 T60 7 T80 7 T100 7 T120 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    <p>Once a week, after a soak, scrub each other with an Italy towel (seshin), then rinse. Finish with cold sikhye
+    (sweet rice drink) and baked eggs on the warm floor.</p>
+    <div class="note"><p><b>Safety.</b> Korean bathhouses run their hot tubs at 106-109F; at home, cap the tub at
+    104F (the U.S. Consumer Product Safety Commission limit) and at 100F or less for anyone pregnant. Drink water
+    after every round and skip alcohol before and between rounds. Anyone with heart conditions should ask a doctor
+    about sauna and cold plunges first. Keep the warm floor at or below about 104F for long lying.</p></div>
+  </div>
+</div></section><section class="wrap" id="schemes"><div class="wide stack-lg"><div class="col stack"><p class="eyebrow">Five plans</p><h2>Five ways to build it</h2><p>All five sit on the same spot: a level terrace just south-east of the house in land Scheme A, more than 50 ft from every Joshua tree. Each has one hot tub, a cedar sauna a few steps away, a cold plunge or cold shower, a wash and scrub station, a warm rest platform, and plants inside. Click any image to enlarge it.</p></div>
+<article class="scheme" id="scheme-a">
+  <div class="scheme-head"><span class="scheme-letter" aria-hidden="true">A</span>
+    <h3>Spring Glass House</h3><p><span class="pill">Closest to The Spring</span> <span class="small muted">Budget tier: Premium</span></p></div>
+  <p>A 24 x 18 ft timber-and-glass bath house, built the way The Spring built its enclosed pool: a solid knee wall, a band of glass, and an open band of slats under a low roof. Where The Spring has a frosted privacy stripe across the glass, this one has a strip of coral lattice at eye level. Sliding glass doors open south to the view and east to a small sauna courtyard.</p>
+  <div class="shots"><figure class="span2"><button class="zoom" type="button" data-full="img/A_hero.jpg" data-cap="Afternoon, from the approach"><img src="img/A_hero.jpg" alt="Afternoon, from the approach" loading="lazy" width="1600" height="900"></button><figcaption>Afternoon, from the approach</figcaption></figure><figure class=""><button class="zoom" type="button" data-full="img/A_inner.jpg" data-cap="Inside, by the tub"><img src="img/A_inner.jpg" alt="Inside, by the tub" loading="lazy" width="1600" height="900"></button><figcaption>Inside, by the tub</figcaption></figure><figure class=""><button class="zoom" type="button" data-full="img/A_dusk.jpg" data-cap="Dusk, lanterns and screens lit"><img src="img/A_dusk.jpg" alt="Dusk, lanterns and screens lit" loading="lazy" width="1600" height="900"></button><figcaption>Dusk, lanterns and screens lit</figcaption></figure></div>
+  <div class="plan-row"><div class="lattice"><figure class=""><button class="zoom" type="button" data-full="img/A_plan.jpg" data-cap="Plan with the roofs lifted off, north up"><img src="img/A_plan.jpg" alt="Plan with the roofs lifted off, north up" loading="lazy" width="1600" height="900"></button><figcaption>Plan with the roofs lifted off, north up</figcaption></figure></div><div class="stack"><p class="eyebrow">Plan key</p><ol class="legend" aria-label="Plan key"><li><span class="n" style="background:#787068">1</span><span>Glass pool house, 24 x 18 ft</span></li><li><span class="n" style="background:#d64034">2</span><span>In-ground hot tub, 9.5 x 7 ft, 104 F max</span></li><li><span class="n" style="background:#d64034">3</span><span>Seated wash + seshin scrub table</span></li><li><span class="n" style="background:#3f703c">4</span><span>Planter: ferns, bird of paradise, snake plant</span></li><li><span class="n" style="background:#3f703c">5</span><span>Potted fan palm</span></li><li><span class="n" style="background:#3f703c">6</span><span>Hanging pothos</span></li><li><span class="n" style="background:#3f703c">7</span><span>Wood sling chairs</span></li><li><span class="n" style="background:#22201f">8</span><span>Cedar cabin sauna, 7 x 7 ft (2-4 people)</span></li><li><span class="n" style="background:#d64034">9</span><span>Cold plunge (stock tank + chiller)</span></li><li><span class="n" style="background:#d64034">10</span><span>Rinse shower</span></li><li><span class="n" style="background:#3f703c">11</span><span>Vine pergola</span></li><li><span class="n" style="background:#3f703c">12</span><span>Heated rest platform (ondol-style)</span></li><li><span class="n" style="background:#3f703c">13</span><span>Loungers</span></li><li><span class="n" style="background:#3f703c">14</span><span>Fan palms (The Spring planting)</span></li></ol><p class="small muted">Marker colors: coral for water, black for heat, green for rest and garden, grey for structure.</p></div></div>
+  <div class="facts">
+    <div><h4>Under the roof</h4><ul><li>One in-ground tiled hot tub, 9.5 x 7 ft, with a blue mosaic waterline like The Spring&#x27;s</li><li>Seated wash station and scrub table against the west wall</li><li>Planter along the north glass: bird of paradise, ferns, snake plant</li><li>Potted fan palm, yucca, stump planter, boulders, hanging pothos, wood sling chairs</li></ul></div>
+    <div><h4>Around it</h4><ul><li>Cedar cabin sauna, 7 x 7 ft, eight steps from the east door</li><li>Stock-tank cold plunge and a rinse shower between the two</li><li>Vine pergola with hanging cone planters over a heated rest platform</li><li>Mexican and Mediterranean fan palms in black pebble beds</li></ul></div>
+    <div><h4>Size</h4><p>About 432 sq ft under roof. Terrace 51 x 37 ft.</p><h4>Best for</h4><p>Year-round use. Glass and a solid knee wall stop the spring wind and hold heat on 20F nights, and steam leaves through the slats.</p><h4>Watch out for</h4><p>The most permits: an enclosed building, safety glass near the water, and an in-ground spa with drowning-prevention features. Highest cost. Needs a dehumidifying fan.</p></div>
+  </div>
+</article>
+<article class="scheme" id="scheme-b">
+  <div class="scheme-head"><span class="scheme-letter" aria-hidden="true">B</span>
+    <h3>Jeongja Bathhouse</h3><p><span class="pill">The full Korean bath</span> <span class="small muted">Budget tier: Balanced to premium</span></p></div>
+  <p>A hanok-style pavilion (jeongja) on a 2-ft stone platform, 24 x 16 ft, in three 8-ft bays that follow the Korean bath in order: wash, soak, rest. Paper-backed lattice screens close the north and west sides for privacy and glow at night. The south side stays open to the view, and the black tile roof turns up at the corners.</p>
+  <div class="shots"><figure class="span2"><button class="zoom" type="button" data-full="img/B_hero.jpg" data-cap="Afternoon, from the approach"><img src="img/B_hero.jpg" alt="Afternoon, from the approach" loading="lazy" width="1600" height="900"></button><figcaption>Afternoon, from the approach</figcaption></figure><figure class=""><button class="zoom" type="button" data-full="img/B_inner.jpg" data-cap="Inside, by the tub"><img src="img/B_inner.jpg" alt="Inside, by the tub" loading="lazy" width="1600" height="900"></button><figcaption>Inside, by the tub</figcaption></figure><figure class=""><button class="zoom" type="button" data-full="img/B_dusk.jpg" data-cap="Dusk, lanterns and screens lit"><img src="img/B_dusk.jpg" alt="Dusk, lanterns and screens lit" loading="lazy" width="1600" height="900"></button><figcaption>Dusk, lanterns and screens lit</figcaption></figure></div>
+  <div class="plan-row"><div class="lattice"><figure class=""><button class="zoom" type="button" data-full="img/B_plan.jpg" data-cap="Plan with the roofs lifted off, north up"><img src="img/B_plan.jpg" alt="Plan with the roofs lifted off, north up" loading="lazy" width="1600" height="900"></button><figcaption>Plan with the roofs lifted off, north up</figcaption></figure></div><div class="stack"><p class="eyebrow">Plan key</p><p class="small muted">Marker colors: coral for water, black for heat, green for rest and garden, grey for structure.</p></div></div>
+  <div class="facts">
+    <div><h4>Under the roof</h4><ul><li>Bay 1: two seated wash stations and a scrub table on a slate floor</li><li>Bay 2: a sunken tiled tub, 6.5 x 6.5 ft, set into the platform</li><li>Bay 3: a heated ondol rest platform, 7 x 8 ft, with floor cushions and a sikhye and baked-egg station</li><li>Planter of bird of paradise and ferns, bamboo in pots, hanging plants</li></ul></div>
+    <div><h4>Around it</h4><ul><li>Cedar cabin sauna, 7 x 7 ft, a few steps east</li><li>Cedar cold-plunge tub and a rinse shower</li><li>Bamboo in raised planters as a north windbreak, olive trees</li></ul></div>
+    <div><h4>Size</h4><p>About 384 sq ft under roof. Stone platform 28 x 20 ft.</p><h4>Best for</h4><p>Doing the whole ritual in order: wash, soak, sauna, cold, rest. It is the most clearly Korean of the five.</p><h4>Watch out for</h4><p>The curved roof is custom carpentry; a straight hip roof costs less. A sunken tub needs a drain and a structural pit. Use polycarbonate behind the paper so rain and splash don&#x27;t ruin it.</p></div>
+  </div>
+</article>
+<article class="scheme" id="scheme-c">
+  <div class="scheme-head"><span class="scheme-letter" aria-hidden="true">C</span>
+    <h3>Octagon Garden Gazebo</h3><p><span class="pill">The classic garden gazebo</span> <span class="small muted">Budget tier: Balanced</span></p></div>
+  <p>A 21-ft octagonal gazebo with a cupola that lets the steam out. Coral lattice screens close the windward north and west faces; the east and south stay open to the view, with a low lattice rail. The round tub sits in the middle, with planters, palms and hanging plants around it.</p>
+  <div class="shots"><figure class="span2"><button class="zoom" type="button" data-full="img/C_hero.jpg" data-cap="Afternoon, from the approach"><img src="img/C_hero.jpg" alt="Afternoon, from the approach" loading="lazy" width="1600" height="900"></button><figcaption>Afternoon, from the approach</figcaption></figure><figure class=""><button class="zoom" type="button" data-full="img/C_inner.jpg" data-cap="Inside, by the tub"><img src="img/C_inner.jpg" alt="Inside, by the tub" loading="lazy" width="1600" height="900"></button><figcaption>Inside, by the tub</figcaption></figure><figure class=""><button class="zoom" type="button" data-full="img/C_dusk.jpg" data-cap="Dusk, lanterns and screens lit"><img src="img/C_dusk.jpg" alt="Dusk, lanterns and screens lit" loading="lazy" width="1600" height="900"></button><figcaption>Dusk, lanterns and screens lit</figcaption></figure></div>
+  <div class="plan-row"><div class="lattice"><figure class=""><button class="zoom" type="button" data-full="img/C_plan.jpg" data-cap="Plan with the roofs lifted off, north up"><img src="img/C_plan.jpg" alt="Plan with the roofs lifted off, north up" loading="lazy" width="1600" height="900"></button><figcaption>Plan with the roofs lifted off, north up</figcaption></figure></div><div class="stack"><p class="eyebrow">Plan key</p><p class="small muted">Marker colors: coral for water, black for heat, green for rest and garden, grey for structure.</p></div></div>
+  <div class="facts">
+    <div><h4>Under the roof</h4><ul><li>Round raised tub, 8 ft across, plaster with a stone rim (or a cedar or acrylic tub with a plaster surround)</li><li>Planters on the screened side: bird of paradise, ferns, snake plant</li><li>Two potted fan palms, hanging pothos on the beams, star jasmine on the entry posts</li><li>Paper lanterns kept more than 5 ft from the water</li></ul></div>
+    <div><h4>Around it</h4><ul><li>Cedar barrel sauna, 6 ft across, about 8 ft from the gazebo</li><li>Stock-tank cold plunge and a rinse shower</li><li>Seated wash and scrub corner behind the west screen</li><li>Heated rest platform and loungers under string lights</li></ul></div>
+    <div><h4>Size</h4><p>About 340 sq ft under roof. Terrace 49 x 36 ft.</p><h4>Best for</h4><p>The romantic, open-air garden gazebo. You can buy many of the parts as a kit and build the rest yourselves.</p><h4>Watch out for</h4><p>Open sides let in dust and cold wind. Plan on roll-down screens or glass panels on the west for winter.</p></div>
+  </div>
+</article>
+<article class="scheme" id="scheme-d">
+  <div class="scheme-head"><span class="scheme-letter" aria-hidden="true">D</span>
+    <h3>Walled Garden Courtyard</h3><p><span class="pill">The most plants and privacy</span> <span class="small muted">Budget tier: Premium</span></p></div>
+  <p>Blush plaster walls, 7.5 ft high with tile caps, enclose a 40 x 40 ft garden room out of the wind, with a coral lattice gate and lattice windows. In the middle, a vine-covered pergola stands over one cedar soaking tub. Each corner holds one part of the bath.</p>
+  <div class="shots"><figure class="span2"><button class="zoom" type="button" data-full="img/D_hero.jpg" data-cap="Afternoon, from the approach"><img src="img/D_hero.jpg" alt="Afternoon, from the approach" loading="lazy" width="1600" height="900"></button><figcaption>Afternoon, from the approach</figcaption></figure><figure class=""><button class="zoom" type="button" data-full="img/D_inner.jpg" data-cap="Inside, by the tub"><img src="img/D_inner.jpg" alt="Inside, by the tub" loading="lazy" width="1600" height="900"></button><figcaption>Inside, by the tub</figcaption></figure><figure class=""><button class="zoom" type="button" data-full="img/D_dusk.jpg" data-cap="Dusk, lanterns and screens lit"><img src="img/D_dusk.jpg" alt="Dusk, lanterns and screens lit" loading="lazy" width="1600" height="900"></button><figcaption>Dusk, lanterns and screens lit</figcaption></figure></div>
+  <div class="plan-row"><div class="lattice"><figure class=""><button class="zoom" type="button" data-full="img/D_plan.jpg" data-cap="Plan with the roofs lifted off, north up"><img src="img/D_plan.jpg" alt="Plan with the roofs lifted off, north up" loading="lazy" width="1600" height="900"></button><figcaption>Plan with the roofs lifted off, north up</figcaption></figure></div><div class="stack"><p class="eyebrow">Plan key</p><p class="small muted">Marker colors: coral for water, black for heat, green for rest and garden, grey for structure.</p></div></div>
+  <div class="facts">
+    <div><h4>Under the roof</h4><ul><li>Cedar soaking tub, 6.5 ft round, under a jasmine pergola</li><li>North-east: cedar cabin sauna, cold plunge and shower</li><li>North-west: a clay dome warm room, after the Korean hanjeungmak kiln sauna (optional)</li><li>South-west: roofed wash and scrub corner. South-east: covered heated rest platform</li><li>Beds of bird of paradise, ferns and bamboo; bougainvillea on the walls; potted fan palms</li></ul></div>
+    <div><h4>Around it</h4><ul><li>Tall fan palms over the wall line</li><li>Agaves and natives outside the walls</li></ul></div>
+    <div><h4>Size</h4><p>1,600 sq ft inside the walls; about 100 sq ft of roofs plus the pergola.</p><h4>Best for</h4><p>A sheltered microclimate where tender plants survive, and complete privacy. Can be built in stages: walls and tub first, the corners later.</p><h4>Watch out for</h4><p>The walls are the big cost, and walls over 6 ft need a permit. The clay dome is a custom build; skip it at first.</p></div>
+  </div>
+</article>
+<article class="scheme" id="scheme-e">
+  <div class="scheme-head"><span class="scheme-letter" aria-hidden="true">E</span>
+    <h3>Starter Kit</h3><p><span class="pill">Start while you build</span> <span class="small muted">Budget tier: Lean</span></p></div>
+  <p>The quick version you can set up in a few weekends and move later. A 12 x 12 ft cedar gazebo kit over a plug-and-play hot tub, two coral lattice screens on the wind side, and plants in pots. A 6-ft barrel sauna, a stock-tank plunge and a post shower stand beside it.</p>
+  <div class="shots"><figure class="span2"><button class="zoom" type="button" data-full="img/E_hero.jpg" data-cap="Afternoon, from the approach"><img src="img/E_hero.jpg" alt="Afternoon, from the approach" loading="lazy" width="1600" height="900"></button><figcaption>Afternoon, from the approach</figcaption></figure><figure class=""><button class="zoom" type="button" data-full="img/E_inner.jpg" data-cap="Inside, by the tub"><img src="img/E_inner.jpg" alt="Inside, by the tub" loading="lazy" width="1600" height="900"></button><figcaption>Inside, by the tub</figcaption></figure><figure class=""><button class="zoom" type="button" data-full="img/E_dusk.jpg" data-cap="Dusk, lanterns and screens lit"><img src="img/E_dusk.jpg" alt="Dusk, lanterns and screens lit" loading="lazy" width="1600" height="900"></button><figcaption>Dusk, lanterns and screens lit</figcaption></figure></div>
+  <div class="plan-row"><div class="lattice"><figure class=""><button class="zoom" type="button" data-full="img/E_plan.jpg" data-cap="Plan with the roofs lifted off, north up"><img src="img/E_plan.jpg" alt="Plan with the roofs lifted off, north up" loading="lazy" width="1600" height="900"></button><figcaption>Plan with the roofs lifted off, north up</figcaption></figure></div><div class="stack"><p class="eyebrow">Plan key</p><p class="small muted">Marker colors: coral for water, black for heat, green for rest and garden, grey for structure.</p></div></div>
+  <div class="facts">
+    <div><h4>Under the roof</h4><ul><li>Plug-and-play acrylic hot tub, about 7 x 7 ft, on 240 V</li><li>Two coral lattice screens on the north and west</li><li>Potted fan palm, bird of paradise and fern; a hanging plant</li></ul></div>
+    <div><h4>Around it</h4><ul><li>Cedar barrel sauna, 6 ft (2 to 4 people)</li><li>Stock-tank cold plunge and a post shower</li><li>Two loungers and string lights</li></ul></div>
+    <div><h4>Size</h4><p>144 sq ft under roof. Paver pad 32 x 24 ft.</p><h4>Best for</h4><p>Trying the ritual cheaply, early. The tub, sauna and plunge all move into Scheme A, B, C or D later.</p><h4>Watch out for</h4><p>Light kits are rated for 40 to 100 mph winds, so anchor them to engineered footings. Before the house is finished, the County may require a Temporary Use Permit.</p></div>
+  </div>
+</article></div></section>
+<section class="wrap" id="compare"><div class="wide stack">
+  <p class="eyebrow">Side by side</p><h2>Compare the five</h2>
+  <div class="scroll"><table>
+    <thead><tr><th></th><th>Plan</th><th>Under roof</th><th>Hot tub</th><th>Sauna</th><th>Korean extras</th><th>Feel</th><th>Budget tier</th></tr></thead>
+    <tbody><tr><td>A</td><td>Spring Glass House</td><td>432 sq ft, glass room</td><td>In-ground tiled, 9.5 x 7 ft</td><td>Cabin, 7 x 7 ft</td><td>Inside: wash + scrub. Outside: plunge, warm platform</td><td>Enclosed, warm in winter</td><td>Premium</td></tr><tr><td>B</td><td>Jeongja Bathhouse</td><td>384 sq ft, open south</td><td>Sunken tiled, 6.5 x 6.5 ft</td><td>Cabin, 7 x 7 ft</td><td>All inside in three bays; ondol floor, sikhye station</td><td>Half open, very Korean</td><td>Balanced to premium</td></tr><tr><td>C</td><td>Octagon Garden Gazebo</td><td>340 sq ft, open east + south</td><td>Round raised, 8 ft</td><td>Barrel, 6 ft</td><td>Outside: wash, plunge, warm platform</td><td>Open-air garden</td><td>Balanced</td></tr><tr><td>D</td><td>Walled Garden Courtyard</td><td>1,600 sq ft walled garden</td><td>Cedar round, 6.5 ft</td><td>Cabin + clay dome</td><td>One per corner</td><td>Private, most plants</td><td>Premium</td></tr><tr><td>E</td><td>Starter Kit</td><td>144 sq ft kit</td><td>Plug-and-play, 7 x 7 ft</td><td>Barrel, 6 ft</td><td>Plunge and post shower</td><td>Quick, movable</td><td>Lean</td></tr></tbody></table></div>
+  <div class="col stack"><div class="note"><p><b>A way to phase it.</b> Start with E once the house permit is issued
+  (or with a Temporary Use Permit), while you live in the trailer. When the house is finished, move the tub, sauna
+  and plunge into A, B, C or D. Nothing in E is wasted.</p></div></div>
+</div></section>
+<section class="wrap" id="plants" style="background:var(--wash)"><div class="col stack">
+  <p class="eyebrow">Planting</p><h2>Plants inside, natives outside</h2>
+  <p>The lot is USDA zone 9a: winter lows of 20-25F, with a record 17F and 115F at the Joshua Tree station. Inside a
+  partly enclosed bathhouse it stays warmer and more humid, but plants still need drip irrigation and a winter plan.
+  Keep plants out of the splash zone; tub chemicals burn leaves.</p>
+  <h3>Under the roof</h3>
+  <div class="scroll"><table><thead><tr><th>Plant</th><th>Where</th><th>Care</th></tr></thead><tbody><tr><td>Windmill palm</td><td>In the ground at a back corner, out of the west wind</td><td>Hardiest palm here (zones 7-11). Wind shreds the leaves.</td></tr><tr><td>Mediterranean fan palm</td><td>At the bright edge or entry</td><td>Clumping, 6-15 ft. Gritty soil; overwatering rots it.</td></tr><tr><td>Clumping bamboo (Bambusa multiplex)</td><td>Lined planters along the west and south-west</td><td>A living screen. Never golden bamboo, which runs.</td></tr><tr><td>Star jasmine</td><td>Trained up posts and lattice</td><td>Fragrant white flowers in late spring; drought tolerant once settled.</td></tr><tr><td>Holly fern</td><td>Deep shade by benches or the warm platform</td><td>The fern most likely to cope with dry desert air. Needs drip.</td></tr><tr><td>Bird of paradise</td><td>In large pots</td><td>Bring under cover below about 32F (zone 10 plant; the lot is zone 9a).</td></tr><tr><td>Pothos</td><td>Hanging pots under the roof</td><td>Frost-tender. Winter indoors.</td></tr></tbody></table></div>
+  <h3>Around the bathhouse</h3>
+  <p>Mojave natives in coral, peach and pink. The Mojave Desert Land Trust sells them for about $12-55 each.</p>
+  <div class="scroll"><table><thead><tr><th>Plant</th><th>Why</th></tr></thead><tbody><tr><td>Apricot mallow</td><td>Peach flowers, very low water</td></tr><tr><td>Firecracker and desert penstemon</td><td>Coral-red and pink along paths</td></tr><tr><td>Chuparosa, California fuchsia</td><td>Coral-red, near the sauna; hummingbirds</td></tr><tr><td>Fairy duster</td><td>Blush pink, foreground beds</td></tr><tr><td>Ocotillo</td><td>A sculpture against white walls, red tips</td></tr><tr><td>Desert willow</td><td>West or south-west of the bathhouse for summer shade</td></tr><tr><td>California fan palm</td><td>The native palm; a grove marks the spa, away from roofs and power lines</td></tr><tr><td>Coral yucca</td><td>Coral flower spikes in gravel beds</td></tr><tr><td>Pink or bush muhly</td><td>A pink haze in fall</td></tr><tr><td>Smoketree, beavertail cactus</td><td>Silver and magenta, good in black-and-white photos</td></tr></tbody></table></div>
+  <p class="small muted">Large existing natives (Joshua trees, yuccas, creosote rings 10 ft or wider, mesquite, smoke trees) need a County removal permit, so plant around them.</p>
+</div></section>
+<section class="wrap" id="rules"><div class="col stack">
+  <p class="eyebrow">Before you build</p><h2>The rules that shape it</h2>
+  <ul class="stack" style="padding-left:1.1em"><li><b>Joshua trees.</b> No digging, grading, slabs, trenches or paths within 50 ft of a western Joshua tree (including a neighbor's) without approval from California Fish and Wildlife. Map the trees before siting anything.</li><li><b>When you can build it.</b> In the County, an accessory structure needs a legally established main use. Before the house is finished, a gazebo, spa and sauna may need a Temporary Use Permit. Ask County Building and Safety whether the trailer permit counts.</li><li><b>Building permits.</b> Needed for any structure over 120 sq ft, any patio cover (solid or lattice), any pool or spa, and all electrical work. Setbacks (25 ft front, 15 ft sides and rear in Rural Living) apply even when no permit is needed.</li><li><b>Drowning prevention.</b> A new spa needs safety features under the California Pool Safety Act. A locking safety cover labeled ASTM F1346 is the usual one; confirm with the inspector whether it is enough on its own.</li><li><b>Wiring.</b> A 240 V hot tub needs a 50 A GFCI disconnect within sight of the tub, at least 5 ft away. No light fixture within 5 ft of the water unless it is 12 ft or more above it. A 6 kW sauna heater needs its own 30 A circuit.</li><li><b>Wind.</b> The County designs for open terrain (Exposure C). Spring gusts reach 40-50 mph, so anchor any gazebo to engineered footings and strap the tub cover.</li><li><b>Water.</b> A 7 x 7 tub holds about 340 gallons and is drained three or four times a year; an uncovered tub can lose over 2,000 gallons a year to evaporation. Keep it covered.</li></ul>
+</div></section>
+<section class="wrap" id="budget" style="background:var(--wash)"><div class="wide stack-lg">
+  <div class="col stack"><p class="eyebrow">Money</p><h2>Three budget tiers</h2>
+  <p>Totals add up list prices for the equipment and estimates for site work and labor. Get two or three local
+  quotes before treating any estimate as real. Scheme E fits the lean tier, C the balanced tier, B the balanced
+  to premium tier, and A and D the premium tier.</p></div>
+  <div class="facts"><div><h4>Lean</h4><p class="figure">$20,600 - $42,200</p><ul><li>Hot tub: Hot Spring Freeflow Mini or Excursion, $5,499-8,999</li><li>Gazebo kit 12 x 14 to 12 x 16 ft, $2,599-4,340</li><li>2-person barrel sauna, $4,485-4,899</li><li>Stock-tank plunge (no chiller) or Ice Barrel, $300-1,750</li><li>Outdoor shower and bench, warm platform with a heat mat (estimates), $1,600-4,500</li><li>Pads, wiring, permits, plants (estimates), $6,100-16,200</li></ul></div><div><h4>Balanced</h4><p class="figure">$47,700 - $90,800</p><ul><li>Hot tub: Hot Spring TX or Relay, $9,999-12,999</li><li>16 x 16 ft timber-frame gazebo, coral screens and a west windbreak, $9,100-14,200</li><li>2-4 person barrel sauna, installed, $5,184-7,799</li><li>Cold plunge with a chiller, $3,950-6,790</li><li>Tiled warm platform and wash station (estimates), $4,500-11,000</li><li>Slab, 125 A spa subpanel, permits, wind engineering, plants, lighting (estimates), $15,000-38,000</li></ul></div><div><h4>Premium</h4><p class="figure">$109,700 - $274,400</p><ul><li>Cedar tub or premium spa, $11,969-38,843 (a custom in-ground tub costs more)</li><li>Custom redwood pavilion with glass or polycarbonate walls and lattice (estimate), $25,000-70,000</li><li>Cabin or cube sauna with a Wi-Fi heater, $10,722-14,600</li><li>Turnkey cold plunge, $7,990-8,999</li><li>Clay or stone warm platform and tiled wet room (estimates), $16,000-40,000</li><li>Site work, 200 A service, design and permits, landscape, lighting (estimates), $38,000-102,000</li></ul></div></div>
+</div></section>
+<section class="wrap" id="products"><div class="wide stack">
+  <p class="eyebrow">Shopping list</p><h2>Products worth a look</h2>
+  <p class="col">List prices checked in October 2026, before tax, delivery and installation.</p>
+  <div class="scroll"><table><thead><tr><th>Part</th><th>Product</th><th class="num">Price</th><th>Notes</th></tr></thead><tbody><tr><td>Gazebo</td><td><a href="https://yardistrystructures.com/products/16-x-16-timber-frame-gazebo" target="_blank" rel="noopener">Yardistry 16 x 16 Timber Frame Gazebo</a></td><td class="num">$7,100</td><td>12 ft 2.5 in clear between posts; fits a 6 x 6 or 7 x 7 tub</td></tr><tr><td>Gazebo</td><td><a href="https://yardistrystructures.com/products/12-x-16-meridian-gazebo" target="_blank" rel="noopener">Yardistry 12 x 16 Meridian (cedar)</a></td><td class="num">$3,360</td><td>Smaller cedar kit for the starter plan</td></tr><tr><td>Gazebo</td><td><a href="https://www.foreverredwood.com/" target="_blank" rel="noopener">Forever Redwood pavilion kits</a></td><td class="num">from $6,000</td><td>Custom-sized redwood kits, drawings approved before building</td></tr><tr><td>Hot tub</td><td><a href="https://www.hotspring.com/shop/hot-spot/tx" target="_blank" rel="noopener">Hot Spring Hot Spot TX</a></td><td class="num">$9,999</td><td>2-seat lounge, 6 x 6 ft, 190 gal; 115 V or 240 V</td></tr><tr><td>Hot tub</td><td><a href="https://www.hotspring.com/shop/hot-spot/relay" target="_blank" rel="noopener">Hot Spring Hot Spot Relay</a></td><td class="num">$12,999</td><td>6 seats, 7 x 7 ft, 340 gal, 4,715 lb filled; 240 V / 50 A</td></tr><tr><td>Hot tub</td><td><a href="https://www.hotspring.com/shop/freeflow/mini" target="_blank" rel="noopener">Hot Spring Freeflow Mini</a></td><td class="num">$5,499</td><td>2 seats, 6 x 4.4 ft, 125 gal; plug-in or 240 V</td></tr><tr><td>Hot tub</td><td><a href="https://almostheaven.com/products/sindri" target="_blank" rel="noopener">Almost Heaven Sindri (wood-fired)</a></td><td class="num">$10,621</td><td>No electricity needed; mind fire weather</td></tr><tr><td>Sauna</td><td><a href="https://www.almostheaven.com/products/salem-2-person-barrel-sauna" target="_blank" rel="noopener">Almost Heaven Salem barrel (2 person)</a></td><td class="num">$4,485</td><td>6 kW heater on 240 V / 30 A</td></tr><tr><td>Sauna</td><td><a href="https://www.almostheaven.com/products/watoga-2-4-person-barrel-sauna" target="_blank" rel="noopener">Almost Heaven Watoga barrel (2-4 person)</a></td><td class="num">$5,184</td><td>78 x 59 in; installation from $1,400</td></tr><tr><td>Sauna</td><td><a href="https://www.redwoodoutdoors.com/products/duo-outdoor-sauna-2-person" target="_blank" rel="noopener">Redwood Outdoors Duo (2 person cabin)</a></td><td class="num">$4,899</td><td>Small cube; 6 or 8 kW Harvia</td></tr><tr><td>Cold</td><td><a href="https://www.icebarrel.com/products/ice-barrel-500" target="_blank" rel="noopener">Ice Barrel 500</a></td><td class="num">$1,750</td><td>94 gal; chiller sold separately</td></tr><tr><td>Cold</td><td><a href="https://penguinchillers.com/collections/cold-therapy" target="_blank" rel="noopener">Penguin outdoor chiller</a></td><td class="num">$1,500-2,200</td><td>Adds summer cold to a barrel or stock tank</td></tr><tr><td>Cold</td><td><a href="https://www.plunge.com/products/plunge-all-in" target="_blank" rel="noopener">Plunge All-In</a></td><td class="num">$7,990</td><td>105 gal, down to 37F, 120 V</td></tr><tr><td>Warm floor</td><td><a href="https://www.warmlyyours.com/en-US/floor-heating" target="_blank" rel="noopener">WarmlyYours TempZone mat</a></td><td class="num">$5-15 per sq ft</td><td>15 W per sq ft under tile; a 6 x 8 ft platform is about 720 W</td></tr></tbody></table></div>
+</div></section>
+<section class="wrap" id="next" style="background:var(--wash)"><div class="col stack">
+  <p class="eyebrow">Next actions</p><h2>What to do next</h2>
+  <p class="small muted">Ticks are saved in this browser only.</p>
+  <ul class="actions"><li><input type="checkbox" id="act0" aria-label="Done"><label for="act0"><span class="ctx">@together</span>Pick the two plans you like best, and decide whether to start with the Starter Kit while you live in the trailer.</label></li><li><input type="checkbox" id="act1" aria-label="Done"><label for="act1"><span class="ctx">@land</span>Walk the lot and pin every Joshua tree, yucca and big creosote ring; draw 50-ft circles and choose the bathhouse spot outside them.</label></li><li><input type="checkbox" id="act2" aria-label="Done"><label for="act2"><span class="ctx">@phone</span>Call County Building and Safety, Joshua Tree office (open Wednesdays, 760-995-8140): does the trailer permit count as the main use for a gazebo, spa and sauna, or do we need a Temporary Use Permit?</label></li><li><input type="checkbox" id="act3" aria-label="Done"><label for="act3"><span class="ctx">@computer</span>Run the ASCE 7 Hazard Tool for the lot's design wind speed, so the gazebo footings can be engineered for it.</label></li><li><input type="checkbox" id="act4" aria-label="Done"><label for="act4"><span class="ctx">@phone</span>Ask an electrician for a load calculation and a quote on a spa subpanel: 50 A tub, 30-40 A sauna, 120 V circuits.</label></li><li><input type="checkbox" id="act5" aria-label="Done"><label for="act5"><span class="ctx">@errand</span>Visit a Hot Spring dealer; sit in a TX and a Relay; confirm the cover is labeled ASTM F1346.</label></li><li><input type="checkbox" id="act6" aria-label="Done"><label for="act6"><span class="ctx">@errand</span>Spend a weekday afternoon at The Spring and measure the pool house: post spacing, wall heights, how the slats vent.</label></li><li><input type="checkbox" id="act7" aria-label="Done"><label for="act7"><span class="ctx">@computer</span>Check the parcel's fire hazard zone on the CAL FIRE map before choosing roof and wall materials.</label></li><li><input type="checkbox" id="act8" aria-label="Done"><label for="act8"><span class="ctx">@errand</span>Buy coral and peach natives at the Mojave Desert Land Trust fall sale or nursery in Joshua Tree; fall is the best planting window.</label></li></ul>
+</div></section>
+<section class="wrap" id="sources"><div class="col stack sources"><p class="eyebrow">Sources</p><ol><li>The Spring: day spa and pools: <a href="https://the-spring.com/spa/day-spa/" target="_blank" rel="noopener">https://the-spring.com/spa/day-spa/</a></li><li>The Spring: our story: <a href="https://the-spring.com/about/our-story/" target="_blank" rel="noopener">https://the-spring.com/about/our-story/</a></li><li>The Spring gallery: <a href="https://the-spring.com/gallery/" target="_blank" rel="noopener">https://the-spring.com/gallery/</a></li><li>ResortPass: The Spring: <a href="https://www.resortpass.com/hotels/the-spring-resort-and-spa" target="_blank" rel="noopener">https://www.resortpass.com/hotels/the-spring-resort-and-spa</a></li><li>Wi Spa: the Korean spa experience: <a href="https://wispausa.com/the-wi-spa-experience/" target="_blank" rel="noopener">https://wispausa.com/the-wi-spa-experience/</a></li><li>CPSC: hot tub temperatures: <a href="https://www.cpsc.gov/Newsroom/News-Releases/1980/CPSC-Warns-Of-Hot-Tub-Temperatures" target="_blank" rel="noopener">https://www.cpsc.gov/Newsroom/News-Releases/1980/CPSC-Warns-Of-Hot-Tub-Temperatures</a></li><li>Harvard Health: saunas and your health: <a href="https://www.health.harvard.edu/staying-healthy/saunas-and-your-health" target="_blank" rel="noopener">https://www.health.harvard.edu/staying-healthy/saunas-and-your-health</a></li><li>Korea Herald: jjimjilbang floor temperatures: <a href="https://www.koreaherald.com/article/1864232" target="_blank" rel="noopener">https://www.koreaherald.com/article/1864232</a></li><li>County: Western Joshua Tree quick reference (Feb 2026): <a href="https://lus.sbcounty.gov/wp-content/uploads/sites/48/WJT_Quick-Reference-Guide_REV-2-25-2026.pdf" target="_blank" rel="noopener">https://lus.sbcounty.gov/wp-content/uploads/sites/48/WJT_Quick-Reference-Guide_REV-2-25-2026.pdf</a></li><li>CDFW: Western Joshua tree FAQ: <a href="https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ" target="_blank" rel="noopener">https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ</a></li><li>County Building and Safety: permits: <a href="https://lus.sbcounty.gov/building-safety-home/permits/" target="_blank" rel="noopener">https://lus.sbcounty.gov/building-safety-home/permits/</a></li><li>County Development Code: <a href="https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/DCWebsite.pdf" target="_blank" rel="noopener">https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/DCWebsite.pdf</a></li><li>Hot Spring spa specs and wiring: <a href="https://www.hotspring.com/shop/hot-spot/relay" target="_blank" rel="noopener">https://www.hotspring.com/shop/hot-spot/relay</a></li><li>Almost Heaven saunas: <a href="https://www.almostheaven.com/collections/barrel-saunas" target="_blank" rel="noopener">https://www.almostheaven.com/collections/barrel-saunas</a></li><li>Harvia KIP heater specs: <a href="https://almostheaven.com/products/kip-dials" target="_blank" rel="noopener">https://almostheaven.com/products/kip-dials</a></li><li>Yardistry gazebos: <a href="https://yardistrystructures.com/" target="_blank" rel="noopener">https://yardistrystructures.com/</a></li><li>Mojave Desert Land Trust 2026 plant sale list: <a href="https://static1.squarespace.com/static/61815979dfa7a7572c721a67/t/6ad0e905a0b45d7fd3978168/1792076037349/2026+plant+sale+inventory.pdf" target="_blank" rel="noopener">https://static1.squarespace.com/static/61815979dfa7a7572c721a67/t/6ad0e905a0b45d7fd3978168/1792076037349/2026+plant+sale+inventory.pdf</a></li><li>ASCE 7 Hazard Tool: <a href="https://asce7hazardtool.online" target="_blank" rel="noopener">https://asce7hazardtool.online</a></li></ol>
+<p>Research and renders: October 2026. The 3D models, research files and build scripts live in the gazebo-spa folder of the repository.</p></div></section>
+<footer class="wrap"><div class="col small muted">Style direction from kwonyin.global: blush, peach, coral and black, coral lattice, high-key black-and-white desert light.</div></footer>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Enlarged render">
+  <button type="button" id="lb-close">Close</button>
+  <div><img id="lb-img" alt=""><p id="lb-cap"></p></div>
+</div>
+<script>
+(function () {
+  var lb = document.getElementById('lightbox'), im = document.getElementById('lb-img'), cap = document.getElementById('lb-cap');
+  var last = null;
+  function open(b) { last = b; im.src = b.dataset.full; im.alt = b.dataset.cap; cap.textContent = b.dataset.cap; lb.hidden = false; document.getElementById('lb-close').focus(); }
+  function close() { lb.hidden = true; im.removeAttribute('src'); if (last) last.focus(); }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.zoom'); if (b) { open(b); return; }
+    if (!lb.hidden && (e.target === lb || e.target.id === 'lb-close')) close();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) close(); });
+  // remember ticked next actions in this browser only
+  document.querySelectorAll('.actions input').forEach(function (cb) {
+    try { cb.checked = localStorage.getItem('spa-' + cb.id) === '1'; } catch (err) {}
+    cb.addEventListener('change', function () { try { localStorage.setItem('spa-' + cb.id, cb.checked ? '1' : '0'); } catch (err) {} });
+  });
+})();
+</script>

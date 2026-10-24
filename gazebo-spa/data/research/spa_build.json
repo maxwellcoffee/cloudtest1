@@ -1,0 +1,985 @@
+{
+ "topic": "spa_build",
+ "summary": "Research brief for a gazebo spa on a ~5-acre high-desert lot near Yucca Valley, CA. It covers one hot tub under a gazebo with plants, a cedar sauna next to it, a cold plunge, a seshin scrub/shower station and a heated ondol rest platform. Note on method: the shared web-search budget was already used up when this step started, so every fact here comes from fetching manufacturer, retailer and agency pages directly. A few sites blocked fetching: CAL FIRE/OSFM, the Town of Yucca Valley, Home Depot, Tractor Supply, Huum, Covana, and Dundalk/LeisureCraft prices. Those gaps are labeled. A follow-up turn could fill them.\n\nRules that decide the layout and schedule:\n- **Joshua trees (hard constraint).** The County's Feb 2026 guide says any land disturbance within 50 ft of a western Joshua tree needs CDFW approval. A gazebo, spa, patio, septic tank, solar array, fence or driveway all count.\n- **Other desert natives.** Yuccas, agaves, nolinas, creosote rings 10 ft or wider, mesquite and smoke tree need a County Tree or Plant Removal Permit (County code 88.01.060).\n- **Permits and the RV.** The County requires permits for structures over 120 sq ft, for any patio cover (solid or lattice), for pools and spas, and for electrical work. An accessory structure must go with a legally established main residence or use. Otherwise it needs a Temporary Use Permit, which matters because the couple will live in an RV.\n- **Setbacks (Rural Living zone, desert region).** Front and street side 25 ft, interior sides 15 ft, rear 15 ft. Maximum lot coverage 20%, height limit 35 ft.\n- **Pool Safety Act.** A hot tub or spa with a locking cover that meets ASTM F1346 is exempt (Health and Safety Code 115925). The County bulletin IB-0007 still describes a safety cover plus one more feature. State law says a cover paired with a pool alarm does not count as two features.\n- **Spa wiring.** Hot Spring's 2026 manual calls for 230 V, 50 A, 4-wire service (#8 copper conductors, #10 ground under 100 ft). The GFCI subpanel must be within sight of the spa, at least 5 ft from it and no more than 50 ft away.\n\nProduct picks:\n- **Hot tub, balanced choice:** a 230 V acrylic spa such as the Hot Spring Relay ($12,999; 340 gal; 4,715 lb filled, about 96 lb/sq ft) or the TX ($9,999; 2 seats; 6x6 ft; runs on 115 V or 230 V).\n- **Gazebo:** the Yardistry 16x16 Timber Frame Gazebo ($7,099.99; 12 ft 2.5 in clear between posts; 11 ft high) fits a 6x6 or 7x7 tub plus corner planters.\n- **Sauna:** an Almost Heaven barrel (2-person Salem $4,485, 2-4 person Watoga $5,184), with a 6 kW Harvia KIP heater (240 V, 25 A draw, 30 A breaker, #10 wire, for a 170-300 cu ft room).\n- **Cold plunge:** use winter's natural cold, and add a chiller for summer (Penguin $1,499.99-$2,199.99; Plunge $6,790-$7,990).\n\nWind is the main design risk:\n- Hot Spring says not to use its cover lifter in winds above 25 mph.\n- Budget hardtop gazebos are rated around 40 mph and aluminum louvered pergolas 70-72 mph.\n- The County requires Exposure C wind design (open terrain) under ASCE 7-22.\n\nClimate: USDA zone 9a (20-25F) for ZIPs 92284 and 92285. The Joshua Tree weather station recorded 17F to 115F. Recommended plants for inside the gazebo are hardy windmill and Mediterranean fan palms, clumping bamboo, star jasmine and holly fern. Bird of paradise and pothos should stay in pots and come under cover in winter. Outside, coral and peach desert natives from the Mojave Desert Land Trust sale cost $12-$55 each. That sale is today, Oct 24, 2026, 9am-2pm in Joshua Tree.\n\nBudget tiers (all labor and site-work figures are estimates):\n- Lean: about $20.6k-$42k\n- Balanced: about $48k-$91k\n- Premium: about $110k-$275k",
+ "findings": [
+  {
+   "title": "Research method and gaps",
+   "detail": "WebSearch returned 'budget used up' on the first call (a shared 200-search limit per turn). Everything below comes from WebFetch of known primary URLs, plus PDFs read locally with pdftotext. These sites blocked fetching or did not resolve: OSFM/CAL FIRE (FHSZ and Chapter 7A pages), the Town of Yucca Valley site, Home Depot, Tractor Supply, Valley Vet, Huum, Covana, homeguide cost pages, Calscape, Goodland Bath, and Dundalk/LeisureCraft prices (dealer-only). SaunaLife and Saunum product prices could not be found. A follow-up turn with search enabled could fill these gaps.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/building-safety-home/permits/"
+   ]
+  },
+  {
+   "title": "Joshua tree 50-ft rule from County and CDFW",
+   "detail": "The County's Western Joshua Tree Quick Reference Guide (rev. Feb 2026) says: 'If Western Joshua Trees are within 50' or less of any land disturbance, approval from the California Department of Fish and Wildlife (CDFW) is required.' The guide's list of structures includes a swimming pool, patio, storage shed, gazebo, septic tank, solar panels, fence and paved driveway. No grading, brush clearing, construction or other ground disturbance is allowed within the buffer. Removing, relocating or trimming a tree requires a CDFW permit.\n\nThere are two permit types:\n- **Hazard Management Permit (HMP):** free. Covers dead trees, fallen trees within 30 ft of a structure, and similar hazards.\n- **Incidental Take Permit (ITP):** requires a tree census. Fees depend on location, number of trees and tree size.\n\nThe CDFW FAQ says no county, city or town has a local delegation agreement yet. CDFW also cites root spread of 14 m (45.9 ft) for a 4.3 m (14 ft) tree and 8.4 m for a 1 m tree, and sets buffers project by project. Contact: CDFW Region 6, (909) 484-0167, AskRegion6@wildlife.ca.gov.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/WJT_Quick-Reference-Guide_REV-2-25-2026.pdf",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ"
+   ]
+  },
+  {
+   "title": "County desert native plant protection (Dev. Code 88.01.060)",
+   "detail": "In the Desert Region, these plants need a County Tree or Plant Removal Permit before removal, and must also comply with the state Desert Native Plants Act:\n- all Agavaceae (yuccas such as Mojave yucca, agaves, nolinas)\n- all Joshua trees\n- creosote rings 10 ft or more in diameter\n- smoke tree and mesquite with stems 2 in or more in diameter or 6 ft or more tall\n- any part of desert ironwood, mesquite or palo verde, living or dead\n\nSite the spa on open, already-disturbed ground, and photograph and map existing natives before any clearing.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/DCWebsite.pdf"
+   ]
+  },
+  {
+   "title": "When County building permits are needed, and the primary-use catch for an RV homesite",
+   "detail": "The County Permits page and Residential Development Guide list what needs a permit:\n- new buildings or structures over 120 sq ft\n- patio covers, both solid and lattice\n- enclosed patios\n- pools and spas\n- electrical, plumbing and mechanical work\n- grading of 100 cubic yards or more\n- temporary structures such as an RV or trailer\n\nSetbacks apply even when no permit is needed.\n\nThe catch: under Dev. Code 84.01.020(b), an accessory structure must go with a legally established primary structure or use. If there is none yet, an accessory structure needs a Temporary Use Permit (Chapter 84.25). Ask the County early whether the RV permit counts as the primary use for a gazebo, spa and sauna.\n\nThe County adopted the 2025 California codes, which apply to applications submitted after Jan 1, 2026 (IB-0012). The Joshua Tree Building and Safety office is open Wednesdays only: 63665 Twentynine Palms Hwy, (760) 995-8140.\n\nIf the lot is inside Town of Yucca Valley limits, the Town's own building and development rules apply instead. Its site could not be fetched.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/building-safety-home/permits/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/Handouts/Residential-Development-Guidance-REV-2823.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0012-2025-Code-Adoption.pdf"
+   ]
+  },
+  {
+   "title": "Setbacks, coverage and the portable-spa exemption",
+   "detail": "Table 82-9C sets these standards for the Rural Living (RL) zone in the desert region:\n- front 25 ft\n- street side 25 ft\n- interior sides 15 ft each, on lots wider than 75 ft\n- rear 15 ft\n- maximum lot coverage 20%\n- maximum height 35 ft\n\nUnder 84.01.050(d), cabanas, ramadas, pools and storage buildings may not extend in front of the primary structure where it faces a street.\n\nDev. Code 82.02 exempts portable spas and hot tubs from land-use (planning) permits if they are no larger than 120 sq ft including equipment, hold no more than 2,000 gallons and are no more than 3 ft deep. This is not an exemption from building or electrical permits. Confirm the lot's zoning first; the RL assumption is unverified.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/DCWebsite.pdf",
+    "https://lus.sbcounty.gov/building-safety-home/zoning-setbacks/"
+   ]
+  },
+  {
+   "title": "Swimming Pool Safety Act requirements for a new hot tub",
+   "detail": "State law (Health and Safety Code):\n- **115921:** a 'swimming pool' is any structure with water over 18 in deep, including hot tubs, spas and portable spas.\n- **115922:** a new or remodeled pool or spa at a private single-family home with a building permit needs at least 2 of 7 drowning-prevention features. These include an enclosure, removable mesh fencing (ASTM F2286), a safety cover (ASTM F1346-23), exit alarms, door latches at least 54 in high, and a pool alarm (ASTM F2208).\n- **115922(b)(3):** a safety cover paired with a pool alarm does not satisfy the two-feature rule.\n- **115925:** exempts 'Hot tubs or spas with locking safety covers that comply with the ASTM International F1346 standard.'\n\nCounty bulletin IB-0007 (updated Jan 1, 2026):\n- An approved safety cover may substitute for the enclosure, plus one more feature from its list.\n- Enclosure specs: at least 60 in high, no more than 2 in gap at grade, no opening that passes a 4 in sphere. If horizontal members are less than 45 in apart, they go on the pool side. Chain-link mesh no larger than 1.5 in.\n- Gates open outward and are self-closing and self-latching. Double gates and gates wider than 4 ft are prohibited.\n- Exit alarms must be UL 2017, 85 dBA, and sound within 7 s for 30 s.\n\nPractical approach: buy a spa whose locking cover is labeled ASTM F1346, then ask the inspector whether a second feature is needed. For a custom in-ground spa, 115928 also requires anti-entrapment suction covers (ANSI/APSP-16, or two outlets at least 3 ft apart).",
+   "confidence": "high",
+   "sources": [
+    "https://california.public.law/codes/ca_health_and_safety_code_section_115922",
+    "https://california.public.law/codes/ca_health_and_safety_code_section_115925",
+    "https://california.public.law/codes/ca_health_and_safety_code_section_115921",
+    "https://california.public.law/codes/ca_health_and_safety_code_section_115928",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf"
+   ]
+  },
+  {
+   "title": "Hot tub wiring per the manufacturer manual",
+   "detail": "The Hot Spring Hot Spot 2026 owner's manual specifies:\n- **Service:** the subpanel needs '50 amp, single phase, 230 volt, four wire service.' The diagram shows #8 AWG copper for L1, L2 and neutral and a #10 ground, for runs under 100 ft.\n- **Subpanel placement:** a GFCI subpanel is included. It must be within sight of the spa, at least 5 ft from it and no more than 50 ft away.\n- **Clearances:** install the spa at least 5 ft from metal surfaces unless each one is bonded, and keep electrical appliances 5 ft away.\n- **Plug-in models:** 115 V models must be on a dedicated 15 or 20 A GFCI circuit. At 115 V the heater gives only about 1,000 W, versus about 4,000 W at 230 V.\n\nThe matching California Electrical Code articles are believed to be 680.13 (maintenance disconnect), 680.42 (outdoor spas) and 680.44 (GFCI) in the NEC 2023-based 2025 CEC. That numbering is from background knowledge; the code text could not be fetched. All spa and sauna wiring needs a County electrical permit and a licensed electrician.",
+   "confidence": "high",
+   "sources": [
+    "https://d1oxc6ayqrhsgs.cloudfront.net/hot-spring/hot-spring-hot-spot-collection-owners-manuals-2026.pdf"
+   ]
+  },
+  {
+   "title": "Acrylic hot tub sizes, filled weights and price ranges",
+   "detail": "Hot Spring specs (MSRP; filled weights include 175 lb per seat). Loads per square foot are my calculation:\n- **Freeflow Mini:** 2 seats, 6 ft x 4 ft 5 in, 125 gal, 1,655 lb (~62 psf), 115 V or 230 V, $5,499\n- **Freeflow Excursion:** 4 seats, 6.5 x 6.5 ft, 250 gal, 3,175 lb (~75 psf), $8,999\n- **Hot Spot TX:** 2 seats, 6x6 ft, 190 gal, 2,570 lb (~71 psf), 115 V/15 A or 230 V/50 A, $9,999\n- **Relay:** 6 seats, 7x7 ft, 340 gal, 4,715 lb (~96 psf), $12,999\n- **Rhythm:** 7 seats, 330 gal, 4,820 lb, $12,999\n- **Jetsetter:** 3 seats, 245 gal, 3,070 lb, $17,499\n- **Limelight Flair:** 6 seats, 335 gal, 4,720 lb, $17,499\n\nOther brands:\n- **Jacuzzi J-215:** 3 seats, 69x80x33 in, 205 gal, 517 lb dry, 120 V/15 A or 240 V/30-40 A, in Jacuzzi's $4,000-$7,999 price tier.\n- **Jacuzzi J404L:** 2 seats, 240 gal, 240 V at 40/50/60 A, price not listed.\n- **Bullfrog:** A Series starts at $12,095-$26,395 MSRP; M Series at $24,695-$30,395.\n\nThe manual says to drain and refill 3-4 times a year. It also warns that summer heat can overheat the equipment compartment, which needs ventilation.",
+   "confidence": "high",
+   "sources": [
+    "https://www.hotspring.com/shop/hot-spot/relay",
+    "https://www.hotspring.com/shop/hot-spot/tx",
+    "https://www.hotspring.com/shop/freeflow/mini",
+    "https://www.hotspring.com/shop/freeflow/excursion",
+    "https://www.hotspring.com/shop/highlife/jetsetter",
+    "https://www.hotspring.com/shop/limelight/flair",
+    "https://www.hotspring.com/shop/hot-spot/rhythm",
+    "https://www.jacuzzi.com/en-us/j-215/J-215-MY26.html",
+    "https://www.jacuzzi.com/en-us/j404l/J404L-MY26.html",
+    "https://www.bullfrogspas.com/pricing/"
+   ]
+  },
+  {
+   "title": "Wood tubs: cedar, wood-fired and hinoki",
+   "detail": "**Snorkel heating-rate table** (gallons and full weight). Loads per square foot are my calculation:\n- 4x3 ft: 209 gal, 1,950 lb\n- 5x3 ft: 335 gal, 3,113 lb (~159 psf)\n- 5x4 ft: 467 gal, 4,250 lb (~217 psf)\n- 6x3 ft: 495 gal, 4,554 lb (~161 psf)\n- 6x4 ft: 686 gal, 6,195 lb\n\nHeating rates for a 5x3 ft tub: electric 5.5-10 kW gives 7-13F per hour; a 125,000 BTU gas heater gives 29F per hour. Snorkel's configurator lists capacity (a 5 ft wood-fired tub holds 2-3 adults) but gives prices only by quote.\n\n**Almost Heaven wood-fired Finnish soak tubs:**\n- Sindri (thermowood): $10,620.99, includes heater, cover and step, about 4 weeks lead time\n- Legend: 4-6 person, 67x67x43 in, about 2 hours to heat, $13,549.99\n\n**Zen Bathworks cedar hot tubs:** from $8,500 (4 ft ellipse) to $42,494 (8 ft round); the 6 ft round runs $10,860-$35,467. Production is full and orders are being taken for June 2027 delivery.\n\n**Hinoki:** Zen Bathworks' Hinoki Onsen is an indoor soaking tub (60-178 gal, $11,925-$28,177) with no heating listed. It suits a bath, not the outdoor heated tub.\n\n**Dundalk/LeisureCraft:** offers Original cedar tubs in 5, 6 and 7 ft (3-5 seats) and a 233 gal Starlight wood-burning tub. Pricing is dealer-only.\n\nWood tubs put a concentrated load of roughly 160-220 psf on a smaller footprint, so they need a level slab or an engineered pad. In 10-20% humidity, wood staves shrink when a tub stands empty, so keep it full.",
+   "confidence": "high",
+   "sources": [
+    "https://www.snorkel.com/blog/product-details-12/heating-rates-30",
+    "https://www.snorkel.com/design/hot-tub",
+    "https://almostheaven.com/products/sindri",
+    "https://almostheaven.com/products/legend-hot-tub-free-shipping",
+    "https://www.zenbathworks.com/product-category/cedar-hot-tubs/",
+    "https://www.zenbathworks.com/shop/ofuro-onsen-hinoki",
+    "https://leisurecraft.com/hot-tubs"
+   ]
+  },
+  {
+   "title": "Saunas and their electrical needs",
+   "detail": "**Almost Heaven barrel saunas:**\n- Salem 2-person: $4,485; 78x47x75 3/8 in; 6 kW heater on 240 V/30 A, hardwired; lights on 110 V/15 A\n- Watoga 2-4 person: $5,184; 78x59x75 3/8 in; 6 kW; installation from $1,400\n- Pinnacle 4-person: $6,060 on sale\n- Shenandoah 4-person: $10,650\n- The barrel line comes with 6, 8 or 9 kW heaters\n\n**Almost Heaven cube and cabin saunas:**\n- Blackwater 1-2 person mini-cube: $8,397\n- Blackwater 4-person cube: $11,268 on sale\n- Allegheny 6-person cabin: $10,722\n\n**Redwood Outdoors:**\n- Duo 2-person cube: $4,899 on sale; 4 ft 2.75 in x 5 ft 2.75 in x 6 ft 10.75 in; heat-treated hemlock; 910 lb\n- Extra-Wide 6-person barrel: $7,799; 178.8 cu ft; 1,190 lb\n- Heater options: Harvia KIP or Spirit at 6 kW (30 A breaker) or 8 kW (40 A), or Homecraft 9 kW (50 A)\n\n**Harvia KIP manual specs:**\n- KIP-45: 18.8 A, #10/2 wire, 100-210 cu ft room\n- KIP-60: 25.0 A, #10/2 wire, 170-300 cu ft room\n- KIP-80: 33.3 A, #8/2 wire, 250-425 cu ft room\n- All 240 V single phase; minimum room height 75 in in the USA\n\nSaunaLife (G2, G3, CL3G, CL4G, CL5G, GL4) and Dundalk (Harmony, Serenity and Tranquility barrels seat 4-6; Georgian cabin) list models but no prices. Huum and Saunum specs could not be retrieved.",
+   "confidence": "high",
+   "sources": [
+    "https://www.almostheaven.com/collections/barrel-saunas",
+    "https://www.almostheaven.com/products/salem-2-person-barrel-sauna",
+    "https://www.almostheaven.com/products/watoga-2-4-person-barrel-sauna",
+    "https://www.almostheaven.com/collections/cabin-saunas",
+    "https://www.redwoodoutdoors.com/products/duo-outdoor-sauna-2-person",
+    "https://www.redwoodoutdoors.com/products/extra-wide-barrel-sauna-6-person",
+    "https://cdn.shopify.com/s/files/1/0555/6355/0889/files/Kip_USA_CN_ENFR_Y05-0623_02052023.pdf?v=1683043679",
+    "https://saunalife.com/outdoor-saunas/",
+    "https://leisurecraft.com/canadian-timber-collection"
+   ]
+  },
+  {
+   "title": "Sauna heater prices, including wood-fired",
+   "detail": "Almost Heaven heater prices:\n- Harvia KIP with dials: $1,179 sale ($1,214 regular). 4.5 or 6 kW on a 30 A double-pole breaker, 8 kW on 40 A.\n- Spirit Smart Kit + Fenix (Wi-Fi): about $3,242-$3,291. 6, 8 or 9 kW; holds 120+ lb of stones.\n- Wood-burning: M3 heater $1,093; M3 kit $3,939 (includes protective base, protective surround, stainless chimney sections, boot and stones); Pro 20 kit $4,612; Legend 150 kit $5,308.\n\nAlmost Heaven says wood-burning is 'recommended for certain outdoor sauna models only.' The Harvia Cilindro wood heater holds 120 kg of stones.\n\nM3 clearance distances were not in the fetched pages or the barrel wood-burning manual. Follow Harvia's M3 manual, use the protective surround, and fit a spark-arresting chimney cap. Given wind and fire risk here, electric is the safer default.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.almostheaven.com/collections/sauna-heaters",
+    "https://almostheaven.com/products/m3-kit",
+    "https://almostheaven.com/products/kip-dials",
+    "https://almostheaven.com/products/spirit-heater",
+    "https://www.harvia.com/en-US/cilindro-wood-burning-heater/"
+   ]
+  },
+  {
+   "title": "Cold plunge options and chillers",
+   "detail": "Packaged plunges:\n- **The Plunge (original):** $6,790 sale ($8,490); 105 gal; 37-104F; dedicated 120 V/15 A circuit; 1,019.7 lb filled.\n- **Plunge All-In Gen 2:** $7,990 ($9,990); 76.75x31.5x28.75 in; 0.75 HP chiller; ozone; 1,150 lb filled; indoor/outdoor.\n- **Hot Spring Vigor:** $8,999; 110 gal; down to 40F; 115 V/15 A plug-in; 1,460 lb filled.\n- **Ice Barrel 500:** $1,749.99; 94 gal; chiller sold separately; bundle with chiller $5,749.98.\n\nPenguin Chillers:\n- Outdoor 1/2 HP high-efficiency chiller: $1,499.99, 5,750 BTU/hr, uses an external pump\n- Cold Therapy Chiller: $1,949.99, 7,500 BTU/hr\n- Barrel Chiller package: $2,199.99\n- These are 'outdoor rated for ambient temperatures above 32F', so they need a freeze plan on desert winter nights. Their standard 1/2-1 HP chillers are not outdoor rated.\n\nA DIY stock-tank plunge is viable: winter does the chilling, and you add a shaded chiller for summer. Stock-tank retail prices could not be fetched (Tractor Supply returned 503).",
+   "confidence": "high",
+   "sources": [
+    "https://www.plunge.com/products/plunge",
+    "https://www.plunge.com/products/plunge-all-in",
+    "https://www.hotspring.com/shop/cold-plunge/vigor",
+    "https://www.icebarrel.com/products/ice-barrel-500",
+    "https://penguinchillers.com/collections/cold-therapy"
+   ]
+  },
+  {
+   "title": "Gazebo and pavilion options with prices and wind ratings",
+   "detail": "**Yardistry (cedar and timber frame):**\n- 16x16 Timber Frame Gazebo: $7,099.99, plus $1,080 assembly. 9x9 in posts, 12 ft 2.5 in clear between posts, 16.1 ft square aluminum roof, 11 ft high.\n- 12x16 Meridian (cedar, 6x6 posts): $3,359.99 plus $980 assembly. Base 14 ft 10 in x 10 ft 11 in, 10 ft 4 in high.\n- 16x14 Timber Frame Pavilion: $6,678.99.\n- 14x12 wood pavilion with aluminum roof: $2,299.99.\n- No numeric wind ratings are published. Warranty is 1 year, with 5 years on lumber.\n\n**Backyard Discovery cedar:** Norwood 14x12 from $2,599, 16x12 from $2,999, 24x12 from $4,299. The company says its gazebos withstand winds 'up to 100 mph if anchored properly.'\n\n**Purple Leaf aluminum:**\n- Louvered pergolas: Caesar from $1,599-$2,579, rated to 70 mph freestanding. Athena from $2,399-$3,348, including shutter-wall variants, rated to 72 mph. Louvers are manual.\n- Hardtop gazebo line: rated for 40 mph wind. The 12x14 sunroom hardtop is $3,899.\n- Retractable curtains from $89.99.\n\n**Custom builders:**\n- Forever Redwood pavilion kits: from $6,000; Cardinal's Nest from $19,540. Custom sizes; the line includes a Hot Tub Pavilion, Zen Garden and Asian Fusion pavilions.\n- Amish Gazebos (octagon or oblong hot-tub gazebos, Eze-Breeze vinyl windows): start at $3,000 and average about $12,000.\n\nCanopia polycarbonate-roof Dallas, Palermo and Martinique gazebos come in 12x14 to 14x20, but prices were not shown.\n\nCounty IB-0003 requires minimum Exposure C (open terrain) and ASCE 7-22 wind design, and 120 mph where the hazard tool shows a Special Wind Region.",
+   "confidence": "high",
+   "sources": [
+    "https://yardistrystructures.com/products/16-x-16-timber-frame-gazebo",
+    "https://yardistrystructures.com/products/12-x-16-meridian-gazebo",
+    "https://www.yardistrystructures.com/",
+    "https://www.backyarddiscovery.com/collections/gazebos",
+    "https://www.purpleleafshop.com/collections/louvered-pergola",
+    "https://www.purpleleafshop.com/collections/hardtop-gazebo",
+    "https://www.foreverredwood.com/",
+    "https://www.amishgazebos.com/pricing",
+    "https://www.canopia.com/product-category/gazebos/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0003-2025-Rainfall-Water-Flow.pdf"
+   ]
+  },
+  {
+   "title": "Covers and wind",
+   "detail": "The Hot Spring cover is a locking cover that 'meets the ASTM F1346-91 Standard for Safety Covers.' The manual says the retractable cover lifter is 'not recommended for use in wind conditions reaching above 25 mph,' and suggests extra cover-lock straps in high-wind areas.\n\nThe Cover Guy sells aftermarket covers:\n- Standard (4-2.5 in taper): $479.99\n- Deluxe (5-3 in): $529.99\n- Extreme (6-4 in): $579.99\n\nAll include 4 child-safety locks and UV-protected 30 oz marine vinyl. The site says 'ASTM standards' without naming F1346, so confirm the label before relying on the 115925 exemption.",
+   "confidence": "high",
+   "sources": [
+    "https://d1oxc6ayqrhsgs.cloudfront.net/hot-spring/hot-spring-hot-spot-collection-owners-manuals-2026.pdf",
+    "https://www.thecoverguy.com/"
+   ]
+  },
+  {
+   "title": "Climate data for siting, freeze protection and plant choice",
+   "detail": "- **Hardiness zone:** 9a (20-25F) for ZIP 92284 (Yucca Valley) and ZIP 92285 (Landers).\n- **Temperature records:** the Joshua Tree WRCC station (1959-2016) recorded lows of 17F (Dec 19, 2008) and 18F (January and February), and a high of 115F (Jul 1, 2013).\n- **Rainfall:** mean annual precipitation 4.36 in.\n- **Evaporation:** the nearest pan-evaporation station, Mojave, averages 111.59 in/yr. WRCC says to multiply by 0.70-0.80 for natural surfaces.\n\nThe Hot Spring manual warns that below 10F combined with wind, the jet pump can partly freeze. Antifreeze must be propylene glycol only. A higher lot may run colder than the stations.",
+   "confidence": "high",
+   "sources": [
+    "https://phzmapi.org/92284.json",
+    "https://phzmapi.org/92285.json",
+    "https://wrcc-archive.dri.edu/cgi-bin/cliRECt.pl?ca4405",
+    "https://wrcc-archive.dri.edu/cgi-bin/cliMONtpre.pl?ca4405",
+    "https://wrcc-archive.dri.edu/Climate/comp_table_show.php?stype=pan_evap_avg"
+   ]
+  },
+  {
+   "title": "Plants inside a partly enclosed desert gazebo",
+   "detail": "NC State Extension data:\n- **Hardy enough to plant in the ground:** windmill palm (zones 7a-11b; wind tears its leaves), Mediterranean fan palm (8a-11b; drought and heat tolerant once established; overwatering causes rot), star jasmine (8a-10b; very fragrant; drought tolerant once established), holly fern (7a-10b; takes deep shade; drought intolerant).\n- **Clumping bamboo:** Bambusa multiplex (8a-11b) is clumping. Avoid golden bamboo (Phyllostachys aurea), which runs aggressively and escapes hardscape.\n- **Pots only, covered in winter:** bird of paradise (zones 10a-12b; likes 55-65F nights; toxic to pets) and pothos (bright indirect light; calcium-oxalate toxic). Sago (zones 9a-12b) dies below 15F and is highly toxic, so it is not advised.\n- **Humidity reality:** the tub adds humidity only while it is uncovered. Plan on drip irrigation and mulch rather than relying on ambient humidity.",
+   "confidence": "high",
+   "sources": [
+    "https://plants.ces.ncsu.edu/plants/trachycarpus-fortunei/",
+    "https://plants.ces.ncsu.edu/plants/chamaerops-humilis/",
+    "https://plants.ces.ncsu.edu/plants/bambusa-multiplex/",
+    "https://plants.ces.ncsu.edu/plants/phyllostachys-aurea/",
+    "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+    "https://plants.ces.ncsu.edu/plants/cyrtomium-falcatum/",
+    "https://plants.ces.ncsu.edu/plants/strelitzia-reginae/",
+    "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+    "https://plants.ces.ncsu.edu/plants/cycas-revoluta/"
+   ]
+  },
+  {
+   "title": "Local native plants in the coral, peach and pink palette, with prices",
+   "detail": "The Mojave Desert Land Trust 2026 plant sale runs Saturday, Oct 24, 2026, 9am-2pm, at 60124 Twentynine Palms Hwy, Joshua Tree. Inventory prices:\n- Sphaeralcea ambigua (apricot mallow): $16 for 4x6\n- Penstemon eatonii (firecracker penstemon): $12\n- Penstemon pseudospectabilis (desert penstemon): $16 for 1 gal\n- Justicia californica (chuparosa): $20\n- Epilobium canum (California fuchsia): $20\n- Calliandra eriophylla (fairy duster): $16\n- Fouquieria splendens (ocotillo): $25\n- Chilopsis linearis (desert willow): $20 for 4x10, $50 for 5 gal\n- Washingtonia filifera (California fan palm): $25 for 4x10\n- Opuntia basilaris (beavertail): $20\n- Psorothamnus spinosus (smoketree): $25 for 1 gal, $55 for 5 gal\n- Muhlenbergia porteri (bush muhly): $16\n\nNon-native but desert-adapted nursery plants: coral yucca (Hesperaloe parviflora; zones 6a-10b; coral-red flowers; superior drainage needed) and pink muhly (zones 5a-9b; pink in fall).",
+   "confidence": "high",
+   "sources": [
+    "https://static1.squarespace.com/static/61815979dfa7a7572c721a67/t/6ad0e905a0b45d7fd3978168/1792076037349/2026+plant+sale+inventory.pdf",
+    "https://www.mdlt.org/plant-sale-faqs",
+    "https://plants.ces.ncsu.edu/plants/hesperaloe-parviflora/",
+    "https://plants.ces.ncsu.edu/plants/muhlenbergia-capillaris/",
+    "https://plants.ces.ncsu.edu/plants/chilopsis-linearis/"
+   ]
+  },
+  {
+   "title": "Ondol-style heated platform",
+   "detail": "WarmlyYours products:\n- **TempZone Flex Roll and Easy Mats:** 15 W/sq ft, set in thinset under tile or stone.\n- **Cable:** 8-15 W/sq ft depending on spacing.\n- **Thermostats:** line-voltage with built-in GFCI. 120 V covers up to about 120 sq ft.\n- **Costs:** materials about $5-15 per sq ft (the page's own figures conflict); thermostat $150-350; electrician hookup $150-400.\n- **Snow-melt mats** run 39-50 W/sq ft and are too hot for a seat.\n\nA 6x8 ft platform at 15 W/sq ft draws about 720 W, roughly 6 A at 120 V (my calculation).",
+   "confidence": "medium",
+   "sources": [
+    "https://www.warmlyyours.com/en-US/floor-heating",
+    "https://www.warmlyyours.com/en-US/snow-melting"
+   ]
+  },
+  {
+   "title": "County permit fees for FY 2026/27",
+   "detail": "The County Construction Fee Schedule (16.0204(a)(1)) gives combined plan check and inspection fees for U-occupancy 'Awning/Canopy, Deck, Carport, Patio Cover,' wood frame (Type VB):\n- $691 at 50 sq ft, plus $59.22 for each additional 100 sq ft\n- $810 at 250 sq ft\n\n'Accessory-Other' (VB) is $4,704 at 1,000 sq ft. Separate spa and electrical permit fees were not in this schedule; get them from the EZOP fee estimator.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/ATT-CAO-040726-County-Fee-Ordinance-LUS-16.0204a1-Construction-Fee-Schedule-26-27.pdf",
+    "http://wp.sbcounty.gov/ezop/fee-estimators/"
+   ]
+  },
+  {
+   "title": "Water, draining and evaporation",
+   "detail": "Hot Spring says to drain and refill 3-4 times a year, or up to 12 months with a salt system. For a 340 gal tub that is about 1,020-1,360 gal a year before top-ups (my calculation). The manual also notes that well water can carry heavy minerals.\n\nEvaporation estimate (unverified, my calculation): Mojave pan evaporation of 111.59 in/yr times 0.7 is about 78 in/yr. Over a 49 sq ft open surface that is about 2,400 gal/yr at ambient temperature. Heated water loses more, and keeping the cover on most of the day cuts this sharply.\n\nWater providers: Hi-Desert Water District serves Yucca Valley ((760) 365-8333); its homepage does not list bulk or hauling rates. As one example, Joshua Basin WD's 2025 schedule charges $8.00-$12.95 per unit (1 unit = 748 gal).\n\nDraining: hold spa water until the sanitizer dissipates before using it on plants. The manual warns that water with a high sanitizer level can harm plants.",
+   "confidence": "medium",
+   "sources": [
+    "https://d1oxc6ayqrhsgs.cloudfront.net/hot-spring/hot-spring-hot-spot-collection-owners-manuals-2026.pdf",
+    "https://wrcc-archive.dri.edu/Climate/comp_table_show.php?stype=pan_evap_avg",
+    "https://www.hdwd.com/",
+    "https://www.jbwd.com/rates-fees"
+   ]
+  },
+  {
+   "title": "Dark-sky lighting rules for the desert region",
+   "detail": "Dev. Code 83.07.040 and Table 83-7:\n- Residential pole lights may be at most 12 ft tall.\n- New permitted lighting must be shielded to prevent light trespass.\n- Halogen, quartz, metal halide and mercury vapor are prohibited in residential areas.\n- Incandescent over 60 W and CFL over 13 W must be fully shielded.\n\nThe practical choice is low-wattage, warm, downward-shielded LED, which also protects stargazing from the tub.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/DCWebsite.pdf"
+   ]
+  },
+  {
+   "title": "Fire safety and ember resistance (not verified)",
+   "detail": "The OSFM and CAL FIRE pages returned 403, so the parcel's fire-hazard zone and the current Chapter 7A text could not be checked. The County Fire Safety (FS) overlay (Dev. Code 82.13) covers mapped high-fire-hazard desert areas, and permits in the overlay are sent to the Fire Authority for comment.\n\nIf the parcel is in a mapped fire hazard zone, CRC R337 and CBC Chapter 7A ember-resistant rules may apply to new structures. This is from background knowledge and not verified; it may include detached accessory structures within about 50 ft of a regulated building.\n\nSafer choices regardless: noncombustible or fire-retardant-treated roofing on the gazebo, gravel or concrete within 5 ft of structures, no wood-fired appliances during red-flag winds, and spark arrestors on any chimney.",
+   "confidence": "low",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/DCWebsite.pdf"
+   ]
+  }
+ ],
+ "products": [
+  {
+   "name": "Yardistry 16 x 16 Timber Frame Gazebo",
+   "category": "gazebo",
+   "price_low": 7099.99,
+   "price_high": 8179.99,
+   "specs": "9x9 in posts; 12 ft 2.5 in x 12 ft 2.5 in clear inside the posts; 16.1 x 16.1 ft graphite aluminum roof on a metal truss; 11 ft high; no published wind or snow rating; 1-year warranty, 5 years on lumber; optional assembly $1,080",
+   "source": "https://yardistrystructures.com/products/16-x-16-timber-frame-gazebo",
+   "why": "Best-priced heavy timber kit sized for a 6x6 or 7x7 tub plus corner planters; offered in Charwood (black) stain",
+   "condition": "new"
+  },
+  {
+   "name": "Yardistry 12 x 16 Meridian Gazebo (cedar)",
+   "category": "gazebo",
+   "price_low": 3359.99,
+   "price_high": 4339.99,
+   "specs": "Cedar with 6x6 posts; base 14 ft 10 in x 10 ft 11 in; overall 16 ft 1 in x 12 ft 2 in; 10 ft 4 in high; coffee-brown aluminum roof; anchors not included; optional assembly $980",
+   "source": "https://yardistrystructures.com/products/12-x-16-meridian-gazebo",
+   "why": "Lean-tier rectangular cover for a 6-7 ft tub",
+   "condition": "new"
+  },
+  {
+   "name": "Yardistry 16 x 14 Timber Frame Pavilion",
+   "category": "gazebo",
+   "price_low": 6678.99,
+   "price_high": 6678.99,
+   "specs": "Timber frame pavilion, Timber Grey or Charwood finish",
+   "source": "https://www.yardistrystructures.com/",
+   "why": "Rectangular alternative that leaves room for an ondol bench next to the tub",
+   "condition": "new"
+  },
+  {
+   "name": "Backyard Discovery Norwood cedar gazebo (14x12 / 16x12)",
+   "category": "gazebo",
+   "price_low": 2599,
+   "price_high": 2999,
+   "specs": "Cedar with a galvanized steel roof; maker says it withstands winds up to 100 mph if anchored properly (marketing claim)",
+   "source": "https://www.backyarddiscovery.com/collections/gazebos",
+   "why": "Lowest-cost cedar hardtop",
+   "condition": "new"
+  },
+  {
+   "name": "Purple Leaf Caesar / Athena louvered pergola (aluminum)",
+   "category": "pergola",
+   "price_low": 1599,
+   "price_high": 3348,
+   "specs": "Powder-coated aluminum with manual louvers; Caesar rated to 70 mph freestanding, Athena to 72 mph; roller-blind and shutter-wall variants available",
+   "source": "https://www.purpleleafshop.com/collections/louvered-pergola",
+   "why": "Adjustable shade and venting over the tub; wind rating is marginal for this site",
+   "condition": "new"
+  },
+  {
+   "name": "Purple Leaf 12x14 Sunroom Hardtop Gazebo",
+   "category": "enclosure",
+   "price_low": 3899,
+   "price_high": 3899,
+   "specs": "Galvanized steel double roof on an aluminum frame; the hardtop line's FAQ gives a 40 mph wind load",
+   "source": "https://www.purpleleafshop.com/collections/hardtop-gazebo",
+   "why": "Enclosed solarium look at low cost, but the wind rating is too low without engineering",
+   "condition": "new"
+  },
+  {
+   "name": "Forever Redwood pavilion kits (Hot Tub Pavilion, Zen Garden, Asian Fusion)",
+   "category": "gazebo",
+   "price_low": 6000,
+   "price_high": 19540,
+   "specs": "Custom-sized redwood kits; Backyard Pavilion Kits from $6,000, Cardinal's Nest from $19,540; drawings approved before building",
+   "source": "https://www.foreverredwood.com/",
+   "why": "Premium custom timber pavilion that can be made to any size",
+   "condition": "new"
+  },
+  {
+   "name": "Amish Gazebos custom hot-tub gazebo (octagon/oblong)",
+   "category": "gazebo",
+   "price_low": 3000,
+   "price_high": 12000,
+   "specs": "Gazebos start at $3,000 and average about $12,000; screens, Eze-Breeze windows and an electrical package are options",
+   "source": "https://www.amishgazebos.com/pricing",
+   "why": "Classic octagon form with operable vinyl windows",
+   "condition": "new"
+  },
+  {
+   "name": "Hot Spring Freeflow Mini",
+   "category": "hot_tub",
+   "price_low": 5499,
+   "price_high": 5499,
+   "specs": "2 seats; 6 ft x 4 ft 5 in x 29 in; 125 gal; 1,655 lb filled; 115 V plug-in or 230 V convertible (1 kW or 4 kW heater)",
+   "source": "https://www.hotspring.com/shop/freeflow/mini",
+   "why": "Lightest and cheapest option for a couple",
+   "condition": "new"
+  },
+  {
+   "name": "Hot Spring Freeflow Excursion",
+   "category": "hot_tub",
+   "price_low": 8999,
+   "price_high": 8999,
+   "specs": "4 seats; 6.5 x 6.5 ft x 34 in; 250 gal; 3,175 lb filled; 115 V or 230 V",
+   "source": "https://www.hotspring.com/shop/freeflow/excursion",
+   "why": "Lean-tier 4-seater",
+   "condition": "new"
+  },
+  {
+   "name": "Hot Spring Hot Spot TX",
+   "category": "hot_tub",
+   "price_low": 9999,
+   "price_high": 9999,
+   "specs": "2-seat lounge; 6x6 ft x 29 in; 190 gal; 2,570 lb filled; 115 V/15 A cord, 115 V/30 A, or 230 V/50 A with GFCI subpanel",
+   "source": "https://www.hotspring.com/shop/hot-spot/tx",
+   "why": "Leaves the most clear space inside a 16x16 gazebo",
+   "condition": "new"
+  },
+  {
+   "name": "Hot Spring Hot Spot Relay",
+   "category": "hot_tub",
+   "price_low": 12999,
+   "price_high": 12999,
+   "specs": "6 seats; 7x7 ft x 36 in; 340 gal; 830 lb dry, 4,715 lb filled; 230 V/50 A with GFCI subpanel included",
+   "source": "https://www.hotspring.com/shop/hot-spot/relay",
+   "why": "Balanced-tier tub with a lounge seat",
+   "condition": "new"
+  },
+  {
+   "name": "Hot Spring Highlife Jetsetter / Jetsetter LX",
+   "category": "hot_tub",
+   "price_low": 17499,
+   "price_high": 18499,
+   "specs": "3 seats; 7 ft x 5 ft 8 in x 33 in; 245 gal; 3,070 lb filled; 115 V/20 A or 230 V/50 A",
+   "source": "https://www.hotspring.com/shop/2-3-person-hot-tub",
+   "why": "Premium compact acrylic spa",
+   "condition": "new"
+  },
+  {
+   "name": "Jacuzzi J-215",
+   "category": "hot_tub",
+   "price_low": 4000,
+   "price_high": 7999,
+   "specs": "Up to 3 adults; 69x80x33 in; 205 gal; 517 lb dry; 120 V/15 A or 240 V/30-40 A. Price is Jacuzzi's $$ tier range, not a model price",
+   "source": "https://www.jacuzzi.com/en-us/j-215/J-215-MY26.html",
+   "why": "Budget brand-name tub with a 120 V option",
+   "condition": "new"
+  },
+  {
+   "name": "Almost Heaven Sindri Soak Tub (wood-fired)",
+   "category": "hot_tub",
+   "price_low": 10620.99,
+   "price_high": 10620.99,
+   "specs": "Thermowood, wood-fired, no electricity; includes heater, cover and step; made in Finland; about 4 weeks lead time",
+   "source": "https://almostheaven.com/products/sindri",
+   "why": "Off-grid wood tub option",
+   "condition": "new"
+  },
+  {
+   "name": "Almost Heaven Legend Soak Tub (wood-fired)",
+   "category": "hot_tub",
+   "price_low": 13549.99,
+   "price_high": 13549.99,
+   "specs": "4-6 person; 67x67x43 in; about 2 hours to heat; self-circulating; also works as a cold plunge",
+   "source": "https://almostheaven.com/products/legend-hot-tub-free-shipping",
+   "why": "Larger wood-fired tub",
+   "condition": "new"
+  },
+  {
+   "name": "Zen Bathworks 6' Round Cedar Hot Tub",
+   "category": "hot_tub",
+   "price_low": 10860,
+   "price_high": 35467,
+   "specs": "Wood, electric or gas heat; line runs $8,500 (4 ft ellipse) to $42,494 (8 ft round); orders now for June 2027 delivery",
+   "source": "https://www.zenbathworks.com/product-category/cedar-hot-tubs/",
+   "why": "Premium cedar tub look",
+   "condition": "new"
+  },
+  {
+   "name": "Zen Bathworks Hinoki Onsen Ofuro",
+   "category": "soaking_tub",
+   "price_low": 11925,
+   "price_high": 28177,
+   "specs": "Indoor hinoki soaking tub, 60-178 gal; no heater listed; unfinished interior",
+   "source": "https://www.zenbathworks.com/shop/ofuro-onsen-hinoki",
+   "why": "Reference only: an indoor bath, not the outdoor heated tub",
+   "condition": "new"
+  },
+  {
+   "name": "The Cover Guy replacement hot tub cover",
+   "category": "cover",
+   "price_low": 479.99,
+   "price_high": 579.99,
+   "specs": "Tapers 4-2.5, 5-3 or 6-4 in; 1.5 lb foam (2 lb upgrade); 4 child-safety locks; 30 oz UV marine vinyl; 'meets ASTM standards' (confirm F1346 label)",
+   "source": "https://www.thecoverguy.com/",
+   "why": "Replacement cover; desert sun wears covers out",
+   "condition": "new"
+  },
+  {
+   "name": "Almost Heaven Salem 2-Person Barrel Sauna",
+   "category": "sauna",
+   "price_low": 4485,
+   "price_high": 4485,
+   "specs": "78x47x75 3/8 in; cedar (Rustic Red Cedar or Onyx); 6 kW heater on 240 V/30 A, hardwired; lights 110 V/15 A",
+   "source": "https://www.almostheaven.com/products/salem-2-person-barrel-sauna",
+   "why": "Lean-tier cedar barrel sized for a couple",
+   "condition": "new"
+  },
+  {
+   "name": "Almost Heaven Watoga 2-4 Person Barrel Sauna",
+   "category": "sauna",
+   "price_low": 5184,
+   "price_high": 6584,
+   "specs": "78x59x75 3/8 in; 6 kW heater on 240 V/30 A; professional installation from $1,400",
+   "source": "https://www.almostheaven.com/products/watoga-2-4-person-barrel-sauna",
+   "why": "Balanced-tier sauna",
+   "condition": "new"
+  },
+  {
+   "name": "Almost Heaven Pinnacle 4 Person Barrel Sauna",
+   "category": "sauna",
+   "price_low": 6060,
+   "price_high": 7575,
+   "specs": "4-person barrel; the barrel line comes with 6, 8 or 9 kW heaters",
+   "source": "https://www.almostheaven.com/collections/barrel-saunas",
+   "why": "Room for guests",
+   "condition": "new"
+  },
+  {
+   "name": "Almost Heaven Blackwater cube saunas (1-2 person mini / 4 person)",
+   "category": "sauna",
+   "price_low": 8397,
+   "price_high": 11268,
+   "specs": "Cube form; 4-person on sale $11,268 (regular $14,085)",
+   "source": "https://www.almostheaven.com/collections/cabin-saunas",
+   "why": "Premium modern cube; pairs well with black finishes",
+   "condition": "new"
+  },
+  {
+   "name": "Almost Heaven Allegheny 6 Person Cabin Sauna",
+   "category": "sauna",
+   "price_low": 10722,
+   "price_high": 10722,
+   "specs": "6-person cabin",
+   "source": "https://www.almostheaven.com/collections/cabin-saunas",
+   "why": "Cabin form with a changing area",
+   "condition": "new"
+  },
+  {
+   "name": "Redwood Outdoors Duo Outdoor Sauna (2 person)",
+   "category": "sauna",
+   "price_low": 4899,
+   "price_high": 5899,
+   "specs": "4 ft 2.75 in x 5 ft 2.75 in x 6 ft 10.75 in; 1.5 in heat-treated hemlock; 910 lb; Harvia KIP/Spirit 6 kW (30 A) or 8 kW (40 A), or Homecraft 9 kW (50 A); listed out of stock",
+   "source": "https://www.redwoodoutdoors.com/products/duo-outdoor-sauna-2-person",
+   "why": "Compact cube option",
+   "condition": "new"
+  },
+  {
+   "name": "Redwood Outdoors Extra-Wide Barrel Sauna (6 person)",
+   "category": "sauna",
+   "price_low": 7799,
+   "price_high": 8299,
+   "specs": "Exterior 7 ft 0.75 in W x 5 ft 11.75 in L x 7 ft 4.5 in H; 178.8 cu ft inside; hemlock; 1,190 lb; KIP 6 kW (30 A) or 8 kW (40 A)",
+   "source": "https://www.redwoodoutdoors.com/products/extra-wide-barrel-sauna-6-person",
+   "why": "Roomy barrel",
+   "condition": "new"
+  },
+  {
+   "name": "Harvia KIP heater with dials",
+   "category": "sauna_heater",
+   "price_low": 1179,
+   "price_high": 1214,
+   "specs": "4.5, 6 or 8 kW; KIP-60 draws 25 A at 240 V on #10/2 wire for a 170-300 cu ft room; KIP-80 draws 33.3 A on #8/2 for 250-425 cu ft; breakers 30 A or 40 A",
+   "source": "https://almostheaven.com/products/kip-dials",
+   "why": "Simple, reliable electric heater",
+   "condition": "new"
+  },
+  {
+   "name": "Harvia Spirit Smart Heater Kit + Fenix",
+   "category": "sauna_heater",
+   "price_low": 3242,
+   "price_high": 3291,
+   "specs": "6, 8 or 9 kW; Wi-Fi remote start; holds 120+ lb of stones; 30 A (6 kW) or 40 A (8 kW) breaker",
+   "source": "https://almostheaven.com/products/spirit-heater",
+   "why": "Lets the sauna be preheated from the RV",
+   "condition": "new"
+  },
+  {
+   "name": "Harvia M3 wood-burning heater / M3 kit with chimney",
+   "category": "sauna_heater",
+   "price_low": 1093,
+   "price_high": 3939,
+   "specs": "Kit includes protective base, surround, 1500 mm and 1000 mm stainless chimney sections, boot and stones; 15x16x27 in; recommended for certain outdoor models only",
+   "source": "https://almostheaven.com/products/m3-kit",
+   "why": "Off-grid option; carries fire and wind risk",
+   "condition": "new"
+  },
+  {
+   "name": "Ice Barrel 500",
+   "category": "cold_plunge",
+   "price_low": 1749.99,
+   "price_high": 5749.98,
+   "specs": "94 gal; 57.6x30.7x42.1 in; 104 lb empty; UV-resistant; chiller separate (bundle with chiller $5,749.98)",
+   "source": "https://www.icebarrel.com/products/ice-barrel-500",
+   "why": "Upright soak that uses little space",
+   "condition": "new"
+  },
+  {
+   "name": "Penguin Chillers outdoor cold plunge chillers",
+   "category": "chiller",
+   "price_low": 1499.99,
+   "price_high": 2199.99,
+   "specs": "Outdoor 1/2 HP high-efficiency, 5,750 BTU/hr (external pump), $1,499.99; Cold Therapy Chiller, 7,500 BTU/hr, $1,949.99; Barrel package $2,199.99; outdoor rated only above 32F ambient",
+   "source": "https://penguinchillers.com/collections/cold-therapy",
+   "why": "For a DIY stock-tank or barrel plunge",
+   "condition": "new"
+  },
+  {
+   "name": "The Plunge (original) with Pro Chiller",
+   "category": "cold_plunge",
+   "price_low": 6790,
+   "price_high": 8490,
+   "specs": "105 gal; 66-5/8 x 31-1/2 x 26 in; 37-104F; dedicated 120 V/15 A circuit; 1,019.7 lb filled",
+   "source": "https://www.plunge.com/products/plunge",
+   "why": "Turnkey plunge for the balanced or premium tier",
+   "condition": "new"
+  },
+  {
+   "name": "Plunge All-In Gen 2",
+   "category": "cold_plunge",
+   "price_low": 7990,
+   "price_high": 9990,
+   "specs": "105 gal; 76.75x31.5x28.75 in; 0.75 HP chiller; 37-104F; ozone; 120 V/15 A with 7 ft cord and GFCI; 1,150 lb filled",
+   "source": "https://www.plunge.com/products/plunge-all-in",
+   "why": "All-in-one unit",
+   "condition": "new"
+  },
+  {
+   "name": "Hot Spring Vigor Cold Plunge",
+   "category": "cold_plunge",
+   "price_low": 8999,
+   "price_high": 8999,
+   "specs": "7 ft 4 in x 3 ft 6 in x 29 in; 110 gal; down to 40F; 115 V/15 A plug-in; 1,460 lb filled",
+   "source": "https://www.hotspring.com/shop/cold-plunge/vigor",
+   "why": "Same dealer and service as a Hot Spring tub",
+   "condition": "new"
+  },
+  {
+   "name": "WarmlyYours TempZone floor-heating mat (for the ondol)",
+   "category": "radiant_heat",
+   "price_low": 5,
+   "price_high": 15,
+   "specs": "Price is per sq ft (materials, per the page). 15 W/sq ft in thinset under tile or stone; GFCI thermostat $150-350; 120 V up to about 120 sq ft",
+   "source": "https://www.warmlyyours.com/en-US/floor-heating",
+   "why": "Low-wattage heat for a tiled ondol platform",
+   "condition": "new"
+  },
+  {
+   "name": "MDLT native plants (apricot mallow, penstemons, chuparosa, ocotillo, desert willow, California fan palm)",
+   "category": "plants",
+   "price_low": 12,
+   "price_high": 55,
+   "specs": "4x6, 1 gal, 4x10 and 5 gal containers; sale Oct 24, 2026, 9am-2pm, in Joshua Tree",
+   "source": "https://static1.squarespace.com/static/61815979dfa7a7572c721a67/t/6ad0e905a0b45d7fd3978168/1792076037349/2026+plant+sale+inventory.pdf",
+   "why": "Local natives in the coral, peach and pink palette",
+   "condition": "new"
+  }
+ ],
+ "design_numbers": [
+  "Joshua tree buffer: no grading, structures, trenching or brush clearing within 50 ft of any western Joshua tree without CDFW approval (County guide, Feb 2026)",
+  "CDFW root spread: 45.9 ft for a 14 ft tree, 27.6 ft for a 3.3 ft tree",
+  "Building permit needed for structures over 120 sq ft, any patio cover (solid or lattice), pools and spas, and electrical work",
+  "RL desert setbacks: front 25 ft, street side 25 ft, interior sides 15 ft each (lots wider than 75 ft), rear 15 ft; max lot coverage 20%; height 35 ft",
+  "Portable spa exempt from planning (land-use) permits if 120 sq ft or less including equipment, 2,000 gal or less, and 3 ft deep or less; building and electrical permits still needed",
+  "Pool barrier (County IB-0007): at least 60 in high; 2 in max gap at grade; no opening that passes a 4 in sphere; horizontal members on the pool side if less than 45 in apart; gates swing outward, self-closing and self-latching, no wider than 4 ft",
+  "Safety cover standard: ASTM F1346 (state statute cites F1346-23; Hot Spring covers are labeled F1346-91)",
+  "Spa electrical (Hot Spring): 230 V, 50 A, 4-wire; #8 AWG L1/L2/N and #10 ground for runs under 100 ft; GFCI subpanel within sight, at least 5 ft and no more than 50 ft from the spa",
+  "Keep electrical appliances 5 ft from the spa; install 5 ft from metal surfaces unless bonded",
+  "Hot tub floor loads (calculated): Relay 4,715 lb over 49 sq ft is about 96 psf; TX 2,570 lb over 36 sq ft is about 71 psf; Mini about 62 psf; Snorkel 5x4 wood tub 4,250 lb over 19.6 sq ft is about 217 psf",
+  "Heater output: 115 V setting about 1 kW, 230 V setting about 4 kW (choose 230 V for desert winters)",
+  "Hot Spring cover lifter: do not use in winds above 25 mph; add extra lock straps",
+  "Wind ratings: budget hardtop gazebo 40 mph; louvered pergolas 70-72 mph; County requires Exposure C and ASCE 7-22; 120 mph in a Special Wind Region",
+  "Yardistry 16x16 gazebo clear between posts is 12 ft 2.5 in, so a 7x7 tub leaves about 2 ft 7 in per side and a 6x6 tub about 3 ft 1 in per side (calculated)",
+  "Sauna heaters: KIP-60 6 kW draws 25 A at 240 V, #10/2 wire, 30 A breaker, for a 170-300 cu ft room; KIP-80 8 kW draws 33.3 A, #8/2, 40 A breaker, for 250-425 cu ft; minimum room height 75 in",
+  "Ondol: 15 W/sq ft, so a 6x8 ft platform is about 720 W (about 6 A at 120 V)",
+  "Cold plunge: Plunge on a dedicated 120 V/15 A circuit; Penguin outdoor chillers rated only above 32F ambient; 105-110 gal tubs weigh about 1,020-1,460 lb filled",
+  "Estimated spa subpanel for the balanced build: 50 A tub + 30-40 A sauna + 15 A plunge + 20 A lights/ondol + optional 30 A water heater, roughly a 125 A subpanel. Estimate only; the electrician's load calculation governs",
+  "Climate: USDA zone 9a (20-25F) for ZIPs 92284 and 92285; Joshua Tree station record low 17F, record high 115F; 4.36 in/yr rain",
+  "Evaporation: Mojave pan 111.59 in/yr, times 0.7 is about 78 in/yr; a 49 sq ft uncovered surface loses about 2,400 gal/yr at ambient temperature (estimate)",
+  "Water use: drain and refill 3-4 times a year, so a 340 gal tub uses about 1,020-1,360 gal/yr before top-ups",
+  "County fee FY26/27: wood (VB) patio-cover-type structure $691 at 50 sq ft + $59.22 per extra 100 sq ft; $810 at 250 sq ft",
+  "Lighting: residential pole lights 12 ft max; shield all new permitted lighting; halogen and metal halide prohibited in residential areas"
+ ],
+ "costs": [
+  {
+   "item": "Gazebo kit (Yardistry 12x16 Meridian to 16x16 Timber Frame, plus pro assembly)",
+   "low_usd": 3360,
+   "high_usd": 8180,
+   "notes": "Yardistry list prices: $3,359.99 + $980 assembly, or $7,099.99 + $1,080 assembly"
+  },
+  {
+   "item": "Custom redwood or Amish pavilion",
+   "low_usd": 3000,
+   "high_usd": 19540,
+   "notes": "Amish Gazebos start at $3,000 and average about $12k; Forever Redwood kits from $6,000 to $19,540 or more; installation extra"
+  },
+  {
+   "item": "Aluminum louvered pergola (Purple Leaf)",
+   "low_usd": 1599,
+   "high_usd": 3348,
+   "notes": "Rated to only 70-72 mph"
+  },
+  {
+   "item": "Acrylic hot tub",
+   "low_usd": 5499,
+   "high_usd": 18499,
+   "notes": "Hot Spring Mini $5,499 up to Jetsetter LX $18,499; Relay or Rhythm $12,999"
+  },
+  {
+   "item": "Wood-fired or cedar hot tub",
+   "low_usd": 8500,
+   "high_usd": 42494,
+   "notes": "Almost Heaven Sindri $10,620.99, Legend $13,549.99; Zen Bathworks $8,500-$42,494"
+  },
+  {
+   "item": "Replacement or extra ASTM-labeled cover",
+   "low_usd": 480,
+   "high_usd": 580,
+   "notes": "The Cover Guy; confirm the F1346 label"
+  },
+  {
+   "item": "Barrel or cube sauna",
+   "low_usd": 4485,
+   "high_usd": 11268,
+   "notes": "Almost Heaven Salem $4,485 to Blackwater 4-person $11,268; Redwood Duo $4,899"
+  },
+  {
+   "item": "Sauna install (Almost Heaven professional)",
+   "low_usd": 1400,
+   "high_usd": 1400,
+   "notes": "'Starting at $1,400' for the Watoga"
+  },
+  {
+   "item": "Sauna heater upgrade (Spirit Wi-Fi) or wood M3 kit",
+   "low_usd": 1093,
+   "high_usd": 5308,
+   "notes": "M3 $1,093; M3 kit $3,939; Spirit kit about $3,242-$3,291; Legend 150 kit $5,308"
+  },
+  {
+   "item": "Cold plunge (DIY barrel + chiller to turnkey)",
+   "low_usd": 1750,
+   "high_usd": 8999,
+   "notes": "Ice Barrel 500 $1,749.99 + Penguin chiller $1,499.99-$2,199.99; Plunge $6,790-$7,990; Vigor $8,999"
+  },
+  {
+   "item": "DIY stock-tank plunge without chiller",
+   "low_usd": 300,
+   "high_usd": 800,
+   "notes": "ESTIMATE, unverified; retail stock-tank prices could not be fetched"
+  },
+  {
+   "item": "Ondol heated platform",
+   "low_usd": 800,
+   "high_usd": 20000,
+   "notes": "ESTIMATE. Mat materials $5-15/sq ft, thermostat $150-350 and electrician $150-400 are from WarmlyYours; the masonry, tile and hwangto finish costs are estimates"
+  },
+  {
+   "item": "Seshin scrub and shower station",
+   "low_usd": 800,
+   "high_usd": 20000,
+   "notes": "ESTIMATE: simple outdoor shower and bench up to a tiled wet room with a water heater"
+  },
+  {
+   "item": "Concrete slab or pads",
+   "low_usd": 1500,
+   "high_usd": 12000,
+   "notes": "ESTIMATE; depends on size, access and engineering"
+  },
+  {
+   "item": "Electrical (spa subpanel, trench, circuits)",
+   "low_usd": 3000,
+   "high_usd": 25000,
+   "notes": "ESTIMATE; driven by distance from the meter and whether a service upgrade is needed"
+  },
+  {
+   "item": "Permits and plan check",
+   "low_usd": 1200,
+   "high_usd": 5000,
+   "notes": "County fee for a wood patio-cover-type structure is $691-$810 at 50-250 sq ft; spa and electrical fees not found (use EZOP estimator); range is an estimate"
+  },
+  {
+   "item": "Engineering and wind design (if required)",
+   "low_usd": 0,
+   "high_usd": 7000,
+   "notes": "ESTIMATE"
+  },
+  {
+   "item": "Plants (MDLT natives plus nursery palms and bamboo)",
+   "low_usd": 400,
+   "high_usd": 15000,
+   "notes": "MDLT $12-$55 each; larger palms and irrigation are estimates"
+  },
+  {
+   "item": "Shielded dark-sky lighting",
+   "low_usd": 500,
+   "high_usd": 10000,
+   "notes": "ESTIMATE"
+  }
+ ],
+ "tiers": [
+  {
+   "tier": "lean",
+   "total_low": 20583,
+   "total_high": 42188,
+   "line_items": [
+    "Hot tub: Hot Spring Freeflow Mini ($5,499) or Excursion ($8,999), wired at 230 V for the 4 kW heater: $5,499-$8,999",
+    "Gazebo: Backyard Discovery Norwood 14x12 (from $2,599) or Yardistry 12x16 Meridian ($3,359.99 + $980 assembly): $2,599-$4,340",
+    "Sauna: Almost Heaven Salem 2-person ($4,485) or Redwood Outdoors Duo ($4,899), 6 kW on 240 V/30 A: $4,485-$4,899",
+    "Cold plunge: DIY stock tank with no chiller (winter cold; estimate) or Ice Barrel 500 ($1,749.99): $300-$1,750",
+    "Seshin station: outdoor shower, cold tap and a small water heater, cedar bench (ESTIMATE): $800-$2,500",
+    "Ondol: 4x7 block platform with a 15 W/sq ft mat in thinset and tile (ESTIMATE using WarmlyYours unit costs): $800-$2,000",
+    "Pads: tub slab plus compacted gravel sauna pad (ESTIMATE): $1,500-$4,000",
+    "Electrical: 50 A spa GFCI subpanel, 30 A sauna and 20 A misc circuits, short trench (ESTIMATE): $3,000-$8,000",
+    "Permits: building (about $700-$810 County fee for a wood patio-cover type) plus spa/electrical (ESTIMATE total): $1,200-$3,000",
+    "Plants: about 20 MDLT natives at $12-$50 plus pots: $400-$1,200",
+    "Safety: extra cover straps, plus a 60 in barrier gate if the inspector requires it (ESTIMATE): $0-$1,500"
+   ]
+  },
+  {
+   "tier": "balanced",
+   "total_low": 47733,
+   "total_high": 90788,
+   "line_items": [
+    "Hot tub: Hot Spring Hot Spot TX ($9,999) or Relay ($12,999), 230 V/50 A, ASTM F1346 locking cover: $9,999-$12,999",
+    "Gazebo: Yardistry 16x16 Timber Frame in Charwood ($7,099.99 + $1,080 assembly) plus coral lattice screens and a west windbreak wall (ESTIMATE $2,000-$6,000): $9,100-$14,200",
+    "Sauna: Almost Heaven Watoga 2-4 person ($5,184 + $1,400 install) or Redwood Extra-Wide barrel ($7,799): $5,184-$7,799",
+    "Cold plunge: Ice Barrel 500 ($1,749.99) + Penguin Barrel Chiller package ($2,199.99), or The Plunge ($6,790): $3,950-$6,790",
+    "Ondol: 6x8 tiled heated platform (ESTIMATE): $2,500-$6,000",
+    "Seshin station: stone shower pad, hot/cold, teak bench, water heater (ESTIMATE): $2,000-$5,000",
+    "Slab: about 16x16 gazebo slab plus sauna pad and paths (ESTIMATE): $5,000-$12,000",
+    "Electrical: about 125 A spa subpanel with trench and all circuits (ESTIMATE): $6,000-$15,000",
+    "Permits, plan check and wind engineering (ESTIMATE): $2,000-$5,000",
+    "Plants, onggi pots, planters and drip irrigation (ESTIMATE; natives priced from MDLT): $1,500-$4,000",
+    "Shielded warm LED lighting (ESTIMATE): $500-$2,000"
+   ]
+  },
+  {
+   "tier": "premium",
+   "total_low": 109681,
+   "total_high": 274442,
+   "line_items": [
+    "Hot tub: Zen Bathworks 7 ft round cedar ($11,969-$38,843; June 2027 lead time) or Hot Spring Jetsetter LX ($18,499). A custom in-ground concrete/tile spa is unpriced here and would add anti-entrapment and barrier requirements: $11,969-$38,843",
+    "Pavilion: Forever Redwood custom pavilion (kits $6,000-$19,540+) with installation, operable polycarbonate/glass walls and Korean lattice (ESTIMATE): $25,000-$70,000",
+    "Sauna: Almost Heaven Allegheny 6-person cabin ($10,722) or Blackwater 4-person cube ($11,268) with a Spirit Wi-Fi heater ($3,242-$3,291): $10,722-$14,600",
+    "Cold plunge: Plunge All-In Gen 2 ($7,990) or Hot Spring Vigor ($8,999): $7,990-$8,999",
+    "Ondol: mason-built hwangto clay or stone heated platform, 8x10 (ESTIMATE): $8,000-$20,000",
+    "Seshin: tiled wet room with rain shower, scrub bench, water heater (ESTIMATE): $8,000-$20,000",
+    "Site work: engineered slabs, drainage, dust control, boulders (ESTIMATE): $15,000-$40,000",
+    "Electrical: dedicated 200 A spa service or subpanel with load calculation (ESTIMATE): $10,000-$25,000",
+    "Design, engineering and permits (ESTIMATE): $5,000-$12,000",
+    "Landscape: palms, clumping bamboo, natives, irrigation (ESTIMATE): $5,000-$15,000",
+    "Lighting, shade sails, sound (ESTIMATE): $3,000-$10,000"
+   ]
+  }
+ ],
+ "plants": [
+  {
+   "name": "Windmill palm (Trachycarpus fortunei)",
+   "where": "Inside the gazebo, ground planter at a back corner, out of the west wind",
+   "care": "Zones 7a-11b, the hardiest palm here. Sun to part shade, moist but well-drained soil, drought tolerant once established. Wind tears the leaves, so put it behind a windbreak. 8-10 ft in cultivation."
+  },
+  {
+   "name": "Mediterranean fan palm (Chamaerops humilis)",
+   "where": "Brightest edge or entry of the gazebo, or just outside it",
+   "care": "Zones 8a-11b. Takes drought and heat once established. Overwatering causes root and stem rot, so use gritty soil. Clumping, 6-15 ft tall."
+  },
+  {
+   "name": "Clumping bamboo (Bambusa multiplex, e.g., 'Golden Goddess')",
+   "where": "Large containers or lined planters along the west and southwest walls as a living screen",
+   "care": "Zones 8a-11b, clumping and non-invasive. Keep moist with drip and compost-rich soil. Do NOT plant golden bamboo (Phyllostachys aurea), which runs and escapes hardscape."
+  },
+  {
+   "name": "Star jasmine (Trachelospermum jasminoides)",
+   "where": "Trained up gazebo posts and lattice",
+   "care": "Zones 8a-10b. Sheltered sun gives the best bloom: fragrant white flowers in late spring. Drought tolerant once established. Milky sticky sap; some sources list it as poisonous."
+  },
+  {
+   "name": "Holly fern (Cyrtomium falcatum)",
+   "where": "Deep shade under benches or beside the ondol platform, away from splash",
+   "care": "Zones 7a-10b. Heavy shade, moist humus-rich soil. Drought intolerant, so use drip and mulch. The most realistic fern for dry desert air."
+  },
+  {
+   "name": "Bird of paradise (Strelitzia reginae)",
+   "where": "Large pot inside the gazebo, moved to shelter or the RV when nights drop below about 32F",
+   "care": "Zones 10a-12b, below this site's 9a. Prefers 55-65F nights. Water freely in summer, drier in winter. Toxic to cats, dogs and horses."
+  },
+  {
+   "name": "Pothos (Epipremnum aureum)",
+   "where": "Hanging pots under the roof in bright indirect light; winter indoors",
+   "care": "Tropical houseplant; no minimum temperature listed, but treat it as frost-tender. Let soil dry between waterings. Calcium-oxalate toxic."
+  },
+  {
+   "name": "Apricot mallow (Sphaeralcea ambigua)",
+   "where": "Outside, sunny gravel beds framing the gazebo (peach and apricot color)",
+   "care": "Mojave native, very low water. MDLT 4x6 for $16."
+  },
+  {
+   "name": "Firecracker penstemon (Penstemon eatonii) and desert penstemon (P. pseudospectabilis)",
+   "where": "Outside along paths (coral-red and pink)",
+   "care": "Natives; sun, sharp drainage, minimal water once established. MDLT $12 (4x6) and $16 (1 gal)."
+  },
+  {
+   "name": "Chuparosa (Justicia californica) and California fuchsia (Epilobium canum)",
+   "where": "Outside near the sauna and shower, attracts hummingbirds (coral-red)",
+   "care": "Natives; sun to part shade, low water. MDLT $20 each (1 gal)."
+  },
+  {
+   "name": "Fairy duster (Calliandra eriophylla)",
+   "where": "Outside foreground beds (blush pink)",
+   "care": "Native; sun, low water. MDLT $16 (4x6)."
+  },
+  {
+   "name": "Ocotillo (Fouquieria splendens)",
+   "where": "Outside as a sculptural accent against white walls, good for B&W photography (red tips)",
+   "care": "Native; full sun, very low water. MDLT $25 (1 gal), limit two per customer."
+  },
+  {
+   "name": "Desert willow (Chilopsis linearis)",
+   "where": "Outside, west or southwest of the gazebo as a summer shade tree",
+   "care": "Zones 7a-11b. Full sun, drought tolerant, deep roots, dislikes wet soil. 15-25 ft. Pink to lavender flowers. MDLT $20 (4x10) or $50 (5 gal)."
+  },
+  {
+   "name": "California fan palm (Washingtonia filifera)",
+   "where": "Outside, a grove marking the spa (well away from the gazebo roof and power lines)",
+   "care": "California desert native. MDLT 4x10 for $25. Grows large; mature size and cold hardiness not verified from a fetched source."
+  },
+  {
+   "name": "Coral yucca (Hesperaloe parviflora)",
+   "where": "Outside in gravel beds; coral flower spikes 4-6 ft",
+   "care": "Zones 6a-10b, nursery plant (not native here). Full sun, superior drainage essential; damp heavy soil causes rot. Very drought tolerant."
+  },
+  {
+   "name": "Pink muhly (Muhlenbergia capillaris) or native bush muhly (M. porteri)",
+   "where": "Outside drifts for a pink fall haze",
+   "care": "Pink muhly: zones 5a-9b, full sun, drought tolerant, blooms Sep-Nov. Bush muhly is a Mojave native, MDLT $16."
+  },
+  {
+   "name": "Smoketree (Psorothamnus spinosus) and beavertail cactus (Opuntia basilaris)",
+   "where": "Outside; silver and magenta accents for the high-key B&W look",
+   "care": "Natives; full sun, wash-like gravel, minimal water. MDLT smoketree $25-$55, beavertail $20. Established smoke trees are regulated by County code 88.01.060."
+  }
+ ],
+ "risks": [
+  {
+   "risk": "Building inside a Joshua tree 50-ft buffer, including trenching for power or water lines",
+   "severity": "high",
+   "mitigation": "Map every Joshua tree on the lot first, then site the spa, slab, trenches and paths outside 50 ft circles. Email CDFW (WJT@wildlife.ca.gov / Region 6, 909-484-0167) about any unavoidable encroachment. Also avoid regulated yuccas and creosote rings (County 88.01.060)."
+  },
+  {
+   "risk": "Accessory structures not allowed without a legally established primary residence or use; living in an RV may not count",
+   "severity": "high",
+   "mitigation": "Before buying the tub or gazebo, ask County Building and Safety (Joshua Tree office, Wednesdays, 760-995-8140) whether the RV permit counts or whether a Temporary Use Permit (Chapter 84.25) is needed. If the lot is inside the Town of Yucca Valley, confirm with Town Building and Safety instead."
+  },
+  {
+   "risk": "High spring winds wrecking covers, cover lifters, enclosure panels and lightweight gazebos",
+   "severity": "high",
+   "mitigation": "Size and anchor the gazebo to an ASCE 7-22, Exposure C engineered footing. Avoid 40 mph-rated hardtops. Use cover-lock straps and don't open the cover lifter above 25 mph. Put solid or polycarbonate walls on the windward side with engineered connections, and leave the downwind side open."
+  },
+  {
+   "risk": "Electrical capacity: hot tub (50 A), sauna (30-40 A), plunge (15 A), ondol, lights and water heater can exceed a small rural service",
+   "severity": "high",
+   "mitigation": "Get an electrician's load calculation and a dedicated spa subpanel. Put the spa GFCI disconnect within sight, 5-50 ft from the tub. Wi-Fi heaters let you avoid running the sauna and tub at full heat at the same time."
+  },
+  {
+   "risk": "Pool Safety Act or County barrier non-compliance at final inspection",
+   "severity": "medium",
+   "mitigation": "Buy a spa whose locking cover is labeled ASTM F1346 (exempt under 115925). If the inspector wants a second feature, don't rely on a pool alarm with the cover (state law says that pair doesn't count); use a compliant 60 in enclosure with a self-closing gate. Korean lattice with horizontal bars on the outside reads as climbable, so back it with smooth glazing or put the lattice on the pool side."
+  },
+  {
+   "risk": "Freeze damage during winter power outages (record 17F; pump freezing below 10F with wind)",
+   "severity": "medium",
+   "mitigation": "Insulate the equipment bay, consider a backup power plan, and know the drain procedure. Use only propylene glycol antifreeze, never automotive ethylene glycol. Penguin chillers are rated only above 32F ambient, so shelter them or drain in winter."
+  },
+  {
+   "risk": "Summer heat over 100F: equipment overheating, an unappealing 102F tub, heat illness from sauna plus tub",
+   "severity": "medium",
+   "mitigation": "Shade and vent the tub equipment compartment (Hot Spring warns about summer overheating). Run the tub cooler in summer, use the plunge, schedule sessions after sunset, hydrate, and avoid alcohol."
+  },
+  {
+   "risk": "Wildfire and embers, especially with wood-fired tubs or sauna stoves in wind",
+   "severity": "medium",
+   "mitigation": "Default to electric heaters. If going wood-fired, use the M3 kit's protective surround, follow Harvia clearances, add a spark-arresting cap, never burn on red-flag or windy days, and keep 5 ft of noncombustible gravel around structures. Check the parcel's fire hazard zone; OSFM pages were not reachable for this research."
+  },
+  {
+   "risk": "Dust clogging filters and abrading covers; well water high in minerals",
+   "severity": "medium",
+   "mitigation": "Add a windbreak, keep the cover on, rinse filters weekly in windy months, and use a pre-filter on fill water. Test hardness (Hot Spring notes well water can be mineral-heavy) and consider hauled or filtered fill water."
+  },
+  {
+   "risk": "Wood tub concentrated loads (about 160-220 psf) and staves drying out in very dry air",
+   "severity": "medium",
+   "mitigation": "Pour a level reinforced slab or an engineered pad, and keep wood tubs full. Note the Zen Bathworks June 2027 lead time."
+  },
+  {
+   "risk": "Plant failures and toxicity: tropical plants freezing, invasive running bamboo, toxic sago",
+   "severity": "low",
+   "mitigation": "Put hardy palms, clumping bamboo, jasmine and holly fern in the ground; keep bird of paradise and pothos in pots that move indoors; skip sago and golden bamboo; keep plants out of chlorine splash."
+  },
+  {
+   "risk": "Data gaps from the exhausted search budget (fire zone rules, Town of Yucca Valley rules, Huum/Saunum/SaunaLife/Dundalk prices, stock tank prices, labor costs)",
+   "severity": "low",
+   "mitigation": "Treat labeled estimates as placeholders and get 2-3 local quotes. Run a follow-up research turn when searching is available."
+  }
+ ],
+ "next_actions": [
+  "Confirm whether the parcel is in unincorporated County or the Town of Yucca Valley, and its zoning (RL assumed). Use the County zoning map (https://lus.sbcounty.gov/planning-home/zoning-and-overlay-maps/zoning-maps/) and the Fire Safety overlay map.",
+  "Walk the lot and GPS-map every western Joshua tree, yucca, nolina and creosote ring. Draw 50 ft circles and site the spa compound, slabs and trench routes outside them.",
+  "Ask County Building and Safety whether the RV permit establishes a primary use or whether a Temporary Use Permit is needed for a gazebo, spa and sauna.",
+  "Run the ASCE 7 Hazard Tool (https://asce7hazardtool.online) for the lot's design wind speed. Have the gazebo footing and connections engineered for Exposure C.",
+  "Get an electrician's load calculation and a quote for a dedicated spa subpanel, 50 A tub circuit, 30-40 A sauna circuit and 120 V circuits. Ask about service capacity and trench length.",
+  "Choose a tub. The Hot Spring TX (6x6, 2 seats) or Relay (7x7) fits a Yardistry 16x16. Confirm the cover is labeled ASTM F1346 and ask a dealer about local delivery.",
+  "Check the parcel's fire hazard zone on the CAL FIRE map and ask the County whether Chapter 7A/R337 rules apply to the gazebo before choosing roof and wall materials.",
+  "Estimate permit fees with the County EZOP fee estimator; the wood patio-cover-type fee is about $691-$810 at 50-250 sq ft.",
+  "Decide the plunge approach: winter stock tank or barrel with a summer chiller (Penguin $1,499.99-$2,199.99) versus a turnkey Plunge or Vigor.",
+  "Buy coral and peach natives at the MDLT sale today (Oct 24, 2026, 9am-2pm, 60124 Twentynine Palms Hwy, Joshua Tree). Fall is a good planting window.",
+  "Test the well or hauled water's hardness. Plan where drained spa water goes once the sanitizer has dissipated."
+ ],
+ "design_ideas": [
+  "Charwood-black (Yardistry stain option) timber gazebo on a white-gravel and white-plaster ground plane, giving a high-key black-and-white photographic look with Joshua trees framed through the openings",
+  "Coral-red Korean changsal lattice (ajasal or ttisal patterns) as laser-cut powder-coated aluminum panels on the pool side of the walls, backed outside with smooth clear or opal polycarbonate. This blocks wind and dust and keeps the barrier non-climbable.",
+  "Solid or translucent windbreak walls on the windward west and southwest sides; open or operable screens to the north and east for views and cross-ventilation; tub placed off-center to leave a 3 ft planting and walking zone",
+  "A blush-pink plaster ondol platform with a 15 W/sq ft mat under peach terracotta or stone tile, beside the tub, with a woven mat and wooden pillows (jjimjilbang-style rest)",
+  "Seshin station: a low wooden stool and bench, a handheld shower, a hook for Italy towels, and a black slate or stone floor that drains to a gravel dry well, placed between the sauna and the plunge",
+  "Onggi (jangdokdae-style) earthenware jars as planters and as the rinse-water basin; coral and peach dancheong-inspired color only on eaves and lattice",
+  "Sauna door facing the tub with a short gravel path; plunge in shade next to the sauna door so the circuit runs sauna, then plunge, then tub, then ondol",
+  "Warm, shielded, low-wattage LED (dark-sky compliant) under benches and lattice so the stars stay visible from the tub",
+  "A grove of California fan palms and desert willows southwest of the gazebo for summer afternoon shade without blocking the night sky",
+  "Indoor plant palette layered by light: windmill palm and clumping bamboo at the back, star jasmine on posts, holly fern in the darkest shade, potted bird of paradise near the entry"
+ ]
+}

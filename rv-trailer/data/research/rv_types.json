@@ -1,0 +1,658 @@
+{
+ "topic": "rv_types",
+ "summary": "Which RV to live in for 1-3 years while owner-building in Yucca Valley. The County decides the outer limits. San Bernardino County's Temporary Structure Permit allows \"a recreational vehicle or travel trailer\" as temporary living quarters, but only after the house building permit has been issued. The permit lasts 12 months and can be renewed in 12-month steps up to 5 years. The application needs the unit's current California DMV registration, plus a sewage pumping contract if the unit is self-contained. A final inspection covers the electrical, gas, sewer and water hookups. Within those limits, the best fit for two adults in 100F summers and freezing winter nights is a 27-35 ft four-season travel trailer, not a fifth wheel, park model or destination trailer.\n\nTop picks:\n- Northwood Arctic Fox NXT 27RK: a two-person rear-kitchen plan, 32'3\" long, 8'6\" wide, 8,975 lb dry, 100 gal fresh water, R-18 ceiling, frameless thermal-pane windows, heated tanks. Dealer street prices of about $74-75k against MSRPs of $105-117k.\n- Grand Design Reflection 317RSTS: rear living room, 2 slides. R-40 roof, R-30 floor, R-9 walls, heated enclosed underbelly. MSRP $80-90k.\n- Outdoors RV Timber Ridge 24RKS or Blackstone 260KVS: similar Oregon-built four-season trailers. I found no verified price.\n- Grand Design Imagine 2600RB: the budget new option at $57-61k MSRP. Same R-40 roof and R-30 floor with R-7 walls, but GVWR is only 7,850 lb.\n\nOn the brand look: an Airstream best matches the couple's high-key black-and-white aesthetic. Used Flying Clouds are listed at $59-80k, a new Flying Cloud starts at $115,900, and a Classic is $195-225k. An Escape RVIA-certified tiny house (Vista Boho XL, $62,710 base) is the closest match to the look of a modern house.\n\nCalifornia rules that change the choice:\n- Towing a travel trailer over 10,000 lb GVWR yourself takes a noncommercial Class A license. Many 33-ft-plus trailers are over that, so plan on dealer or hauler delivery.\n- California DMV and HCD cannot register a fifth-wheel trailer over 40 ft long or 102 in wide, and it cannot be sold in the state.\n- Park trailers are DMV-registered RVs under state law (H&SC 18010(b)), but they need a Caltrans permit to move. Confirm with the County that a park model counts as an \"RV or travel trailer\" for this permit.\n\nSetting up on raw land means:\n- a leveled gravel pad\n- a steel shade structure or shade sails on the west and over the roof\n- skirting (also keeps rodents out)\n- a freestanding deck and steps\n- a 250-gal propane tank\n- a 1,500-3,000 gal water tank with a pump\n- a pumping contract or holding tank for sewage\n- ideally an SCE temporary 50-amp service shared with the house build\n\nEvery setup cost, delivery cost, used-truck price, slide-out depth and power-use figure here is a labelled estimate, not a quote. My web-search budget ran out partway through. Outdoors RV prices, park model prices, County fees and the exact Vehicle Code length and width sections are still unverified.",
+ "findings": [
+  {
+   "title": "County permit: RV/travel trailer allowed only after the house permit; 12-month terms up to 5 years",
+   "detail": "The San Bernardino County EZOP Temporary Structure Permit sheet (rev. 6/2025) allows 'TEMPORARY RESIDENTIAL QUARTERS: A recreational vehicle or travel trailer occupied as residential quarters on a temporary basis by an individual constructing a residence on a property. Applicant must have a permit issued for the construction of a residence prior to the approval.'\n\nPlacement: the unit may not be placed on site until the companion Building Permit is issued and the Temporary Structure Permit is approved. Early placement can bring penalty fees.\n\nTerm: up to 12 months, renewable for another 12 months, with an absolute cap of 5 years from first issuance. The permit expires if no inspection is called for within 180 days.\n\nFinal inspection: covers electrical hookup, gas lines and sewer/water connections. Fire, Environmental Health and Public Works approvals come first where required.\n\nResidential submittal:\n- site/plot plan\n- 'current California DMV registration for unit'\n- 'if self-contained unit, a copy of the pumping contract for sewage disposal'\n- will-serve letters if applicable\n\nFees are set by the Master Fee Schedule, which I did not retrieve. Practical takeaway: buy the RV so it arrives just after the building permit is issued, and keep its California registration current every year.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://lus.sbcounty.gov/?p=4431"
+   ]
+  },
+  {
+   "title": "California RV definitions: travel trailers under 400 sq ft; park trailers are RVs but need a Caltrans permit to move",
+   "detail": "H&SC 18010(a) defines an RV (motor home, travel trailer, truck camper or camping trailer) as having less than 320 sq ft of internal living area and 400 sq ft or less gross area, on a single chassis, and towable on the highway without a permit. Under 18010(b), a park trailer (18009.3) also counts as an RV.\n\nH&SC 18009.3 defines a park trailer as being for recreational or seasonal use only, 400 sq ft or less of gross floor area (qualifying lofts excluded), no more than 14 ft wide, and movable on highways only with a Vehicle Code 35780 permit.\n\nThe DMV manual says park trailers carry an ANSI label and are licensed and titled by DMV. HUD-labelled manufactured homes are titled by HCD.\n\nThe park model 'issue' is therefore practical, not a ban:\n- An 11-14 ft wide park model needs a permitted oversize move.\n- The County checklist literally says 'recreational vehicle or travel trailer'.\n- The checklist mentions a 'Setdown Permit (for manufactured units)'.\n\nGet written County confirmation before buying a park model.",
+   "confidence": "medium",
+   "sources": [
+    "https://california.public.law/codes/ca_health_and_safety_code_section_18010",
+    "https://us.vlex.com/vid/park-trailer-defined-673704705",
+    "https://www.dmv.ca.gov/portal/?p=13666",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/permanent-trailer-identification-pti/trailers-excluded/"
+   ]
+  },
+  {
+   "title": "California licensing and size limits favor a \u226410,000 lb GVWR travel trailer, or professional delivery",
+   "detail": "From the CA DMV license page:\n- A Class C license may tow a trailer coach or fifth-wheel under 10,000 lb GVWR, if the tow vehicle weighs at least 4,000 lb unladen and the towing is not for pay.\n- A fifth wheel of 10,000-15,000 lb GVWR requires an endorsement.\n- A trailer coach over 10,000 lb GVWR, or a fifth wheel over 15,000 lb, requires a Noncommercial Class A license.\n\nThe DMV VIRPM section 6.060 says oversize fifth-wheel travel trailers (over 40 ft overall or over 102 in wide) cannot be registered by DMV or HCD and cannot be sold in California. It also says a pickup with a kingpin (fifth-wheel) connecting device must be registered as a commercial vehicle.\n\nExamples that cross the 10,000 lb GVWR line for a travel trailer:\n- Reflection 317RSTS on Grand Design's current page: 10,995 lb GVWR. The 2026 RVGuide listing shows 9,995.\n- Arctic Fox 27RK: 12,800 lb.\n- Blackstone 260KVS: 11,000 lb.\n\nSince the couple will tow once (dealer to lot), hiring dealer or hauler delivery avoids the license issue entirely.",
+   "confidence": "high",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/driver-licenses-dl/",
+    "https://www.dmv.ca.gov/portal/wp-json/wp/v2/dmv_handbook/13669"
+   ]
+  },
+  {
+   "title": "Northwood Arctic Fox NXT: best-documented four-season build for a couple",
+   "detail": "Northwood's standard construction:\n- Four Seasons insulation with R-18 ceiling and R-15 reflective foil in roof and slides\n- high-density block foam and laminated multi-layer walls\n- frameless thermal-pane windows\n- fully welded thick-wall aluminum frame on Northwood's own Ironhorse chassis\n- heated holding tanks\n\nNXT 27RK: 32'3\" long, 8'6\" wide, 12'0\" tall with AC. 8,975 lb dry, 900 lb hitch, GVWR 12,800, 3,825 lb carrying capacity. Tanks 100/75/42 gal fresh/gray/black, 60 lb LP. 13.5K AC (15K optional), roughly 30K BTU furnace, 10 cu ft 12V fridge. 60x80 queen bed, sleeps 2, 2 slides (RVGuide).\n\nNXT 25RB: 27'3\" long, 8'6\" wide, 11'10\" tall, 6,935 lb dry, GVWR 10,600, 100 gal fresh, sofa slide, 60x74.5 bed.\n\nNXT 27SX: 31'2\" long, 8,125 lb dry, GVWR 12,800, 100/55/55 gal tanks.\n\nThe lineup also includes the 26KX, 26MK, 22GT and 24SK. Northwood does not publish MSRPs.",
+   "confidence": "high",
+   "sources": [
+    "https://northwoodmfg.com/arctic-fox-nxt-27rk/",
+    "https://northwoodmfg.com/arctic-fox-nxt-25rb/",
+    "https://northwoodmfg.com/arctic-fox-nxt-27sx/",
+    "https://northwoodmfg.com/arctic-fox-nxt/",
+    "https://www.rvguide.com/specs/northwood/travel-trailer/2026/arctic-fox-nxt/27rk.html"
+   ]
+  },
+  {
+   "title": "Grand Design Reflection and Imagine publish real R-values and cold-chamber testing",
+   "detail": "Reflection travel trailers:\n- walls R-9 (R-11 on bed-slide models)\n- floor R-30 with radiant foil in a heated underbelly; slide floors R-24\n- front cap and roof R-40\n- heated tanks, enclosed low-point drains and gate valves, heated utility center\n- furnace plus fireplace at 30K BTU or more\n- 180W solar standard\n- third-party chamber testing from -6F to +101F (excludes wind, humidity and altitude)\n\nCurrent Reflection travel trailer floorplans:\n- 317RSTS: 35'5\", 9,518 lb, GVWR 10,995, 2 slides, $90,227 MSRP\n- 322FKTS: 35'9\", $86,855\n- 342BHTS: $94,625\n- 345RLTS: 38'10\", $94,391\n\nAll are 11'11\" tall with 54-55 gal fresh tanks. The RVGuide 2026 entry for the 317RSTS lists 425 in long, 96 in wide, 143 in tall, 9,200 lb dry, GVWR 9,995, MSRP $80,204. It has a rear living room with fireplace, front queen bedroom, center kitchen and dinette.\n\nImagine: walls R-7, floor R-30, roof and front cap R-40, Arctic 4-Season package, 200W solar, 12V fridge. Examples:\n- 2600RB: 29'8\", 6,533 lb, GVWR 7,850, 11'2\" tall, $60,916 (RVGuide 2026: 96 in wide, $57,259, 45/82/45 gal tanks)\n- 2970RL: 34'2\", 7,810 lb, $72,384\n\nGrand Design's pages do not state AC BTU for these lines.",
+   "confidence": "high",
+   "sources": [
+    "https://www.granddesignrv.com/travel-trailers/reflection",
+    "https://www.granddesignrv.com/travel-trailers/imagine",
+    "https://www.rvguide.com/specs/grand-design/travel-trailer/2026/reflection--travel-trailer-/317rsts.html",
+    "https://www.rvguide.com/specs/grand-design/travel-trailer/2026/imagine/2600rb.html"
+   ]
+  },
+  {
+   "title": "Outdoors RV (Oregon): mountain-rated trailers, prices not verified",
+   "detail": "Timber Ridge 24RKS: 24' floor, 28'11\" overall, 11'7\" tall with AC. 6,775 lb dry (Mountain) or 7,255 lb (Titanium); max trailer weight 9,995 lb; 800 lb hitch. Tanks: 80 gal fresh, 40/40 gray, 40 black, 60 lb LP. 35K BTU furnace, 2x200W solar standard. RVGuide gives the width as 96 in.\n\nBlackstone 260KVS: 28' floor, 32'4\" overall, 11'7\" tall. 7,850 lb (Mountain) or 8,330 lb (Titanium); max 11,000 lb; 850 lb hitch. Tanks 80/80/50 gal.\n\nShared construction:\n- 'Mountain Extreme' thermal-pane windows\n- three-layer roof (reflective layer plus two layers of R-7 fiberglass)\n- reflective foil on underbelly, slide floor and tanks\n- fully enclosed, heated underbelly\n- 1 in insulated baggage doors, 2 in bonded aluminum-frame walls\n- off-road cambered chassis\n\nThe 15K Coleman AC is part of the Titanium Premium package, and an 11K bedroom AC is optional. Outdoors RV publishes no MSRP, and I could not get a dealer price (sites returned 403 and my search budget ran out).",
+   "confidence": "high",
+   "sources": [
+    "https://outdoorsrvmfg.com/timber-ridge-24rks/",
+    "https://outdoorsrvmfg.com/black-stone-260kvs/",
+    "https://outdoorsrvmfg.com/",
+    "https://www.rvguide.com/specs/outdoors-rv/travel-trailer/2026/titanium-series--timber-ridge-class-/24rks.html"
+   ]
+  },
+  {
+   "title": "Airstream: brand-fit aesthetic, ducted heat-pump AC, premium price",
+   "detail": "2027 Classic: 28-33 ft, from $195,400.\nClassic 33FB: 33'3\" long, 8'5.5\" wide, 9'7\" tall. 8,550 lb base weight, GVWR 10,000, 1,200 lb hitch. Tanks 53/34/39 gal. One 15,000 BTU dual-ducted AC with heat pump, quiet hydronic heat, 9.7 cu ft 12V fridge, 17 windows and skylights, enclosed heated aluminum underbelly, insulated tanks with 12V heat pads.\n\n2027 Flying Cloud: 23-30 ft, from $115,900.\nFlying Cloud 30FB Bunk: 31'2\" long, 8'5.5\" wide, 9'7\" tall. 6,700 lb, GVWR 8,800, 900 lb hitch. Tanks 53/40/35 gal. 15K ducted heat-pump AC, optional 13.5K second AC, 30K BTU furnace.\n\n2027 Globetrotter: 25-30 ft, from $147,400.\n\nDealer listings:\n- 2026 Classic 30RB: MSRP about $204,400-207,400; 31'5\" long, 7,725 lb dry\n- 2026 Classic 33FB: $216,300-225,400\n- 2026 Flying Cloud 30FB Office (has a desk): about $131,000\n\nA low 9'7\" height and a reflective aluminum shell make it easy to shade. Airstream does not publish R-values.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.airstream.com/travel-trailers/classic/",
+    "https://www.airstream.com/explore-products/travel-trailers/dual-axle/classic-full-spec-detail-page",
+    "https://www.airstream.com/travel-trailers/flying-cloud/",
+    "https://www.airstream.com/explore-products/travel-trailers/dual-axle/flying-cloud-spec-detail-page",
+    "https://www.airstream.com/travel-trailers/globetrotter/",
+    "https://www.bluecompassrv.com/product/new-2026-airstream-classic-30rb-3581282-29",
+    "https://www.rvusa.com/2026-airstream-flying-cloud-30fb-office-travel-trailer-5214274"
+   ]
+  },
+  {
+   "title": "Small premium trailers (Lance, Oliver, Bowlus) are well built but tight for 1-3 years",
+   "detail": "Lance 2465: 24'11\" floor, 29'10\" overall, 96-3/8 in wide, 10'5\" tall. 6,400 lb dry, 905 lb hitch, GVWR 8,900. Tanks 45/40/40 gal. Optional 15K Furrion or Truma AC, 35K furnace, king bed, tinted thermopane windows, optional All Seasons package. Utah dealer listings for 2026 units: $81,773, and $63,995 sale against $87,165.\n\nOliver Legacy Elite II: 24 ft long, 7 ft wide, 9'8\" tall. About 4,900 lb dry, GVWR 7,000. Double-hull fiberglass shell with tanks between the hulls, heated. Bonded dual-pane windows, 75x79 king (convertible dinette). From $85,000.\n\nBowlus: Terra Firma discontinued. Rivet from $150,000; Endless Highways from $185,000 (27 ft floor plan, 4,000-4,400 lb); Frontier Edition from $256,000.\n\nAll are excellent for travel but small for two adults working from home through a summer of 100F+.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.lancecamper.com/travel-trailers/",
+    "https://www.lancecamper.com/travel-trailers/2465/",
+    "https://www.rvusa.com/2026-lance-lance-travel-trailers-2465-travel-trailer-5192005",
+    "https://www.olivertraveltrailers.com/legacy-elite-ii/",
+    "https://www.bowlus.com/terra-firma/",
+    "https://www.bowlus.com/endless-highways/"
+   ]
+  },
+  {
+   "title": "Fifth wheels: more headroom and 2 ACs, but need a 3/4- or 1-ton pickup with a fifth-wheel hitch",
+   "detail": "Arctic Fox NXT 295RL: 34'7\" long, 8'6\" wide, 13'4\" tall. 12,735 lb dry, 2,545 lb pin, GVWR 15,800. Tanks 88/67/65 gal, 80 lb LP. 13.5K AC, roughly 35K furnace, 74x80 king-size bed, same Four Seasons insulation. A Yuma dealer lists MSRP $113,125.\n\nGrand Design Reflection 303RLS: 32'10\", 12'11\" tall, 10,325 lb, 1,985 lb pin, GVWR 11,995, 3 slides, 74/87/47 gal tanks, $90,947.\n\nGrand Design Solitude 310GK: 34'4\", 13'5\" tall, 13,200 lb, 2,350 lb pin, GVWR 19,000, $158,788. Solitude walls R-11, floor R-45, roof R-40, dual 15K ACs standard.\n\nUsed Arctic Fox 27-5L (2018-2019): about $33-35k.\n\nThe pin weights mean a heavy-duty pickup, and California requires commercial registration for a pickup with a kingpin device. For a couple who will not travel, the fifth wheel's main advantage is a raised bedroom and more storage. That is usually not worth buying a truck.",
+   "confidence": "medium",
+   "sources": [
+    "https://northwoodmfg.com/arctic-fox-nxt-295rl/",
+    "https://northwoodmfg.com/arctic-fox-nxt-fifth-wheels/",
+    "https://www.granddesignrv.com/fifth-wheels/reflection",
+    "https://www.granddesignrv.com/fifth-wheels/solitude",
+    "https://www.rvuniverse.com/listing/for-sale/253207973/2026-northwood-arctic-fox-nxt-295rl-fifth-wheel?print=1",
+    "https://www.bluecompassrv.com/product/used-2019-northwood-arctic-silver-fox-edition-27-5l-3792423-5",
+    "https://www.rvuniverse.com/listing/for-sale/254796043/2018-northwood-arctic-fox-27-5l-fifth-wheel?print=1",
+    "https://www.dmv.ca.gov/portal/wp-json/wp/v2/dmv_handbook/13669"
+   ]
+  },
+  {
+   "title": "Destination trailers: huge, cheap per square foot, but heavy and not built for desert or cold",
+   "detail": "Keystone Residence 40FLFT (2025 RVGuide): 491 in (40.9 ft) long, 102 in wide, 161 in (13'5\") tall. 12,890 lb dry, GVWR 14,000, only 1,110 lb payload. Small tanks (53/39/39 gal), 3 slides, 'freeze-proof insulation' with no R-value. MSRP $96,310; a Lazydays listing shows $72,627 sale.\n\nForest River Timberwolf 27MDK (2026): listed at $61,995 in Turlock, CA. 35'11\" long, 13'6\" tall, 8'6\" wide, 2x15K BTU AC, 16 cu ft fridge, loft.\n\nPros: residential layouts and large fridges at a low price. Cons:\n- They need professional delivery.\n- Tanks are small for a site with no sewer.\n- No published R-values.\n- Warranty language usually excludes full-time occupancy.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.rvguide.com/specs/keystone/destination/2025/residence/40flft.html",
+    "https://root.lazydays.com/rvs/knoxville-tn/travel-trailer/new/2025/keystone-rv-residence-21167605",
+    "https://www.rvusa.com/2026-forest-river-cherokee-timberwolf-27mdk-destination-trailer-5031166"
+   ]
+  },
+  {
+   "title": "RVIA tiny houses on wheels: a modern-house look at RV legal status",
+   "detail": "ESCAPE says all its units are RVIA inspected and certified.\n\nVista Boho XL: 26 ft (31 ft with hitch), 8'6\" wide, 10 ft tall, 9,900 lb, 213 sq ft, about $62,710 base, delivery extra.\n\nTraveler XL: 30 ft (35 ft with hitch), 8.5 ft wide, 13'5\" tall, 11,000-13,000 lb, 344 sq ft (255 main floor plus 89 loft), listed as a travel trailer with the RVIA seal. $103,020 base; XLS $112,235.\n\nNo R-values or mini-split details are published.\n\nConfirm before ordering:\n- Can it be DMV-registered as a travel trailer in California?\n- Will the County accept it?\n- At 9,900-13,000 lb it cannot be towed on a Class C license if GVWR is over 10,000 lb, so plan professional delivery.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.escapetraveler.net/",
+    "https://www.escapetraveler.net/vista-boho-xl",
+    "https://www.escapetraveler.net/traveler-xl",
+    "https://slocity.org/government/department-directory/community-development/housing/tiny-home-on-wheels"
+   ]
+  },
+  {
+   "title": "Toy haulers: the garage can serve as an office or workshop",
+   "detail": "Outdoors RV Trail Series toy haulers: 25-31 ft floor length, over 8,000 lb, no slides, on-board generator (floorplans 25TRX, 27TRX, 29TRX).\n\nGrand Design Momentum fifth-wheel toy haulers:\n- 344M: 39'11\", 15,910 lb, 11 ft garage, $192,693\n- up to the 399M: 44'10\", 19,170 lb, $216,567\n\nMomentum construction: R-40 roof, R-11 walls, R-45 floor, R-40 garage floor, dual 15K ACs standard.\n\nUseful for securely storing tools during the build, or as a ramp-door patio and office. Big Momentums need a 1-ton truck and probably a noncommercial Class A license to tow yourself.",
+   "confidence": "medium",
+   "sources": [
+    "https://outdoorsrvmfg.com/trail-series-class/",
+    "https://www.granddesignrv.com/toy-haulers/momentum"
+   ]
+  },
+  {
+   "title": "Used market prices (asking prices, 2025-2026 listings)",
+   "detail": "Grand Design Reflection 297RSTS:\n- 2019: $28,000 in Corona, CA per the search snippet; the listing is now off-market\n- 2021: $32,986 (Campers Inn)\n- 2024: $50,313 (Blue Compass)\n\nAirstream Flying Cloud:\n- 2018 25FB: $59,000 private\n- 2018 27FB: $64,063-68,995\n- 2019 25FB: $66,562\n- 2019 27FB: $59,999-79,900\n- 2021 27FB Twin: $73,788\n\nArctic Fox 27-5L fifth wheel, 2018-2019: $32,999-34,940.\n\nThese are asking prices gathered from search snippets. Several dealer pages returned 403 and could not be re-checked.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.rvpark.com/rvs/6928049-2019-reflection-297rsts-for-sale-in-corona-ca",
+    "https://www.campersinn.com/product/used-2021-grand-design-reflection-297rsts-3639522-29",
+    "https://www.bluecompassrv.com/product/used-2024-grand-design-reflection-297rsts-3778668-29",
+    "https://www.irv2.com/classifieds/2019-flying-cloud-27fb.2395/",
+    "https://www.rvusa.com/2018-airstream-flying-cloud-27fb-travel-trailer-5215897",
+    "https://rv.campingworld.com/product/airstream/flying-cloud",
+    "https://www.rvuniverse.com/listing/for-sale/258913813/2019-airstream-flying-cloud-25fb-travel-trailers"
+   ]
+  },
+  {
+   "title": "New-unit street prices run 25-50% below MSRP",
+   "detail": "Arctic Fox NXT 27RK (2026):\n- Bish's Fairfield, CA: MSRP $116,989\n- Bish's Kalispell: MSRP $104,855, sale $74,995\n- Blue Compass St. George: $73,845\n\nKeystone Residence: MSRP $96,310, Lazydays sale $72,627.\n\nLance 2465: $87,165 marked down to $63,995.\n\nNegotiate against the street price, not the MSRP. Budget roughly $700-1,000 in dealer doc and prep fees, plus sales tax and registration. Parris RV, for example, lists a $699 doc fee.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-27rk-3657130-29",
+    "https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-27rk-3696597-29",
+    "https://www.rvusa.com/2026-northwood-arctic-fox-nxt-27rk-travel-trailer-5211103",
+    "https://root.lazydays.com/rvs/knoxville-tn/travel-trailer/new/2025/keystone-rv-residence-21167605",
+    "https://www.rvusa.com/2026-lance-lance-travel-trailers-2465-travel-trailer-5192005"
+   ]
+  },
+  {
+   "title": "Full-time use can affect the warranty",
+   "detail": "An RV lemon-law attorney writes that many manufacturers claim full-time or commercial use voids the warranty.\n\nA forum post quotes Grand Design's structural warranty as covering 'normal use when utilized for the intended purpose of traveling & camping'.\n\nA Forest River (Coachmen) warranty, per a forum user, excludes continuous occupancy beyond 30 days, or 18 days per month for 2+ consecutive months.\n\nGet the written warranty for the exact unit before buying.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.rvtravel.com/future-fulltimers-beware-you-could-be-voiding-your-rvs-warranty/",
+    "https://www.jaycoowners.com/goto/post?id=6070811",
+    "https://classbforum.com/forums/f5/forest-river-warranty-coachmen-galleria-8160.html",
+    "https://bishs.com/blog/rv-warranties-and-full-time-rving"
+   ]
+  },
+  {
+   "title": "Raw-land setup pieces, mostly estimates",
+   "detail": "County-driven items (sourced): the final inspection covers electrical, gas and sewer/water, and a self-contained unit needs a pumping contract.\n\nAirSkirts makes inflatable PVC-canvas skirting that installs without drilling. It says custom skirting can cost up to $5,000 and that skirting also helps cooling.\n\nLabelled estimates, not verified:\n- 250-gal leased propane tank instead of the 2x30 lb onboard cylinders\n- 1,500-3,000 gal poly water tank, filled by water haulers, with a 12V/120V pump\n- weekly or biweekly septic pump-out of the RV tanks, or a temporary holding tank\n- SCE temporary service pole with a NEMA 14-50 (50 A) RV outlet, shared with the house construction\n- steel shade structure about 14-15 ft clear over the trailer, or west-side shade sails\n- freestanding 8x12 ft deck with steps at the entry door\n- ground anchors and straps for spring winds",
+   "confidence": "low",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://www.airskirts.com/"
+   ]
+  }
+ ],
+ "products": [
+  {
+   "name": "Northwood Arctic Fox NXT 27RK (2026)",
+   "category": "four-season travel trailer (top pick for a couple)",
+   "condition": "new",
+   "price_low": 73845,
+   "price_high": 116989,
+   "specs": "32'3\" L x 8'6\" W x 12'0\" H; 8,975 lb dry, GVWR 12,800, 900 lb hitch. Tanks 100/75/42 gal, 60 lb LP. 13.5K AC (15K optional), roughly 30K furnace, 10 cu ft 12V fridge. 60x80 queen, sleeps 2, 2 slides. R-18 ceiling, R-15 foil, thermal-pane windows, heated tanks.",
+   "source": "https://northwoodmfg.com/arctic-fox-nxt-27rk/ ; prices https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-27rk-3657130-29 , https://www.rvusa.com/2026-northwood-arctic-fox-nxt-27rk-travel-trailer-5211103",
+   "why": "A floorplan built for two, with the largest fresh tank of the group and documented four-season build. Street price is about $74-75k. GVWR over 10k lb means delivery by dealer or hauler."
+  },
+  {
+   "name": "Northwood Arctic Fox NXT 25RB (2026)",
+   "category": "four-season travel trailer (compact)",
+   "condition": "new",
+   "price_low": 0,
+   "price_high": 0,
+   "specs": "27'3\" L x 8'6\" W x 11'10\" H; 6,935 lb dry, GVWR 10,600. Tanks 100/44/35 gal. 13.5K AC, roughly 25K furnace, 10 cu ft 12V fridge. 60x74.5 bed, sofa slide.",
+   "source": "https://northwoodmfg.com/arctic-fox-nxt-25rb/",
+   "why": "Shorter, easier to shade. Price not found; 0 means unknown."
+  },
+  {
+   "name": "Grand Design Reflection 317RSTS",
+   "category": "four-season travel trailer (rear living)",
+   "condition": "new",
+   "price_low": 80204,
+   "price_high": 90227,
+   "specs": "35'5\" L (425 in), 96 in wide, 11'11\" H. 9,200-9,518 lb dry, GVWR 9,995 (2026 RVGuide) or 10,995 (current GD page). Tanks 55/78/39 gal. 2 slides, front queen, rear living with fireplace. R-9 walls, R-30 floor, R-40 roof and cap, heated enclosed underbelly, 180W solar.",
+   "source": "https://www.granddesignrv.com/travel-trailers/reflection ; https://www.rvguide.com/specs/grand-design/travel-trailer/2026/reflection--travel-trailer-/317rsts.html",
+   "why": "Most living room and recliners for remote work in this class, with published R-values and cold-chamber testing. MSRP shown; expect a lower street price."
+  },
+  {
+   "name": "Grand Design Imagine 2600RB",
+   "category": "travel trailer (budget four-season)",
+   "condition": "new",
+   "price_low": 57259,
+   "price_high": 60916,
+   "specs": "29'8\" L, 96 in W, 11'2\" H. 6,487-6,533 lb dry, GVWR 7,850, about 674-754 lb hitch. Tanks 45/82/45 gal. 1 slide, front queen bedroom. R-7 walls, R-30 floor, R-40 roof and cap, Arctic 4-Season package, 200W solar.",
+   "source": "https://www.granddesignrv.com/travel-trailers/imagine ; https://www.rvguide.com/specs/grand-design/travel-trailer/2026/imagine/2600rb.html",
+   "why": "Lowest-cost new trailer with real four-season numbers. GVWR under 10k lb, so it can be towed on a Class C license."
+  },
+  {
+   "name": "Grand Design Imagine 2970RL",
+   "category": "travel trailer",
+   "condition": "new",
+   "price_low": 72384,
+   "price_high": 72384,
+   "specs": "34'2\" L, 11'3\" H, 7,810 lb, GVWR 10,195, 2 slides, 45/90/45 gal tanks, rear living",
+   "source": "https://www.granddesignrv.com/travel-trailers/imagine",
+   "why": "Rear-living layout at a mid price. MSRP only."
+  },
+  {
+   "name": "Outdoors RV Timber Ridge 24RKS (Mountain/Titanium)",
+   "category": "four-season travel trailer",
+   "condition": "new",
+   "price_low": 0,
+   "price_high": 0,
+   "specs": "28'11\" L, 96 in W, 11'7\" H. 6,775-7,255 lb dry, max 9,995 lb, 800 lb hitch. Tanks 80/40+40/40 gal. 35K furnace, thermal-pane windows, triple-layer roof, heated enclosed underbelly, 2x200W solar.",
+   "source": "https://outdoorsrvmfg.com/timber-ridge-24rks/",
+   "why": "Built for Western mountain climates; under 10k lb. Price not verified (0 = unknown); get a dealer quote."
+  },
+  {
+   "name": "Outdoors RV Blackstone 260KVS",
+   "category": "four-season travel trailer",
+   "condition": "new",
+   "price_low": 0,
+   "price_high": 0,
+   "specs": "32'4\" L, 11'7\" H. 7,850-8,330 lb dry, max 11,000 lb, 850 lb hitch. Tanks 80/80/50 gal. 35K furnace, 15K AC in Titanium package, 11K bedroom AC optional.",
+   "source": "https://outdoorsrvmfg.com/black-stone-260kvs/",
+   "why": "Can run a second AC, which matters in a Mojave summer. Price unknown."
+  },
+  {
+   "name": "Airstream Flying Cloud (2027 line; 30FB Office/Bunk)",
+   "category": "premium aluminum travel trailer",
+   "condition": "new",
+   "price_low": 115900,
+   "price_high": 150650,
+   "specs": "30FB: 31'2\" L x 8'5.5\" W x 9'7\" H; 6,700 lb, GVWR 8,800, 900 lb hitch. Tanks 53/40/35 gal. 15K ducted heat-pump AC plus optional 13.5K second AC, 30K furnace, heated aluminum underbelly.",
+   "source": "https://www.airstream.com/travel-trailers/flying-cloud/ ; https://www.airstream.com/explore-products/travel-trailers/dual-axle/flying-cloud-spec-detail-page",
+   "why": "Office floorplan, low height that is easy to shade, strong resale value, and fits the brand's black-and-white aesthetic."
+  },
+  {
+   "name": "Airstream Classic 33FB / 30RB",
+   "category": "premium aluminum travel trailer",
+   "condition": "new",
+   "price_low": 195400,
+   "price_high": 225600,
+   "specs": "33FB: 33'3\" L x 8'5.5\" W x 9'7\" H; 8,550 lb, GVWR 10,000, 1,200 lb hitch. Tanks 53/34/39 gal. 15K ducted heat-pump AC, hydronic heat. 30RB: 31'5\", 7,725 lb.",
+   "source": "https://www.airstream.com/explore-products/travel-trailers/dual-axle/classic-full-spec-detail-page ; https://www.bluecompassrv.com/product/new-2026-airstream-classic-33fb-3293164-29",
+   "why": "Top-tier finish; hydronic heat suits cold nights. Very expensive for a 1-3 year bridge."
+  },
+  {
+   "name": "Airstream Globetrotter (2027)",
+   "category": "premium aluminum travel trailer",
+   "condition": "new",
+   "price_low": 147400,
+   "price_high": 147400,
+   "specs": "25-30 ft, 3 floorplans, queen or twin bed front or rear",
+   "source": "https://www.airstream.com/travel-trailers/globetrotter/",
+   "why": "Starting price only."
+  },
+  {
+   "name": "Used Airstream Flying Cloud 25FB/27FB (2018-2021)",
+   "category": "premium aluminum travel trailer",
+   "condition": "used",
+   "price_low": 59000,
+   "price_high": 79900,
+   "specs": "25-27 ft, front bedroom queen, single 13.5-15K AC (check the unit)",
+   "source": "https://www.irv2.com/classifieds/2019-flying-cloud-27fb.2395/ ; https://www.rvusa.com/2018-airstream-flying-cloud-27fb-travel-trailer-5215897 ; https://rv.campingworld.com/product/airstream/flying-cloud",
+   "why": "Brand look at roughly half the new price, and likely to resell well after the build (an estimate)."
+  },
+  {
+   "name": "Used Grand Design Reflection 297RSTS (2019-2024)",
+   "category": "travel trailer",
+   "condition": "used",
+   "price_low": 28000,
+   "price_high": 50313,
+   "specs": "About 33-34 ft rear-living layout, 2 slides, queen bed, same Reflection insulation package (verify by year)",
+   "source": "https://www.campersinn.com/product/used-2021-grand-design-reflection-297rsts-3639522-29 ; https://www.bluecompassrv.com/product/used-2024-grand-design-reflection-297rsts-3778668-29 ; https://www.rvpark.com/rvs/6928049-2019-reflection-297rsts-for-sale-in-corona-ca",
+   "why": "Lowest-cost credible full-time option. Get a professional inspection for roof and water damage."
+  },
+  {
+   "name": "Lance 2465",
+   "category": "compact premium travel trailer",
+   "condition": "new",
+   "price_low": 63995,
+   "price_high": 87165,
+   "specs": "29'10\" L, 96-3/8 in W, 10'5\" H. 6,400 lb, GVWR 8,900, 905 lb hitch. Tanks 45/40/40 gal. King bed, 35K furnace, 15K AC optional, thermopane windows.",
+   "source": "https://www.lancecamper.com/travel-trailers/2465/ ; https://www.rvusa.com/2026-lance-lance-travel-trailers-2465-travel-trailer-5192005",
+   "why": "High build quality, lower profile, king bed. Smaller tanks."
+  },
+  {
+   "name": "Oliver Legacy Elite II",
+   "category": "fiberglass double-hull travel trailer",
+   "condition": "new",
+   "price_low": 85000,
+   "price_high": 85000,
+   "specs": "24' L x 7' W x 9'8\" H; about 4,900 lb dry, GVWR 7,000, about 490 lb hitch. Double-hull insulated with heated tanks between the hulls, dual-pane bonded windows, 75x79 king (dinette conversion).",
+   "source": "https://www.olivertraveltrailers.com/legacy-elite-ii/",
+   "why": "Excellent build and resale, but small (6'7\" interior width) for 1-3 years of living and working."
+  },
+  {
+   "name": "Bowlus Endless Highways / Rivet",
+   "category": "luxury aluminum travel trailer",
+   "condition": "new",
+   "price_low": 150000,
+   "price_high": 256000,
+   "specs": "Endless Highways: 27 ft floor plan, 4,000-4,400 lb, twins convert to king, off-grid power system",
+   "source": "https://www.bowlus.com/endless-highways/ ; https://www.bowlus.com/terra-firma/",
+   "why": "Design icon, but poor value as a construction-period home."
+  },
+  {
+   "name": "Northwood Arctic Fox NXT 295RL",
+   "category": "four-season fifth wheel",
+   "condition": "new",
+   "price_low": 113125,
+   "price_high": 113125,
+   "specs": "34'7\" L x 8'6\" W x 13'4\" H; 12,735 lb dry, 2,545 lb pin, GVWR 15,800. Tanks 88/67/65 gal, 80 lb LP. 74x80 bed.",
+   "source": "https://northwoodmfg.com/arctic-fox-nxt-295rl/",
+   "why": "Best four-season fifth wheel here (MSRP shown). Needs a heavy-duty pickup; GVWR over 15k lb means a noncommercial Class A license to tow."
+  },
+  {
+   "name": "Grand Design Reflection 303RLS fifth wheel",
+   "category": "fifth wheel",
+   "condition": "new",
+   "price_low": 90947,
+   "price_high": 90947,
+   "specs": "32'10\" L, 12'11\" H, 10,325 lb, 1,985 lb pin, GVWR 11,995, 3 slides, 74/87/47 gal tanks, R-40 roof, R-30 floor",
+   "source": "https://www.granddesignrv.com/fifth-wheels/reflection",
+   "why": "Shortest Reflection fifth wheel. Needs a fifth-wheel endorsement in CA (10-15k lb GVWR)."
+  },
+  {
+   "name": "Grand Design Solitude 310GK",
+   "category": "luxury fifth wheel",
+   "condition": "new",
+   "price_low": 158788,
+   "price_high": 158788,
+   "specs": "34'4\" L, 13'5\" H, 13,200 lb, 2,350 lb pin, GVWR 19,000, 83/106/53 gal tanks, dual 15K ACs, R-45 floor, R-11 walls, R-40 roof",
+   "source": "https://www.granddesignrv.com/fifth-wheels/solitude",
+   "why": "Dual ACs standard, closest to residential. Heavy and costly."
+  },
+  {
+   "name": "Used Northwood Arctic Fox 27-5L fifth wheel (2018-2019)",
+   "category": "fifth wheel",
+   "condition": "used",
+   "price_low": 32999,
+   "price_high": 34940,
+   "specs": "About 30 ft four-season fifth wheel (verify unit)",
+   "source": "https://www.bluecompassrv.com/product/used-2019-northwood-arctic-silver-fox-edition-27-5l-3792423-5 ; https://www.rvuniverse.com/listing/for-sale/254796043/2018-northwood-arctic-fox-27-5l-fifth-wheel?print=1",
+   "why": "Cheap four-season option if they already own or will buy a 3/4-ton truck."
+  },
+  {
+   "name": "Keystone Residence 40FLFT (2025)",
+   "category": "destination trailer",
+   "condition": "new",
+   "price_low": 72627,
+   "price_high": 96310,
+   "specs": "40.9 ft (491 in) L x 102 in W x 13'5\" H; 12,890 lb, GVWR 14,000, 1,110 lb payload, 53/39/39 gal tanks, 3 slides",
+   "source": "https://www.rvguide.com/specs/keystone/destination/2025/residence/40flft.html",
+   "why": "Most space for the money, but small tanks, no published R-values, and needs professional transport."
+  },
+  {
+   "name": "Forest River Timberwolf 27MDK (2026)",
+   "category": "destination trailer",
+   "condition": "new",
+   "price_low": 61995,
+   "price_high": 61995,
+   "specs": "35'11\" L, 8'6\" W, 13'6\" H, 2x15K AC, 16 cu ft fridge, loft",
+   "source": "https://www.rvusa.com/2026-forest-river-cherokee-timberwolf-27mdk-destination-trailer-5031166",
+   "why": "Dual AC standard at a low price (Turlock, CA dealer listing seen in a search snippet)."
+  },
+  {
+   "name": "ESCAPE Vista Boho XL (RVIA tiny house)",
+   "category": "RVIA tiny house on wheels",
+   "condition": "new",
+   "price_low": 62710,
+   "price_high": 62710,
+   "specs": "26 ft (31 ft with hitch) x 8'6\" W x 10' H; 9,900 lb; 213 sq ft; delivery extra",
+   "source": "https://www.escapetraveler.net/vista-boho-xl",
+   "why": "Modern-cabin aesthetic. Confirm CA DMV registration and County acceptance."
+  },
+  {
+   "name": "ESCAPE Traveler XL / XLS (RVIA tiny house)",
+   "category": "RVIA tiny house on wheels",
+   "condition": "new",
+   "price_low": 103020,
+   "price_high": 112235,
+   "specs": "30 ft (35 ft with hitch) x 8.5 ft W x 13'5\" H; 11,000-13,000 lb; 344 sq ft incl. 89 sq ft loft; RVIA seal, travel trailer",
+   "source": "https://www.escapetraveler.net/traveler-xl",
+   "why": "Most house-like interior; could become a guest unit later if local rules allow (unverified)."
+  },
+  {
+   "name": "Grand Design Momentum 344M (toy hauler fifth wheel)",
+   "category": "toy hauler",
+   "condition": "new",
+   "price_low": 192693,
+   "price_high": 192693,
+   "specs": "39'11\" L, 15,910 lb, GVWR 19,000, 11 ft garage, dual 15K AC, R-40 roof, R-45 floor, R-40 garage floor",
+   "source": "https://www.granddesignrv.com/toy-haulers/momentum",
+   "why": "Garage works as a lockable tool room or office. Overkill unless they want the garage."
+  },
+  {
+   "name": "AirSkirts inflatable RV skirting",
+   "category": "site setup",
+   "condition": "new",
+   "price_low": 0,
+   "price_high": 5000,
+   "specs": "PVC-coated canvas tubes, heat-welded seams, no drilling; vendor says under 30 min setup",
+   "source": "https://www.airskirts.com/",
+   "why": "Insulates the underbelly against winter freezes and summer heat, and blocks dust and rodents. $5,000 is the vendor's 'custom skirting up to' figure, not a kit quote."
+  }
+ ],
+ "design_numbers": [
+  "County Temporary Structure Permit: 12-month term, renewable in 12-month steps, 5-year maximum from original issuance; expires if no inspection within 180 days (sbcounty checklist rev. 6/2025)",
+  "CA RV definition (H&SC 18010): under 320 sq ft internal living area and 400 sq ft or less gross; park trailer (18009.3) 400 sq ft or less gross, 14 ft maximum width, moved only by Caltrans permit",
+  "CA licensing (DMV): Class C may tow a trailer coach or fifth wheel under 10,000 lb GVWR (tow vehicle at least 4,000 lb unladen); fifth wheel 10,000-15,000 lb GVWR needs an endorsement; trailer coach over 10,000 lb GVWR or fifth wheel over 15,000 lb needs Noncommercial Class A",
+  "CA: oversize fifth wheels over 40 ft (480 in) overall or over 102 in wide cannot be registered or sold in California (DMV VIRPM 6.060)",
+  "Arctic Fox NXT 27RK: L 32'3\" with hitch, W 8'6\" (102 in), H 12'0\" with AC; 2 slides; dry 8,975 lb; GVWR 12,800; hitch 900 lb; 100/75/42 gal tanks",
+  "Arctic Fox NXT 25RB: L 27'3\", W 8'6\", H 11'10\"; dry 6,935 lb; GVWR 10,600",
+  "Arctic Fox NXT 27SX: L 31'2\", W 8'6\", H 12'0\"; dry 8,125 lb; GVWR 12,800",
+  "Arctic Fox NXT 295RL fifth wheel: L 34'7\", W 8'6\", H 13'4\"; dry 12,735 lb; pin 2,545 lb; GVWR 15,800",
+  "Arctic Fox insulation: R-18 ceiling, R-15 reflective foil roof and slides, block foam walls, thermal-pane windows",
+  "Grand Design Reflection 317RSTS: L 35'5\" (GD) / 425 in (RVGuide), W 96 in, H 11'11\" (143 in); 2 slides; dry 9,200-9,518 lb; GVWR 9,995-10,995",
+  "Reflection travel trailer R-values: walls R-9 (R-11 bed slide), floor R-30, slide floors R-24, roof R-40, front cap R-40; cold chamber -6F to +101F",
+  "Imagine 2600RB: L 29'8\" (356 in), W 96 in, H 11'2\" (134 in); 1 slide; dry 6,487-6,533 lb; GVWR 7,850; walls R-7, floor R-30, roof R-40",
+  "Outdoors RV Timber Ridge 24RKS: floor 24', overall 28'11\", W 96 in, H 11'7\" with AC; interior height 6'11\"; 35K BTU furnace",
+  "Outdoors RV Blackstone 260KVS: floor 28', overall 32'4\", H 11'7\"; 7,850-8,330 lb; max 11,000 lb",
+  "Lance 2465: floor 24'11\", overall 29'10\", W 96-3/8 in, H 10'5\", interior 80 in; dry 6,400 lb; GVWR 8,900",
+  "Airstream Classic 33FB: L 33'3\", W 8'5.5\", H 9'7\" with AC; base 8,550 lb; GVWR 10,000; 15K BTU heat-pump AC",
+  "Airstream Flying Cloud 30FB: L 31'2\", W 8'5.5\", H 9'7\"; 6,700 lb; GVWR 8,800; 15K + optional 13.5K AC; 30K furnace",
+  "Oliver Legacy Elite II: L 24', W 7' (6'7\" inside), H 9'8\" to AC, interior 6'6\"; about 4,900 lb dry; GVWR 7,000",
+  "ESCAPE Vista Boho XL: 26' (31' with hitch) x 8'6\" x 10' H; 213 sq ft; 9,900 lb",
+  "ESCAPE Traveler XL: 30' (35' with hitch) x 8.5' x 13'5\" H; 344 sq ft (255 + 89 loft)",
+  "Keystone Residence 40FLFT: 491 in L x 102 in W x 161 in H; interior 96 in; 3 slides",
+  "Reflection 303RLS fifth wheel: L 32'10\", H 12'11\"; pin 1,985 lb; Solitude 310GK: L 34'4\", H 13'5\", pin 2,350 lb",
+  "ESTIMATE (not sourced): slide-out room depth typically about 24-42 in beyond the 96-102 in body; model 30 in as a default box",
+  "ESTIMATE: gravel pad about 14 ft x (trailer length + 10 ft), e.g. 14 x 42 ft for a 32 ft trailer, compacted and level within about 1-2 in",
+  "ESTIMATE: shade structure clear height at least 14 ft for 12'0\"-tall units, about 12 ft for Airstream (9'7\"); 20-24 ft wide x 40-45 ft long to cover the trailer and door-side deck",
+  "ESTIMATE: entry deck about 8 x 12 ft at curbside door, 3 steps to about 24-28 in floor height, freestanding with no attachment to the trailer",
+  "ESTIMATE: orient long axis east-west, with the hitch facing the prevailing west/southwest wind, so the long walls face north and south and the narrow end takes the wind",
+  "ESTIMATE: 50 A / 240 V RV service (NEMA 14-50) to run two roof ACs; each roof AC is roughly 1.3-1.8 kW running",
+  "ESTIMATE: water use for two full-time adults in an RV about 40-80 gal/day, so a 2,500 gal tank lasts about 4-8 weeks",
+  "ESTIMATE: 250 gal propane tank (about 200 gal usable) vs onboard 60 lb (about 14 gal) cylinders"
+ ],
+ "costs": [
+  {
+   "item": "New four-season travel trailer, street price (Imagine 2600RB to Arctic Fox 27RK / Reflection 317RSTS)",
+   "low_usd": 55000,
+   "high_usd": 90000,
+   "notes": "MSRPs $57k-117k, but dealer listings show 25-50% off (Arctic Fox 27RK about $74-75k). Add sales tax (about 8.75% in Yucca Valley; my estimate, not sourced), DMV fees and about $700-1,000 doc/prep."
+  },
+  {
+   "item": "Used travel trailer (Reflection 297RSTS 2019-2024, Arctic Fox 27-5L)",
+   "low_usd": 28000,
+   "high_usd": 50000,
+   "notes": "Asking prices from listings. Add about $500-1,000 for a professional pre-purchase inspection (estimate)."
+  },
+  {
+   "item": "Airstream (used Flying Cloud to new Classic)",
+   "low_usd": 59000,
+   "high_usd": 225600,
+   "notes": "Used 2018-2021 Flying Cloud $59-80k; new Flying Cloud from $115,900; Classic $195,400-225,600."
+  },
+  {
+   "item": "RVIA tiny house (ESCAPE)",
+   "low_usd": 62710,
+   "high_usd": 112235,
+   "notes": "Base prices only; delivery extra and location-dependent."
+  },
+  {
+   "item": "Fifth wheel plus pickup (only if they will also tow)",
+   "low_usd": 85000,
+   "high_usd": 200000,
+   "notes": "ESTIMATE. Fifth wheel $33k used to $159k new, plus a used 3/4-ton or 1-ton pickup with a fifth-wheel hitch (roughly $40-70k, estimate). The CA pickup must also be registered commercial."
+  },
+  {
+   "item": "Delivery by dealer or commercial hauler to the lot",
+   "low_usd": 500,
+   "high_usd": 3000,
+   "notes": "ESTIMATE, not sourced. Avoids needing a Noncommercial Class A license for trailers over 10,000 lb GVWR."
+  },
+  {
+   "item": "County Temporary Structure Permit plus annual renewals",
+   "low_usd": 0,
+   "high_usd": 0,
+   "notes": "UNKNOWN. Set by the San Bernardino County Master Fee Schedule (not retrieved). Annual CA DMV registration also required."
+  },
+  {
+   "item": "Gravel/DG pad, leveling, anchors and straps",
+   "low_usd": 1500,
+   "high_usd": 5000,
+   "notes": "ESTIMATE"
+  },
+  {
+   "item": "Shade: shade sails (low) to permitted steel RV carport (high)",
+   "low_usd": 1500,
+   "high_usd": 20000,
+   "notes": "ESTIMATE. A steel structure likely needs its own County building permit and wind design; could be reused later as a carport or workshop."
+  },
+  {
+   "item": "Skirting (AirSkirts or vinyl/foam)",
+   "low_usd": 1000,
+   "high_usd": 5000,
+   "notes": "AirSkirts states custom skirting can cost up to $5,000; the low end is my estimate."
+  },
+  {
+   "item": "Freestanding deck and steps",
+   "low_usd": 800,
+   "high_usd": 4000,
+   "notes": "ESTIMATE; DIY treated lumber or composite"
+  },
+  {
+   "item": "Water: 1,500-3,000 gal tank, pump, pressure tank, freeze protection",
+   "low_usd": 2000,
+   "high_usd": 5000,
+   "notes": "ESTIMATE; plus hauled-water deliveries (price not verified)"
+  },
+  {
+   "item": "Sewage: pumping contract (County requires one for a self-contained unit)",
+   "low_usd": 3000,
+   "high_usd": 12000,
+   "notes": "ESTIMATE per year, assuming biweekly to weekly pump-outs at roughly $150-450 each. A temporary holding tank, or an early-installed septic system approved by Environmental Health, could cut this."
+  },
+  {
+   "item": "Propane: 250 gal tank set and fills",
+   "low_usd": 500,
+   "high_usd": 2500,
+   "notes": "ESTIMATE per year; winter heating raises use"
+  },
+  {
+   "item": "Power: SCE temporary service pole with 50 A RV outlet (shared with construction)",
+   "low_usd": 2000,
+   "high_usd": 6000,
+   "notes": "ESTIMATE; not verified with SCE"
+  },
+  {
+   "item": "Off-grid alternative: solar (about 5-8 kW), battery (about 15-30 kWh), inverter, generator",
+   "low_usd": 12000,
+   "high_usd": 35000,
+   "notes": "ESTIMATE. Running two ACs all summer on batteries is impractical; a generator or grid power would still be needed. Factory solar is only 180-400 W."
+  },
+  {
+   "item": "Heat mitigation: reflective roof coating, window film, extra AC or RV mini-split",
+   "low_usd": 500,
+   "high_usd": 5000,
+   "notes": "ESTIMATE"
+  }
+ ],
+ "risks": [
+  {
+   "risk": "The RV cannot legally go on the lot, or be lived in, until the house building permit is issued and the Temporary Structure Permit is approved. Placing it early can bring penalty fees and enforcement.",
+   "severity": "high",
+   "mitigation": "Time the purchase and delivery to follow building permit issuance. Store the RV at the dealer, in storage or at an RV park in the meantime. Call for the first inspection within 180 days."
+  },
+  {
+   "risk": "Mojave summer heat (100F+): single 13.5-15K roof ACs struggle, especially in long, multi-slide, dark-interior trailers.",
+   "severity": "high",
+   "mitigation": "Pick a unit with a second AC (Blackstone 11K option, Flying Cloud 13.5K option, Timberwolf or Solitude dual 15K). Get 50 A power. Shade the roof and west side, use skirting and reflective window film. Consider adding a mini-split."
+  },
+  {
+   "risk": "Spring winds (often 40-60 mph gusts, my estimate) damaging awnings, slide toppers, shade sails and steps, or rocking the trailer.",
+   "severity": "medium",
+   "mitigation": "Orient the narrow end into the prevailing wind. Use ground anchors and straps and stabilizer jacks. Retract awnings when you leave. Use shade sails rated for wind and design steel shade structures for the County wind load."
+  },
+  {
+   "risk": "Winter nights below freezing: frozen fresh-water hose, tank valves and drains.",
+   "severity": "medium",
+   "mitigation": "Buy a heated, enclosed underbelly (Reflection, Imagine, Arctic Fox and Outdoors RV all have one). Use a heated hose or heat-taped supply line, skirting, and a 250 gal propane tank."
+  },
+  {
+   "risk": "Towing a trailer coach over 10,000 lb GVWR (Reflection 317RSTS on GD's current page, Arctic Fox 27RK, Blackstone 260KVS, ESCAPE Traveler XL) requires a CA Noncommercial Class A license.",
+   "severity": "medium",
+   "mitigation": "Have the dealer or a licensed hauler deliver it, or choose a trailer under 10,000 lb GVWR (Imagine 2600RB, Timber Ridge 24RKS, Lance 2465, Flying Cloud, Oliver)."
+  },
+  {
+   "risk": "Park models, and some tiny houses, may not be treated as an 'RV or travel trailer' by the County, may need a Setdown Permit, and need Caltrans oversize move permits.",
+   "severity": "medium",
+   "mitigation": "Get written confirmation from San Bernardino County Building & Safety before buying. Make sure the unit will carry current CA DMV registration (required with the application)."
+  },
+  {
+   "risk": "Manufacturer warranties often exclude or limit full-time occupancy.",
+   "severity": "medium",
+   "mitigation": "Read the warranty for the exact unit and ask the dealer in writing. Budget for repairs, or buy a full-time-friendly extended service contract."
+  },
+  {
+   "risk": "Fifth wheels over 40 ft or 102 in wide cannot be registered in CA, and a pickup with a fifth-wheel hitch must be registered commercial.",
+   "severity": "medium",
+   "mitigation": "Prefer a travel trailer. If choosing a fifth wheel, stay at or under 40 ft and 102 in."
+  },
+  {
+   "risk": "Pack rats and rodents chewing wiring, and dust getting into slide seals and AC filters.",
+   "severity": "medium",
+   "mitigation": "Fit skirting with hardware cloth at the base, seal plumbing penetrations, clean AC filters often, keep slides in when not needed, and keep the area free of brush and wood piles."
+  },
+  {
+   "risk": "Small holding tanks (39-50 gal black water) on a site without sewer mean frequent pumping.",
+   "severity": "medium",
+   "mitigation": "Choose large tanks (Arctic Fox 100 gal fresh; Blackstone 80+80 gray). Add a temporary holding tank, or install the permanent septic early if Environmental Health allows."
+  },
+  {
+   "risk": "Listed prices and MSRPs vary widely and change; some search-snippet prices could not be re-verified (dealer sites blocked automated fetches).",
+   "severity": "low",
+   "mitigation": "Get written out-the-door quotes from 2-3 dealers (Bish's Fairfield, Blue Compass, RV World Yuma, SoCal dealers) and check NADA/J.D. Power values for used units."
+  },
+  {
+   "risk": "Depreciation over 1-3 years.",
+   "severity": "low",
+   "mitigation": "Buy lightly used, or buy a brand with strong resale (Airstream, Northwood, Oliver), then sell or keep it as a guest unit or rental if local rules allow."
+  }
+ ],
+ "next_actions": [
+  "Call San Bernardino County Land Use Services, Building & Safety. Confirm Temporary Structure Permit fees (Master Fee Schedule) and whether a park model or RVIA tiny house qualifies as an 'RV or travel trailer'. Also ask what the final inspection expects for electrical, gas, water and sewer hookups.",
+  "Decide grid vs. off-grid for the build. Ask SCE for temporary service with a 50 A RV outlet the house construction can share.",
+  "Shortlist three: Arctic Fox NXT 27RK, Grand Design Reflection 317RSTS (or Imagine 2600RB on a budget), and Outdoors RV Timber Ridge 24RKS or Blackstone 260KVS. Add a used Airstream Flying Cloud 25FB/27FB if the brand aesthetic matters most.",
+  "Get out-the-door quotes, with delivery to the Yucca Valley lot, from Bish's (Fairfield, CA), Blue Compass, RV World Yuma, and a SoCal Northwood or Outdoors RV dealer.",
+  "For any used unit, hire an NRVIA inspector, check roof seals and soft floors, and pull the CA registration history.",
+  "Get the manufacturer's written warranty and ask in writing about full-time use.",
+  "Line up a septic pumping contractor (required for the permit), a propane supplier (250 gal tank) and a water-hauling or storage-tank plan.",
+  "Ask the house designer to place the RV pad and shade structure so they can later be reused as the house's carport or workshop pad, without blocking the house's construction access.",
+  "Follow-up research still open (search budget ran out): Outdoors RV MSRPs, park model prices delivered to SoCal, County fee amounts, and the exact Vehicle Code length and width sections."
+ ],
+ "design_ideas": [
+  "Use a high-key white-and-aluminum trailer as a photographic object against the desert. A polished Airstream Flying Cloud, or a white-gelcoat Lance/Oliver, fits the black-and-white brand photography best.",
+  "Build a black steel shade frame with a white or blush (#f2d1d1) tensioned fabric roof, set 14-15 ft high and independent of the trailer. Later it becomes the house's carport, so the shade spend is not wasted.",
+  "Make the skirting a design element: black corrugated metal or fiber-cement panels with a coral (#ec4639) changsal/key-fret laser-cut vent band at the base. Back it with hardware cloth against rodents.",
+  "Freestanding deck at the curbside entry: black-stained boards, coral steel stair stringers, and a peach (#fec6b4) outdoor rug. It doubles as an outdoor office under the awning in spring and fall.",
+  "Hide utilities behind one cabinet-like 'utility wall' screen: water tank, pump, propane tank and solar inverter behind a lattice-pattern (changsal) black screen, so the site photographs clean.",
+  "Orient the trailer east-west with the big window wall facing north toward the Joshua trees for even light on video calls. Shade the west end heavily.",
+  "Choose a rear-living or rear-kitchen floorplan (Arctic Fox 27RK, Reflection 317RSTS, Timber Ridge 24RKS) so the big rear window frames the view of the house going up.",
+  "Model it in 3D as simple boxes: body box (L x 8'-8'6\" W x 11'-12' H), slide boxes (30 in deep default), hitch triangle (about 4-5 ft), AC pods (about 3 x 2.5 x 1 ft) on the roof, plus pad, shade frame, deck, water tank (about 7 ft diameter x 6 ft tall for 2,500 gal, estimate) and propane cylinder (about 3 x 7.5 ft for 250 gal, estimate)."
+ ]
+}

@@ -1,0 +1,597 @@
+{
+ "topic": "rv_trailer",
+ "summary": "Scope note: the computed task asked for desert gazebo spa research (topic spa_build). The user's relayed request asked for something else: where to get the RV trailer, what it could look like, and used and new budgets. The harness says the user's request wins where the two conflict, so this covers the RV trailer. No spa research was done. The web search budget ran out near the end, so a few gaps remain (insurance, loan rates, exact A/C specs).\n\nKEY RULES: San Bernardino County lets you live in an RV or travel trailer while you build your own house, under a Temporary Structure Permit. Your house building permit has to be issued first. Moving the trailer onto the lot before then can bring penalties. The permit lasts 12 months, renews 12 months at a time, and caps at 5 years. You need a current California DMV registration for the unit. If the trailer is self-contained, you also need a sewage pumping contract. If the lot is inside the Town of Yucca Valley, the town's own code applies instead: self-contained RVs, one year plus one-year extensions, 4 years total, and the permit ends when the house is done. So buy something DMV-registrable, a travel trailer or fifth wheel. Avoid a park model unless the county approves it first.\n\nWHERE TO BUY (closest first): Blue Compass RV Palm Desert, Mike Thompson's RV (Cathedral City and Colton), Camping World Colton, I-15 RV and used lots in Hesperia/Victorville, and Airstream Inland Empire in Temecula. Farther out: Airstream Los Angeles (San Gabriel) and Airstream of San Diego (San Marcos). Lance builds its trailers in Lancaster, a high-desert town, and runs factory tours; you buy through dealers. Happier Camper has an LA showroom. Used listings: Airstream Marketplace, RV Trader, Autotrader RV, RVUSA, RV Universe. The California RV Supershow in Pomona runs March 19-21, 2027.\n\nNEW PRICES:\n- Airstream 2027 \"from\" prices: World Traveler $64,400, Basecamp $69,900, Bambi $75,400, Caravel $92,400, Flying Cloud $115,900, Globetrotter $147,400.\n- Northwood Arctic Fox NXT 22GT (built for four seasons): $46,995-$55,495 on sale, against MSRPs around $67k-$72k.\n- Outdoors RV Creek Side and Timber Ridge: about $50k-$87k.\n- Lance 1985: MSRP about $75k-$88k.\n- Oliver Legacy Elite II: about $80k-$85k.\n- Happier Camper: $39,950-$74,950.\n- Bowlus: $150k-$185k.\n\nUSED PRICES:\n- Used Airstream Flying Cloud: $23,800-$106,000, average $72,833.\n- 2016 Flying Cloud 25: $52,998. 2019 Flying Cloud 23FB: $58,849.\n- 2023 Arctic Fox 25Y in Kerman, CA: $48,900.\n- Renovated 1970s 31-ft Airstream Sovereigns: about $32k-$55k asking. Unrenovated or project shells: $9.5k-$25k.\n- Entry-level used trailers in Palm Desert: about $13k-$18k.\n\nRESALE: A 2026 study of five-year-old trailers found Airstreams kept about 76.6% of MSRP, against 46.7% for the weakest brands. That favors buying a used Airstream (or a strong four-season brand) and selling it once the house is done. Renting long-term runs an estimated $3k-$6k a month, which is usually worse than buying and reselling.\n\nDESERT FIT: RV air conditioners pull the inside only about 20F below outside, so in 100F+ heat use shade, a 50A/two-A/C rig and a white or silver exterior. In winter use skirting plus a heater, because nights freeze.\n\nLOOK: a silver-shelled trailer under a white steel carport, with coral-red lattice (changsal) screens, blush and peach linens and black hardware. It suits her high-key black-and-white photography.\n\nBUDGETS (all-in estimates, before septic, well or utility-line work):\n- Lean (used trailer): about $17k-$43k.\n- Balanced (new Arctic Fox / Basecamp or a used Flying Cloud, plus carport): about $61k-$88k.\n- Premium (new Flying Cloud / Oliver / Globetrotter, top carport and finishes): about $106k-$198k.",
+ "findings": [
+  {
+   "title": "County permit for living in an RV or travel trailer while building",
+   "detail": "San Bernardino County EZOP Temporary Structure Permit checklist (Rev. 6/2025, citing Development Code Title 8 Div. 4):\n- What it covers: 'A recreational vehicle or travel trailer occupied as residential quarters on a temporary basis by an individual constructing a residence.' The house building permit must be issued before this permit is approved.\n- Placement: the trailer may not go on the lot until the companion building permit is issued and this permit is approved; placing it early 'may result in Penalty Fees and Enforcement Action.'\n- Final inspection covers the electrical hookup, gas lines and sewer/water connections. Any Fire District, Environmental Health or Public Works approvals must come first.\n- Term: 12 months, renewable for 12 months at a time, never more than 5 years from first issuance. The permit expires if no inspection is called within 180 days.\n- Submittals: site/plot plan; current California DMV registration for the unit; a sewage pumping contract if the unit is self-contained; will-serve letters from water and sewer providers if applicable.\n- Fees: per the county Master Fee Schedule (amount not found).\n- The county FAQ confirms the house permit must already be issued and lists Land Use Services at 909.387.8311.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://lus.sbcounty.gov/faqs/while-building-a-new-home-can-i-put-a-temporary-mobile-home-on-my-property-to-live-in-while-my-house-is-under-construction"
+   ]
+  },
+  {
+   "title": "If the lot is inside the Town of Yucca Valley, the town's rules apply instead",
+   "detail": "Yucca Valley Zoning Code Section 9.39.050(A) allows 'manufactured homes and self-contained recreational vehicles' (travel trailers are not named) as temporary quarters while the first permanent dwelling is built.\n- It can be approved once construction permits are issued.\n- Term: one year with one-year extensions, at most 4 years in total.\n- It becomes invalid when the building permit is cancelled or construction is complete.\n- Section 9.39.060 lets the director require removal and site-restoration measures plus performance security. The permit must be displayed where it can be seen from outside.\n- Living in a vehicle is otherwise prohibited.\nIn short: confirm whether the parcel is incorporated, choose a fully self-contained unit, and plan to sell or store it when the house is finished. The code text comes from a third-party host (gocodebook), so verify it with town planning.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures"
+   ]
+  },
+  {
+   "title": "Buy a DMV-registered travel trailer or fifth wheel, not a park model",
+   "detail": "The county wants a current California DMV registration copy for an RV or trailer, so a normal travel trailer or fifth wheel is the simplest route.\n- California law defines a park trailer as up to 400 sq ft and up to 14 ft wide, movable on highways only with a permit.\n- The DMV manual says park trailers carry ANSI A119.5 labels and are DMV-titled. Any unit with a HUD data plate gets referred to HCD (state housing). That adds steps and may not count as an 'RV or travel trailer' under the county permit.\n- Towing: a regular Class C license covers a trailer coach up to 10,000 lb GVWR. A fifth wheel of 10,000-15,000 lb needs a recreational fifth-wheel endorsement. Heavier trailers need a noncommercial Class A license. (The CHP document is a 2013 revision; verify.)",
+   "confidence": "medium",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/vehicle-registration/trailers/",
+    "https://berkeley.municipal.codes/CA/HSC/18009.3",
+    "https://www.chp.ca.gov/CommercialVehicleSectionSite/Documents/IB%20California%20Driver%20License%20Requirements%20for%20Towing%20Trailers.pdf",
+    "https://www.rvtravel.com/california-5th-wheel-owners-may-need-special-license/"
+   ]
+  },
+  {
+   "title": "Where to buy near Yucca Valley: multi-brand dealers",
+   "detail": "- Blue Compass RV Palm Desert, 77840 Varner Rd, Palm Desert 92211 (formerly Holland RV). Has carried Jayco, Grand Design, Forest River, Alliance, Brinkley and Keystone. About 86 new and 26 used units listed; one entry-level travel trailer was listed at $12,899-$17,690.\n- Camping World of Colton, 1175 S Mount Vernon Ave. About 127 travel trailer listings, new and used.\n- Mike Thompson's RV: Colton, Cathedral City, Santa Fe Springs and Fountain Valley (per press releases).\n- Hesperia/Victorville/Apple Valley: I-15 RV in Hesperia (new and used, consignment) and used lots such as Pop RVs and National Vehicle.\n- Lance builds in the high desert at 43014 Exchange Place, Lancaster. The factory offers tours, but sales go through dealers.\n- Happier Camper has a Los Angeles showroom.\nAddresses and stock come from dealer pages and aggregators; confirm before visiting.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.bluecompassrv.com/locations/california/palm-desert/contact-us",
+    "https://www.bluecompassrv.com/locations/california/palm-desert/used-rvs-for-sale",
+    "https://rv.campingworld.com/rvclass/travel-trailer-rvs/dealer/colton-california",
+    "https://rv.campingworld.com/dealer/colton-ca",
+    "https://lifestyle.kbew98country.com/story/254853/southern-california-rv-inventory-expanded-at-mike-thompsons-rv-service-parts/",
+    "https://smb.americanpress.com/article/I-15-RV-Expands-2026-Inventory-Across-Southern-California-Locations/6a43e2f3dcc45f000247d214",
+    "https://www.rvusa.com/used-rvs-for-sale-in-hinkley-california",
+    "https://weretherussos.com/lance-camper-factory-tour-travel-trailers-truck-campers/",
+    "https://www.happiercamper.com/"
+   ]
+  },
+  {
+   "title": "Where to buy an Airstream in Southern California",
+   "detail": "- Airstream Inland Empire, 27969 Jefferson Ave, Temecula 92590 (from a Bank of America dealer directory). About 1.5-2 hours from Yucca Valley.\n- Airstream Los Angeles, 1212 E Las Tunas Dr, San Gabriel. Part of Airstream SoCal (Westminster, Midway City, Temecula, Las Vegas).\n- Airstream of San Diego, San Marcos (Blue Compass), opened July 17, 2024.\n- We Are Airstream announced a Ventura store.\nUsed Airstreams are also sold on airstreammarketplace.com. Example: a 2024 25-ft International in Temecula asking $120,000. airstream.com shows a $1,000 Airstream Supply Co. gift card for Basecamp purchases July 1-Oct 31, 2026, which ends a week from today. Check Airstream's dealer locator before driving.",
+   "confidence": "medium",
+   "sources": [
+    "https://dealer-network.bankofamerica.com/rv-dealers/ca/temecula/vehicle-loans-temecula-ca-0122880003.html",
+    "https://rv.com/archive/airstream-opens-fifth-la-area-dealership/",
+    "https://www.rvnews.com/blue-compass-establishes-new-airstream-dealership/",
+    "https://www.weareairstreamsuperstore.com/about-us/",
+    "https://www.airstreammarketplace.com/airstream-trailers-for-sale/2024-25-international-for-sale-in-temecula-california/",
+    "https://www.airstream.com/travel-trailers/basecamp/"
+   ]
+  },
+  {
+   "title": "New Airstream prices (2027 model-year cards on airstream.com)",
+   "detail": "Airstream 'from' prices on airstream.com:\n- World Traveler $64,400: 2027, 17-22 ft, single axle, sleeps 4, 2 floor plans.\n- Basecamp $69,900: 20 ft, sleeps up to 4, GVWR 4,300-4,500 lb, hitch 508-535 lb, 23 gal fresh water.\n- Bambi $75,400.\n- Basecamp Xe $88,900.\n- Caravel $92,400: 16, 20 or 22 ft, single axle, sleeps 5.\n- Flying Cloud $115,900: 23-30 ft, 2 axles, 5 plans, sleeps 8.\n- International $128,900. Trade Wind $134,400. Globetrotter $147,400. Classic $195,400.\nDealer examples:\n- 2026 Basecamp 16X: MSRP $62,650, sale $57,495 (8% off).\n- 2026 Basecamp 20X: MSRPs $74,450-$88,250, sales about $63k-$77k.\n- 2026 Flying Cloud 25FB: about $110k-$137k at dealers.\n- JD Power lists the 2026 Caravel 22FB at $90,300 and the Flying Cloud 25FB Queen at $121,900.",
+   "confidence": "high",
+   "sources": [
+    "https://www.airstream.com/travel-trailers/",
+    "https://www.airstream.com/travel-trailers/basecamp/",
+    "https://www.airstream.com/travel-trailers/flying-cloud/",
+    "https://www.airstream.com/travel-trailers/caravel/",
+    "https://www.airstream.com/travel-trailers/world-traveler/",
+    "https://www.bluecompassrv.com/product/new-2026-airstream-basecamp-16x-3665824-29",
+    "https://www.rvuniverse.com/listing/for-sale/253647831/2026-airstream-basecamp-20x-travel-trailers",
+    "https://www.jdpower.com/rvs/2026/airstream/m-22fb/6644300/values",
+    "https://www.jdpower.com/rvs/2026/airstream/m-25fb-queen-rear-hatch/6644305/values"
+   ]
+  },
+  {
+   "title": "Four-season trailers (better insulated for heat and cold): Northwood, Outdoors RV, Lance, Oliver",
+   "detail": "- Northwood (La Grande, OR) calls itself a 'true 4-season' maker. Its Arctic Fox Edge lists high-density block foam, heated holding tanks, thermal-pane windows and an insulated roof.\n- 2026 Arctic Fox NXT 22GT (about 24 ft): $46,995-$55,495 on sale against MSRPs of $66,723-$71,569. Bish's Fairfield, CA has one at $49,995 (MSRP $71,212).\n- Arctic Fox Edge 22GT: $64,911 (MSRP $84,536).\n- Arctic Fox NXT 27SX (31 ft), Fairfield, CA: $66,995 (MSRP $87,779). Edge 27SX: $79,990 (MSRP $109,719).\n- Outdoors RV 2026: Creek Side 17RBS MSRP about $59.9k, sale about $52.7k. Creek Side Titanium 19MKS $49,995. Timber Ridge 22MKS/24BKS MSRP about $63k-$64k; 25RDS about $75.8k; Titanium 28RES $86,902.\n- Lance: floor lengths 14'10\" to 25'6\", dry weights 2,905-6,400 lb (the 1985 is 18'9\", 4,480 lb). Dual-pane windows, heated enclosed underbelly, block foam with Azdel walls. Lance 1985 MSRPs $74,761-$87,760 (2024-25 listings).\n- Oliver: Legacy Elite II (24 ft, GVWR 7,000 lb, double-hull fiberglass, sleeps 3) about $79,995 for 2026 and $85,000 standard for 2027. Legacy Elite (18'5\", 3,700 lb dry) 2026 slots are sold out.\nThese prices come from dealer listings and vary.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.northwoodmfg.com/",
+    "https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-22gt-3566688-29",
+    "https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-22gt-3487088-29",
+    "https://www.bishs.com/product/new-2026-northwood-arctic-fox-edge-22gt-3590123-29",
+    "https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-27sx-3487082-29",
+    "https://www.rvuniverse.com/listing/for-sale/257223177/2026-northwood-arctic-fox-edge-27sx-travel-trailers",
+    "https://www.rvuniverse.com/listing/for-sale/258695569/2026-outdoors-rv-titanium-series-creek-side-19mks-travel-trailers",
+    "https://www.bishs.com/product/new-2026-outdoors-rv-timber-ridge-titanium-series-28res-3754473-29",
+    "https://www.lancecamper.com/travel-trailers/",
+    "https://lazydays.com/rvs/tucson-az/travel-trailer/new/2025/lance-lance-travel-trailers-21161379",
+    "https://www.rvtravel.com/rv-review-lance-1985-travel-trailer-rvdt-1667/",
+    "https://olivertraveltrailers.com/travel-trailers/oliver-legacy-elite-vs-airstream-nest/"
+   ]
+  },
+  {
+   "title": "Design-led options: Happier Camper and Bowlus",
+   "detail": "- Happier Camper (LA showroom), 2027 prices: HC1 $39,950; HC1 Venture $44,950; HC1 Studio $54,950 (kitchenette, shower, toilet); Traveler $74,950.\n- The HC1 is lightweight fiberglass with a modular cube interior.\n- Used: a 2022 HC1 Classic was $19,500 and 2024 Studios were $35k-$39k. One buyer reported about a 1-year build wait.\n- Very small for two people living full time. Better afterward as a guest room or photo studio.\n- Bowlus: Endless Highways from $185,000 (4,000-4,400 lb), Rivet from $150,000. The Terra Firma is no longer built.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.happiercamper.com/",
+    "https://www.rvparkstore.com/rvs/7038565-2022-hc1-classic-for-sale-in-livingston-tx",
+    "https://www.rvpark.com/rvs/7004142-2024-hc1-studio-for-sale-in-austin-tx",
+    "https://bowlus.com/endless-highways/",
+    "https://bowlus.com/llms.txt"
+   ]
+  },
+  {
+   "title": "Used-market price points",
+   "detail": "- Used Airstream Flying Cloud on Autotrader: $23,800-$106,000, average $72,833.\n- Examples: 2016 Flying Cloud 25 at $52,998 (Camper's Inn); 2019 Flying Cloud 23FB at $58,849 (Camping World); 2025 25FB at $90,000 private and $95,995 dealer.\n- 2023 Arctic Fox 25Y (30 ft) at a Kerman, CA dealer: $48,900.\n- 1970s 31-ft Airstream Sovereign/Land Yacht asks: renovated $32k-$54.9k; original or project units $9.5k-$25k. These are asking prices, not sold prices.\n- High-desert used lots are mostly fifth wheels and toy haulers, which need a pickup with a fifth-wheel hitch: 2021 Grand Design Solitude $48,000; 2018 Keystone Montana $39,900; 2022 Alliance Valor $67,499.\n- Entry-level used travel trailers in Palm Desert were about $13k-$18k.",
+   "confidence": "medium",
+   "sources": [
+    "https://rvs.autotrader.com/rvs-for-sale/used-airstream-flying_cloud-for-sale",
+    "https://www.campersinn.com/product/used-2016-airstream-flying-cloud-25-3665331-29",
+    "https://rv.campingworld.com/product/airstream/flying-cloud",
+    "https://www.airstreammarketplace.com/airstream-trailers-for-sale/2025-25-flying-cloud-for-sale-in-asheville-nc-north-carolina/",
+    "https://www.rvusa.com/2023-northwood-arctic-fox-25y-travel-trailer-5243478",
+    "https://www.airstreammarketplace.com/airstream-trailers-for-sale/1970-31-sovereign-of-the-road-for-sale-in-ormond-beach-florida/",
+    "https://www.rvpark.com/rvs/7005813-1976-sovereign-31-twin-for-sale-in-las-cruces-nm",
+    "https://www.airstreammarketplace.com/airstream-trailers-for-sale/1973-31-sovereign-for-sale-in-plymouth-michigan/",
+    "https://www.airstreammarketplace.com/airstream-trailers-for-sale/1971-31-sovereign-for-sale-in-ridgeland-mississippi/",
+    "https://www.rvusa.com/used-rvs-for-sale-in-hinkley-california",
+    "https://www.bluecompassrv.com/locations/california/palm-desert/used-rvs-for-sale"
+   ]
+  },
+  {
+   "title": "Resale: buy something that holds its value, then sell it when the house is done",
+   "detail": "The 2026 RVBlogger study (74 five-year-old trailers, 22 brands and product lines) found 46.7%-76.6% of original MSRP retained. Airstream was best at 76.6% and nuCamp T@B second at 64.4%. Rules of thumb elsewhere put the first-year drop at 20-30%. For a 1-3 year stay, a lightly used Airstream or a strong four-season brand bought and resold usually beats both new budget trailers and renting.\nRenting: travel trailers rent for about $100-$200 a day, with 10-20% monthly discounts. That is an estimated $3k-$6k a month, or $36k-$144k over 12-24 months.",
+   "confidence": "medium",
+   "sources": [
+    "https://rvblogger.com/blog/travel-trailer-depreciation/",
+    "https://www.rvshare.com/blog/rv-depreciation",
+    "https://www.campland.com/renting-an-rv-cost-in-california/",
+    "https://www.rvezy.com/campgrounds/destination/united-states/california/calabasas"
+   ]
+  },
+  {
+   "title": "Desert heat, dust, freeze and power",
+   "detail": "- Arizona owners report RV A/C units cool only about 20F below outside temperature (110F outside gives about 90F inside). One A/C struggles above 100F on larger rigs; owners advise two A/Cs on trailers over about 30 ft (anecdotal).\n- Shade can feel about 20F cooler. Shade cloth on the sun side cuts inside temps by 5-8F.\n- Clean A/C filters weekly in dust. Reflective foil on dual-pane windows may break their seals.\n- Power: 30A service is about 3,600 W (120 V x 30 A). 50A service is two 120 V legs, about 12,000 W, which is the practical way to run two A/Cs.\n- Winter: EZ Snap no-drill skirting $899.99-$2,099.99 plus Xtreme Heaters 800 W $469 or 1000 W $539. AirSkirts inflatable $1,899-$3,199.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.rvtravel.com/quick-tips-heat-cold1619/",
+    "https://koa.com/campgrounds/tucson/blog/how-to-keep-your-rv-cool_ad9952ee-4d91-4e21-8628-b95012f4b867/",
+    "https://www.winnieowners.com/threads/arizona-ac-solutions.718813/",
+    "https://www.rvtravel.com/30-amp-rv-50-amp-rv-whats-difference1574/",
+    "https://www.rvtravel.com/rv-electricity-issue-13-forum-q-a-50-amp-pedestals/",
+    "https://ezsnapdirect.com/collections/travel-trailer-skirting",
+    "https://www.airskirts.com/?p=25897"
+   ]
+  },
+  {
+   "title": "Site setup costs: shade structure, power pedestal, delivery, inspection, tax",
+   "detail": "- Carport: an 18x36 steel RV cover runs $6,480-$19,440 installed (AA Metal Buildings, 2026 ranges; open-sided, level ground; excludes grading, concrete and permits). Carport Central's 18x46x12 RV cover starts at $7,035. An Arrow 14x38x14 retail kit is rated 100 mph wind / 35 psf snow. Get a stamped wind certification for your ZIP code.\n- Power pedestal: a 50/30/20A direct-burial GFCI pedestal is about $415. Electrician labor is about $500 and up per forums; trenching distance drives cost.\n- Delivery if you don't tow: travel trailer transport is about $1.50-$3.50 per mile, local moves $150-$300 (guide last updated 2023).\n- Used-unit inspection: NRVIA pre-purchase inspection typically $300-$800, up to about $1,200.\n- Sales tax: Yucca Valley city rate is 8.75% (6% state, 0.25% county, 1% town, 1.5% special). Unincorporated addresses may differ; check CDTFA's address lookup.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.aametalbuildings.com/blog/how-much-does-a-metal-carport-cost-in-2025-prices-by-size-what-really-changes-the-quote",
+    "https://www.carportcentral.com/18x46x12-camper-rv-carport",
+    "https://www.tractorsupply.com/tsc/product/arrow-14-ft-x-38-ft-x-14-ft-rv-carport-cph143814-1499892",
+    "https://store.solarcellzusa.com/products/50-amp-rv-pedestal-power-outlet-with-nema-14-50r-etl-listed",
+    "https://www.winnieowners.com/threads/cost-for-50amp-pedestal-home.719284/",
+    "https://citizenshipper.com/blog/rv-transport-cost/",
+    "https://camperreport.com/how-much-does-an-rv-inspection-cost/",
+    "https://nrvta.com/how-to-avoid-an-rv-buying-nightmare/",
+    "https://www.salestaxhandbook.com/california/rates/yucca-valley",
+    "https://www.avalara.com/us/en/taxrates/state-rates/california/cities/yucca-valley.html",
+    "https://www.cdtfa.ca.gov/taxes-and-fees/sales-use-tax-rates.htm"
+   ]
+  },
+  {
+   "title": "Shopping calendar",
+   "detail": "- It is the end of the model year: 2027s are on airstream.com and dealers are discounting leftover 2026 stock (Arctic Fox about $16k-$22k under MSRP; Basecamp 16X about 8% off).\n- The California RV Supershow in Pomona runs March 19-21, 2027, and is useful for walking through many floor plans in one day.\n- An Overland Adventure show is at Fairplex Oct 24-25, 2026.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.rvsupershows.com/",
+    "https://www.truckcampermagazine.com/rv-shows-rallies/rv-shows-a-rallies",
+    "https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-22gt-3566688-29"
+   ]
+  },
+  {
+   "title": "Gaps: not researched (search budget exhausted)",
+   "detail": "Not covered:\n- Full-timer RV insurance cost.\n- 2026 RV loan rates.\n- Exact A/C BTU and second-A/C prep for each model.\n- DMV registration and vehicle license fee amounts. From background knowledge only, not verified here: the fee is about 0.65% of depreciated value.\n- The county permit fee amount.\n- Septic or pumping-contract costs in Morongo Basin.\nVerify these before finalizing budgets.",
+   "confidence": "low",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/vehicle-registration/trailers/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf"
+   ]
+  }
+ ],
+ "products": [
+  {
+   "name": "Airstream World Traveler (2027)",
+   "category": "new travel trailer",
+   "condition": "new",
+   "price_low": 64400,
+   "price_high": 64400,
+   "specs": "17-22 ft, single axle, sleeps 4, 2 floor plans; optional solar/lithium",
+   "source": "https://www.airstream.com/travel-trailers/world-traveler/",
+   "why": "Lowest-priced new Airstream with the classic silver look"
+  },
+  {
+   "name": "Airstream Basecamp 16X / 20X (2026 leftovers)",
+   "category": "new travel trailer",
+   "condition": "new",
+   "price_low": 57495,
+   "price_high": 77000,
+   "specs": "20 ft, sleeps up to 4, GVWR 4,300-4,500 lb, hitch 508-535 lb, 23 gal fresh; 2027 from $69,900",
+   "source": "https://www.bluecompassrv.com/product/new-2026-airstream-basecamp-16x-3665824-29",
+   "why": "Compact, light enough for a midsize tow vehicle; strong resale"
+  },
+  {
+   "name": "Airstream Caravel (2027)",
+   "category": "new travel trailer",
+   "condition": "new",
+   "price_low": 90300,
+   "price_high": 92400,
+   "specs": "16/20/22 ft single axle, sleeps 5",
+   "source": "https://www.airstream.com/travel-trailers/caravel/",
+   "why": "Classic riveted-aluminum shell in a small size"
+  },
+  {
+   "name": "Airstream Flying Cloud 25FB / 27FB",
+   "category": "new travel trailer",
+   "condition": "new",
+   "price_low": 110000,
+   "price_high": 137000,
+   "specs": "23-30 ft range, 2 axles; 2027 from $115,900; 2026 25FB Queen JD Power MSRP $121,900",
+   "source": "https://www.airstream.com/travel-trailers/flying-cloud/",
+   "why": "Best size for two people living full time for 1-3 years; holds value"
+  },
+  {
+   "name": "Airstream Globetrotter (2027)",
+   "category": "new travel trailer",
+   "condition": "new",
+   "price_low": 147400,
+   "price_high": 147400,
+   "specs": "Premium Airstream trim, from-price",
+   "source": "https://www.airstream.com/travel-trailers/",
+   "why": "Premium tier, design-forward interior"
+  },
+  {
+   "name": "Used Airstream Flying Cloud (2016-2019, 23-25 ft)",
+   "category": "used travel trailer",
+   "condition": "used",
+   "price_low": 52998,
+   "price_high": 58849,
+   "specs": "2016 FC 25 at $52,998; 2019 FC 23FB at $58,849; market range $23,800-$106,000, average $72,833",
+   "source": "https://rvs.autotrader.com/rvs-for-sale/used-airstream-flying_cloud-for-sale",
+   "why": "Best value-for-resale pick for the balanced tier"
+  },
+  {
+   "name": "Vintage Airstream Sovereign 31 (1970s), renovated",
+   "category": "used travel trailer",
+   "condition": "used",
+   "price_low": 32000,
+   "price_high": 54900,
+   "specs": "31 ft twin axle; renovated asks $32k-$54.9k; project/original $9.5k-$25k",
+   "source": "https://www.airstreammarketplace.com/airstream-trailers-for-sale/1970-31-sovereign-of-the-road-for-sale-in-ormond-beach-florida/",
+   "why": "Most photogenic option, a canvas for the coral/black/white brand; needs a careful inspection"
+  },
+  {
+   "name": "Northwood Arctic Fox NXT 22GT (2026)",
+   "category": "new four-season travel trailer",
+   "condition": "new",
+   "price_low": 46995,
+   "price_high": 55495,
+   "specs": "About 24 ft, sleeps 3-4; MSRPs $66,723-$71,569; block foam, heated tanks, thermal-pane windows (Northwood claims)",
+   "source": "https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-22gt-3487088-29",
+   "why": "Best-insulated value pick for 100F summers and freezing nights"
+  },
+  {
+   "name": "Northwood Arctic Fox NXT 27SX (2026)",
+   "category": "new four-season travel trailer",
+   "condition": "new",
+   "price_low": 66995,
+   "price_high": 79990,
+   "specs": "31 ft; MSRP $87,779 (NXT) to $109,719 (Edge)",
+   "source": "https://www.bishs.com/product/new-2026-northwood-arctic-fox-nxt-27sx-3487082-29",
+   "why": "More room for long stays; Fairfield, CA stock"
+  },
+  {
+   "name": "Outdoors RV Creek Side 19MKS Titanium (2026)",
+   "category": "new four-season travel trailer",
+   "condition": "new",
+   "price_low": 49995,
+   "price_high": 52995,
+   "specs": "Compact; marketed as four-season",
+   "source": "https://www.rvuniverse.com/listing/for-sale/258695569/2026-outdoors-rv-titanium-series-creek-side-19mks-travel-trailers",
+   "why": "Alternative four-season brand at a similar price"
+  },
+  {
+   "name": "Outdoors RV Timber Ridge 22MKS-28RES (2026)",
+   "category": "new four-season travel trailer",
+   "condition": "new",
+   "price_low": 63431,
+   "price_high": 86902,
+   "specs": "Mountain Series 22MKS about $63.4k MSRP; 25RDS about $75.8k; Titanium 28RES $86,902 MSRP",
+   "source": "https://www.bishs.com/product/new-2026-outdoors-rv-timber-ridge-titanium-series-28res-3754473-29",
+   "why": "Larger four-season floor plans"
+  },
+  {
+   "name": "Lance 1985 travel trailer",
+   "category": "new travel trailer",
+   "condition": "new",
+   "price_low": 74761,
+   "price_high": 87760,
+   "specs": "18'9\" floor, 4,480 lb dry, sleeps 4; dual-pane windows, heated enclosed underbelly, block foam/Azdel walls",
+   "source": "https://www.lancecamper.com/travel-trailers/",
+   "why": "Built in high-desert Lancaster, CA; well insulated; factory tours available"
+  },
+  {
+   "name": "Oliver Legacy Elite II",
+   "category": "new fiberglass travel trailer",
+   "condition": "new",
+   "price_low": 79995,
+   "price_high": 85000,
+   "specs": "24 ft, GVWR 7,000 lb, double-hull fiberglass, sleeps 3",
+   "source": "https://olivertraveltrailers.com/travel-trailers/oliver-legacy-elite-vs-airstream-nest/",
+   "why": "Seamless double-hull fiberglass shell, plumbing inside the shell; build slots limited"
+  },
+  {
+   "name": "Happier Camper HC1 Studio / Traveler (2027)",
+   "category": "design-forward small trailer",
+   "condition": "new",
+   "price_low": 54950,
+   "price_high": 74950,
+   "specs": "Fiberglass, modular cube interior; Studio has kitchenette, shower, toilet",
+   "source": "https://www.happiercamper.com/",
+   "why": "Graphic, photogenic; later works as a guest or photo studio (small for two people full time)"
+  },
+  {
+   "name": "Bowlus Endless Highways",
+   "category": "luxury aluminum trailer",
+   "condition": "new",
+   "price_low": 185000,
+   "price_high": 256000,
+   "specs": "4,000-4,400 lb; Frontier Edition $256k (25 units)",
+   "source": "https://bowlus.com/endless-highways/",
+   "why": "Design-object premium ceiling"
+  },
+  {
+   "name": "EZ Snap travel trailer skirting kit",
+   "category": "freeze protection",
+   "condition": "new",
+   "price_low": 899.99,
+   "price_high": 2099.99,
+   "specs": "No-drill vinyl skirting, custom cut to the rig",
+   "source": "https://ezsnapdirect.com/collections/travel-trailer-skirting",
+   "why": "Encloses the underside so tanks and lines survive freezing nights; blocks dust and wind"
+  },
+  {
+   "name": "Xtreme Heaters (sold by EZ Snap)",
+   "category": "freeze protection",
+   "condition": "new",
+   "price_low": 469,
+   "price_high": 539,
+   "specs": "800 W ($469) or 1000 W ($539); bracket $47.95",
+   "source": "https://ezsnapdirect.com/collections/travel-trailer-skirting",
+   "why": "Heats the skirted space under the trailer"
+  },
+  {
+   "name": "AirSkirts inflatable skirting",
+   "category": "freeze protection",
+   "condition": "new",
+   "price_low": 1899,
+   "price_high": 3199,
+   "specs": "Reusable inflatable",
+   "source": "https://www.airskirts.com/?p=25897",
+   "why": "Premium, easy to remove and reuse"
+  },
+  {
+   "name": "18x36 steel RV carport, installed",
+   "category": "shade structure",
+   "condition": "new",
+   "price_low": 6480,
+   "price_high": 19440,
+   "specs": "Open-sided, level ground; excludes grading, concrete and permits",
+   "source": "https://www.aametalbuildings.com/blog/how-much-does-a-metal-carport-cost-in-2025-prices-by-size-what-really-changes-the-quote",
+   "why": "Biggest single fix for summer heat; later becomes a carport or workshop for the house"
+  },
+  {
+   "name": "Carport Central 18x46x12 RV cover",
+   "category": "shade structure",
+   "condition": "new",
+   "price_low": 7035,
+   "price_high": 7035,
+   "specs": "Starting price; varies with local wind and snow certification",
+   "source": "https://www.carportcentral.com/18x46x12-camper-rv-carport",
+   "why": "Long enough for a 30-31 ft trailer plus a hitch-end porch"
+  },
+  {
+   "name": "50/30/20A GFCI RV power pedestal",
+   "category": "electrical",
+   "condition": "new",
+   "price_low": 415,
+   "price_high": 415,
+   "specs": "NEMA 14-50R, direct burial, NEMA 3R, ETL listed",
+   "source": "https://store.solarcellzusa.com/products/50-amp-rv-pedestal-power-outlet-with-nema-14-50r-etl-listed",
+   "why": "Needed to run two A/Cs on 50A; electrician and trench are extra"
+  }
+ ],
+ "design_numbers": [
+  "County temporary permit: 12 months, renewable 12 months at a time, max 5 years from first issuance; expires if no inspection within 180 days; the house building permit must be issued first",
+  "Town of Yucca Valley (if incorporated): 1 year + 1-year extensions, max 4 years total; self-contained RV; ends when construction is complete",
+  "California DMV registration for the trailer is a required submittal; so is a pumping contract if the trailer is self-contained",
+  "Towing on a Class C license: trailer coach up to 10,000 lb GVWR; fifth wheel 10,000-15,000 lb needs endorsement; above that, noncommercial Class A (CHP 2013 doc)",
+  "Power: 30A = about 3,600 W (120 V x 30 A); 50A = two 120 V legs, about 12,000 W total; use a NEMA 14-50R pedestal for 50A",
+  "RV A/C pulls the inside only about 20F below outside (110F out gives about 90F in, anecdotal); consider two A/Cs on rigs over 30 ft",
+  "Shade: about 20F cooler felt; shade cloth on the sun side cuts inside temps 5-8F",
+  "Airstream Basecamp: 20 ft, GVWR 4,300-4,500 lb, hitch 508-535 lb, 23 gal fresh water",
+  "Airstream World Traveler 17-22 ft; Caravel 16/20/22 ft; Flying Cloud 23-30 ft",
+  "Oliver Legacy Elite: 18'5\" long, 6'6\" wide, 9'2\" to A/C top, 3,700 lb dry, 5,000 lb GVWR; Legacy Elite II: 24 ft, 7,000 lb GVWR",
+  "Lance floor lengths/dry weights: 1475 14'10\"/2,905 lb; 1575 15'9\"/3,270; 1685 16'6\"/4,225; 1985 18'9\"/4,480; 1995 19'2\"/4,465; 2075 20'3\"/4,425; 2465 24'11\"/6,400; 2565 25'6\"/5,750",
+  "Arctic Fox NXT 22GT about 24 ft; NXT/Edge 27SX 31 ft",
+  "Carport sizes: 18x36 standard RV cover; 18x46x12 for a 30-31 ft trailer; Arrow 14x38x14 rated 100 mph wind / 35 psf snow",
+  "Park trailer legal definition: 400 sq ft or less, 14 ft max width (H&SC 18009.3), so avoid unless the county confirms",
+  "Sales tax: 8.75% in Yucca Valley city limits (6 state + 0.25 county + 1 town + 1.5 special); unincorporated may differ",
+  "Resale: five-year-old trailers kept 46.7%-76.6% of MSRP; Airstream highest at 76.6%",
+  "Transport: about $1.50-$3.50 per mile; Temecula to Yucca Valley is roughly 100 miles (estimate), so about $150-$350"
+ ],
+ "costs": [
+  {
+   "item": "LEAN tier: used trailer (entry-level travel trailer, vintage Airstream project, used Happier Camper or high-mileage Flying Cloud)",
+   "low_usd": 13000,
+   "high_usd": 35000,
+   "notes": "Based on listings: Palm Desert entry trailers about $12.9k-$17.7k; Sovereign projects $9.5k-$25k; 2022 HC1 $19.5k; Flying Cloud low end $23.8k. Estimate."
+  },
+  {
+   "item": "BALANCED tier: new Arctic Fox NXT 22GT / Outdoors RV Creek Side / Basecamp 16X, or a used 2016-2019 Flying Cloud",
+   "low_usd": 47000,
+   "high_usd": 60000,
+   "notes": "Arctic Fox 22GT sale $46,995-$55,495; Basecamp 16X $57,495; used Flying Cloud $52,998-$58,849"
+  },
+  {
+   "item": "PREMIUM tier: Oliver Legacy Elite II, new Flying Cloud 25FB/27FB or Globetrotter",
+   "low_usd": 80000,
+   "high_usd": 150000,
+   "notes": "Oliver about $79,995-$85,000; Flying Cloud about $110k-$137k at dealers; Globetrotter from $147,400"
+  },
+  {
+   "item": "Sales/use tax at 8.75% (Yucca Valley city rate; verify for unincorporated)",
+   "low_usd": 1138,
+   "high_usd": 13125,
+   "notes": "Calculated: lean $13k-$35k gives $1,138-$3,063; balanced $47k-$60k gives $4,113-$5,250; premium $80k-$150k gives $7,000-$13,125"
+  },
+  {
+   "item": "NRVIA pre-purchase inspection (used units)",
+   "low_usd": 300,
+   "high_usd": 1200,
+   "notes": "Typical $300-$800"
+  },
+  {
+   "item": "Delivery by transporter (if no tow vehicle)",
+   "low_usd": 150,
+   "high_usd": 1700,
+   "notes": "$1.50-$3.50/mile; about 100 mi from Temecula is about $150-$350; about 480 mi from Fairfield, CA is about $720-$1,680 (calculated estimates)"
+  },
+  {
+   "item": "Skirting (EZ Snap DIY kit to AirSkirts)",
+   "low_usd": 900,
+   "high_usd": 3199,
+   "notes": "EZ Snap $899.99-$2,099.99; AirSkirts $1,899-$3,199"
+  },
+  {
+   "item": "Under-trailer freeze heater",
+   "low_usd": 469,
+   "high_usd": 539,
+   "notes": "Xtreme Heaters 800 W / 1000 W"
+  },
+  {
+   "item": "Steel RV carport 18x36 installed (balanced and premium tiers)",
+   "low_usd": 6480,
+   "high_usd": 19440,
+   "notes": "Excludes grading, concrete and permits; may need a building permit and stamped wind certification"
+  },
+  {
+   "item": "50A RV pedestal plus electrician (excludes long trench or a utility service upgrade)",
+   "low_usd": 900,
+   "high_usd": 3000,
+   "notes": "Pedestal $415 plus labor about $500 and up (forum figures); the high end is an estimate"
+  },
+  {
+   "item": "Optional exterior vinyl wrap or accent band (20-25 ft)",
+   "low_usd": 2500,
+   "high_usd": 4500,
+   "notes": "Low-quality sources; get shop quotes. Keep the roof and most of the body light-colored for heat."
+  },
+  {
+   "item": "Interior refresh (paint, textiles, coral lattice screens, lighting)",
+   "low_usd": 1000,
+   "high_usd": 8000,
+   "notes": "Estimate only; not sourced"
+  },
+  {
+   "item": "Renting a trailer instead (per month)",
+   "low_usd": 3000,
+   "high_usd": 6000,
+   "notes": "$100-$200 per day x 30 before 10-20% monthly discounts; estimate; over 12-24 months this usually exceeds buy-and-resell"
+  },
+  {
+   "item": "TIER TOTAL: Lean (trailer + tax + inspection + delivery + skirting + heater + pedestal)",
+   "low_usd": 16857,
+   "high_usd": 43202,
+   "notes": "Calculated sum; excludes septic/water/utility-line work, permit fees, insurance and registration"
+  },
+  {
+   "item": "TIER TOTAL: Balanced (adds a basic carport and interior refresh)",
+   "low_usd": 61012,
+   "high_usd": 88389,
+   "notes": "Calculated sum; same exclusions"
+  },
+  {
+   "item": "TIER TOTAL: Premium (AirSkirts, heavier carport, custom interior)",
+   "low_usd": 106088,
+   "high_usd": 198303,
+   "notes": "Calculated sum; same exclusions. Expect to recover a large share on resale if it's an Airstream or Oliver."
+  }
+ ],
+ "risks": [
+  {
+   "risk": "Moving the trailer onto the lot (or living in it) before the house building permit and the Temporary Structure Permit are issued",
+   "severity": "high",
+   "mitigation": "Pull the house permit first, then apply for the Temporary Structure Permit through EZOP with the site plan, DMV registration, pumping contract and will-serve letters. Deliver the trailer only after approval."
+  },
+  {
+   "risk": "Not knowing whether the parcel is in the Town of Yucca Valley or unincorporated county (different code, 4-year vs 5-year cap, different tax rate)",
+   "severity": "high",
+   "mitigation": "Look up the parcel's jurisdiction on the county parcel map and confirm with Yucca Valley planning or county Land Use Services before buying"
+  },
+  {
+   "risk": "Buying a unit that cannot get California DMV registration (park model, HUD-labeled unit, missing title or out-of-state paperwork)",
+   "severity": "medium",
+   "mitigation": "Buy a titled travel trailer or fifth wheel. Check the VIN, title and lien status, and register it before applying for the permit."
+  },
+  {
+   "risk": "Summer heat overwhelms a single A/C, and UV and heat damage cheap trailers (roof seams, delamination)",
+   "severity": "high",
+   "mitigation": "Choose a four-season or aluminum/fiberglass shell with 50A and two A/Cs. Park under a carport or shade cloth with a light-colored roof, and clean filters weekly."
+  },
+  {
+   "risk": "Freezing winter nights split pipes and tanks",
+   "severity": "medium",
+   "mitigation": "Heated, enclosed underbelly; skirting plus an under-trailer heater; heated hose; insulate the water line where it leaves the ground"
+  },
+  {
+   "risk": "Spring winds tear awnings and rock the trailer; dust gets into seals and A/C",
+   "severity": "medium",
+   "mitigation": "Retract awnings when you leave and in wind. Use stabilizers and chocks, and add ground anchors or tie-downs if the installer recommends them. Put the hitch end into the prevailing wind, add lattice or windbreak screens, and gravel the pad."
+  },
+  {
+   "risk": "Hidden water damage or scams in used private sales",
+   "severity": "medium",
+   "mitigation": "NRVIA inspection ($300-$800), meet at a dealer or bank, verify the title, never wire a deposit for an unseen unit"
+  },
+  {
+   "risk": "Dark exterior wrap (black brand color) adds solar heat",
+   "severity": "medium",
+   "mitigation": "Keep the body silver or white. Use black and coral only as thin linework or bands, and keep the roof white."
+  },
+  {
+   "risk": "Lead times for new builds (Oliver 2026 slots full; Happier Camper owners report about 1-year waits)",
+   "severity": "low",
+   "mitigation": "Buy dealer stock or leftover 2026 units now, or buy used"
+  },
+  {
+   "risk": "Depreciation, and having to vacate when the house is finished",
+   "severity": "medium",
+   "mitigation": "Pick a brand that holds value (Airstream retained 76.6% at 5 years) and plan the sale or storage before final inspection of the house"
+  },
+  {
+   "risk": "Tow vehicle mismatch (fifth wheels and 6,000-9,000+ lb trailers need a full-size truck; heavy trailers need a license upgrade)",
+   "severity": "medium",
+   "mitigation": "Have it delivered ($1.50-$3.50/mile) since it will sit for 1-3 years, or choose a trailer under 10,000 lb GVWR"
+  }
+ ],
+ "next_actions": [
+  "Confirm the parcel's jurisdiction (Town of Yucca Valley or unincorporated county). Call county Land Use Services (909.387.8311) to get the Temporary Structure Permit fee and ask whether a pumping contract is enough or a septic hookup is required.",
+  "Decide tow vs. deliver. If delivering, get 2-3 transporter quotes.",
+  "Shortlist and walk through: Arctic Fox NXT 22GT, Lance 1985/2075, Outdoors RV Creek Side, Airstream Basecamp 20X / World Traveler, and a used Flying Cloud 23-25.",
+  "Visit the nearest dealers first: Blue Compass RV Palm Desert and Mike Thompson's Cathedral City. Then Camping World Colton and Airstream Inland Empire (Temecula). Optionally take the Lance factory tour in Lancaster.",
+  "Watch Airstream Marketplace, RV Trader and Autotrader for a used 2016-2020 Flying Cloud or a renovated Sovereign. Book an NRVIA inspection before paying.",
+  "Ask dealers about leftover 2026 discounts now. The Airstream Basecamp $1,000 gift-card offer ends Oct 31, 2026.",
+  "Price the site package: 50A pedestal and trench, 18x36 or 18x46 carport with wind certification, skirting and heater, gravel pad.",
+  "Follow-up research the search limit blocked: full-timer insurance quotes, RV loan rates, DMV fees for the chosen unit, septic or pumping contract costs.",
+  "Plan the exit: list the trailer for sale (or move it to storage) before the house's final inspection."
+ ],
+ "design_ideas": [
+  "'Silver and coral' concept: a polished Airstream (Basecamp, Flying Cloud or a renovated Sovereign). The aluminum reads as bright white in high-key black-and-white photos and reflects the sun.",
+  "Coral-red (#ec4639) changsal / key-fret lattice panels on the trailer, either removable laser-cut window screens or an entry-door privacy screen. They cast lattice shadows inside and outdoors.",
+  "Interior palette: matte-white or pale-wood cabinets, black hardware and faucets, blush (#f2d1d1) and peach (#fec6b4) linen bedding and cushions. Replace dated valances with hanji-style (Korean paper) roller shades for soft diffused light.",
+  "For a boxy four-season trailer (Arctic Fox, Lance), use a white or silver body with one thin black or coral key-fret band, not a full black wrap, to limit heat.",
+  "Park under a white steel carport (18x36, or 18x46 for 30 ft). Add coral lattice screen walls on the west/southwest wind side; they double as a backdrop for brand shoots and become the house carport or workshop later.",
+  "Put the door side facing the house build site, with a gravel pad, a simple wood deck with steps, and an outdoor kitchen/table under the carport overhang.",
+  "Lean version: a vintage Airstream project shell rebuilt in her black/white/coral style, a content series in itself, and a strong resale story afterward.",
+  "After the house is done, a small Happier Camper or Basecamp could become a guest room or photo studio. Check whether the code allows that; temporary occupancy ends at completion."
+ ]
+}
