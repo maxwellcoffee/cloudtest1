@@ -1,0 +1,305 @@
+<title>Build-Years Trailer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fondamento&family=Inknut+Antiqua:wght@600&family=Inter+Tight:wght@400;600;700&display=swap">
+<style>/* Layout: one reading column (~68ch) with full-bleed image bands; renders sit in coral changsal-lattice frames.
+   Palette and type follow the brief: blush, peach, coral, black on white; a calligraphic display face,
+   a heavy serif for figures, a clean grotesque for reading. */
+:root {
+  --paper: #ffffff;
+  --wash: #fbf2ef;
+  --blush: #f2d1d1;
+  --peach: #fec6b4;
+  --coral: #d9483b;
+  --ink: #161312;
+  --muted: #6c605d;
+  --line: #ead9d4;
+  --bar: #d9483b;
+  --display: "Fondamento", "Iowan Old Style", Georgia, serif;
+  --figure: "Inknut Antiqua", Georgia, "Times New Roman", serif;
+  --body: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121010; --wash: #1c1615; --blush: #3a2727; --peach: #4a3129; --coral: #f06a5c;
+    --ink: #f5ece9; --muted: #b9aaa6; --line: #3a2d2b; --bar: #e8594b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121010; --wash: #1c1615; --blush: #3a2727; --peach: #4a3129; --coral: #f06a5c;
+  --ink: #f5ece9; --muted: #b9aaa6; --line: #3a2d2b; --bar: #e8594b; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+.wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.col { max-width: 72ch; margin: 0 auto; }
+.wide { max-width: 1180px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); letter-spacing: 0.01em; }
+h2 { font-size: clamp(1.9rem, 4.2vw, 2.7rem); }
+h3 { font-size: 1.45rem; }
+p { margin: 0; }
+a { color: var(--coral); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+.eyebrow { font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.lede { font-size: 1.18rem; color: var(--ink); }
+.muted { color: var(--muted); }
+.small { font-size: 0.88rem; }
+section { padding-block: 56px; }
+.stack { display: flex; flex-direction: column; gap: 18px; }
+.stack-lg { display: flex; flex-direction: column; gap: 32px; }
+
+/* the coral lattice (changsal) frame */
+.lattice { padding: 20px; outline: 2px solid var(--coral); outline-offset: -2px; background:
+  repeating-linear-gradient(0deg, var(--coral) 0 2px, transparent 2px 9px),
+  repeating-linear-gradient(90deg, var(--coral) 0 2px, transparent 2px 9px); }
+.lattice > figure, .lattice > button { background: var(--paper); padding: 3px; }
+.lattice > img, .lattice > button > img { display: block; width: 100%; height: auto; }
+.wave { height: 14px; color: var(--coral); display: block; margin: 0 auto; width: 120px; }
+
+/* hero */
+.hero { padding-block: 28px 8px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 36px; align-items: center; }
+.hero-text { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+
+/* section nav */
+.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.toc ul { list-style: none; margin: 0 auto; padding: 10px 0; display: flex; gap: 6px 18px; flex-wrap: wrap; max-width: 1180px; }
+@media (max-width: 700px) { .toc ul { flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; scrollbar-width: none; } }
+section, article { scroll-margin-top: 56px; }
+.toc a { color: var(--ink); text-decoration: none; font-size: 0.86rem; letter-spacing: 0.04em; }
+.toc a:hover { color: var(--coral); }
+
+/* image galleries */
+.zoom { all: unset; cursor: zoom-in; display: block; }
+.zoom:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+.shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.shots figure { margin: 0; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.shots img { width: 100%; height: auto; display: block; }
+.shots .span2 { grid-column: 1 / -1; }
+figcaption { font-size: 0.84rem; color: var(--muted); }
+@media (max-width: 640px) { .shots { grid-template-columns: 1fr; } }
+
+/* scheme blocks */
+.scheme { border-top: 1px solid var(--line); padding-block: 48px; display: flex; flex-direction: column; gap: 24px; }
+.scheme-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 20px; align-items: baseline; }
+.scheme-letter { font-family: var(--figure); font-size: 3.4rem; line-height: 1; color: var(--coral); grid-row: span 2; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px 28px; }
+.facts > div { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.facts h4 { margin: 0; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.facts ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; }
+.plan-row { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 760px) { .plan-row { grid-template-columns: 1fr; } }
+.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; }
+.legend li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; align-items: start; }
+.legend .n { width: 24px; height: 24px; border-radius: 50%; color: #fff; font-size: 0.75rem; font-weight: 700; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.pill { display: inline-block; padding: 3px 10px; border-radius: 99px; background: var(--blush); color: var(--ink); font-size: 0.8rem; font-weight: 600; }
+
+/* callouts and tables */
+.note { background: var(--wash); padding: 22px 24px; display: flex; flex-direction: column; gap: 12px; border-left: 3px solid var(--coral); }
+.note ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 6px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.figure { font-family: var(--figure); font-size: 1.05rem; }
+
+/* the bathing round */
+.round { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; counter-reset: step; }
+.round li { background: var(--wash); padding: 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.round li::before { counter-increment: step; content: counter(step); font-family: var(--figure); color: var(--coral); font-size: 1.6rem; line-height: 1; }
+.round .t { font-family: var(--display); font-size: 1.3rem; }
+@media (max-width: 860px) { .round { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .round { grid-template-columns: 1fr; } }
+
+/* next actions */
+.actions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.actions li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; }
+.actions input { margin-top: 5px; accent-color: var(--coral); width: 16px; height: 16px; }
+.ctx { font-size: 0.75rem; letter-spacing: 0.08em; color: var(--coral); font-weight: 700; margin-right: 6px; }
+
+/* lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 20; background: rgba(10, 8, 8, 0.92); display: grid; place-items: center;
+  padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lightbox img { max-width: 100%; max-height: 88vh; width: auto; height: auto; }
+.lightbox p { color: #f5ece9; font-size: 0.9rem; margin-top: 10px; text-align: center; }
+.lightbox button { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); background: none; border: 1px solid #f5ece9; color: #f5ece9; padding: 6px 12px; cursor: pointer; font: inherit; }
+.sources { font-size: 0.82rem; color: var(--muted); overflow-wrap: anywhere; }
+.sources ol { padding-left: 1.3em; display: flex; flex-direction: column; gap: 4px; margin: 0; }
+footer { padding-block: 40px; border-top: 1px solid var(--line); }
+@media (prefers-reduced-motion: no-preference) { .zoom img { transition: filter 0.2s; } .zoom:hover img { filter: brightness(1.04); } }
+
+.tiers .scheme-letter { font-size: 2.6rem; }
+.money { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.money div { background: var(--wash); padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.money b { font-family: var(--figure); font-weight: 600; font-size: 1.15rem; }
+.money span { font-size: 0.8rem; color: var(--muted); }
+.bars { display: flex; flex-direction: column; gap: 14px; }
+.bar-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px; align-items: center; }
+.bar-track { position: relative; height: 22px; }
+.bar { height: 22px; background: var(--bar); border-radius: 0 4px 4px 0; }
+.bar-val { position: absolute; top: 0; height: 22px; display: flex; align-items: center; padding-left: 8px; font-size: 0.85rem; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); }
+.bar-axis { border-left: 1px solid var(--line); }
+.tip { position: fixed; z-index: 15; background: var(--ink); color: var(--paper); font-size: 0.8rem; padding: 6px 9px; pointer-events: none; max-width: 260px; }
+@media (max-width: 520px) { .bar-row { grid-template-columns: 1fr; gap: 4px; } }
+</style>
+
+<header class="wrap hero">
+  <div class="wide hero-grid">
+    <div class="hero-text">
+      <p class="eyebrow">Yucca Valley lot &middot; living on the land while you build &middot; October 2026</p>
+      <h1>The Build-Years Trailer</h1>
+      <p class="lede">Where to get the trailer you'll live in while the house goes up, what the setup could look like
+      on the lot, and what it costs used and new.</p>
+      <p class="muted">Every image is a Blender render of the real lot model, with the house framing going up behind
+      the trailer. Prices are October 2026 listings or labeled estimates.</p>
+    </div>
+    <div class="lattice"><button class="zoom" type="button" data-full="img/RC_dusk.jpg" data-cap="The premium setup at dusk: Airstream under a black steel ramada">
+      <img src="img/RC_dusk.jpg" alt="The premium setup at dusk: Airstream under a black steel ramada" width="1600" height="900"></button></div>
+  </div>
+</header><nav class="toc wrap" aria-label="Sections"><ul><li><a href="#rule">The rule</a></li><li><a href="#pod">The $20k pod</a></li><li><a href="#looks">Three setups</a></li><li><a href="#which">Which trailer</a></li><li><a href="#where">Where to buy</a></li><li><a href="#how">How to buy</a></li><li><a href="#budget">Budgets</a></li><li><a href="#desert">Desert living</a></li><li><a href="#next">Next actions</a></li></ul></nav>
+<section class="wrap" id="rule"><div class="col stack">
+  <p class="eyebrow">The rule that decides everything</p>
+  <h2>You can live on the land, in a registered trailer, once the house permit is issued</h2>
+  <p>San Bernardino County's Temporary Structure Permit lets the person building a house live on the same lot in "a
+  recreational vehicle or travel trailer" while they build.</p>
+  <div class="note"><ul>
+    <li><b>Order:</b> the house building permit is issued first, then this permit, then the trailer moves in. Putting it on the lot earlier can bring penalty fees and enforcement.</li>
+    <li><b>Term:</b> 12 months, renewed 12 months at a time, never more than 5 years from the first issue. It lapses if no inspection is called within 180 days.</li>
+    <li><b>You submit:</b> a plot plan, the trailer's current California DMV registration, and a sewage pumping contract if the trailer is self-contained. The final inspection covers the power, gas, sewer and water hookups.</li>
+    <li><b>Fees (from July 1, 2026):</b> $301 to apply and $257 for each renewal; the schedule also lists $261 for a temporary RV site (ask whether both apply). A temporary power pole is $156. Each permit adds a $57 intake fee. Fees rise slightly on July 1, 2027 ($310, $264, $268, $160 and $58).</li>
+    <li><b>If the lot is inside the Town of Yucca Valley</b>, the Town's code applies instead: a "self-contained recreational vehicle", 1 year plus 1-year extensions, 4 years at most, and it ends when the house is done. (Read from a third-party copy of the Town code; confirm with Town planning.)</li>
+  </ul></div>
+  <p>So buy something the DMV registers: a travel trailer or a fifth wheel. State law counts a park model as an RV,
+  but the County hasn't said it qualifies for this permit, so get that in writing before buying one. You can buy before the permit, but plan to keep the trailer at a storage lot or the
+  dealer until the house permit is issued.</p>
+</div></section>
+<section class="wrap" id="pod" style="background:var(--wash)"><div class="col stack">
+  <p class="eyebrow">Your question</p>
+  <h2>Can a small prebuilt pod count as storage?</h2>
+  <p><b>Yes, if it is truly storage, and with the same rules as any shed.</b> In the unincorporated County a storage
+  building needs no building permit only if it is 120 sq ft or less, one story, under 14 ft tall, has no utilities,
+  and sits inside the setbacks. Anything bigger needs an accessory-structure permit. Shipping containers and metal
+  storage units are allowed in Rural Living if painted to blend in and placed behind the main building; their permit
+  is $156 for one to three units, plus $195 plan review and a $57 intake fee.</p>
+  <ul>
+    <li><b>Before the house exists</b>, any accessory structure needs a Temporary Use Permit (County code 84.01.020(b)). Inside the Town of Yucca Valley, a storage building before the house is allowed only with a bond to remove it if the house isn't finished within 2 years.</li>
+    <li><b>Storage means storage.</b> A pod with wiring needs an electrical permit, and one with a bed, insulation and air conditioning is a dwelling to an inspector, whatever it is called. Only the permitted trailer may be slept in; one complaint can bring an order to vacate. An imported capsule without a HUD, HCD or RVIA label can never become a legal bedroom or guest unit later.</li>
+    <li><b>Real cost.</b> Capsules listed around $19,000-24,000 come to about $25,000-37,000 after import duty, and roughly $35,000-65,000 once freight, crane, foundation and hookups are added (estimates from the land research; no specific pod was priced here).</li>
+  </ul>
+  <div class="note"><p><b>Better use of the $20,000:</b> it buys a decent used trailer, the one interim home the County
+  allows, and a 10 x 12 ft shed covers storage for a few thousand dollars more. If you love a particular pod, buy one
+  with an HCD factory-built insignia or an RVIA park-model seal so it could become a legal guest unit later, get that
+  in writing from the seller, and confirm with County Building and Safety before you buy.</p></div>
+</div></section>
+<section class="wrap" id="looks"><div class="wide stack-lg">
+  <div class="col stack"><p class="eyebrow">What it could look like</p><h2>Three setups on the lot</h2>
+  <p>All three use the same spot: a level gravel pad south-east of the house site, the trailer's long side
+  east-west with the narrow back end into the west wind, and the door, deck and shade on the south. The house
+  framing is going up about 90 ft to the north-west.</p></div>
+  <figure class="span2"><button class="zoom" type="button" data-full="img/RL_lineup.jpg" data-cap="Four kinds of trailer at the same scale: fiberglass double-hull (24 ft), aluminum Airstream (26 ft), new four-season (30 ft), older used (28 ft)"><img src="img/RL_lineup.jpg" alt="Four kinds of trailer at the same scale: fiberglass double-hull (24 ft), aluminum Airstream (26 ft), new four-season (30 ft), older used (28 ft)" loading="lazy" width="2400" height="820"></button><figcaption>Four kinds of trailer at the same scale: fiberglass double-hull (24 ft), aluminum Airstream (26 ft), new four-season (30 ft), older used (28 ft)</figcaption></figure>
+  
+<article class="scheme tiers" id="tier-a">
+  <div class="scheme-head"><span class="scheme-letter" aria-hidden="true">A</span><h3>Lean, used</h3><p class="small muted">A 2017-2019 travel trailer, about 28 ft, bought used for about $12,000-28,000 (a four-season Northwood is the best find; a Jayco or Grand Design Imagine is more common).</p></div>
+  <div class="shots"><figure class="span2"><button class="zoom" type="button" data-full="img/RA_hero.jpg" data-cap="Tier A: Lean, used"><img src="img/RA_hero.jpg" alt="Tier A: Lean, used" loading="lazy" width="1600" height="900"></button><figcaption>Tier A: Lean, used</figcaption></figure></div>
+  <div class="plan-row"><div class="lattice"><figure class=""><button class="zoom" type="button" data-full="img/RA_plan.jpg" data-cap="Plan, roofs lifted off, north up"><img src="img/RA_plan.jpg" alt="Plan, roofs lifted off, north up" loading="lazy" width="2000" height="1300"></button><figcaption>Plan, roofs lifted off, north up</figcaption></figure></div><div class="stack"><p class="eyebrow">Plan key</p><p class="small muted">Marker colors: grey for the trailer and its shelter, blue for water, power, propane and internet, green for outdoor living, coral for storage.</p></div></div>
+  <div class="facts"><div><h4>What's on the pad</h4><ul><li>Shade sail on posts over the west and door side</li><li>Vinyl skirting and frame tie-downs</li><li>Freestanding 8 x 8 ft deck and steps</li><li>1,550-gal water tank and 12 V pump</li><li>Inverter generator plus a few solar panels and a battery</li><li>Starlink, propane cylinders, a pump-out contract</li><li>10 x 12 ft storage shed (no permit needed if it has no power)</li></ul></div><div><h4>Money (estimates)</h4><div class="money"><div><span>Up front, all in</span><b>$23k-58k</b></div><div><span>Monthly, with pump-out</span><b>$1,150</b></div><div><span>Resale after 2 years</span><b>$10k-24k</b></div><div><span>Net cost after 1 / 2 / 3 years</span><b>$31k / $47k / $62k</b></div></div></div></div>
+</article>
+<article class="scheme tiers" id="tier-b">
+  <div class="scheme-head"><span class="scheme-letter" aria-hidden="true">B</span><h3>Balanced, new four-season</h3><p class="small muted">A new or nearly new 30-ft four-season travel trailer, budgeted at $35,000-65,000. A new Grand Design Imagine 2600RB lists at $57,259-60,916 before dealer discounts.</p></div>
+  <div class="shots"><figure class="span2"><button class="zoom" type="button" data-full="img/RB_hero.jpg" data-cap="Tier B: Balanced, new four-season"><img src="img/RB_hero.jpg" alt="Tier B: Balanced, new four-season" loading="lazy" width="1600" height="900"></button><figcaption>Tier B: Balanced, new four-season</figcaption></figure><figure class="span2"><button class="zoom" type="button" data-full="img/RB_bird.jpg" data-cap="From above: the trailer, shed and solar, with the house framing behind"><img src="img/RB_bird.jpg" alt="From above: the trailer, shed and solar, with the house framing behind" loading="lazy" width="1600" height="900"></button><figcaption>From above: the trailer, shed and solar, with the house framing behind</figcaption></figure></div>
+  <div class="plan-row"><div class="lattice"><figure class=""><button class="zoom" type="button" data-full="img/RB_plan.jpg" data-cap="Plan, roofs lifted off, north up"><img src="img/RB_plan.jpg" alt="Plan, roofs lifted off, north up" loading="lazy" width="2000" height="1300"></button><figcaption>Plan, roofs lifted off, north up</figcaption></figure></div><div class="stack"><p class="eyebrow">Plan key</p><p class="small muted">Marker colors: grey for the trailer and its shelter, blue for water, power, propane and internet, green for outdoor living, coral for storage.</p></div></div>
+  <div class="facts"><div><h4>What's on the pad</h4><ul><li>24 x 41 ft steel RV cover with 14-ft legs (needs a permit)</li><li>Skirting, tie-downs, a second A/C</li><li>Freestanding 8 x 12 ft deck with coral lattice privacy panels</li><li>6 kW ground solar and a 10 kWh battery that can later serve the house</li><li>1,550-gal water tank, 250-gal propane tank</li><li>Temporary power pole with a 50 A RV outlet, Starlink</li><li>Storage shed</li></ul></div><div><h4>Money (estimates)</h4><div class="money"><div><span>Up front, all in</span><b>$69k-130k</b></div><div><span>Monthly, with pump-out</span><b>$1,085</b></div><div><span>Resale after 2 years</span><b>$25k-45k</b></div><div><span>Net cost after 1 / 2 / 3 years</span><b>$46k / $63k / $79k</b></div></div></div></div>
+</article>
+<article class="scheme tiers" id="tier-c">
+  <div class="scheme-head"><span class="scheme-letter" aria-hidden="true">C</span><h3>Premium, Airstream</h3><p class="small muted">An Airstream Flying Cloud about 26 ft (2027 models from $115,900 list; leftover 2026 units are being discounted), or an Oliver Legacy Elite II fiberglass trailer from $85,000.</p></div>
+  <div class="shots"><figure class="span2"><button class="zoom" type="button" data-full="img/RC_hero.jpg" data-cap="Tier C: Premium, Airstream"><img src="img/RC_hero.jpg" alt="Tier C: Premium, Airstream" loading="lazy" width="1600" height="900"></button><figcaption>Tier C: Premium, Airstream</figcaption></figure><figure class="span2"><button class="zoom" type="button" data-full="img/RC_hero.jpg" data-cap="Afternoon under the ramada"><img src="img/RC_hero.jpg" alt="Afternoon under the ramada" loading="lazy" width="1600" height="900"></button><figcaption>Afternoon under the ramada</figcaption></figure></div>
+  <div class="plan-row"><div class="lattice"><figure class=""><button class="zoom" type="button" data-full="img/RC_plan.jpg" data-cap="Plan, roofs lifted off, north up"><img src="img/RC_plan.jpg" alt="Plan, roofs lifted off, north up" loading="lazy" width="2000" height="1300"></button><figcaption>Plan, roofs lifted off, north up</figcaption></figure></div><div class="stack"><p class="eyebrow">Plan key</p><p class="small muted">Marker colors: grey for the trailer and its shelter, blue for water, power, propane and internet, green for outdoor living, coral for storage.</p></div></div>
+  <div class="facts"><div><h4>What's on the pad</h4><ul><li>Black steel ramada, 39 x 23 ft, with a cedar-slat west end</li><li>12 x 12 ft cedar deck, coral lattice screens, blush loungers, olive trees in pots, string lights</li><li>Outdoor shower</li><li>12 kW solar and a 20 kWh battery that moves to the house</li><li>Water and propane tanks, Starlink</li><li>Storage shed</li></ul></div><div><h4>Money (estimates)</h4><div class="money"><div><span>Up front, all in</span><b>$140k-263k</b></div><div><span>Monthly, with pump-out</span><b>$1,180</b></div><div><span>Resale after 2 years</span><b>$66k-117k</b></div><div><span>Net cost after 1 / 2 / 3 years</span><b>$70k / $92k / $113k</b></div></div></div></div>
+</article>
+</div></section>
+<section class="wrap" id="which"><div class="wide stack">
+  <p class="eyebrow">Which trailer</p><h2>What to buy for 1-3 years in the high desert</h2>
+  <p class="col">For two adults through 100F+ summers and freezing nights, aim for a 24-32 ft four-season travel
+  trailer. Rooftop A/C only cools the air about 18-25F below outside, so shade matters more than the trailer.</p>
+  <div class="scroll"><table><thead><tr><th>Type</th><th>Verdict</th><th>Why</th></tr></thead><tbody><tr><td>Travel trailer, four-season, 24-32 ft</td><td><span class="pill">Best fit</span></td><td>DMV-registered; a dealer delivers it, so you don't need a truck. Look for dual-pane windows, heated and enclosed tanks, 50 A service and room for a second A/C.</td></tr><tr><td>Airstream or molded fiberglass</td><td><span class="pill">Good, costs more</span></td><td>Aluminum or fiberglass shell with no rubber roof to fail in the sun, and the best resale value.</td></tr><tr><td>Fifth wheel</td><td><span class="pill">Works if delivered</span></td><td>More room and height, but you need a pickup to move it. Over 40 ft or 102 in wide cannot be registered in California.</td></tr><tr><td>Destination trailer, about 40 ft</td><td><span class="pill">Roomy, rarely four-season</span></td><td>Three slides and 13.5 ft tall; needs a long pad and a tall shade cover.</td></tr><tr><td>RVIA tiny house on wheels</td><td><span class="pill">Ask the County first</span></td><td>Closest to a modern house look (for example the Escape Vista Boho XL, from $62,710). Registered as a travel trailer, but confirm it counts.</td></tr><tr><td>Park model</td><td><span class="pill">Avoid unless approved</span></td><td>Up to 400 sq ft and 14 ft wide, moved only with a highway permit. State law calls it an RV, but get the County's answer in writing before buying.</td></tr></tbody></table></div>
+  <h3>Models worth seeing</h3>
+  <div class="scroll"><table><thead><tr><th>Model</th><th class="num">Length</th><th class="num">Max weight: tow on a car license?</th><th>Built for the weather</th><th>New</th><th>Used</th><th>Pick it for</th></tr></thead><tbody><tr><td>Grand Design Imagine 2600RB</td><td class="num">29 ft 8 in</td><td class="num">7,850 lb: yes</td><td>R-40 roof, R-30 floor, four-season package, 50 A, ready for a 2nd A/C</td><td>$57,259-60,916 list</td><td>2019 Imagines: about $16k-29k asking</td><td>Best value new</td></tr><tr><td>Northwood Arctic Fox NXT 22GT</td><td class="num">23 ft 10 in</td><td class="num">10,400 lb: no</td><td>Built in Oregon for four seasons: heated tanks, thermal-pane windows</td><td>no list price; dealer listings about $47k-74k (unverified)</td><td>2018 25Y: about $29k-35k asking</td><td>Compact four-season</td></tr><tr><td>Northwood Arctic Fox NXT 27RK</td><td class="num">32 ft 3 in</td><td class="num">12,800 lb: no</td><td>Two slides, rear kitchen, 100-gal fresh tank, sleeps 2</td><td>dealer listings about $74k-75k (unverified)</td><td>n/a</td><td>Roomiest four-season for two</td></tr><tr><td>Grand Design Reflection 317RSTS</td><td class="num">35 ft 5 in</td><td class="num">10,995 lb: no</td><td>R-40 roof, R-30 floor, rear living room, 2 slides</td><td>$80,204-90,227 list</td><td>297RSTS 2019-2024: about $28k-50k asking</td><td>Most living space</td></tr><tr><td>Lance 2465</td><td class="num">29 ft 10 in</td><td class="num">8,900 lb: yes</td><td>King bed, thermopane windows, four-season package; built in Lancaster</td><td>no list price; listings about $64k-87k (unverified)</td><td>n/a</td><td>High-desert-built</td></tr><tr><td>Oliver Legacy Elite II</td><td class="num">24 ft</td><td class="num">7,000 lb: yes</td><td>Double-hull fiberglass, heated tanks between the shells</td><td>from $85,000, sold direct</td><td>rare</td><td>Lasts, resells well</td></tr><tr><td>Airstream Flying Cloud 25FB</td><td class="num">26 ft 2 in</td><td class="num">7,300 lb: yes</td><td>Aluminum shell, 15k BTU heat-pump A/C, heated underbelly</td><td>2027 from $115,900 list</td><td>2016-2019: about $49k-59k</td><td>The look; best resale</td></tr></tbody></table></div>
+  <p class="small muted">List prices are from the makers' sites in October 2026; dealer listings are snapshots that couldn't all be re-checked; used prices are asking prices. A regular California license tows a trailer under 10,000 lb loaded weight (GVWR) behind a vehicle of at least 4,000 lb; heavier ones need a noncommercial Class A license or dealer delivery. In one 2026 sample of 74 five-year-old trailers (RVBlogger), Airstreams averaged 76.6% of their original price, the best of any brand.</p>
+</div></section>
+<section class="wrap" id="where" style="background:var(--wash)"><div class="wide stack">
+  <p class="eyebrow">Where to get it</p><h2>Dealers, private sales and shows</h2>
+  <div class="scroll"><table><thead><tr><th>Dealer</th><th>Where</th><th>Notes</th></tr></thead><tbody><tr><td>Blue Compass RV Palm Desert</td><td>Varner Rd, Palm Desert (confirm the address)</td><td>Closest full dealer, about 45 mi. Jayco, Forest River, Keystone, Grand Design; new and used.</td></tr><tr><td>Mike Thompson's RV</td><td>68318 E Palm Canyon Dr, Cathedral City; 902 RV Center Dr, Colton</td><td>New and used mainstream brands.</td></tr><tr><td>Giant RV</td><td>1300 E Santo Antonio Dr, Colton (also Montclair, Murrieta)</td><td>New and used; takes consignments of 2015-or-newer trailers.</td></tr><tr><td>Camping World</td><td>10717 Indiana Ave, Riverside</td><td>Large lot of new and used trailers.</td></tr><tr><td>High Desert lots (I-15 RV and others)</td><td>Hesperia and Victorville</td><td>Mostly used; closest to the lot from the north.</td></tr><tr><td>Airstream Inland Empire</td><td>27969 Jefferson Ave, Temecula</td><td>Airstream dealer, about 95 mi. Ask for leftover 2026 units.</td></tr><tr><td>Airstream Los Angeles</td><td>1212 E Las Tunas Dr, San Gabriel</td><td>Airstream dealer with a large service department, about 125 mi.</td></tr><tr><td>Cruise America sales center</td><td>Carson (Los Angeles)</td><td>Sells ex-rental units, mostly motorhomes.</td></tr></tbody></table></div>
+  <div class="col stack">
+    <p><b>Private sales:</b> RV Trader, RVT.com, RVUSA, RV Universe, Airstream Classifieds and Airforums, Facebook
+    Marketplace, and the Inland Empire, Palm Springs and Los Angeles Craigslist sites. Never pay through an
+    "escrow" or shipping service the seller picks, and only buy when the title is in the seller's name.</p>
+    <p><b>Avoid</b> auctions and bank repossessions for a trailer you must live in: sold as-is, often with salvage titles.</p>
+    <p><b>When:</b> now through winter. With 2027 prices out, dealers are discounting leftover 2026 trailers, some by
+    $12,000-20,000 on Airstreams. The California RV Supershow in Pomona, March 19-21, 2027, is the other good time
+    to compare floor plans in one place.</p>
+  </div>
+</div></section>
+<section class="wrap" id="how"><div class="wide stack-lg">
+  <div class="col stack"><p class="eyebrow">How to buy</p><h2>From shortlist to delivery</h2>
+  <p>Paying cash or a short loan keeps you from owing more than the trailer is worth when you sell it. If you finance,
+  RV lenders want 10-20% down; $50,000 over 15 years at 8.5% is about $492 a month and $38,600 in interest.</p></div>
+  <ol class="round" style="grid-template-columns:repeat(3,minmax(0,1fr))"><li><span class="t">Shortlist</span><span>Agree on length, bed, budget cap and must-haves (dual-pane windows, heated tanks, 50 A, two A/Cs). Walk three or four floor plans at the Palm Desert dealer on a weekday.</span></li><li><span class="t">Inspect</span><span>Do your own walk-through for water damage first: press the floor at the door, bath and sink; sight down the walls for bubbles; check ceiling corners and roof seals. Then hire an NRVIA-certified inspector (find one on rvhelp.com; about $400-1,200 with travel).</span></li><li><span class="t">Price it</span><span>Ask for an itemized out-the-door price: doc fee, prep, delivery, add-ons, tax and DMV. Sales tax is about 7.75% in unincorporated areas and 8.75% inside the Town of Yucca Valley, based on where the trailer will sit.</span></li><li><span class="t">Title and DMV</span><span>Trailers over 16 ft are trailer coaches with yearly registration. Fees include $76 registration, a license fee of 0.65% of value and a transportation fee by value; run the DMV fee calculator with the VIN for the real total. Report the transfer within 10 days; the seller files a release within 5.</span></li><li><span class="t">Insure it</span><span>A normal travel-trailer policy leaves liability to the tow vehicle, and you won't have one. Ask for a full-timer add-on (Progressive) or a stationary or full-timer trailer policy (Foremost writes these through agents; check it still does in California).</span></li><li><span class="t">Deliver it</span><span>Write dealer delivery and leveling into the deal, or book a tow-away driver (uShip averages about $3.39 a mile under 100 miles). Check that a truck and a 30-ft trailer can turn around on the lot.</span></li></ol>
+</div></section>
+<section class="wrap" id="budget"><div class="col stack">
+  <p class="eyebrow">Money</p><h2>What two years really costs</h2>
+  <p>Net cost is everything you spend (trailer, tax, setup, two years of running costs) minus what you get back:
+  the trailer's resale and the solar, tanks and shade you reuse for the house.</p>
+  <h3 style="font-size:1.1rem">Net cost after two years, pump-out scenario</h3>
+  <div class="bars" role="img" aria-label="Net cost after two years: Tier A about 47 thousand dollars, Tier B about 63 thousand, Tier C about 92 thousand"><div class="bar-row"><span>Tier A: Lean, used</span><div class="bar-track bar-axis" data-tip="Tier A: about $47k after 2 years ($31k / $47k / $62k after 1 / 2 / 3 years)"><div class="bar" style="width:47.0%"></div><span class="bar-val" style="left:47.0%">$47k</span></div></div><div class="bar-row"><span>Tier B: Balanced, new four-season</span><div class="bar-track bar-axis" data-tip="Tier B: about $63k after 2 years ($46k / $63k / $79k after 1 / 2 / 3 years)"><div class="bar" style="width:63.0%"></div><span class="bar-val" style="left:63.0%">$63k</span></div></div><div class="bar-row"><span>Tier C: Premium, Airstream</span><div class="bar-track bar-axis" data-tip="Tier C: about $92k after 2 years ($70k / $92k / $113k after 1 / 2 / 3 years)"><div class="bar" style="width:92.0%"></div><span class="bar-val" style="left:92.0%">$92k</span></div></div></div>
+  <div class="scroll"><table><thead><tr><th>Tier</th><th class="num">Up front</th><th class="num">Per month</th><th class="num">Resale, 2 yrs</th><th class="num">Net, 1 / 2 / 3 yrs</th></tr></thead><tbody><tr><td>Tier A: Lean, used</td><td class="num">$23k-58k</td><td class="num">$1,150</td><td class="num">$10k-24k</td><td class="num">$31k / $47k / $62k</td></tr><tr><td>Tier B: Balanced, new four-season</td><td class="num">$69k-130k</td><td class="num">$1,085</td><td class="num">$25k-45k</td><td class="num">$46k / $63k / $79k</td></tr><tr><td>Tier C: Premium, Airstream</td><td class="num">$140k-263k</td><td class="num">$1,180</td><td class="num">$66k-117k</td><td class="num">$70k / $92k / $113k</td></tr></tbody></table></div>
+  <ul>
+    <li><b>The biggest monthly cost is sewage pump-out</b> (trailer tanks hold only 40-80 gallons). Putting the house's septic in first and connecting the trailer to it saves about $5,400 a year, if the County allows it.</li>
+    <li><b>The biggest upfront lever is shade.</b> A cover over the trailer cuts the A/C load; each rooftop unit draws about 1,500 W.</li>
+    <li><b>Monthly running costs</b> with pump-out run about $650-1,700: pump-out $250-700, hauled water $100-300, propane $20-250, insurance $50-250, Starlink $55-130, plus renewals and repairs.</li>
+    <li>The 30% federal solar tax credit ended for systems placed in service after December 31, 2025.</li>
+  </ul>
+  <p class="small muted">Trailer prices come from listings; site work, insurance, inspection, delivery and resale values are estimates. The budgets assume the Town's 8.75% sales tax; on an unincorporated lot the tax is 7.75%, about $1,000 less per $100,000. Get quotes.</p>
+</div></section>
+<section class="wrap" id="desert" style="background:var(--wash)"><div class="col stack">
+  <p class="eyebrow">Living in it</p><h2>The desert checklist</h2>
+  <div class="scroll"><table><tbody><tr><td><b>Heat</b></td><td>Shade over the roof and the west side first. Two A/Cs on anything over 25 ft, 50 A service, a white reflective roof coating. Plan heavy cooking and laundry for the morning.</td></tr><tr><td><b>Cold</b></td><td>Skirting with a small heater behind it, heated tanks, heat tape on the water line, and a 250-gal propane tank (a furnace can burn 1-3 gallons on a cold night).</td></tr><tr><td><b>Wind</b></td><td>Back end to the west wind, frame tie-downs with 48-in earth anchors, awning rolled up on windy days. Spring gusts reach 40-50 mph.</td></tr><tr><td><b>Sun</b></td><td>UV cracks roof sealant and tires even when parked: reseal each season, cover the tires, and take the weight off them with jack stands.</td></tr><tr><td><b>Dust and rodents</b></td><td>Seal every gap under the trailer with hardware cloth before the skirting goes on; check the wiring for chewing.</td></tr><tr><td><b>Water</b></td><td>Two people use about 30-50 gallons a day, so a 1,550-gal tank lasts 30-50 days between deliveries.</td></tr><tr><td><b>Smell</b></td><td>Black tanks smell in the heat: keep them closed until two-thirds full, then dump all at once, and use enzyme treatment.</td></tr></tbody></table></div>
+</div></section>
+<section class="wrap" id="next"><div class="col stack">
+  <p class="eyebrow">Next actions</p><h2>What to do next</h2>
+  <p class="small muted">Ticks are saved in this browser only.</p>
+  <ul class="actions"><li><input type="checkbox" id="rvact0" aria-label="Done"><label for="rvact0"><span class="ctx">@together</span>Pick a tier and a trailer type; decide the budget cap and whether to finance.</label></li><li><input type="checkbox" id="rvact1" aria-label="Done"><label for="rvact1"><span class="ctx">@computer</span>Look up the lot address on the state tax-rate lookup (7.75% or 8.75%) and confirm whether it is County or Town.</label></li><li><input type="checkbox" id="rvact2" aria-label="Done"><label for="rvact2"><span class="ctx">@computer</span>Set saved searches on RV Trader, RVT.com, Airstream Classifieds and Facebook Marketplace for 24-32 ft four-season trailers.</label></li><li><input type="checkbox" id="rvact3" aria-label="Done"><label for="rvact3"><span class="ctx">@phone</span>Call Blue Compass Palm Desert and Giant RV Colton: used 24-30 ft trailers 2016 or newer with dual-pane windows; which are consignment?</label></li><li><input type="checkbox" id="rvact4" aria-label="Done"><label for="rvact4"><span class="ctx">@phone</span>Call Airstream Inland Empire: leftover 2026 Flying Cloud and Caravel, out-the-door price with delivery to Yucca Valley.</label></li><li><input type="checkbox" id="rvact5" aria-label="Done"><label for="rvact5"><span class="ctx">@phone</span>Get two insurance quotes for a stationary travel trailer used as a temporary home on your own land during construction.</label></li><li><input type="checkbox" id="rvact6" aria-label="Done"><label for="rvact6"><span class="ctx">@computer</span>Find two NRVIA inspectors on rvhelp.com and get quotes with travel to Palm Desert or Temecula.</label></li><li><input type="checkbox" id="rvact7" aria-label="Done"><label for="rvact7"><span class="ctx">@land</span>Flag a level pad spot and check that a truck and a 30-ft trailer can get in and turn around.</label></li><li><input type="checkbox" id="rvact8" aria-label="Done"><label for="rvact8"><span class="ctx">@phone</span>Ask County Land Use Services (909-387-8311) whether a park model or RVIA tiny house would count, and whether the trailer can connect to the house septic once it is in.</label></li></ul>
+</div></section>
+<section class="wrap" id="sources" style="background:var(--wash)"><div class="col stack sources"><p class="eyebrow">Sources</p><ol><li>County Temporary Structure Permit checklist (rev. 6/2025): <a href="https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf" target="_blank" rel="noopener">https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf</a></li><li>County FAQ: living on the property while building: <a href="https://lus.sbcounty.gov/faqs/while-building-a-new-home-can-i-put-a-temporary-mobile-home-on-my-property-to-live-in-while-my-house-is-under-construction" target="_blank" rel="noopener">https://lus.sbcounty.gov/faqs/while-building-a-new-home-can-i-put-a-temporary-mobile-home-on-my-property-to-live-in-while-my-house-is-under-construction</a></li><li>Yucca Valley Zoning Code chapter 9.39 (third-party copy): <a href="https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures" target="_blank" rel="noopener">https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures</a></li><li>California DMV: trailers: <a href="https://www.dmv.ca.gov/portal/vehicle-registration/trailers/" target="_blank" rel="noopener">https://www.dmv.ca.gov/portal/vehicle-registration/trailers/</a></li><li>CHP: license requirements for towing trailers: <a href="https://www.chp.ca.gov/CommercialVehicleSectionSite/Documents/IB%20California%20Driver%20License%20Requirements%20for%20Towing%20Trailers.pdf" target="_blank" rel="noopener">https://www.chp.ca.gov/CommercialVehicleSectionSite/Documents/IB%20California%20Driver%20License%20Requirements%20for%20Towing%20Trailers.pdf</a></li><li>Airstream travel trailers and prices: <a href="https://www.airstream.com/travel-trailers/" target="_blank" rel="noopener">https://www.airstream.com/travel-trailers/</a></li><li>Airstream dealer locator: <a href="https://www.airstream.com/dealers/" target="_blank" rel="noopener">https://www.airstream.com/dealers/</a></li><li>Blue Compass RV Palm Desert: <a href="https://www.bluecompassrv.com/locations/california/palm-desert/contact-us" target="_blank" rel="noopener">https://www.bluecompassrv.com/locations/california/palm-desert/contact-us</a></li><li>Grand Design Imagine: <a href="https://www.granddesignrv.com/travel-trailers/imagine" target="_blank" rel="noopener">https://www.granddesignrv.com/travel-trailers/imagine</a></li><li>Grand Design Reflection: <a href="https://www.granddesignrv.com/travel-trailers/reflection" target="_blank" rel="noopener">https://www.granddesignrv.com/travel-trailers/reflection</a></li><li>Northwood Arctic Fox NXT: <a href="https://northwoodmfg.com/arctic-fox-nxt/" target="_blank" rel="noopener">https://northwoodmfg.com/arctic-fox-nxt/</a></li><li>Oliver Legacy Elite II: <a href="https://www.olivertraveltrailers.com/legacy-elite-ii/" target="_blank" rel="noopener">https://www.olivertraveltrailers.com/legacy-elite-ii/</a></li><li>Escape tiny houses (Vista Boho XL): <a href="https://www.escapetraveler.net/vista-boho-xl" target="_blank" rel="noopener">https://www.escapetraveler.net/vista-boho-xl</a></li><li>NRVIA: find an inspector: <a href="https://nrvia.org/locate/" target="_blank" rel="noopener">https://nrvia.org/locate/</a></li><li>Giant RV: <a href="https://giantrv.com/" target="_blank" rel="noopener">https://giantrv.com/</a></li><li>Camping World Riverside: <a href="https://rv.campingworld.com/dealer/riverside-ca" target="_blank" rel="noopener">https://rv.campingworld.com/dealer/riverside-ca</a></li><li>Cruise America used RVs: <a href="https://www.cruiseamerica.com/buy-used-rvs" target="_blank" rel="noopener">https://www.cruiseamerica.com/buy-used-rvs</a></li><li>Progressive: full-time RV insurance: <a href="https://www.progressive.com/rv/rv-insurance-coverages-full-timers/" target="_blank" rel="noopener">https://www.progressive.com/rv/rv-insurance-coverages-full-timers/</a></li><li>Foremost full-timer travel trailer sheet: <a href="https://www.foremostagent.com/assets/marketing/AgentMarketingMaterials/Casualty/pdf/Full-Timer-Travel-Trailer-Selling-Sheet.pdf" target="_blank" rel="noopener">https://www.foremostagent.com/assets/marketing/AgentMarketingMaterials/Casualty/pdf/Full-Timer-Travel-Trailer-Selling-Sheet.pdf</a></li><li>CDTFA sales and use tax rates: <a href="https://www.cdtfa.ca.gov/taxes-and-fees/sales-use-tax-rates.htm" target="_blank" rel="noopener">https://www.cdtfa.ca.gov/taxes-and-fees/sales-use-tax-rates.htm</a></li><li>RV Supershows: <a href="https://www.rvsupershows.com/" target="_blank" rel="noopener">https://www.rvsupershows.com/</a></li><li>uShip travel trailer transport: <a href="https://www.uship.com/trailer-transport" target="_blank" rel="noopener">https://www.uship.com/trailer-transport</a></li><li>Carport Central RV cover prices: <a href="https://www.carportcentral.com/metal-rv-carport-prices" target="_blank" rel="noopener">https://www.carportcentral.com/metal-rv-carport-prices</a></li></ol>
+<p>Research and renders: October 2026. The 3D models, research files and build scripts live in the rv-trailer folder of the repository.</p></div></section>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Enlarged render">
+  <button type="button" id="lb-close">Close</button>
+  <div><img id="lb-img" alt=""><p id="lb-cap"></p></div>
+</div>
+<div class="tip" id="tip" hidden></div>
+<script>
+(function () {
+  var lb = document.getElementById('lightbox'), im = document.getElementById('lb-img'), cap = document.getElementById('lb-cap');
+  var last = null;
+  function open(b) { last = b; im.src = b.dataset.full; im.alt = b.dataset.cap; cap.textContent = b.dataset.cap; lb.hidden = false; document.getElementById('lb-close').focus(); }
+  function close() { lb.hidden = true; im.removeAttribute('src'); if (last) last.focus(); }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.zoom'); if (b) { open(b); return; }
+    if (!lb.hidden && (e.target === lb || e.target.id === 'lb-close')) close();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) close(); });
+  // bar tooltips
+  var tip = document.getElementById('tip');
+  document.querySelectorAll('.bar-track').forEach(function (t) {
+    t.addEventListener('mousemove', function (e) { tip.textContent = t.dataset.tip; tip.hidden = false; tip.style.left = (e.clientX + 14) + 'px'; tip.style.top = (e.clientY + 14) + 'px'; });
+    t.addEventListener('mouseleave', function () { tip.hidden = true; });
+  });
+  document.querySelectorAll('.actions input').forEach(function (cb) {
+    try { cb.checked = localStorage.getItem('rv-' + cb.id) === '1'; } catch (err) {}
+    cb.addEventListener('change', function () { try { localStorage.setItem('rv-' + cb.id, cb.checked ? '1' : '0'); } catch (err) {} });
+  });
+})();
+</script>

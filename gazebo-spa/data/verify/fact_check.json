@@ -1,0 +1,290 @@
+{
+ "project": "spa",
+ "claim_checks": [
+  {
+   "claim": "County permits page: building permits are needed for structures over 120 sq ft, patio covers (solid and lattice), enclosed patios, pools and spas, electrical work, and temporary structures such as an RV or trailer.",
+   "verdict": "confirmed",
+   "correct_statement": "The County Permits page lists 'New Buildings and Structures greater than 120 square feet', 'Patio Covers (Solid and Lattice)', 'Pools and Spas', 'Electrical, Plumbing, Mechanical...' and 'Temporary structures such as a modular unit, recreational vehicle/trailer'. It also says setbacks apply whether or not a permit is needed.",
+   "sources": [
+    "https://lus.sbcounty.gov/building-safety-home/permits/"
+   ]
+  },
+  {
+   "claim": "Dev. Code 84.01.020(b): an accessory structure must go with a legally established primary structure or use; if none exists yet, it needs a Temporary Use Permit under Chapter 84.25.",
+   "verdict": "confirmed",
+   "correct_statement": "84.01.020(b) says an accessory structure or use must always exist with a legally established primary structure or use that has the same owner. Where the primary use is not yet established, an accessory structure 'may only be built subject to the issuance of a Temporary Use Permit in compliance with Chapter 84.25'. No source says whether an RV temporary-occupancy permit counts as the primary use, so that remains a question for the County.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/DCWebsite.pdf",
+    "https://lus.sbcounty.gov/building-safety-home/permits/"
+   ]
+  },
+  {
+   "claim": "Rural Living (desert region, Table 82-9C): front 25 ft, street side 25 ft, interior sides 15 ft, rear 15 ft, maximum lot coverage 20%, height 35 ft.",
+   "verdict": "confirmed",
+   "correct_statement": "Table 82-9C (RL, desert) gives front 25 ft, street side 25 ft, rear 15 ft and height 35 ft. Interior sides are 15 ft only on lots wider than 75 ft (5 ft and 10 ft on narrower lots). The 20% maximum covers 'structures and impervious surfaces', so slabs, pavers and paved drives count too.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/DCWebsite.pdf"
+   ]
+  },
+  {
+   "claim": "Dev. Code 82.02 exempts portable spas and hot tubs from planning (land-use) permits if they are 120 sq ft or less including equipment, 2,000 gal or less, and 3 ft deep or less.",
+   "verdict": "confirmed",
+   "correct_statement": "82.02.040(7) exempts portable spas, hot tubs and similar equipment from planning permits if they do not exceed 120 sq ft including related equipment, 2,000 gallons, or 3 ft depth. This exempts only the planning permit. The Permits page still requires building permits for pools and spas, and electrical work needs its own permit.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/DCWebsite.pdf",
+    "https://lus.sbcounty.gov/building-safety-home/permits/"
+   ]
+  },
+  {
+   "claim": "HSC 115925 exempts 'Hot tubs or spas with locking safety covers that comply with the ASTM International F1346 standard' from the Swimming Pool Safety Act.",
+   "verdict": "confirmed",
+   "correct_statement": "HSC 115925(b) says the article does not apply to hot tubs or spas with locking safety covers that comply with ASTM F1346. No edition year is given. Checked on the public.law mirror; leginfo returned 403.",
+   "sources": [
+    "https://california.public.law/codes/ca_health_and_safety_code_section_115925"
+   ]
+  },
+  {
+   "claim": "HSC 115922: a new or remodeled pool or spa at a single-family home with a building permit needs 2 of 7 drowning-prevention features (cover to ASTM F1346-23), and a safety cover paired with a pool alarm does not satisfy the rule.",
+   "verdict": "confirmed",
+   "correct_statement": "115922(a) requires at least two of seven features, one of which is a safety pool cover labeled to ASTM F1346-23. 115922(b) says a safety pool cover combined with an ASTM F2208 pool alarm does not satisfy the requirement.",
+   "sources": [
+    "https://california.public.law/codes/ca_health_and_safety_code_section_115922"
+   ]
+  },
+  {
+   "claim": "korean_program / spa_precedent: for this hot tub, HSC 115922 requires 2 of 7 features and an F1346 cover counts as one, so plan a cover plus a second feature.",
+   "verdict": "corrected",
+   "correct_statement": "Under state law, a spa with a locking ASTM F1346 cover is outside the article entirely (115925(b)), so the two-feature rule does not apply to it. However, County IB-0007 (updated Jan 1, 2026) still says an approved safety cover may substitute for the enclosure 'and one additional item'. Plan for the inspector possibly asking for a second feature, and do not use a pool alarm as that second feature.",
+   "sources": [
+    "https://california.public.law/codes/ca_health_and_safety_code_section_115925",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf"
+   ]
+  },
+  {
+   "claim": "County IB-0007 requirements: safety cover may replace the enclosure plus one more feature; enclosure at least 60 in, 2 in max gap at grade, no 4 in sphere openings, horizontal members on the pool side if less than 45 in apart, 1.5 in chain-link mesh; gates open outward and are self-closing and self-latching; double gates and gates over 4 ft prohibited; exit alarms UL 2017, 85 dBA, sound within 7 s for 30 s.",
+   "verdict": "confirmed",
+   "correct_statement": "IB-0007 (updated Jan 1, 2026) states all of these. It defines the approved cover per ASTM F1346-91. Its list of acceptable second features includes an F2208 pool alarm, which conflicts with HSC 115922(b).",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf"
+   ]
+  },
+  {
+   "claim": "NEC 680.13: a hardwired spa's disconnect must be readily accessible, within sight, and at least 5 ft from the tub's inside walls.",
+   "verdict": "confirmed",
+   "correct_statement": "A 2023 NEC permit handout states this for 680.13. It comes from Broomfield, CO; that the 2025 CEC adopted by the County (IB-0012) is NEC-2023 based is background knowledge, not checked against the CEC text. Hot Spring's manual adds that the GFCI subpanel must be within sight, at least 5 ft away and no more than 50 ft away.",
+   "sources": [
+    "https://broomfield.org/DocumentCenter/View/2525/Swimming-Pools-Hot-tubs-or-Spas",
+    "https://d1oxc6ayqrhsgs.cloudfront.net/hot-spring/hot-spring-hot-spot-collection-owners-manuals-2026.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0012-2025-Code-Adoption.pdf"
+   ]
+  },
+  {
+   "claim": "NEC: no new light fixture or fan within 5 ft horizontally of the tub unless it is 12 ft or more above the water.",
+   "verdict": "confirmed",
+   "correct_statement": "For outdoor spas, new luminaires or ceiling fans over or within 5 ft horizontally must be at least 12 ft above maximum water level (680.22(B)(1)). If the inspector treats the enclosure as indoor (680.43), fixtures may be 7.5 ft up with GFCI, or lower if recessed or enclosed, damp-listed and GFCI-protected.",
+   "sources": [
+    "https://broomfield.org/DocumentCenter/View/2525/Swimming-Pools-Hot-tubs-or-Spas"
+   ]
+  },
+  {
+   "claim": "NEC receptacles: all receptacles within 20 ft are GFCI; one general receptacle 6-20 ft from the tub, no higher than 6.5 ft; no other receptacle closer than 6 ft.",
+   "verdict": "confirmed",
+   "correct_statement": "This is correct for outdoor spas (680.22(A)). Indoor spas (680.43(A)) differ: at least one receptacle 6-10 ft away, none closer than 6 ft, and GFCI on receptacles within 10 ft.",
+   "sources": [
+    "https://broomfield.org/DocumentCenter/View/2525/Swimming-Pools-Hot-tubs-or-Spas"
+   ]
+  },
+  {
+   "claim": "Hot Spring manual: subpanel needs 50 A, single-phase, 230 V, four-wire service; #8 AWG L1/L2/neutral and #10 ground for runs under 100 ft; 115 V heat about 1,000 W vs about 4,000 W at 230 V.",
+   "verdict": "confirmed",
+   "correct_statement": "The 2026 Hot Spot owner's manual says '50 amp, single phase, 230 volt, four wire service', with a ground of at least #10 AWG. Its diagram shows #8 L1/L2/N and #10 ground 'LESS THAN 100 FT', and it gives about 1,000 W of heat at 115 V vs about 4,000 W at 230 V. The cover is labeled ASTM F1346-91.",
+   "sources": [
+    "https://d1oxc6ayqrhsgs.cloudfront.net/hot-spring/hot-spring-hot-spot-collection-owners-manuals-2026.pdf"
+   ]
+  },
+  {
+   "claim": "CPSC: hot tub water should never exceed 104F.",
+   "verdict": "confirmed",
+   "correct_statement": "A CPSC release dated Dec 31, 1979 says temperatures 'should never exceed 104 degrees Fahrenheit'. It calls 100F safe for healthy adults and says pregnant women should keep to 100F, because water above 102F can cause fetal damage in the first trimester.",
+   "sources": [
+    "https://www.cpsc.gov/Newsroom/News-Releases/1980/CPSC-Warns-Of-Hot-Tub-Temperatures"
+   ]
+  },
+  {
+   "claim": "Joshua trees: the County's Feb 2026 guide says any land disturbance within 50 ft of a western Joshua tree needs CDFW approval; structures include pool, patio, shed, gazebo, septic tank, solar, fence, paved driveway; HMP free, ITP fee-based.",
+   "verdict": "confirmed",
+   "correct_statement": "The guide says: 'If Western Joshua Trees are within 50' or less of any land disturbance, approval from CDFW is required'. It lists those structures, bars grading, brush clearing, construction and other ground disturbance inside the buffer, describes the HMP as no-cost, and says ITP fees depend on location and on the number and size of trees.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/WJT_Quick-Reference-Guide_REV-2-25-2026.pdf"
+   ]
+  },
+  {
+   "claim": "Dev. Code 88.01.060 regulates (Tree or Plant Removal Permit) all Agavaceae, all Joshua trees, creosote rings 10 ft or wider, smoke tree and mesquite with stems 2 in+ or 6 ft+ tall, and any part of ironwood, mesquite or palo verde, living or dead.",
+   "verdict": "confirmed",
+   "correct_statement": "88.01.060(c) lists exactly these, with smoke tree under the old name Dalea spinosa. Removals must also comply with the state Desert Native Plants Act before a development permit is issued (88.01.060(d)).",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/DCWebsite.pdf"
+   ]
+  },
+  {
+   "claim": "Hot Spring Relay: $12,999; 6 seats; 7x7 ft x 36 in; 340 gal; 830 lb dry, 4,715 lb filled; 230 V/50 A with GFCI subpanel.",
+   "verdict": "confirmed",
+   "correct_statement": "Hot Spring lists Relay at MSRP $12,999 with exactly these specs. The filled weight includes 175 lb per seat, and the heater is 4,000 W at 230 V.",
+   "sources": [
+    "https://www.hotspring.com/shop/hot-spot/relay"
+   ]
+  },
+  {
+   "claim": "Hot Spring TX: $9,999; 2 seats; 6x6 ft x 29 in; 190 gal; 2,570 lb filled; 115 V/15 A cord, 115 V/30 A, or 230 V/50 A.",
+   "verdict": "confirmed",
+   "correct_statement": "Hot Spring lists the TX at MSRP $9,999 with these specs. It heats at 1,000 W on 115 V and 4,000 W on 230 V. korean_program's '$5,000-$8,000 estimate' is wrong.",
+   "sources": [
+    "https://www.hotspring.com/shop/hot-spot/tx"
+   ]
+  },
+  {
+   "claim": "Yardistry 16x16 Timber Frame Gazebo: $7,099.99, plus $1,080 assembly; 9x9 in posts; 12 ft 2.5 in clear between posts; 16.1 ft roof; 11 ft high; no wind rating; 1-year warranty, 5 years on lumber.",
+   "verdict": "confirmed",
+   "correct_statement": "Both prices are sale prices: $7,099.99 (regular $7,599.99) and assembly $1,080 (regular $1,800). The specs match, and no wind or snow rating is published.",
+   "sources": [
+    "https://yardistrystructures.com/products/16-x-16-timber-frame-gazebo"
+   ]
+  },
+  {
+   "claim": "Almost Heaven Salem 2-person barrel sauna: $4,485; 78x47x75 3/8 in; 6 kW on 240 V/30 A hardwired; lights 110 V/15 A.",
+   "verdict": "confirmed",
+   "correct_statement": "Almost Heaven lists Salem at $4,485 with these dimensions and electrical specs.",
+   "sources": [
+    "https://www.almostheaven.com/products/salem-2-person-barrel-sauna"
+   ]
+  },
+  {
+   "claim": "Almost Heaven Watoga 2-4 person barrel: $5,184 (spa_build) vs $6,183 list (korean_program); 78x59x75 3/8 in; 6 kW 240 V/30 A; install from $1,400.",
+   "verdict": "corrected",
+   "correct_statement": "Both prices are real but belong to two different products. The standard Watoga is $5,184; on the check date its heater and wood options showed as sold out or unavailable. The 'Quick Ship Kit' Watoga with a KIP Smart heater and Fenix control is $6,183. Dimensions, 240 V/30 A and installation 'starting at $1,400' are confirmed.",
+   "sources": [
+    "https://www.almostheaven.com/products/watoga-2-4-person-barrel-sauna",
+    "https://almostheaven.com/products/watoga-2-4-person-barrel-sauna-kit"
+   ]
+  },
+  {
+   "claim": "Harvia KIP 6 kW (KIP-60): 240 V, 25 A draw, 30 A breaker, #10 wire, for a 170-300 cu ft room.",
+   "verdict": "confirmed",
+   "correct_statement": "Harvia's KIP manual lists KIP-60 at 6.0 kW, 25.0 A, 240 V single-phase, #10/2 wire, for a room of 170-300 cu ft. Almost Heaven lists the 6 kW heater on a 30 A breaker.",
+   "sources": [
+    "https://cdn.shopify.com/s/files/1/0555/6355/0889/files/Kip_USA_CN_ENFR_Y05-0623_02052023.pdf?v=1683043679",
+    "https://www.almostheaven.com/products/salem-2-person-barrel-sauna"
+   ]
+  },
+  {
+   "claim": "Penguin chillers: Outdoor 1/2 HP HE $1,499.99 (5,750 BTU/hr), Cold Therapy Chiller $1,949.99 (7,500 BTU/hr), Barrel package $2,199.99; outdoor rated above 32F; standard line not outdoor rated.",
+   "verdict": "confirmed",
+   "correct_statement": "All three are 'From' prices and match. Penguin also says outdoor-rated units 'must still be disconnected and fully drained when ambient temperatures reach freezing'.",
+   "sources": [
+    "https://penguinchillers.com/collections/cold-therapy"
+   ]
+  },
+  {
+   "claim": "Plunge: original $6,790 (vs $8,490); All-In Gen 2 $7,990 (vs $9,990), 0.75 HP, 120 V/15 A, 1,150 lb filled. korean_program says All-In is 1 HP, 120 V/20 A, about 1,100 lb.",
+   "verdict": "corrected",
+   "correct_statement": "Plunge.com shows the original at $6,790 and All-In Gen 2 at $7,990, 0.75 HP, on a dedicated 120 V/15 A circuit, 1,150 lb filled. The higher figures are labeled 'Comp. Value' (a comparable retail price), not a former price. korean_program's 1 HP / 20 A / 1,100 lb figures do not match the current product page.",
+   "sources": [
+    "https://www.plunge.com/products/plunge",
+    "https://www.plunge.com/products/plunge-all-in"
+   ]
+  },
+  {
+   "claim": "Plunge Pro Chiller Gen 2: $3,490; 0.75 HP; down to 37F; dedicated 120 V/15 A; ambient up to 120F.",
+   "verdict": "confirmed",
+   "correct_statement": "Plunge lists the Pro Chiller Gen 2 at $3,490 (Comp. Value $3,990) with these specs, including a 120F maximum ambient.",
+   "sources": [
+    "https://plunge.com/products/standard-chiller"
+   ]
+  },
+  {
+   "claim": "Dundalk Georgian cabin sauna CTC88W: $7,998 sale ($10,397 list), sale range $6,922-$7,998, 7x7 ft interior, 8 kW electric or wood heater (heater extra), 19-1/4 x 83-3/4 in back bench.",
+   "verdict": "corrected",
+   "correct_statement": "Home and Heat lists SKU 100-CTC88W at $7,998 sale ($10,397 list), 7x7 ft interior, with an 8 kW or wood-burning heater recommended. The page does not say whether a heater is included and gives no exterior or bench sizes. The $6,922 low price and the 83-3/4 in bench were not confirmed.",
+   "sources": [
+    "https://www.homeandheat.com/products/dundalk-georgian-cabin-sauna"
+   ]
+  },
+  {
+   "claim": "The Spring Resort: enclosed soaking pool 'slightly above body temperature', outdoor soaking pool 104F, built 1957 as The Moors.",
+   "verdict": "confirmed",
+   "correct_statement": "The resort's day-spa page uses both quoted temperature phrases. Its story page says the property 'was originally built in 1957', was 'known for over 45 years as The Moors Hotel', and was renamed The Spring in 2003. The 101F figure for the enclosed pool comes from a third-party guide, not the resort.",
+   "sources": [
+    "https://the-spring.com/spa/day-spa/",
+    "https://the-spring.com/about/our-story/",
+    "https://www.hotspringsguides.com/hot-springs/the-spring-resort-and-spa-california"
+   ]
+  },
+  {
+   "claim": "USDA hardiness zone 9a (20-25F) for ZIP 92284.",
+   "verdict": "confirmed",
+   "correct_statement": "phzmapi.org returns zone 9a, 20 to 25F, for 92284 (centroid 34.16, -116.41). A specific parcel at higher elevation may run colder. 92285 was not re-checked.",
+   "sources": [
+    "https://phzmapi.org/92284.json"
+   ]
+  },
+  {
+   "claim": "Mojave Desert Land Trust native plant sale is Oct 24, 2026, 9am-2pm, in Joshua Tree.",
+   "verdict": "confirmed",
+   "correct_statement": "MDLT says 'The sale is Saturday, October 24 from 9am-2pm' at its headquarters, 60124 Twentynine Palms Highway, Joshua Tree. Oct 24 falls on a Saturday in 2026, and today is that date.",
+   "sources": [
+    "https://www.mdlt.org/plant-sale-faqs"
+   ]
+  },
+  {
+   "claim": "County IB-0003 requires minimum Exposure C wind design under ASCE 7-22, and 120 mph in a Special Wind Region.",
+   "verdict": "confirmed",
+   "correct_statement": "IB-0003 says wind loads follow CBC 1609 or ASCE 7-22, 'Minimum Exposure Category C shall be used throughout the County', and a Special Wind Region shall be 120 mph for all risk categories.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0003-2025-Rainfall-Water-Flow.pdf"
+   ]
+  },
+  {
+   "claim": "County adopted the 2025 California codes for permit applications submitted after Jan 1, 2026 (IB-0012).",
+   "verdict": "confirmed",
+   "correct_statement": "IB-0012 says permit applications submitted after January 1, 2026 must comply with the 2025 California Building Standards Code.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0012-2025-Code-Adoption.pdf"
+   ]
+  },
+  {
+   "claim": "Jacuzzi J-215: 69x80x33 in, 205 gal, 517 lb dry, 120 V/15 A or 240 V/30-40 A, in Jacuzzi's $4,000-$7,999 tier.",
+   "verdict": "corrected",
+   "correct_statement": "The MY26 page confirms the dimensions, 205 gal, 517 lb dry and the electrical options. It shows no price and does not place the J-215 in any price tier, so the $4,000-$7,999 band is not established for this model.",
+   "sources": [
+    "https://www.jacuzzi.com/en-us/j-215/J-215-MY26.html"
+   ]
+  }
+ ],
+ "contradictions": [
+  "Pool Safety Act: spa_build says a spa with a locking ASTM F1346 cover is exempt (HSC 115925). korean_program and spa_precedent say 2 of 7 features apply and the cover counts as one. The statute supports spa_build: 115925(b) puts such spas outside the article. County IB-0007 (Jan 2026) still describes a cover plus one additional feature, so the inspector's reading governs in practice.",
+  "County IB-0007 lists an ASTM F2208 pool alarm as an acceptable second feature alongside a safety cover. HSC 115922(b) says a safety cover plus that alarm does not satisfy the two-feature rule. Follow state law and do not use the alarm as the second feature.",
+  "Safety-cover edition: HSC 115922 cites ASTM F1346-23, while IB-0007 and the Hot Spring cover label cite F1346-91. HSC 115925(b) names F1346 with no year. The exemption language does not depend on the edition, but confirm the label is acceptable to the inspector.",
+  "Hot Spring TX price: korean_program estimates $5,000-$8,000 ('no dealer price captured'). spa_build gives $9,999. Hot Spring's site shows MSRP $9,999, so spa_build is right.",
+  "Watoga price: spa_build gives $5,184 and korean_program gives $6,183. Both are current Almost Heaven prices for different products: the standard Watoga is $5,184 (options showed as unavailable on the check date), and the Quick Ship Kit with KIP Smart + Fenix is $6,183.",
+  "Plunge All-In: korean_program says 1 HP, 120 V/20 A, about 1,100 lb filled. spa_build says 0.75 HP, 120 V/15 A, 1,150 lb. The current plunge.com product page (Gen 2) supports spa_build.",
+  "Jacuzzi J-215 size: spa_build gives 69x80x33 in and 205 gal (MY26 page). korean_program gives 76x66x32 in and 220 gal from a different Jacuzzi URL. The MY26 page supports spa_build. Neither price is published.",
+  "Primary-use question: spa_build says to ask whether the RV permit counts as the primary use. spa_precedent says to plan the pavilion only after the house is finaled. These are consistent: 84.01.020(b) allows an accessory structure before the primary use only under a Temporary Use Permit, and no source settles whether the RV permit counts."
+ ],
+ "page_cautions": [
+  "Do not say a hot tub with a locking cover needs nothing more. Say that state law (HSC 115925(b)) exempts spas with locking ASTM F1346 covers, but the County's IB-0007 still describes a safety cover plus one more feature, and the inspector decides. Never suggest a pool alarm as that second feature.",
+  "Lot coverage: say the 20% RL maximum counts 'structures and impervious surfaces' (slabs, pavers, paved drives), not just buildings. Say interior side setbacks are 15 ft on lots wider than 75 ft. Present all RL numbers as conditional on the parcel actually being zoned RL in unincorporated County.",
+  "If the lot is inside the Town of Yucca Valley, none of the County Dev. Code numbers apply. The Town's site returned 403 and its rules are unverified, so the page must say so rather than imply the County rules cover the Town.",
+  "Do not state that a gazebo, spa or sauna is allowed while living in the RV. 84.01.020(b) requires a legally established primary use, or else a Temporary Use Permit (Ch. 84.25). Whether the RV temporary-occupancy permit counts is unconfirmed and must be asked of the County.",
+  "Do not say a small gazebo is permit-free because it is under 120 sq ft. Patio covers (solid or lattice) and pools/spas need permits at any size, and electrical work always needs a permit. The 82.02.040(7) portable-spa exemption covers only the planning permit.",
+  "Lighting under a gazebo: the Yardistry 16x16 is only 11 ft tall, so for an outdoor spa no new fixture or fan can go over or within 5 ft horizontally of the tub (the 12 ft rule). If the inspector treats a walled gazebo as indoor (NEC 680.43), the rules change (7.5 ft with GFCI; receptacles 6-10 ft; GFCI within 10 ft). Say the classification must be confirmed.",
+  "Cite the NEC figures as 2023 NEC as quoted in a permit handout from another jurisdiction (Broomfield, CO), applied to California's 2025 CEC. Give the article numbers, but have the County or a licensed electrician confirm them.",
+  "Prices are snapshots from Oct 24, 2026. Label them 'listed price' and give the date. Yardistry and Plunge figures are sale prices; Plunge's higher number is a 'Comp. Value', not a former price; Penguin prices are 'From' prices. The standard Watoga's options showed as unavailable.",
+  "Dundalk Georgian: do not say the heater is included or quote exterior or bench sizes. The retailer page gives only $7,998 sale / $10,397 list, a 7x7 ft interior, and an 8 kW or wood heater 'recommended'.",
+  "The Spring: quote the resort's own wording ('slightly above body temperature'; outdoor pool 104F). If 101F is used, attribute it to a third-party guide. Say 'originally built in 1957 and known for 45+ years as The Moors Hotel; renamed The Spring in 2003'.",
+  "MDLT sale: avoid the word 'today' on a page that will outlive the date. Write 'Saturday, Oct 24, 2026, 9am-2pm, 60124 Twentynine Palms Hwy, Joshua Tree'.",
+  "Joshua trees: present 50 ft as the County guide's trigger for needing CDFW approval, not a fixed safe distance. CDFW sets avoidance buffers per project, and trenching for power or water counts as land disturbance.",
+  "CPSC 104F: note that the source is a 1979 CPSC release that is still the US benchmark. Also give the 100F limit for pregnancy.",
+  "Hot Spring TX on 115 V heats at only about 1,000 W, vs about 4,000 W at 230 V. Do not present the plug-in mode as equal for desert winters.",
+  "Relayed user question (whether a small prebuilt pod around $20k can count as a storage unit): the page must not imply this spa check answered it. Relevant verified County text: 82.02.040(5) exempts from planning permits a single portable structure per lot, such as a pre-manufactured storage shed, that is also exempt from a building permit. The Permits page sets the building-permit threshold at structures over 120 sq ft. 84.01.050(f)(2) allows freight containers and similar storage-type structures in RL if they are painted or altered to blend in and placed behind the primary structure. 84.01.020(b) still requires a primary use or a Temporary Use Permit. A pod with wiring needs an electrical permit, and a pod used for sleeping, as a sauna or as living space is not a storage shed. Do not suggest labeling it 'storage' to avoid permits; tell them to confirm with County Building and Safety."
+ ]
+}

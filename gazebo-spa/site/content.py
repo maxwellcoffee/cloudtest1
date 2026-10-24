@@ -27,8 +27,9 @@ def spring():
   <h2>What The Spring's gazebo really is</h2>
   <p>The "gazebo" at The Spring Resort &amp; Spa is an enclosed pool house at one end of the main pool, which one
   guide calls "the pool inside the greenhouse". The resort keeps that pool "slightly above body temperature"
-  (guides say about 101F) and the outdoor soaking pool at 104F. The hotel opened in 1957 as The Moors and is
-  adults-only. Reconstructed from the resort's own photos, the pool house is:</p>
+  (a hot-springs guide puts it at about 101F) and the outdoor soaking pool at 104F. The property was built in
+  1957, was known for more than 45 years as The Moors Hotel, became The Spring in 2003, and is adults-only.
+  Reconstructed from the resort's own photos, the pool house is:</p>
   <ul>
     <li>A one-story timber post-and-beam room under a low-slope roof with exposed rafter tails. Posts are roughly 6 ft apart, about 8 ft to the top plate.</li>
     <li>Walls in three bands: a solid knee wall about 3 ft high, glass with a frosted privacy stripe, and an open band of painted vertical slats under the header.</li>
@@ -65,7 +66,7 @@ def ritual(wave):
     <p>Once a week, after a soak, scrub each other with an Italy towel (seshin), then rinse. Finish with cold sikhye
     (sweet rice drink) and baked eggs on the warm floor.</p>
     <div class="note"><p><b>Safety.</b> Korean bathhouses run their hot tubs at 106-109F; at home, cap the tub at
-    104F (the U.S. Consumer Product Safety Commission limit) and at 100F or less for anyone pregnant. Drink water
+    104F (the U.S. Consumer Product Safety Commission's limit since 1979) and at 100F or less for anyone pregnant. Drink water
     after every round and skip alcohol before and between rounds. Anyone with heart conditions should ask a doctor
     about sauna and cold plunges first. Keep the warm floor at or below about 104F for long lying.</p></div>
   </div>
@@ -129,12 +130,13 @@ def plants():
 
 def rules():
     items = [
-        '<b>Joshua trees.</b> No digging, grading, slabs, trenches or paths within 50 ft of a western Joshua tree (including a neighbor\'s) without approval from California Fish and Wildlife. Map the trees before siting anything.',
-        '<b>When you can build it.</b> In the County, an accessory structure needs a legally established main use. Before the house is finished, a gazebo, spa and sauna may need a Temporary Use Permit. Ask County Building and Safety whether the trailer permit counts.',
-        '<b>Building permits.</b> Needed for any structure over 120 sq ft, any patio cover (solid or lattice), any pool or spa, and all electrical work. Setbacks (25 ft front, 15 ft sides and rear in Rural Living) apply even when no permit is needed.',
-        '<b>Drowning prevention.</b> A new spa needs safety features under the California Pool Safety Act. A locking safety cover labeled ASTM F1346 is the usual one; confirm with the inspector whether it is enough on its own.',
-        '<b>Wiring.</b> A 240 V hot tub needs a 50 A GFCI disconnect within sight of the tub, at least 5 ft away. No light fixture within 5 ft of the water unless it is 12 ft or more above it. A 6 kW sauna heater needs its own 30 A circuit.',
-        '<b>Wind.</b> The County designs for open terrain (Exposure C). Spring gusts reach 40-50 mph, so anchor any gazebo to engineered footings and strap the tub cover.',
+        '<b>Joshua trees.</b> Any digging, grading, slab, trench or path within 50 ft of a western Joshua tree (a neighbor\'s counts too) needs approval from California Fish and Wildlife first. Treat 50 ft as the trigger, not a safe distance: the agency sets buffers project by project. Map the trees before siting anything, including the power and water trenches.',
+        '<b>When you can build it.</b> In the County, an accessory structure needs a legally established main use; until then it can only be built under a Temporary Use Permit. Nobody has confirmed whether the trailer permit counts as that main use, so ask County Building and Safety before buying a gazebo or tub.',
+        '<b>Building permits.</b> Needed for any structure over 120 sq ft, any patio cover (solid or lattice) at any size, any pool or spa, and all electrical work. A small portable spa is exempt only from the planning permit, not from these.',
+        '<b>Setbacks and coverage</b> (if the lot is zoned Rural Living in the unincorporated County): 25 ft front, 15 ft rear, 15 ft sides on lots wider than 75 ft, and no more than 20% of the lot under structures and paving combined. Inside the Town of Yucca Valley the Town\'s own rules apply instead; they were not checked here.',
+        '<b>Drowning prevention.</b> State law exempts a hot tub with a locking safety cover labeled ASTM F1346. The County\'s barrier bulletin still describes a cover plus one more safety feature, so the inspector decides. If asked for a second feature, don\'t use a pool alarm: state law says a cover plus an alarm doesn\'t count.',
+        '<b>Wiring.</b> A 240 V hot tub needs a 50 A GFCI disconnect within sight of the tub, at least 5 ft away (Hot Spring says no more than 50 ft). For an outdoor tub, no light or fan within 5 ft of the water unless it is 12 ft or more above it; a 16 x 16 kit gazebo is only 11 ft tall, so light from the edges. If the inspector treats an enclosed bathhouse like Scheme A as indoor, the rules change. These are 2023 National Electrical Code figures; confirm them with the County or your electrician. A 6 kW sauna heater needs its own 30 A circuit.',
+        '<b>Wind.</b> The County designs for open terrain (Exposure C, ASCE 7-22). Spring gusts reach 40-50 mph, so anchor any gazebo to engineered footings and strap the tub cover.',
         '<b>Water.</b> A 7 x 7 tub holds about 340 gallons and is drained three or four times a year; an uncovered tub can lose over 2,000 gallons a year to evaporation. Keep it covered.',
     ]
     return f'''
@@ -166,12 +168,12 @@ def products():
         ('Gazebo', 'Yardistry 16 x 16 Timber Frame Gazebo', '$7,100', '12 ft 2.5 in clear between posts; fits a 6 x 6 or 7 x 7 tub', 'https://yardistrystructures.com/products/16-x-16-timber-frame-gazebo'),
         ('Gazebo', 'Yardistry 12 x 16 Meridian (cedar)', '$3,360', 'Smaller cedar kit for the starter plan', 'https://yardistrystructures.com/products/12-x-16-meridian-gazebo'),
         ('Gazebo', 'Forever Redwood pavilion kits', 'from $6,000', 'Custom-sized redwood kits, drawings approved before building', 'https://www.foreverredwood.com/'),
-        ('Hot tub', 'Hot Spring Hot Spot TX', '$9,999', '2-seat lounge, 6 x 6 ft, 190 gal; 115 V or 240 V', 'https://www.hotspring.com/shop/hot-spot/tx'),
+        ('Hot tub', 'Hot Spring Hot Spot TX', '$9,999', '2-seat lounge, 6 x 6 ft, 190 gal. Runs on 115 V, but heats at only 1 kW that way; use 240 V (4 kW) for desert winters', 'https://www.hotspring.com/shop/hot-spot/tx'),
         ('Hot tub', 'Hot Spring Hot Spot Relay', '$12,999', '6 seats, 7 x 7 ft, 340 gal, 4,715 lb filled; 240 V / 50 A', 'https://www.hotspring.com/shop/hot-spot/relay'),
         ('Hot tub', 'Hot Spring Freeflow Mini', '$5,499', '2 seats, 6 x 4.4 ft, 125 gal; plug-in or 240 V', 'https://www.hotspring.com/shop/freeflow/mini'),
         ('Hot tub', 'Almost Heaven Sindri (wood-fired)', '$10,621', 'No electricity needed; mind fire weather', 'https://almostheaven.com/products/sindri'),
         ('Sauna', 'Almost Heaven Salem barrel (2 person)', '$4,485', '6 kW heater on 240 V / 30 A', 'https://www.almostheaven.com/products/salem-2-person-barrel-sauna'),
-        ('Sauna', 'Almost Heaven Watoga barrel (2-4 person)', '$5,184', '78 x 59 in; installation from $1,400', 'https://www.almostheaven.com/products/watoga-2-4-person-barrel-sauna'),
+        ('Sauna', 'Almost Heaven Watoga barrel (2-4 person)', '$5,184', '78 x 59 in; installation from $1,400. The Quick Ship kit with a smart heater is $6,183', 'https://www.almostheaven.com/products/watoga-2-4-person-barrel-sauna'),
         ('Sauna', 'Redwood Outdoors Duo (2 person cabin)', '$4,899', 'Small cube; 6 or 8 kW Harvia', 'https://www.redwoodoutdoors.com/products/duo-outdoor-sauna-2-person'),
         ('Cold', 'Ice Barrel 500', '$1,750', '94 gal; chiller sold separately', 'https://www.icebarrel.com/products/ice-barrel-500'),
         ('Cold', 'Penguin outdoor chiller', '$1,500-2,200', 'Adds summer cold to a barrel or stock tank', 'https://penguinchillers.com/collections/cold-therapy'),
@@ -182,7 +184,7 @@ def products():
     return f'''
 <section class="wrap" id="products"><div class="wide stack">
   <p class="eyebrow">Shopping list</p><h2>Products worth a look</h2>
-  <p class="col">List prices checked in October 2026, before tax, delivery and installation.</p>
+  <p class="col">Prices listed on the makers' sites on October 24, 2026, before tax, delivery and installation. Yardistry and Plunge were showing sale prices; Penguin prices are "from" prices.</p>
   <div class="scroll"><table><thead><tr><th>Part</th><th>Product</th><th class="num">Price</th><th>Notes</th></tr></thead><tbody>{trs}</tbody></table></div>
 </div></section>'''
 
@@ -191,13 +193,13 @@ def actions():
     items = [
         ('@together', 'Pick the two plans you like best, and decide whether to start with the Starter Kit while you live in the trailer.'),
         ('@land', 'Walk the lot and pin every Joshua tree, yucca and big creosote ring; draw 50-ft circles and choose the bathhouse spot outside them.'),
-        ('@phone', 'Call County Building and Safety, Joshua Tree office (open Wednesdays, 760-995-8140): does the trailer permit count as the main use for a gazebo, spa and sauna, or do we need a Temporary Use Permit?'),
+        ('@phone', 'Call County Building and Safety, Joshua Tree office (open Wednesdays, 760-995-8140): does the trailer permit count as the main use for a gazebo, spa and sauna, or do we need a Temporary Use Permit? Will a locking ASTM F1346 cover satisfy the barrier rules on its own?'),
         ('@computer', 'Run the ASCE 7 Hazard Tool for the lot\'s design wind speed, so the gazebo footings can be engineered for it.'),
         ('@phone', 'Ask an electrician for a load calculation and a quote on a spa subpanel: 50 A tub, 30-40 A sauna, 120 V circuits.'),
         ('@errand', 'Visit a Hot Spring dealer; sit in a TX and a Relay; confirm the cover is labeled ASTM F1346.'),
         ('@errand', 'Spend a weekday afternoon at The Spring and measure the pool house: post spacing, wall heights, how the slats vent.'),
         ('@computer', 'Check the parcel\'s fire hazard zone on the CAL FIRE map before choosing roof and wall materials.'),
-        ('@errand', 'Buy coral and peach natives at the Mojave Desert Land Trust fall sale or nursery in Joshua Tree; fall is the best planting window.'),
+        ('@errand', 'Buy coral and peach natives at the Mojave Desert Land Trust plant sale (Saturday, Oct 24, 2026, 9am-2pm, 60124 Twentynine Palms Hwy, Joshua Tree) or at its next sale; fall is the best planting window.'),
     ]
     lis = ''.join(f'<li><input type="checkbox" id="act{i}" aria-label="Done"><label for="act{i}"><span class="ctx">{c}</span>{t}</label></li>' for i, (c, t) in enumerate(items))
     return f'''

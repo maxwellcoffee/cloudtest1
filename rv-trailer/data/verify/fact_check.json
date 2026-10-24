@@ -1,0 +1,245 @@
+{
+ "project": "rv",
+ "claim_checks": [
+  {
+   "claim": "USER QUESTION: a small prebuilt pod (~$20k) can count as a storage unit / accessory storage structure on the lot (rv_budget: 'A Residential Accessory permit is required for accessory structures over 120 sq ft').",
+   "verdict": "corrected",
+   "correct_statement": "In unincorporated San Bernardino County, a detached storage structure of 120 sq ft or less needs no building permit only if it is one story, has no utilities, sits within the setbacks and is under 14 ft tall. Over 120 sq ft needs a Residential Accessory permit. Development Code 84.01.020(b) also says an accessory structure must go with an established primary use. Until the house exists, one can be built only under a Temporary Use Permit (Ch. 84.25). The County lists metal, cargo, shipping and storage containers as accessory structures. FY2026-27 fees for a storage-only cargo container permit: $156 for 1-3 units, plus $195 plan review and the $57 intake fee. A pod with power, plumbing or sleeping use is not an exempt storage shed. Inside the Town of Yucca Valley, 9.39.050(J) allows a storage structure before the primary use exists only with a bond to remove it if the primary use is not finished within 2 years. No specific pod product or $20k price was checked.",
+   "sources": [
+    "https://lus.sbcounty.gov/faqs/",
+    "https://wp.sbcounty.gov/ezop/permits/residential-accessory/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf",
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures"
+   ]
+  },
+  {
+   "claim": "County Temporary Structure Permit: an RV or travel trailer may serve as temporary quarters for someone building a house. The house permit must be issued first, and early placement can bring penalties. Final inspection covers electrical, gas, sewer and water. Term is 12 months, renewable 12 months at a time, max 5 years. The permit expires if no inspection is called within 180 days. Submittals: site plan, current CA DMV registration, a pumping contract if self-contained, will-serve letters if applicable. Phone 909.387.8311.",
+   "verdict": "confirmed",
+   "correct_statement": "The checklist (Rev. 6/2025) states each of these points word for word. It also requires a Setdown Permit for manufactured units. The County FAQ adds that 'manufactured homes and travel trailers' may be used once a permit for the permanent residence has been obtained, and gives 909.387.8311.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://lus.sbcounty.gov/faqs/while-building-a-new-home-can-i-put-a-temporary-mobile-home-on-my-property-to-live-in-while-my-house-is-under-construction"
+   ]
+  },
+  {
+   "claim": "FY2026-27 County fees: TSP initial $301, renewal $257, temporary RV site $261, manufactured homes $603, temporary power span pole $156, intake $57.",
+   "verdict": "confirmed",
+   "correct_statement": "The fee ordinance effective July 1, 2026 lists all six amounts. The $57 intake fee applies to each electrical permit and to each land use compliance permit, which covers the TSP. Fees rise on July 1, 2027 (initial $310, renewal $264, RV site $268, span pole $160, intake $58) and on July 1, 2028 ($319/$271/$276/$164/$59). The schedule does not say whether the $301 and $261 lines both apply to one trailer.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf"
+   ]
+  },
+  {
+   "claim": "Town of Yucca Valley 9.39.050(A): manufactured homes and self-contained RVs may be temporary quarters while the first permanent dwelling is built, once building permits are issued. Term is one year with one-year extensions, 4 years max. The permit becomes invalid when the building permit is cancelled or construction is complete.",
+   "verdict": "confirmed",
+   "correct_statement": "The code text says 'not to exceed one year with one year extensions; not to exceed an aggregate total of four (4) years'. 9.39.060 lets the director require removal, site restoration and performance security, and requires the permit to be displayed. This text comes from the gocodebook mirror (dated 2026-10-03); the official ecode360 page blocked fetching.",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures"
+   ]
+  },
+  {
+   "claim": "Park trailer = 400 sq ft or less gross floor area, no more than 14 ft wide, movable on highways only with a permit (HSC 18009.3).",
+   "verdict": "confirmed",
+   "correct_statement": "HSC 18009.3 also requires recreational or seasonal use only and a single chassis, and excludes qualifying lofts from the area. Highway moves need a permit under VC 35780. HSC 18010(b) counts a park trailer as a recreational vehicle. DMV titles park trailers (ANSI label), registers them annually, and excludes them from PTI.",
+   "sources": [
+    "https://california.public.law/codes/ca_health_and_safety_code_section_18009.3",
+    "https://california.public.law/codes/ca_health_and_safety_code_section_18010",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/permanent-trailer-identification-pti/trailers-excluded/"
+   ]
+  },
+  {
+   "claim": "A park model qualifies for the County Temporary Structure Permit (or, per rv_trailer, 'may not count as an RV or travel trailer').",
+   "verdict": "unverifiable",
+   "correct_statement": "State law treats a park trailer as an RV, and it can carry the DMV registration the permit asks for. Whether the County accepts one under 'recreational vehicle or travel trailer' is not stated anywhere I found. The fee schedule prices a 'Temporary RV site' at $261 and 'Manufactured homes' at $603. Get written County confirmation.",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Temporary-Structure-Permit-Checklist-2025.pdf",
+    "https://california.public.law/codes/ca_health_and_safety_code_section_18010"
+   ]
+  },
+  {
+   "claim": "CA towing: a Class C license covers a trailer coach up to 10,000 lb GVWR. A fifth wheel of 10,000-15,000 lb needs an endorsement. Heavier units need a noncommercial Class A.",
+   "verdict": "confirmed",
+   "correct_statement": "Per DMV, Class C may tow a trailer coach or fifth wheel under 10,000 lb GVWR if the tow vehicle weighs 4,000 lb or more unladen and the towing is not for pay. A fifth wheel over 10,000 and under 15,000 lb GVWR needs an endorsement. A trailer coach over 10,000 lb, or a fifth wheel over 15,000 lb, needs a noncommercial Class A. The current DMV page confirms the 2013 CHP document.",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/driver-licenses-dl/"
+   ]
+  },
+  {
+   "claim": "DMV trailer coach fees: $76 registration, $34 CHP, VLF 0.65% of value, $15 transfer, TIF $33/$66/$132/$198/$231 by value band. Trailer coaches are registered annually and camp trailers use PTI ($20, then $10 every 5 years).",
+   "verdict": "confirmed",
+   "correct_statement": "The DMV fee page lists these amounts. VLF is 0.65% of purchase price or value and declines over 11 renewal years. The page does not list which fees apply to trailer coaches, so use the DMV fee calculator. The DMV manual says trailer coaches cannot use PTI and are registered annually. Its camp-trailer test is 'does not exceed 16 ft in overall length or does not exceed 8 ft in width'.",
+   "sources": [
+    "https://www.dmv.ca.gov/portal/vehicle-registration/registration-fees/",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/permanent-trailer-identification-pti/trailers-excluded/",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/miscellaneous-originals/7-015-camp-trailers-vc-%c2%a7242/"
+   ]
+  },
+  {
+   "claim": "Sales/use tax: 8.75% in the Town of Yucca Valley. Unincorporated areas (e.g., Joshua Tree) are 7.75% (rv_buying); rv_trailer and rv_budget apply 8.75% to every tier. Trailer coach use tax follows situs.",
+   "verdict": "confirmed",
+   "correct_statement": "CDTFA's table (operative Oct 1, 2026) gives Town of Yucca Valley 8.75% and San Bernardino County unincorporated 7.75%. The DMV manual says trailer coach use tax 'is based on the situs county and city'. Budgets that apply 8.75% to an unincorporated lot overstate the tax by 1 point.",
+   "sources": [
+    "https://www.cdtfa.ca.gov/formspubs/cdtfa95.pdf",
+    "https://www.dmv.ca.gov/portal/handbook/vehicle-industry-registration-procedures-manual-2/use-tax/use-tax-basis/"
+   ]
+  },
+  {
+   "claim": "2027 Airstream starting prices: World Traveler $64,400, Basecamp $69,900, Bambi $75,400, Caravel $92,400, Flying Cloud $115,900, Globetrotter $147,400.",
+   "verdict": "confirmed",
+   "correct_statement": "airstream.com lists all six prices. The World Traveler, Caravel, Flying Cloud and Globetrotter pages say 2027. The index also lists Basecamp Xe $88,900, International $128,900, Trade Wind $134,400 and Classic $195,400. The Basecamp page confirms 20 ft, GVWR 4,300-4,500 lb, hitch 508-535 lb, 23 gal fresh water, and a $1,000 gift card for Basecamp purchases July 1-Oct 31, 2026.",
+   "sources": [
+    "https://www.airstream.com/travel-trailers/",
+    "https://www.airstream.com/travel-trailers/world-traveler/",
+    "https://www.airstream.com/travel-trailers/flying-cloud/",
+    "https://www.airstream.com/travel-trailers/globetrotter/",
+    "https://www.airstream.com/travel-trailers/caravel/",
+    "https://www.airstream.com/travel-trailers/basecamp/"
+   ]
+  },
+  {
+   "claim": "Arctic Fox NXT 27RK: 32'3\", 8'6\" wide, 12'0\" tall, 8,975 lb dry, 900 lb hitch, GVWR 12,800, 100/75/42 gal, 13.5K AC, R-18 ceiling, thermal-pane windows. Street price about $74-75k against MSRPs of $105-117k.",
+   "verdict": "corrected",
+   "correct_statement": "Northwood's page confirms the specs: 3,825 lb carrying capacity, 60 lb LP, 10 cu ft 12V fridge, 60x80 bed, sleeps 2, R-15 foil in roof and slides. It lists no price, and the dealer listings returned 403, so the $73,845-$74,995 street prices and $104,855-$116,989 MSRPs are unverified. GVWR 12,800 means a noncommercial Class A license to tow it.",
+   "sources": [
+    "https://northwoodmfg.com/arctic-fox-nxt-27rk/"
+   ]
+  },
+  {
+   "claim": "Arctic Fox NXT 22GT: about 24 ft, a four-season value pick; sale $46,995-$55,495 against MSRPs of $66,723-$71,569 (rv_trailer), or $73,900 against $89,900 (rv_budget).",
+   "verdict": "corrected",
+   "correct_statement": "Northwood lists 23'10\" with hitch, 8'6\" wide, 11'10\" tall, about 5,910 lb dry, 675 lb hitch, GVWR 10,400 lb, 100/42/35 gal tanks, sleeps 4, 13.5K AC, no price. GVWR 10,400 is over the Class C trailer-coach limit, so towing it yourself needs a noncommercial Class A. Both price sets come from Bish's listings that returned 403, so neither is verified.",
+   "sources": [
+    "https://northwoodmfg.com/arctic-fox-nxt-22gt/",
+    "https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/driver-licenses-dl/"
+   ]
+  },
+  {
+   "claim": "Grand Design Imagine 2600RB: 29'8\", 11'2\", 6,487-6,533 lb dry, GVWR 7,850, 1 slide, 45/82/45 gal; R-7 walls, R-30 floor, R-40 roof and cap, 200W solar; MSRP $57,259-$60,916 (rv_budget: 6,624 lb, MSRP $58,587, Lazydays sale $37,989).",
+   "verdict": "confirmed",
+   "correct_statement": "Grand Design's page lists 29'8\", 11'2\", UVW 6,533, GVWR 7,850, hitch 754, 1 slide, 45/82/45 gal, MSRP $60,916, the R-values and 200W solar. RVGuide 2026 lists 6,487 lb, 674 lb hitch, 96 in wide and MSRP $57,259. GVWR is under 10,000 lb, so Class C can tow it. rv_budget's 6,624 lb and the Lazydays $58,587/$37,989 are unverified; use Grand Design's figures.",
+   "sources": [
+    "https://www.granddesignrv.com/travel-trailers/imagine",
+    "https://www.rvguide.com/specs/grand-design/travel-trailer/2026/imagine/2600rb.html"
+   ]
+  },
+  {
+   "claim": "Grand Design Reflection 317RSTS: 35'5\", 9,518 lb, GVWR 10,995 (current GD page) or 9,995 (2026 RVGuide), 2 slides, MSRP $90,227 or $80,204; R-9 walls, R-30 floor, R-40 roof, cold-chamber tested -6F to +101F, 180W solar.",
+   "verdict": "confirmed",
+   "correct_statement": "Grand Design's page lists 35'5\", 11'11\", UVW 9,518, hitch 1,145, GVWR 10,995, 2 slides, 55/78/39 gal, MSRP $90,227, the stated R-values, the -6F to +101F chamber test and 180W solar. RVGuide 2026 lists 425 in long, 96 in wide, 143 in tall, 9,200 lb, GVWR 9,995 and $80,204. Use the current 10,995 lb figure: it means a noncommercial Class A to tow.",
+   "sources": [
+    "https://www.granddesignrv.com/travel-trailers/reflection",
+    "https://www.rvguide.com/specs/grand-design/travel-trailer/2026/reflection--travel-trailer-/317rsts.html"
+   ]
+  },
+  {
+   "claim": "Oliver Legacy Elite II: 24 ft, about 4,900 lb dry, GVWR 7,000, double-hull fiberglass, sleeps 3. Price about $79,995 for 2026 and $85,000 for 2027 (rv_trailer), or $85k/$90k/$100k Standard/Premium/Platinum (rv_budget), or 'from $85,000' (rv_buying, rv_types).",
+   "verdict": "corrected",
+   "correct_statement": "Oliver's model page shows 2026 'from $85,000' and lists 24 ft long, 7 ft wide (6'7\" inside), 9'8\" to the A/C, about 4,900 lb dry, GVWR 7,000, about 490 lb hitch, sleeps 3, 75x79 king, bonded dual-pane windows. Oliver's blog gives 2027 Standard at $85,000 and a Platinum Pro build at $113,000. The $79,995 figure is not supported, and the $90k Premium and $100k Platinum prices are unverified.",
+   "sources": [
+    "https://www.olivertraveltrailers.com/legacy-elite-ii/",
+    "https://olivertraveltrailers.com/blog/oliver-legacy-elite-ii-vs-forest-river-ibex/"
+   ]
+  },
+  {
+   "claim": "Lance 2465: 24'11\" floor, 29'10\" overall, 96-3/8 in wide, 10'5\" tall, 6,400 lb dry, 905 lb hitch, GVWR 8,900, 45/40/40 gal, 35K furnace, optional 15K AC; Utah dealer prices $81,773 and $63,995 sale against $87,165.",
+   "verdict": "corrected",
+   "correct_statement": "Lance's page confirms every spec, plus 80 in interior height, 2,500 lb cargo and a king bed. Lance publishes no MSRP, and the RVUSA listing returned 403, so the dealer prices are unverified.",
+   "sources": [
+    "https://www.lancecamper.com/travel-trailers/2465/"
+   ]
+  },
+  {
+   "claim": "Dealers: Blue Compass RV Palm Desert at 77840 Varner Rd; Airstream Inland Empire at 27969 Jefferson Ave, Temecula; Airstream Los Angeles at 1212 E Las Tunas Dr, San Gabriel.",
+   "verdict": "corrected",
+   "correct_statement": "Bank of America's RV dealer directory lists Airstream Inland Empire at 27969 Jefferson Ave, Temecula 92590. rv.com (undated Trailer Life reprint) puts Airstream Los Angeles at 1212 East Las Tunas Drive, San Gabriel, as Airstream's 'fifth stand-alone dealership in the United States'. The Blue Compass Palm Desert address could not be checked because every Blue Compass and RVUSA page returned 403. The 'Airstream So Cal group' membership is the dealer's own copy and is unverified.",
+   "sources": [
+    "https://dealer-network.bankofamerica.com/rv-dealers/ca/temecula/vehicle-loans-temecula-ca-0122880003.html",
+    "https://rv.com/archive/airstream-opens-fifth-la-area-dealership/"
+   ]
+  },
+  {
+   "claim": "Mike Thompson's RV has locations in Colton, Cathedral City, Santa Fe Springs and Fountain Valley.",
+   "verdict": "confirmed",
+   "correct_statement": "BBB lists 13940 Firestone Blvd, Santa Fe Springs; 10480 Talbert Ave and 18240 Ward St, Fountain Valley; 902 RV Center Dr, Colton; and 68318 E Palm Canyon Dr, Cathedral City.",
+   "sources": [
+    "https://www.bbb.org/us/ca/santa-fe-springs/profile/rv-dealers/mike-thompsons-rv-superstores-1216-24710"
+   ]
+  },
+  {
+   "claim": "Cruise America sells ex-rental units from a Los Angeles (Carson) sales center, including a Coachmen Apex 16 travel trailer, with 'flybuy' and 'renttobuy' rebates.",
+   "verdict": "confirmed",
+   "correct_statement": "Cruise America's used-RV page lists a Los Angeles (Carson) sales center, the Coachmen Apex 16 travel trailer (its only trailer), and Thor Majestic and Winnebago Minnie Winnie Class C units. The rebates appear as 'Sales Rebates' tiles. No street address or prices are shown.",
+   "sources": [
+    "https://www.cruiseamerica.com/buy-used-rvs"
+   ]
+  },
+  {
+   "claim": "The California RV Supershow in Pomona runs March 19-21, 2027.",
+   "verdict": "confirmed",
+   "correct_statement": "rvsupershows.com lists the California RV Supershow for March 19-21, 2027 in Pomona, CA.",
+   "sources": [
+    "https://www.rvsupershows.com/"
+   ]
+  },
+  {
+   "claim": "Progressive says a normal travel-trailer policy carries no liability because the tow vehicle's policy covers it, so with no tow vehicle the couple must buy liability separately. Foremost writes full-timer, primary-residence and stationary travel trailer policies.",
+   "verdict": "confirmed",
+   "correct_statement": "Progressive's RV page says that for travel trailers 'the vehicle pulling your trailer already provides the liability coverage'. Its full-timer add-on (more than 6 months a year) adds personal liability while parked, medical payments and loss assessment; the $5,000 loss figure is only an example. Foremost's sheet (9019315 6/20) lists Full-Timer, Primary Residence and Stationary Travel Trailers as eligible, with homeowners-style liability that extends to the site, adjacent structures (sheds, decks, carports) and a 25% yearly diminishing deductible. It also says 'not all products... available in all areas', so confirm California.",
+   "sources": [
+    "https://www.progressive.com/rv/",
+    "https://www.progressive.com/rv/rv-insurance-coverages-full-timers/",
+    "https://www.foremostagent.com/assets/marketing/AgentMarketingMaterials/Casualty/pdf/Full-Timer-Travel-Trailer-Selling-Sheet.pdf"
+   ]
+  },
+  {
+   "claim": "Resale: in a 2026 study, five-year-old Airstreams kept about 76.6% of MSRP, against 46.7% for the weakest brands.",
+   "verdict": "confirmed",
+   "correct_statement": "RVBlogger's 2026 Travel Trailer Resale Value Study sampled 74 five-year-old trailers across 22 brands and lines. Airstream averaged 76.6% of original MSRP, nuCamp T@B was second at 64.4%, and the low was about 46.7% (brand not named). It is a blog's sample average, not a guarantee.",
+   "sources": [
+    "https://rvblogger.com/blog/travel-trailer-depreciation/"
+   ]
+  },
+  {
+   "claim": "The 30% federal residential solar credit no longer applies to systems placed in service after 12/31/2025 (rv_budget).",
+   "verdict": "confirmed",
+   "correct_statement": "IRS: 'The credit is not available for any property placed in service after December 31, 2025.'",
+   "sources": [
+    "https://www.irs.gov/credits-deductions/residential-clean-energy-credit"
+   ]
+  },
+  {
+   "claim": "Airstream of San Diego (Blue Compass, San Marcos) opened July 17, 2024.",
+   "verdict": "unverifiable",
+   "correct_statement": "RV News (dated April 9, 2024) reports that Blue Compass set up its 10th Airstream dealership in San Marcos, sharing its existing store. It gives no opening date.",
+   "sources": [
+    "https://www.rvnews.com/blue-compass-establishes-new-airstream-dealership/"
+   ]
+  }
+ ],
+ "contradictions": [
+  "Sales/use tax for an unincorporated lot: rv_buying says 7.75% unincorporated and 8.75% Town. rv_trailer applies 8.75% to every tier, and rv_budget does too while noting unincorporated may be lower. rv_types gives 8.75% as an unsourced estimate. rv_buying is right: CDTFA (Oct 1, 2026) lists SB County unincorporated at 7.75% and the Town of Yucca Valley at 8.75%.",
+  "County permit fees: rv_trailer and rv_types say the fee was not found. rv_budget gives FY2026-27 fees ($301/$257/$261/$156/$57). rv_budget is right per the fee ordinance; it should also note the step-ups on July 1, 2027 and 2028.",
+  "Oliver Legacy Elite II price: rv_trailer says about $79,995 for 2026 and $85,000 for 2027. rv_budget says $85k/$90k/$100k by trim. rv_buying and rv_types say 'from $85,000'. Oliver's own pages support 'from $85,000' (2026 model page; 2027 Standard in Oliver's blog, with Platinum Pro at $113,000). $79,995 is unsupported and $90k/$100k are unverified.",
+  "Arctic Fox NXT 22GT price: rv_trailer gives $46,995-$55,495 sale against MSRPs of $66,723-$71,569. rv_budget gives $73,900 against an $89,900 MSRP. Both come from blocked Bish's listings and Northwood publishes no MSRP, so neither can be confirmed. Present them as dealer snapshots, not MSRPs. Neither file notes the 22GT's 10,400 lb GVWR.",
+  "Imagine 2600RB: rv_budget lists 6,624 lb dry and a $58,587 MSRP (Lazydays). rv_types lists 6,487-6,533 lb and $57,259-$60,916. Grand Design's current page (6,533 lb UVW, $60,916 MSRP) and RVGuide 2026 (6,487 lb, $57,259) support rv_types.",
+  "Reflection 317RSTS GVWR: 9,995 (RVGuide 2026) vs 10,995 (Grand Design's current page), as rv_types notes. Use 10,995 from the manufacturer, which puts it over the Class C limit.",
+  "Resale evidence: rv_budget says 'No rigorous study exists'. rv_trailer cites RVBlogger's 2026 study (76.6% Airstream). The RVBlogger study exists and says what rv_trailer reports, but it is a blog sample. Say 'one 2026 sample study found...' and drop 'no study exists'.",
+  "Park model status: rv_trailer suggests a HUD or park unit 'may not count as an RV or travel trailer'. rv_types says park trailers are RVs under H&SC 18010(b). rv_types is right on state law, but County acceptance is unconfirmed. Separately, the County FAQ says manufactured homes may also be temporary quarters, though the checklist names only RV/travel trailer.",
+  "Budget tiers are not comparable: rv_trailer's lean tier is $17k-$43k and excludes permits, septic and utilities. rv_budget's Tier A is $23k-$58k upfront and includes permits and site setup. Inspection estimates ($200-$1,200, $300-$1,200, $400-$1,200) and delivery estimates ($150-$800, $150-$1,700, $300-$3,000, $500-$3,000) also differ across files; all are unverified estimates."
+ ],
+ "page_cautions": [
+  "The user's actual question is whether a small prebuilt pod (~$20k) can be a storage unit. Answer it directly, and don't say a pod of 120 sq ft or less is always permit-free. The County exemption requires one story, no utilities, within setbacks and under 14 ft tall. On a lot with no house yet, 84.01.020(b) allows an accessory structure only under a Temporary Use Permit. Containers and metal storage units are listed accessory structures with their own permit fee ($156 for 1-3 units + $195 plan review + $57 intake, FY2026-27). A pod with power, insulation-for-living or a bed is not storage, and only the permitted RV or trailer may be slept in. In the Town of Yucca Valley, a storage structure before the house needs a removal bond (9.39.050(J)). No pod product or $20k price was verified.",
+  "Use 7.75% sales/use tax for unincorporated San Bernardino County and 8.75% only inside the Town of Yucca Valley, and tell readers to check the parcel on maps.cdtfa.ca.gov. Don't apply 8.75% to all tiers.",
+  "County fees: give the FY2026-27 amounts as effective July 1, 2026, and say they rise July 1, 2027 ($310 initial, $264 renewal, $268 RV site, $160 span pole, $58 intake). Say the $57 intake applies to each permit. Say it is unclear whether both the $301 initial and $261 RV-site lines apply.",
+  "Towing: write 'under 10,000 lb GVWR', and add 'tow vehicle at least 4,000 lb unladen, not for pay'. Flag that the Arctic Fox NXT 22GT (GVWR 10,400), NXT 27RK (12,800) and Reflection 317RSTS (10,995 on the GD page) need a noncommercial Class A license or professional delivery. Verified under-10k options: Imagine 2600RB (7,850), Lance 2465 (8,900), Oliver Legacy Elite II (7,000).",
+  "Insurance: say Progressive's travel-trailer policy relies on the tow vehicle for liability, so parked-site liability comes from a full-timer add-on (Progressive) or a stationary or full-timer policy (Foremost). Don't say no insurer offers liability. Note the Foremost sheet is dated 6/2020 and says not all products are available in all areas.",
+  "Oliver: write 'from $85,000'. Don't print $79,995, and don't print $90k/$100k trims as fact.",
+  "Label every dealer street price and sale-vs-MSRP figure (Bish's, RVUSA, Lazydays, Blue Compass) as an unverified listing snapshot. Those pages blocked verification, and Northwood and Lance publish no MSRPs.",
+  "Don't print the Blue Compass Palm Desert street address as verified; tell readers to confirm it. Treat Airstream So Cal group membership and the 'opened July 17, 2024' date for Airstream of San Diego as unverified.",
+  "Airstream: the 2027 'from' prices are verified. The Basecamp $1,000 gift-card offer ends Oct 31, 2026, one week after the page date. Mark it time-limited.",
+  "Park models: say state law counts a park trailer as an RV and DMV registers it. Also say the County's acceptance for the Temporary Structure Permit is unconfirmed and needs written approval. Don't call a park model 'not an RV'.",
+  "Yucca Valley rules: cite 9.39.050 as read from a third-party code mirror. State the 4-year Town cap vs the 5-year County cap, and that the Town names 'self-contained recreational vehicles' (not travel trailers generically).",
+  "Resale: phrase as 'in RVBlogger's 2026 sample of 74 five-year-old trailers, Airstreams averaged 76.6% of MSRP', not as a guaranteed resale value.",
+  "DMV: say total first-year fees must come from the DMV fee calculator, because the DMV page doesn't list which fees apply to trailer coaches."
+ ]
+}

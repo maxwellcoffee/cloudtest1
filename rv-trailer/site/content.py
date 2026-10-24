@@ -4,10 +4,10 @@ TIERS = [
     dict(k='A', name='Lean, used', render='RA', trailer='A 2017-2019 travel trailer, about 28 ft, bought used for about $12,000-28,000 (a four-season Northwood is the best find; a Jayco or Grand Design Imagine is more common).',
          gear=['Shade sail on posts over the west and door side', 'Vinyl skirting and frame tie-downs', 'Freestanding 8 x 8 ft deck and steps', '1,550-gal water tank and 12 V pump', 'Inverter generator plus a few solar panels and a battery', 'Starlink, propane cylinders, a pump-out contract', '10 x 12 ft storage shed (no permit needed if it has no power)'],
          upfront='$23k-58k', monthly='$1,150', resale='$10k-24k', net=47, nets='$31k / $47k / $62k'),
-    dict(k='B', name='Balanced, new four-season', render='RB', trailer='A new 30-ft four-season travel trailer, such as a Grand Design Imagine 2600RB or Northwood Arctic Fox, for about $38,000-65,000.',
+    dict(k='B', name='Balanced, new four-season', render='RB', trailer='A new or nearly new 30-ft four-season travel trailer, budgeted at $35,000-65,000. A new Grand Design Imagine 2600RB lists at $57,259-60,916 before dealer discounts.',
          gear=['24 x 41 ft steel RV cover with 14-ft legs (needs a permit)', 'Skirting, tie-downs, a second A/C', 'Freestanding 8 x 12 ft deck with coral lattice privacy panels', '6 kW ground solar and a 10 kWh battery that can later serve the house', '1,550-gal water tank, 250-gal propane tank', 'Temporary power pole with a 50 A RV outlet, Starlink', 'Storage shed'],
          upfront='$69k-130k', monthly='$1,085', resale='$25k-45k', net=63, nets='$46k / $63k / $79k'),
-    dict(k='C', name='Premium, Airstream', render='RC', trailer='An Airstream Flying Cloud about 26 ft (new from about $95,000 for a leftover 2026 to $115,900 list for a 2027), or an Oliver Legacy Elite II fiberglass trailer from $85,000.',
+    dict(k='C', name='Premium, Airstream', render='RC', trailer='An Airstream Flying Cloud about 26 ft (2027 models from $115,900 list; leftover 2026 units are being discounted), or an Oliver Legacy Elite II fiberglass trailer from $85,000.',
          gear=['Black steel ramada, 39 x 23 ft, with a cedar-slat west end', '12 x 12 ft cedar deck, coral lattice screens, blush loungers, olive trees in pots, string lights', 'Outdoor shower', '12 kW solar and a 20 kWh battery that moves to the house', 'Water and propane tanks, Starlink', 'Storage shed'],
          upfront='$140k-263k', monthly='$1,180', resale='$66k-117k', net=92, nets='$70k / $92k / $113k'),
 ]
@@ -49,11 +49,11 @@ def rule():
     <li><b>Order:</b> the house building permit is issued first, then this permit, then the trailer moves in. Putting it on the lot earlier can bring penalty fees and enforcement.</li>
     <li><b>Term:</b> 12 months, renewed 12 months at a time, never more than 5 years from the first issue. It lapses if no inspection is called within 180 days.</li>
     <li><b>You submit:</b> a plot plan, the trailer's current California DMV registration, and a sewage pumping contract if the trailer is self-contained. The final inspection covers the power, gas, sewer and water hookups.</li>
-    <li><b>Fees (July 2026 schedule):</b> $301 to apply, $261 for the temporary RV site, $257 for each renewal; a temporary power pole is $156 plus a $57 intake fee.</li>
-    <li><b>If the lot is inside the Town of Yucca Valley</b>, the Town's code applies instead: a self-contained RV, 1 year plus 1-year extensions, 4 years at most, and it ends when the house is done.</li>
+    <li><b>Fees (from July 1, 2026):</b> $301 to apply and $257 for each renewal; the schedule also lists $261 for a temporary RV site (ask whether both apply). A temporary power pole is $156. Each permit adds a $57 intake fee. Fees rise slightly on July 1, 2027 ($310, $264, $268, $160 and $58).</li>
+    <li><b>If the lot is inside the Town of Yucca Valley</b>, the Town's code applies instead: a "self-contained recreational vehicle", 1 year plus 1-year extensions, 4 years at most, and it ends when the house is done. (Read from a third-party copy of the Town code; confirm with Town planning.)</li>
   </ul></div>
-  <p>So buy something the DMV registers: a travel trailer or a fifth wheel. Skip a park model unless the County says
-  in writing that it counts. You can buy before the permit, but plan to keep the trailer at a storage lot or the
+  <p>So buy something the DMV registers: a travel trailer or a fifth wheel. State law counts a park model as an RV,
+  but the County hasn't said it qualifies for this permit, so get that in writing before buying one. You can buy before the permit, but plan to keep the trailer at a storage lot or the
   dealer until the house permit is issued.</p>
 </div></section>'''
 
@@ -63,17 +63,20 @@ def pod():
 <section class="wrap" id="pod" style="background:var(--wash)"><div class="col stack">
   <p class="eyebrow">Your question</p>
   <h2>Can a small prebuilt pod count as storage?</h2>
-  <p><b>Yes, as storage only.</b> In the County a shed of 120 sq ft or less, under 14 ft tall and with no utilities,
-  needs no building permit. Setbacks still apply, and anything larger needs an accessory-structure permit.</p>
+  <p><b>Yes, if it is truly storage, and with the same rules as any shed.</b> In the unincorporated County a storage
+  building needs no building permit only if it is 120 sq ft or less, one story, under 14 ft tall, has no utilities,
+  and sits inside the setbacks. Anything bigger needs an accessory-structure permit. Shipping containers and metal
+  storage units are allowed in Rural Living if painted to blend in and placed behind the main building; their permit
+  is $156 for one to three units, plus $195 plan review and a $57 intake fee.</p>
   <ul>
-    <li><b>Before the house permit exists</b>, any accessory structure on the lot also needs a Temporary Use Permit and a removal bond. Inside the Town of Yucca Valley, accessory structures are allowed only with an approved house.</li>
-    <li><b>No sleeping in it.</b> A pod with a bed, insulation, windows and air conditioning reads as a dwelling to an inspector, and one complaint can bring an order to vacate. An imported capsule without a HUD, HCD or RVIA label can never become a legal bedroom or guest unit later.</li>
-    <li><b>Real cost.</b> Capsules listed around $19,000-24,000 come to about $25,000-37,000 after import duty, and roughly $35,000-65,000 once freight, crane, foundation and hookups are added (estimates).</li>
+    <li><b>Before the house exists</b>, any accessory structure needs a Temporary Use Permit (County code 84.01.020(b)). Inside the Town of Yucca Valley, a storage building before the house is allowed only with a bond to remove it if the house isn't finished within 2 years.</li>
+    <li><b>Storage means storage.</b> A pod with wiring needs an electrical permit, and one with a bed, insulation and air conditioning is a dwelling to an inspector, whatever it is called. Only the permitted trailer may be slept in; one complaint can bring an order to vacate. An imported capsule without a HUD, HCD or RVIA label can never become a legal bedroom or guest unit later.</li>
+    <li><b>Real cost.</b> Capsules listed around $19,000-24,000 come to about $25,000-37,000 after import duty, and roughly $35,000-65,000 once freight, crane, foundation and hookups are added (estimates from the land research; no specific pod was priced here).</li>
   </ul>
   <div class="note"><p><b>Better use of the $20,000:</b> it buys a decent used trailer, the one interim home the County
   allows, and a 10 x 12 ft shed covers storage for a few thousand dollars more. If you love a particular pod, buy one
-  with an HCD factory-built insignia or an RVIA park-model seal so it could become a legal guest unit later, and get
-  that in writing from the seller.</p></div>
+  with an HCD factory-built insignia or an RVIA park-model seal so it could become a legal guest unit later, get that
+  in writing from the seller, and confirm with County Building and Safety before you buy.</p></div>
 </div></section>'''
 
 
@@ -118,19 +121,19 @@ def which():
         ('Fifth wheel', 'Works if delivered', 'More room and height, but you need a pickup to move it. Over 40 ft or 102 in wide cannot be registered in California.'),
         ('Destination trailer, about 40 ft', 'Roomy, rarely four-season', 'Three slides and 13.5 ft tall; needs a long pad and a tall shade cover.'),
         ('RVIA tiny house on wheels', 'Ask the County first', 'Closest to a modern house look (for example the Escape Vista Boho XL, from $62,710). Registered as a travel trailer, but confirm it counts.'),
-        ('Park model', 'Avoid unless approved', 'Up to 400 sq ft and 14 ft wide, moved only by Caltrans permit. Get the County\'s answer in writing before buying.'),
+        ('Park model', 'Avoid unless approved', 'Up to 400 sq ft and 14 ft wide, moved only with a highway permit. State law calls it an RV, but get the County\'s answer in writing before buying.'),
     ]
     picks = [
-        ('Grand Design Imagine 2600RB', '29 ft 8 in', 'R-40 roof, R-30 floor, four-season package, 50 A, ready for a 2nd A/C', '$38k-59k', '2019: about $16k-29k', 'Best value new'),
-        ('Northwood Arctic Fox NXT 22GT', '24 ft', 'Built in Oregon for four seasons: heated tanks, thermal-pane windows', 'about $47k-74k on sale', '2018 25Y: about $29k-35k', 'Compact four-season'),
-        ('Northwood Arctic Fox NXT 27RK', '32 ft 3 in', 'Two slides, rear kitchen, 100-gal fresh tank', 'about $74k-75k on sale', 'n/a', 'Roomiest four-season for two'),
-        ('Grand Design Reflection 317RSTS', '35 ft 5 in', 'R-40 roof, R-30 floor, rear living room, 2 slides', '$80k-90k', '297RSTS 2019-2024: about $28k-50k', 'Most living space'),
-        ('Lance 2465', '29 ft 10 in', 'King bed, thermopane windows, four-season package; built in Lancaster', '$64k-87k', 'n/a', 'High-desert-built'),
-        ('Oliver Legacy Elite II', '24 ft', 'Double-hull fiberglass, heated tanks between the shells', '$85k-100k (no haggle)', 'rare', 'Lasts, resells well'),
-        ('Airstream Flying Cloud 25FB', '26 ft 2 in', 'Aluminum shell, 15k BTU heat-pump A/C, heated underbelly', '2027 from $115,900; leftover 2026 from about $94,900', '2016-2019: about $49k-59k', 'The look; best resale'),
+        ('Grand Design Imagine 2600RB', '29 ft 8 in', '7,850 lb: yes', 'R-40 roof, R-30 floor, four-season package, 50 A, ready for a 2nd A/C', '$57,259-60,916 list', '2019 Imagines: about $16k-29k asking', 'Best value new'),
+        ('Northwood Arctic Fox NXT 22GT', '23 ft 10 in', '10,400 lb: no', 'Built in Oregon for four seasons: heated tanks, thermal-pane windows', 'no list price; dealer listings about $47k-74k (unverified)', '2018 25Y: about $29k-35k asking', 'Compact four-season'),
+        ('Northwood Arctic Fox NXT 27RK', '32 ft 3 in', '12,800 lb: no', 'Two slides, rear kitchen, 100-gal fresh tank, sleeps 2', 'dealer listings about $74k-75k (unverified)', 'n/a', 'Roomiest four-season for two'),
+        ('Grand Design Reflection 317RSTS', '35 ft 5 in', '10,995 lb: no', 'R-40 roof, R-30 floor, rear living room, 2 slides', '$80,204-90,227 list', '297RSTS 2019-2024: about $28k-50k asking', 'Most living space'),
+        ('Lance 2465', '29 ft 10 in', '8,900 lb: yes', 'King bed, thermopane windows, four-season package; built in Lancaster', 'no list price; listings about $64k-87k (unverified)', 'n/a', 'High-desert-built'),
+        ('Oliver Legacy Elite II', '24 ft', '7,000 lb: yes', 'Double-hull fiberglass, heated tanks between the shells', 'from $85,000, sold direct', 'rare', 'Lasts, resells well'),
+        ('Airstream Flying Cloud 25FB', '26 ft 2 in', '7,300 lb: yes', 'Aluminum shell, 15k BTU heat-pump A/C, heated underbelly', '2027 from $115,900 list', '2016-2019: about $49k-59k', 'The look; best resale'),
     ]
     t1 = ''.join(f'<tr><td>{a}</td><td><span class="pill">{b}</span></td><td>{c}</td></tr>' for a, b, c in types)
-    t2 = ''.join(f'<tr><td>{a}</td><td class="num">{b}</td><td>{c}</td><td>{d}</td><td>{e}</td><td>{f}</td></tr>' for a, b, c, d, e, f in picks)
+    t2 = ''.join(f'<tr><td>{a}</td><td class="num">{b}</td><td class="num">{g}</td><td>{c}</td><td>{d}</td><td>{e}</td><td>{f}</td></tr>' for a, b, g, c, d, e, f in picks)
     return f'''
 <section class="wrap" id="which"><div class="wide stack">
   <p class="eyebrow">Which trailer</p><h2>What to buy for 1-3 years in the high desert</h2>
@@ -138,15 +141,15 @@ def which():
   trailer. Rooftop A/C only cools the air about 18-25F below outside, so shade matters more than the trailer.</p>
   <div class="scroll"><table><thead><tr><th>Type</th><th>Verdict</th><th>Why</th></tr></thead><tbody>{t1}</tbody></table></div>
   <h3>Models worth seeing</h3>
-  <div class="scroll"><table><thead><tr><th>Model</th><th class="num">Length</th><th>Built for the weather</th><th>New</th><th>Used</th><th>Pick it for</th></tr></thead><tbody>{t2}</tbody></table></div>
-  <p class="small muted">New prices are dealer sale prices or list prices seen in October 2026; used prices are asking prices. Listings change daily.</p>
+  <div class="scroll"><table><thead><tr><th>Model</th><th class="num">Length</th><th class="num">Max weight: tow on a car license?</th><th>Built for the weather</th><th>New</th><th>Used</th><th>Pick it for</th></tr></thead><tbody>{t2}</tbody></table></div>
+  <p class="small muted">List prices are from the makers' sites in October 2026; dealer listings are snapshots that couldn't all be re-checked; used prices are asking prices. A regular California license tows a trailer under 10,000 lb loaded weight (GVWR) behind a vehicle of at least 4,000 lb; heavier ones need a noncommercial Class A license or dealer delivery. In one 2026 sample of 74 five-year-old trailers (RVBlogger), Airstreams averaged 76.6% of their original price, the best of any brand.</p>
 </div></section>'''
 
 
 def where():
     dealers = [
-        ('Blue Compass RV Palm Desert', '77840 Varner Rd, Palm Desert', 'Closest full dealer, about 45 mi. Jayco, Forest River, Keystone, Grand Design; new and used.'),
-        ('Mike Thompson\'s RV', 'Cathedral City and Colton', 'New and used mainstream brands.'),
+        ('Blue Compass RV Palm Desert', 'Varner Rd, Palm Desert (confirm the address)', 'Closest full dealer, about 45 mi. Jayco, Forest River, Keystone, Grand Design; new and used.'),
+        ('Mike Thompson\'s RV', '68318 E Palm Canyon Dr, Cathedral City; 902 RV Center Dr, Colton', 'New and used mainstream brands.'),
         ('Giant RV', '1300 E Santo Antonio Dr, Colton (also Montclair, Murrieta)', 'New and used; takes consignments of 2015-or-newer trailers.'),
         ('Camping World', '10717 Indiana Ave, Riverside', 'Large lot of new and used trailers.'),
         ('High Desert lots (I-15 RV and others)', 'Hesperia and Victorville', 'Mostly used; closest to the lot from the north.'),
@@ -165,8 +168,8 @@ def where():
     "escrow" or shipping service the seller picks, and only buy when the title is in the seller's name.</p>
     <p><b>Avoid</b> auctions and bank repossessions for a trailer you must live in: sold as-is, often with salvage titles.</p>
     <p><b>When:</b> now through winter. With 2027 prices out, dealers are discounting leftover 2026 trailers, some by
-    $12,000-20,000 on Airstreams. The California RV Supershow at the Pomona Fairplex in March is the other good
-    time to compare floor plans in one place.</p>
+    $12,000-20,000 on Airstreams. The California RV Supershow in Pomona, March 19-21, 2027, is the other good time
+    to compare floor plans in one place.</p>
   </div>
 </div></section>'''
 
@@ -176,8 +179,8 @@ def how():
         ('Shortlist', 'Agree on length, bed, budget cap and must-haves (dual-pane windows, heated tanks, 50 A, two A/Cs). Walk three or four floor plans at the Palm Desert dealer on a weekday.'),
         ('Inspect', 'Do your own walk-through for water damage first: press the floor at the door, bath and sink; sight down the walls for bubbles; check ceiling corners and roof seals. Then hire an NRVIA-certified inspector (find one on rvhelp.com; about $400-1,200 with travel).'),
         ('Price it', 'Ask for an itemized out-the-door price: doc fee, prep, delivery, add-ons, tax and DMV. Sales tax is about 7.75% in unincorporated areas and 8.75% inside the Town of Yucca Valley, based on where the trailer will sit.'),
-        ('Title and DMV', 'Trailers over 16 ft are trailer coaches with yearly registration: $76 plus a $34 CHP fee, a license fee of 0.65% of value, and a transportation fee by value. Register within 10 days; the seller files a release within 5.'),
-        ('Insure it', 'Ask for a full-timer or stationary-trailer policy with liability. A normal travel-trailer policy leaves liability to the tow vehicle, and you won\'t have one.'),
+        ('Title and DMV', 'Trailers over 16 ft are trailer coaches with yearly registration. Fees include $76 registration, a license fee of 0.65% of value and a transportation fee by value; run the DMV fee calculator with the VIN for the real total. Report the transfer within 10 days; the seller files a release within 5.'),
+        ('Insure it', 'A normal travel-trailer policy leaves liability to the tow vehicle, and you won\'t have one. Ask for a full-timer add-on (Progressive) or a stationary or full-timer trailer policy (Foremost writes these through agents; check it still does in California).'),
         ('Deliver it', 'Write dealer delivery and leveling into the deal, or book a tow-away driver (uShip averages about $3.39 a mile under 100 miles). Check that a truck and a 30-ft trailer can turn around on the lot.'),
     ]
     lis = ''.join(f'<li><span class="t">{a}</span><span>{b}</span></li>' for a, b in steps)
@@ -213,7 +216,7 @@ def budget():
     <li><b>Monthly running costs</b> with pump-out run about $650-1,700: pump-out $250-700, hauled water $100-300, propane $20-250, insurance $50-250, Starlink $55-130, plus renewals and repairs.</li>
     <li>The 30% federal solar tax credit ended for systems placed in service after December 31, 2025.</li>
   </ul>
-  <p class="small muted">Trailer prices come from listings; site work, insurance, inspection, delivery and resale values are estimates. Get quotes.</p>
+  <p class="small muted">Trailer prices come from listings; site work, insurance, inspection, delivery and resale values are estimates. The budgets assume the Town's 8.75% sales tax; on an unincorporated lot the tax is 7.75%, about $1,000 less per $100,000. Get quotes.</p>
 </div></section>'''
 
 
@@ -262,7 +265,7 @@ def sources():
         ('County FAQ: living on the property while building', 'https://lus.sbcounty.gov/faqs/while-building-a-new-home-can-i-put-a-temporary-mobile-home-on-my-property-to-live-in-while-my-house-is-under-construction'),
         ('Yucca Valley Zoning Code chapter 9.39 (third-party copy)', 'https://gocodebook.com/library/us/ca/yucca-valley-zoning/chapter-9.39-temporary-uses-and-structures'),
         ('California DMV: trailers', 'https://www.dmv.ca.gov/portal/vehicle-registration/trailers/'),
-        ('CHP: licence requirements for towing trailers', 'https://www.chp.ca.gov/CommercialVehicleSectionSite/Documents/IB%20California%20Driver%20License%20Requirements%20for%20Towing%20Trailers.pdf'),
+        ('CHP: license requirements for towing trailers', 'https://www.chp.ca.gov/CommercialVehicleSectionSite/Documents/IB%20California%20Driver%20License%20Requirements%20for%20Towing%20Trailers.pdf'),
         ('Airstream travel trailers and prices', 'https://www.airstream.com/travel-trailers/'),
         ('Airstream dealer locator', 'https://www.airstream.com/dealers/'),
         ('Blue Compass RV Palm Desert', 'https://www.bluecompassrv.com/locations/california/palm-desert/contact-us'),

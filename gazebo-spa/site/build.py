@@ -37,7 +37,7 @@ SCHEMES = [
          outside=['Cedar cabin sauna, 7 x 7 ft, eight steps from the east door', 'Stock-tank cold plunge and a rinse shower between the two', 'Vine pergola with hanging cone planters over a heated rest platform', 'Mexican and Mediterranean fan palms in black pebble beds'],
          size='About 432 sq ft under roof. Terrace 51 x 37 ft.',
          good='Year-round use. Glass and a solid knee wall stop the spring wind and hold heat on 20F nights, and steam leaves through the slats.',
-         watch='The most permits: an enclosed building, safety glass near the water, and an in-ground spa with drowning-prevention features. Highest cost. Needs a dehumidifying fan.',
+         watch='The most permits: an enclosed building, safety glass near the water, and an in-ground spa that needs a barrier or safety features. The inspector may treat the room as indoor, which changes the wiring rules. Highest cost. Needs an exhaust fan for steam.',
          tier='Premium', shots=['A_hero', 'A_inner', 'A_dusk']),
     dict(k='B', name='Jeongja Bathhouse', tag='The full Korean bath',
          idea="A hanok-style pavilion (jeongja) on a 2-ft stone platform, 24 x 16 ft, in three 8-ft bays that follow the Korean bath in order: wash, soak, rest. Paper-backed lattice screens close the north and west sides for privacy and glow at night. The south side stays open to the view, and the black tile roof turns up at the corners.",
@@ -61,7 +61,7 @@ SCHEMES = [
          outside=['Tall fan palms over the wall line', 'Agaves and natives outside the walls'],
          size='1,600 sq ft inside the walls; about 100 sq ft of roofs plus the pergola.',
          good='A sheltered microclimate where tender plants survive, and complete privacy. Can be built in stages: walls and tub first, the corners later.',
-         watch='The walls are the big cost, and walls over 6 ft need a permit. The clay dome is a custom build; skip it at first.',
+         watch='The walls are the big cost; garden walls this tall need a building permit and wind engineering (ask the County). The clay dome is a custom build; skip it at first.',
          tier='Premium', shots=['D_hero', 'D_inner', 'D_dusk']),
     dict(k='E', name='Starter Kit', tag='Start while you build',
          idea="The quick version you can set up in a few weekends and move later. A 12 x 12 ft cedar gazebo kit over a plug-and-play hot tub, two coral lattice screens on the wind side, and plants in pots. A 6-ft barrel sauna, a stock-tank plunge and a post shower stand beside it.",
@@ -69,7 +69,7 @@ SCHEMES = [
          outside=['Cedar barrel sauna, 6 ft (2 to 4 people)', 'Stock-tank cold plunge and a post shower', 'Two loungers and string lights'],
          size='144 sq ft under roof. Paver pad 32 x 24 ft.',
          good='Trying the ritual cheaply, early. The tub, sauna and plunge all move into Scheme A, B, C or D later.',
-         watch='Light kits are rated for 40 to 100 mph winds, so anchor them to engineered footings. Before the house is finished, the County may require a Temporary Use Permit.',
+         watch='Light kits are rated for 40 to 100 mph winds, so anchor them to engineered footings. Before the house is finished, it needs a Temporary Use Permit unless the County says the trailer permit counts as the main use.',
          tier='Lean', shots=['E_hero', 'E_inner', 'E_dusk']),
 ]
 
