@@ -1,4 +1,4 @@
-"""Scheme C - Octagon Garden Gazebo: an octagonal timber gazebo around one round soaking tub, screened
+"""Scheme C - Octagon Garden Gazebo: an octagonal timber gazebo around one round in-ground hot tub, screened
 with coral lattice on the windward side, planted inside; a cedar barrel sauna a few steps east."""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -26,9 +26,9 @@ for k in range(8):
             s.bay(p1, p2, z, g['h'], kind='half', pattern='yong')
         s.bay(p1, p2, z, g['h'], kind='frieze')
 
-# ---- the one hot tub: a raised round plaster tub (about 8 ft across), stone coping, step
-s.round_tub('Hot tub, 8 ft round, plaster + stone coping', 0, 0.15, R=1.25, H=0.62, depth=0.56)
-s.box('tub_step', (0.9, 0.42, 0.3), (0, 0.15 - 1.25 - 0.26, z + 0.15), s.m('stone'), 'spa')
+# ---- the one hot tub: in-ground, round, 8 ft across, plaster with a blue mosaic waterline and stone coping
+s.sunk_pool('In-ground round hot tub, 8 ft', s.stadium(2.5, 2.5, r=1.25, n=16, cx=0.0, cy=0.15), depth=0.95,
+            coping=0.28, steps_at=(0.0, 0.15 - 1.05, 0))
 
 # ---- planting inside the screened half: planters along N/NW/W/SW faces, palms in pots, hanging pothos
 for k in (2, 3, 4, 5):

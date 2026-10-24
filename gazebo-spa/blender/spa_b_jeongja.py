@@ -1,5 +1,5 @@
-"""Scheme B - Jeongja Bathhouse: a hanok-inspired pavilion on a raised stone platform, in three 8-ft bays
-(wash + scrub / soak / warm rest), with coral lattice and paper screens that glow at night; a cedar cabin
+"""Scheme B - Jeongja Bathhouse: a hanok-inspired pavilion on a low stone base, in three 8-ft bays
+(wash + scrub / in-ground soak / warm rest), with coral lattice and paper screens that glow at night; a cedar cabin
 sauna, cold plunge and shower a few steps east."""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -12,14 +12,14 @@ s.paper_glow = lambda: 3.0 if s.night else 0.0
 s.terrace(16.0, 12.5, x=1.6, y=0.2)
 z = s.z
 
-# ---- raised stone platform (gidan), 2 ft high, with a hole for the sunken tub in the middle bay
-W, L, PH = 7.3, 4.9, 0.6
+# ---- low stone base (gidan), 1 ft high, with a hole for the in-ground tub in the middle bay
+W, L, PH = 7.3, 4.9, 0.3
 zt = z + PH + 0.04          # finished floor: stone platform + 4 cm boards
 tub = s.stadium(1.95, 1.95, r=0.22, cx=0.0, cy=-0.1)
 s.hanok_plinth(W + 1.3, L + 1.3, PH, hole=(0.0, -0.1, 1.97, 1.97), steps=[(0.0, -(L + 1.3) / 2, 0), (W / 2 + 0.65, -1.2, 90)])
 s.hanok_floor(W + 1.3, L + 1.3, z + PH, hole=(0.0, -0.1, 1.97, 1.97))
 s.box('wet_floor', (2.6, L + 0.6, 0.02), (-W / 2 + 1.2, 0.0, zt + 0.01), s.mat('slate', '#3b3a39', rough=0.6), 'spa')
-s.sunk_pool('Sunken tiled hot tub, 6.5 x 6.5 ft, 104 F max', tub, depth=0.95, z_top=zt, coping=0.22)
+s.sunk_pool('In-ground tiled hot tub, 6.5 x 6.5 ft, rim at floor level', tub, depth=1.0, z_top=zt, coping=0.22)
 
 # ---- the pavilion: 24 x 16 ft, three bays, black-stained posts, upturned tile roof
 g = s.rect_pavilion('Jeongja bathhouse, 24 x 16 ft, three bays', W, L, h=2.7, nx=4, ny=3, roof='hip', rise=1.7,
@@ -111,4 +111,4 @@ s.sky.sun_intensity = 0.6
 s.shot(dusk, 'B_dusk', samples=72, exposure=0.6)
 s.set_night(False)
 s.plan_shot('B_plan', width=24.0, center=(1.9, 0.3),
-            note='Pavilion 24 x 16 ft = 384 sq ft on a 28 x 20 ft stone platform, 2 ft high')
+            note='Pavilion 24 x 16 ft = 384 sq ft on a 28 x 20 ft stone base, 1 ft high; tub set into the ground')

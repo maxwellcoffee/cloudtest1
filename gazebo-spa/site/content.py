@@ -8,8 +8,8 @@ def intro():
     <div class="hero-text">
       <p class="eyebrow">Yucca Valley lot &middot; bathhouse plans &middot; October 2026</p>
       <h1>The Garden Bathhouse</h1>
-      <p class="lede">Five plans for a Korean-style bathhouse on the land: one hot tub under a roof with plants inside,
-      a cedar sauna a few steps away, then cold water and a warm floor to rest on. The starting point is the enclosed
+      <p class="lede">Five plans for a Korean-style bathhouse on the land: one hot tub built into the ground, under a
+      roof with plants inside, a cedar sauna a few steps away, then cold water and a warm floor to rest on. The starting point is the enclosed
       pool house at The Spring in Desert Hot Springs.</p>
       <p class="muted">Every image is a Blender render of the real lot model: same slope, same Joshua trees, same
       mountains to the north. Prices are 2025-2026 list prices or labeled estimates.</p>
@@ -76,10 +76,10 @@ def ritual(wave):
 def compare(schemes):
     rows = [
         ('A', 'Spring Glass House', '432 sq ft, glass room', 'In-ground tiled, 9.5 x 7 ft', 'Cabin, 7 x 7 ft', 'Inside: wash + scrub. Outside: plunge, warm platform', 'Enclosed, warm in winter', 'Premium'),
-        ('B', 'Jeongja Bathhouse', '384 sq ft, open south', 'Sunken tiled, 6.5 x 6.5 ft', 'Cabin, 7 x 7 ft', 'All inside in three bays; ondol floor, sikhye station', 'Half open, very Korean', 'Balanced to premium'),
-        ('C', 'Octagon Garden Gazebo', '340 sq ft, open east + south', 'Round raised, 8 ft', 'Barrel, 6 ft', 'Outside: wash, plunge, warm platform', 'Open-air garden', 'Balanced'),
-        ('D', 'Walled Garden Courtyard', '1,600 sq ft walled garden', 'Cedar round, 6.5 ft', 'Cabin + clay dome', 'One per corner', 'Private, most plants', 'Premium'),
-        ('E', 'Starter Kit', '144 sq ft kit', 'Plug-and-play, 7 x 7 ft', 'Barrel, 6 ft', 'Plunge and post shower', 'Quick, movable', 'Lean'),
+        ('B', 'Jeongja Bathhouse', '384 sq ft, open south', 'In-ground tiled, 6.5 x 6.5 ft', 'Cabin, 7 x 7 ft', 'All inside in three bays; ondol floor, sikhye station', 'Half open, very Korean', 'Balanced to premium'),
+        ('C', 'Octagon Garden Gazebo', '340 sq ft, open east + south', 'In-ground round, 8 ft', 'Barrel, 6 ft', 'Outside: wash, plunge, warm platform', 'Open-air garden', 'Balanced'),
+        ('D', 'Walled Garden Courtyard', '1,600 sq ft walled garden', 'In-ground round, 6.5 ft', 'Cabin + clay dome', 'One per corner', 'Private, most plants', 'Premium'),
+        ('E', 'Starter Kit', '144 sq ft kit', 'Plug-and-play, recessed, 7 x 7 ft', 'Barrel, 6 ft', 'Plunge and post shower', 'Lowest cost', 'Lean'),
     ]
     trs = ''.join('<tr>' + ''.join(f'<td>{c}</td>' for c in r) + '</tr>' for r in rows)
     return f'''
@@ -88,9 +88,9 @@ def compare(schemes):
   <div class="scroll"><table>
     <thead><tr><th></th><th>Plan</th><th>Under roof</th><th>Hot tub</th><th>Sauna</th><th>Korean extras</th><th>Feel</th><th>Budget tier</th></tr></thead>
     <tbody>{trs}</tbody></table></div>
-  <div class="col stack"><div class="note"><p><b>A way to phase it.</b> Start with E once the house permit is issued
-  (or with a Temporary Use Permit), while you live in the trailer. When the house is finished, move the tub, sauna
-  and plunge into A, B, C or D. Nothing in E is wasted.</p></div></div>
+  <div class="col stack"><div class="note"><p><b>A way to phase it.</b> Because the tub is built into the ground,
+  pick its final spot from the start. Dig and build the tub where it will stay, roof it simply at first (E), and add
+  the bigger structure of A, B, C or D around it later. The barrel sauna and plunge can move.</p></div></div>
 </div></section>'''
 
 

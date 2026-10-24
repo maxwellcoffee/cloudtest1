@@ -844,7 +844,8 @@ class Spa(K.Site):
         cutter.hide_render = True
         cutter.hide_viewport = True
 
-    def sunk_pool(self, label, outline, depth=0.95, z_top=None, coping=0.3, targets=(), band=0.15, steps_at=None):
+    def sunk_pool(self, label, outline, depth=0.95, z_top=None, coping=0.3, targets=(), band=0.15, steps_at=None,
+                  lining='pool_lining', band_mat='mosaic', coping_mat='stone'):
         """In-ground tiled pool/spa: blue mosaic band at the waterline, pale lining, stone coping.
         Cuts the terrace (and any `targets`) and dips the terrain under it."""
         zt = self.z if z_top is None else z_top
@@ -858,19 +859,19 @@ class Spa(K.Site):
             self.cut(t, cutter)
         n = len(outline)
         # walls: mosaic band on top, lining below
-        for (z0, z1, mat) in ((zt - band, zt, self.m('mosaic')), (zb, zt - band, self.m('pool_lining'))):
+        for (z0, z1, mat) in ((zt - band, zt, self.m(band_mat)), (zb, zt - band, self.m(lining))):
             verts = [(x, y, z1) for (x, y) in outline] + [(x, y, z0) for (x, y) in outline]
             faces = [(i, (i + 1) % n, n + (i + 1) % n, n + i) for i in range(n)]
             self.mesh_from('pool_wall', verts, faces, mat, 'spa')
-        self.mesh_from('pool_floor', [(x, y, zb) for (x, y) in outline], [tuple(range(n))], self.m('pool_lining'), 'spa')
-        self.ring_slab('coping', self.offset(outline, -0.02), self.offset(outline, coping), zt - 0.02, zt + 0.05, self.m('stone'), 'spa')
+        self.mesh_from('pool_floor', [(x, y, zb) for (x, y) in outline], [tuple(range(n))], self.m(lining), 'spa')
+        self.ring_slab('coping', self.offset(outline, -0.02), self.offset(outline, coping), zt - 0.02, zt + 0.05, self.m(coping_mat), 'spa')
         self.mesh_from('water', [(x, y, zt - 0.12) for (x, y) in self.offset(outline, -0.005)], [tuple(range(n))], self.m('water'), 'spa')
         if steps_at:
             sx, sy, rot = steps_at
             root = self.empty('pool_steps', sx, sy, zb, rot, 'spa')
             for i in range(3):
                 hh = depth * (i + 1) / 4
-                self.box('pool_step', (1.0, 0.36 * (3 - i), hh), (0, 0.18 * (3 - i), hh / 2), self.m('pool_lining'), 'spa', parent=root)
+                self.box('pool_step', (1.0, 0.36 * (3 - i), hh), (0, 0.18 * (3 - i), hh / 2), self.m(lining), 'spa', parent=root)
         self.anchor(label, cx, cy, zt, 1, dz=0.3)
         return zb
 

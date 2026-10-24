@@ -1,5 +1,5 @@
-"""Scheme E - Starter Kit: the quick, movable first version. A 12 x 12 ft cedar gazebo kit over a
-plug-and-play hot tub, two coral lattice screens on the wind side, potted plants inside; a 6-ft cedar barrel
+"""Scheme E - Starter Kit: the lean version. A 12 x 12 ft cedar gazebo kit over a
+plug-and-play hot tub recessed into the ground, two coral lattice screens on the wind side, potted plants inside; a 6-ft cedar barrel
 sauna, stock-tank plunge and post shower beside it. Everything can move to its final spot later."""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +21,10 @@ s.bay(ring[0], ring[1], z, g['h'], kind='frieze')
 s.bay(ring[1], ring[2], z, g['h'], kind='frieze')
 s.anchor('Two coral lattice screens on the wind side', ring[3][0], 0.0, z, 0, dz=1.5)
 
-s.acrylic_spa('Plug-and-play hot tub, 7 x 7 ft (240 V)', 0.15, -0.1, s=2.13)
+s.sunk_pool('Recessed hot tub, 7 x 7 ft, rim at ground level', s.stadium(1.85, 1.85, r=0.35, n=8, cx=0.15, cy=-0.1), depth=0.9,
+            coping=0.14, band=0.06, lining='acrylic', band_mat='acrylic', coping_mat='acrylic')
+s.box('equipment_hatch', (0.9, 0.55, 0.05), (1.62, -0.1, z + 0.025), s.m('cedar_h'), 'spa')
+s.anchor('Hatch to the tub equipment (pumps, heater)', 1.62, -0.1, z, 0, dz=0.3)
 for (px, py, kind) in ((-1.5, 1.5, 'palm'), (1.55, 1.5, 'bop'), (-1.55, -1.5, 'fern')):
     t = s.pot(px, py, r=0.28, h=0.5, mat='black_fabric' if kind != 'fern' else 'plaster')
     if kind == 'palm':

@@ -1,5 +1,5 @@
 """Scheme D - Walled Garden Courtyard: blush plaster walls with tile caps make a 40 x 40 ft garden room,
-out of the wind; a vine pergola over one cedar soaking tub in the middle; cedar sauna, clay dome warm room,
+out of the wind; a vine pergola over one in-ground hot tub in the middle; cedar sauna, clay dome warm room,
 wash corner and a covered rest platform in the four corners; palms, bird of paradise and bougainvillea."""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -42,8 +42,8 @@ s.anchor('Coral lattice gate', 0.0, -R, z, 0, dz=2.4)
 
 # ---- centre: vine pergola (14 x 14 ft) over one round cedar soaking tub
 pg = s.rect_pavilion('Vine pergola, 14 x 14 ft', 4.3, 4.3, h=2.6, nx=2, ny=2, roof='pergola', cx=0.0, cy=0.6, anchor_cat=3)
-s.round_tub('Cedar soaking tub, 6.5 ft round (electric or wood-fired)', 0.0, 0.6, R=1.0, H=1.05, depth=0.95, kind='cedar')
-s.box('tub_step', (0.8, 0.45, 0.45), (0.0, 0.6 - 1.28, z + 0.225), s.m('cedar_plain'), 'spa')
+s.sunk_pool('In-ground round hot tub, 6.5 ft', s.stadium(2.0, 2.0, r=1.0, n=16, cx=0.0, cy=0.6), depth=0.95,
+            coping=0.3, steps_at=(0.0, 0.6 - 0.82, 0))
 for (px, py) in pg['ring']:
     s.vine_post(px, py, z, 2.55)
 bx0, bx1, by0, by1 = pg['box']
