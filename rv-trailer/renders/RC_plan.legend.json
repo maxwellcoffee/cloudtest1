@@ -1,7 +1,7 @@
 [
  {
   "n": 1,
-  "label": "Airstream Flying Cloud, about 26 ft",
+  "label": "Airstream Flying Cloud 25FB, 26 ft 2 in overall",
   "phase": 0
  },
  {
@@ -22,7 +22,7 @@
  {
   "n": 5,
   "label": "Outdoor shower",
-  "phase": 1
+  "phase": 3
  },
  {
   "n": 6,
@@ -36,12 +36,17 @@
  },
  {
   "n": 8,
-  "label": "12 kW solar + 20 kWh battery (moves to the house)",
+  "label": "28 panels (about 12 kW) + 20 kWh battery (moves to the house)",
   "phase": 2
  },
  {
   "n": 9,
-  "label": "Storage shed, 10 x 12 ft",
+  "label": "Starlink dish on a short mast",
+  "phase": 2
+ },
+ {
+  "n": 10,
+  "label": "Storage shed, 10 x 12 ft, off the pad",
   "phase": 1
  }
 ]

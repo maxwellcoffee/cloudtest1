@@ -31,17 +31,22 @@
  },
  {
   "n": 7,
-  "label": "6 kW ground solar + 10 kWh battery",
+  "label": "14 panels (about 6 kW) + 10 kWh battery",
   "phase": 2
  },
  {
   "n": 8,
-  "label": "Temporary power pole + 50 A pedestal",
+  "label": "Starlink dish on a short mast",
   "phase": 2
  },
  {
   "n": 9,
-  "label": "Storage shed, 10 x 12 ft",
+  "label": "Backup inverter generator",
+  "phase": 2
+ },
+ {
+  "n": 10,
+  "label": "Storage shed, 10 x 12 ft, off the pad",
   "phase": 1
  }
 ]

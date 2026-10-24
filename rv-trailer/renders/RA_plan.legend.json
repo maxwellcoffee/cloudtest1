@@ -11,7 +11,7 @@
  },
  {
   "n": 3,
-  "label": "Shade sail on the west + door side",
+  "label": "Shade sail over the door side",
   "phase": 0
  },
  {
@@ -26,22 +26,22 @@
  },
  {
   "n": 6,
-  "label": "Inverter generator (backup for A/C)",
+  "label": "Inverter generator, about 18 ft east (backup for A/C)",
   "phase": 2
  },
  {
   "n": 7,
-  "label": "Starter solar: 6 panels + battery",
+  "label": "Starter solar: 6 panels + small battery",
   "phase": 2
  },
  {
   "n": 8,
-  "label": "Starlink dish",
+  "label": "Starlink dish on a short mast",
   "phase": 2
  },
  {
   "n": 9,
-  "label": "Storage shed, 10 x 12 ft (no permit if no power)",
+  "label": "Storage shed, 10 x 12 ft, off the pad",
   "phase": 1
  }
 ]
