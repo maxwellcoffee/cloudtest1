@@ -146,7 +146,13 @@ def main():
                'Each has one hot tub built into the ground, a cedar sauna a few steps away, a cold plunge or cold shower, a wash and scrub station, a warm rest platform, and plants inside. '
                'Click any image to enlarge it.</p></div>'
                + ''.join(scheme_html(s) for s in SCHEMES) + '</div></section>')
-    body = intro() + toc + spring() + ritual(WAVE) + parts() + schemes + compare(SCHEMES) + seasons() + plants() + rules() + budget() + products() + actions() + sources()
+    banner = ''
+    if os.environ.get('SPA_PREVIEW'):
+        banner = ('<div class="wrap"><div class="col note" style="margin-block:16px"><p><b>Preview.</b> Every plan now has its hot tub '
+                  'built into the ground. Scheme A and the first Scheme B images are final; the rest are quick low-resolution '
+                  'renders while the final images finish (within the hour). The budget section still shows above-ground tub '
+                  'prices; in-ground costs are being researched and will replace them.</p></div></div>')
+    body = intro() + toc + banner + spring() + ritual(WAVE) + parts() + schemes + compare(SCHEMES) + seasons() + plants() + rules() + budget() + products() + actions() + sources()
     open(os.path.join(HERE, 'index.html'), 'w').write(page(body))
     print('wrote index.html', len(page(body)) // 1024, 'KB')
 
