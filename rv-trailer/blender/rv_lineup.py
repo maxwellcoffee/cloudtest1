@@ -30,7 +30,7 @@ for (title, sub, L, build) in TRAILERS:
     build(title, cx)
     spans.append({'title': title, 'sub': sub, 'x0': x0, 'x1': x0 + L + T, 'body': L})
     x0 += L + T + GAP
-s.person(spans[1]['x0'] + 1.6, -1.9)
+s.person(spans[1]['x0'] + 5.0, -1.9)          # just ahead of the Airstream's front tyre
 s.daylight(az=185, el=34, strength=4.4, sky=0.55)
 s.scene.render.film_transparent = True     # no hillside behind: lineup_post.py lays it on paper
 
@@ -39,7 +39,7 @@ TILT = math.radians(10)
 u = Vector((0.0, math.sin(TILT), math.cos(TILT)))          # screen up
 fwd = Vector((0.0, math.cos(TILT), -math.sin(TILT)))
 v_lo = -4.0 * math.sin(TILT) - 0.3                            # front edge of the pad, plus a margin
-v_hi = 3.95 * math.cos(TILT) + 0.45                           # roof A/Cs, plus a margin
+v_hi = 3.55 * math.cos(TILT) + 0.45                           # roof A/Cs, plus a margin
 W_M = total + 4.0
 H_M = v_hi - v_lo
 RES = (2400, int(round(2400 * H_M / W_M)))

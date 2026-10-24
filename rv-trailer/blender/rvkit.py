@@ -139,14 +139,16 @@ class Camp(SK.Spa):
         # shader from object position + normal, so their edges stay smooth and rounded on the curved skin
         quads = [(rows[i][k], rows[i][(k + 1) % nt], rows[i + 1][(k + 1) % nt], rows[i + 1][k]) for i in range(nx - 1) for k in range(nt)]
         faces = list(quads)
-        d0, d1 = -L * 0.12, -L * 0.12 + 0.66
+        rear_axle, tire = (-0.45, 0.36) if air else (-0.35, 0.38)
+        d1 = rear_axle - tire - 0.12                       # door just aft of the rear tyre, steps clear of the wheel
+        d0 = d1 - 0.66
         if air:
             wz = (zb + 1.18, zb + 1.72)
-            rects = [((-L * 0.36, -L * 0.2), wz, 0.1), ((-L * 0.0, L * 0.12), wz, 0.1), ((L * 0.17, L * 0.27), wz, 0.1)]
+            rects = [((-L * 0.42, -L * 0.3), wz, 0.1), ((-L * 0.02, L * 0.12), wz, 0.1), ((L * 0.17, L * 0.27), wz, 0.1)]
             band = (zb + 1.02, zb + 1.5)
         else:
             wz = (zb + 1.08, zb + 1.6)
-            rects = [((-L * 0.34, -L * 0.15), wz, 0.14), ((L * 0.06, L * 0.22), wz, 0.14)]
+            rects = [((-L * 0.44, -L * 0.3), wz, 0.14), ((L * 0.04, L * 0.2), wz, 0.14)]
             band = (zb + 1.0, zb + 1.55)
         shell = self.shell_material(kind, L, W, zb, rects, band, door=((d0, d1), (zb + 0.06, zb + 1.86), 0.08),
                                     door_win=((d0 + 0.16, d1 - 0.16), (zb + 1.22, zb + 1.62), 0.06))
@@ -175,7 +177,7 @@ class Camp(SK.Spa):
         self.box('roof_ac', (0.75, 0.7, 0.26), (-0.4, 0, zt + 0.1), ac, coll, parent=root, bevel=0.08, seg=3)
         self.box('door_handle', (0.14, 0.05, 0.04), (d0 + 0.12, -W / 2 - 0.03, zb + 0.95), self.m('steel'), coll, parent=root)
         self.entry_steps(root, (d0 + d1) / 2, -W / 2 + 0.05, zb, coll)
-        self.running_gear(root, L, W, (-0.45, 0.45) if air else (-0.35, 0.35), zb - 0.02, coll, tongue=1.15, tires=0.36 if air else 0.38)
+        self.running_gear(root, L, W, (rear_axle, -rear_axle), zb - 0.02, coll, tongue=1.15, tires=tire)
         self.foot(x, y, L / 2 + 2.5, W / 2 + 2.0)
         self.anchor(label, x, y, z0, cat, dz=zt + 0.6)
         self.door_world = self._local_to_world(root, ((d0 + d1) / 2, -W / 2, zb))
@@ -327,7 +329,7 @@ class Camp(SK.Spa):
         return (root.location.x + v.x, root.location.y + v.y, root.location.z + v.z)
 
     # ------------------------------------------------------------ conventional laminated trailer
-    def box_trailer(self, label, x, y, rot=0.0, L=7.9, W=2.44, H=2.9, coll='rv', style='modern', slide=True, cat=0, awning_open=False):
+    def box_trailer(self, label, x, y, rot=0.0, L=7.9, W=2.44, H=2.6, coll='rv', style='modern', slide=True, cat=0, awning_open=False):
         """Conventional laminated travel trailer: fiberglass front cap, slide-out on the street side.
         style: 'modern' (white, charcoal graphics, two roof A/Cs) or 'classic' (cream, brown graphics, older and boxier)."""
         z0 = self.t.h(x, y) if not getattr(self, 'pad_z', None) else self.pad_z
@@ -363,12 +365,12 @@ class Camp(SK.Spa):
         g1 = self.mat('graphic1_' + style, '#2c2d2f' if modern else '#4a3a33', rough=0.4)
         g2 = self.mat('graphic2_' + style, '#8d9196' if modern else '#9c8f7a', rough=0.4)
         trim = self.mat('trim_black', '#1c1d1f', rough=0.5)
-        dx = -L * 0.08
+        dx = -(0.55 + 0.36 + 0.12 + 0.4)                  # door aft of the rear tyre (axles at +/-0.55 m)
         for sy in (-1, 1):
             yy = sy * (W / 2 + 0.006)
             self.box('stripe', (L * 0.55, 0.01, 0.16), (L * 0.15, yy, zb + 0.55), g1, coll, parent=root, rot=(0, math.radians(4), 0))
             self.box('stripe', (L * 0.35, 0.01, 0.08), (L * 0.25, yy, zb + 0.82), g2, coll, parent=root, rot=(0, math.radians(7), 0))
-            for (wx, ww) in ((-L * 0.32, 1.1), (L * 0.2, 0.8)):
+            for (wx, ww) in ((-L * 0.37, 1.1), (L * 0.2, 0.8)):
                 self.box('window_frame', (ww + 0.08, 0.015, 0.83), (wx, yy, zb + 1.75), trim, coll, parent=root, bevel=0.04, seg=2)
                 self.box('window', (ww, 0.025, 0.75), (wx, yy, zb + 1.75), self.tint(), coll, parent=root, bevel=0.04, seg=2)
         # side graphics: two slanted swoosh bands rising toward the cap (inside the bevelled outline)
@@ -409,7 +411,13 @@ class Camp(SK.Spa):
         else:
             self.box('roof_ac', (0.75, 0.72, 0.3), (-L * 0.2, 0, zt + 0.13), ac, coll, parent=root, bevel=0.06, seg=2)
             self.box('roof_vent', (0.4, 0.4, 0.12), (L * 0.2, 0, zt + 0.06), self.mat('vent_smoke', '#6e6a62', rough=0.4), coll, parent=root)
-        self.box('ladder', (0.04, 0.42, H - 0.2), (-L / 2 - 0.05, 0.6, zb + H / 2), self.m('steel'), coll, parent=root)
+        lx, l0, l1 = -L / 2 - 0.07, zb + 0.35, zt - 0.05       # rear ladder: two rails, rungs, stand-offs to the wall
+        for sy in (0.42, 0.78):
+            self.box('ladder_rail', (0.03, 0.03, l1 - l0), (lx, sy, (l0 + l1) / 2), self.m('steel'), coll, parent=root)
+            for zz in (l0 + 0.05, l1 - 0.05):
+                self.box('ladder_standoff', (0.08, 0.025, 0.025), (lx + 0.04, sy, zz), self.m('steel'), coll, parent=root)
+        for k in range(int((l1 - l0) / 0.3) + 1):
+            self.cyl('ladder_rung', 0.014, 0.36, (lx, 0.6, l0 + k * 0.3), self.m('steel'), coll, parent=root, seg=8, rot=(math.pi / 2, 0, 0))
         # awning: rolled case, or open (fabric and arms in the roof collection so plans show the deck)
         ax0, ax1 = dx - 0.4, dx - 0.4 + L * 0.55
         self.box('awning_case', (L * 0.55, 0.12, 0.12), ((ax0 + ax1) / 2, -W / 2 - 0.08, zt - 0.2), self.mat('awning_case', '#e9e9e6', rough=0.3, metal=0.5), coll, parent=root)
@@ -493,7 +501,7 @@ class Camp(SK.Spa):
         self.anchor(label, x, y - W / 2, z, cat, dz=H + 0.5)
         return [(xx, y + sy * W / 2) for xx in cols for sy in (-1, 1)]
 
-    def shade_sail(self, label, pts, posts_h=(3.4, 2.6, 3.8, 2.8), color='#efe9df', cat=0, coll='camp'):
+    def shade_sail(self, label, pts, posts_h=(3.4, 2.6, 3.8, 2.8), color='#efe9df', cat=0, coll='camp', at=None):
         """Tensioned four-corner shade sail (a twisted hypar) on steel posts, edges curved inward."""
         z = self.pad_z
         corners = [Vector((px, py, z + h)) for (px, py), h in zip(pts, posts_h)]
@@ -527,7 +535,7 @@ class Camp(SK.Spa):
         for c in corners:
             self.cyl('d_ring', 0.05, 0.02, tuple(c), self.m('steel'), 'roof', seg=10)
         self.outline([tuple(c[:2]) for c in corners], z + 0.1)
-        self.anchor(label, cen.x, cen.y, z, cat, dz=3.4)
+        self.anchor(label, *(at or (cen.x, cen.y)), z, cat, dz=3.4)
 
     def skirting(self, x, y, L, W, h=0.6, coll='camp', color='#c4b79f', inset=0.04):
         """Ribbed vinyl skirting set just inside the body line."""
@@ -635,8 +643,15 @@ class Camp(SK.Spa):
 
     def generator(self, label, x, y, coll='camp', cat=2):
         z = self.pad_z if abs(x) < 9 and abs(y) < 6 else self.t.h(x, y)
-        self.box('generator', (0.52, 0.3, 0.45), (x, y, z + 0.23), self.mat('gen_red', '#b3241b', rough=0.4), coll, bevel=0.04, seg=2)
-        self.box('gen_panel', (0.02, 0.18, 0.12), (x - 0.27, y, z + 0.28), self.mat('gen_black', '#222222', rough=0.5), coll)
+        red, blk = self.mat('gen_red', '#b3241b', rough=0.4), self.mat('gen_black', '#222222', rough=0.5)
+        self.box('generator', (0.56, 0.32, 0.44), (x, y, z + 0.26), red, coll, bevel=0.05, seg=2)
+        self.box('gen_base', (0.58, 0.34, 0.05), (x, y, z + 0.025), blk, coll)
+        for sx in (-0.2, 0.2):
+            self.box('gen_handle_post', (0.04, 0.04, 0.12), (x + sx, y, z + 0.52), blk, coll)
+        self.box('gen_handle', (0.44, 0.05, 0.04), (x, y, z + 0.59), blk, coll, bevel=0.015, seg=2)
+        self.box('gen_panel', (0.24, 0.02, 0.14), (x - 0.1, y - 0.165, z + 0.3), blk, coll)
+        for k in range(5):
+            self.box('gen_vent', (0.015, 0.02, 0.2), (x + 0.1 + k * 0.035, y - 0.165, z + 0.27), blk, coll)
         self.anchor(label, x, y, z, cat, dz=0.8)
 
     def storage_shed(self, label, x, y, rot=0.0, w=3.66, d=3.05, h=2.6, color='#3a3a3c', door='#df4537', cat=1, coll='camp'):
@@ -653,6 +668,8 @@ class Camp(SK.Spa):
             self.box('door_pull', (0.03, 0.05, 0.3), (sx, -d / 2 - 0.05, 1.2), self.m('steel'), coll, parent=root)
         self.box('shed_window', (0.04, 0.6, 0.45), (w / 2 + 0.02, 0, 1.75), self.tint(), coll, parent=root)
         self.foot(x, y, w / 2 + 1.0, d / 2 + 1.2)
+        ax, ay, _ = self._local_to_world(root, (0, -d / 2 - 1.5, 0))
+        self.foot(ax, ay, w / 2 + 0.5, 1.9)                    # door apron
         self.anchor(label, x, y, z, cat, dz=h + 0.6)
 
     def pickup(self, x, y, rot=0.0, color='#4b5560', coll='camp'):
@@ -669,7 +686,8 @@ class Camp(SK.Spa):
         for ax in (-1.75, 1.75):
             for sy in (-1, 1):
                 self.cyl('truck_tire', 0.42, 0.3, (ax, sy * 0.88, 0.42), tire, coll, parent=root, seg=28, rot=(math.pi / 2, 0, 0))
-        self.foot(x, y, 3.2, 1.6)
+        a = math.radians(rot)
+        self.foot(x, y, abs(3.0 * math.cos(a)) + abs(1.1 * math.sin(a)) + 1.2, abs(3.0 * math.sin(a)) + abs(1.1 * math.cos(a)) + 1.2)
 
     def person(self, x, y, rot=0.0, coll='camp', color='#3a3633'):
         """A 5 ft 9 in (1.75 m) figure for scale: legs, hips, torso, arms, neck and head."""
@@ -725,6 +743,15 @@ class Camp(SK.Spa):
             self.box('chair_back', (0.42, 0.04, 0.4), (cx + 0.2 * math.cos(a), cy + 0.2 * math.sin(a), z + 0.68), self.m('coral'), coll, rot=(0, 0, a + math.pi / 2))
             for (lx, ly) in ((-0.17, -0.17), (0.17, -0.17), (-0.17, 0.17), (0.17, 0.17)):
                 self.box('chair_leg', (0.03, 0.03, 0.44), (cx + lx, cy + ly, z + 0.22), self.m('steel_dark'), coll)
+
+    def clear_view(self, cam, tgt, far=10.0, step=1.5):
+        """Keep scatter out of a widening wedge in front of a camera."""
+        d = Vector((tgt[0] - cam[0], tgt[1] - cam[1], 0.0)).normalized()
+        k = 1.0
+        while k <= far:
+            r = 1.0 + 0.62 * k
+            self.footprints.append((cam[0] + d.x * k, cam[1] + d.y * k, r, r, 99))
+            k += step
 
     def plan_shot(self, name, width=24.0, center=(0, 0), note='', key=None, res=(2000, 1300), samples=40):
         key = key or [['dot', PALETTE[0], 'Trailer + shelter'], ['dot', PALETTE[2], 'Water, power, propane, internet'],

@@ -22,8 +22,8 @@ def intro():
       <h1>The Build-Years Trailer</h1>
       <p class="lede">Where to get the trailer you'll live in while the house goes up, what the setup could look like
       on the lot, and what it costs used and new.</p>
-      <p class="muted">Every image is a Blender render of the real lot model, with the house framing going up behind
-      the trailer. Prices are October 2026 listings or labeled estimates.</p>
+      <p class="muted">Every image is a Blender render of the real lot model; the view from above in Tier B also shows
+      the house framing going up about 90 ft away. Prices are October 2026 listings or labeled estimates.</p>
     </div>
     <div class="lattice"><button class="zoom" type="button" data-full="img/RC_dusk.jpg" data-cap="The premium setup at dusk: Airstream under a black steel ramada">
       <img src="img/RC_dusk.jpg" alt="The premium setup at dusk: Airstream under a black steel ramada" width="1600" height="900"></button></div>
