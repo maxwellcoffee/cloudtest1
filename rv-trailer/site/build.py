@@ -86,7 +86,7 @@ def main():
         if f.endswith('.jpg'):
             shutil.copy(os.path.join(REN, f), os.path.join(IMG, f))
     import content as C
-    body = C.intro() + C.toc() + C.rule() + C.pod() + C.looks(img, legend) + C.which() + C.where() + C.how() + C.budget() + C.desert() + C.actions() + C.sources()
+    body = C.intro() + C.toc() + C.rule() + C.pod() + C.looks(img, legend) + C.which() + C.where() + C.how() + C.timeline() + C.budget() + C.desert() + C.actions() + C.sources()
     out = page(body)
     open(os.path.join(HERE, 'index.html'), 'w').write(out)
     print('wrote index.html', len(out) // 1024, 'KB')

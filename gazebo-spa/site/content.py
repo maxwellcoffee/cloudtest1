@@ -9,10 +9,12 @@ def intro():
       <p class="eyebrow">Yucca Valley lot &middot; bathhouse plans &middot; October 2026</p>
       <h1>The Garden Bathhouse</h1>
       <p class="lede">Five plans for a Korean-style bathhouse on the land: one hot tub built into the ground, under a
-      roof with plants inside, a cedar sauna a few steps away, then cold water and a warm floor to rest on. The starting point is the enclosed
-      pool house at The Spring in Desert Hot Springs.</p>
-      <p class="muted">Every image is a Blender render of the real lot model: same slope, same Joshua trees, same
-      mountains to the north. Prices are 2025-2026 list prices or labeled estimates.</p>
+      roof with plants inside, a cedar sauna a few steps away, then cold water and a warm floor to rest on. The
+      starting point is the enclosed pool house at The Spring in Desert Hot Springs.</p>
+      <p class="muted">The colors and the coral lattice come from kwonyin.global: blush, peach, coral and black, with
+      bright black-and-white desert light. If you want a different palette or lattice pattern, the renders can be
+      redone. Every image is a Blender render of the lot model: same slope, same Joshua trees, same mountains to the
+      north. Prices are what makers listed on October 24, 2026 (some are sale or "from" prices) or labeled estimates.</p>
     </div>
     <div class="lattice"><button class="zoom" type="button" data-full="img/A_hero_bw.jpg" data-cap="Scheme A, the Spring Glass House, in black and white">
       <img src="img/A_hero_bw.jpg" alt="Scheme A, the Spring Glass House, in black and white" width="1600" height="900"></button></div>
@@ -51,46 +53,113 @@ def ritual(wave):
   <div class="col stack">
     <p class="eyebrow">How you would use it</p>
     <h2>The bathing round</h2>
-    <p>A Korean bathhouse (mogyoktang) and its rest halls (jjimjilbang) follow one order: clean, hot, cold, rest.
-    For two people at home a full round takes about 2 to 2.5 hours. Steps 3 and 4 repeat two or three times.</p>
+    <p>A mogyoktang is a Korean bathhouse for washing and soaking; a jjimjilbang adds hot rooms and a heated floor to
+    lie on. Both follow the same pattern: clean, hot, cold, rest. For two people at home a full round takes about 2
+    to 2.5 hours. Steps 3, 4 and 5 repeat two or three times, and the round ends with a longer 20-30 minute rest.</p>
   </div>
   <ol class="round">
     <li><span class="t">Wash</span><span>Seated shower on a low stool, about 10 minutes. Hair tied up. Nobody gets in the tub unwashed.</span></li>
     <li><span class="t">Soak</span><span>10 to 15 minutes at 100-104F, heart above the water. In summer run it as a warm tub at 97-100F.</span></li>
-    <li><span class="t">Sauna</span><span>8 to 12 minutes at 176-194F. About 30 minutes of high heat in total.</span></li>
-    <li><span class="t">Cold</span><span>30 seconds to 2 minutes at 57-64F, head out, feet first, never alone. In winter the water is cold enough on its own.</span></li>
+    <li><span class="t">Sauna</span><span>8 to 12 minutes at 176-194F. No more than about 30 minutes of high heat in total.</span></li>
+    <li><span class="t">Cold</span><span>30 seconds to 2 minutes at 57-64F, head out, feet first, never alone. From about November to April the water is cold enough on its own.</span></li>
     <li><span class="t">Rest</span><span>10 to 15 minutes lying on the warm floor (about 97F) with a glass of water.</span></li>
   </ol>
   <div class="col stack">
     {wave}
-    <p>Once a week, after a soak, scrub each other with an Italy towel (seshin), then rinse. Finish with cold sikhye
-    (sweet rice drink) and baked eggs on the warm floor.</p>
-    <div class="note"><p><b>Safety.</b> Korean bathhouses run their hot tubs at 106-109F; at home, cap the tub at
-    104F (the U.S. Consumer Product Safety Commission's limit since 1979) and at 100F or less for anyone pregnant. Drink water
-    after every round and skip alcohol before and between rounds. Anyone with heart conditions should ask a doctor
-    about sauna and cold plunges first. Keep the warm floor at or below about 104F for long lying.</p></div>
+    <p>Once a week at most, after a soak, scrub each other with an Italy towel, a coarse mitt (the scrub itself is
+    called seshin). Never on the face; rinse after. Finish lying on the warm floor with cold sikhye (a sweet rice
+    drink) and slow-baked eggs (maekbanseok eggs, baked ahead in an oven or rice cooker until the whites turn tan).</p>
+    <div class="note"><p><b>Safety.</b> Korean bathhouses run their hot tubs at 106-109F. At home, cap the tub at
+    104F, the long-standing U.S. Consumer Product Safety Commission guideline (from 1979; advice, not a regulation),
+    and at 100F or less for anyone pregnant. Drink water after every round and skip alcohol before and between
+    rounds. Anyone with a heart condition should ask a doctor about sauna and cold plunges first. Keep the warm floor
+    at or below about 104F for long lying.</p></div>
   </div>
+</div></section>'''
+
+
+def parts():
+    rows = [
+        ('Wash station', 'A low stool, a basin, a hand shower and a mirror at seated height. Wash head to toe before touching any tub.'),
+        ('Hot tub (ontang)', 'The one in-ground tub. Soak with your heart above the water; keep it covered between uses.'),
+        ('Cedar sauna', 'Takes the place of a jjimjilbang\'s hot rooms: dry heat, 8 to 12 minutes a round.'),
+        ('Cold plunge (naengtang)', 'A short dip that ends each round. In summer it needs a chiller to stay cold.'),
+        ('Warm floor (ondol)', 'A heated platform you lie on between rounds, the heart of a jjimjilbang.'),
+        ('Scrub table', 'For the weekly partner scrub with an Italy towel.'),
+        ('Clay dome (hanjeungmak)', 'Only in Scheme D, and optional: a dome of clay or stone, traditionally heated by a pine fire. Rounds of 10 minutes or less.'),
+        ('Snack corner', 'Cold sikhye and baked eggs, eaten on the warm floor.'),
+    ]
+    trs = ''.join(f'<tr><td><b>{a}</b></td><td>{b}</td></tr>' for a, b in rows)
+    return f'''
+<section class="wrap" id="parts"><div class="col stack">
+  <p class="eyebrow">The pieces</p><h2>What each part is for</h2>
+  <div class="scroll"><table><tbody>{trs}</tbody></table></div>
+  <p><b>What to wear.</b> Korean bathhouses are nude and split by gender. At home with guests, wear swimsuits in the
+  tub and loose cotton clothes (jjimjilbok, a T-shirt and shorts) in the sauna and on the warm floor; peach sets for
+  guests suit the palette.</p>
+  <p><b>Barrel or cabin sauna?</b> A barrel heats fast and costs less, but you sit upright. A 7 x 7 ft cabin has a
+  bench long enough to lie on, which is how many Koreans rest in the heat. Ask for red cedar: Almost Heaven's
+  barrels come in red cedar, while some other makers use hemlock or spruce.</p>
+</div></section>'''
+
+
+def seasons():
+    return '''
+<section class="wrap" id="seasons" style="background:var(--wash)"><div class="col stack">
+  <p class="eyebrow">Living with it</p><h2>Summer, water and running costs</h2>
+  <p><b>June to September:</b> use the bathhouse at dawn or after dark. Set the tub to 97-100F, keep sauna rounds
+  short, and run a chiller on the plunge; without one it is only cold from about November to April. A glass room
+  (Scheme A) overheats on summer afternoons unless its doors open wide and the west and south glass is shaded.</p>
+  <p><b>Winter:</b> nights reach 17-25F. Keep the tub covered and heated, and disconnect and drain outdoor plunge
+  chillers on freezing nights (Penguin rates its outdoor units only above 32F). Don't open a cover lifter in winds
+  above about 25 mph.</p>
+  <p><b>Where the water goes:</b> decide before pouring a slab. Shower and wash-floor water goes to the septic system
+  or to a permitted graywater line for the plants; ask the County which it allows. To drain the tub, let the
+  chlorine fade for a few days, then drain it slowly onto the land, not into the septic tank. Ask the County before
+  the first drain.</p>
+  <p><b>Running costs (rough estimates at about 35 cents per kWh; check your utility):</b> a covered tub about
+  $40-90 a month in winter and less in summer; a sauna session about $2-3; a plunge chiller about $20-50 a month in
+  summer; the warm floor about 50 cents for two hours.</p>
 </div></section>'''
 
 
 def compare(schemes):
     rows = [
-        ('A', 'Spring Glass House', '432 sq ft, glass room', 'In-ground tiled, 9.5 x 7 ft', 'Cabin, 7 x 7 ft', 'Inside: wash + scrub. Outside: plunge, warm platform', 'Enclosed, warm in winter', 'Premium'),
-        ('B', 'Jeongja Bathhouse', '384 sq ft, open south', 'In-ground tiled, 6.5 x 6.5 ft', 'Cabin, 7 x 7 ft', 'All inside in three bays; ondol floor, sikhye station', 'Half open, very Korean', 'Balanced to premium'),
-        ('C', 'Octagon Garden Gazebo', '340 sq ft, open east + south', 'In-ground round, 8 ft', 'Barrel, 6 ft', 'Outside: wash, plunge, warm platform', 'Open-air garden', 'Balanced'),
-        ('D', 'Walled Garden Courtyard', '1,600 sq ft walled garden', 'In-ground round, 6.5 ft', 'Cabin + clay dome', 'One per corner', 'Private, most plants', 'Premium'),
+        ('A', 'Spring Glass House', '432 sq ft, glass room', 'In-ground tiled, 9.5 x 7 ft', 'Cabin, 7 x 7 ft', 'Inside: wash + scrub. Outside: plunge, warm platform', 'Enclosed; warm in winter', 'Premium'),
+        ('B', 'Jeongja Bathhouse', '384 sq ft, open south', 'In-ground tiled, 6.5 x 6.5 ft', 'Cabin, 7 x 7 ft', 'Wash, soak and rest in three bays; sauna and plunge outside', 'Half open, very Korean', 'Upper balanced to premium'),
+        ('C', 'Octagon Garden Gazebo', '340 sq ft, open east + south', 'In-ground round, 8 ft', 'Barrel, 6 ft', 'Outside: wash, plunge, warm platform', 'Open-air garden', 'Upper balanced'),
+        ('D', 'Walled Garden Courtyard', 'About 100 sq ft of roofs plus a pergola, in a 1,600 sq ft walled garden', 'In-ground round, 6.5 ft', 'Cabin + clay dome', 'One per corner', 'Private, most plants', 'Premium'),
         ('E', 'Starter Kit', '144 sq ft kit', 'Plug-and-play, recessed, 7 x 7 ft', 'Barrel, 6 ft', 'Plunge and post shower', 'Lowest cost', 'Lean'),
     ]
     trs = ''.join('<tr>' + ''.join(f'<td>{c}</td>' for c in r) + '</tr>' for r in rows)
+    build = [
+        ('E', 'Yes, in a few weekends once the pit is dug and lined.'),
+        ('C', 'Mostly, from a kit; hire the pool builder for the tub.'),
+        ('B', 'Hire a carpenter for the curved roof and a pool builder for the tub.'),
+        ('A', 'Hire a contractor, a glazier and a pool builder.'),
+        ('D', 'Hire a mason for the walls and a pool builder for the tub.'),
+    ]
+    lis = ''.join(f'<li><b>{k}:</b> {t}</li>' for k, t in build)
     return f'''
 <section class="wrap" id="compare"><div class="wide stack">
   <p class="eyebrow">Side by side</p><h2>Compare the five</h2>
   <div class="scroll"><table>
     <thead><tr><th></th><th>Plan</th><th>Under roof</th><th>Hot tub</th><th>Sauna</th><th>Korean extras</th><th>Feel</th><th>Budget tier</th></tr></thead>
     <tbody>{trs}</tbody></table></div>
-  <div class="col stack"><div class="note"><p><b>A way to phase it.</b> Because the tub is built into the ground,
-  pick its final spot from the start. Dig and build the tub where it will stay, roof it simply at first (E), and add
-  the bigger structure of A, B, C or D around it later. The barrel sauna and plunge can move.</p></div></div>
+  <div class="col stack">
+    <h3>Which one?</h3>
+    <p>To start soon and for the least money: E, then grow toward C. For the full Korean bath in order: B. For The
+    Spring's glass room and comfort on cold nights: A. If plants and privacy matter most: D.</p>
+    <p><b>Decide these first:</b> open or enclosed; how the in-ground tub is built (tiled concrete, fiberglass shell,
+    or a recessed acrylic tub); barrel or cabin sauna; electric or wood-fired heat; how many people will use it at once.</p>
+    <p><b>Can we build it ourselves?</b> In every plan, hire the electrician, the engineer for the footings, and a
+    licensed builder for the in-ground tub.</p>
+    <ul>{lis}</ul>
+    <div class="note"><p><b>A way to phase it.</b> Because the tub is built into the ground, pick its final spot from
+    the start. Build the tub where it will stay, roof it simply at first (E), and add the bigger structure of A, B, C
+    or D around it later. The barrel sauna fits C, and the plunge and shower move into any plan. Start only once the
+    County confirms the trailer permit counts as the main use, or issues a Temporary Use Permit.</p></div>
+  </div>
 </div></section>'''
 
 
@@ -115,14 +184,15 @@ def plants():
     t2 = ''.join(f'<tr><td>{a}</td><td>{b}</td></tr>' for a, b in outside)
     return f'''
 <section class="wrap" id="plants" style="background:var(--wash)"><div class="col stack">
-  <p class="eyebrow">Planting</p><h2>Plants inside, natives outside</h2>
-  <p>The lot is USDA zone 9a: winter lows of 20-25F, with a record 17F and 115F at the Joshua Tree station. Inside a
+  <p class="eyebrow">Planting</p><h2>Plants inside, desert plants outside</h2>
+  <p>ZIP 92284 is USDA zone 9a (a higher parcel can run colder): winter lows of 20-25F, with a record 17F and 115F at the Joshua Tree station. Inside a
   partly enclosed bathhouse it stays warmer and more humid, but plants still need drip irrigation and a winter plan.
   Keep plants out of the splash zone; tub chemicals burn leaves.</p>
   <h3>Under the roof</h3>
   <div class="scroll"><table><thead><tr><th>Plant</th><th>Where</th><th>Care</th></tr></thead><tbody>{t1}</tbody></table></div>
   <h3>Around the bathhouse</h3>
-  <p>Mojave natives in coral, peach and pink. The Mojave Desert Land Trust sells them for about $12-55 each.</p>
+  <p>Mostly Mojave natives in coral, peach and pink, sold by the Mojave Desert Land Trust for about $12-55 each.
+  Coral yucca and pink muhly are desert-tough nursery plants, not natives.</p>
   <div class="scroll"><table><thead><tr><th>Plant</th><th>Why</th></tr></thead><tbody>{t2}</tbody></table></div>
   <p class="small muted">Large existing natives (Joshua trees, yuccas, creosote rings 10 ft or wider, mesquite, smoke trees) need a County removal permit, so plant around them.</p>
 </div></section>'''
@@ -135,9 +205,10 @@ def rules():
         '<b>Building permits.</b> Needed for any structure over 120 sq ft, any patio cover (solid or lattice) at any size, any pool or spa, and all electrical work. A small portable spa is exempt only from the planning permit, not from these.',
         '<b>Setbacks and coverage</b> (if the lot is zoned Rural Living in the unincorporated County): 25 ft front, 15 ft rear, 15 ft sides on lots wider than 75 ft, and no more than 20% of the lot under structures and paving combined. Inside the Town of Yucca Valley the Town\'s own rules apply instead; they were not checked here.',
         '<b>Drowning prevention.</b> State law exempts a hot tub with a locking safety cover labeled ASTM F1346. The County\'s barrier bulletin still describes a cover plus one more safety feature, so the inspector decides. If asked for a second feature, don\'t use a pool alarm: state law says a cover plus an alarm doesn\'t count.',
-        '<b>Wiring.</b> A 240 V hot tub needs a 50 A GFCI disconnect within sight of the tub, at least 5 ft away (Hot Spring says no more than 50 ft). For an outdoor tub, no light or fan within 5 ft of the water unless it is 12 ft or more above it; a 16 x 16 kit gazebo is only 11 ft tall, so light from the edges. If the inspector treats an enclosed bathhouse like Scheme A as indoor, the rules change. These are 2023 National Electrical Code figures; confirm them with the County or your electrician. A 6 kW sauna heater needs its own 30 A circuit.',
-        '<b>Wind.</b> The County designs for open terrain (Exposure C, ASCE 7-22). Spring gusts reach 40-50 mph, so anchor any gazebo to engineered footings and strap the tub cover.',
-        '<b>Water.</b> A 7 x 7 tub holds about 340 gallons and is drained three or four times a year; an uncovered tub can lose over 2,000 gallons a year to evaporation. Keep it covered.',
+        '<b>Wiring.</b> A hardwired tub needs its disconnect within sight of the tub and at least 5 ft away; Hot Spring\'s 240 V tubs need a 50 A GFCI subpanel no more than 50 ft away, and other makers differ. An in-ground tub also needs its deck, rebar and nearby metal bonded together. For an outdoor tub, no light or fan within 5 ft of the water unless it is 12 ft or more above it; a 16 x 16 kit gazebo is only 11 ft tall, so light from the edges. If the inspector treats an enclosed bathhouse like Scheme A as indoor, the rules change. These are 2023 National Electrical Code figures as quoted in a Colorado permit handout; California\'s 2025 code is based on the NEC, so confirm them with the County or your electrician. A 6 kW sauna heater needs its own 30 A circuit.',
+        '<b>Wind.</b> The County assumes open, flat land with nothing to block the wind ("Exposure C" in the building code). Spring wind advisories bring gusts of 40-50 mph, so anchor any gazebo to engineered footings and strap the tub cover.',
+        '<b>Fire.</b> The parcel\'s fire hazard zone hasn\'t been checked. If it is mapped, ember-resistant building rules may apply. Prefer noncombustible roofing, keep 5 ft of gravel around structures, use electric heaters, and never light a wood-fired tub or stove on windy or red-flag days.',
+        '<b>Water.</b> A 7 x 7 tub holds about 340 gallons and is drained three or four times a year. Uncovered, it could lose roughly 2,400 gallons a year to evaporation (a rough estimate from pan-evaporation data). Keep it covered.',
     ]
     return f'''
 <section class="wrap" id="rules"><div class="col stack">
@@ -174,7 +245,7 @@ def products():
         ('Hot tub', 'Almost Heaven Sindri (wood-fired)', '$10,621', 'No electricity needed; mind fire weather', 'https://almostheaven.com/products/sindri'),
         ('Sauna', 'Almost Heaven Salem barrel (2 person)', '$4,485', '6 kW heater on 240 V / 30 A', 'https://www.almostheaven.com/products/salem-2-person-barrel-sauna'),
         ('Sauna', 'Almost Heaven Watoga barrel (2-4 person)', '$5,184', '78 x 59 in; installation from $1,400. The Quick Ship kit with a smart heater is $6,183', 'https://www.almostheaven.com/products/watoga-2-4-person-barrel-sauna'),
-        ('Sauna', 'Redwood Outdoors Duo (2 person cabin)', '$4,899', 'Small cube; 6 or 8 kW Harvia', 'https://www.redwoodoutdoors.com/products/duo-outdoor-sauna-2-person'),
+        ('Sauna', 'Almost Heaven cube and cabin saunas', 'from about $8,400', 'Blackwater 4-person $11,268 on sale; a cabin bench is long enough to lie on. Ask for cedar', 'https://www.almostheaven.com/collections/cabin-saunas'),
         ('Cold', 'Ice Barrel 500', '$1,750', '94 gal; chiller sold separately', 'https://www.icebarrel.com/products/ice-barrel-500'),
         ('Cold', 'Penguin outdoor chiller', '$1,500-2,200', 'Adds summer cold to a barrel or stock tank', 'https://penguinchillers.com/collections/cold-therapy'),
         ('Cold', 'Plunge All-In', '$7,990', '105 gal, down to 37F, 120 V', 'https://www.plunge.com/products/plunge-all-in'),

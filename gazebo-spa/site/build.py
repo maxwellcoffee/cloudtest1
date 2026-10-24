@@ -36,12 +36,12 @@ SCHEMES = [
          inside=['One in-ground tiled hot tub, 9.5 x 7 ft, with a blue mosaic waterline like The Spring\'s', 'Seated wash station and scrub table against the west wall', 'Planter along the north glass: bird of paradise, ferns, snake plant', 'Potted fan palm, yucca, stump planter, boulders, hanging pothos, wood sling chairs'],
          outside=['Cedar cabin sauna, 7 x 7 ft, eight steps from the east door', 'Stock-tank cold plunge and a rinse shower between the two', 'Vine pergola with hanging cone planters over a heated rest platform', 'Mexican and Mediterranean fan palms in black pebble beds'],
          size='About 432 sq ft under roof. Terrace 51 x 37 ft.',
-         good='Year-round use. Glass and a solid knee wall stop the spring wind and hold heat on 20F nights, and steam leaves through the slats.',
+         good='Use in every season: the glass and knee wall stop the spring wind and hold heat on 20F nights, and steam leaves through the slats. In summer, open the doors wide, shade the west and south glass, and use it early or late.',
          watch='The most permits: an enclosed building, safety glass near the water, and an in-ground spa that needs a barrier or safety features. The inspector may treat the room as indoor, which changes the wiring rules. Highest cost. Needs an exhaust fan for steam.',
          tier='Premium', shots=['A_hero', 'A_inner', 'A_dusk']),
     dict(k='B', name='Jeongja Bathhouse', tag='The full Korean bath',
-         idea="A hanok-style pavilion (jeongja) on a low stone base, 24 x 16 ft, in three 8-ft bays that follow the Korean bath in order: wash, soak, rest. Paper-backed lattice screens close the north and west sides for privacy and glow at night. The south side stays open to the view, and the black tile roof turns up at the corners.",
-         inside=['Bay 1: two seated wash stations and a scrub table on a slate floor', 'Bay 2: an in-ground tiled tub, 6.5 x 6.5 ft, its rim flush with the floor', 'Bay 3: a heated ondol rest platform, 7 x 8 ft, with floor cushions and a sikhye and baked-egg station', 'Planter of bird of paradise and ferns, bamboo in pots, hanging plants'],
+         idea="A jeongja, the open garden pavilion of a traditional Korean wooden house (hanok), on a low stone base, 24 x 16 ft, in three 8-ft bays that follow the Korean bath in order: wash, soak, rest. Paper-backed lattice screens close the north and west sides for privacy and glow at night. The south side stays open to the view, and the black tile roof turns up at the corners.",
+         inside=['Bay 1: two seated wash stations and a scrub table on a slate floor', 'Bay 2: an in-ground tiled tub, 6.5 x 6.5 ft, its rim flush with the floor', 'Bay 3: a heated rest platform (ondol, the Korean warm floor you lie on), 7 x 8 ft, with floor cushions and a sikhye and baked-egg station', 'Planter of bird of paradise and ferns, bamboo in pots, hanging plants'],
          outside=['Cedar cabin sauna, 7 x 7 ft, a few steps east', 'Cedar cold-plunge tub and a rinse shower', 'Bamboo in raised planters as a north windbreak, olive trees'],
          size='About 384 sq ft under roof. Stone base 28 x 20 ft, 1 ft high.',
          good='Doing the whole ritual in order: wash, soak, sauna, cold, rest. It is the most clearly Korean of the five.',
@@ -56,8 +56,8 @@ SCHEMES = [
          watch='Open sides let in dust and cold wind. Plan on roll-down screens or glass panels on the west for winter.',
          tier='Balanced', shots=['C_hero', 'C_inner', 'C_dusk']),
     dict(k='D', name='Walled Garden Courtyard', tag='The most plants and privacy',
-         idea="Blush plaster walls, 7.5 ft high with tile caps, enclose a 40 x 40 ft garden room out of the wind, with a coral lattice gate and lattice windows. In the middle, a vine-covered pergola stands over one in-ground hot tub. Each corner holds one part of the bath.",
-         inside=['In-ground round tub, 6.5 ft across, under a jasmine pergola', 'North-east: cedar cabin sauna, cold plunge and shower', 'North-west: a clay dome warm room, after the Korean hanjeungmak kiln sauna (optional)', 'South-west: roofed wash and scrub corner. South-east: covered heated rest platform', 'Beds of bird of paradise, ferns and bamboo; bougainvillea on the walls; potted fan palms'],
+         idea="Blush plaster walls, 7.5 ft high with tile caps, enclose a 40 x 40 ft garden room out of the wind, with a coral lattice gate and lattice windows. In the middle, a vine-covered pergola stands over one in-ground hot tub. Each corner holds one part of the bath. It is the only plan without a solid roof over the tub; add a shade sail or a solid pergola roof for sun and rain.", head='Inside the walls',
+         inside=['In-ground round tub, 6.5 ft across, under a jasmine pergola', 'North-east: cedar cabin sauna, cold plunge and shower', 'North-west: a clay dome warm room, after the Korean hanjeungmak kiln sauna (optional)', 'South-west: roofed wash and scrub corner. South-east: covered heated rest platform', 'Bird of paradise, ferns and bamboo in beds (bring the bird of paradise under cover below about 32F); bougainvillea on the warmest wall; potted fan palms'],
          outside=['Tall fan palms over the wall line', 'Agaves and natives outside the walls'],
          size='1,600 sq ft inside the walls; about 100 sq ft of roofs plus the pergola.',
          good='A sheltered microclimate where tender plants survive, and complete privacy. Can be built in stages: walls and tub first, the corners later.',
@@ -69,7 +69,7 @@ SCHEMES = [
          outside=['Cedar barrel sauna, 6 ft (2 to 4 people)', 'Stock-tank cold plunge and a post shower', 'Two loungers and string lights'],
          size='144 sq ft under roof. Paver pad 32 x 24 ft.',
          good='The lowest-cost way to get an in-ground tub. The sauna and plunge can move into Scheme A, B, C or D later.',
-         watch='Light kits are rated for 40 to 100 mph winds, so anchor them to engineered footings. Before the house is finished, it needs a Temporary Use Permit unless the County says the trailer permit counts as the main use.',
+         watch='Light kits publish little wind data (budget hardtops are rated for 40 mph; one cedar maker claims 100 mph if anchored), so anchor the kit to engineered footings. Check that the tub maker allows a recessed install with equipment access. Before the house is finished, it needs a Temporary Use Permit unless the County says the trailer permit counts as the main use.',
          tier='Lean', shots=['E_hero', 'E_inner', 'E_dusk']),
 ]
 
@@ -89,7 +89,7 @@ def scheme_html(s):
   <div class="shots">{shots}</div>
   {plan}
   <div class="facts">
-    <div><h4>Under the roof</h4>{ul([E(x) for x in s["inside"]])}</div>
+    <div><h4>{E(s.get("head", "Under the roof"))}</h4>{ul([E(x) for x in s["inside"]])}</div>
     <div><h4>Around it</h4>{ul([E(x) for x in s["outside"]])}</div>
     <div><h4>Size</h4><p>{E(s["size"])}</p><h4>Best for</h4><p>{E(s["good"])}</p><h4>Watch out for</h4><p>{E(s["watch"])}</p></div>
   </div>
@@ -136,17 +136,17 @@ def main():
     for f in os.listdir(REN):
         if f.endswith('.jpg'):
             shutil.copy(os.path.join(REN, f), os.path.join(IMG, f))
-    from content import intro, spring, ritual, compare, plants, rules, budget, products, actions, sources
+    from content import intro, spring, ritual, parts, seasons, compare, plants, rules, budget, products, actions, sources
     toc = ('<nav class="toc wrap" aria-label="Sections"><ul>'
-           '<li><a href="#spring">The Spring</a></li><li><a href="#ritual">The bathing round</a></li>'
+           '<li><a href="#spring">The Spring</a></li><li><a href="#ritual">The bathing round</a></li><li><a href="#parts">The pieces</a></li>'
            '<li><a href="#schemes">Five plans</a></li><li><a href="#compare">Compare</a></li><li><a href="#plants">Plants</a></li>'
            '<li><a href="#rules">Rules</a></li><li><a href="#budget">Budget</a></li><li><a href="#next">Next actions</a></li></ul></nav>')
     schemes = ('<section class="wrap" id="schemes"><div class="wide stack-lg"><div class="col stack"><p class="eyebrow">Five plans</p>'
-               '<h2>Five ways to build it</h2><p>All five sit on the same spot: a level terrace just south-east of the house in land Scheme A, more than 50 ft from every Joshua tree. '
-               'Each has one hot tub, a cedar sauna a few steps away, a cold plunge or cold shower, a wash and scrub station, a warm rest platform, and plants inside. '
+               '<h2>Five ways to build it</h2><p>All five sit on the same spot: a level terrace just south-east of the house site in the land plan, placed in the model outside 50-ft circles around the Joshua trees we know about (confirm with a tree map, including trench routes, before building). '
+               'Each has one hot tub built into the ground, a cedar sauna a few steps away, a cold plunge or cold shower, a wash and scrub station, a warm rest platform, and plants inside. '
                'Click any image to enlarge it.</p></div>'
                + ''.join(scheme_html(s) for s in SCHEMES) + '</div></section>')
-    body = intro() + toc + spring() + ritual(WAVE) + schemes + compare(SCHEMES) + plants() + rules() + budget() + products() + actions() + sources()
+    body = intro() + toc + spring() + ritual(WAVE) + parts() + schemes + compare(SCHEMES) + seasons() + plants() + rules() + budget() + products() + actions() + sources()
     open(os.path.join(HERE, 'index.html'), 'w').write(page(body))
     print('wrote index.html', len(page(body)) // 1024, 'KB')
 
