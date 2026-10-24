@@ -22,10 +22,13 @@ def ft_in(m):
 
 raw, out = sys.argv[1], sys.argv[2]
 meta = json.load(open(os.path.join(raw, 'RL_lineup.meta.json')))
-im = Image.open(os.path.join(raw, meta['image'])).convert('RGB')
+rgba = Image.open(os.path.join(raw, meta['image'])).convert('RGBA')
+im = Image.new('RGBA', rgba.size, PAPER + (255,))
+im.alpha_composite(rgba)
+im = im.convert('RGB')
 W, H = im.size
 s = W / 2400.0
-band = int(150 * s)
+band = int(185 * s)
 canvas = Image.new('RGB', (W, H + band), PAPER)
 canvas.paste(im, (0, 0))
 d = ImageDraw.Draw(canvas)
@@ -44,7 +47,7 @@ for it in meta['items']:
     d.text(((a + b) / 2, H + int(66 * s)), it['title'], font=f_t, fill=INK, anchor='mm')
     d.text(((a + b) / 2, H + int(100 * s)), it['sub'], font=f_s, fill=MUTED, anchor='mm')
 # scale bar: 0-10 ft, bottom left
-x0, yb = int(24 * s), H + band - int(22 * s)
+x0, yb = int(24 * s), H + band - int(18 * s)
 step = 5 * FT * ppm
 for k in range(2):
     d.rectangle([x0 + k * step, yb - 6 * s, x0 + (k + 1) * step, yb], fill=INK if k == 0 else PAPER, outline=INK)

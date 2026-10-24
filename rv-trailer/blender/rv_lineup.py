@@ -2,9 +2,10 @@
 camera), hitches east, doors facing you. Left to right: molded fiberglass (Oliver class), aluminium Airstream,
 new four-season trailer, older used trailer. A 5 ft 9 in figure stands by for scale. lineup_post.py adds the
 captions, overall lengths and a scale bar from RL_lineup.json."""
-import json, os, sys
+import json, math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import rvkit as RK
+from mathutils import Vector
 
 out, preview = RK.SK.args()
 s = RK.Camp('RL', out, preview)
@@ -30,20 +31,24 @@ for (title, sub, L, build) in TRAILERS:
     spans.append({'title': title, 'sub': sub, 'x0': x0, 'x1': x0 + L + T, 'body': L})
     x0 += L + T + GAP
 s.person(spans[1]['x0'] + 1.6, -1.9)
-s.foot(0.0, -12.0, 30.0, 10.0)            # keep the foreground clear of shrubs
-s.ground(R=40.0)
 s.daylight(az=185, el=34, strength=4.4, sky=0.55)
+s.scene.render.film_transparent = True     # no hillside behind: lineup_post.py lays it on paper
 
+# orthographic camera tilted 10 degrees down: true horizontal scale, and the pad (with shadows) shows as a strip
+TILT = math.radians(10)
+u = Vector((0.0, math.sin(TILT), math.cos(TILT)))          # screen up
+fwd = Vector((0.0, math.cos(TILT), -math.sin(TILT)))
+v_lo = -4.0 * math.sin(TILT) - 0.3                            # front edge of the pad, plus a margin
+v_hi = 3.95 * math.cos(TILT) + 0.45                           # roof A/Cs, plus a margin
 W_M = total + 4.0
-RES = (2400, 400)
-H_M = W_M * RES[1] / RES[0]
-GROUND = 0.35                             # metres of ground strip below the pad line
-cam = s.camera('lineup', (0.0, -14.0, z + H_M / 2 - GROUND), target=(0.0, 0.0, z + H_M / 2 - GROUND), ortho=W_M)
+H_M = v_hi - v_lo
+RES = (2400, int(round(2400 * H_M / W_M)))
+centre = Vector((0.0, 0.0, z)) + u * ((v_lo + v_hi) / 2)
+cam = s.camera('lineup', tuple(centre - fwd * 30.0), ortho=W_M, rot=(math.pi / 2 - TILT, 0.0, 0.0))
 s.shot(cam, 'RL_lineup', res=RES, samples=56)
 f = 0.4 if preview else 1.0
 W, H = int(RES[0] * f), int(RES[1] * f)
 ppm = W / W_M
-meta = {'image': 'RL_lineup.png', 'width': W, 'height': H, 'px_per_m': ppm, 'ground_px': H - GROUND * ppm,
-        'items': [dict(sp, px0=(sp['x0'] + W_M / 2) * ppm, px1=(sp['x1'] + W_M / 2) * ppm) for sp in spans],
-        'person_px': (spans[1]['x0'] + 1.6 + W_M / 2) * ppm}
+meta = {'image': 'RL_lineup.png', 'width': W, 'height': H, 'px_per_m': ppm,
+        'items': [dict(sp, px0=(sp['x0'] + W_M / 2) * ppm, px1=(sp['x1'] + W_M / 2) * ppm) for sp in spans]}
 json.dump(meta, open(os.path.join(out, 'RL_lineup.meta.json'), 'w'), indent=1)
