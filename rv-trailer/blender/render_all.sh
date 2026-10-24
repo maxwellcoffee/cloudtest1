@@ -10,3 +10,4 @@ for k in rv_lineup rv_a_lean rv_b_balanced rv_c_premium; do
   echo "rendered $k"
 done
 python3 ../../gazebo-spa/blender/post.py "$RAW" ../renders
+python3 lineup_post.py "$RAW" ../renders

@@ -1,0 +1,47 @@
+[
+ {
+  "n": 1,
+  "label": "Cedar gazebo kit, 12 x 12 ft",
+  "phase": 0
+ },
+ {
+  "n": 2,
+  "label": "Two coral lattice screens on the wind side",
+  "phase": 0
+ },
+ {
+  "n": 3,
+  "label": "Recessed hot tub, 7 x 7 ft, rim at ground level",
+  "phase": 1
+ },
+ {
+  "n": 4,
+  "label": "Hatch to the tub equipment (pumps, heater)",
+  "phase": 0
+ },
+ {
+  "n": 5,
+  "label": "Potted palm, bird of paradise, fern",
+  "phase": 3
+ },
+ {
+  "n": 6,
+  "label": "Cedar barrel sauna, 6 ft (2-4 people)",
+  "phase": 2
+ },
+ {
+  "n": 7,
+  "label": "Stock-tank cold plunge",
+  "phase": 1
+ },
+ {
+  "n": 8,
+  "label": "Post shower",
+  "phase": 1
+ },
+ {
+  "n": 9,
+  "label": "Loungers",
+  "phase": 3
+ }
+]

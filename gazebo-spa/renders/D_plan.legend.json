@@ -1,0 +1,77 @@
+[
+ {
+  "n": 1,
+  "label": "Blush plaster walls, 7.5 ft, tile caps",
+  "phase": 0
+ },
+ {
+  "n": 3,
+  "label": "Vine pergola, 14 x 14 ft",
+  "phase": 3
+ },
+ {
+  "n": 4,
+  "label": "In-ground round hot tub, 6.5 ft",
+  "phase": 1
+ },
+ {
+  "n": 5,
+  "label": "Star jasmine on posts and beams",
+  "phase": 3
+ },
+ {
+  "n": 6,
+  "label": "Cedar cabin sauna, 7 x 7 ft",
+  "phase": 2
+ },
+ {
+  "n": 7,
+  "label": "Cold plunge (stock tank + chiller)",
+  "phase": 1
+ },
+ {
+  "n": 8,
+  "label": "Rinse shower",
+  "phase": 1
+ },
+ {
+  "n": 9,
+  "label": "Clay dome warm room (after the Korean hanjeungmak)",
+  "phase": 2
+ },
+ {
+  "n": 10,
+  "label": "Wash + scrub corner (roofed)",
+  "phase": 1
+ },
+ {
+  "n": 11,
+  "label": "Covered rest platform",
+  "phase": 3
+ },
+ {
+  "n": 12,
+  "label": "Heated rest platform (ondol-style)",
+  "phase": 3
+ },
+ {
+  "n": 13,
+  "label": "Bird of paradise + ferns (west bed)",
+  "phase": 3
+ },
+ {
+  "n": 14,
+  "label": "Bamboo bed against the north wall",
+  "phase": 3
+ },
+ {
+  "n": 15,
+  "label": "Bougainvillea on the walls",
+  "phase": 3
+ },
+ {
+  "n": 16,
+  "label": "Mediterranean fan palms in pots",
+  "phase": 3
+ }
+]

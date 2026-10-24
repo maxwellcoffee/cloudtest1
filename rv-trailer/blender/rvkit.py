@@ -26,31 +26,6 @@ class Camp(SK.Spa):
     """A Spa scene plus trailers and the gear around them."""
 
     # ------------------------------------------------------------ materials
-    def aluminum(self):
-        if 'aluminum' in self.mats:
-            return self.mats['aluminum']
-        m = bpy.data.materials.new('aluminum')
-        m.use_nodes = True
-        nt = m.node_tree
-        p = nt.nodes['Principled BSDF']
-        b = nt.nodes.new('ShaderNodeTexBrick')
-        b.offset = 0.0
-        b.inputs['Color1'].default_value = K.srgb('#cfd3d6')
-        b.inputs['Color2'].default_value = K.srgb('#c8ccd0')
-        b.inputs['Mortar'].default_value = K.srgb('#8e9399')
-        b.inputs['Scale'].default_value = 1.0
-        b.inputs['Mortar Size'].default_value = 0.005
-        b.inputs['Brick Width'].default_value = 1.2
-        b.inputs['Row Height'].default_value = 30.0
-        tc = nt.nodes.new('ShaderNodeTexCoord')
-        nt.links.new(tc.outputs['Object'], b.inputs['Vector'])
-        nt.links.new(b.outputs['Color'], p.inputs['Base Color'])
-        p.inputs['Metallic'].default_value = 1.0
-        p.inputs['Roughness'].default_value = 0.3
-        p.inputs['Anisotropic'].default_value = 0.5
-        self.mats['aluminum'] = m
-        return m
-
     def tint(self):
         return self.mat('rv_glass', '#14181c', rough=0.05, metal=0.3, spec=0.9, emit='#ffb36b', emit_strength=0.0)
 
@@ -86,6 +61,9 @@ class Camp(SK.Spa):
         m = self.mats.get('rv_glass')
         if m:
             m.node_tree.nodes['Principled BSDF'].inputs['Emission Strength'].default_value = 1.1 if on else 0.0
+        for k in ('shell_airstream', 'shell_oliver'):
+            if k in self.mats:
+                self.mats[k].node_tree.nodes['glass'].inputs['Emission Strength'].default_value = 1.1 if on else 0.0
 
     # ------------------------------------------------------------ running gear shared by all trailers
     def running_gear(self, root, L, W, axle_x, z_frame, coll, tongue=1.1, tires=0.36):
@@ -157,81 +135,32 @@ class Camp(SK.Spa):
                 row.append(len(verts))
                 verts.append((xx, yy, zz))
             rows.append(row)
-        # face material groups on the (i, k) grid
-        SKIN, GLASS, DOOR, TRIM, LOWER = 0, 1, 2, 3, 4
-
-        def kband(s0, s1, side):
-            """angle indices whose sin is in [s0, s1] on a side: 'curb' (y<0), 'street' (y>0), 'any'."""
-            out = set()
-            for k in range(nt):
-                ang = 2 * math.pi * (k + 0.5) / nt
-                c, s_ = math.cos(ang), math.sin(ang)
-                if s0 <= s_ <= s1 and (side == 'any' or (side == 'curb' and c < -0.55) or (side == 'street' and c > 0.55)):
-                    out.add(k)
-            return out
-
-        def irange(x0, x1):
-            return {i for i in range(nx - 1) if x0 <= (xs[i] + xs[i + 1]) / 2 <= x1}
-
-        mat = {}
-        win_k_side = kband(0.12, 0.62, 'curb') | kband(0.12, 0.62, 'street')
-        wins = ((-L * 0.36, -L * 0.2), (-L * 0.02, L * 0.12), (L * 0.18, L * 0.3)) if air else ((-L * 0.32, -L * 0.14), (L * 0.06, L * 0.22))
-        for (w0, w1) in wins:
-            for i in irange(w0, w1):
-                for k in win_k_side:
-                    mat[(i, k)] = GLASS
-        front_k = kband(0.18, 0.66, 'any') if air else kband(0.1, 0.7, 'any')
-        for i in irange(L / 2 - (1.25 if air else 0.85), L / 2):
-            for k in front_k:
-                mat[(i, k)] = GLASS
-        for i in irange(-L / 2, -L / 2 + (0.6 if air else 0.45)):
-            for k in kband(0.25, 0.55, 'any'):
-                mat[(i, k)] = GLASS
-        # door on the curb side, a little behind the middle, with a small window
-        d0, d1 = -L * 0.12, -L * 0.12 + 0.68
-        door_k = kband(-0.8, 0.66, 'curb')
-        for i in irange(d0, d1):
-            for k in door_k:
-                mat[(i, k)] = DOOR
-        for i in irange(d0 + 0.18, d1 - 0.18):
-            for k in kband(0.3, 0.55, 'curb'):
-                mat[(i, k)] = GLASS
-        # dark trim around glass and door (one face ring)
-        trimmed = {}
-        for (i, k), mtyp in mat.items():
-            for (di, dk) in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-                q = (i + di, (k + dk) % nt)
-                if q not in mat and 0 <= q[0] < nx - 1:
-                    trimmed[q] = TRIM
-        mat.update(trimmed)
-        if not air:
-            for i in range(nx - 1):
-                for k in kband(-1.0, -0.38, 'any'):
-                    mat.setdefault((i, k), LOWER)
-                for k in kband(-0.36, -0.3, 'any'):
-                    mat.setdefault((i, k), TRIM)
-        faces, mats = [], []
-        for i in range(nx - 1):
-            for k in range(nt):
-                k2 = (k + 1) % nt
-                faces.append((rows[i][k], rows[i + 1][k], rows[i + 1][k2], rows[i][k2]))
-                mats.append(mat.get((i, k), SKIN))
+        # side faces wound (k, k+1, i+1) so normals point out; windows, door and trim are painted by the shell
+        # shader from object position + normal, so their edges stay smooth and rounded on the curved skin
+        quads = [(rows[i][k], rows[i][(k + 1) % nt], rows[i + 1][(k + 1) % nt], rows[i + 1][k]) for i in range(nx - 1) for k in range(nt)]
+        faces = list(quads)
+        d0, d1 = -L * 0.12, -L * 0.12 + 0.66
+        if air:
+            wz = (zb + 1.18, zb + 1.72)
+            rects = [((-L * 0.36, -L * 0.2), wz, 0.1), ((-L * 0.0, L * 0.12), wz, 0.1), ((L * 0.17, L * 0.27), wz, 0.1)]
+            band = (zb + 1.02, zb + 1.5)
+        else:
+            wz = (zb + 1.08, zb + 1.6)
+            rects = [((-L * 0.34, -L * 0.15), wz, 0.14), ((L * 0.06, L * 0.22), wz, 0.14)]
+            band = (zb + 1.0, zb + 1.55)
+        shell = self.shell_material(kind, L, W, zb, rects, band, door=((d0, d1), (zb + 0.06, zb + 1.86), 0.08),
+                                    door_win=((d0 + 0.16, d1 - 0.16), (zb + 1.22, zb + 1.62), 0.06))
         for row, sign in ((rows[0], -1), (rows[-1], 1)):
             cx = verts[row[0]][0] + sign * (0.06 if air else 0.03)
             ci = len(verts)
             verts.append((cx, 0.0, sum(verts[r][2] for r in row) / nt))
             for k in range(nt):
                 faces.append((row[k], row[(k + 1) % nt], ci) if sign > 0 else (row[(k + 1) % nt], row[k], ci))
-                mats.append(SKIN)
         me = bpy.data.meshes.new(kind)
         me.from_pydata(verts, [], faces)
         me.update()
         me.polygons.foreach_set('use_smooth', [True] * len(me.polygons))
-        me.polygons.foreach_set('material_index', mats)
-        skin = self.aluminum() if air else self.mat('fiberglass', '#f6f5f2', rough=0.22)
-        door_m = self.mat('door_alu', '#b3b8bc', rough=0.4, metal=1.0) if air else self.mat('fiberglass_door', '#eeede9', rough=0.25)
-        for mm in (skin, self.tint(), door_m, self.mat('trim_black', '#1c1d1f', rough=0.5), self.mat('fiberglass_lower', '#8d9296', rough=0.3)):
-            me.materials.append(mm)
+        me.materials.append(shell)
         ob = bpy.data.objects.new(kind, me)
         ob.parent = root
         self.link(ob, coll)
@@ -251,6 +180,146 @@ class Camp(SK.Spa):
         self.anchor(label, x, y, z0, cat, dz=zt + 0.6)
         self.door_world = self._local_to_world(root, ((d0 + d1) / 2, -W / 2, zb))
         return root
+
+    def shell_material(self, kind, L, W, zb, rects, band, door, door_win):
+        """Shader that paints a lofted shell: skin, side windows (rounded rectangles seen from the side),
+        a wraparound front window (a height band on forward-facing skin), a rear window, door and door window,
+        each opening ringed by dark trim. Uses object-space position and normal, so edges are exact."""
+        name = 'shell_' + kind
+        if name in self.mats:
+            return self.mats[name]
+        air = kind == 'airstream'
+        m = bpy.data.materials.new(name)
+        m.use_nodes = True
+        nt = m.node_tree
+        nodes, links = nt.nodes, nt.links
+        out = nodes['Material Output']
+        nodes.remove(nodes['Principled BSDF'])
+
+        def bsdf(color, rough, metal=0.0, emit=None):
+            p = nodes.new('ShaderNodeBsdfPrincipled')
+            if isinstance(color, str):
+                p.inputs['Base Color'].default_value = K.srgb(color)
+            else:
+                links.new(color, p.inputs['Base Color'])
+            p.inputs['Roughness'].default_value = rough
+            p.inputs['Metallic'].default_value = metal
+            if emit:
+                p.inputs['Emission Color'].default_value = K.srgb(emit)
+                p.inputs['Emission Strength'].default_value = 0.0
+            return p
+
+        def op(o, a, b=None):
+            n = nodes.new('ShaderNodeMath')
+            n.operation = o
+            for i, v in enumerate((a, b)):
+                if v is None:
+                    continue
+                if isinstance(v, (int, float)):
+                    n.inputs[i].default_value = v
+                else:
+                    links.new(v, n.inputs[i])
+            return n.outputs[0]
+
+        tc = nodes.new('ShaderNodeTexCoord')
+        sp = nodes.new('ShaderNodeSeparateXYZ')
+        links.new(tc.outputs['Object'], sp.inputs[0])
+        geo = nodes.new('ShaderNodeNewGeometry')
+        vt = nodes.new('ShaderNodeVectorTransform')
+        vt.vector_type, vt.convert_from, vt.convert_to = 'NORMAL', 'WORLD', 'OBJECT'
+        links.new(geo.outputs['Normal'], vt.inputs[0])
+        sn = nodes.new('ShaderNodeSeparateXYZ')
+        links.new(vt.outputs[0], sn.inputs[0])
+        X, Y, Z = sp.outputs[0], sp.outputs[1], sp.outputs[2]
+        NX, NY = sn.outputs[0], sn.outputs[1]
+
+        def rrect(xr, zr, r):
+            """signed distance (m) to a rounded rectangle in the side (x, z) plane"""
+            cx, hx = (xr[0] + xr[1]) / 2, (xr[1] - xr[0]) / 2
+            cz, hz = (zr[0] + zr[1]) / 2, (zr[1] - zr[0]) / 2
+            qx = op('SUBTRACT', op('ABSOLUTE', op('SUBTRACT', X, cx)), hx - r)
+            qz = op('SUBTRACT', op('ABSOLUTE', op('SUBTRACT', Z, cz)), hz - r)
+            mx, mz = op('MAXIMUM', qx, 0.0), op('MAXIMUM', qz, 0.0)
+            ln = op('SQRT', op('ADD', op('MULTIPLY', mx, mx), op('MULTIPLY', mz, mz)))
+            inner = op('MINIMUM', op('MAXIMUM', qx, qz), 0.0)
+            return op('SUBTRACT', op('ADD', ln, inner), r)
+
+        def inside(dist, grow=0.0):
+            return op('LESS_THAN', dist, grow)
+
+        def band_mask(lo, hi, grow=0.0):
+            return op('MULTIPLY', op('GREATER_THAN', Z, lo - grow), op('LESS_THAN', Z, hi + grow))
+
+        TRIM = 0.035
+        side = op('GREATER_THAN', op('ABSOLUTE', NY), 0.42)
+        curb = op('LESS_THAN', NY, -0.42)
+        glass, trim = [], []
+        for (xr, zr, r) in rects:
+            d = rrect(xr, zr, r)
+            glass.append(op('MULTIPLY', inside(d), side))
+            trim.append(op('MULTIPLY', inside(d, TRIM), side))
+        fwd = op('GREATER_THAN', NX, 0.3)
+        fwd_t = op('GREATER_THAN', NX, 0.24)
+        near_front = op('GREATER_THAN', X, L / 2 - 1.7)
+        glass.append(op('MULTIPLY', op('MULTIPLY', band_mask(*band), fwd), near_front))
+        trim.append(op('MULTIPLY', op('MULTIPLY', band_mask(*band, grow=TRIM), fwd_t), near_front))
+        rear = op('LESS_THAN', NX, -0.45)
+        narrow = op('LESS_THAN', op('ABSOLUTE', Y), W * 0.22)
+        rz = (zb + 1.15, zb + 1.45)
+        glass.append(op('MULTIPLY', op('MULTIPLY', band_mask(*rz), rear), narrow))
+        trim.append(op('MULTIPLY', op('MULTIPLY', band_mask(*rz, grow=TRIM), op('LESS_THAN', NX, -0.4)),
+                       op('LESS_THAN', op('ABSOLUTE', Y), W * 0.22 + TRIM)))
+        dd = rrect(*door)
+        door_m = op('MULTIPLY', inside(dd), curb)
+        trim.append(op('MULTIPLY', op('SUBTRACT', inside(dd, 0.025), inside(dd)), curb))     # a ring, not the door
+        dw = rrect(*door_win)
+        glass.append(op('MULTIPLY', inside(dw), curb))
+
+        def any_of(ms):
+            acc = ms[0]
+            for mm in ms[1:]:
+                acc = op('MAXIMUM', acc, mm)
+            return acc
+
+        G, T = any_of(glass), any_of(trim)
+        if air:
+            b = nodes.new('ShaderNodeTexBrick')
+            b.offset = 0.0
+            b.inputs['Color1'].default_value = K.srgb('#cfd3d6')
+            b.inputs['Color2'].default_value = K.srgb('#c6cacf')
+            b.inputs['Mortar'].default_value = K.srgb('#8e9399')
+            b.inputs['Scale'].default_value = 1.0
+            b.inputs['Mortar Size'].default_value = 0.004
+            b.inputs['Brick Width'].default_value = 1.2
+            b.inputs['Row Height'].default_value = 30.0
+            links.new(tc.outputs['Object'], b.inputs['Vector'])
+            skin = bsdf(b.outputs['Color'], 0.3, 1.0)
+            skin.inputs['Anisotropic'].default_value = 0.5
+            door_b = bsdf('#b9bec2', 0.42, 1.0)
+        else:
+            skin = bsdf('#f6f5f2', 0.22)
+            door_b = bsdf('#efeeea', 0.26)
+            low = op('LESS_THAN', Z, zb + 0.32)
+            lower_b = bsdf('#8d9296', 0.3)
+            mix0 = nodes.new('ShaderNodeMixShader')
+            links.new(low, mix0.inputs[0])
+            links.new(skin.outputs[0], mix0.inputs[1])
+            links.new(lower_b.outputs[0], mix0.inputs[2])
+            skin = mix0
+            T = op('MAXIMUM', T, op('MULTIPLY', op('GREATER_THAN', Z, zb + 0.32), op('LESS_THAN', Z, zb + 0.37)))
+        trim_b = bsdf('#1c1d1f', 0.5)
+        glass_b = bsdf('#14181c', 0.05, 0.3, emit='#ffb36b')
+        glass_b.name = 'glass'
+        acc = skin.outputs[0]
+        for fac, sh in ((door_m, door_b), (T, trim_b), (G, glass_b)):
+            mx = nodes.new('ShaderNodeMixShader')
+            links.new(fac, mx.inputs[0])
+            links.new(acc, mx.inputs[1])
+            links.new(sh.outputs[0], mx.inputs[2])
+            acc = mx.outputs[0]
+        links.new(acc, out.inputs['Surface'])
+        self.mats[name] = m
+        return m
 
     def _local_to_world(self, root, p):
         v = Vector(p)
@@ -278,9 +347,14 @@ class Camp(SK.Spa):
         r = bmesh.ops.extrude_face_region(bm, geom=[f])
         bmesh.ops.translate(bm, vec=Vector((0, W, 0)), verts=[v for v in r['geom'] if isinstance(v, bmesh.types.BMVert)])
         bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+        cap_x = L / 2 - (1.0 if modern else 0.55) + 0.01
+        for fc in bm.faces:                       # the molded front cap: roof slope, nose and chin strips
+            if abs(fc.normal.y) < 0.5 and fc.calc_center_median().x > cap_x:
+                fc.material_index = 1
         body_col = '#f3f2ee' if modern else '#ece3d0'
         body = self.mat('gelcoat_' + style, body_col, rough=0.3 if modern else 0.5)
-        ob = self.mesh_obj('trailer_body', bm, [body], coll, parent=root)
+        cap = self.mat('cap_' + style, '#dcdcda' if modern else '#e2d6bf', rough=0.22 if modern else 0.45)
+        ob = self.mesh_obj('trailer_body', bm, [body, cap], coll, parent=root)
         mod = ob.modifiers.new('bevel', 'BEVEL')
         mod.width = 0.07 if modern else 0.04
         mod.segments = 3
@@ -297,7 +371,26 @@ class Camp(SK.Spa):
             for (wx, ww) in ((-L * 0.32, 1.1), (L * 0.2, 0.8)):
                 self.box('window_frame', (ww + 0.08, 0.015, 0.83), (wx, yy, zb + 1.75), trim, coll, parent=root, bevel=0.04, seg=2)
                 self.box('window', (ww, 0.025, 0.75), (wx, yy, zb + 1.75), self.tint(), coll, parent=root, bevel=0.04, seg=2)
-        self.box('front_window', (0.03, W * 0.8, 0.45), (L / 2 - (0.05 if modern else 0.03), 0, zt - (1.05 if modern else 0.85)), self.tint(), coll, parent=root, rot=(0, math.radians(-25 if modern else -12), 0))
+        # side graphics: two slanted swoosh bands rising toward the cap (inside the bevelled outline)
+        top = zt - 0.18
+        for (x_lo, wd, mm, z_lo) in ((L / 2 - 2.35, 0.34, g1, zb + 0.2), (L / 2 - 1.85, 0.12, g2, zb + 0.45)):
+            dxs = 1.0                                                  # run of the slant from bottom to top
+            quad = [(x_lo, z_lo), (x_lo + wd, z_lo), (x_lo + wd + dxs, top), (x_lo + dxs, top)]
+            for sy in (-1, 1):
+                y0, y1 = sy * (W / 2 + 0.004), sy * (W / 2 + 0.014)
+                vv = [(px, y0, pz) for (px, pz) in quad] + [(px, y1, pz) for (px, pz) in quad]
+                ff = [(0, 1, 2, 3), (7, 6, 5, 4), (0, 4, 5, 1), (1, 5, 6, 2), (2, 6, 7, 3), (3, 7, 4, 0)]
+                self.mesh_from('swoosh', vv, ff, mm, coll, parent=root)
+        # front window lying on the sloped nose segment, with a dark frame
+        p1, p2 = (prof[5], prof[6]) if modern else (prof[4], prof[5])
+        mx_, mz_ = (p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2
+        tilt = math.atan2(p1[0] - p2[0], p1[1] - p2[1])
+        nrm = (math.cos(tilt), -math.sin(tilt))
+        seg_len = math.hypot(p1[0] - p2[0], p1[1] - p2[1])
+        self.box('front_window_frame', (0.02, W * 0.84, seg_len * 0.82), (mx_ + nrm[0] * 0.01, 0, mz_ + nrm[1] * 0.01), trim, coll, parent=root, rot=(0, tilt, 0))
+        self.box('front_window', (0.02, W * 0.8, seg_len * 0.74), (mx_ + nrm[0] * 0.02, 0, mz_ + nrm[1] * 0.02), self.tint(), coll, parent=root, rot=(0, tilt, 0))
+        self.box('baggage_door', (0.75, 0.015, 0.5), (L / 2 - 0.8, -W / 2 - 0.006, zb + 0.4), self.mat('door_' + style, '#e2e0da' if modern else '#d9cdb5', rough=0.35), coll, parent=root)
+        self.box('baggage_door', (0.79, 0.01, 0.54), (L / 2 - 0.8, -W / 2 - 0.001, zb + 0.4), trim, coll, parent=root)
         # door (curb side, -Y): trimmed frame, handle, window, grab handle, fold-down steps
         yy = -W / 2 - 0.012
         self.box('door_frame', (0.8, 0.02, 1.98), (dx, yy, zb + 0.99), trim, coll, parent=root)
@@ -328,7 +421,7 @@ class Camp(SK.Spa):
             self.cyl('roller', 0.05, L * 0.55, ((ax0 + ax1) / 2, out_y, out_z), self.mat('awning_case', '#e9e9e6', rough=0.3, metal=0.5), 'roof', parent=root, seg=12, rot=(0, math.pi / 2, 0))
             for axx in (ax0 + 0.05, ax1 - 0.05):
                 self.beam('awning_arm', (axx, -W / 2 - 0.02, zb + 0.15), (axx, out_y, out_z), (0.05, 0.05), self.m('steel'), 'roof', parent=root)
-        self.running_gear(root, L, W, (-0.55, 0.55), zb - 0.04, coll, tongue=1.1)
+        self.running_gear(root, L, W, (-0.55, 0.55), zb - 0.04, coll, tongue=1.15)
         self.foot(x, y, L / 2 + 2.5, W / 2 + 2.5)
         self.anchor(label, x, y, z0, cat, dz=zt + 0.6)
         self.door_world = self._local_to_world(root, (dx, -W / 2, zb))
@@ -579,12 +672,20 @@ class Camp(SK.Spa):
         self.foot(x, y, 3.2, 1.6)
 
     def person(self, x, y, rot=0.0, coll='camp', color='#3a3633'):
-        """A 5 ft 9 in figure for scale."""
+        """A 5 ft 9 in (1.75 m) figure for scale: legs, hips, torso, arms, neck and head."""
         z = self.pad_z if getattr(self, 'pad_z', None) else self.t.h(x, y)
+        root = self.empty('person', x, y, z, rot, coll)
         m = self.mat('figure_' + color, color, rough=0.8)
-        self.cyl('legs', 0.14, 0.82, (x, y, z + 0.41), m, coll, seg=12, r2=0.12)
-        self.cyl('torso', 0.2, 0.6, (x, y, z + 1.12), m, coll, seg=14, r2=0.17)
-        self.cyl('head', 0.11, 0.24, (x, y, z + 1.6), m, coll, seg=14, r2=0.1)
+        for sx in (-0.1, 0.1):
+            self.cyl('leg', 0.075, 0.86, (sx, 0, 0.43), m, coll, parent=root, seg=12, r2=0.065)
+            self.box('shoe', (0.12, 0.26, 0.07), (sx, -0.05, 0.035), m, coll, parent=root, bevel=0.03, seg=2)
+        self.box('hips', (0.36, 0.2, 0.16), (0, 0, 0.9), m, coll, parent=root, bevel=0.06, seg=2)
+        t = self.cyl('torso', 0.16, 0.56, (0, 0, 1.24), m, coll, parent=root, seg=16, r2=0.2)
+        t.scale = (1.05, 0.62, 1.0)
+        for sx in (-1, 1):
+            self.beam('arm', (sx * 0.23, 0, 1.47), (sx * 0.27, 0.02, 0.86), (0.085, 0.085), m, coll, parent=root)
+        self.cyl('neck', 0.05, 0.08, (0, 0, 1.55), m, coll, parent=root, seg=10)
+        self.lathe('head', [(0.0, -0.11), (0.07, -0.095), (0.1, -0.03), (0.1, 0.03), (0.07, 0.095), (0.0, 0.11)], (0, 0, 1.64), m, coll, seg=20, parent=root)
 
     def house_frame(self, label, x, y, W=9.75, D=6.1, H=3.05, cat=0, coll='house'):
         """The permitted house under construction: slab, stud walls, top plates and a few roof joists."""

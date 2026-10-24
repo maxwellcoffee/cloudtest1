@@ -62,7 +62,8 @@ SCHEMES = [
          size='1,600 sq ft inside the walls; about 100 sq ft of roofs plus the pergola.',
          good='A sheltered microclimate where tender plants survive, and complete privacy. Can be built in stages: walls and tub first, the corners later.',
          watch='The walls are the big cost; garden walls this tall need a building permit and wind engineering, and must sit outside the side and rear setbacks (walls inside them are capped at 6 ft). The walls can be the safety barrier, but the gate must then be a single self-closing leaf no wider than 4 ft that opens outward, not the double gate drawn. The clay dome is a custom build; skip it at first.',
-         tier='Premium', shots=['D_hero', 'D_inner', 'D_dusk']),
+         tier='Premium', shots=['D_bird', 'D_inner', 'D_dusk'],
+         caps=['From above: the walled courtyard, sauna and rest room in the corners', 'Inside the courtyard, by the tub', 'Dusk, lanterns and screens lit']),
     dict(k='E', name='Starter Kit', tag='Start while you build',
          idea="The lean version. A 12 x 12 ft cedar gazebo kit over a plug-and-play hot tub that is set into the ground, so its rim sits at ground level, with two coral lattice screens on the wind side and plants in pots. A 6-ft barrel sauna, a stock-tank plunge and a post shower stand beside it.",
          inside=['Plug-and-play acrylic hot tub, about 7 x 7 ft, on 240 V, recessed into a lined pit with its rim at ground level', 'A hatch beside it to reach the pumps and heater', 'Two coral lattice screens on the north and west', 'Potted fan palm, bird of paradise and fern; a hanging plant'],
@@ -77,7 +78,7 @@ SCHEMES = [
 def scheme_html(s):
     k = s['k']
     shots = ''.join(img(n, cap, 'span2' if i == 0 else '') for i, (n, cap) in enumerate(
-        zip(s['shots'], ['Afternoon, from the approach', 'Inside, by the tub', 'Dusk, lanterns and screens lit'])))
+        zip(s['shots'], s.get('caps', ['Afternoon, from the approach', 'Inside, by the tub', 'Dusk, lanterns and screens lit']))))
     plan = (f'<div class="plan-row"><div class="lattice">{img(k + "_plan", "Plan with the roofs lifted off, north up")}</div>'
             f'<div class="stack"><p class="eyebrow">Plan key</p>{legend(k + "_plan")}'
             f'<p class="small muted">Marker colors: coral for water, black for heat, green for rest and garden, grey for structure.</p></div></div>')

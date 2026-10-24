@@ -1,0 +1,67 @@
+[
+ {
+  "n": 1,
+  "label": "Octagonal gazebo, 21 ft across",
+  "phase": 0
+ },
+ {
+  "n": 2,
+  "label": "In-ground round hot tub, 8 ft",
+  "phase": 1
+ },
+ {
+  "n": 3,
+  "label": "Planters: ferns, bird of paradise, snake plant",
+  "phase": 3
+ },
+ {
+  "n": 4,
+  "label": "Potted fan palms",
+  "phase": 3
+ },
+ {
+  "n": 5,
+  "label": "Hanging pothos on the beams",
+  "phase": 3
+ },
+ {
+  "n": 6,
+  "label": "Star jasmine on the entry posts",
+  "phase": 3
+ },
+ {
+  "n": 7,
+  "label": "Cedar barrel sauna (2-4 people)",
+  "phase": 2
+ },
+ {
+  "n": 8,
+  "label": "Cold plunge (stock tank + chiller)",
+  "phase": 1
+ },
+ {
+  "n": 9,
+  "label": "Outdoor rinse shower",
+  "phase": 1
+ },
+ {
+  "n": 10,
+  "label": "Scrub + seated wash station",
+  "phase": 1
+ },
+ {
+  "n": 11,
+  "label": "Loungers for the rest round",
+  "phase": 3
+ },
+ {
+  "n": 12,
+  "label": "Warm rest platform (ondol-style)",
+  "phase": 3
+ },
+ {
+  "n": 13,
+  "label": "Fan palms (low water once established)",
+  "phase": 3
+ }
+]

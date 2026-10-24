@@ -1,0 +1,57 @@
+[
+ {
+  "n": 1,
+  "label": "In-ground tiled hot tub, 6.5 x 6.5 ft, rim at floor level",
+  "phase": 1
+ },
+ {
+  "n": 2,
+  "label": "Jeongja bathhouse, 24 x 16 ft, three bays",
+  "phase": 0
+ },
+ {
+  "n": 3,
+  "label": "Bay 1: two seated wash stations + scrub table",
+  "phase": 1
+ },
+ {
+  "n": 4,
+  "label": "Bay 2 planter: bird of paradise + ferns",
+  "phase": 3
+ },
+ {
+  "n": 5,
+  "label": "Bay 3: heated ondol rest platform, 7 x 8 ft",
+  "phase": 3
+ },
+ {
+  "n": 6,
+  "label": "Sikhye + baked-egg station",
+  "phase": 3
+ },
+ {
+  "n": 7,
+  "label": "Cedar cabin sauna, 7 x 7 ft",
+  "phase": 2
+ },
+ {
+  "n": 8,
+  "label": "Cedar cold plunge tub",
+  "phase": 1
+ },
+ {
+  "n": 9,
+  "label": "Rinse shower",
+  "phase": 1
+ },
+ {
+  "n": 10,
+  "label": "Bamboo in raised planters (north windbreak)",
+  "phase": 3
+ },
+ {
+  "n": 11,
+  "label": "Olive trees",
+  "phase": 3
+ }
+]
