@@ -45,6 +45,7 @@ def annotate(src_dir, out_dir, name, phases=None):
     r = int(17 * s) + 1
     plan = 'px_per_m' in meta
     pal = {int(k): tuple(v) for k, v in meta['palette'].items()} if 'palette' in meta else PHASE
+    fs = meta.get('font_scale', 1.0)   # larger captions for plans shown small on a page
     d = ImageDraw.Draw(im, 'RGBA')
     anchors = [a for a in meta['anchors'] if phases is None or a['phase'] in phases]
     markers = []
@@ -71,31 +72,31 @@ def annotate(src_dir, out_dir, name, phases=None):
         segs = [0, 50, 100, 200] if site else [0, 5, 10, 20]
         x0, y0 = 40 * s, H - 46 * s
         L = segs[-1] * FT * ppm
-        d.rounded_rectangle([x0 - 14 * s, y0 - 34 * s, x0 + max(L + 40 * s, 330 * s), y0 + 28 * s], radius=8 * s, fill=(255, 255, 255, 215))
+        d.rounded_rectangle([x0 - 14 * s, y0 - 34 * s * fs, x0 + max(L + 40 * s, 330 * s * fs, len(meta.get('note', '')) * 7.2 * s * fs), y0 + 28 * s * fs], radius=8 * s, fill=(255, 255, 255, 235))
         for i in range(len(segs) - 1):
             a = x0 + segs[i] * FT * ppm
             b = x0 + segs[i + 1] * FT * ppm
             d.rectangle([a, y0, b, y0 + 9 * s], fill=(30, 30, 30, 255) if i % 2 == 0 else (255, 255, 255, 255), outline=(30, 30, 30, 255), width=max(1, int(2 * s)))
-        fl = font('Medium', int(14 * s))
+        fl = font('Medium', int(14 * s * fs))
         for v in segs:
             d.text((x0 + v * FT * ppm, y0 - 6 * s), f'{v}' + (' ft' if v == segs[-1] else ''), font=fl, fill=(30, 30, 30, 255), anchor='md')
         note = meta.get('note') or ('660 ft x 330 ft = 5.0 acres   contours every 2 ft' if site else '32 ft x 20 ft outside = 640 sq ft')
-        d.text((x0, y0 + 22 * s), note, font=font('Regular', int(12 * s)), fill=(50, 50, 50, 255), anchor='ls')
+        d.text((x0, y0 + 22 * s * fs), note, font=font('Medium' if fs > 1 else 'Regular', int(12 * s * fs)), fill=(30, 30, 30, 255), anchor='ls')
         items = [tuple(i) for i in meta.get('key', [])]
         # key
         items = items if (items or not site) else [('line', (255, 255, 255), 'Property line'), ('dash', (232, 120, 42), 'Setbacks: 25 ft front, 15 ft sides + rear'),
                  ('ring', (47, 163, 107), 'Joshua tree 50-ft buffer: no work inside'), ('dashring', (210, 60, 60), '100 ft defensible space'),
                  ('dashring', (47, 127, 216), 'Well: no septic within 100 ft')]
-        fk = font('Medium', int(13 * s))
-        bw, bh = (318 if site else 360) * s, (len(items) * 24 + 16) * s
+        fk = font('Medium', int(13 * s * fs))
+        bw, bh = (318 if site else 360) * s * fs, (len(items) * 24 + 16) * s * fs
         if not items:
             bw = bh = 0
         bx, by = W - bw - 24 * s, H - bh - 18 * s
         if items:
-            d.rounded_rectangle([bx, by, bx + bw, by + bh], radius=8 * s, fill=(255, 255, 255, 220))
+            d.rounded_rectangle([bx, by, bx + bw, by + bh], radius=8 * s, fill=(255, 255, 255, 235))
         for i, (kind, col, txt) in enumerate(items):
-            yy = by + (14 + i * 24) * s + 6 * s
-            xx = bx + 14 * s
+            yy = by + ((14 + i * 24) * s + 6 * s) * fs
+            xx = bx + 14 * s * fs
             if kind == 'line':
                 d.line([(xx, yy), (xx + 30 * s, yy)], fill=(120, 120, 120, 255), width=int(6 * s))
                 d.line([(xx, yy), (xx + 30 * s, yy)], fill=col + (255,), width=int(3 * s))
@@ -103,14 +104,14 @@ def annotate(src_dir, out_dir, name, phases=None):
                 for k in range(3):
                     d.line([(xx + k * 11 * s, yy), (xx + k * 11 * s + 7 * s, yy)], fill=col + (255,), width=int(3 * s))
             elif kind == 'dot':
-                d.ellipse([xx + 6 * s, yy - 9 * s, xx + 24 * s, yy + 9 * s], fill=tuple(col) + (255,), outline=(255, 255, 255, 255), width=max(1, int(2 * s)))
+                d.ellipse([xx + 6 * s * fs, yy - 9 * s * fs, xx + 24 * s * fs, yy + 9 * s * fs], fill=tuple(col) + (255,), outline=(255, 255, 255, 255), width=max(1, int(2 * s)))
             elif kind == 'ring':
                 d.ellipse([xx + 8 * s, yy - 8 * s, xx + 24 * s, yy + 8 * s], outline=col + (255,), width=int(3 * s))
             else:
                 d.arc([xx + 6 * s, yy - 10 * s, xx + 26 * s, yy + 10 * s], 0, 70, fill=col + (255,), width=int(3 * s))
                 d.arc([xx + 6 * s, yy - 10 * s, xx + 26 * s, yy + 10 * s], 120, 190, fill=col + (255,), width=int(3 * s))
                 d.arc([xx + 6 * s, yy - 10 * s, xx + 26 * s, yy + 10 * s], 240, 310, fill=col + (255,), width=int(3 * s))
-            d.text((xx + 42 * s, yy), txt, font=fk, fill=(35, 35, 35, 255), anchor='lm')
+            d.text((xx + 42 * s * fs, yy), txt, font=fk, fill=(35, 35, 35, 255), anchor='lm')
     os.makedirs(out_dir, exist_ok=True)
     out = os.path.join(out_dir, name + '.jpg')
     im.save(out, quality=86, optimize=True, progressive=True)

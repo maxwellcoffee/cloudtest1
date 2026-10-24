@@ -1,0 +1,496 @@
+{
+ "topic": "rules",
+ "summary": "The County allows an in-ground spa on this lot with one Building and Safety \"Pool and Spa\" permit through EZOP. On the FY2026-27 fee schedule that costs $335 for a spa or hot tub plus a $57 intake fee. The County may instead classify a large site-built tub as a pool: $647 with a standard plan, $748 without. Both fees include plan review and all inspections.\n\nSix rules shape the design:\n(1) Any water over 18 in deep counts as a \"swimming pool\" under the Swimming Pool Safety Act. That includes the cold plunge. A new spa at a single-family home needs 2 of 7 drowning-prevention features. Since SB 552 (Ch. 769, Stats. 2024), some pairs do not count, including a safety cover plus a pool alarm.\n(2) The statute's spa exemption (HSC 115925(b): a locking cover meeting ASTM F1346) does not separate portable from permanent spas. But other agencies read it narrowly (SLO County limits it to self-contained spas). San Bernardino County's IB-0007 (updated 1/1/2026) does not offer a cover-only exemption: a safety cover can replace the enclosure, but one more feature is still required. Plan on an enclosure plus a labeled F1346-23 locking cover for every scheme.\n(3) A walled courtyard (D) or the walls of a detached pool house (A) can be the enclosure. IB-0007 then bans double doors, doors wider than 4 ft, and pairs of gates in that enclosure. So big glass sliders cannot be part of the barrier.\n(4) The 2025 California Electrical Code (2023 NEC) Article 680 requires full perimeter bonding (3 ft around) for every flush or recessed spa. This applies even to the acrylic tub in E, because the 28-in-rim exception only covers above-ground units. Other limits: line-voltage lights within 5 ft of the water must be 12 ft above it outdoors (low-voltage listed fixtures are excepted), and no electric radiant floor cables are allowed within 20 ft. That last rule matters for a heated rest platform.\n(5) Under the 2025 Energy Code, a new permanent spa's main heater must be a heat pump or solar. Gas or electric-resistance heat is only a backup, and only with on-site renewables. Outdoor heated spas need a cover.\n(6) Zoning, septic and wildlife:\n- Spa location: no closer than 25 ft to the front line or 15 ft to the side lines. It may sit in the rear setback but must be at least 5 ft from that property line.\n- Septic: at least 5 ft from the tank and 8 ft from the leach field or a seepage pit (County OWTS table).\n- Draining: never into the septic system. Dechlorinate and spread it on your own land.\n- Joshua trees: any western Joshua tree within 50 ft of any digging, including trenches, needs CDFW approval.\n- Timing: the County generally won't let an accessory spa come before the house (Dev. Code 84.01.020(b)). The TUP route is not meant for permanent structures, so permit the spa with or after the house.\n\nEvery scheme's excavation stays well under the 100 cy grading-permit threshold. The real ground risks are caliche and collapse-prone desert soil, which a soils engineer should check.",
+ "findings": [
+  {
+   "title": "County permit path and FY2026-27 fees for an in-ground spa",
+   "detail": "The County requires a Pool and Spa permit before construction. You apply in EZOP: Building > Create an Application > Pool and Spa. The County must approve plans and supporting documents first, and the Swimming Pool/Spa Barrier condition must be met before the permit is issued. Fee ordinance \u00a716.0204(i), effective July 1, 2026:\n- Spas and/or hot tubs: $335 ($345 from July 1, 2027; $355 from July 1, 2028).\n- Pool accessory to a single-family home: $647 with a standard plan, $748 with other than a standard plan.\n- Possible extra plan review when other than a standard plan: $195.\n- Intake processing fee on every permit: $57 (\u00a716.0204(h)(1)).\nThe pool and spa fee 'includes plan review fees ... and all inspection fees for all phases of the construction including ... electrical, mechanical, plumbing and solar energy permit fees.' The bathhouse, gazebo or pavilion needs its own building permit. Ask the County whether a 9.5x7 ft site-built tiled tub is billed as a spa ($335) or a pool ($748). The EZOP page lists no plan checklist or inspection sequence. Expect the usual California sequence: pre-gunite (steel, bonding, plumbing pressure test), pre-deck (perimeter bonding), then final. Under HSC 115922 the building official must inspect the drowning-prevention features before final approval.",
+   "confidence": "high",
+   "sources": [
+    "https://wp.sbcounty.gov/ezop/permits/pool-and-spa/",
+    "https://wp.sbcounty.gov/ezop/conditions/swimming-pool-spa-barrier/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf",
+    "https://sanbenitocountyca.gov/home/showpublisheddocument/10346/638126611333270000",
+    "https://cityoftracy.org/home/showpublisheddocument/1982/637505389058270000"
+   ]
+  },
+  {
+   "title": "Any water over 18 in deep is a 'pool': the spa and the cold plunge both need two drowning-prevention features",
+   "detail": "HSC 115921 and IB-0007 define a swimming pool as any structure for swimming or recreational bathing that holds water over 18 inches deep, in-ground or above-ground. That includes hot tubs, spas and portable spas, so a cold plunge deeper than 18 in is covered too. HSC 115922(a) applies when a permit is issued for a new pool or spa at a private single-family home. The pool must have at least 2 of these 7 features:\n1. An enclosure meeting HSC 115923 that isolates the pool from the home.\n2. Removable mesh fencing (ASTM F2286) with a self-closing, self-latching, key-lockable gate.\n3. A safety cover labeled to ASTM F1346-23.\n4. Exit alarms on house doors, and now windows, with direct access.\n5. A self-closing, self-latching device on those doors, with the release at least 54 in above the floor.\n6. A water alarm certified to ASTM F2208. Child-worn alarms do not count.\n7. Other equivalent, lab-verified means.\nSB 552 (Ch. 769, Stats. 2024, in force 1/1/2025) added HSC 115922(b): some pairs no longer count, including an exit alarm plus a self-closing device on the same door, and a safety cover plus a pool alarm.",
+   "confidence": "high",
+   "sources": [
+    "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115921/",
+    "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115922/",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202320240sb552",
+    "https://gocodebook.com/library/us/ca/ca-building-code/chapter-31-special-construction/section-3109-swimming-pools-spas-and-hot-tubs",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf"
+   ]
+  },
+  {
+   "title": "The HSC 115925(b) locking-cover exemption: the statute covers any spa, but in this County don't count on it",
+   "detail": "Current HSC 115925 says the Act does not apply to '(b) Hot tubs or spas with locking safety covers that comply with the ASTM International F1346 standard.' The text does not limit this to portable spas, so it covers a permanent in-ground spa on its face. Agencies read it differently:\n- San Luis Obispo County applies the exemption only to 'self-contained' spas, where all equipment sits under the skirt. It treats non-self-contained, site-built spas as pools that need a CBC 3109 enclosure. A self-contained spa may be recessed if the manufacturer allows it and the cover still works.\n- San Bernardino County's IB-0007 (updated 1/1/2026) never mentions the 115925(b) exemption. Instead, item A.7 says an approved safety cover 'may substitute for the required pool enclosure.' Item 8.3 then still requires one more drowning-prevention feature.\nSo for the site-built tubs in Schemes A-D, assume no exemption: two features, cover plus enclosure. For Scheme E's self-contained acrylic spa the exemption argument is stronger, but ask the County for a written ruling. A cover-only plan also relies on the cover being locked after every soak.",
+   "confidence": "medium",
+   "sources": [
+    "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115925/",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/appendix-ci-swimming-pool-safety-act",
+    "https://slocounty.ca.gov/departments/planning-building/forms-documents/pool-and-spa-forms-and-documents/bld-1054-07092024-barrier-requirements-for-pool-_-spa",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf"
+   ]
+  },
+  {
+   "title": "IB-0007 is behind the statute: follow the stricter HSC rules",
+   "detail": "IB-0007 (updated January 1, 2026) still defines an approved safety cover by ASTM F1346-91. Its item 8.3 allows a cover plus 'one additional item' from its list, and the list includes the in-water pool alarm. Under HSC 115922 as amended by SB 552, the cover must carry a label verifying ASTM F1346-23, and a cover plus a pool alarm does not count as two features. Specify an F1346-23-labeled locking cover, and pair it with an enclosure, not an alarm.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf",
+    "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115922/",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202320240sb552"
+   ]
+  },
+  {
+   "title": "IB-0007 enclosure details that drive the gazebo, pavilion and courtyard designs",
+   "detail": "Enclosure rules (IB-0007 A.1-6 and HSC 115923):\n- Top at least 60 in above grade, measured on the side away from the pool, with at most 2 in between grade and the bottom.\n- No opening that passes a 4-in sphere.\n- No climbable decoration on the outside face.\n- Horizontal members closer than 45 in apart must be on the pool side.\n- Chain link mesh at most 1.5 in (1.75 in with slats).\n- Gates open outward, away from the pool, are self-closing and self-latching, and accept a lock. If the latch release is under 60 in, it goes on the pool side at least 3 in below the top, with no opening over 1/2 in within 18 in of it.\nIB-0007 C.3 prohibits as part of the enclosure: double doors or pairs of gates, doors or gates wider than 4 ft, driveway gates and garage doors. Exit alarms (C.1) must be UL 2017 listed, sound within 7 s for 30 s at 85 dBA or more, and have a deactivation switch at least 54 in up that bypasses for no more than 15 s.\nBy scheme: the open-sided pavilion and gazebos (B, C, E) need a separate 60-in fence or wall around the bath precinct. The walled garden (D) meets the rule naturally if the walls are 60 in or taller on the outside with single gates no wider than 4 ft.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf",
+    "https://gocodebook.com/library/us/ca/ca-residential-code/appendix-ci-swimming-pool-safety-act"
+   ]
+  },
+  {
+   "title": "Scheme A: the enclosed pool house can be the barrier, with limits on its doors and windows",
+   "detail": "HSC 115921 defines an enclosure as 'a fence, wall, or other barrier that isolates a swimming pool from access to the home.' IB-0007 Detail C allows the enclosure to combine fences, parts of buildings or structures, and walls. So the walls of a detached bathhouse that isolate the spa from the house can serve as feature #1. Its exterior doors then count as enclosure gates:\n- single leaf, no wider than 4 ft (no French doors, folding or sliding glass walls)\n- swing outward, away from the spa\n- self-closing and self-latching, with the release at 60 in or higher or on the pool side\n- no operable window or vent below 60 in that opens past 4 in\n- glass walls are fine as long as there are no outside footholds\nThe large glass sliders seen at The Spring therefore cannot be part of the barrier. Either use fixed glazing with code doors, or put a compliant 60-in wall around the whole bathhouse courtyard. If a door leads straight from the house into the spa room, IB-0007 8.2 also requires an extra feature on that door, such as an exit alarm or a 54-in self-closing latch. Feature #2: an F1346-23 locking cover, which also cuts humidity and heat loss. No County document addresses detached pool houses directly, so get a written determination.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf",
+    "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115921/",
+    "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115922/"
+   ]
+  },
+  {
+   "title": "Drain entrapment: VGB Act for covers, plus California's dual-drain rule for new spas",
+   "detail": "Federal: under 16 CFR 1450.3 (VGB Act), every pool or spa drain cover made, sold or brought into commerce in the US must meet ANSI/APSP/ICC-16 2017, effective May 24, 2021 after a COVID delay. This applies to covers sold for residential spas too. The extra federal entrapment systems (safety vacuum release, auto shut-off, suction-limiting vent, or an unblockable drain) are mandated for PUBLIC pools and spas only. California HSC 115928, for a new pool or spa:\n- either at least two suction outlets per pump, hydraulically balanced and plumbed through a T, at least 3 ft apart in any dimension\n- or no suction outlets at all, using skimmers or a perimeter-overflow system\n- covers must meet ANSI/APSP-16 and need tools to remove\n- optional backup systems must meet CPSC Publication 363\nA perimeter-overflow (gravity gutter to surge tank) design suits a rim-at-deck tub and leaves no suction in the bathing well.",
+   "confidence": "high",
+   "sources": [
+    "https://www.ecfr.gov/current/title-16/chapter-II/subchapter-B/part-1450/section-1450.3",
+    "https://cpsc.gov/s3fs-public/Draft%20Direct%20Final%20Rule%20-%20VGB%20Pool%20and%20Spa%20Safety%20Act-%20Incorporated%20by%20Reference%20Successor%20Standard%20-%20May%208%2C%202019.pdf",
+    "https://lawfilesext.leg.wa.gov/Law/WSR/2022/01/22-01-010.htm",
+    "https://www.poolsafely.gov/wp-content/uploads/2016/04/PSSA-Staff-Guide.pdf",
+    "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115928/",
+    "https://gocodebook.com/library/us/ca/ca-building-code/chapter-31-special-construction/section-3109-swimming-pools-spas-and-hot-tubs"
+   ]
+  },
+  {
+   "title": "NEC Article 680 (2025 CEC = 2023 NEC): bonding, GFCI, disconnect, lights, receptacles",
+   "detail": "The 2025 California Electrical Code, in force 1/1/2026, adopts the 2023 NEC.\nOutdoor spas (Schemes B, C, D and E, under open-sided roofs): 680.42 applies Parts I and II, the same rules as pools.\n- Bonding (680.26): bond the shell steel, metal fittings, and pump and heater equipment.\n- Perimeter bonding (680.26(B)(2)): the walking surface 3 ft out from the inside wall, paved or unpaved. Use the deck rebar or wire mesh, or an 8 AWG solid copper ring set 4-6 in below subgrade (older text: 18-24 in from the inside wall).\n- Fixed metal (680.26(B)(7)): metal within 5 ft horizontally and 12 ft vertically gets bonded, which catches metal gazebo frames and handrails.\n- Exception for an outdoor spa (680.42(B)): no perimeter bonding only if the spa is listed self-contained for above-ground use, sits on or above grade, and has its rim at least 28 in above all surfaces within 30 in. A flush or recessed spa, including E's acrylic, does not qualify.\n- GFCI: required on the outlets supplying the spa (680.44). The 2023 code extends GFCI to receptacles rated 60 A or less within 20 ft (680.22(A)(4)).\n- Receptacles: at least 6 ft from the inside wall.\n- Switches: at least 5 ft away unless a permanent barrier separates them.\n- Maintenance disconnect (680.13): within sight and at least 5 ft away.\n- Lights (680.22(B)): new luminaires and ceiling fans over the water or within 5 ft horizontally must be at least 12 ft above the maximum water level. Listed low-voltage luminaires within the low-voltage contact limit, on listed power supplies, are allowed closer (680.22(B)(6)).\nIndoor spa (Scheme A, 680.43):\n- at least one 125 V receptacle 6-10 ft from the inside wall; receptacles within 10 ft on GFCI\n- switches at least 5 ft away\n- luminaires within 5 ft horizontally: 12 ft up, or 7.5 ft up if GFCI-protected and of the enclosed or nonmetallic types\n- bond the metal fittings and the metal surfaces, raceways and piping within 5 ft\n- the perimeter-bonding exception applies only to a listed self-contained spa set above a finished floor\nPublished NEC text could not be fetched, so these numbers come from trade articles. Have the C-10 electrician confirm them against the 2025 CEC.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.dgs.ca.gov/-/media/Divisions/BSC/02-Codes/2025-CEC_rev2025-11-20_locked.docx",
+    "https://shop.iccsafe.org/2025-california-electrical-code-title-24-part-3.html",
+    "https://www.ecmweb.com/national-electrical-code/code-basics/article/20903256/spas-hot-tubs-and-hydromassage-tubs",
+    "https://www.ecmweb.com/national-electrical-code/code-basics/article/21239561/keeping-pools-and-spas-safe-part-2-of-2",
+    "https://forums.mikeholt.com/threads/680-42-b-4-spa-bonding-exception.2565632",
+    "https://www.ecmweb.com/national-electrical-code/article/20889368/top-2008-nec-changes",
+    "https://lightnowblog.com/2022/11/four-changes-in-the-2023-national-electric-code-impacting-lighting",
+    "https://forums.mikeholt.com/goto/post?id=2823777",
+    "https://www.ecmweb.com/code-quiz-of-day/article/20899205/minimum-clearances-for-electrical-equipment-near-spas-and-hot-tubs"
+   ]
+  },
+  {
+   "title": "The heated rest platform: no electric radiant cables within 20 ft of the spa",
+   "detail": "NEC 680.27(C) covers deck areas, including covered pools, where electric comfort heating sits within 20 ft of the inside wall. Unit heaters must be at least 5 ft away horizontally. Permanently wired radiant heaters must be at least 5 ft away and at least 12 ft above the deck. Under (C)(3), 'Radiant heating cables embedded in or below the deck shall not be permitted.' An electric-mat ondol platform within 20 ft of the tub is likely to be rejected, and one manufacturer applies the ban at any distance. Use hydronic tubing fed by the heat pump or water heater, or put an electric platform more than 20 ft away. Confirm with the inspector.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.ecmag.com/magazine/articles/article-detail/codes-standards-swimming-pools-electric-ranges-and-more",
+    "https://www.warmlyyours.com/en-CA/support/articles/electric-heating-cable-prohibited-in-pool-decks-is-not-allowed-per-nec-rule",
+    "https://forums.mikeholt.com/threads/nec-680-27-c.99595/latest"
+   ]
+  },
+  {
+   "title": "2025 Energy Code: a new permanent spa needs a heat-pump or solar main heater, plus a cover outdoors",
+   "detail": "CEC 2025 single-family FAQ, Energy Code in force 1/1/2026. Section 110.4(c): the primary heater must be a heat pump, solar thermal, or a mix, or 60% or more from on-site renewable or recovered energy. 'Electric resistance or gas may be used, but only as a supplemental heating source,' and only together with on-site renewables. Exceptions include:\n- portable electric spas that comply with Title 20 \u00a71605.3(g)(7)\n- permanent-spa heating in EXISTING buildings where gas is available\n- permanent-spa heating in buildings with too little Solar Access Roof Area\nOther rules: outdoor pools and spas with gas or electric heaters must have a cover (110.4(b)); no continuously burning gas pilot (110.5); heater on/off switch and efficiency label (110.4(a)). For Schemes A-D, plan a low-ambient spa heat pump with PV-backed electric boost; 17-25F nights will slow heat-up. Scheme E's acrylic spa likely falls under the portable-electric-spa exception if the model is Title 20 listed.",
+   "confidence": "high",
+   "sources": [
+    "https://www.energy.ca.gov/2025-single-family-pools-and-spas-faqs"
+   ]
+  },
+  {
+   "title": "Spa setbacks from property lines, the house and the street (RL, Desert Region)",
+   "detail": "Desert Region RL setbacks (Dev. Code Table 82-9C): front 25 ft, street side 25 ft, interior side 15 ft on lots wider than 75 ft, rear 15 ft. Maximum lot coverage is 20%, counting structures and impervious paving. Table 83-5 (Allowed Projections/Structures Within Setbacks):\n- 'Swimming pools and spas no closer than 5 ft. to any property line': not allowed in front, street-side or interior-side setbacks; allowed in the rear setback.\n- Pool equipment may project 4 ft into the front setback (if screened), 2 ft into an interior side setback and 4 ft into the rear setback.\nDev. Code 84.01.050(d)(1): outside the Mountain Region, swimming pools may not extend in front of the main house where it faces a street. Dev. Code 83.06.060(a): pools and spas must be fenced per the CBC. The zoning code sets no distance between a spa and the house. Building-code limits apply instead: safety glazing near water, footings, and CBC 1808.7.3 slope setbacks.",
+   "confidence": "high",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-82.04-residential-land-use-zoning-districts",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-83.02-general-development-and-use-standards",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.01-accessory-structures-and-uses",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/2007-Development-Code-14-04-24.pdf"
+   ]
+  },
+  {
+   "title": "Setbacks from the septic system and the well",
+   "detail": "County OWTS bulletin IB-00018, setback table P, minimum distance from buildings or structures: septic tank 5 ft, leach (disposal) field 8 ft, seepage pit 8 ft. 'Structures' include porches, roofed patios, covered walks and similar appurtenances. The table has no separate line for pools, so treat the spa and its roof as a structure. A 100% expansion area must be reserved for the leach field. Keep the spa, its over-dig and its drain-down area out of that area too.\nWell distances in the same table: septic tank 100 ft, leach field 100 ft, seepage pit 150 ft from a private well. Drainage piping must stay 50 ft from a well, or 25 ft if built of materials approved for use inside buildings. State well standard copies (DWR Bulletin 74-90) give: sewer line 50 ft, septic or leach field 100 ft, seepage pit 150 ft. No pool-to-well setback was found in County or state rules. Keep spa drain water and chemical storage well away from the wellhead, and keep pump-rig access open.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/IB-00018-Onsite-Wastewater-Treatment-Systems-Final-Edited-06-20-2024-002-1.pdf",
+    "https://ehs.sbcounty.gov/wp-content/uploads/sites/97/Programs/WaterAndWaste/percolation-testing-and-reporting-standards-for-onsite-wastewater-treatment-systems.pdf",
+    "https://www.zone7water.com/sites/main/files/file-attachments/bulletin_74-90.pdf?1619130727",
+    "https://www.waterboards.ca.gov/drinking_water/programs/districts/docs/tehachapi/new_well_requirements.pdf"
+   ]
+  },
+  {
+   "title": "Excavation in desert soil: no grading permit needed, but caliche, collapse and perched water matter",
+   "detail": "A County grading permit is needed above 100 cy (CBC Appendix J103). Excavation for construction that doesn't change drainage or add fill is exempt, as are utility trenches. A residential grading permit costs $693 for the first 100 cy (FY2026-27). Every scheme's dig is roughly 10-30 cy (estimates below), so no grading permit, as long as spoil isn't spread as more than 100 cy of fill. The grading checklist needs no soils engineer for a single-family project on existing slopes of 20% or less outside earthquake, landslide and liquefaction zones. The Pinto Mountain and Landers faults are nearby, so check the parcel's zone. Caltrans (January 2026): 'Collapse settlements of two to three feet are common in the southwestern United States.' Collapsible soils are common in arid alluvial fans and windblown sands, held together by clay or calcium carbonate (caliche). The listed wetting sources include 'leakage from swimming pools' and 'seepage from septic tanks and leach fields.' Practical consequences:\n- caliche hardpan may need a breaker\n- caliche layers can perch water against the shell\n- splash-out, leaks and roof runoff can collapse the soil under a flush deck\nRegional groundwater is deep, but perched water can still build up. Use a gravel underdrain or sump with a hydrostatic relief valve, and don't drain the shell right after storms. CBC 1808.7.3 (pools and slopes): the pool setback from a slope is half the building-footing setback, and any pool wall within 7 ft of the top of a slope must hold the water without soil support.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/Purpose-of-Grading-Program-20231106.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf",
+    "https://dot.ca.gov/-/media/dot-media/programs/engineering/documents/geotechnical-services/202601-gm-collapsiblesoil-a11y.pdf",
+    "https://pubs.usgs.gov/of/1958/0007/report.pdf",
+    "https://ocds.ocpublicworks.com/sites/ocpwocds/files/2021-06/Swimming%20Pool%20and%20Spa%20Slope%20Setback.pdf"
+   ]
+  },
+  {
+   "title": "Draining the spa: not into the septic system; dechlorinate and keep it on your land",
+   "detail": "Colorado River Basin Water Board (Region 7) orders for a Yucca Valley mobile home park (Order 85-82) and a Twentynine Palms one (Order 87-8) both say: 'Swimming pool and hot pool wastewater shall not be discharged into a sewage disposal system.' Region 7's waiver for swimming-pool discharges (Res. 03-0008, Attachment A) set these conditions:\n- stop chlorinating or brominating 3-7 days before draining\n- test to confirm 'no measurable chlorine or bromine'\n- the water must contain no detergents, wastes or added chemicals\nThat waiver expired January 15, 2008, and no renewal was found, so treat the conditions as best practice. County grading rules forbid sending more runoff onto neighbors (CBC J109.4) and require concentrated flow to go only to approved places. Spread it slowly on your own landscape, away from foundations (collapse risk), the leach field and its expansion area, the well, washes and roads. Approximate spa water volumes: A about 1,300-1,700 gal, B about 850-1,100, C about 1,000-1,300, D about 650-870, E about 350-450 (estimates).",
+   "confidence": "medium",
+   "sources": [
+    "https://www.waterboards.ca.gov/rwqcb7/board_decisions/adopted_orders/orders/1985/85_82.pdf",
+    "https://www.waterboards.ca.gov/rwqcb7/board_decisions/adopted_orders/orders/1987/87_8.pdf",
+    "https://waterboards.ca.gov/coloradoriver/board_decisions/adopted_orders/resolutions/2003/res03_0008_waiver.pdf",
+    "https://waterboards.ca.gov/coloradoriver/board_decisions/adopted_orders/resolutions/2003/res03_0008_staff_sb390.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf"
+   ]
+  },
+  {
+   "title": "Joshua trees: any land disturbance within 50 ft needs CDFW approval, including spa digs and trenches",
+   "detail": "County Western Joshua Tree Quick Reference Guide (Feb 2026): 'If Western Joshua Trees are within 50' or less of any land disturbance, approval from ... CDFW is required.' The guide lists swimming pool, patio, gazebo, septic tank, fence and solar panels as structures. It adds: 'There cannot be any activity such as grading, brush clearing, construction or other ground disturbance within the WJT buffer radius.' The County grading checklist requires existing Joshua trees to be shown, with CDFW approval if any are within 50 ft. CDFW sets buffers project by project. It warns 'digging or trenching near a WJT may harm the WJT,' and reports roots reaching 45.9 ft from a 14-ft tree. Count trees on neighboring parcels and along every trench route: power, water, the spa drain line and the line to the heat pump. Incidental Take Permit in-lieu fees in the standard fee area: $2,609 per tree 5 m or taller, $521.75 for 1-5 m, $354.75 under 1 m. AB 1808 (Ch. 816, Stats. 2026, urgency law) eases removal for owner-occupants of EXISTING homes, up to 10 trees, including within or 15 ft from a new accessory structure. It won't help until the house exists and is lived in.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/WJT_Quick-Reference-Guide_REV-2-25-2026.pdf",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/FAQ",
+    "https://wildlife.ca.gov/Conservation/Environmental-Review/WJT/Permitting/WJTCA-ITP",
+    "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1808"
+   ]
+  },
+  {
+   "title": "Spa before the house: probably not; permit it with or after the house",
+   "detail": "Dev. Code 84.01.020(b): 'An accessory structure or use shall always exist in conjunction with, and never without, a legally established primary structure or primary use.' Where the main use isn't yet established, an accessory structure 'may only be built subject to the issuance of a Temporary Use Permit' under Chapter 84.25. The only before-the-house provision in 84.25, \u00a784.25.040(l), covers accessory STORAGE structures, and requires a bond to remove them if the main use isn't completed within 2 years. The County's TUP page says a TUP lasts at most 12 months and 'does not authorize the construction or establishment of any new permanent structures.' HSC 115922 is also written around pools 'at a private single-family home.' Expect the spa, bathhouse and gazebo permits to be issued with or after the house permit. Ask whether issuing them together is acceptable, and whether a spa final can come before the house final.",
+   "confidence": "medium",
+   "sources": [
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.01-accessory-structures-and-uses",
+    "https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.25-temporary-structures-and-uses",
+    "https://wp.sbcounty.gov/ezop/permits/temporary-use-permit/"
+   ]
+  },
+  {
+   "title": "Other building-code items: safety glass, water temperature, and Town vs County",
+   "detail": "Safety glazing (IRC/CRC R308.4.5): glass in walls, enclosures or fences around hot tubs, spas, saunas and pools is a hazardous location when its bottom edge is under 60 in above a walking surface. It must be safety glass unless more than 60 in horizontally from the water's edge, which matters for Scheme A and for sauna doors. CPSC advises keeping spa water at or below 104F. The Development Code lists swimming pools, spas, hot tubs and gazebos as residential accessory structures. Everything here assumes UNINCORPORATED County land. If the parcel is inside the Town of Yucca Valley, Town codes and Town building officials govern, and Town permit timelines and septic rules differ.",
+   "confidence": "medium",
+   "sources": [
+    "https://bouldercounty.gov/property-and-land/land-use/building/building-publications/b30-safety-glazing/",
+    "https://www.cpsc.gov/Newsroom/News-Releases/1980/CPSC-Warns-Of-Hot-Tub-Temperatures",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/DevelopmentCode/2007-Development-Code-14-04-24.pdf"
+   ]
+  }
+ ],
+ "options": [
+  {
+   "name": "Site-built shotcrete (gunite) shell, waterproofed and tiled",
+   "how": "Excavate, set a gravel underdrain and sump, tie rebar (bonded per NEC 680.26), and set the plumbing: two drains at least 3 ft apart or a gravity perimeter overflow. Shoot the shell, waterproof it, tile it, and finish with stone or tile coping flush with the deck. Equipment: heat pump, filter, pump and a labeled F1346-23 locking cover.",
+   "cost_low": 30000,
+   "cost_high": 75000,
+   "cost_basis": "ESTIMATE, not a quote. Covers the spa shell, tile, plumbing, equipment (heat pump), bonding and a safety cover. Excludes the bathhouse or gazebo, the barrier wall, electrical service work, long trenches and CDFW fees. National cost guides put 'in-ground hot tubs' at about $5k-$25k, with custom tile builds above $35k (HomeAdvisor) and custom builds at $8k-$25k (Sundance). Tile alone runs $4-$30/sq ft (HomeAdvisor). I raised the range for a custom tiled spa in a remote high-desert site with an Energy Code heat pump. County permit about $392-$587 on top.",
+   "pros": "Any shape or size: the 9.5x7 rectangle, the 6.5x6.5 square, and 8 ft or 6.5 ft rounds. True flush rim. Allows benches, steps and perimeter overflow (no suction entrapment). Most durable. Suits the Korean-bath look.",
+   "cons": "Highest cost and longest build. Needs an engineer or standard plan. Pre-gunite and pre-deck inspections. Sensitive to collapsible soil and caliche, so soils review is advised. Cracking risk if the subgrade gets wet. Custom safety cover needed for odd shapes. Few rural crews.",
+   "best_for_schemes": "A (9.5x7), B (6.5x6.5), C (8 ft round), D (6.5 ft round)",
+   "sources": [
+    "https://www.homeadvisor.com/cost/swimming-pools-hot-tubs-and-saunas/install-in-ground-hot-tub",
+    "https://www.sundancespas.com/en-ca/In-Ground-Hot-Tub-Cost.html",
+    "https://www.homeadvisor.com/cost/swimming-pools-hot-tubs-and-saunas/pool-resurfacing",
+    "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115928/"
+   ]
+  },
+  {
+   "name": "Formed concrete or grouted CMU/ICF walls on a slab, waterproofed and tiled",
+   "how": "Pour a reinforced base slab. Build the walls from cast-in-place concrete, fully grouted rebar CMU, or ICF block. Apply a bonded waterproofing membrane, then tile. Same plumbing, bonding and cover as the gunite option. Best for straight-sided tubs.",
+   "cost_low": 22000,
+   "cost_high": 55000,
+   "cost_basis": "ESTIMATE, not a quote, on the same basis as above. Somewhat less than gunite because a general or masonry contractor can do it and partial owner labor is possible. Engineering still required.",
+   "pros": "Needs no gunite rig, which is useful far out of town. Easy rectangles and squares. Can be phased. Square corners suit hanok and timber detailing.",
+   "cons": "Rounds are hard. Waterproofing and joints are the weak point. Needs structural design for soil and water loads. The same soil and bonding work applies.",
+   "best_for_schemes": "A, B (rectangular or square tubs)",
+   "sources": [
+    "https://www.homeadvisor.com/cost/swimming-pools-hot-tubs-and-saunas/install-in-ground-hot-tub",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf"
+   ]
+  },
+  {
+   "name": "Prefabricated fiberglass in-ground spa shell with tile or stone coping",
+   "how": "Set a factory fiberglass spa shell (standard rounds and squares) on a compacted sand or gravel bed in the excavation. Backfill while filling with water, add a concrete collar and bonding grid, and finish with coping flush with the deck. Equipment remote, in a ventilated, drained pit or shed.",
+   "cost_low": 15000,
+   "cost_high": 40000,
+   "cost_basis": "ESTIMATE, not a quote. Sundance puts prefabricated in-ground installs at $6k-$17k. I raised the range for shipping to the high desert, crane or set, a heat pump, a perimeter bonding grid, a custom safety cover and coping. No manufacturer price for a specific shell was verified.",
+   "pros": "Fast install. Smooth, non-porous surface. Fewer inspections and less cracking than site concrete. Good fit for round tubs.",
+   "cons": "Limited sizes, so 9.5x7 is unlikely. Looks less like a tiled Korean bath unless coped heavily. Delivery and crane access. Can pop up if perched water builds when empty, so a hydrostatic relief valve is essential. Hot-water rating needs checking.",
+   "best_for_schemes": "C (8 ft round), D (6.5 ft round), possibly B",
+   "sources": [
+    "https://www.sundancespas.com/en-ca/In-Ground-Hot-Tub-Cost.html",
+    "https://www.homeadvisor.com/cost/swimming-pools-hot-tubs-and-saunas/install-in-ground-hot-tub"
+   ]
+  },
+  {
+   "name": "Self-contained acrylic spa recessed into a lined pit (budget)",
+   "how": "Pour a level slab in a pit about 1 ft wider than the spa on all sides. Use retaining walls with a gravel sump or daylight drain, and keep the equipment side and access panel reachable. Only use models whose manufacturer allows recessing and whose locking cover still works. Perimeter-bond the surrounding deck, since the 28-in-rim exception is lost.",
+   "cost_low": 14000,
+   "cost_high": 35000,
+   "cost_basis": "ESTIMATE, not a quote. A 7x7 acrylic spa is typically $7k-$20k for the unit alone (Sundance), plus $5k-$15k for pit, walls, drainage, bonding grid, electrical and cover hardware (my estimate). National installed figures: $5k-$25k (HomeAdvisor, ThePricer). Excludes the gazebo kit.",
+   "pros": "Lowest cost and fastest. The factory unit is UL listed with an integral GFCI. Likely falls under the Energy Code portable-electric-spa heater exception. Strongest case for the HSC 115925(b) locking-cover exemption, though the County still wants a second feature.",
+   "cons": "Rim is not truly flush unless the deck is built up. Equipment access and drainage are critical: a flooded pit ruins the spa. Manufacturer warranty and install rules for recessing must be confirmed in writing. Shorter life than concrete. Looks like a hot tub, not a tiled bath.",
+   "best_for_schemes": "E",
+   "sources": [
+    "https://www.sundancespas.com/en-ca/In-Ground-Hot-Tub-Cost.html",
+    "https://www.thepricer.org/in-ground-hot-tub-cost/",
+    "https://www.hotspring.com/wp-content/uploads/2026/08/hot-spring-hot-spot-collection-pre-delivery-instruction-2026.pdf",
+    "https://slocounty.ca.gov/departments/planning-building/forms-documents/pool-and-spa-forms-and-documents/bld-1054-07092024-barrier-requirements-for-pool-_-spa",
+    "https://www.energy.ca.gov/2025-single-family-pools-and-spas-faqs"
+   ]
+  },
+  {
+   "name": "Add-on: ASTM F1346-23 labeled locking safety cover (needed whichever way the tub is built)",
+   "how": "A rigid, lockable cover tested and labeled to ASTM F1346-23. On a custom tub it can be a track or hinged cover, or a custom automatic cover. It serves as the second drowning-prevention feature with an enclosure, and as the Energy Code heat-retention cover outdoors.",
+   "cost_low": 1500,
+   "cost_high": 12000,
+   "cost_basis": "ESTIMATE, not a quote. Low end: a manufacturer's locking hard cover on a standard acrylic or fiberglass spa. High end: a custom automatic or track safety cover for a 9.5x7 or round tiled tub. No vendor price was verified in this session.",
+   "pros": "Meets the barrier rule and the Energy Code cover rule. Cuts heat loss and evaporation in wind and 17-25F nights. Cuts humidity in Scheme A.",
+   "cons": "Odd shapes cost more. Must be wind-rated and actually locked. A cover plus a water alarm does NOT count as two features under SB 552.",
+   "best_for_schemes": "All (A-E)",
+   "sources": [
+    "https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115922/",
+    "https://www.energy.ca.gov/2025-single-family-pools-and-spas-faqs"
+   ]
+  }
+ ],
+ "design_numbers": [
+  "Water over 18 in deep = 'swimming pool' under HSC 115921 and IB-0007; the cold plunge counts too",
+  "At least 2 of 7 drowning-prevention features (HSC 115922); a safety cover plus a pool alarm does not count, and neither does an exit alarm plus a self-closer on the same door",
+  "Barrier: at least 60 in tall measured outside; at most 2 in gap at the bottom; no opening passing a 4-in sphere; horizontal members less than 45 in apart go on the pool side; chain link at most 1.5 in mesh (1.75 in with slats)",
+  "Gates and doors in the barrier: open outward away from the spa, self-closing, self-latching, lockable; release at 60 in or higher, or on the pool side at least 3 in below the top with no opening over 1/2 in within 18 in; no double doors, no pairs of gates, nothing wider than 4 ft (IB-0007 C.3)",
+  "House doors opening to the spa area: self-closing latch released at 54 in or higher; exit alarm UL 2017, 85 dBA or more, sounds within 7 s for 30 s, bypass switch at 54 in or higher, bypass up to 15 s",
+  "Safety cover: labeled ASTM F1346-23 (statute), even though IB-0007 still cites F1346-91",
+  "Suction outlets: at least 2 per pump, at least 3 ft apart in any dimension, balanced through a T; or none (skimmer or perimeter overflow); covers ANSI/APSP/ICC-16 2017, tool-removable",
+  "NEC perimeter bonding: 3 ft out from the inside wall; 8 AWG solid copper or the deck steel; copper set 4-6 in below subgrade (older text: 18-24 in from the wall); the 28-in-rim exemption is NOT available for any flush or recessed spa",
+  "NEC fixed metal within 5 ft horizontally and 12 ft vertically of the water gets bonded (metal gazebo frames, rails)",
+  "NEC outdoor: receptacles at least 6 ft from the inside wall; GFCI on receptacles within 20 ft (2023 NEC: rated 60 A or less); switches at least 5 ft; maintenance disconnect within sight and at least 5 ft",
+  "NEC outdoor lights within 5 ft horizontally of the water: at least 12 ft above water, unless listed low-voltage (680.22(B)(6))",
+  "NEC indoor (Scheme A): one receptacle 6-10 ft from the spa; GFCI within 10 ft; lights within 5 ft horizontally at 12 ft, or 7.5 ft if GFCI-protected and enclosed or nonmetallic types; switches at least 5 ft",
+  "NEC 680.27(C): no electric radiant heating cable in or below a deck within 20 ft of the spa; unit heaters at least 5 ft away; radiant heaters at least 5 ft away and 12 ft up",
+  "Energy Code 2025: primary spa heater is a heat pump or solar; gas or electric resistance only as backup with on-site renewables; cover required on outdoor heated spas; no standing pilot",
+  "Spa water temperature at or below 104F (CPSC)",
+  "Desert RL setbacks: front 25 ft, street side 25 ft, interior side 15 ft, rear 15 ft; spa may sit in the rear setback but at least 5 ft from the property line; not in front or side setbacks; not in front of the house where it faces a street",
+  "Pool equipment may project into setbacks: 4 ft front (screened), 2 ft interior side, 4 ft rear",
+  "Lot coverage at most 20% (structures plus impervious paving)",
+  "Septic: tank at least 5 ft and leach field or seepage pit at least 8 ft from any structure; private well at least 100 ft from tank and field, 150 ft from a seepage pit; keep the leach field's 100% expansion area clear",
+  "Grading permit above 100 cy (residential fee $693 for the first 100 cy, FY2026-27); estimated spa digs: A about 22-28 cy, B about 16, C about 17, D about 13, E about 11 cy plus trenches (ESTIMATES)",
+  "Pool or spa near a slope: setback is half the building-footing setback; a wall within 7 ft of the top of a slope must hold the water without soil support (CBC 1808.7.3)",
+  "Safety glass: any glazing with a bottom edge under 60 in above the floor and within 60 in horizontally of the water (R308.4.5)",
+  "Joshua trees: CDFW approval if any are within 50 ft of any digging or trench; roots measured to 45.9 ft; standard-area ITP fees $2,609 / $521.75 / $354.75 per tree",
+  "Draining: stop chlorine or bromine 3-7 days, confirm no measurable residual, no detergents; never into the septic system; keep the water on your own land",
+  "Permit fees FY2026-27: spa or hot tub $335 + $57 intake; pool accessory to a single-family home $647 (standard plan) or $748 (other) + $57; possible $195 extra plan review",
+  "Approximate water volumes (ESTIMATES, at 3.5 ft depth): A 1,300-1,700 gal; B 850-1,100; C 1,000-1,300; D 650-870; E 350-450"
+ ],
+ "rules": [
+  {
+   "rule": "Pool and Spa permit through EZOP before any construction; plans and supporting documents approved first; the barrier condition must be satisfied before permit issuance",
+   "applies_to": "All schemes (A-E); the cold plunge if over 18 in deep",
+   "source": "https://wp.sbcounty.gov/ezop/permits/pool-and-spa/ ; https://wp.sbcounty.gov/ezop/conditions/swimming-pool-spa-barrier/"
+  },
+  {
+   "rule": "Fees effective July 1, 2026: spa or hot tub $335; pool accessory to a single-family home $647 (standard plan) or $748 (other); plus $57 intake; includes plan review and all trade inspections",
+   "applies_to": "All schemes; Scheme A's large tub may be billed as a pool",
+   "source": "https://lus.sbcounty.gov/wp-content/uploads/sites/48/FY-2026-BNS-Fee-Schedule.pdf"
+  },
+  {
+   "rule": "A new spa at a single-family home needs at least 2 of 7 drowning-prevention features; the building official inspects them before final; some pairs don't count (cover plus pool alarm; exit alarm plus self-closer on the same door)",
+   "applies_to": "All schemes",
+   "source": "HSC 115922 (as amended by SB 552, Ch. 769 Stats. 2024): https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115922/"
+  },
+  {
+   "rule": "Exemption: hot tubs or spas with locking safety covers complying with ASTM F1346; the statute makes no portable vs permanent distinction, but SB County's IB-0007 still requires cover plus one more feature",
+   "applies_to": "Mostly Scheme E (self-contained acrylic); don't rely on it for A-D",
+   "source": "HSC 115925(b): https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115925/ ; IB-0007: https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf"
+  },
+  {
+   "rule": "Enclosure at least 60 in high, at most 2 in bottom gap, no 4-in openings, not climbable; gates open outward, self-close and self-latch; no double doors, pairs of gates, or doors over 4 ft wide in the enclosure",
+   "applies_to": "A (pool house walls as barrier), D (courtyard walls), B, C, E (separate fence or wall)",
+   "source": "IB-0007 sections A and C: https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf ; HSC 115923"
+  },
+  {
+   "rule": "Where a building wall is part of the enclosure with doors opening directly to the spa, items A.1-6 plus one feature from B (exit alarm, 54-in self-closing latch, ASTM F2208 alarm, or equivalent)",
+   "applies_to": "A if connected to the house; D if a house wall forms part of the courtyard",
+   "source": "IB-0007 section 8.2: https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf"
+  },
+  {
+   "rule": "Drain covers must meet ANSI/APSP/ICC-16 2017 (federal VGB Act and CPSC rule)",
+   "applies_to": "All schemes",
+   "source": "16 CFR 1450.3: https://www.ecfr.gov/current/title-16/chapter-II/subchapter-B/part-1450/section-1450.3"
+  },
+  {
+   "rule": "New spa: two balanced suction outlets per pump at least 3 ft apart, or no suction outlets (skimmer or perimeter overflow); APSP-16 grates that need tools to remove",
+   "applies_to": "All schemes (factory spa E: confirm with the manufacturer)",
+   "source": "HSC 115928: https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-115928/"
+  },
+  {
+   "rule": "An outdoor spa follows NEC Article 680 Parts I and II, including 680.26 equipotential bonding and 3-ft perimeter bonding; the 680.42(B) exception applies only to above-ground self-contained spas with the rim 28 in or more above surrounding surfaces",
+   "applies_to": "B, C, D, E (E loses the exception once recessed)",
+   "source": "2025 CEC = 2023 NEC; https://www.ecmweb.com/national-electrical-code/code-basics/article/20903256/spas-hot-tubs-and-hydromassage-tubs"
+  },
+  {
+   "rule": "Indoor spa (680.43): receptacle 6-10 ft, GFCI within 10 ft, switches at least 5 ft, luminaire heights, bonding of metal within 5 ft; corrosive-environment wiring methods",
+   "applies_to": "A",
+   "source": "https://www.ecmweb.com/national-electrical-code/code-basics/article/20903256/spas-hot-tubs-and-hydromassage-tubs"
+  },
+  {
+   "rule": "GFCI on all outlets supplying a spa (680.44); maintenance disconnect within sight and at least 5 ft from the water (680.13)",
+   "applies_to": "All schemes",
+   "source": "https://www.ecmweb.com/national-electrical-code/code-basics/article/20903256/spas-hot-tubs-and-hydromassage-tubs"
+  },
+  {
+   "rule": "No electric radiant heating cables in or below the deck within 20 ft of the spa (680.27(C)(3))",
+   "applies_to": "The heated rest platform in every scheme",
+   "source": "https://www.ecmag.com/magazine/articles/article-detail/codes-standards-swimming-pools-electric-ranges-and-more"
+  },
+  {
+   "rule": "Energy Code: new spa primary heater must be a heat pump or solar (or 60% renewable); gas or electric resistance supplemental only with on-site renewables; outdoor heated spas need a cover; no standing pilot",
+   "applies_to": "A-D (site-built); E is likely exempt as a Title 20 portable electric spa",
+   "source": "2025 Energy Code \u00a7110.4, \u00a7110.5: https://www.energy.ca.gov/2025-single-family-pools-and-spas-faqs"
+  },
+  {
+   "rule": "Pools and spas: not in front, street-side or interior-side setbacks; allowed in the rear setback but at least 5 ft from the property line; not in front of the house where it faces a street",
+   "applies_to": "All schemes",
+   "source": "Dev. Code Table 83-5 and \u00a784.01.050(d)(1): https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-83.02-general-development-and-use-standards"
+  },
+  {
+   "rule": "Desert RL setbacks: front 25 ft, street side 25 ft, interior side 15 ft, rear 15 ft; lot coverage at most 20%",
+   "applies_to": "All schemes and their bath buildings",
+   "source": "Dev. Code Table 82-9C: https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-82.04-residential-land-use-zoning-districts"
+  },
+  {
+   "rule": "OWTS setbacks from buildings or structures: tank 5 ft, leach field 8 ft, seepage pit 8 ft; from a private well 100/100/150 ft; 100% expansion area",
+   "applies_to": "Siting of the spa, bathhouse and drain-down area",
+   "source": "IB-00018: https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/IB-00018-Onsite-Wastewater-Treatment-Systems-Final-Edited-06-20-2024-002-1.pdf"
+  },
+  {
+   "rule": "Grading permit required above 100 cy; construction excavation that doesn't change drainage or add fill, and utility trenches, are exempt",
+   "applies_to": "All schemes (all are under the threshold)",
+   "source": "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/Purpose-of-Grading-Program-20231106.pdf"
+  },
+  {
+   "rule": "No added runoff onto adjacent property; concentrated flow only to approved locations",
+   "applies_to": "Spa drain-down and roof runoff from the bath buildings",
+   "source": "County grading checklist (CBC J109.4): https://lus.sbcounty.gov/wp-content/uploads/sites/48/SBC-LUS-LD-Grading-Check-List-20260527-1.pdf"
+  },
+  {
+   "rule": "Pool or hot-pool wastewater shall not go into a sewage disposal system (Region 7 orders in Yucca Valley and Twentynine Palms); for land discharge, dechlorinate to no measurable residual, with no detergents or chemicals",
+   "applies_to": "All schemes",
+   "source": "https://www.waterboards.ca.gov/rwqcb7/board_decisions/adopted_orders/orders/1985/85_82.pdf ; https://waterboards.ca.gov/coloradoriver/board_decisions/adopted_orders/resolutions/2003/res03_0008_waiver.pdf"
+  },
+  {
+   "rule": "CDFW approval required if any western Joshua tree is within 50 ft of any land disturbance (pools, gazebos, septic, fences, trenches)",
+   "applies_to": "All schemes, including utility trench routes",
+   "source": "https://lus.sbcounty.gov/wp-content/uploads/sites/48/WJT_Quick-Reference-Guide_REV-2-25-2026.pdf"
+  },
+  {
+   "rule": "An accessory structure or use requires a legally established primary use; otherwise a TUP, but a TUP doesn't authorize permanent structures",
+   "applies_to": "Timing of every scheme relative to the house",
+   "source": "Dev. Code \u00a784.01.020(b): https://gocodebook.com/library/us/ca/san-bernardino-county-zoning/chapter-84.01-accessory-structures-and-uses ; https://wp.sbcounty.gov/ezop/permits/temporary-use-permit/"
+  },
+  {
+   "rule": "Safety glazing for glass with a bottom edge under 60 in above the floor and within 60 in horizontally of the spa or sauna",
+   "applies_to": "A especially; any glass screens in B-E; sauna doors",
+   "source": "IRC/CRC R308.4.5: https://bouldercounty.gov/property-and-land/land-use/building/building-publications/b30-safety-glazing/"
+  },
+  {
+   "rule": "Pool or spa setback from slopes is half the footing setback; a pool wall within 7 ft of the top of a slope must hold the water without soil support",
+   "applies_to": "Any scheme sited near a slope or wash bank",
+   "source": "CBC 1808.7.3: https://ocds.ocpublicworks.com/sites/ocpwocds/files/2021-06/Swimming%20Pool%20and%20Spa%20Slope%20Setback.pdf"
+  }
+ ],
+ "risks": [
+  {
+   "risk": "The County reads the barrier rules more strictly than expected: no cover-only exemption, and pool house walls with operable glass not accepted as the enclosure, forcing a redesign of Scheme A's glazing or an added courtyard wall",
+   "severity": "high",
+   "mitigation": "Before design freeze, get a written determination from County Building and Safety (909-387-8311). Design to enclosure plus F1346-23 cover from the start. In A, use fixed glass and single 36-42 in outswing self-closing doors, or wrap the bath precinct in a 60-in wall (Scheme D logic)."
+  },
+  {
+   "risk": "Joshua trees within 50 ft of the spa, the bathhouse or any trench route trigger a CDFW Incidental Take Permit: months of delay plus $354.75-$2,609 per tree",
+   "severity": "high",
+   "mitigation": "Census all trees, including on neighboring parcels, before siting. Place the bath complex and all trench routes more than 50 ft from every tree, and allow for roots reaching about 46 ft. Show the trees on the plot plan and file the County's Joshua Tree Acknowledgment."
+  },
+  {
+   "risk": "Collapsible soil or caliche under the spa and deck: settlement and cracking after leaks, splash-out or roof runoff; hardpan raises excavation cost",
+   "severity": "high",
+   "mitigation": "Get a geotechnical engineer to dig test pits at the spa site. Over-excavate and recompact where advised. Moisture-condition the subgrade, add a gravel underdrain, sump and hydrostatic relief valve, and send roof and deck water away from the shell. Leak-test the plumbing before backfill."
+  },
+  {
+   "risk": "Spa permit can't be issued before the house (Dev. Code 84.01.020(b)), delaying the bathhouse if the house is phased later",
+   "severity": "medium",
+   "mitigation": "Submit the spa, bathhouse and gazebo permits together with, or right after, the house permit. Ask the County whether issuing them together is acceptable. Don't plan on a TUP for a permanent spa."
+  },
+  {
+   "risk": "Lights, fans or receptacles under a low gazebo or hanok roof fail Article 680 clearances (12 ft above water within 5 ft outdoors); metal gazebo-kit frames left unbonded",
+   "severity": "medium",
+   "mitigation": "Use listed low-voltage luminaires on a listed power supply near the spa, or keep line-voltage fixtures more than 5 ft away horizontally. Bond fixed metal within 5 ft horizontally and 12 ft vertically, or use wood structure. Have a C-10 design to the 2025 CEC."
+  },
+  {
+   "risk": "Electric-mat heated rest platform within 20 ft of the spa is rejected under NEC 680.27(C)(3)",
+   "severity": "medium",
+   "mitigation": "Use hydronic tubing fed by the spa heat pump or a water heater, or move an electric platform more than 20 ft from the spa's inside wall. Confirm with the inspector."
+  },
+  {
+   "risk": "Energy Code limits heaters on a site-built spa (heat pump or solar primary): slow heat-up on 17-25F nights and higher equipment cost",
+   "severity": "medium",
+   "mitigation": "Size a low-ambient spa heat pump. Add PV-backed electric supplemental heat as the code allows, and use a tight insulated cover. Use a smaller, deeper tub (B or D) to cut the heat load. Keep the spa hot instead of reheating from cold."
+  },
+  {
+   "risk": "Spa drain water sent to the septic tank, the leach field area or a wash: violates Regional Board orders, hydraulically overloads the leach field, and wets collapse-prone soil",
+   "severity": "medium",
+   "mitigation": "Plumb a drain-down line to a dedicated on-site infiltration or landscape area away from the leach field and expansion area, the well, foundations and washes. Stop sanitizer 3-7 days before draining and test to zero residual. Prefer non-salt sanitation."
+  },
+  {
+   "risk": "Spa sited too close to the septic system or in the leach expansion area, or blocking well-rig access",
+   "severity": "medium",
+   "mitigation": "Locate the tank, leach field and 100% expansion area and the well on the plot plan first. Keep the spa structure at least 8 ft (preferably more) from the field and upslope of it. Keep equipment and drain discharge away from the wellhead."
+  },
+  {
+   "risk": "County fee and plan category ambiguity: a 9.5x7 ft site-built tub billed as a pool ($748), plus engineering not on a standard plan",
+   "severity": "low",
+   "mitigation": "Ask at intake. Budget about $400-$800 in County permit fees for the tub itself, plus engineering of about $1,500-$4,000 (ESTIMATE)."
+  },
+  {
+   "risk": "Parcel is actually inside the Town of Yucca Valley, where Town codes, permits and septic rules apply instead of the County's",
+   "severity": "medium",
+   "mitigation": "Confirm jurisdiction by APN on the County zoning map before relying on any County rule cited here."
+  },
+  {
+   "risk": "Scheme A pool-house humidity and chloramines: condensation on glass on cold nights, rot, and corrosion of electrical equipment",
+   "severity": "medium",
+   "mitigation": "Design dehumidification and ventilation, use corrosion-rated wiring methods and a locking cover when not in use, specify thermally broken glazing, and keep the equipment room separate."
+  },
+  {
+   "risk": "If the bathhouse is ever rented or offered to the public, the spa could become a 'public pool' under County DEHS rules (separate plans, permits, annual health permit)",
+   "severity": "low",
+   "mitigation": "Keep use private, or check with SB County DEHS (800-442-2283) before any rental or event use."
+  }
+ ],
+ "next_actions": [
+  "Confirm the parcel is unincorporated County, not inside the Town of Yucca Valley, using the APN on the County zoning map",
+  "Put these questions to County Building and Safety in writing (909-387-8311): (1) Does the County ever apply the HSC 115925(b) locking-cover exemption to a site-built or recessed spa? (2) Can a detached pool house's walls be the enclosure, and what is allowed for windows and doors? (3) Is a 9.5x7 tiled tub billed as a spa ($335) or a pool ($748)? (4) Can the spa and bath building permits be issued with the house permit? (5) Is a hydronic or electric heated platform allowed within 20 ft?",
+  "Map the septic tank, leach field and 100% expansion area, the well, setbacks (25/25/15/15 ft) and every Joshua tree within 50 ft on one plot plan before choosing where the bathhouse goes",
+  "Have a soils engineer dig test pits at the spa location (caliche depth, collapse potential, sulfate) and give over-excavation and drainage recommendations",
+  "Choose the barrier strategy per scheme now: walled courtyard or 60-in fence plus an F1346-23 labeled locking cover; keep doors in the barrier single, no wider than 4 ft, outswing and self-closing",
+  "Brief the pool designer: two suction outlets at least 3 ft apart or a perimeter overflow; APSP-16 covers; heat-pump main heater; hydrostatic relief valve; a separate drain-down line to an on-site infiltration area",
+  "Have a C-10 electrician lay out Article 680 under the 2025 CEC: perimeter bonding grid, GFCI, disconnect at 5 ft or more, low-voltage lighting under the roof, bonding of metal framing",
+  "Ask the Colorado River Basin Regional Water Board whether any current waiver covers residential spa discharge to land, and follow the Res. 03-0008 dechlorination conditions meanwhile",
+  "Include the cold plunge in the same barrier and permit, since it is a 'pool' if over 18 in deep"
+ ]
+}

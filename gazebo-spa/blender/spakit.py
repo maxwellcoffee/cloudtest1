@@ -497,6 +497,23 @@ class Spa(K.Site):
             fl.build(self, 'brittle_flowers', self.mat('brittle_flower', '#f2c230', rough=0.6), coll, smooth=False)
         return ob
 
+    def outline(self, pts, z, coll='plan_only', dash=0.5, w=0.07, color='#2d2a28'):
+        """Dashed outline drawn only in plan views (e.g. a roof that the plan lifts off)."""
+        m = self.mat('outline_' + color, color, rough=0.9)
+        n = len(pts)
+        for i in range(n):
+            a, b = Vector((*pts[i], z)), Vector((*pts[(i + 1) % n], z))
+            L = (b - a).length
+            k = max(1, int(L / (2 * dash)))
+            for j in range(k):
+                t0, t1 = j / k, (j + 0.5) / k
+                self.beam('dash', a.lerp(b, t0), a.lerp(b, t1), (w, 0.02), m, coll)
+
+    def keep_clear(self, p1, p2, width=4.0, step=1.5):
+        """Keep desert scatter out of a corridor (e.g. from a camera to its subject)."""
+        for (x, y) in K.densify([p1[:2], p2[:2]], step):
+            self.footprints.append((float(x), float(y), width / 2, width / 2, 99))
+
     def terrace(self, w, l, x=0.0, y=0.0, rot=0.0, mat='pavers', pad_extra=5.0):
         """Level the ground and lay a stone terrace. Sets self.e (pad) and self.z (finished floor)."""
         self.e = self.pad(x, y, w + pad_extra, l + pad_extra, rot, coll='spa', surface=None)
@@ -1094,7 +1111,7 @@ class Spa(K.Site):
             self.box('plunge_step', (0.7, 0.4, 0.45), (x, y - 0.95, z + 0.225), self.m('cedar_plain'), coll)
         self.anchor(label, x, y, z, 1, dz=1.2)
 
-    def shower(self, label, x, y, rot=0.0, coll='spa', anchor=True):
+    def shower(self, label, x, y, rot=0.0, coll='spa', anchor=True, cat=1):
         z = self.z
         root = self.empty('shower', x, y, z, rot, coll)
         self.box('shower_post', (0.14, 0.14, 2.35), (0, 0, 1.175), self.m('cedar_plain'), coll, parent=root)
@@ -1105,7 +1122,7 @@ class Spa(K.Site):
         for i in range(n):
             self.box('shower_slat', (0.95, 0.1, 0.04), (0, -0.42 - 0.45 + (i + 0.5) * 0.9 / n, 0.04), self.m('cedar_plain'), coll, parent=root)
         if anchor:
-            self.anchor(label, x, y, z, 1, dz=2.5)
+            self.anchor(label, x, y, z, cat, dz=2.5)
 
     def scrub_station(self, label, x, y, rot=0.0, coll='spa', roofed=True):
         """Seshin (Korean body-scrub) corner: a padded tiled table, low stools, basins, hand shower."""
@@ -1165,7 +1182,7 @@ class Spa(K.Site):
 
     def string_lights(self, p1, p2, n=12, sag=0.35, coll='spa'):
         p1, p2 = Vector(p1), Vector(p2)
-        bulb = self.mat('bulb', '#fff4dc', emit='#ffc98a', emit_strength=18.0 if self.night else 0.3)
+        bulb = self.mat('bulb', '#fff4dc', emit='#ffb45c', emit_strength=7.0 if self.night else 0.3)
         prev = p1
         for i in range(n + 1):
             t = i / n
@@ -1174,11 +1191,10 @@ class Spa(K.Site):
             if i:
                 self.beam('wire', prev, p, (0.006, 0.006), self.m('timber'), coll)
             if 0 < i < n:
-                self.cyl('bulb', 0.035, 0.07, (p.x, p.y, p.z - 0.05), bulb, coll, seg=8)
+                b = self.lathe('bulb', [(0.0, -0.05), (0.035, -0.035), (0.042, 0.0), (0.03, 0.03), (0.012, 0.045), (0.0, 0.05)], (p.x, p.y, p.z - 0.07), bulb, coll, seg=12, round_r=0.0)
+                if i % 3 == 0:
+                    self.point((p.x, p.y, p.z - 0.12), 12, '#ffc27c', radius=0.05)
             prev = p
-        mid = p1.lerp(p2, 0.5)
-        mid.z -= sag
-        self.point(tuple(mid), 25, '#ffc27c', radius=0.5)
 
     def point(self, loc, watts, color, radius=0.2):
         ld = bpy.data.lights.new('lamp', 'POINT')
@@ -1431,7 +1447,7 @@ class Spa(K.Site):
             elif m.name == 'sauna_glow':
                 p.inputs['Emission Strength'].default_value = 6.0 if on else 0.0
             elif m.name == 'bulb':
-                p.inputs['Emission Strength'].default_value = 18.0 if on else 0.3
+                p.inputs['Emission Strength'].default_value = 7.0 if on else 0.3
         for ob in self.lamps:
             ob.hide_render = not on
 
@@ -1496,8 +1512,8 @@ class Spa(K.Site):
         return path
 
     def shot(self, cam, name, res=(1600, 900), samples=56, hide=(), exposure=0.0, look='AgX - Medium High Contrast'):
-        """A beauty render (no markers)."""
-        p = self.render(cam, name, res=res, samples=samples, hide=list(hide), exposure=exposure, look=look)
+        """A beauty render (no markers; plan-only outlines hidden)."""
+        p = self.render(cam, name, res=res, samples=samples, hide=list(hide) + ['plan_only'], exposure=exposure, look=look)
         os.remove(os.path.join(self.out, f'{name}.json'))
         return p
 
@@ -1510,6 +1526,7 @@ class Spa(K.Site):
         jp = os.path.join(self.out, f'{name}.json')
         meta = json.load(open(jp))
         meta['note'] = note
+        meta['font_scale'] = 1.6
         meta['palette'] = {str(k): v for k, v in PALETTE.items()}
         meta['key'] = key or [['dot', PALETTE[1], 'Water: hot tub, cold plunge, showers, scrub'],
                               ['dot', PALETTE[2], 'Heat: sauna, warm rooms'],

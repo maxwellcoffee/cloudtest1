@@ -198,17 +198,54 @@ def plants():
 </div></section>'''
 
 
+def inground():
+    rows = [
+        ('Custom concrete (shotcrete or gunite), plaster or tile', 'A, B, C, D', '$30,000-80,000', 'The most authentic: any shape, a tiled interior, a flush stone rim. A desert builder quotes $30k-50k for a standalone spa; a fully tiled 9.5 x 7 ft tub on a remote lot runs higher.'),
+        ('Formed concrete or block walls, waterproofed and tiled', 'A, B', '$22,000-55,000', 'Suits the square tubs in A and B; needs a structural engineer.'),
+        ('Prefab fiberglass spa shell', 'C, D, maybe B', '$15,000-45,000', 'San Juan makes an 8 ft round (Isle, about 600 gal) that fits C, a 6 ft 10 in octagon (Haven) for D, and 6 ft 11 in x 7 ft 1 in squares (Lido, Scottsdale) for B. Ask the dealer in writing whether a standalone install is approved.'),
+        ('Acrylic spa recessed into a drained concrete pit', 'E', '$12,000-40,000', 'The budget way. Only with the maker\'s written approval: Bullfrog and Master Spas describe full recessing; Master Spas asks for about 3 ft of service access around it (or removable deck panels) and a floor drain.'),
+    ]
+    trs = ''.join(f'<tr><td>{a}</td><td>{b}</td><td class="num">{c}</td><td>{d}</td></tr>' for a, b, c, d in rows)
+    return f'''
+<section class="wrap" id="inground"><div class="wide stack">
+  <p class="eyebrow">The tub</p><h2>Building the tub into the ground</h2>
+  <div class="scroll"><table><thead><tr><th>How</th><th>Plans</th><th class="num">Installed, estimate</th><th>Notes</th></tr></thead><tbody>{trs}</tbody></table></div>
+  <div class="col stack">
+    <p class="small muted">Every cost here is a planning estimate, not a quote; get two or three local bids. Ranges
+    include digging, the shell, plumbing, a heat pump, bonding and a cover, but not the roof structure, barrier,
+    long trenches or soils engineering. Caliche (hardpan) under the sand can add $1,000-4,000 to the dig.</p>
+    <p><b>Heating is a heat pump now.</b> Since January 1, 2026, California's energy code requires the main heater
+    for a new permanent spa to be a heat pump (sized to the code's method) or solar. An electric or propane heater
+    can only be a backup. A listed portable electric spa (Scheme E) is exempt; ask plan check whether a recessed one
+    still counts. Most heat pumps stop heating below about 40-50F, so on 17-25F nights the tub relies on a tight
+    cover, daytime recovery and a backup heater. The cover is required anyway, and standing pilot lights are banned.</p>
+    <p><b>A tub this deep counts as a pool.</b> The County treats any water over 18 in deep, hot tubs included, as a
+    pool. That means a 60-in barrier (gates single, no wider than 4 ft, opening outward, self-closing, with the latch
+    60 in or higher), or a locking safety cover plus one more feature: a door exit alarm, a high door latch, or an
+    in-water alarm. State law exempts spas with locking ASTM F1346 covers, but the County's handout doesn't mention
+    that, so ask in writing and budget for a cover plus one alarm. A cover only counts if its label says F1346-23
+    (many say F1346-91). Single covers come only up to 96 in, so Scheme A's 9.5 x 7 ft tub needs a two-piece or
+    automatic cover. The cold plunge is a pool too if its water is over 18 in deep.</p>
+    <p><b>Bonding.</b> Every in-ground tub needs its steel and the deck within 3 ft bonded together under the paving,
+    and a recessed portable spa loses the exemption a free-standing one has, so its deck needs bonding too. Design
+    the grid before the slab is poured.</p>
+    <p><b>Water volumes</b> (rough): A 1,300-1,700 gal, B 850-1,100, C 1,000-1,300, D 650-870, E 350-450.</p>
+  </div>
+</div></section>'''
+
+
 def rules():
     items = [
-        '<b>Joshua trees.</b> Any digging, grading, slab, trench or path within 50 ft of a western Joshua tree (a neighbor\'s counts too) needs approval from California Fish and Wildlife first. Treat 50 ft as the trigger, not a safe distance: the agency sets buffers project by project. Map the trees before siting anything, including the power and water trenches.',
-        '<b>When you can build it.</b> In the County, an accessory structure needs a legally established main use; until then it can only be built under a Temporary Use Permit. Nobody has confirmed whether the trailer permit counts as that main use, so ask County Building and Safety before buying a gazebo or tub.',
-        '<b>Building permits.</b> Needed for any structure over 120 sq ft, any patio cover (solid or lattice) at any size, any pool or spa, and all electrical work. A small portable spa is exempt only from the planning permit, not from these.',
-        '<b>Setbacks and coverage</b> (if the lot is zoned Rural Living in the unincorporated County): 25 ft front, 15 ft rear, 15 ft sides on lots wider than 75 ft, and no more than 20% of the lot under structures and paving combined. Inside the Town of Yucca Valley the Town\'s own rules apply instead; they were not checked here.',
-        '<b>Drowning prevention.</b> State law exempts a hot tub with a locking safety cover labeled ASTM F1346. The County\'s barrier bulletin still describes a cover plus one more safety feature, so the inspector decides. If asked for a second feature, don\'t use a pool alarm: state law says a cover plus an alarm doesn\'t count.',
-        '<b>Wiring.</b> A hardwired tub needs its disconnect within sight of the tub and at least 5 ft away; Hot Spring\'s 240 V tubs need a 50 A GFCI subpanel no more than 50 ft away, and other makers differ. An in-ground tub also needs its deck, rebar and nearby metal bonded together. For an outdoor tub, no light or fan within 5 ft of the water unless it is 12 ft or more above it; a 16 x 16 kit gazebo is only 11 ft tall, so light from the edges. If the inspector treats an enclosed bathhouse like Scheme A as indoor, the rules change. These are 2023 National Electrical Code figures as quoted in a Colorado permit handout; California\'s 2025 code is based on the NEC, so confirm them with the County or your electrician. A 6 kW sauna heater needs its own 30 A circuit.',
+        '<b>Check the jurisdiction first.</b> Everything here assumes unincorporated San Bernardino County. Confirm by parcel number; inside the Town of Yucca Valley the Town\'s rules apply instead, and they weren\'t checked here.',
+        '<b>Joshua trees.</b> Any digging, grading, slab, trench or path within 50 ft of a western Joshua tree (a neighbor\'s counts too) needs approval from California Fish and Wildlife first. Treat 50 ft as the trigger, not a safe distance. If a permit is needed, the in-lieu fee is $156.50-2,609 per tree depending on its height and the fee area. Map the trees before siting anything, including the power and water trenches.',
+        '<b>When you can build it.</b> An accessory structure needs a legally established main use; until then it can only be built under a Temporary Use Permit. Nobody has confirmed whether the trailer permit counts, so ask County Building and Safety before buying anything. Starting work before a permit is issued adds a fee equal to the permit.',
+        '<b>Permits.</b> The spa permit is $335 plus a $57 intake fee, and $195 more for plan review if it isn\'t a standard plan (County fee schedule effective July 1, 2026); a large site-built tub may be billed as a pool instead ($704-1,000). The gazebo or bathhouse needs its own building permit (any patio cover, solid or lattice, or anything over 120 sq ft), and all electrical work needs a permit. A grading permit is needed only if all grading on the site together tops 100 cubic yards.',
+        '<b>Setbacks and coverage</b> (Rural Living zoning): only the tub itself may sit in the rear setback (at least 5 ft from the line); any roof over it must meet the full 25 ft front and 15 ft side and rear setbacks (sides on lots wider than 75 ft). Walls inside a side or rear setback are capped at 6 ft. No more than 20% of the lot may be under structures and paving combined.',
+        '<b>Septic and well.</b> Keep roofed structures at least 5 ft from the septic tank and 8 ft from the leach field, and the septic system 100 ft from a well. Never drain the tub into the septic system; drain it, once the chlorine has faded, onto an area at least 10 ft from the septic tank and leach field. Ask County Environmental Health before the first drain.',
+        '<b>Wiring and lights.</b> A hardwired tub needs its disconnect within sight of the tub and at least 5 ft away; Hot Spring\'s 240 V tubs need a 50 A GFCI subpanel no more than 50 ft away. Outdoors (B to E), a line-voltage light within 5 ft of the water must be 12 ft above it; under a low gazebo roof, use listed low-voltage spa lights or keep fixtures farther away. Indoors (A): 12 ft without GFCI, 7.5 ft with GFCI, and lower only for listed enclosed types with GFCI. A 6 kW sauna heater needs its own 30 A circuit. These follow the 2023 National Electrical Code; confirm with your electrician.',
+        '<b>Warm floors near the tub.</b> The electrical code restricts electric heating cables in or under the deck within 20 ft of a pool, so heat the rest platforms with hot water (hydronic tubing) rather than electric mats.',
         '<b>Wind.</b> The County assumes open, flat land with nothing to block the wind ("Exposure C" in the building code). Spring wind advisories bring gusts of 40-50 mph, so anchor any gazebo to engineered footings and strap the tub cover.',
-        '<b>Fire.</b> The parcel\'s fire hazard zone hasn\'t been checked. If it is mapped, ember-resistant building rules may apply. Prefer noncombustible roofing, keep 5 ft of gravel around structures, use electric heaters, and never light a wood-fired tub or stove on windy or red-flag days.',
-        '<b>Water.</b> A 7 x 7 tub holds about 340 gallons and is drained three or four times a year. Uncovered, it could lose roughly 2,400 gallons a year to evaporation (a rough estimate from pan-evaporation data). Keep it covered.',
+        '<b>Fire.</b> The parcel\'s fire hazard zone hasn\'t been checked. If it is mapped, ember-resistant building rules may apply. Prefer noncombustible roofing, keep 5 ft of gravel around structures, use electric heat, and never light a wood-fired stove on windy or red-flag days.',
     ]
     return f'''
 <section class="wrap" id="rules"><div class="col stack">
@@ -219,37 +256,35 @@ def rules():
 
 def budget():
     tiers = [
-        ('Lean', '$20,600 - $42,200', ['Hot tub: Hot Spring Freeflow Mini or Excursion, $5,499-8,999', 'Gazebo kit 12 x 14 to 12 x 16 ft, $2,599-4,340', '2-person barrel sauna, $4,485-4,899', 'Stock-tank plunge (no chiller) or Ice Barrel, $300-1,750', 'Outdoor shower and bench, warm platform with a heat mat (estimates), $1,600-4,500', 'Pads, wiring, permits, plants (estimates), $6,100-16,200']),
-        ('Balanced', '$47,700 - $90,800', ['Hot tub: Hot Spring TX or Relay, $9,999-12,999', '16 x 16 ft timber-frame gazebo, coral screens and a west windbreak, $9,100-14,200', '2-4 person barrel sauna, installed, $5,184-7,799', 'Cold plunge with a chiller, $3,950-6,790', 'Tiled warm platform and wash station (estimates), $4,500-11,000', 'Slab, 125 A spa subpanel, permits, wind engineering, plants, lighting (estimates), $15,000-38,000']),
-        ('Premium', '$109,700 - $274,400', ['Cedar tub or premium spa, $11,969-38,843 (a custom in-ground tub costs more)', 'Custom redwood pavilion with glass or polycarbonate walls and lattice (estimate), $25,000-70,000', 'Cabin or cube sauna with a Wi-Fi heater, $10,722-14,600', 'Turnkey cold plunge, $7,990-8,999', 'Clay or stone warm platform and tiled wet room (estimates), $16,000-40,000', 'Site work, 200 A service, design and permits, landscape, lighting (estimates), $38,000-102,000']),
+        ('Lean (Scheme E)', 'about $24,000 - $64,000', ['Acrylic spa recessed into a drained concrete pit with service access, wiring and bonding (estimate), $12,000-40,000', '12 x 12 to 12 x 16 ft cedar gazebo kit, $2,599-4,340', '2-person cedar barrel sauna (Almost Heaven Salem), $4,485', 'Stock-tank plunge (no chiller) or Ice Barrel, $300-1,750', 'Outdoor shower and bench, warm platform (estimates), $1,600-4,500', 'Sauna circuit, permits, plants, a safety cover and one alarm (estimates), $3,000-9,000']),
+        ('Balanced (Scheme C; B with a simpler roof)', 'about $53,000 - $123,000', ['Fiberglass in-ground shell with heat pump, bonding and cover (estimate), $15,000-45,000', 'Timber-frame or octagon gazebo kit with coral screens and a west windbreak, $9,100-14,200', '2-4 person cedar barrel sauna, $5,184 (installation from $1,400 more) or a 6-person barrel at $7,799', 'Cold plunge with a chiller, $3,950-6,790', 'Tiled warm platform with hot-water floor heat, and a wash station (estimates), $4,500-11,000', 'Slab, spa subpanel, permits, wind engineering, plants, lighting (estimates), $15,000-38,000']),
+        ('Premium (Schemes A and D; B as drawn)', 'about $128,000 - $316,000', ['Custom concrete in-ground tub, tiled (estimate), $30,000-80,000', 'Custom pavilion, pool house or walled courtyard with lattice (estimate), $25,000-70,000; D\'s walls can add more', 'Cabin or cube sauna with a Wi-Fi heater, $10,722-14,600', 'Turnkey cold plunge, $7,990-8,999', 'Clay or stone warm platform and tiled wet room (estimates), $16,000-40,000', 'Site work, 200 A service, design and permits, landscape, lighting (estimates), $38,000-102,000']),
     ]
     cards = ''.join(f'''<div><h4>{t}</h4><p class="figure">{rng}</p>{"<ul>" + "".join(f"<li>{x}</li>" for x in items) + "</ul>"}</div>''' for t, rng, items in tiers)
     return f'''
 <section class="wrap" id="budget" style="background:var(--wash)"><div class="wide stack-lg">
   <div class="col stack"><p class="eyebrow">Money</p><h2>Three budget tiers</h2>
-  <p>Totals add up list prices for the equipment and estimates for site work and labor. Get two or three local
-  quotes before treating any estimate as real. Scheme E fits the lean tier, C the balanced tier, B the balanced
-  to premium tier, and A and D the premium tier.</p></div>
+  <p>Totals add up list prices for the equipment and planning estimates for the in-ground tub, site work and
+  labor. They are not quotes: get two or three local bids before relying on any of them. Each tier prices a
+  typical version; a plan built exactly as drawn can land higher.</p></div>
   <div class="facts">{cards}</div>
 </div></section>'''
 
 
 def products():
     rows = [
+        ('In-ground tub', 'San Juan fiberglass spa shells', 'ask a dealer', 'Isle 8 ft round (about 600 gal) for C; Haven 6 ft 10 in octagon for D; Lido or Scottsdale 6 ft 11 in x 7 ft 1 in for B', 'https://sanjuanpools.com/spas/'),
+        ('In-ground tub', 'Recessed acrylic spa, e.g. Jacuzzi J-335 (7 x 7 ft)', '$13,895', 'One retailer\'s sale price (list $15,441). Recess only with the maker\'s written approval', 'https://galaxyhomerecreation.com/product/jacuzzi-j-335-hot-tub/'),
+        ('In-ground tub', 'Hot Spring Hot Spot Relay (7 x 7 ft)', '$12,999', '340 gal, 240 V / 50 A. Hot Spring\'s documents don\'t address recessing, so ask the dealer', 'https://www.hotspring.com/shop/hot-spot/relay'),
         ('Gazebo', 'Yardistry 16 x 16 Timber Frame Gazebo', '$7,100', '12 ft 2.5 in clear between posts; fits a 6 x 6 or 7 x 7 tub', 'https://yardistrystructures.com/products/16-x-16-timber-frame-gazebo'),
-        ('Gazebo', 'Yardistry 12 x 16 Meridian (cedar)', '$3,360', 'Smaller cedar kit for the starter plan', 'https://yardistrystructures.com/products/12-x-16-meridian-gazebo'),
+        ('Gazebo', 'Yardistry 12 x 16 Meridian (cedar)', '$3,360', 'Cedar kit; the extra length leaves room to service a recessed tub', 'https://yardistrystructures.com/products/12-x-16-meridian-gazebo'),
         ('Gazebo', 'Forever Redwood pavilion kits', 'from $6,000', 'Custom-sized redwood kits, drawings approved before building', 'https://www.foreverredwood.com/'),
-        ('Hot tub', 'Hot Spring Hot Spot TX', '$9,999', '2-seat lounge, 6 x 6 ft, 190 gal. Runs on 115 V, but heats at only 1 kW that way; use 240 V (4 kW) for desert winters', 'https://www.hotspring.com/shop/hot-spot/tx'),
-        ('Hot tub', 'Hot Spring Hot Spot Relay', '$12,999', '6 seats, 7 x 7 ft, 340 gal, 4,715 lb filled; 240 V / 50 A', 'https://www.hotspring.com/shop/hot-spot/relay'),
-        ('Hot tub', 'Hot Spring Freeflow Mini', '$5,499', '2 seats, 6 x 4.4 ft, 125 gal; plug-in or 240 V', 'https://www.hotspring.com/shop/freeflow/mini'),
-        ('Hot tub', 'Almost Heaven Sindri (wood-fired)', '$10,621', 'No electricity needed; mind fire weather', 'https://almostheaven.com/products/sindri'),
-        ('Sauna', 'Almost Heaven Salem barrel (2 person)', '$4,485', '6 kW heater on 240 V / 30 A', 'https://www.almostheaven.com/products/salem-2-person-barrel-sauna'),
+        ('Sauna', 'Almost Heaven Salem barrel (2 person)', '$4,485', 'Red cedar; 6 kW heater on 240 V / 30 A', 'https://www.almostheaven.com/products/salem-2-person-barrel-sauna'),
         ('Sauna', 'Almost Heaven Watoga barrel (2-4 person)', '$5,184', '78 x 59 in; installation from $1,400. The Quick Ship kit with a smart heater is $6,183', 'https://www.almostheaven.com/products/watoga-2-4-person-barrel-sauna'),
         ('Sauna', 'Almost Heaven cube and cabin saunas', 'from about $8,400', 'Blackwater 4-person $11,268 on sale; a cabin bench is long enough to lie on. Ask for cedar', 'https://www.almostheaven.com/collections/cabin-saunas'),
         ('Cold', 'Ice Barrel 500', '$1,750', '94 gal; chiller sold separately', 'https://www.icebarrel.com/products/ice-barrel-500'),
-        ('Cold', 'Penguin outdoor chiller', '$1,500-2,200', 'Adds summer cold to a barrel or stock tank', 'https://penguinchillers.com/collections/cold-therapy'),
+        ('Cold', 'Penguin outdoor chiller', '$1,500-2,200', 'Adds summer cold to a barrel or stock tank; drain it on freezing nights', 'https://penguinchillers.com/collections/cold-therapy'),
         ('Cold', 'Plunge All-In', '$7,990', '105 gal, down to 37F, 120 V', 'https://www.plunge.com/products/plunge-all-in'),
-        ('Warm floor', 'WarmlyYours TempZone mat', '$5-15 per sq ft', '15 W per sq ft under tile; a 6 x 8 ft platform is about 720 W', 'https://www.warmlyyours.com/en-US/floor-heating'),
     ]
     trs = ''.join(f'<tr><td>{a}</td><td><a href="{u}" target="_blank" rel="noopener">{b}</a></td><td class="num">{c}</td><td>{d}</td></tr>' for a, b, c, d, u in rows)
     return f'''
@@ -295,6 +330,13 @@ def sources():
         ('Harvia KIP heater specs', 'https://almostheaven.com/products/kip-dials'), ('Yardistry gazebos', 'https://yardistrystructures.com/'),
         ('Mojave Desert Land Trust 2026 plant sale list', 'https://static1.squarespace.com/static/61815979dfa7a7572c721a67/t/6ad0e905a0b45d7fd3978168/1792076037349/2026+plant+sale+inventory.pdf'),
         ('ASCE 7 Hazard Tool', 'https://asce7hazardtool.online'),
+        ('California Energy Commission: 2025 pool and spa rules (heat pumps)', 'https://www.energy.ca.gov/2025-single-family-pools-and-spas-faqs'),
+        ('County IB-0007: pool, spa and hot tub barriers', 'https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf'),
+        ('County pool and spa permits', 'https://wp.sbcounty.gov/ezop/permits/pool-and-spa/'),
+        ('County fee ordinance effective July 1, 2026', 'https://lus.sbcounty.gov/wp-content/uploads/sites/48/Ordinance-No.-4509-af-16.0204-LUS-BNS-2026-27-04-07-26-Board-Mtg.pdf'),
+        ('San Juan Pools spa shells', 'https://sanjuanpools.com/spas/'),
+        ('Bullfrog Spas: in-ground hot tubs', 'https://www.bullfrogspas.com/in-ground-hot-tubs/'),
+        ('Master Spas: recessed installs', 'https://masterspas.com/blog/?p=3030'),
     ]
     lis = ''.join(f'<li>{t}: <a href="{u}" target="_blank" rel="noopener">{u}</a></li>' for t, u in src)
     return f'''

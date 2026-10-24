@@ -1,0 +1,426 @@
+{
+ "topic": "build",
+ "summary": "You can build an in-ground hot tub on this site in five realistic ways. Ranked from the most authentic to the cheapest: (1) a custom shotcrete/gunite spa with a tile or plaster finish, about $30k-80k (estimate; an Arizona desert builder quotes $30k-50k for a standalone spa); (2) a prefab fiberglass spa shell, which River Pools (Mar 2026) prices at $18k-35k installed, or about $22k-45k here (estimate); (3) a portable acrylic spa set into a concrete vault or deck, about $15k-40k (Jacuzzi J-335 7x7 is $13,895 sale / $15,441 MSRP); (4) a tiled concrete soaking pool in the Japanese/Korean style, with no jets, about $20k-50k (estimate); (5) a cedar tub set in a concrete vault, about $20k-55k (Zen Bathworks 7 ft round lists at $11,969-$38,843; the maker says it cannot be backfilled with soil and needs concrete retaining walls). The biggest change for 2026 is the 2025 California Energy Code (effective 1/1/2026). For a NEW permanent in-ground spa the main heater must be a heat pump or solar (or a mix). An electric-resistance heater is not allowed unless 60% or more of the heat comes from site solar. Gas or propane is allowed only as backup, or under narrow exceptions. Portable spas are exempt (option 3 / Scheme E). Other site issues: caliche can add thousands to the dig; winter nights of 17-25F are below a typical heat pump's 40F cutoff; desert air makes an uncovered tub lose heat and water very fast. San Bernardino County treats any tub deeper than 18 in as a 'pool'. It must have a 60 in barrier, or an ASTM F1346 locking safety cover plus one more safety feature. The spa permit is $335 plus a $57 intake fee (FY2026-27). Best fit by scheme: A = gunite, fully tiled (fiberglass Latham Royal 7'8\"x9'8\" is the fallback); B = gunite, or a no-jet tiled soaking pool (San Juan Lido/Scottsdale shells 6'11\"x7'1\" as a fallback); C = San Juan Isle 8'0\" round fiberglass, or gunite; D = small gunite, San Juan Haven 6'10\" octagon, or a cedar tub in a vault; E = a recessed portable 7x7 acrylic spa.",
+ "findings": [
+  {
+   "title": "2025 CA Energy Code (eff. 1/1/2026) changes heater choice for any new permanent in-ground spa",
+   "detail": "Section 110.4(a)4 now reads 'No electric resistance heating', with two exceptions. Exception 1 is listed package units with fully insulated enclosures and covers of R-6 or better, which means portable spas. Exception 2 is pools or spas that get 60% or more of their annual heat from site solar or recovered energy. Section 110.4(c) requires one of five primary-heating paths: (1) solar collectors with area of at least 60% of the pool/spa surface (single-family); (2) a heat pump sized per JA16.3, which must give a 10F rise in 17.5 h or less, with a 'supplementary heater of any energy source'; (3) 60% or more renewable or recovered energy; (4) solar plus heat pump; (5) an equivalent system. Exceptions to 110.4(c): portable electric spas compliant with Title 20; alterations to existing heated spas; solar-only systems; 'permanent spa applications in existing buildings with gas availability'; and permanent spas with inadequate Solar Access Roof Area. Gas is still allowed, but only after one of the five paths is met or under those two spa exceptions. Outdoor spas with electric or gas heaters must have a cover (110.4(b)3). Plumbing must have 18 in of pipe between filter and heater, or dedicated lines, or future-solar stub-outs (110.4(b)2). No standing pilots (110.5). The installer files CF2R-PLB-03-E. Practical effect: for Schemes A-D, plan on a heat pump (or about 60% of water area in solar collectors on the bathhouse roof), with optional propane backup. A simple 11 kW electric spa heater can no longer be the main heater.",
+   "confidence": "high",
+   "sources": [
+    "https://www.energy.ca.gov/2025-single-family-pools-and-spas-faqs",
+    "https://solar-rating.org/wp-content/uploads/2025-CA-Title-24-Pool-Regs-Webinar-20241017-Post-Webinar-Copy.pdf"
+   ]
+  },
+  {
+   "title": "County: a hot tub is a 'pool'; barrier or locking cover required; spa permit fee",
+   "detail": "San Bernardino County IB-0007 (updated 1/1/2026) applies HSC 115920-115929, CBC 3109 and CRC Appendix CI. It defines a pool as any structure holding water more than 18 in deep, including hot tubs, spas and portable spas. Enclosure rules: at least 60 in high, at most 2 in clearance at grade, no openings that pass a 4 in sphere, and gates that open outward and are self-closing and self-latching. An 'approved safety pool cover' meeting ASTM F1346-91 may replace the enclosure, but it must be paired with ONE more feature: a UL 2017 exit alarm, a door latch release at 54 in or higher, or an ASTM F2208 pool alarm. Where the building forms part of the enclosure (Detail C, relevant to the Scheme A pool house), items 1-6 apply plus one extra feature. The County EZOP page says a Pool and Spa Permit is required before construction. Ordinance 4509 (FY2026-27) lists 'Spas and/or hot tubs' at $335 ($345 in FY27-28, $355 in FY28-29), plus a $57 intake fee. The figures come from an OCR'd scan, so confirm them with the County fee estimator.",
+   "confidence": "high",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf",
+    "https://wp.sbcounty.gov/ezop/permits/pool-and-spa/",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Ordinance-No.-4509-af-16.0204-LUS-BNS-2026-27-04-07-26-Board-Mtg.pdf"
+   ]
+  },
+  {
+   "title": "Custom shotcrete/gunite standalone spa: price evidence",
+   "detail": "An Arizona desert builder (California Pools & Landscape, part of Cody Pools) says standalone shotcrete spas can range from $30,000 to $50,000 (undated; inclusions not stated). In a search snippet, Blue Haven says a freestanding spa can cost almost as much as a small gunite pool, because every trade has to mobilize. National guides are lower: ThePricer (Aug 2026, citing Angi) gives $8k-25k for a standalone custom build and $25k-35k+ for custom tiled work. An Ohio builder gives $8k-25k+, and $22k-35k+ for luxury. For a remote high-desert lot with a fully tiled interior, my estimate is $30k-45k for a 6.5 ft plaster or pebble tub and $45k-80k for a 9.5x7 fully tiled tub. That includes dig, steel, shell, plumbing, equipment, electrical, coping and cover, but not the building. This is an estimate, not a quote.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.calpool.com/standalone-spa/",
+    "https://bluehaven.com/faq-topic/inground-spas-gunite-spas",
+    "https://www.thepricer.org/in-ground-hot-tub-cost/",
+    "https://thepremierpoolco.com/blogs/inground-jacuzzi-cost"
+   ]
+  },
+  {
+   "title": "Prefab fiberglass spa shells: real models and sizes that match the schemes",
+   "detail": "San Juan Pools publishes spa specs, given here as outside dimensions / depth / gallons at waterline:\n- Isle Spa (8RD): round 8'0\" / 3'0\" / 504 gal (600 brim); seats 5-6; 300 lb shell; 'can be installed above ground or inground'.\n- Sarasota: round 8'10\" / 3'5\" / 731 gal.\n- Grande: octagon 8'3\" / 3'2\" / 584 gal.\n- Diamond: 8'x8' / 2'11\" / 527 gal.\n- Lido: 6'11\"x7'1\" / 3'3\" / 454 gal.\n- Scottsdale: 6'11\"x7'1\" / 3'0\" / 503 gal.\n- Haven: octagon 6'10\" / 3'0\" / 412 gal.\n- Cove: 6'1\" square / 2'11\" / 299 gal.\n- Royale: 7'0\"x10'3\" / 3'2\" / 610 gal.\n- Peninsula: 8'4\"x10'10\" / 3'2\" / 992 gal.\nSan Juan lists 6 in coping on all of these. Latham fiberglass: Royal 7'8\"x9'8\" / 3'4\" / 600 gal; Mystic 9'8\"x9'8\" / 3'4\" / 550 gal. Latham also sells vinyl-liner Round and Square spas, both 7'8\" / 3'3\" deep. Thursday Pools: Grand Spa 11'6\"x11'10\", 35 in deep, can stand alone (Aqua Magazine); Square Spa 9'x9' outside, about 3' deep, 900 gal (dealer page, unverified). I could not retrieve spa lineups for Blue Hawaiian/Viking (Latham-family brands) or River Pools. River Pools sells spas only as pool add-ons, and its blog says a separate fiberglass spa 'often ranges from $18,000-$35,000 installed' (updated Mar 5, 2026). Shell-only prices are not published by the brands.",
+   "confidence": "high",
+   "sources": [
+    "https://sanjuanpools.com/spas/",
+    "https://www.lathampool.com/pools-spas/spas/",
+    "https://www.aquamagazine.com/products/spas/article/15679755/thursday-pools-thursday-pools-fiberglass-grand-spa",
+    "https://app.gohighlevel.com/v2/preview/KucG4UZ76AZcMfURatYg",
+    "https://www.riverpoolsandspas.com/blog/fiberglass-pool-with-spa-pros-cons"
+   ]
+  },
+  {
+   "title": "Recessing a portable acrylic spa: what Hot Spring, Jacuzzi, Bullfrog and Master Spas say",
+   "detail": "None of the manuals I could read explicitly approves or forbids a fully flush install. They all set conditions that a recess must meet.\n- Hot Spring (pre-delivery instructions): place the equipment compartment where water drains away from it; leave access to it; damage from an inadequate foundation is not covered; a reinforced pad of at least 4 in is required or recommended depending on model. A Hot Spring blog says that if a technician has to remove deck or fence sections, the owner pays for that repair.\n- Jacuzzi 2014 J-300 guide: 'Placing the spa in a depression without provisions for proper drainage could cause rain or any water overflow to flood the equipment'. Plan to remove cabinet panels, and note the spa 'might sometime need to be moved or lifted from the ground'. Indoors, ventilation must be engineered. The disconnect goes at least 5 ft from spa water. The warranty is void if the guidelines are not followed.\n- Bullfrog: portable spas can go partly or fully in-ground, but this is 'costly to undo'. Allow at least 1 ft of access on all sides. In-ground work is estimated at $2,000-5,000+ (the maker's estimate; likely low for a full vault). For a partial recess, leave about 16-18 in above the deck so the cover fits, and keep clearance to the access panel.\n- Master Spas: recessed installs 'need a floor drain system installed in the concrete pad'; plan 3 ft around the perimeter; decking can serve as a trap door for access.\n- ThermoSpas warranty excludes the cost of removing a permanent deck.",
+   "confidence": "high",
+   "sources": [
+    "https://www.hotspring.com/wp-content/uploads/2018/11/hot-spring_spas_pre-delivery_addendum1_02.pdf",
+    "https://www.hotspring.com/wp-content/uploads/2026/08/hot-spring-highlife-collection-pre-delivery-instruction-2026.pdf",
+    "https://www.hotspring.com/blog/cost-repair-your-hot-tub",
+    "https://www.specifiedby.com/jacuzzi/j-335-baths/jacuzzi_J-335_Other_J-300-Pre-Delivery-Guide-EN.pdf",
+    "https://www.bullfrogspas.com/in-ground-hot-tubs/",
+    "https://www.bullfrogspas.com/63-hot-tub-deck-ideas-secrets-of-pro-installers-designers",
+    "https://masterspas.com/blog/?p=3030",
+    "https://www.thermospas.com/wp-content/uploads/2024/04/thermospas-premium-warranty-1.pdf"
+   ]
+  },
+  {
+   "title": "Portable 7x7 spa prices and what a recessed install adds",
+   "detail": "Jacuzzi J-335 (84x84x36 in, seats 6): MSRP $15,441, store price $13,895 (2026 model, one retailer). Pool Magazine 2025 ranges: Bullfrog A-Series $13.8k-20k+; Hot Spring Grandee $16k-20k+; Sundance Optima $17k-24k. Bullfrog puts a filled spa at 3,000-4,000 lb and says the spa alone runs $8k-20k+. ThePricer (citing Angi, Jul 2026): electrical wiring $1,900-4,200; excavation $400-2,500; crane delivery $800-1,500+. My estimate for a properly built vault with a 4-6 in slab, sump or floor drain, retaining walls and an access hatch: $6k-15k. Total installed: about $15k-40k.",
+   "confidence": "medium",
+   "sources": [
+    "https://everythingbilliards.net/hot-tubs/j-335",
+    "https://www.poolmagazine.com/features/hot-tubs/best-selling-hot-tubs-of-2025/",
+    "https://www.bullfrogspas.com/in-ground-hot-tubs/",
+    "https://www.thepricer.org/in-ground-hot-tub-cost/"
+   ]
+  },
+  {
+   "title": "Wood (cedar/hinoki) tubs: one maker allows below-ground only inside concrete retaining walls",
+   "detail": "Zen Bathworks FAQ: 'Cedar hot tubs are easiest to install above ground because the tubs cannot be soil backfilled. Below-ground installations will require concrete retaining walls.' Its manual adds:\n- 'Good drainage and airflow around the tub are vital. Wood lasts longest either fully submerged, or fully dry.'\n- 4x6 pressure-treated chine joists lift the staves about 2-3/8 in for plumbing and ventilation clearance, and the warranty is void if the tub is filled without them.\n- Recessed decks or adjacent structures need 1 in or more of clearance so the staves can swell.\n- Soil or leaves against the staves will rot the tub.\n- The equipment can sit up to 10 ft away (50 ft with longer cables).\nPrice: 7 ft Round lists at $11,969 (29 in tall) to $15,708 (48 in) base, up to $38,843 with options. Forest Cooperage: below-deck installs need access to plumbing and airflow around the tub. I found no written guidance from Bartok (hinoki ofuro, Kobe) on sunken installs. Ask in writing. Desert caution (inference): the very dry air will shrink the staves fast whenever the tub is drained.",
+   "confidence": "high",
+   "sources": [
+    "https://www.zenbathworks.com/discover-hot-tubs/",
+    "https://www.zenbathworks.com/wp-content/uploads/2022/11/Zen_Bathworks_Cedar_Hot_Tub_-_Assembly_Installation__Maintenance_Manual_5.1.23.pdf",
+    "https://www.zenbathworks.com/shop/ht-round-7/",
+    "https://forestcooperage.com/blogs/journal/everything-you-need-to-know-about-buying-a-cedar-hot-tub",
+    "https://www.spabusiness.com/wellness-products-and-services/Bartok-Design-installs-transformative-soaking-tubs-in-SpaFusion-at-Pallazzo-Varignana/339284"
+   ]
+  },
+  {
+   "title": "Tiled concrete ofuro / Korean-style hot pool (no jets)",
+   "detail": "A deep soaking pool can be built like a small shotcrete spa, with circulation inlets and suction or skimmer but no jet plumbing, and tiled inside. Typical ofuro water depth is 22-27 in or 24-30 in, with the water at shoulder height when seated. Because the water is deeper than 18 in, it is still a legal 'pool': the same barrier/cover, anti-entrapment and Title 24 heater rules apply. LATICRETE's US data sheet lists swimming pools, fountains and spas/hot tubs as uses for HYDRO BAN membrane. Confirm hot-water ratings with the maker. Korean bathhouse hot pools often run about 41-43C (106-109F; one user report). CPSC says spa water should never exceed 104F, and US spa controls are built to that limit, so design for 104F maximum.",
+   "confidence": "medium",
+   "sources": [
+    "https://aquaticausa.com/blogs/aquatica/soaking-tub-dimensions",
+    "https://www.badeloftusa.com/buying-guides/ofuro-bathtub",
+    "https://cdnmdm.laticrete.com/Datasheet/NA/40/Datasheet_NA_en_40.pdf",
+    "https://wanderlog.com/place/details/2355951/\uace8\ub4dc\ub85c\uc988\uc0ac\uc6b0\ub098",
+    "https://www.cpsc.gov/Newsroom/News-Releases/1996/CPSC-Issues-Warning-for-Pools-Spas-and-Hot-Tubs"
+   ]
+  },
+  {
+   "title": "Equipment for a stand-alone in-ground spa: options and street prices",
+   "detail": "Heaters:\n- Heat pump (the compliant primary heater): Hayward HeatPro 50k BTU heat+cool, $2,499-2,999 retail, minimum operating air temperature 40F. Standard large HeatPro models stop at 50F.\n- Propane backup: Pentair MasterTemp 125 LP low-NOx $1,929-2,249; Raypak 156A LP $1,912-2,649.\n- Electric 11 kW: Raypak E3T $999-1,154; Hayward CSPAXI11 about $1,474. Under the 2025 Energy Code this can only be primary heat in a portable or solar-dominated system.\n- The HP50HA2 is a heat+cool model, so it can also chill the tub in 100F+ summers.\nPump, filter and sanitation: variable-speed pump about $1,500-1,800 (one marketplace listing; low confidence); Del ozone $125-371; Delta UV E-40 $900 (pool-sized).\nAutomation: $500-2,000 (Ohio builder estimate).\nCovers: custom in-ground foam covers from Spa Covers Etc (SoCal) start at $729.95 (4-2 in taper, R-12.6) or $889.95 (5-3 in, R-16.5). They come with four locking straps 'designed to meet ASTM F1346', but only up to 96 in. Gunite covers are sized to the water span plus 6-8 in.\nCover lifters: most attach under a cabinet. The CoverMate Freestyle ($517) slides under the spa and needs 20 in behind it, so it does not suit a flush in-ground tub. Use a two-piece cover, a roof-beam hoist or an auto cover. Latham quotes $10k-20k for automatic covers on pools; no spa-only price was found.\nMy estimate for the full equipment package installed: $7k-14k.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.hayward.com/heatpro-heat-pump-50-000-btu-side-air-platform-heat-cool-hp50ha2.html",
+    "https://www.homedepot.com/p/HAYWARD-HeatPro-50-000-BTU-Above-Ground-Heat-Pump-Pool-Heater-W3HP50HA2-A/333778498",
+    "https://hayward.com/media/akeneo_connector/asset_files/L/I/LITHTPRO23_HeatPro_Series_Sell_Sheet_DIGITAL_5b7e.pdf",
+    "https://lesliespool.com/pentair-ec-462025-mastertemp-low-nox-125k-btu-propane-gas-pool-spa-heater-with-cord---limited-warranty/387226.html",
+    "https://www.poolweb.com/products/r156a-aboveground-pool-spa-heater-digital-control-150-000-btus-propane-gas-0-4999-feet",
+    "https://lesliespool.com/raypak-e3t-electric-pool-and-spa-heater-0011/953234.html",
+    "https://punchout.hdsupplysolutions.com/p/hayward-11-kw-240-volt-electric-spa-heater-p100849",
+    "https://www.inyopools.com/Products/01600001003741.htm",
+    "https://lesliespool.com/delta-uv-e-series-e-40-uv-disinfection-system-110-gpm--single-110w-120-240v/304356.html",
+    "https://thepremierpoolco.com/blogs/inground-jacuzzi-cost",
+    "https://www.spacoversetc.com/in-ground-spa-covers/",
+    "https://www.masterspaparts.com/covermate-freestyle.html",
+    "https://lathampool.com/products/automatic-safety-covers"
+   ]
+  },
+  {
+   "title": "Running costs in the high desert (calculated estimates)",
+   "detail": "Inputs: Yucca Valley December average is about 56F high / 35F low (WeatherSpark). SCE TOU-D-4-9PM rates (Jan 2026) are 23-58 cents/kWh; I used about $0.35. Propane assumed at about $3.50/gal (CA, low confidence).\n- Portable 400 gal spa (Scheme E): the Title 20 standby cap (3.75*V^(2/3)+40 W, inferred from a CEC label) is about 244 W at 60F air. Scaled to a 45F mean, that is about 8 kWh/day, or about $2.80/day maximum in winter. That matches Zen Bathworks' quoted $1.50-3.50/day for electric or gas cedar tubs.\n- Covered 1,000 gal gunite tub (Scheme A): my estimate of winter loss is 0.5-0.9 kW (cover plus an uninsulated shell in contact with the ground), or 12-22 kWh of heat per day. That costs about $1.40-2.60/day on a heat pump (COP about 3), $1.90-3.40/day on propane, or $4-8/day on electric resistance. Add $0.70-1.40/day for the filtration pump. Summer heating is near zero; the tub may instead overheat.\n- Uncovered: the ASHRAE evaporation equation for 50-66 sf of 102F water in 50F, 30% RH air with a light breeze gives about 1.5-2 gal/h and 4-5 kW of latent heat loss. So every uncovered hour costs roughly a third of a covered day. HPAC notes the ASHRAE method can overstate evaporation by about 37%.\n- DOE says covers cut pool heating cost 50-70%; EPA says they prevent up to 95% of evaporation.\n- Heat-up of 1,000 gal from 60F to 102F (about 350k BTU): about 3.5 h on a 125k BTU propane heater; about 10-12 h on a 50k BTU heat pump in cool air.\n- Annual total for a gunite tub on a heat pump: about $700-1,100 (estimate).",
+   "confidence": "low",
+   "sources": [
+    "https://weatherspark.com/y/2137/Average-Weather-in-Yucca-Valley-California-United-States-Year-Round",
+    "https://www.solar.com/learn/sce-time-of-use-tou-rates-a-beginners-guide",
+    "https://www.platinum-spas.com/wp-content/uploads/2024/04/Oslo-CEC-certificate.pdf",
+    "https://www.zenbathworks.com/discover-hot-tubs/",
+    "https://www.hpac.com/humidity-control/simplified-method-calculating-evaporation-swimming-pools",
+    "https://www.energy.gov/node/1266136",
+    "https://www.epa.gov/system/files/documents/2022-09/ws-outdoor-pool-guide.pdf"
+   ]
+  },
+  {
+   "title": "Excavation in caliche / desert soils",
+   "detail": "In Nevada, rocky caliche 'often requires jackhammering or blasting, adding $3,000 to $8,000' to excavation for a 14x28 pool. A Phoenix builder explains 'overbreak' from caliche veins: the gap is filled with extra shotcrete and billed by the excavator. A spa dig is much smaller: about 15-25 cu yd for a 9.5x7 tub dug 1 ft oversize and about 4.5 ft deep (my calculation). I estimate a caliche adder of $1,000-4,000 for a spa. Get a caliche or rock clause in writing, and pothole-test the site first.",
+   "confidence": "medium",
+   "sources": [
+    "https://askdoss.com/how-much-does-a-pool-cost-in-nevada-in-2026/",
+    "https://shastapools.com/blog/phoenix-surprise-or-gilbert-az-change-how-your-pool-gets-built"
+   ]
+  },
+  {
+   "title": "Anti-entrapment, electrical and temperature rules",
+   "detail": "HSC 115928 (AB 2114 text): a new private pool or spa needs either at least two suction outlets per pump, hydraulically balanced and at least 3 ft apart, or a design with no suction outlets (skimmer or perimeter overflow). Grates must meet ANSI/APSP-16 and be removable only with tools. A perimeter overflow suits a flush Japanese/Korean rim.\nNEC 680 (summaries): maintenance disconnect within sight and at least 5 ft from the inside wall of the spa, with GFCI protection. For an indoor spa (Scheme A), one receptacle 6-10 ft from the spa, and light fixtures at least 12 ft above water, or 7.5 ft with GFCI. Portable spas typically need 240V 50-60A GFCI (Bullfrog).\nCPSC: keep water at or below 104F.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.leginfo.ca.gov/pub/11-12/bill/asm/ab_2101-2150/ab_2114_bill_20120911_enrolled.html",
+    "https://www.ecmweb.com/code-basics/spas-hot-tubs-and-hydromassage-tubs",
+    "https://iaeimagazine.org/electrical-fundamentals/installations-and-inspections-of-spas-and-hot-tubs-at-dwellings/",
+    "https://www.bullfrogspas.com/in-ground-hot-tubs/",
+    "https://www.cpsc.gov/Newsroom/News-Releases/1996/CPSC-Issues-Warning-for-Pools-Spas-and-Hot-Tubs"
+   ]
+  },
+  {
+   "title": "Septic and drainage siting",
+   "detail": "County OWTS SOP IB-00018 gives minimum setbacks from 'buildings or structures' (including roofed patios and covered walls): 5 ft from a septic tank, 8 ft from a disposal field, 8 ft from a seepage pit. Pools are not listed separately, so treat the spa and bathhouse as structures and confirm with Environmental Health. Bulk pool or spa water should not go into a household septic system because it reduces treatment and can flush solids into the leach field. Drain dechlorinated water to landscape well away from the leach field.",
+   "confidence": "medium",
+   "sources": [
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/IB-00018-Onsite-Wastewater-Treatment-Systems-Final-Edited-06-20-2024-002-1.pdf",
+    "https://stormwater.pca.state.mn.us/ms4_fact_sheet_swimming_pool_and_hot_tub_water_discharges_best_management_practices"
+   ]
+  },
+  {
+   "title": "Design-geometry references (ISPSC is not adopted in CA; use as good practice)",
+   "detail": "A city checklist citing ISPSC gives: maximum spa water depth 4 ft (R503.1); maximum 28 in at any seat (503.2); floor slope no steeper than 1:12 (503.3). ICC pool-stair guidance: top tread at most 12 in below the coping; treads at least 10 in deep; risers at most 12 in. Austin's checklist caps spa and deck risers at 7.5 in. Shotcrete forum builders say walls run about 6-9 in thick (6 in minimum), water sits 5-6 in below the coping, and two bench heights (for example 18 and 22 in below water) suit different body sizes. These forum figures are low confidence. ICC is still campaigning for California to adopt the ISPSC.",
+   "confidence": "medium",
+   "sources": [
+    "https://lfportal.everettwa.gov/WebLink/0/doc/1776767/Page6.aspx",
+    "https://www.iccsafe.org/wp-content/uploads/24-23564_PMG_ISPSC_Entry_Exit_Requirements_FINAL_MIDRES.pdf",
+    "https://www.austintexas.gov/sites/default/files/files/Development_Services/RES_ThirdPartyResidentialPoolAndSpaInspectionChecklist.pdf",
+    "https://www.troublefreepool.com/goto/post?id=1237909",
+    "https://www.iccsafe.org/wp-content/uploads/Reasons_to_Adopt_the_2021_ISPSC\u00ae_in_California.pdf"
+   ]
+  },
+  {
+   "title": "Equipment pad siting",
+   "detail": "Heat pump (Inyo install guide for HeatPro; check against the Hayward manual): base at least 36x36 in, 24 in from walls on each side, 72 in clear above, and never in a fully enclosed shed or room. In Scheme A the heat pump must sit outside the pool house. Cal Spas manual: an external equipment pack must be within 15 ft of the spa. Zen Bathworks: equipment up to 10 ft away as standard; longer runs lose jet pressure, so insulate the pipes.",
+   "confidence": "medium",
+   "sources": [
+    "https://www.inyopools.com/HowToPage/how-to-install-a-hayward-heatpro-heat-pump.aspx",
+    "https://manualmachine.com/calspas/a857l/1041950-user-manual/",
+    "https://www.zenbathworks.com/wp-content/uploads/2022/11/Zen_Bathworks_Cedar_Hot_Tub_-_Assembly_Installation__Maintenance_Manual_5.1.23.pdf"
+   ]
+  }
+ ],
+ "options": [
+  {
+   "name": "Custom shotcrete/gunite spa (jetted), tile or plaster/pebble finish",
+   "how": "Steps: survey the site and pothole for caliche. Excavate the interior plus about 1 ft each side, about 4-4.5 ft deep. Set engineered rebar (the County requires engineered or standard-plan structural details). Rough-in the plumbing: two suction outlets at least 3 ft apart or a skimmer/perimeter overflow, returns or jets, and an air line. Shoot a 6-9 in shotcrete shell with benches and steps formed. Set the tile band or full tile, or plaster/pebble, and the coping. Then build the equipment pad (heat pump, optional propane backup, VS pump, cartridge filter, ozone/UV, automation), run the electrical subpanel and GFCI, fit an ASTM F1346 cover, and get inspections (pre-gunite, electrical, final with barrier check).",
+   "cost_low": 30000,
+   "cost_high": 80000,
+   "cost_basis": "The range is my estimate for this remote site, anchored on: an Arizona desert builder saying standalone shotcrete spas 'can range from $30,000-$50,000' (undated; inclusions not stated); Blue Haven's note that a freestanding spa costs nearly as much as a small pool; national guides at $8k-35k+. Low end is a small (about 6.5 ft) plaster or pebble tub. High end is a 9.5x7 fully tiled tub. Both include equipment ($7k-14k est.), electrical, cover and permit ($335 + $57). Excludes the building and the caliche adder ($1k-4k est.). Not a quote.",
+   "pros": "Any shape, size or depth: true flush deck-level rim, perimeter overflow like an onsen, built-in steps and benches at exact heights, and full tile for the Korean/Japanese look. Most durable. Can be finished to match the bathhouse floor.",
+   "cons": "Most expensive and slowest (weeks; several trades mobilize to a remote site). Uninsulated concrete loses heat to the ground. Needs a heat pump under the 2025 Energy Code. Caliche risk. Plaster or tile needs careful water chemistry. Permanent.",
+   "best_for_schemes": "A (9.5x7 tiled, enclosed pool house) - first choice; B (6.5x6.5 sunken tiled) - first choice; C (8 ft round) - good; D (6.5 ft round) - good",
+   "sources": [
+    "https://www.calpool.com/standalone-spa/",
+    "https://bluehaven.com/faq-topic/inground-spas-gunite-spas",
+    "https://www.thepricer.org/in-ground-hot-tub-cost/",
+    "https://wp.sbcounty.gov/ezop/permits/pool-and-spa/",
+    "https://www.energy.ca.gov/2025-single-family-pools-and-spas-faqs"
+   ]
+  },
+  {
+   "name": "Prefab fiberglass in-ground spa shell",
+   "how": "Order a shell from a dealer, for example: San Juan Isle (8'0\" round, 3'0\" deep, 504 gal), Haven (6'10\" octagon, 3'0\", 412 gal), Lido/Scottsdale (6'11\"x7'1\"), Royale (7'0\"x10'3\"); Latham Royal (7'8\"x9'8\", 3'4\", 600 gal). Dig about 12-24 in oversize, set the shell level on a compacted sand or gravel base, plumb it, and backfill with gravel or sand while filling with water. Pour a collar or bond beam and set coping (San Juan specifies 6 in) flush with the deck. The equipment pad is the same as for gunite.",
+   "cost_low": 18000,
+   "cost_high": 45000,
+   "cost_basis": "River Pools blog (updated Mar 5, 2026): a separate fiberglass spa 'often ranges from $18,000-$35,000 installed' (a dealer/manufacturer figure). I raised the top to about $45k for freight to the high desert, the heat-pump requirement, and tile or stone coping (estimate). Shell-only prices are dealer-only and not published.",
+   "pros": "Fast install (days). Smooth non-porous gelcoat uses fewer chemicals. Light shells (about 300-1,000 lb) can be set without a large crane on a rural lot. Sizes almost match Schemes C and D. Lower cost than gunite.",
+   "cons": "Fixed shapes only: no true custom 6.5x6.5 square or 9.5x7. A gelcoat look rather than full tile (usually only a waterline tile band). Benches are fixed. A flush overflow edge is hard to do. Still needs a heat pump, barrier or cover, and anti-entrapment.",
+   "best_for_schemes": "C (8 ft round: San Juan Isle 8'0\" or Grande octagon 8'3\") - first choice; D (6.5 ft: Haven 6'10\" octagon) - good; B (Lido/Scottsdale 6'11\"x7'1\") - fallback; A (Latham Royal 7'8\"x9'8\" or San Juan Royale 7'0\"x10'3\") - fallback",
+   "sources": [
+    "https://sanjuanpools.com/spas/",
+    "https://www.lathampool.com/pools-spas/spas/",
+    "https://www.riverpoolsandspas.com/blog/fiberglass-pool-with-spa-pros-cons"
+   ]
+  },
+  {
+   "name": "Portable acrylic spa recessed into a concrete vault or deck",
+   "how": "Buy a CEC-listed 7x7 portable spa, for example a Jacuzzi J-335 (84x84x36 in). Pour a reinforced 4-6 in slab at the bottom of a vault with retaining walls, a floor drain or sump, and at least 12 in (Bullfrog) to 36 in (Master Spas) of service space on the equipment side. Either set it flush, with a removable deck hatch over the equipment side, or partly recessed with about 16-18 in above the deck (Bullfrog) so the standard cover and lifter work. The built-in heater and controls are allowed (portable-spa exemption). Run a 240V 50-60A GFCI circuit.",
+   "cost_low": 15000,
+   "cost_high": 40000,
+   "cost_basis": "Spa: Jacuzzi J-335 at $13,895 sale / $15,441 MSRP (one retailer, 2026); Pool Magazine 2025 ranges of $13.8k-24k for 6-7 seat models; Bullfrog says spas run $8k-20k+. Recess: Bullfrog estimates in-ground installs at $2k-5k+ (maker's estimate); I estimate $6k-15k for a proper vault with drain and hatch. Electrical $1.9k-4.2k (Angi via ThePricer). These are list prices plus estimates.",
+   "pros": "Cheapest and quickest. The 2025 Energy Code heater rule does not apply (portable-spa exemption; Title 20 listing). Factory-insulated cabinet and an R-12+ cover give the lowest running cost (about $3/day maximum in winter by the Title 20 benchmark). Comes with seats, jets, a cover with locks (Hot Spring says its locking cover meets ASTM F1346-91).",
+   "cons": "No manual explicitly approves a fully flush recess. All require equipment access and drainage. Jacuzzi warns the spa may need to be 'lifted from the ground'. The owner pays for deck or hatch removal during service. Flooding of the equipment in a vault is a real risk. The rim and cabinet look less like a built-in bath. Cabinet lifters do not work when flush. Lifespan of 10-20 years, then a vault-sized replacement is needed.",
+   "best_for_schemes": "E (12x12 gazebo kit, budget) - first choice. An 84 in spa in a 12 ft gazebo leaves about 30 in per side, enough for Bullfrog's 1 ft but under Master Spas' 3 ft, so put the equipment side toward a removable deck section",
+   "sources": [
+    "https://everythingbilliards.net/hot-tubs/j-335",
+    "https://www.poolmagazine.com/features/hot-tubs/best-selling-hot-tubs-of-2025/",
+    "https://www.bullfrogspas.com/in-ground-hot-tubs/",
+    "https://www.bullfrogspas.com/63-hot-tub-deck-ideas-secrets-of-pro-installers-designers",
+    "https://masterspas.com/blog/?p=3030",
+    "https://www.specifiedby.com/jacuzzi/j-335-baths/jacuzzi_J-335_Other_J-300-Pre-Delivery-Guide-EN.pdf",
+    "https://www.hotspring.com/wp-content/uploads/2018/11/hot-spring_spas_pre-delivery_addendum1_02.pdf",
+    "https://www.thepricer.org/in-ground-hot-tub-cost/",
+    "https://solar-rating.org/wp-content/uploads/2025-CA-Title-24-Pool-Regs-Webinar-20241017-Post-Webinar-Copy.pdf"
+   ]
+  },
+  {
+   "name": "Tiled concrete soaking pool, ofuro / Korean bathhouse style (no jets)",
+   "how": "Build a small shotcrete or cast concrete vessel, about 24-36 in of water, with a single-level seat step, circulation only (no jet plumbing), and a perimeter overflow or skimmer. Waterproof it with a pool or spa-rated membrane (for example LATICRETE HYDRO BAN, listed for pools and spas in the US). Tile it fully and finish with a flush stone or wood-look rim at floor level. Heat with a heat pump (plus optional propane) and fit a locking cover.",
+   "cost_low": 20000,
+   "cost_high": 50000,
+   "cost_basis": "Estimate only. No source prices this type. It is a gunite spa minus the jet plumbing and blower but with full tile, and the same equipment, permit and cover costs as option 1.",
+   "pros": "The most authentic Korean or Japanese bath feel: deep still water, clean rim, a quiet overflow. Fewer mechanical parts. A deck-level overflow rim is easy to do with custom concrete.",
+   "cons": "Legally still a 'pool' (more than 18 in deep), with barrier/cover, anti-entrapment and Title 24 heater rules. Full tile is costly. US equipment is limited to 104F (CPSC), cooler than Korean hot pools at 41-43C. No massage jets unless added.",
+   "best_for_schemes": "B (hanok 6.5x6.5 sunken tiled) - strong fit; D (walled courtyard 6.5 ft round) - strong fit; A - possible",
+   "sources": [
+    "https://aquaticausa.com/blogs/aquatica/soaking-tub-dimensions",
+    "https://www.badeloftusa.com/buying-guides/ofuro-bathtub",
+    "https://cdnmdm.laticrete.com/Datasheet/NA/40/Datasheet_NA_en_40.pdf",
+    "https://www.cpsc.gov/Newsroom/News-Releases/1996/CPSC-Issues-Warning-for-Pools-Spas-and-Hot-Tubs",
+    "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf"
+   ]
+  },
+  {
+   "name": "Cedar (or hinoki) wood tub set in a concrete vault",
+   "how": "Build a concrete-walled vault, not soil backfill, with a drained, sloped floor. Set the tub on 4x6 pressure-treated chine joists, keep 1 in or more of clearance between the staves and any deck or wall, and leave airflow and debris-clearing access. Run the equipment pack (electric, gas or wood-fired) up to 10 ft away. For a permanent spa, the Title 24 heater rules apply as for options 1-2; confirm with the plan checker.",
+   "cost_low": 20000,
+   "cost_high": 55000,
+   "cost_basis": "Zen Bathworks 7 ft Round list price $11,969 (29 in) to $15,708 (48 in) base, up to $38,843 with options (fetched Oct 2026). Plus my estimate of $5k-12k for the vault and deck, and electrical and permit.",
+   "pros": "Beautiful, warm material that fits the hanok and garden schemes. Kit delivery. Zen Bathworks explicitly allows below-ground installs with retaining walls.",
+   "cons": "Wood must stay either fully wet or fully dry. Trapped dampness or soil against the staves causes rot. Desert air dries and shrinks the staves fast when drained. Needs a vault with airflow, so it is not truly 'buried'. Shorter life than concrete. I found no written hinoki/Bartok guidance on sunken installs.",
+   "best_for_schemes": "D (walled courtyard 6.5 ft round: a 6 or 7 ft round tub) - good; B (hanok) - possible",
+   "sources": [
+    "https://www.zenbathworks.com/discover-hot-tubs/",
+    "https://www.zenbathworks.com/wp-content/uploads/2022/11/Zen_Bathworks_Cedar_Hot_Tub_-_Assembly_Installation__Maintenance_Manual_5.1.23.pdf",
+    "https://www.zenbathworks.com/shop/ht-round-7/",
+    "https://forestcooperage.com/blogs/journal/everything-you-need-to-know-about-buying-a-cedar-hot-tub"
+   ]
+  }
+ ],
+ "design_numbers": [
+  "Water depth at the deepest point (floor to waterline): 36-42 in typical. Prefab shells: 2'11\"-3'5\" overall (San Juan), 3'3\"-3'4\" (Latham), 35 in (Thursday Grand Spa). Upper limit 48 in (ISPSC 503 reference). Ofuro-style: 24-30 in.",
+  "Seat/bench: 18-22 in below the waterline (forum examples). Do not exceed 28 in below water at any seat (ISPSC 503.2 reference). Model two heights, for example 18 and 22 in. Bench depth front-to-back about 15-18 in (estimate).",
+  "Waterline: 5-6 in below the top of coping for a skimmer spa (forum). About 0.5-1 in below the rim for a flush perimeter-overflow edge with a 2-3 in slot drain around it (estimate).",
+  "Entry steps: top tread no more than 12 in below the coping; treads at least 10 in deep; risers no more than 12 in, comfortable at 7.5-10 in (ICC, Austin checklist).",
+  "Floor slope: no steeper than 1:12 (ISPSC 503.3 reference).",
+  "Coping: 6 in (San Juan shell spec) up to 12-16 in deck stone at a flush rim (estimate).",
+  "Shotcrete shell walls 6-9 in thick (forum). Excavation for gunite: interior + about 12 in each side; for fiberglass: shell outside dimension + 12-24 in all around (estimate). Dig depth about interior depth + 12 in.",
+  "Cover footprint: gunite spa water span + 6-8 in (3-4 in bearing per side). Single locking covers claimed to meet ASTM F1346 only up to 96 in, so Scheme A (9.5x7 ft, about 114x84 in water) needs a two-piece cover, an automatic cover, or the building-enclosure route.",
+  "Scheme volumes (estimates unless a model is named): A 9.5x7 about 900-1,200 gal (Latham Royal 600 gal); B 6.5x6.5 about 550-650 gal (San Juan Lido 454 gal); C 8 ft round about 500-800 gal (San Juan Isle 504 gal at waterline, Sarasota 731); D 6.5 ft round about 400-500 gal (San Juan Haven 412 gal); E 7x7 portable about 350-450 gal.",
+  "Scheme E portable spa: Jacuzzi J-335 is 84 x 84 x 36 in. Filled weight 3,000-4,000 lb (Bullfrog). Reinforced pad 4 in minimum (Hot Spring/Jacuzzi), 4-6 in per Bullfrog. Vault clearance 12 in minimum (Bullfrog) to 36 in (Master Spas). Leave 16-18 in above the deck for a partial recess (Bullfrog). Floor drain or sump in the vault slab.",
+  "Wood tub: 4x6 pressure-treated chine joists (3.5 x 5.5 in, set on edge) lift the staves about 2-3/8 in; 1 in or more of gap to the deck or vault wall; concrete retaining walls, never soil backfill (Zen Bathworks).",
+  "Equipment pad: heat pump base at least 36x36 in, 24 in side clearance, 72 in clear above, not enclosed (Inyo/Hayward). Full pad about 4 x 10 ft with pump, filter, propane heater and controls (estimate). Place it within 10-15 ft of the tub (Zen 10 ft; Cal Spas pack 15 ft maximum). Maintenance disconnect within sight and at least 5 ft from the water (NEC 680 / Jacuzzi).",
+  "Indoor spa (Scheme A): receptacle 6-10 ft from the spa wall; light fixtures at least 12 ft above water, or 7.5 ft with GFCI (NEC 680.43 summaries). Heat pump must be outside the pool house.",
+  "Suction outlets: two per pump, at least 3 ft apart, or skimmer/perimeter overflow only (HSC 115928). Fits inside a 6.5 ft (78 in) round tub.",
+  "Barrier (if no safety cover): 60 in high, at most 2 in gap at grade, no openings passing a 4 in sphere; gate opens outward, self-closing and self-latching, with the latch release at least 3 in below the top on the pool side (IB-0007).",
+  "Septic: keep the spa or structure at least 5 ft from the septic tank and at least 8 ft from the leach field or seepage pit (IB-00018, 'structures'); confirm with EHS.",
+  "Heating sizing check (JA16.3): heat pump must give a 10F rise in 17.5 h or less. Example: 1,000 gal needs about 4,800 BTU/h net plus losses, so a 50k BTU unit easily passes.",
+  "Max water temperature 104F (CPSC)."
+ ],
+ "rules": [
+  {
+   "rule": "Any structure holding water more than 18 in deep, including hot tubs, spas and portable spas, is a 'swimming pool'. It needs a 60 in enclosure with self-closing, self-latching, outward-opening gates. OR an ASTM F1346-91 approved safety cover may substitute for the enclosure, plus one more feature: a UL 2017 exit alarm, a door latch release at 54 in or higher, or an ASTM F2208 water alarm.",
+   "applies_to": "All schemes A-E (including the portable spa in E)",
+   "source": "https://lus.sbcounty.gov/wp-content/uploads/sites/48/IB-0007-Swimming-Pool-Spa-and-Hot-Tub-Barrier-Requirements.pdf"
+  },
+  {
+   "rule": "A Pool and Spa Permit is required before construction. The spa/hot tub permit fee is $335 (FY2026-27; $345 FY27-28; $355 FY28-29), plus a $57 intake fee. The fee includes plan review and building, electrical, mechanical, plumbing and solar inspections.",
+   "applies_to": "A-D in-ground spas; E likely at least electrical plus a permit for the vault/deck (confirm)",
+   "source": "https://lus.sbcounty.gov/wp-content/uploads/sites/48/Ordinance-No.-4509-af-16.0204-LUS-BNS-2026-27-04-07-26-Board-Mtg.pdf"
+  },
+  {
+   "rule": "2025 Energy Code 110.4(a)4: no electric-resistance pool or spa heating. Exceptions: listed package units with insulated enclosures and covers of R-6 or better (portable spas), or 60% or more of annual heat from site solar or recovered energy.",
+   "applies_to": "A-D (blocks a plain 11 kW electric heater); E exempt",
+   "source": "https://solar-rating.org/wp-content/uploads/2025-CA-Title-24-Pool-Regs-Webinar-20241017-Post-Webinar-Copy.pdf"
+  },
+  {
+   "rule": "2025 Energy Code 110.4(c): new spa heating must be solar (collectors of at least 60% of the water surface area), a heat pump sized per JA16.3 (any supplementary heater allowed), 60% or more renewable or recovered energy, solar plus heat pump, or an equivalent. Exceptions include portable electric spas (Title 20), permanent spas in existing buildings with gas availability, and permanent spas with inadequate Solar Access Roof Area.",
+   "applies_to": "A-D",
+   "source": "https://www.energy.ca.gov/2025-single-family-pools-and-spas-faqs"
+  },
+  {
+   "rule": "Outdoor pools or spas with electric or gas heating equipment must have a cover. Plumbing needs at least 18 in of pipe between filter and heater, or dedicated suction and return lines, or future-solar connections. Heater needs an external on/off switch and an efficiency placard. No continuously burning pilot (110.5). Installer files CF2R-PLB-03-E.",
+   "applies_to": "A-D (B, C, D, E are outdoors under roofs; A is indoors)",
+   "source": "https://www.energy.ca.gov/2025-single-family-pools-and-spas-faqs"
+  },
+  {
+   "rule": "Pumps (150.0(p)): must be listed dedicated-purpose pool pumps; filtration turnover in 6 h or 36 gpm, whichever is greater; multi-speed default to the filtration rate; return-line velocity at most 8 ft/s and suction at most 6 ft/s; NSF/ANSI 50 filters.",
+   "applies_to": "A-D",
+   "source": "https://www.energy.ca.gov/2025-single-family-pools-and-spas-faqs"
+  },
+  {
+   "rule": "New private pools and spas need either two balanced suction outlets per pump at least 3 ft apart, or no suction outlets (skimmers or perimeter overflow). Grates must meet ANSI/APSP-16 and be removable only with tools.",
+   "applies_to": "A-D (portable spas come factory-compliant)",
+   "source": "https://www.leginfo.ca.gov/pub/11-12/bill/asm/ab_2101-2150/ab_2114_bill_20120911_enrolled.html"
+  },
+  {
+   "rule": "Portable electric spas sold in California must meet Title 20 standby-power limits. A CEC label example implies a cap of 3.75*V^(2/3)+40 W (V = gallons; inferred).",
+   "applies_to": "E",
+   "source": "https://www.platinum-spas.com/wp-content/uploads/2024/04/Oslo-CEC-certificate.pdf"
+  },
+  {
+   "rule": "NEC 680: maintenance disconnect readily accessible, within sight and at least 5 ft from the inside wall of the spa; GFCI protection. Indoors: a receptacle 6-10 ft away; lights at least 12 ft above water, or 7.5 ft with GFCI.",
+   "applies_to": "All; indoor rules for A",
+   "source": "https://www.ecmweb.com/code-basics/spas-hot-tubs-and-hydromassage-tubs"
+  },
+  {
+   "rule": "Keep spa water at or below 104F.",
+   "applies_to": "All",
+   "source": "https://www.cpsc.gov/Newsroom/News-Releases/1996/CPSC-Issues-Warning-for-Pools-Spas-and-Hot-Tubs"
+  },
+  {
+   "rule": "Septic setbacks for buildings and structures: 5 ft from tank, 8 ft from disposal field, 8 ft from seepage pit. Do not drain bulk spa water into the septic system.",
+   "applies_to": "All",
+   "source": "https://lus.sbcounty.gov/wp-content/uploads/sites/48/BandS/IB-00018-Onsite-Wastewater-Treatment-Systems-Final-Edited-06-20-2024-002-1.pdf"
+  },
+  {
+   "rule": "Manufacturer conditions for recessed portable spas: drainage away from the equipment compartment, access for service or removal, and a proper foundation. Warranties exclude damage from improper foundations, and the owner pays for deck or hatch removal.",
+   "applies_to": "E",
+   "source": "https://www.specifiedby.com/jacuzzi/j-335-baths/jacuzzi_J-335_Other_J-300-Pre-Delivery-Guide-EN.pdf"
+  },
+  {
+   "rule": "Cedar tubs cannot be soil backfilled; below-ground installs need concrete retaining walls. The warranty is void if the tub is filled without chine-joist support.",
+   "applies_to": "D or B if a wood tub is chosen",
+   "source": "https://www.zenbathworks.com/discover-hot-tubs/"
+  }
+ ],
+ "risks": [
+  {
+   "risk": "Designing around an electric-resistance or propane-only heater for a new permanent spa. Under the 2025 Energy Code, plan check would reject it, or force a redesign after the pad is built.",
+   "severity": "high",
+   "mitigation": "Specify a heat pump (for example a 50k BTU heat+cool unit) as primary, with optional propane backup. Or put solar collectors of at least 60% of the water area on the bathhouse roof. Confirm the path, and whether the 'existing building with gas' or SARA exceptions apply, with County plan check before design."
+  },
+  {
+   "risk": "Heat pump cannot run on winter nights (17-25F) because typical units stop at 40-50F.",
+   "severity": "medium",
+   "mitigation": "Choose a low-ambient model rated to 40F or lower. Size it to recover during desert daytime (December highs about 56F). Use a well-sealed R-12+ cover. Add propane backup if cold snaps matter. Program freeze protection."
+  },
+  {
+   "risk": "Recessed portable spa (Scheme E) floods or becomes unserviceable, so the warranty claim is refused or the deck has to be torn out.",
+   "severity": "high",
+   "mitigation": "Build the vault with a floor drain or sump, 12-36 in of service clearance on the equipment side, and a removable deck hatch. Consider a partial recess (16-18 in above the deck). Get the dealer's written approval of the install drawing for that exact model."
+  },
+  {
+   "risk": "Caliche or rock found during the dig drives a change order.",
+   "severity": "medium",
+   "mitigation": "Pothole-test the spa location first. Require a written caliche clause (hourly or flat allowance) in bids. Budget $1k-4k contingency (estimate)."
+  },
+  {
+   "risk": "Uncovered hot water in dry, windy desert air loses heat and water very fast (estimated 1.5-2 gal and 4-5 kW per uncovered hour). Spring winds can also lift the cover.",
+   "severity": "medium",
+   "mitigation": "Keep the tub covered whenever not in use. Order high-wind straps. Site Schemes C, D and E so walls or screens block the prevailing wind. Shorter soaks with the cover partly on."
+  },
+  {
+   "risk": "Summer overheating above the 104F safe limit under a roof in 100F+ air.",
+   "severity": "medium",
+   "mitigation": "Use a heat+cool heat pump to chill. Shade the equipment and tub. Allow a lower summer setpoint. Use a reliable thermostat with a high-limit."
+  },
+  {
+   "risk": "Scheme A's 9.5x7 tub is bigger than the 96 in limit for single ASTM F1346 locking foam covers.",
+   "severity": "medium",
+   "mitigation": "Use a two-piece locking cover verified by the maker, an automatic safety cover (quote needed; pool auto covers run $10k-20k), or meet the barrier rule with the enclosed pool house (Detail C) plus door alarms or self-closing latches. Confirm with the County."
+  },
+  {
+   "risk": "Wood tub rots or leaks in a vault, or dries out and shrinks in desert air when drained.",
+   "severity": "medium",
+   "mitigation": "Use only with concrete retaining walls, a drained and sloped floor, airflow, and 1 in gaps (Zen Bathworks). Keep it filled year-round. Get the maker's written approval."
+  },
+  {
+   "risk": "Uninsulated gunite shell loses heat to the ground, raising running costs.",
+   "severity": "low",
+   "mitigation": "Ask the builder about insulating the shell exterior or backfill zone (estimate only; not code). Insulate the plumbing runs. Keep the equipment within 10-15 ft."
+  },
+  {
+   "risk": "Spa water drained onto or near the leach field or into the septic tank harms the septic system. Hauled-water refills are costly.",
+   "severity": "medium",
+   "mitigation": "Site the spa at least 8 ft from the leach field (confirm with EHS). Dechlorinate and drain to landscape away from the leach field. Choose a smaller-volume tub. Get local water-hauling quotes (no reliable local price found)."
+  },
+  {
+   "risk": "Assuming national cost-guide prices ($8k-25k) apply to a remote high-desert custom build.",
+   "severity": "medium",
+   "mitigation": "Get three itemized bids from Coachella Valley, Morongo Basin or High Desert builders. Compare against the $30k-50k desert-builder figure."
+  }
+ ],
+ "next_actions": [
+  "Call San Bernardino County Building & Safety (909-387-8311) with each scheme. Confirm: the Title 24 2025 heater path (heat pump vs solar vs gas exceptions); the barrier method (locking cover + one feature, or enclosure; Detail C for the Scheme A pool house); whether a recessed portable spa needs a building permit for the vault; and the current spa fee (listed at $335 + $57).",
+  "Ask Environmental Health to confirm septic setbacks for an in-ground spa and the bathhouse, and where the drain water can go.",
+  "Pothole-test the chosen tub location for caliche before requesting bids.",
+  "Get three itemized bids for gunite (Schemes A/B) and for a San Juan Isle or Haven fiberglass shell (Schemes C/D). Ask for the caliche clause, heat-pump model, cover type and cover size limits.",
+  "For Scheme E, choose a specific spa model and get the dealer's written approval of the recessed vault drawing: drain, service clearance, hatch, partial vs flush.",
+  "For a wood tub, get Zen Bathworks (or Bartok, for hinoki) written guidance on a vault install in desert conditions.",
+  "For Scheme A, ask cover makers whether a two-piece locking cover for about 114x84 in water meets ASTM F1346, or price an automatic cover.",
+  "Collect local quotes for water hauling and propane delivery to firm up the running-cost estimates."
+ ]
+}
