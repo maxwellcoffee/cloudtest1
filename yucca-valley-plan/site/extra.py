@@ -59,7 +59,7 @@ EARTH_SHELTERED = '''
   </header>
   <figure class="plate">
     <img src="img/yucca-earth-sheltered-concept.webp" alt="Concept board titled Yucca Valley, earth sheltered courtyard. Top: a low flat-roofed house with a full-height glass south wall opening onto a shaded courtyard with a pergola, a wood soaking tub and built-in seating among desert plants and Joshua trees. Bottom: a cutaway with the north side set into an uphill earth berm, a clerestory window above the berm, a retaining wall with waterproofing and a drain pipe, and the soft heated living floor." loading="lazy" width="1536" height="1024">
-    <figcaption><b>AI generated concept, not a surveyed site plan or construction detail.</b> The drainage arrows are schematic, not engineered drain sizing.</figcaption>
+    <figcaption><b>AI generated concept, not a surveyed site plan or construction detail.</b> The drainage arrows are schematic, not engineered drain sizing. Tree positions and furnishings are illustrative only; the 50-ft Joshua tree rule and the A-1 heating still apply.</figcaption>
   </figure>
   <div class="col">
     <h3>The design</h3>
@@ -72,15 +72,15 @@ EARTH_SHELTERED = '''
     </ul>
     <div class="proscons">
       <div><h4>What it could give you</h4><ul>
-        <li>Earth against the north and side walls blocks wind and evens out temperature swings on those walls.</li>
-        <li>A lower profile from uphill, and a courtyard sheltered on three sides.</li>
+        <li>Earth behind the north retaining wall and the short end berms shelters those sides from wind, and may soften temperature swings there; how much depends on the final wall and insulation design.</li>
+        <li>A lower profile seen from uphill, with the courtyard backed by the house and the hill.</li>
         <li>The south glass, the courtyard and the floor plan work as they do in A-1.</li>
       </ul></div>
       <div><h4>What it asks of you</h4><ul>
         <li>Excavation, retaining walls, waterproofing and drainage become extra work, each with its own engineering and inspections.</li>
         <li>Uphill runoff and desert cloudbursts have to be steered around the house, and water behind the walls carried away.</li>
         <li>Daylight and fresh air on the back side come only through the clerestory and fans, and the back walls are hard to change later.</li>
-        <li>The cut is grading, so it still has to stay 50 ft clear of every Joshua tree.</li>
+        <li>The cut counts as grading, so the plan's 50-ft Joshua tree rule applies: keep it more than 50 ft from every western Joshua tree, including a neighbor's, or get state (CDFW) approval first.</li>
       </ul></div>
     </div>
     <div class="callout">
