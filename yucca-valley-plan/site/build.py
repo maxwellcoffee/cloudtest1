@@ -248,7 +248,7 @@ def copy_images():
     dst = os.path.join(HERE, 'img')
     os.makedirs(dst, exist_ok=True)
     for f in os.listdir(RND):
-        if f.endswith('.jpg'):
+        if f.endswith(('.jpg', '.webp')):
             shutil.copy(os.path.join(RND, f), os.path.join(dst, f))
 
 

@@ -47,6 +47,51 @@ def cons_top(b):
     </div>'''
 
 
+# A-2 is fixed text around the supplied AI concept board (renders/yucca-earth-sheltered-concept.webp);
+# it carries no worksheet fields or checkboxes.
+EARTH_SHELTERED = '''
+
+<section class="sheet" id="earth-sheltered" aria-labelledby="earth-h">
+  <header>
+    <div class="sheet-code"><span>A-2</span><span>Design option · the same 20 × 32 ft, 640 sq ft house</span></div>
+    <h2 id="earth-h">Earth sheltered courtyard</h2>
+    <p class="lede">A way to set the <a href="#house">A-1 house</a> partly into the ground. Its north service strip tucks shallowly into an uphill slope, and the south glass and the shaded courtyard stay open at downhill grade.</p>
+  </header>
+  <figure class="plate">
+    <img src="img/yucca-earth-sheltered-concept.webp" alt="Concept board titled Yucca Valley, earth sheltered courtyard. Top: a low flat-roofed house with a full-height glass south wall opening onto a shaded courtyard with a pergola, a wood soaking tub and built-in seating among desert plants and Joshua trees. Bottom: a cutaway with the north side set into an uphill earth berm, a clerestory window above the berm, a retaining wall with waterproofing and a drain pipe, and the soft heated living floor." loading="lazy" width="1536" height="1024">
+    <figcaption><b>AI generated concept, not a surveyed site plan or construction detail.</b> The drainage arrows are schematic, not engineered drain sizing.</figcaption>
+  </figure>
+  <div class="col">
+    <h3>The design</h3>
+    <ul>
+      <li><b>Same house.</b> The compact 20 × 32 ft, 640 sq ft room and the soft heated floor from A-1 don't change.</li>
+      <li><b>Back into the hill.</b> The north service strip (bath, mechanical closet, galley and entry) sits shallowly into a suitable uphill slope. Engineered retaining walls hold the cut, and short side berms wrap the east and west ends.</li>
+      <li><b>Front open to the courtyard.</b> The south glass wall and the shaded courtyard stay at downhill grade, so you still walk straight out onto level ground.</li>
+      <li><b>Roof in the open air.</b> The insulated roof stays exposed above the earth, and a rear clerestory brings daylight in over the berm. The retaining walls take the soil, so no earth bears on the SIP or steel shell. There's no buried shipping container.</li>
+      <li><b>Where it could fit.</b> It may suit the mid-slope bench of <a href="#scheme-C">S-C Courtyard Compound</a>, if the survey and the drainage support it. It's an additional design option. It doesn't change the preferred scheme or the agreed budget.</li>
+    </ul>
+    <div class="proscons">
+      <div><h4>What it could give you</h4><ul>
+        <li>Earth against the north and side walls blocks wind and evens out temperature swings on those walls.</li>
+        <li>A lower profile from uphill, and a courtyard sheltered on three sides.</li>
+        <li>The south glass, the courtyard and the floor plan work as they do in A-1.</li>
+      </ul></div>
+      <div><h4>What it asks of you</h4><ul>
+        <li>Excavation, retaining walls, waterproofing and drainage become extra work, each with its own engineering and inspections.</li>
+        <li>Uphill runoff and desert cloudbursts have to be steered around the house, and water behind the walls carried away.</li>
+        <li>Daylight and fresh air on the back side come only through the clerestory and fans, and the back walls are hard to change later.</li>
+        <li>The cut is grading, so it still has to stay 50 ft clear of every Joshua tree.</li>
+      </ul></div>
+    </div>
+    <div class="callout">
+      <h4>Before you choose it</h4>
+      <p>A geotechnical, civil and structural review must establish a suitable slope, the excavation, the retaining wall design, runoff diversion, external waterproofing and drainage to a lawful outlet, daylight and ventilation, and a safe way out. Price those items separately before selecting this option. Partial earth sheltering is not proof of a lower installed cost, or that the house will be more affordable.</p>
+    </div>
+    <p style="color:var(--ink-2);font-size:.9rem">Background reading: <a href="https://dahp.wa.gov/historic-preservation/historic-buildings/architectural-style-guide/earth-shelter">Earth shelter (Washington State DAHP architectural style guide)</a> · <a href="https://bsesc.energy.gov/energy-basics/foundation-drain-gutters-downspouts">Foundation drains, gutters and downspouts (U.S. DOE Building Science Education)</a></p>
+  </div>
+</section>'''
+
+
 def sections(b):
     E, ul, cid, linkify, digest, research = b.E, b.ul, b.cid, b.linkify, b.digest, b.research
     out = {}
@@ -159,6 +204,8 @@ def sections(b):
     <figcaption>Layer thicknesses are exaggerated so each one shows. More detail in <a href="#topic-house_design">C-1 · The small house</a>.</figcaption>
   </figure>
 </section>'''
+
+    out['HOUSE'] += EARTH_SHELTERED   # A-2: design option for setting the A-1 house partly into the ground
 
     # ------------------------------------------------------------------ bhutan
     bd = digest('bhutan')
