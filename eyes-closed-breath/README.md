@@ -52,6 +52,12 @@ To save power, **Only track breathing while my eyes are closed** (on by default)
 while your eyes are closed, the noise is fading, or in Preview, and the eyes are checked 3 times a second
 (**Eye checks per second** in the Eyes panel).
 
+**Continuous noise** (Noise panel, off by default) keeps the noise playing the whole time tracking runs.
+With your eyes closed the filter follows your breath as usual. With them open, or when your breath isn't
+being tracked (no face, breath lost, or tracking paused to save power), the filter glides down to the low
+cutoff over 2.5 s and rests there, and glides back up when your eyes close. The full-screen picture still
+appears only with your eyes closed.
+
 **Preview with eyes open** (or <kbd>P</kbd>) plays the noise and moves the filter with your breathing while
 the page stays in view, so you can watch the breath graph and adjust the sliders as you listen. The
 full-screen picture only appears when your eyes are really closed. <kbd>H</kbd> shows the readouts on top of

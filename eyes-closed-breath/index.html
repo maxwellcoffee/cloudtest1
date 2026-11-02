@@ -382,6 +382,9 @@ kbd {
       <div class="readout">
         <div class="readout-head"><span class="label">Noise</span><span class="value" id="noiseValue">Silent</span></div>
         <div class="meter" aria-hidden="true"><div class="meter-fill noise" id="noiseFill"></div></div>
+        <div class="setting" id="continuousRow">
+          <p class="hint">The noise keeps playing the whole time. With your eyes closed the filter follows your breath; with them open, or when your breath isn't being tracked, it glides down to the low cutoff and rests there.</p>
+        </div>
       </div>
 
       <div class="readout">
@@ -477,6 +480,7 @@ const TRACK = {
   minSeparation: 0.3,      // how clearly a color method must split shoulder from background (0..1)
   minEdgeColumns: 0.3,     // share of columns that must show a clear outline
   poseEvery: 2,            // run the pose model on every second camera frame
+  gateGlideSec: 2.5,       // continuous noise: time to glide between following the breath and the low cutoff
   ppgScale: 0.003,         // pulse mode: breath units per beat-per-minute of heart-rate swing
   ppgMaxIrregular: 0.15,   // pulse mode: beat-to-beat variation above this means no clear pulse
   rangeRelaxSec: 12,       // how fast the min/max window forgets old extremes
@@ -516,6 +520,7 @@ const DEFAULTS = {
   breathSource: 'motion',
   colorMethod: 'sharp',
   breathOnlyEyesClosed: true,
+  continuousNoise: false,
   eyeHz: 3,
 };
 const fmtHz = v => v >= 1000 ? `${+(v / 1000).toFixed(2)} kHz` : `${Math.round(v)} Hz`;
@@ -608,7 +613,8 @@ addEventListener('load', readTokens);
 document.fonts?.ready.then(readTokens).catch(() => {});
 // How open the filter is for a breath value: 0 at or below the exhale floor, 1 at the top of the breath.
 const filterAmount = b => S.exhaleFloor > 0 ? clamp((b - S.exhaleFloor) / (1 - S.exhaleFloor), 0, 1) : clamp(b, 0, 1);
-const cutoffFor = b => S.cutoffLow * Math.pow(Math.max(S.cutoffHigh, S.cutoffLow + 1) / S.cutoffLow, filterAmount(b));
+const cutoffAt = open => S.cutoffLow * Math.pow(Math.max(S.cutoffHigh, S.cutoffLow + 1) / S.cutoffLow, open);
+const cutoffFor = b => cutoffAt(filterAmount(b));
 
 // =====================================================================
 // Eye closure
@@ -1494,24 +1500,25 @@ function createNoiseEngine() {
     return ctx.resume();
   }
 
-  function update(fade, breath) {
+  // level: 0..1 loudness of the noise; open: 0..1 how far the filter is open (0 = low cutoff).
+  function update(level, open) {
     if (!ctx || !nodes) return;
     const t = ctx.currentTime;
     if (t - lastUpdate < 1 / 40) return;
     lastUpdate = t;
-    const f = cutoffFor(breath);
+    const f = cutoffAt(open);
     nodes.lp1.frequency.setTargetAtTime(f, t, 0.08);
     nodes.lp2.frequency.setTargetAtTime(Math.min(f * 1.5, ctx.sampleRate / 2 - 100), t, 0.08);
     // Resonance: the lowpass Q in Web Audio is the height of the peak in dB. Half of that is taken
     // back off the level so a strong peak doesn't make the whole sound much louder.
     nodes.lp1.Q.setTargetAtTime(S.resonance, t, 0.05);
     const comp = Math.pow(10, -S.resonance / 40);
-    nodes.swell.gain.setTargetAtTime((0.65 + 0.35 * filterAmount(breath)) * comp, t, 0.12);
+    nodes.swell.gain.setTargetAtTime((0.65 + 0.35 * open) * comp, t, 0.12);
     // Linear gain rises quickly in loudness, so the noise is audible as soon as the fade starts.
-    nodes.master.gain.setTargetAtTime(S.volume * fade * 1.4, t, 0.06);
+    nodes.master.gain.setTargetAtTime(S.volume * level * 1.4, t, 0.06);
   }
 
-  return { start, update, get running() { return !!ctx && ctx.state === 'running'; } };
+  return { start, update, get running() { return !!ctx && ctx.state === 'running'; }, get nodes() { return nodes; } };
 }
 
 // =====================================================================
@@ -1814,7 +1821,7 @@ try { noise = createNoiseRenderer(noiseCanvas); } catch (e) { console.error('Noi
 const app = {
   running: false, preview: false, hud: false, armed: false, fade: 0,
   stream: null, faceRes: null, poseRes: null, frameCount: 0, lastPoseT: null, posePending: false, statusMsg: null, statusWarn: false,
-  traceBuf: [], lidHist: [], wakeLock: null, lastFaceT: null, breathPaused: false, stats: { face: 0, body: 0, pose: 0 },
+  traceBuf: [], lidHist: [], wakeLock: null, lastFaceT: null, breathPaused: false, stats: { face: 0, body: 0, pose: 0 }, level: 0, open: 0, gate: 0, gateTarget: false,
 };
 
 const ui = {
@@ -1965,6 +1972,7 @@ function buildControls() {
   for (const s of FILTER_SLIDERS) makeSlider(s, filter);
   for (const s of EYE_SLIDERS) makeSlider(s, $('eyeControls'));
   makeCheck({ key: 'breathOnlyEyesClosed', label: 'Only track breathing while my eyes are closed', prepend: true }, $('breathPowerRow'));
+  makeCheck({ key: 'continuousNoise', label: 'Continuous noise', prepend: true }, $('continuousRow'));
   const srcSel = $('set-breathSource'), methodSel = $('set-colorMethod');
   srcSel.addEventListener('change', () => {
     S.breathSource = srcSel.value; saveSettings(); syncBreathUI();
@@ -2124,6 +2132,30 @@ function updateArming(now, dt) {
   else if (!L.closed && now - L.openSince >= TRACK.openGraceSec) app.armed = false;
   const step = app.armed ? dt / S.fadeInSec : -dt / S.fadeOutSec;
   app.fade = clamp(app.fade + step, 0, 1);
+}
+
+// ---------- Sound level and filter ----------
+// Normally the noise is heard only while it is faded in (eyes closed), and the filter follows the
+// breath. With Continuous noise the sound stays on while tracking runs, and a gate decides whether
+// the filter follows the breath (eyes closed, breath tracked) or glides down to the low cutoff.
+function updateSound(dt) {
+  const breathOpen = filterAmount(breath.st.out);
+  if (!S.continuousNoise) {
+    app.level = app.fade;
+    app.gate = app.fade; // so switching the setting on mid-session starts from where things are
+    app.gateTarget = app.armed;
+    app.open = breathOpen;
+    return;
+  }
+  // Loudness: up over the fade-in time while running, down over the fade-out time when stopped.
+  const want = app.running || app.preview ? 1 : 0;
+  app.level = want ? Math.min(1, app.level + dt / S.fadeInSec) : Math.max(0, app.level - dt / S.fadeOutSec);
+  // Follow the breath only while the eyes are closed (or in Preview) and the breath is tracked.
+  app.gateTarget = (app.armed || app.preview) && breath.st.tracked && !app.breathPaused;
+  const step = dt / TRACK.gateGlideSec;
+  app.gate = app.gateTarget ? Math.min(1, app.gate + step) : Math.max(0, app.gate - step);
+  const eased = app.gate * app.gate * (3 - 2 * app.gate); // gentle at both ends
+  app.open = eased * breathOpen;
 }
 
 // ---------- Drawing ----------
@@ -2299,7 +2331,7 @@ function updateReadouts(now) {
   } else {
     ui.lidRecent.style.width = '0';
   }
-  ui.noiseFill.style.width = `${app.fade * 100}%`;
+  ui.noiseFill.style.width = `${app.level * 100}%`;
 
   if (!app.running) {
     ui.eyesValue.textContent = 'Not tracking';
@@ -2320,9 +2352,15 @@ function updateReadouts(now) {
   else if (app.armed) noiseText = 'Full';
   else if (app.fade > 0) noiseText = `Falling ${Math.round(app.fade * 100)}%`;
   else if (app.running && L.closed) noiseText = `In ${Math.max(0, S.holdSec - closedFor).toFixed(1)} s`;
+  if (S.continuousNoise && (app.running || app.level > 0.01) && !app.preview) {
+    noiseText = app.level < 0.99 && !app.running ? 'Stopping'
+      : app.gate > 0.98 ? 'Following breath'
+      : app.gate < 0.02 ? 'At low cutoff'
+      : app.gateTarget ? 'Opening' : 'Gliding to low cutoff';
+  }
   ui.noiseValue.textContent = noiseText;
 
-  const hz = Math.round(cutoffFor(B.out));
+  const hz = Math.round(cutoffAt(app.open));
   ui.cutoffValue.textContent = fmtHz(hz);
 
   const sum = breath.summary();
@@ -2628,7 +2666,8 @@ function loop() {
 
   breath.tick(now, dt);
   updateArming(now, dt);
-  engine.update(app.fade, breath.st.out);
+  updateSound(dt);
+  engine.update(app.level, app.open);
 
   if (app.running) {
     app.traceBuf.push({ t: now, b: breath.st.out, m: breath.st.fast, tracked: breath.st.tracked });
@@ -2640,14 +2679,14 @@ function loop() {
   // moves, but the page stays in view so you can watch the readouts.
   const shown = app.preview ? 0 : app.fade;
   const visible = shown > 0.001;
-  if (visible && noise) noise.render(now, filterAmount(breath.st.out), S.resonance / 24);
+  if (visible && noise) noise.render(now, app.open, S.resonance / 24);
   const eased = 1 - (1 - shown) * (1 - shown); // ease-out: visible right away, settles gently
   noiseCanvas.style.opacity = visible ? eased.toFixed(3) : '0';
 
   if (shown < 0.999) {
     drawCamera();
     drawTrace(now);
-    ui.bandNow.style.left = `${bandPos(cutoffFor(breath.st.out))}%`;
+    ui.bandNow.style.left = `${bandPos(cutoffAt(app.open))}%`;
   }
   if (now - lastReadoutT > 0.1) { updateReadouts(now); lastReadoutT = now; }
   if (breathLog.open && now - breathLog.lastDraw > 1 / 15) { breathLog.lastDraw = now; drawHistory(); }
