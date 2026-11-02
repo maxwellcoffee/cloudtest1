@@ -210,6 +210,13 @@ button:focus-visible, summary:focus-visible, input:focus-visible {
 .setting output { font: 400 var(--step--1) var(--font-data); font-variant-numeric: tabular-nums; }
 .setting input[type="range"] { grid-column: 1 / -1; width: 100%; margin: 4px 0 0; accent-color: var(--breath); }
 .setting .hint { grid-column: 1 / -1; margin: 0; font-size: var(--step--2); color: var(--muted); }
+.setting select {
+  grid-column: 1 / -1; width: 100%; margin-top: 4px; padding: 8px 10px;
+  font: 400 var(--step--1) var(--font-body); color: var(--fg);
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 6px;
+}
+.setting select:focus-visible { outline: 2px solid var(--breath); outline-offset: 2px; }
+.setting output.warn { color: var(--warn); }
 .check { display: flex; gap: 10px; align-items: center; font-size: var(--step--1); cursor: pointer; }
 .check input { accent-color: var(--breath); width: 16px; height: 16px; }
 .reset-row { grid-column: 1 / -1; }
@@ -302,6 +309,21 @@ kbd {
         <canvas id="breathTrace" aria-label="Breath over the last 30 seconds"></canvas>
         <p class="legend"><span class="key key-measured"></span>Measured <span class="key key-filter"></span>Smoothed, moves the filter</p>
         <p class="note" id="breathNote">Read from how your shoulders rise and fall in the two marked windows. Your head can move freely.</p>
+        <div class="setting">
+          <label for="set-poseModel">Pose model <span class="sub">· finds the shoulders</span></label>
+          <output id="poseInfo" for="set-poseModel"></output>
+          <select id="set-poseModel">
+            <optgroup label="MediaPipe Pose">
+              <option value="mp-full">MediaPipe Full · 9 MB</option>
+              <option value="mp-heavy">MediaPipe Heavy · 31 MB, most accurate</option>
+            </optgroup>
+            <optgroup label="TensorFlow.js MoveNet">
+              <option value="movenet-lightning">MoveNet Lightning · 5 MB, fastest</option>
+              <option value="movenet-thunder">MoveNet Thunder · 13 MB</option>
+            </optgroup>
+          </select>
+          <p class="hint">Only places the shoulder windows, so a steadier model means fewer re-locks. The time per frame shows how hard your computer is working.</p>
+        </div>
       </div>
 
       <div class="readout">
@@ -356,7 +378,6 @@ kbd {
 const MP_VERSION = '0.10.35';
 const MP_URL = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${MP_VERSION}`;
 const FACE_MODEL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
-const POSE_MODEL = 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task';
 
 // ---------- Tracking constants ----------
 const TRACK = {
@@ -381,7 +402,6 @@ const TRACK = {
   outSmoothSec: 0.15,
   breathLostSec: 1.5,
   restingBreath: 0.4,      // where the filter settles when the shoulders are out of view
-  minVisibility: 0.5,
 
   inhaleMark: 0.68,        // sketch 2 counts a breath on an up-swing then a down-swing
   exhaleMark: 0.32,
@@ -404,6 +424,7 @@ const DEFAULTS = {
   cutoffLow: 110,
   cutoffHigh: 900,
   resonance: 1,
+  poseModel: 'mp-full',
   breathSmoothSec: 1.5,
   sensitivity: 5,
   invertBreath: false,
@@ -647,12 +668,10 @@ function createShoulderMotion(videoEl) {
   }
 
   // From the pose model, a few times a second: smoothed shoulder positions in video pixels.
-  function updateShoulders(poseRes, W, H, now, dt) {
-    const pl = poseRes?.landmarks?.[0];
-    if (!pl) return;
-    const a = pl[11], b = pl[12];
-    if (!a || !b || (a.visibility ?? 1) < TRACK.minVisibility || (b.visibility ?? 1) < TRACK.minVisibility) return;
-    const A = { x: a.x * W, y: a.y * H }, B = { x: b.x * W, y: b.y * H };
+  function updateShoulders(pose, minScore, now, dt) {
+    if (!pose) return;
+    const A = pose.ls, B = pose.rs;
+    if (A.score < minScore || B.score < minScore) return;
     const sw = Math.hypot(A.x - B.x, A.y - B.y);
     if (sw < 24) return;
     const k = st.ls ? 1 - Math.exp(-dt / TRACK.shoulderPosSec) : 1;
@@ -944,51 +963,170 @@ function createNoiseRenderer(canvas) {
 // =====================================================================
 // Models
 // =====================================================================
-let modelsPromise = null;
-const models = { face: null, pose: null, poseError: null };
+// The face model is always MediaPipe. The pose model (which only finds the shoulders) can be switched
+// between two libraries, two sizes each. Each pose backend returns both shoulders in video pixels.
+const POSE_MODELS = {
+  'mp-full': { library: 'MediaPipe Pose', name: 'Full', size: '9 MB', kind: 'mediapipe',
+    url: 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task' },
+  'mp-heavy': { library: 'MediaPipe Pose', name: 'Heavy', size: '31 MB', kind: 'mediapipe',
+    url: 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/1/pose_landmarker_heavy.task' },
+  'movenet-lightning': { library: 'TensorFlow.js MoveNet', name: 'Lightning', size: '5 MB', kind: 'movenet', type: 'SINGLEPOSE_LIGHTNING' },
+  'movenet-thunder': { library: 'TensorFlow.js MoveNet', name: 'Thunder', size: '13 MB', kind: 'movenet', type: 'SINGLEPOSE_THUNDER' },
+};
+const TFJS_SCRIPTS = [
+  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js',
+  'https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@2.1.3/dist/pose-detection.min.js',
+];
 
-function ensureModels() {
-  if (!modelsPromise) {
-    modelsPromise = loadModels().catch(err => { modelsPromise = null; throw err; });
+let visionPromise = null, facePromise = null, tfPromise = null;
+const models = { face: null, pose: null, poseId: null, poseLoading: null, poseError: null, poseMs: null };
+
+function ensureVision() {
+  if (!visionPromise) {
+    visionPromise = (async () => {
+      const vision = await import(`${MP_URL}/vision_bundle.mjs`);
+      const fileset = await vision.FilesetResolver.forVisionTasks(`${MP_URL}/wasm`);
+      return { vision, fileset };
+    })().catch(err => { visionPromise = null; throw err; });
   }
-  return modelsPromise;
+  return visionPromise;
 }
 
-async function loadModels() {
-  const vision = await import(`${MP_URL}/vision_bundle.mjs`);
-  const fileset = await vision.FilesetResolver.forVisionTasks(`${MP_URL}/wasm`);
-  const withDelegate = async (Task, options) => {
-    try {
-      return await Task.createFromOptions(fileset, { ...options, baseOptions: { ...options.baseOptions, delegate: 'GPU' } });
-    } catch (e) {
-      console.warn('GPU delegate failed, using CPU', e);
-      return await Task.createFromOptions(fileset, { ...options, baseOptions: { ...options.baseOptions, delegate: 'CPU' } });
-    }
-  };
-  const [face, pose] = await Promise.allSettled([
-    withDelegate(vision.FaceLandmarker, {
-      baseOptions: { modelAssetPath: FACE_MODEL },
-      runningMode: 'VIDEO',
-      numFaces: 1,
-      outputFaceBlendshapes: true,
-      minFaceDetectionConfidence: 0.5,
-      minFacePresenceConfidence: 0.5,
-      minTrackingConfidence: 0.5,
-    }),
-    withDelegate(vision.PoseLandmarker, {
-      baseOptions: { modelAssetPath: POSE_MODEL },
+async function withDelegate(Task, options) {
+  const { fileset } = await ensureVision();
+  try {
+    return await Task.createFromOptions(fileset, { ...options, baseOptions: { ...options.baseOptions, delegate: 'GPU' } });
+  } catch (e) {
+    console.warn('GPU delegate failed, using CPU', e);
+    return await Task.createFromOptions(fileset, { ...options, baseOptions: { ...options.baseOptions, delegate: 'CPU' } });
+  }
+}
+
+function ensureModels() {
+  if (!facePromise) {
+    facePromise = (async () => {
+      const { vision } = await ensureVision();
+      models.face = await withDelegate(vision.FaceLandmarker, {
+        baseOptions: { modelAssetPath: FACE_MODEL },
+        runningMode: 'VIDEO',
+        numFaces: 1,
+        outputFaceBlendshapes: true,
+        minFaceDetectionConfidence: 0.5,
+        minFacePresenceConfidence: 0.5,
+        minTrackingConfidence: 0.5,
+      });
+      return models;
+    })().catch(err => { facePromise = null; throw err; });
+  }
+  return facePromise;
+}
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src; s.async = false; s.crossOrigin = 'anonymous';
+    s.onload = resolve; s.onerror = () => reject(new Error(`Could not load ${src}`));
+    document.head.append(s);
+  });
+}
+
+function ensureTf() {
+  if (!tfPromise) {
+    tfPromise = (async () => {
+      for (const src of TFJS_SCRIPTS) await loadScript(src);
+      await window.tf.setBackend('webgl').catch(() => window.tf.setBackend('cpu'));
+      await window.tf.ready();
+    })().catch(err => { tfPromise = null; throw err; });
+  }
+  return tfPromise;
+}
+
+async function createPoseBackend(id) {
+  const m = POSE_MODELS[id];
+  if (m.kind === 'mediapipe') {
+    const { vision } = await ensureVision();
+    const lm = await withDelegate(vision.PoseLandmarker, {
+      baseOptions: { modelAssetPath: m.url },
       runningMode: 'VIDEO',
       numPoses: 1,
       minPoseDetectionConfidence: 0.5,
       minPosePresenceConfidence: 0.5,
       minTrackingConfidence: 0.5,
-    }),
-  ]);
-  if (face.status === 'rejected') throw face.reason;
-  models.face = face.value;
-  if (pose.status === 'fulfilled') models.pose = pose.value;
-  else { models.poseError = pose.reason; console.error('Pose model failed to load', pose.reason); }
-  return models;
+    });
+    return {
+      id, async: false, minScore: 0.5,
+      detect(videoEl, ts, W, H) {
+        const pl = lm.detectForVideo(videoEl, ts)?.landmarks?.[0];
+        if (!pl) return null;
+        const p = k => ({ x: pl[k].x * W, y: pl[k].y * H, score: pl[k].visibility ?? 1 });
+        return { ls: p(11), rs: p(12) };
+      },
+      close() { try { lm.close(); } catch { /* already closed */ } },
+    };
+  }
+  await ensureTf();
+  const pd = window.poseDetection;
+  const detector = await pd.createDetector(pd.SupportedModels.MoveNet, {
+    modelType: pd.movenet.modelType[m.type],
+    enableSmoothing: true,
+  });
+  return {
+    id, async: true, minScore: 0.3,
+    async detect(videoEl) {
+      const kp = (await detector.estimatePoses(videoEl, { flipHorizontal: false }))?.[0]?.keypoints;
+      if (!kp) return null;
+      const p = k => ({ x: kp[k].x, y: kp[k].y, score: kp[k].score ?? 0 });
+      return { ls: p(5), rs: p(6) };
+    },
+    close() { try { detector.dispose(); } catch { /* already disposed */ } },
+  };
+}
+
+// Loads the chosen pose model and swaps it in when ready; the previous one keeps running meanwhile.
+let poseLoad = null; // { id, promise } while a model is loading
+function switchPose(id) {
+  if (!POSE_MODELS[id]) id = DEFAULTS.poseModel;
+  if (models.poseId === id && models.pose) return Promise.resolve(models.pose);
+  if (poseLoad && poseLoad.id === id) return poseLoad.promise;
+  models.poseError = null;
+  const promise = (async () => {
+    try {
+      const backend = await createPoseBackend(id);
+      if (poseLoad?.id !== id) { backend.close(); return models.pose; } // a later choice won
+      const old = models.pose;
+      models.pose = backend;
+      models.poseId = id;
+      models.poseMs = null;
+      old?.close();
+      motion.reset();
+      breath.reset();
+      return backend;
+    } catch (err) {
+      console.error('Pose model failed to load', err);
+      if (poseLoad?.id === id) models.poseError = id;
+      throw err;
+    } finally {
+      if (poseLoad?.id === id) poseLoad = null;
+      models.poseLoading = poseLoad?.id ?? null;
+      updatePoseInfo();
+    }
+  })();
+  poseLoad = { id, promise };
+  models.poseLoading = id;
+  updatePoseInfo();
+  return promise;
+}
+
+function updatePoseInfo() {
+  const el = $('poseInfo');
+  if (!el) return;
+  const m = POSE_MODELS[models.poseLoading || models.poseId || S.poseModel];
+  if (models.poseLoading) el.textContent = `Loading ${m.name} (${m.size})…`;
+  else if (models.poseError) el.textContent = 'Did not load. Check the connection or pick another.';
+  else if (models.pose && models.poseMs != null) el.textContent = `${Math.round(models.poseMs)} ms per frame`;
+  else if (models.pose) el.textContent = 'Ready';
+  else el.textContent = '';
+  el.classList.toggle('warn', !!models.poseError);
 }
 
 // =====================================================================
@@ -1009,7 +1147,7 @@ try { noise = createNoiseRenderer(noiseCanvas); } catch (e) { console.error('Noi
 
 const app = {
   running: false, preview: false, hud: false, armed: false, fade: 0,
-  stream: null, faceRes: null, poseRes: null, frameCount: 0, lastPoseT: null, statusMsg: null, statusWarn: false,
+  stream: null, faceRes: null, poseRes: null, frameCount: 0, lastPoseT: null, posePending: false, statusMsg: null, statusWarn: false,
   traceBuf: [], lidHist: [], wakeLock: null,
 };
 
@@ -1110,6 +1248,13 @@ function buildControls() {
     refreshControls();
   });
   controls.lidThreshold = { spec: { key: 'lidThreshold', fmt: v => v.toFixed(2) }, input: lidInput, out: $('out-lidThreshold') };
+  const poseSelect = $('set-poseModel');
+  poseSelect.value = POSE_MODELS[S.poseModel] ? S.poseModel : DEFAULTS.poseModel;
+  poseSelect.addEventListener('change', () => {
+    S.poseModel = poseSelect.value;
+    saveSettings();
+    switchPose(S.poseModel).catch(() => { /* shown next to the picker */ });
+  });
   const grid = $('settingsGrid');
   for (const s of SLIDERS) makeSlider(s, grid);
   for (const c of CHECKS) makeCheck(c, grid);
@@ -1117,7 +1262,11 @@ function buildControls() {
   resetRow.className = 'reset-row';
   const reset = document.createElement('button');
   reset.type = 'button'; reset.id = 'resetSettings'; reset.textContent = 'Restore defaults';
-  reset.addEventListener('click', () => { Object.assign(S, DEFAULTS); saveSettings(); refreshControls(); updateStaticCopy(); });
+  reset.addEventListener('click', () => {
+    Object.assign(S, DEFAULTS); saveSettings(); refreshControls(); updateStaticCopy();
+    $('set-poseModel').value = S.poseModel;
+    switchPose(S.poseModel).catch(() => {});
+  });
   resetRow.append(reset);
   grid.append(resetRow);
   refreshControls();
@@ -1149,8 +1298,11 @@ async function begin() {
     await video.play();
     await audioStart;
     ui.cameraEmpty.hidden = true;
+    video.width = video.videoWidth;   // MoveNet reads the element's size attributes
+    video.height = video.videoHeight;
     setStatus('Loading face and pose models…');
     await ensureModels();
+    await switchPose(S.poseModel).catch(() => { /* reported in the Breath panel */ });
     lids.reset();
     breath.reset();
     motion.reset();
@@ -1395,9 +1547,9 @@ function updateReadouts(now) {
   let breathWarn = false;
   if (app.running) {
     if (!models.pose) {
-      ui.breathValue.textContent = 'Off';
-      ui.breathNote.textContent = 'The pose model did not load, so the filter rests in the middle.';
-      breathWarn = true;
+      ui.breathValue.textContent = models.poseLoading ? 'Loading' : 'Off';
+      ui.breathNote.textContent = models.poseLoading ? 'Loading the pose model…' : 'The pose model did not load. Pick another pose model, or check the connection.';
+      breathWarn = !models.poseLoading;
     } else if (!B.tracked) {
       ui.breathValue.textContent = 'Lost';
       ui.breathNote.textContent = motion.st.ls ? 'Hold still for a moment while the shoulder windows settle.' : 'Shoulders not in view. Sit back so both shoulders show.';
@@ -1413,6 +1565,7 @@ function updateReadouts(now) {
     }
   }
   ui.breathNote.classList.toggle('warn', breathWarn);
+  updatePoseInfo();
 
   if (app.running && !app.statusWarn) {
     ui.status.textContent = !L.faceInView ? 'No face in view' : (models.pose && !B.tracked ? 'Face found. Shoulders not in view.' : 'Tracking eyes and breath');
@@ -1452,11 +1605,23 @@ function loop() {
     app.lidHist.push({ t: now, v: lids.st.lid });
     while (app.lidHist.length && app.lidHist[0].t < now - 15) app.lidHist.shift();
     // The pose model only places the shoulder windows, so it can run less often.
-    if (models.pose && app.frameCount++ % TRACK.poseEvery === 0) {
+    const pose = models.pose;
+    if (pose && app.frameCount++ % TRACK.poseEvery === 0 && !app.posePending) {
       const pdt = app.lastPoseT == null ? 1 / 15 : clamp(now - app.lastPoseT, 0.001, 1);
       app.lastPoseT = now;
-      try { app.poseRes = models.pose.detectForVideo(video, ts); } catch (e) { app.poseRes = null; }
-      motion.updateShoulders(app.poseRes, W, H, now, pdt);
+      const t0 = performance.now();
+      const done = r => {
+        const ms = performance.now() - t0;
+        models.poseMs = models.poseMs == null ? ms : models.poseMs * 0.9 + ms * 0.1;
+        if (models.pose === pose) motion.updateShoulders(r, pose.minScore, performance.now() / 1000, pdt);
+      };
+      if (pose.async) {
+        // MoveNet answers asynchronously; skip pose frames until it has.
+        app.posePending = true;
+        pose.detect(video).then(done, () => {}).finally(() => { app.posePending = false; });
+      } else {
+        try { done(pose.detect(video, ts, W, H)); } catch (e) { /* skip this frame */ }
+      }
     }
     breath.update(motion.measure(now, W, H), now, ddt);
   }
@@ -1492,6 +1657,7 @@ updateReadouts(performance.now() / 1000);
 requestAnimationFrame(loop);
 // Start fetching the models right away so Begin is quick. Failures are reported when Begin is pressed.
 ensureModels().catch(err => console.warn('Models not loaded yet', err));
+switchPose(S.poseModel).catch(() => { /* shown in the Breath panel */ });
 
 // ---------- Install as an app ----------
 // The service worker keeps the page and models on this computer, so the installed app also opens offline.
