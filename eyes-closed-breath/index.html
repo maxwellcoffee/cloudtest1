@@ -219,6 +219,7 @@ button:focus-visible, summary:focus-visible, input:focus-visible {
 .setting output.warn { color: var(--warn); }
 .check { display: flex; gap: 10px; align-items: center; font-size: var(--step--1); cursor: pointer; }
 .setting > .check { grid-column: 1 / -1; }
+.note.quality { font-family: var(--font-data); font-size: var(--step--2); }
 .check input { accent-color: var(--breath); width: 16px; height: 16px; }
 .reset-row { grid-column: 1 / -1; }
 .reset-row button { font-size: var(--step--1); padding: 8px 12px; }
@@ -309,8 +310,31 @@ kbd {
         <div class="readout-head"><span class="label">Breath</span><span class="value breath" id="breathValue">Not tracking</span></div>
         <canvas id="breathTrace" aria-label="Breath over the last 30 seconds"></canvas>
         <p class="legend"><span class="key key-measured"></span>Measured <span class="key key-filter"></span>Smoothed, moves the filter</p>
-        <p class="note" id="breathNote">Read from how your shoulders rise and fall in the two marked windows. Your head can move freely.</p>
+        <p class="note" id="breathNote">Press Begin to start tracking.</p>
+        <p class="note quality" id="qualityNote"></p>
         <div class="setting">
+          <label for="set-breathSource">Breath from</label>
+          <select id="set-breathSource">
+            <option value="motion">Shoulder movement (image motion)</option>
+            <option value="outline">Shoulder outline by color</option>
+            <option value="pulse">Pulse in your face (camera PPG, experimental)</option>
+          </select>
+          <p class="hint" id="breathSourceHint"></p>
+        </div>
+        <div class="setting" id="colorMethodRow">
+          <label for="set-colorMethod">Color method <span class="sub">· both shoulders at once</span></label>
+          <select id="set-colorMethod">
+            <option value="rgb">Average colors</option>
+            <option value="opponent">Color, ignoring brightness</option>
+            <option value="hist">Color histograms</option>
+            <option value="gauss">Color spread (Gaussian)</option>
+            <option value="sharp">Sharpest color change</option>
+            <option value="mask">Neural person mask (MediaPipe)</option>
+            <option value="vote">Vote of the five color methods</option>
+          </select>
+          <p class="hint" id="colorMethodHint"></p>
+        </div>
+        <div class="setting" id="poseRow">
           <label for="set-poseModel">Pose model <span class="sub">· finds the shoulders</span></label>
           <output id="poseInfo" for="set-poseModel"></output>
           <select id="set-poseModel">
@@ -324,9 +348,6 @@ kbd {
             </optgroup>
           </select>
           <p class="hint">Only places the shoulder windows, so a steadier model means fewer re-locks. The time per frame shows how hard your computer is working.</p>
-        </div>
-        <div class="setting" id="breathOptions">
-          <p class="hint">On: learns the colors of your shoulders and the background just above them, and follows the outline between them (the dotted line). Off: follows how the picture over each shoulder moves. Color works best when your top or skin stands out from what is behind you.</p>
         </div>
       </div>
 
@@ -400,14 +421,16 @@ const TRACK = {
   minMatch: 0.2,           // match quality (0..1) below this is ignored; unrelated images score about 0
   relockMove: 0.12,        // shoulders moved this far (shoulder widths): place the windows again
   edgeWidth: 0.36,         // color-outline windows, in shoulder widths: this wide around each shoulder point,
-  edgeAbove: 0.3,          //   reaching this far above it (background) ...
-  edgeBelow: 0.15,         //   ... and this far below it (shoulder)
+  edgeAbove: 0.35,         //   reaching this far above it (background) ...
+  edgeBelow: 0.3,          //   ... and this far below it, in case the shoulder point sits too high
   edgeBand: 0.05,          // once found, the outline is searched for within this distance of where it was
   edgeStep: 1.4,           // how cleanly a column must split into background and shoulder (max 2)
   edgeLearnRate: 0.05,     // how quickly the two learned colors follow changes in light
-  minContrast: 28,         // shoulder and background colors must differ at least this much (0..441)
+  minSeparation: 0.3,      // how clearly a color method must split shoulder from background (0..1)
   minEdgeColumns: 0.3,     // share of columns that must show a clear outline
   poseEvery: 2,            // run the pose model on every second camera frame
+  ppgScale: 0.003,         // pulse mode: breath units per beat-per-minute of heart-rate swing
+  ppgMaxIrregular: 0.15,   // pulse mode: beat-to-beat variation above this means no clear pulse
   rangeRelaxSec: 12,       // how fast the min/max window forgets old extremes
   rangeResetSec: 4,        // shoulders gone this long: start the window again
   maxSpan: 0.09,           // window never wider than this (in shoulder widths)
@@ -442,7 +465,8 @@ const DEFAULTS = {
   sensitivity: 5,
   invertBreath: false,
   mirror: true,
-  colorEdge: false,
+  breathSource: 'motion',
+  colorMethod: 'rgb',
 };
 const fmtHz = v => v >= 1000 ? `${+(v / 1000).toFixed(2)} kHz` : `${Math.round(v)} Hz`;
 
@@ -486,6 +510,7 @@ function loadSettings() {
     const raw = localStorage.getItem(STORE_KEY);
     if (raw) {
       const saved = JSON.parse(raw);
+      if (saved.colorEdge && !saved.breathSource) saved.breathSource = 'outline'; // earlier checkbox
       if (!saved.version) {
         // Saved by the first version: drop its slower fade defaults so the quicker ones apply.
         if (saved.holdSec === 1.5) delete saved.holdSec;
@@ -567,7 +592,7 @@ function createBreathTracker() {
   const st = {};
   function reset() {
     Object.assign(st, {
-      level: null, lo: null, hi: null,
+      level: null, lo: null, hi: null, d1: null, d2: null, jit2: null, jitter: null, levels: [], swing: null,
       raw: TRACK.restingBreath, fast: TRACK.restingBreath, s1: TRACK.restingBreath, s2: TRACK.restingBreath,
       out: TRACK.restingBreath, vel: 0,
       lastSeen: -Infinity, tracked: false,
@@ -580,6 +605,15 @@ function createBreathTracker() {
   // d is the shoulder height in shoulder widths, larger = lower.
   function update(sample, now, dt) {
     if (!sample) return;
+    // Steadiness: noise from the second difference of raw samples (slow breathing cancels out),
+    // and the breath's swing over the last 10 s.
+    if (sample.reset) { st.d1 = st.d2 = null; st.levels = []; }
+    if (st.d1 != null && st.d2 != null) {
+      const sd = sample.d - 2 * st.d1 + st.d2;
+      st.jit2 = st.jit2 == null ? sd * sd / 6 : ema(st.jit2, sd * sd / 6, dt, 3);
+      st.jitter = Math.sqrt(st.jit2);
+    }
+    st.d2 = st.d1; st.d1 = sample.d;
     const fresh = sample.reset || st.level == null || now - st.lastSeen > TRACK.rangeResetSec;
     st.level = fresh ? sample.d : ema(st.level, sample.d, dt, TRACK.levelSmoothSec);
     const d = st.level;
@@ -603,6 +637,11 @@ function createBreathTracker() {
     if (S.invertBreath) b = 1 - b;
     st.raw = clamp(b, 0, 1);
     st.lastSeen = now;
+    st.levels.push({ t: now, v: d });
+    while (st.levels[0].t < now - 10) st.levels.shift();
+    let mn = Infinity, mx = -Infinity;
+    for (const q of st.levels) { mn = Math.min(mn, q.v); mx = Math.max(mx, q.v); }
+    st.swing = mx - mn;
   }
 
   // Every animation frame.
@@ -687,7 +726,7 @@ function createShoulderMotion(videoEl) {
 
   function reset() {
     Object.assign(st, { ls: null, rs: null, sw: null, lastPoseAt: -Infinity, rois: null, relock: false, lowSince: null,
-      mode: null, lowReason: null, needReset: false });
+      mode: null, lowReason: null, needReset: false, body: null, edgeShift: 0, sides: 0, oneSince: null, lastPlacedAt: -Infinity });
   }
   reset();
 
@@ -768,10 +807,10 @@ function createShoulderMotion(videoEl) {
   // were when the windows were placed, in shoulder widths (smaller = raised = in-breath), or null
   // when nothing is reliable.
   function measure(now, W, H) {
-    const mode = S.colorEdge ? 'edge' : 'motion';
+    const mode = S.breathSource === 'outline' ? `edge:${S.colorMethod}` : 'motion';
     if (st.mode !== mode) { st.mode = mode; st.rois = null; }
     if (!st.ls || now - st.lastPoseAt > TRACK.breathLostSec) { st.rois = null; return null; }
-    return mode === 'edge' ? measureEdge(now, W, H) : measureMotion(now, W, H);
+    return S.breathSource === 'outline' ? measureEdge(now, W, H, S.colorMethod) : measureMotion(now, W, H);
   }
 
   function windowsDrifted(want) {
@@ -786,12 +825,15 @@ function createShoulderMotion(videoEl) {
     return null;
   }
 
-  // ---- Color outline: find where the shoulder meets the background ----
-  // In each window the app keeps two colors, the background just above the shoulder and the
-  // shoulder itself, learned with a running two-cluster k-means. Every pixel gets a score for how
-  // much more it looks like shoulder than background; down each column, the shoulder top is where
-  // that score first crosses one half, interpolated between rows. A line through those points,
-  // read at a fixed spot, gives the shoulder height.
+  // ---- Color outline: both shoulders measured together ----
+  // A window sits over each shoulder, reaching up into the background. A color method turns every
+  // pixel into a score for how much more it looks like shoulder than background (or, for "Sharpest
+  // color change", finds the steepest change between them). Down each column the outline is the row
+  // that best splits it into background above and shoulder below, refined to a fraction of a row,
+  // and once found it is only searched for near where it was. Every outline point from both
+  // shoulders then votes on one shared shift since the windows were placed (the median), so the two
+  // shoulders are always measured together. The shoulder's own colors are first learned from the
+  // upper chest between the shoulders, which is reliably you even when a shoulder point is off.
   function edgeRois(W, H) {
     const out = [];
     for (const p of [st.ls, st.rs]) {
@@ -809,52 +851,221 @@ function createShoulderMotion(videoEl) {
     return wctx.getImageData(0, 0, r.cols, r.rows).data;
   }
 
-  function meanColor(px, cols, y0, y1) {
-    const m = [0, 0, 0];
+  // The upper chest just below the point between the shoulders, as RGBA pixels.
+  function chestPixels(W, H) {
+    const mx = (st.ls.x + st.rs.x) / 2, my = (st.ls.y + st.rs.y) / 2;
+    const x0 = Math.max(0, mx - st.sw * 0.15), x1 = Math.min(W, mx + st.sw * 0.15);
+    const y0 = Math.max(0, my + st.sw * 0.08), y1 = Math.min(H, my + st.sw * 0.3);
+    if (x1 - x0 < 8 || y1 - y0 < 8) return null;
+    return captureRGB({ x: x0, y: y0, w: x1 - x0, h: y1 - y0, cols: 12, rows: 10 }).slice();
+  }
+
+  // Pixel lists for seeding: the top fifth of each window is background; the chest (or, failing
+  // that, the bottom quarter of the windows) is shoulder.
+  function rowsOf(px, cols, y0, y1) { return px.subarray(y0 * cols * 4, y1 * cols * 4); }
+
+  // --- Feature spaces for the mean-color methods ---
+  const tfRGB = (r, g, b, o) => { o[0] = r; o[1] = g; o[2] = b; };
+  // Opponent colors: two hue axes at full weight, brightness at a third, so shadows matter less.
+  const tfOpp = (r, g, b, o) => { o[0] = (r - g) * 0.7071; o[1] = (r + g - 2 * b) * 0.4082; o[2] = (r + g + b) * 0.1925; };
+
+  function meanOf(pxList, tf) {
+    const f = new Float32Array(3), m = [0, 0, 0];
     let n = 0;
-    for (let y = y0; y < y1; y++) for (let x = 0; x < cols; x++) {
-      const i = (y * cols + x) * 4;
-      m[0] += px[i]; m[1] += px[i + 1]; m[2] += px[i + 2]; n++;
+    for (const px of pxList) for (let j = 0; j < px.length; j += 4) {
+      tf(px[j], px[j + 1], px[j + 2], f); m[0] += f[0]; m[1] += f[1]; m[2] += f[2]; n++;
     }
     return m.map(v => v / Math.max(1, n));
   }
 
-  function newEdgeWindow(r) {
-    const cols = clamp(Math.round(r.w / 4), 12, 48);
-    const rows = clamp(Math.round(r.h / 1.5), 24, 128);
-    const w = { ...r, cols, rows, pts: [], fit: null, ok: false, base: null, contrast: 0 };
-    const px = captureRGB(w);
-    // Seed the two colors: the top fifth of the window is background, the bottom quarter is shoulder.
-    w.bg = meanColor(px, cols, 0, Math.ceil(rows * 0.2));
-    w.body = meanColor(px, cols, Math.floor(rows * 0.75), rows);
-    return w;
+  // One average color per side (k-means with two clusters, kept running).
+  function meanMethod(tf) {
+    const f = new Float32Array(3);
+    return {
+      seed(wins, chest, sm) {
+        for (const w of wins) w.ms[sm.key].bg = meanOf([rowsOf(w.px, w.cols, 0, Math.ceil(w.rows * 0.2))], tf);
+        sm.body = meanOf(chest ? [chest] : wins.map(w => rowsOf(w.px, w.cols, Math.floor(w.rows * 0.75), w.rows)), tf);
+      },
+      newAcc: () => ({ s: [0, 0, 0], n: 0 }),
+      score(w, wm, sm, acc) {
+        const px = w.px, p = new Float32Array(w.cols * w.rows), bg = wm.bg, bd = sm.body, sBg = [0, 0, 0];
+        let nBg = 0;
+        for (let i = 0, j = 0; i < p.length; i++, j += 4) {
+          tf(px[j], px[j + 1], px[j + 2], f);
+          const dB = (f[0] - bg[0]) ** 2 + (f[1] - bg[1]) ** 2 + (f[2] - bg[2]) ** 2;
+          const dF = (f[0] - bd[0]) ** 2 + (f[1] - bd[1]) ** 2 + (f[2] - bd[2]) ** 2;
+          const v = dB / (dB + dF + 1e-6);
+          p[i] = v;
+          if (v < 0.3) { sBg[0] += f[0]; sBg[1] += f[1]; sBg[2] += f[2]; nBg++; }
+          else if (v > 0.7) { acc.s[0] += f[0]; acc.s[1] += f[1]; acc.s[2] += f[2]; acc.n++; }
+        }
+        if (nBg > w.cols) for (let c = 0; c < 3; c++) bg[c] += TRACK.edgeLearnRate * (sBg[c] / nBg - bg[c]);
+        return p;
+      },
+      learn(sm, acc) { if (acc.n > 8) for (let c = 0; c < 3; c++) sm.body[c] += TRACK.edgeLearnRate * (acc.s[c] / acc.n - sm.body[c]); },
+    };
   }
 
-  function measureEdgeWindow(w) {
-    const { cols, rows } = w;
-    const px = captureRGB(w);
-    const p = new Float32Array(cols * rows);
-    const [br, bgn, bb] = w.bg, [fr, fg, fb] = w.body;
-    const sumBg = [0, 0, 0], sumBody = [0, 0, 0];
-    let nBg = 0, nBody = 0;
-    for (let i = 0, j = 0; i < p.length; i++, j += 4) {
-      const r = px[j], g = px[j + 1], b = px[j + 2];
-      const dB = (r - br) ** 2 + (g - bgn) ** 2 + (b - bb) ** 2;
-      const dF = (r - fr) ** 2 + (g - fg) ** 2 + (b - fb) ** 2;
-      const v = dB / (dB + dF + 1e-6); // 0 = background, 1 = shoulder
-      p[i] = v;
-      if (v < 0.3) { sumBg[0] += r; sumBg[1] += g; sumBg[2] += b; nBg++; }
-      else if (v > 0.7) { sumBody[0] += r; sumBody[1] += g; sumBody[2] += b; nBody++; }
-    }
-    // Running k-means step: move each color a little towards the pixels it currently claims.
-    const k = TRACK.edgeLearnRate;
-    if (nBg > cols) for (let c = 0; c < 3; c++) w.bg[c] += k * (sumBg[c] / nBg - w.bg[c]);
-    if (nBody > cols) for (let c = 0; c < 3; c++) w.body[c] += k * (sumBody[c] / nBody - w.body[c]);
-    w.contrast = Math.hypot(w.bg[0] - w.body[0], w.bg[1] - w.body[1], w.bg[2] - w.body[2]);
+  // Color histograms: the whole spread of colors on each side, 10 levels per channel.
+  const HB = 10, HN = HB * HB * HB, binOf = (r, g, b) => ((r * HB) >> 8) * HB * HB + ((g * HB) >> 8) * HB + ((b * HB) >> 8);
+  function histOf(pxList) {
+    const h = new Float32Array(HN).fill(0.5);
+    let n = HN * 0.5;
+    for (const px of pxList) for (let j = 0; j < px.length; j += 4) { h[binOf(px[j], px[j + 1], px[j + 2])] += 1; n += 1; }
+    for (let i = 0; i < HN; i++) h[i] /= n;
+    return h;
+  }
+  const histMethod = {
+    seed(wins, chest, sm) {
+      for (const w of wins) w.ms[sm.key].bg = histOf([rowsOf(w.px, w.cols, 0, Math.ceil(w.rows * 0.2))]);
+      sm.body = histOf(chest ? [chest] : wins.map(w => rowsOf(w.px, w.cols, Math.floor(w.rows * 0.75), w.rows)));
+    },
+    newAcc: () => ({ h: new Float32Array(HN), n: 0 }),
+    score(w, wm, sm, acc) {
+      const px = w.px, p = new Float32Array(w.cols * w.rows), hBg = new Float32Array(HN);
+      let nBg = 0;
+      for (let i = 0, j = 0; i < p.length; i++, j += 4) {
+        const k = binOf(px[j], px[j + 1], px[j + 2]);
+        const v = sm.body[k] / (sm.body[k] + wm.bg[k]);
+        p[i] = v;
+        if (v < 0.25) { hBg[k]++; nBg++; } else if (v > 0.75) { acc.h[k]++; acc.n++; }
+      }
+      if (nBg > w.cols) { const a = TRACK.edgeLearnRate; for (let k = 0; k < HN; k++) wm.bg[k] = (1 - a) * wm.bg[k] + a * (hBg[k] + 0.5 / HN * nBg) / (nBg * 1.5); }
+      return p;
+    },
+    learn(sm, acc) { if (acc.n > 8) { const a = TRACK.edgeLearnRate; for (let k = 0; k < HN; k++) sm.body[k] = (1 - a) * sm.body[k] + a * (acc.h[k] + 0.5 / HN * acc.n) / (acc.n * 1.5); } },
+  };
 
-    // Down each column, the row that best splits it into background above and shoulder below
-    // (a one-step fit). Once an outline is found, the search stays in a narrow band around it so
-    // other edges (stripes, furniture, hair) can't pull it away.
+  // Color spread: each side as a Gaussian (average color plus how it varies), compared by likelihood.
+  function gaussStats(pxList) {
+    const s = [0, 0, 0], ss = [0, 0, 0, 0, 0, 0];
+    let n = 0;
+    for (const px of pxList) for (let j = 0; j < px.length; j += 4) {
+      const r = px[j], g = px[j + 1], b = px[j + 2];
+      s[0] += r; s[1] += g; s[2] += b;
+      ss[0] += r * r; ss[1] += r * g; ss[2] += r * b; ss[3] += g * g; ss[4] += g * b; ss[5] += b * b; n++;
+    }
+    return { s, ss, n };
+  }
+  function gaussModel({ s, ss, n }) {
+    n = Math.max(n, 1);
+    const m = s.map(v => v / n);
+    const reg = 30; // keeps a little spread so a flat area still has a sensible model
+    const c = [ss[0] / n - m[0] * m[0] + reg, ss[1] / n - m[0] * m[1], ss[2] / n - m[0] * m[2],
+               ss[3] / n - m[1] * m[1] + reg, ss[4] / n - m[1] * m[2], ss[5] / n - m[2] * m[2] + reg];
+    return withInverse({ m, c });
+  }
+  function withInverse(g) {
+    const [a, b, c, d, e, f] = g.c; // symmetric [[a b c][b d e][c e f]]
+    const A = d * f - e * e, B = c * e - b * f, C = b * e - c * d;
+    const det = a * A + b * B + c * C;
+    const k = 1 / (det || 1e-6);
+    g.inv = [A * k, B * k, C * k, (a * f - c * c) * k, (b * c - a * e) * k, (a * d - b * b) * k];
+    g.logdet = Math.log(Math.max(det, 1e-6));
+    return g;
+  }
+  function gaussBlend(g, st2, rate) {
+    const t = gaussModel(st2);
+    for (let i = 0; i < 3; i++) g.m[i] += rate * (t.m[i] - g.m[i]);
+    for (let i = 0; i < 6; i++) g.c[i] += rate * (t.c[i] - g.c[i]);
+    withInverse(g);
+  }
+  function gaussLL(g, r, gg, b) {
+    const x = r - g.m[0], y = gg - g.m[1], z = b - g.m[2], I = g.inv;
+    return -0.5 * (I[0] * x * x + I[3] * y * y + I[5] * z * z + 2 * (I[1] * x * y + I[2] * x * z + I[4] * y * z)) - 0.5 * g.logdet;
+  }
+  const gaussMethod = {
+    seed(wins, chest, sm) {
+      for (const w of wins) w.ms[sm.key].bg = gaussModel(gaussStats([rowsOf(w.px, w.cols, 0, Math.ceil(w.rows * 0.2))]));
+      sm.body = gaussModel(gaussStats(chest ? [chest] : wins.map(w => rowsOf(w.px, w.cols, Math.floor(w.rows * 0.75), w.rows))));
+    },
+    newAcc: () => ({ s: [0, 0, 0], ss: [0, 0, 0, 0, 0, 0], n: 0 }),
+    score(w, wm, sm, acc) {
+      const px = w.px, p = new Float32Array(w.cols * w.rows), bgAcc = { s: [0, 0, 0], ss: [0, 0, 0, 0, 0, 0], n: 0 };
+      for (let i = 0, j = 0; i < p.length; i++, j += 4) {
+        const r = px[j], g = px[j + 1], b = px[j + 2];
+        const z = clamp(gaussLL(wm.bg, r, g, b) - gaussLL(sm.body, r, g, b), -30, 30);
+        const v = 1 / (1 + Math.exp(z));
+        p[i] = v;
+        const t = v < 0.2 ? bgAcc : v > 0.8 ? acc : null;
+        if (t) { t.s[0] += r; t.s[1] += g; t.s[2] += b; t.ss[0] += r * r; t.ss[1] += r * g; t.ss[2] += r * b; t.ss[3] += g * g; t.ss[4] += g * b; t.ss[5] += b * b; t.n++; }
+      }
+      if (bgAcc.n > w.cols) gaussBlend(wm.bg, bgAcc, TRACK.edgeLearnRate);
+      return p;
+    },
+    learn(sm, acc) { if (acc.n > 8) gaussBlend(sm.body, acc, TRACK.edgeLearnRate); },
+  };
+
+  // Sharpest color change: per column, the steepest step from the background color towards the
+  // shoulder color (the change projected on the line between the two learned colors).
+  const rgbMethod = meanMethod(tfRGB);
+  const sharpMethod = {
+    seed: rgbMethod.seed, newAcc: rgbMethod.newAcc, score: rgbMethod.score, learn: rgbMethod.learn,
+    points(w, wm, sm, p) {
+      const { cols, rows, px } = w;
+      const dir = [sm.body[0] - wm.bg[0], sm.body[1] - wm.bg[1], sm.body[2] - wm.bg[2]];
+      const len = Math.hypot(...dir) || 1;
+      dir[0] /= len; dir[1] /= len; dir[2] /= len;
+      const L = (x, y) => { const j = (y * cols + x) * 4; return px[j] * dir[0] + px[j + 1] * dir[1] + px[j + 2] * dir[2]; };
+      const pxPerRow = w.h / rows, pxPerCol = w.w / cols;
+      const band = Math.max(3, Math.round(st.sw * TRACK.edgeBand / pxPerRow));
+      const pts = [];
+      const D = new Float32Array(rows - 1);
+      for (let x = 0; x < cols; x++) {
+        const xa = Math.max(0, x - 1), xb = Math.min(cols - 1, x + 1);
+        for (let y = 0; y < rows - 1; y++) D[y] = (L(xa, y + 1) - L(xa, y) + 2 * (L(x, y + 1) - L(x, y)) + L(xb, y + 1) - L(xb, y)) / 4;
+        const xPx = w.x + (x + 0.5) * pxPerCol;
+        let lo = 1, hi = rows - 3;
+        const guess = guessAt(w, wm, x, xPx);
+        if (Number.isFinite(guess)) { const row = Math.round((guess - w.y) / pxPerRow - 1); lo = Math.max(lo, row - band); hi = Math.min(hi, row + band); }
+        let best = -Infinity, by = -1;
+        for (let y = lo; y <= hi; y++) if (D[y] > best) { best = D[y]; by = y; }
+        const sorted = Array.from(D, Math.abs).sort((a, b) => a - b);
+        const typical = sorted[sorted.length >> 1] || 0;
+        if (by < 1 || best < Math.max(6, 4 * typical)) { wm.prev[x] = NaN; continue; }
+        const l = D[by - 1], c = D[by], r = D[by + 1], den = l - 2 * c + r;
+        const off = den < 0 ? clamp(0.5 * (l - r) / den, -0.5, 0.5) : 0;
+        const yPx = w.y + (by + 1 + off) * pxPerRow; // between rows by and by+1
+        wm.prev[x] = yPx;
+        pts.push({ col: x, x: xPx, y: yPx });
+      }
+      return pts;
+    },
+  };
+
+  // Neural person mask: MediaPipe's selfie segmenter scores every pixel as person or not.
+  const maskMethod = {
+    score(w) {
+      const m = st.mask;
+      if (!m) return null;
+      const p = new Float32Array(w.cols * w.rows);
+      const sx = m.w / st.frameW, sy = m.h / st.frameH;
+      for (let y = 0; y < w.rows; y++) {
+        const fy = Math.min(m.h - 1.001, Math.max(0, (w.y + (y + 0.5) * w.h / w.rows) * sy - 0.5));
+        const y0 = Math.floor(fy), ty = fy - y0;
+        for (let x = 0; x < w.cols; x++) {
+          const fx = Math.min(m.w - 1.001, Math.max(0, (w.x + (x + 0.5) * w.w / w.cols) * sx - 0.5));
+          const x0 = Math.floor(fx), tx = fx - x0, i = y0 * m.w + x0;
+          const top = m.data[i] * (1 - tx) + m.data[i + 1] * tx, bot = m.data[i + m.w] * (1 - tx) + m.data[i + m.w + 1] * tx;
+          p[y * w.cols + x] = top * (1 - ty) + bot * ty;
+        }
+      }
+      return p;
+    },
+  };
+
+  const OUTLINE_METHODS = { rgb: rgbMethod, opponent: meanMethod(tfOpp), hist: histMethod, gauss: gaussMethod, sharp: sharpMethod, mask: maskMethod };
+  const OUTLINE_VOTERS = ['rgb', 'opponent', 'hist', 'gauss', 'sharp'];
+
+  // Where to look for a column's outline: last frame's point, else the window's line, else anywhere.
+  function guessAt(w, wm, x, xPx) {
+    if (Number.isFinite(wm.prev[x])) return wm.prev[x];
+    return wm.fit ? wm.fit.a + wm.fit.b * (xPx - w.cx) : NaN;
+  }
+
+  // Outline points from a score map: the best background-above / shoulder-below split per column.
+  function splitPoints(w, wm, p) {
+    const { cols, rows } = w;
     const pxPerRow = w.h / rows, pxPerCol = w.w / cols;
     const band = Math.max(3, Math.round(st.sw * TRACK.edgeBand / pxPerRow));
     const pts = [];
@@ -863,32 +1074,31 @@ function createShoulderMotion(videoEl) {
       for (let y = 0; y < rows; y++) pre[y + 1] = pre[y] + p[y * cols + x];
       const xPx = w.x + (x + 0.5) * pxPerCol;
       let lo = 2, hi = rows - 2;
-      if (w.fit) {
-        const prevRow = Math.round((w.fit.a + w.fit.b * (xPx - w.cx) - w.y) / pxPerRow - 0.5);
-        lo = Math.max(lo, prevRow - band); hi = Math.min(hi, prevRow + band);
-      }
+      const guess = guessAt(w, wm, x, xPx);
+      if (Number.isFinite(guess)) { const row = Math.round((guess - w.y) / pxPerRow - 0.5); lo = Math.max(lo, row - band); hi = Math.min(hi, row + band); }
       let best = -1, bestY = -1, bestBg = 0, bestBody = 0;
       for (let y = lo; y <= hi; y++) {
         const bgness = 1 - pre[y] / y;                       // share of background above
         const bodyness = (pre[rows] - pre[y]) / (rows - y);  // share of shoulder below
         if (bgness + bodyness > best) { best = bgness + bodyness; bestY = y; bestBg = bgness; bestBody = bodyness; }
       }
-      if (bestY < 0 || best < TRACK.edgeStep || bestBg < 0.6 || bestBody < 0.6) continue;
-      // Sub-row position: where the column's score crosses one half next to the best split.
+      if (bestY < 0 || best < TRACK.edgeStep || bestBg < 0.6 || bestBody < 0.6) { wm.prev[x] = NaN; continue; }
       const at = y => p[clamp(y, 0, rows - 1) * cols + x];
       let yy = bestY - 0.5;
       for (const y of [bestY, bestY - 1, bestY + 1, bestY - 2, bestY + 2]) {
         const v0 = at(y - 1), v1 = at(y);
         if (v0 < 0.5 && v1 >= 0.5) { yy = y - 1 + (0.5 - v0) / (v1 - v0); break; }
       }
-      pts.push({ x: xPx, y: w.y + (yy + 0.5) * pxPerRow });
+      const yPx = w.y + (yy + 0.5) * pxPerRow;
+      wm.prev[x] = yPx;
+      pts.push({ col: x, x: xPx, y: yPx });
     }
-    w.pts = pts;
-    w.ok = false;
-    if (w.contrast < TRACK.minContrast) { w.reason = 'contrast'; return null; }
-    if (pts.length < cols * TRACK.minEdgeColumns) { w.reason = 'edges'; return null; }
+    return pts;
+  }
 
-    // Line through the points (x relative to the window's anchor), refitted without outliers.
+  function fitLine(w, wm) {
+    const pts = wm.pts;
+    if (pts.length < 3) return;
     const fit = list => {
       let sx = 0, sy = 0, sxx = 0, sxy = 0;
       for (const q of list) { const dx = q.x - w.cx; sx += dx; sy += q.y; sxx += dx * dx; sxy += dx * q.y; }
@@ -898,35 +1108,98 @@ function createShoulderMotion(videoEl) {
     };
     let f = fit(pts);
     const res = pts.map(q => Math.abs(q.y - (f.a + f.b * (q.x - w.cx))));
-    const mad = [...res].sort((a, b) => a - b)[Math.floor(res.length / 2)] || 0;
+    const mad = [...res].sort((a, b) => a - b)[res.length >> 1] || 0;
     const kept = pts.filter((q, i) => res[i] <= Math.max(1.5, 3 * mad));
     if (kept.length >= 3) f = fit(kept);
-    w.fit = f;
-    w.ok = true;
-    return f.a; // the outline's height at the anchor, in video pixels
+    wm.fit = f;
   }
 
-  function measureEdge(now, W, H) {
+  // How clearly a score map separates the two sides: 0 = not at all, 1 = every pixel is sure.
+  function separation(p) {
+    let s = 0;
+    for (let i = 0; i < p.length; i++) s += Math.abs(2 * p[i] - 1);
+    return s / p.length;
+  }
+
+  const median = a => { const b = [...a].sort((x, y) => x - y), m = b.length >> 1; return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2; };
+
+  function measureEdge(now, W, H, method) {
+    st.frameW = W; st.frameH = H;
     const want = edgeRois(W, H);
     if (want.length === 0) { st.rois = null; return null; }
+    const keys = method === 'vote' ? OUTLINE_VOTERS : [OUTLINE_METHODS[method] ? method : 'rgb'];
     if (!st.rois || windowsDrifted(want) || st.relock) {
-      st.rois = want.map(newEdgeWindow);
+      st.rois = want.map(r => {
+        const cols = clamp(Math.round(r.w / 4), 12, 48), rows = clamp(Math.round(r.h / 1.5), 24, 128);
+        const w = { ...r, cols, rows, ms: {} };
+        w.px = captureRGB(w).slice();
+        return w;
+      });
+      const chest = chestPixels(W, H);
+      st.ms = {};
+      for (const k of keys) {
+        st.ms[k] = { key: k, shift: 0 };
+        for (const w of st.rois) w.ms[k] = { base: new Float32Array(w.cols).fill(NaN), prev: new Float32Array(w.cols).fill(NaN), fit: null, pts: [], ok: false };
+        OUTLINE_METHODS[k].seed?.(st.rois, chest, st.ms[k]);
+      }
       st.relock = false;
       st.lowSince = null;
+      st.lastPlacedAt = now;
       st.needReset = true; // the breath range starts again from the new windows
+    } else {
+      for (const w of st.rois) w.px = captureRGB(w).slice();
     }
-    let sum = 0, n = 0, reason = null;
-    for (const w of st.rois) {
-      const y = measureEdgeWindow(w);
-      if (y == null) { reason = w.reason; continue; }
-      if (w.base == null) w.base = y; // heights are measured from where each outline started
-      sum += y - w.base; n++;
+
+    const shifts = [];
+    let sides = 0, reason = null, points = 0;
+    for (const k of keys) {
+      const M = OUTLINE_METHODS[k], sm = st.ms[k];
+      const acc = M.newAcc ? M.newAcc() : null;
+      for (const w of st.rois) {
+        const wm = w.ms[k];
+        const p = M.score(w, wm, sm, acc);
+        if (!p) { wm.ok = false; wm.pts = []; wm.reason = 'loading'; continue; }
+        wm.pts = M.points ? M.points(w, wm, sm, p) : splitPoints(w, wm, p);
+        wm.sep = separation(p);
+        wm.ok = wm.sep >= TRACK.minSeparation && wm.pts.length >= w.cols * TRACK.minEdgeColumns;
+        wm.reason = wm.sep < TRACK.minSeparation ? 'contrast' : 'edges';
+        fitLine(w, wm);
+      }
+      if (acc) M.learn(sm, acc);
+      const ok = st.rois.filter(w => w.ms[k].ok);
+      if (ok.length === 0) { reason = reason || st.rois[0].ms[k].reason; continue; }
+      sides = Math.max(sides, ok.length);
+      // Every outline point from both shoulders: how far it moved since its column was first seen.
+      const deltas = [];
+      for (const w of ok) {
+        const wm = w.ms[k];
+        for (const q of wm.pts) {
+          if (!Number.isFinite(wm.base[q.col])) wm.base[q.col] = q.y - sm.shift;
+          deltas.push(q.y - wm.base[q.col]);
+        }
+        points += wm.pts.length;
+      }
+      sm.shift = median(deltas);
+      shifts.push(sm.shift);
     }
-    if (n === 0) return lowConfidence(now, reason);
-    st.lowSince = null; st.lowReason = null;
+    st.sides = sides;
+    st.points = points;
+    if (shifts.length === 0) return lowConfidence(now, reason);
+
+    // Both shoulders are wanted. If only one has been found for a second, place both windows again
+    // (at most every 5 s) so the other one is picked up.
+    if (sides < 2 || st.rois.length < 2) {
+      if (st.oneSince == null) st.oneSince = now;
+      if (now - st.oneSince > 1 && now - st.lastPlacedAt > 5) { st.relock = true; st.oneSince = null; }
+      st.lowReason = 'one-side';
+    } else {
+      st.oneSince = null;
+      st.lowReason = null;
+    }
+    st.lowSince = null;
     const reset = st.needReset;
     st.needReset = false;
-    return { d: (sum / n) / st.sw, reset };
+    return { d: median(shifts) / st.sw, reset };
   }
 
   // ---- Image motion: how far the picture in each window moved against a reference frame ----
@@ -952,7 +1225,145 @@ function createShoulderMotion(videoEl) {
     return { d: (sum / wsum) / st.sw, reset: false };
   }
 
-  return { st, updateShoulders, measure, reset };
+  function relock() { st.rois = null; }
+
+  return { st, updateShoulders, measure, reset, relock };
+}
+
+// =====================================================================
+// Pulse breath (camera PPG, experimental)
+// The skin of the forehead and cheeks changes color very slightly with every heartbeat as blood
+// fills the small vessels. The face model says where that skin is; its average color, frame by
+// frame, goes through the POS method (Wang et al., 2017), which separates the pulse from changes
+// in lighting. Beats are the peaks of that pulse, and the time between beats gives the heart rate.
+// Heart rate rises as you breathe in and falls as you breathe out (respiratory sinus arrhythmia),
+// so the slow swing of the heart rate is used as the breath. It lags the breath by a beat or two.
+// =====================================================================
+function createPulseBreath(videoEl) {
+  const work = document.createElement('canvas');
+  work.width = 16; work.height = 16;
+  const wctx = work.getContext('2d', { willReadFrequently: true });
+  const st = {};
+
+  function biquad(type, f0, fs) {
+    const w0 = 2 * Math.PI * f0 / fs, c = Math.cos(w0), al = Math.sin(w0) / (2 * Math.SQRT1_2), a0 = 1 + al;
+    const b = type === 'lp' ? [(1 - c) / 2, 1 - c, (1 - c) / 2] : [(1 + c) / 2, -(1 + c), (1 + c) / 2];
+    return { b0: b[0] / a0, b1: b[1] / a0, b2: b[2] / a0, a1: -2 * c / a0, a2: (1 - al) / a0, x1: 0, x2: 0, y1: 0, y2: 0 };
+  }
+  const runF = (f, x) => {
+    const y = f.b0 * x + f.b1 * f.x1 + f.b2 * f.x2 - f.a1 * f.y1 - f.a2 * f.y2;
+    f.x2 = f.x1; f.x1 = x; f.y2 = f.y1; f.y1 = y;
+    return y;
+  };
+  // Pulse band, 0.7-3 Hz (42-180 beats per minute): a high-pass and a low-pass in a row.
+  const bandPass = fs => [biquad('hp', 0.7, fs), biquad('lp', 3.0, fs)];
+  const runBand = (fs, x) => runF(fs[1], runF(fs[0], x));
+
+  function reset() {
+    Object.assign(st, {
+      rois: [], fs: 30, filtFs: 0, f1: null, f2: null, mean: null, v1: 0, v2: 0,
+      hist: [], amp: 0, lastPeakT: null, ibis: [], hrNow: null, hrFast: null, hrSlow: null,
+      bpm: null, regularity: null, lastBeatAt: -Infinity, lastGoodBeatAt: -Infinity, started: false, face: false,
+    });
+  }
+  reset();
+
+  function skinRois(fl, W, H) {
+    const P = i => ({ x: fl[i].x * W, y: fl[i].y * H });
+    const a = P(33), b = P(263);
+    const E = Math.hypot(a.x - b.x, a.y - b.y); // distance between the outer eye corners
+    if (E < 20) return [];
+    const box = (c, w, h) => {
+      const x0 = Math.max(0, c.x - w / 2), y0 = Math.max(0, c.y - h / 2);
+      return { x: x0, y: y0, w: Math.min(W, c.x + w / 2) - x0, h: Math.min(H, c.y + h / 2) - y0 };
+    };
+    // Forehead, and the two cheeks below the eyes.
+    return [box(P(151), E * 0.7, E * 0.28), box(P(205), E * 0.3, E * 0.3), box(P(425), E * 0.3, E * 0.3)]
+      .filter(r => r.w > 4 && r.h > 4);
+  }
+
+  function meanRGB(rois) {
+    let R = 0, G = 0, B = 0, n = 0;
+    for (const r of rois) {
+      const cols = 12, rows = clamp(Math.round(12 * r.h / r.w), 4, 16);
+      wctx.drawImage(videoEl, r.x, r.y, r.w, r.h, 0, 0, cols, rows);
+      const px = wctx.getImageData(0, 0, cols, rows).data;
+      for (let j = 0; j < px.length; j += 4) { R += px[j]; G += px[j + 1]; B += px[j + 2]; n++; }
+    }
+    return n ? [R / n, G / n, B / n] : null;
+  }
+
+  // Every camera frame. Returns { d, reset } (d: minus the heart-rate swing, scaled), or null.
+  function update(faceRes, W, H, now, dt) {
+    const fl = faceRes?.faceLandmarks?.[0];
+    st.face = !!fl;
+    if (!fl) return null;
+    st.rois = skinRois(fl, W, H);
+    const c = meanRGB(st.rois);
+    if (!c) return null;
+
+    st.fs = ema(st.fs, 1 / Math.max(dt, 1e-3), dt, 2);
+    if (!st.f1 || Math.abs(st.fs - st.filtFs) / st.filtFs > 0.15) {
+      st.filtFs = st.fs; st.f1 = bandPass(st.fs); st.f2 = bandPass(st.fs);
+    }
+
+    // POS: normalise each channel by its recent average, then project onto two axes that are
+    // insensitive to brightness changes, and mix them so lighting flicker cancels out.
+    st.mean = st.mean ? st.mean.map((m, i) => ema(m, c[i], dt, 1.6)) : c.slice();
+    const n = c.map((v, i) => v / st.mean[i]);
+    const s1 = runBand(st.f1, n[1] - n[2]);
+    const s2 = runBand(st.f2, n[1] + n[2] - 2 * n[0]);
+    st.v1 = ema(st.v1, s1 * s1, dt, 1.6);
+    st.v2 = ema(st.v2, s2 * s2, dt, 1.6);
+    const h = s1 + Math.sqrt(st.v1 / (st.v2 + 1e-12)) * s2;
+
+    // Beats: local maxima above the running level, at least 0.33 s apart, timed between frames.
+    st.amp = ema(st.amp, Math.abs(h), dt, 2);
+    st.hist.push({ t: now, v: h });
+    if (st.hist.length > 3) st.hist.shift();
+    if (st.hist.length === 3) {
+      const [a, b, cc] = st.hist;
+      if (b.v > a.v && b.v >= cc.v && b.v > 0.8 * st.amp && (st.lastPeakT == null || b.t - st.lastPeakT > 0.33)) {
+        const den = a.v - 2 * b.v + cc.v;
+        const off = den < 0 ? clamp(0.5 * (a.v - cc.v) / den, -0.5, 0.5) : 0;
+        const tp = b.t + off * (cc.t - a.t) / 2;
+        beat(tp);
+      }
+    }
+
+    // The heart rate, smoothed over about one beat, against its slow average: the breathing swing.
+    // No steady pulse yet, or the beats are too irregular to be a real pulse (noise finds 'beats' too).
+    if (st.hrNow == null || now - st.lastGoodBeatAt > 4 || st.regularity > TRACK.ppgMaxIrregular) return null;
+    st.hrFast = st.hrFast == null ? st.hrNow : ema(st.hrFast, st.hrNow, dt, 0.6);
+    st.hrSlow = st.hrSlow == null ? st.hrNow : ema(st.hrSlow, st.hrNow, dt, 8);
+    const reset = !st.started;
+    st.started = true;
+    return { d: -(st.hrFast - st.hrSlow) * TRACK.ppgScale, reset };
+  }
+
+  function beat(tp) {
+    st.lastBeatAt = tp;
+    if (st.lastPeakT != null) {
+      const ibi = tp - st.lastPeakT;
+      const med = st.ibis.length >= 3 ? [...st.ibis].sort((x, y) => x - y)[st.ibis.length >> 1] : null;
+      if (ibi > 0.33 && ibi < 1.5 && (med == null || Math.abs(ibi - med) / med < 0.3)) {
+        st.ibis.push(ibi);
+        if (st.ibis.length > 12) st.ibis.shift();
+        if (st.ibis.length >= 4) {
+          st.hrNow = 60 / ibi;
+          st.lastGoodBeatAt = tp;
+          const m = st.ibis.reduce((x, y) => x + y, 0) / st.ibis.length;
+          st.bpm = 60 / m;
+          st.regularity = Math.sqrt(st.ibis.reduce((x, y) => x + (y - m) ** 2, 0) / st.ibis.length) / m;
+        }
+      } else if (ibi >= 1.5) {
+        st.ibis.length = 0; // a long gap: start counting again
+      }
+    }
+    st.lastPeakT = tp;
+  }
+
+  return { st, update, reset };
 }
 
 // =====================================================================
@@ -1322,6 +1733,7 @@ const noiseCanvas = $('noise');
 const lids = createLidTracker();
 const breath = createBreathTracker();
 const motion = createShoulderMotion(video);
+const pulse = createPulseBreath(video);
 const engine = createNoiseEngine();
 let noise = null;
 try { noise = createNoiseRenderer(noiseCanvas); } catch (e) { console.error('Noise shader failed', e); }
@@ -1338,7 +1750,7 @@ const ui = {
   breathValue: $('breathValue'), breathNote: $('breathNote'),
   noiseValue: $('noiseValue'), noiseFill: $('noiseFill'),
   cutoffValue: $('cutoffValue'), bandRange: $('bandRange'), bandNow: $('bandNow'),
-  hud: $('hud'), previewHint: $('previewHint'),
+  hud: $('hud'), previewHint: $('previewHint'), qualityNote: $('qualityNote'),
 };
 
 function setStatus(msg, warn = false) {
@@ -1417,12 +1829,80 @@ function refreshControls(dragging = null) {
   }
 }
 
+const SOURCE_HINTS = {
+  motion: 'Follows how the picture over each shoulder moves up and down. Steady, and needs no particular colors.',
+  outline: 'Finds the outline where both shoulders meet the background and follows it (the dotted line). Pick a color method below.',
+  pulse: 'Reads your pulse from tiny color changes in the skin of your face (the boxes), then follows how your heart rate rises as you breathe in and falls as you breathe out. Needs your face still and evenly lit, and lags your breath by a second or two.',
+};
+const METHOD_HINTS = {
+  rgb: 'One learned color for the background and one for you. Simple and steady.',
+  opponent: 'Compares hue more than brightness, so shadows, camera exposure changes and lamp flicker move it less.',
+  hist: 'Learns the whole mix of colors on each side, for patterned backgrounds or clothes.',
+  gauss: 'Learns each side’s color and how much it varies, so shading on skin or fabric still counts as you.',
+  sharp: 'Finds the steepest change from background color to shoulder color in each column, to a fraction of a pixel. Precise when the outline is crisp.',
+  mask: 'A small neural network trained to separate people from backgrounds draws the outline; it ignores color. Downloads 250 KB.',
+  vote: 'Runs the five color methods together and takes the middle answer, so one method’s mistake is outvoted.',
+};
+
+function syncBreathUI() {
+  $('set-breathSource').value = S.breathSource;
+  $('set-colorMethod').value = S.colorMethod;
+  $('colorMethodRow').hidden = S.breathSource !== 'outline';
+  $('poseRow').hidden = S.breathSource === 'pulse';
+  $('breathSourceHint').textContent = SOURCE_HINTS[S.breathSource] || '';
+  $('colorMethodHint').textContent = METHOD_HINTS[S.colorMethod] || '';
+}
+
+// A live measure of how steady the breath signal is, to compare sources and color methods.
+function qualityText() {
+  const B = breath.st;
+  if (S.breathSource === 'pulse') {
+    const P = pulse.st;
+    if (!P.bpm) return 'Pulse: not found yet';
+    if (P.regularity > TRACK.ppgMaxIrregular) return `Pulse unclear: beats vary ±${Math.round(P.regularity * 100)}%`;
+    const swing = B.swing != null ? ` · heart-rate swing ${(B.swing / TRACK.ppgScale).toFixed(1)} bpm` : '';
+    return `Pulse ${Math.round(P.bpm)} bpm · beat-to-beat ±${Math.round((P.regularity || 0) * 100)}%${swing}`;
+  }
+  const sw = motion.st.sw;
+  if (!sw || B.jitter == null) return '';
+  const parts = [`Jitter ${(B.jitter * sw).toFixed(2)} px`];
+  if (B.swing != null) parts.push(`breath swing ${(B.swing * sw).toFixed(1)} px`);
+  if (S.breathSource === 'outline') parts.push(`${motion.st.sides || 0} of 2 shoulders, ${motion.st.points || 0} outline points`);
+  return parts.join(' · ');
+}
+
+let segPromise = null;
+const SEG_MODEL = 'https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/1/selfie_segmenter.tflite';
+function ensureSegmenter() {
+  if (!segPromise) {
+    segPromise = (async () => {
+      const { vision } = await ensureVision();
+      models.seg = await withDelegate(vision.ImageSegmenter, {
+        baseOptions: { modelAssetPath: SEG_MODEL },
+        runningMode: 'VIDEO',
+        outputConfidenceMasks: true,
+        outputCategoryMask: false,
+      });
+    })().catch(err => { segPromise = null; console.error('Person mask model failed to load', err); throw err; });
+  }
+  return segPromise;
+}
+
 function buildControls() {
   const filter = $('filterControls');
   for (const s of FILTER_SLIDERS) makeSlider(s, filter);
   for (const s of EYE_SLIDERS) makeSlider(s, $('eyeControls'));
-  makeCheck({ key: 'colorEdge', label: 'Track the shoulder outline by color', prepend: true,
-    onChange: () => breath.reset() }, $('breathOptions'));
+  const srcSel = $('set-breathSource'), methodSel = $('set-colorMethod');
+  srcSel.addEventListener('change', () => {
+    S.breathSource = srcSel.value; saveSettings(); syncBreathUI();
+    breath.reset(); pulse.reset(); motion.relock();
+    if (S.breathSource === 'outline' && S.colorMethod === 'mask') ensureSegmenter().catch(() => {});
+  });
+  methodSel.addEventListener('change', () => {
+    S.colorMethod = methodSel.value; saveSettings(); syncBreathUI();
+    breath.reset(); motion.relock();
+    if (S.colorMethod === 'mask') ensureSegmenter().catch(() => {});
+  });
   // The closed threshold is the marker on the live eye bar, so it sits on the same 0..1 scale.
   const lidInput = $('set-lidThreshold');
   lidInput.addEventListener('input', () => {
@@ -1449,10 +1929,13 @@ function buildControls() {
     Object.assign(S, DEFAULTS); saveSettings(); refreshControls(); updateStaticCopy();
     $('set-poseModel').value = S.poseModel;
     switchPose(S.poseModel).catch(() => {});
+    syncBreathUI(); breath.reset(); motion.relock();
   });
   resetRow.append(reset);
   grid.append(resetRow);
   refreshControls();
+  syncBreathUI();
+  if (S.breathSource === 'outline' && S.colorMethod === 'mask') ensureSegmenter().catch(() => {});
 }
 
 const bandPos = hz => clamp(Math.log(hz / LOG_MIN) / Math.log(LOG_MAX / LOG_MIN), 0, 1) * 100;
@@ -1489,6 +1972,7 @@ async function begin() {
     lids.reset();
     breath.reset();
     motion.reset();
+    pulse.reset();
     app.traceBuf.length = 0;
     app.lidHist.length = 0;
     app.running = true;
@@ -1603,15 +2087,28 @@ function drawCamera() {
   // Shoulder points from the pose model (faint), and the two windows the breath is read from.
   const M = motion.st;
   const px = x => (S.mirror ? W - x : x);
-  if (M.ls && M.rs) {
+  if (M.ls && M.rs && S.breathSource !== 'pulse') {
     cam.globalAlpha = 0.45; cam.strokeStyle = COLORS.fg; cam.fillStyle = COLORS.fg; cam.lineWidth = lw;
     cam.beginPath(); cam.moveTo(px(M.ls.x), M.ls.y); cam.lineTo(px(M.rs.x), M.rs.y); cam.stroke();
     for (const p of [M.ls, M.rs]) { cam.beginPath(); cam.arc(px(p.x), p.y, lw * 2, 0, Math.PI * 2); cam.fill(); }
     cam.globalAlpha = 1;
   }
-  if (M.rois) {
+  if (S.breathSource === 'pulse') {
+    const since = performance.now() / 1000 - pulse.st.lastBeatAt;
+    cam.strokeStyle = COLORS.breath;
+    cam.lineWidth = lw;
+    cam.globalAlpha = 0.45 + 0.55 * Math.exp(-since * 5); // brightens on each detected beat
+    for (const r of pulse.st.rois) {
+      const x0 = S.mirror ? W - (r.x + r.w) : r.x;
+      cam.strokeRect(x0, r.y, r.w, r.h);
+    }
+    cam.globalAlpha = 1;
+  }
+  if (M.rois && S.breathSource !== 'pulse') {
     for (const r of M.rois) {
-      const good = M.mode === 'edge' ? r.ok : r.score >= TRACK.minMatch;
+      const edgeMode = !!M.mode?.startsWith('edge') && !!r.ms;
+      const wms = edgeMode ? Object.values(r.ms) : [];
+      const good = edgeMode ? wms.some(m => m.ok) : r.score >= TRACK.minMatch;
       const x0 = S.mirror ? W - (r.x + r.w) : r.x;
       cam.strokeStyle = good ? COLORS.breath : COLORS.muted;
       cam.lineWidth = lw;
@@ -1621,15 +2118,21 @@ function drawCamera() {
         cam.moveTo(ax + sx * c, ay); cam.lineTo(ax, ay); cam.lineTo(ax, ay + sy * c);
       }
       cam.stroke();
-      if (M.mode === 'edge') {
-        // The outline points found in each column, and the line fitted through them.
-        cam.fillStyle = good ? COLORS.breath : COLORS.muted;
-        for (const q of r.pts) { cam.beginPath(); cam.arc(px(q.x), q.y, lw * 0.9, 0, Math.PI * 2); cam.fill(); }
-        if (r.fit && good) {
-          const yAt = x => r.fit.a + r.fit.b * (x - r.cx);
-          cam.lineWidth = lw * 1.5;
-          cam.beginPath(); cam.moveTo(px(r.x), yAt(r.x)); cam.lineTo(px(r.x + r.w), yAt(r.x + r.w)); cam.stroke();
+      if (edgeMode) {
+        // The outline points found in each column, and (for one method) the line fitted through them.
+        // In Vote mode every method's points are drawn faintly.
+        const single = wms.length === 1;
+        for (const wm of wms) {
+          cam.fillStyle = wm.ok ? COLORS.breath : COLORS.muted;
+          cam.globalAlpha = single ? 1 : 0.5;
+          for (const q of wm.pts) { cam.beginPath(); cam.arc(px(q.x), q.y, lw * 0.9, 0, Math.PI * 2); cam.fill(); }
+          if (single && wm.fit && wm.ok) {
+            const yAt = x => wm.fit.a + wm.fit.b * (x - r.cx);
+            cam.lineWidth = lw * 1.5;
+            cam.beginPath(); cam.moveTo(px(r.x), yAt(r.x)); cam.lineTo(px(r.x + r.w), yAt(r.x + r.w)); cam.stroke();
+          }
         }
+        cam.globalAlpha = 1;
       } else {
         // A level line that moves with the measured shift, exaggerated four times so it is visible.
         const yLine = r.y + r.h / 2 + (r.shift || 0) * r.ref.pxPerRow * 4;
@@ -1751,20 +2254,26 @@ function updateReadouts(now) {
   const sum = breath.summary();
   let breathWarn = false;
   if (app.running) {
-    if (!models.pose) {
+    if (S.breathSource !== 'pulse' && !models.pose) {
       ui.breathValue.textContent = models.poseLoading ? 'Loading' : 'Off';
       ui.breathNote.textContent = models.poseLoading ? 'Loading the pose model…' : 'The pose model did not load. Pick another pose model, or check the connection.';
       breathWarn = !models.poseLoading;
     } else if (!B.tracked) {
       ui.breathValue.textContent = 'Lost';
-      ui.breathNote.textContent = !motion.st.ls ? 'Shoulders not in view. Sit back so both shoulders show.'
-        : motion.st.lowReason === 'contrast' ? 'Your shoulders and the background look too alike. Try more light, or turn off color tracking.'
-        : motion.st.lowReason === 'edges' ? 'No clear shoulder outline in the windows. Try more light, or turn off color tracking.'
+      ui.breathNote.textContent = S.breathSource === 'pulse'
+        ? (pulse.st.face ? 'Looking for your pulse. Keep your face still and evenly lit; it takes about 10 seconds to lock on.' : 'No face in view.')
+        : S.breathSource === 'outline' && S.colorMethod === 'mask' && !models.seg ? 'Loading the person mask model…'
+        : !motion.st.ls ? 'Shoulders not in view. Sit back so both shoulders show.'
+        : motion.st.lowReason === 'contrast' ? 'This color method can’t tell your shoulders from the background. Try another method or more light.'
+        : motion.st.lowReason === 'edges' ? 'No clear shoulder outline in the windows. Try another color method or more light.'
         : 'Hold still for a moment while the shoulder windows settle.';
       breathWarn = true;
     } else {
       ui.breathValue.textContent = B.vel > 0.03 ? 'In' : B.vel < -0.03 ? 'Out' : 'Still';
-      if (sum) {
+      if (S.breathSource === 'outline' && motion.st.lowReason === 'one-side') {
+        ui.breathNote.textContent = 'Only one shoulder outline found. Placing the windows again to find the other; make sure both shoulders are in view.';
+        breathWarn = true;
+      } else if (sum) {
         const v = sum.variation != null ? ` · varies ±${Math.round(sum.variation)}%` : '';
         ui.breathNote.textContent = `${sum.avg.toFixed(1)} s per breath · ${sum.perMin.toFixed(1)} per minute${v}`;
       } else {
@@ -1774,6 +2283,7 @@ function updateReadouts(now) {
   }
   ui.breathNote.classList.toggle('warn', breathWarn);
   updatePoseInfo();
+  ui.qualityNote.textContent = app.running ? qualityText() : '';
 
   if (app.running && !app.statusWarn) {
     ui.status.textContent = !L.faceInView ? 'No face in view' : (models.pose && !B.tracked ? 'Face found. Shoulders not in view.' : 'Tracking eyes and breath');
@@ -1813,7 +2323,7 @@ function loop() {
     app.lidHist.push({ t: now, v: lids.st.lid });
     while (app.lidHist.length && app.lidHist[0].t < now - 15) app.lidHist.shift();
     // The pose model only places the shoulder windows, so it can run less often.
-    const pose = models.pose;
+    const pose = S.breathSource === 'pulse' ? null : models.pose; // pulse mode doesn't need the shoulders
     if (pose && app.frameCount++ % TRACK.poseEvery === 0 && !app.posePending) {
       const pdt = app.lastPoseT == null ? 1 / 15 : clamp(now - app.lastPoseT, 0.001, 1);
       app.lastPoseT = now;
@@ -1831,7 +2341,18 @@ function loop() {
         try { done(pose.detect(video, ts, W, H)); } catch (e) { /* skip this frame */ }
       }
     }
-    breath.update(motion.measure(now, W, H), now, ddt);
+    if (S.breathSource === 'outline' && S.colorMethod === 'mask' && models.seg) {
+      try {
+        models.seg.segmentForVideo(video, ts, res => {
+          const masks = res.confidenceMasks;
+          if (!masks?.length) return;
+          const m = masks[masks.length > 1 ? 1 : 0]; // the person channel
+          motion.st.mask = { data: m.getAsFloat32Array().slice(), w: m.width, h: m.height };
+        });
+      } catch (e) { /* skip this frame */ }
+    }
+    const sample = S.breathSource === 'pulse' ? pulse.update(app.faceRes, W, H, now, ddt) : motion.measure(now, W, H);
+    breath.update(sample, now, ddt);
   }
 
   breath.tick(now, dt);
@@ -1898,7 +2419,7 @@ installBtn.addEventListener('click', async () => {
 addEventListener('appinstalled', () => { installBtn.hidden = true; $('installHint').hidden = true; });
 
 // A handle for tuning from the browser console.
-window.breathingDark = { settings: S, track: TRACK, lids: lids.st, breath: breath.st, motion: motion.st, app, engine };
+window.breathingDark = { settings: S, track: TRACK, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine };
 </script>
 </body>
 </html>

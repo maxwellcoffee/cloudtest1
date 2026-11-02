@@ -68,6 +68,13 @@ MediaPipe Full is stored for offline use straight away; the others are stored th
 
 ## How the breath is measured
 
+Pick a source under **Breath from** in the Breath panel. A line under the graph shows how steady the
+current source is: jitter (frame-to-frame noise, in pixels), breath swing (how far the breath moved the
+measurement over the last 10 s), and for the outline, how many shoulders were found. Switch sources and
+color methods while breathing normally and keep the one with the lowest jitter for the largest swing.
+
+### Shoulder movement (default)
+
 The pose model's shoulder points are guesses at the joint inside the body, and they wander by about as much
 as a breath moves. So they are only used to place two windows over the shoulders (the corner brackets in
 the camera view). Each camera frame, the picture inside each window is matched against a stored reference
@@ -76,34 +83,50 @@ vertical brightness gradient). The windows are placed again when the shoulders m
 eighth of a shoulder width or the match gets poor. The head is outside both windows, so tilting or turning
 it doesn't affect the breath.
 
-### Color outline (checkbox)
+### Shoulder outline by color
 
-**Track the shoulder outline by color**, under the pose model picker, measures the shoulders a second way.
-Each window instead reaches a little above the shoulder into the background. The app learns two colors
-there, the background and the shoulder, with a running two-cluster k-means that follows changes in the
-light. Each pixel gets a score for how much more it looks like shoulder than background. Down each column,
-the outline is the row that best splits the column into background above and shoulder below, refined to a
-fraction of a row where the score crosses one half. Once found, the search stays within a narrow band
-around it, so stripes, furniture or hair further up can't pull it away. A line through the column points
-(the dotted line in the camera view), read at a fixed spot, gives the shoulder height.
+Each window reaches a little above the shoulder into the background. A color method scores every pixel
+for how much more it looks like shoulder than background. Down each column, the outline is the row that best
+splits the column into background above and shoulder below, refined to a fraction of a row. Once found, it
+is only searched for in a narrow band around where it was, so stripes, furniture or hair further up can't
+pull it away. Every outline point from **both shoulders** then votes on one shared shift since the windows
+were placed (the median), so the two shoulders are always measured together. If only one shoulder's outline
+is found for a second, both windows are placed again to pick up the other. The shoulder's colors are first
+learned from the upper chest between the shoulders, which is reliably you even when a shoulder point is
+off.
 
-On a synthetic test (shoulders rising 4 px every 5 s while the head bobbed 10 px every 7 s), the two methods
-compared like this:
+| Color method | How it tells shoulder from background |
+| --- | --- |
+| Average colors | One learned color per side (running two-cluster k-means) |
+| Color, ignoring brightness | The same in an opponent-color space with brightness at a third of the weight, so shadows and exposure changes matter less |
+| Color histograms | A 1000-bin color histogram per side, for patterned backgrounds or clothes |
+| Color spread (Gaussian) | Each side's color and how it varies (mean and covariance), compared by likelihood |
+| Sharpest color change | The steepest step from background color towards shoulder color in each column, with sub-pixel peak fitting |
+| Neural person mask | MediaPipe's selfie segmenter (250 KB) draws the person/background split; it ignores color |
+| Vote | Runs the five color methods together and takes the median of their answers |
 
-| Method | Movement recovered | Noise left after a 5 s fit |
-| --- | --- | --- |
-| Image motion (default) | 3.35 of 4 px | 0.09 px |
-| Color outline | 3.92 of 4 px | 0.16 px |
+On a synthetic test (shoulders rising 4 px every 5 s while the head bobbed 10 px every 7 s), shoulder
+movement recovered 3.35 of the 4 px and average colors 3.92 px, both with R² 0.99 against the 5 s breath.
+In a headless browser all seven color methods found both shoulders; sharpest color change was the steadiest
+there.
 
-The color outline measures where the edge actually is, so it doesn't drift and needs no reference frame. It
-needs the shoulders to stand out from what is behind them. If it can't separate them, the Breath panel says
-so.
+### Pulse in your face (camera PPG, experimental)
+
+The skin of the forehead and cheeks (the boxes in the camera view, which brighten on each detected beat)
+changes color very slightly with every heartbeat. Its average color goes through the POS method (Wang et
+al., 2017), which separates the pulse from lighting changes; beats are the peaks, and the time between beats
+gives the heart rate. Heart rate rises as you breathe in and falls as you breathe out (respiratory sinus
+arrhythmia), and that slow swing is used as the breath. A pulse whose beats vary by more than 15% is treated
+as not found. On a synthetic 30 fps face (62 bpm swinging ±6 bpm with 5 s breaths, camera noise and lighting
+drift) it read the heart rate within 1 bpm and followed the breath with a correlation of 0.88, about 1.8 s
+behind. It needs your face still and evenly lit, works best with slow relaxed breathing (which makes the
+swing larger), and always lags the breath by a beat or two.
 
 | Signal | Source | Drives |
 | --- | --- | --- |
 | Lid signal 0–1 | Face blendshapes, smoothed over 0.15 s | Closed when ≥ threshold (0.55), open again below threshold − 0.08 |
 | Eyes closed ≥ hold (0.6 s) | Lid state | Noise fades in (2.5 s); eyes open for 0.3 s fades it out (1 s) |
-| Breath 0–1 | Up-down shift of the shoulder windows ÷ shoulder width, adaptive window | Breath trace, breath count |
+| Breath 0–1 | The chosen source (shoulder shift ÷ shoulder width, or heart-rate swing), adaptive window | Breath trace, breath count |
 | Smoothed breath | Breath averaged over the **Breath smoothing** window (1.5 s) | Lowpass cutoff, exponential from **Low cutoff** (110 Hz) on the out-breath to **High cutoff** (900 Hz) on the in-breath; a small level swell; the picture's fine detail, brightness and aperture |
 | Exhale floor (off) | Slider, 0–60% up the breath range | Below it the breath is held at the floor before smoothing, so the filter stays at the low cutoff through the less reliable bottom of the out-breath; the sweep from low to high cutoff runs between the floor and the top |
 | Resonance (1 dB) | Slider, 0–24 dB | Height of the filter's peak at the cutoff (half of it is taken back off the level); in the picture, detail at the cutoff's scale and a ring at the aperture |
