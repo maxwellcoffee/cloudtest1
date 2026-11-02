@@ -27,6 +27,7 @@
   --warn: #d98c7a;             /* tracking problems */
   --scrim: rgb(10 11 15 / 0.74);
   --breath-dim: rgb(225 182 115 / 0.3);  /* the chosen cutoff band */
+  --lid-dim: rgb(141 180 204 / 0.3);     /* recent range of the eye signal */
 
   --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
   --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -132,7 +133,23 @@ h1 em { font-style: italic; color: var(--muted); }
 }
 .meter-fill.closed { background: var(--lid); }
 .meter-fill.noise { background: var(--fg); }
-.meter-tick { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; background: var(--fg); }
+.lid-meter { position: relative; height: 26px; }
+.lid-track { position: absolute; left: 0; right: 0; top: 10px; height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.lid-recent { position: absolute; top: 0; bottom: 0; width: 0; background: var(--lid-dim); }
+.lid-slider {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
+  -webkit-appearance: none; appearance: none; background: transparent; cursor: ew-resize;
+}
+.lid-slider::-webkit-slider-runnable-track { height: 26px; background: transparent; border: 0; }
+.lid-slider::-moz-range-track { height: 26px; background: transparent; border: 0; }
+.lid-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 6px; height: 26px; border: 0; border-radius: 2px;
+  background: var(--fg); box-shadow: 0 0 0 2px var(--night);
+}
+.lid-slider::-moz-range-thumb { width: 6px; height: 26px; border: 0; border-radius: 2px; background: var(--fg); box-shadow: 0 0 0 2px var(--night); }
+.lid-scale { display: flex; justify-content: space-between; margin-top: -2px; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
+.readout > .hint { margin: 0; font-size: var(--step--2); color: var(--muted); }
 
 #breathTrace { display: block; width: 100%; height: 96px; }
 .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 0; font-size: var(--step--2); color: var(--muted); }
@@ -263,8 +280,21 @@ kbd {
     <div class="readouts">
       <div class="readout">
         <div class="readout-head"><span class="label">Eyes</span><span class="value" id="eyesValue">Not tracking</span></div>
-        <div class="meter" aria-hidden="true"><div class="meter-fill" id="lidFill"></div><div class="meter-tick" id="lidTick"></div></div>
-        <p class="note" id="eyesNote">Lid signal from the face model. The tick marks the closed threshold.</p>
+        <div class="setting">
+          <label for="set-lidThreshold">Closed threshold <span class="sub">· drag the marker</span></label>
+          <output id="out-lidThreshold" for="set-lidThreshold">0.55</output>
+        </div>
+        <div class="lid-meter">
+          <div class="lid-track" aria-hidden="true">
+            <div class="lid-recent" id="lidRecent"></div>
+            <div class="meter-fill" id="lidFill"></div>
+          </div>
+          <input type="range" id="set-lidThreshold" class="lid-slider" min="0" max="1" step="0.01" value="0.55">
+        </div>
+        <div class="lid-scale" aria-hidden="true"><span>open</span><span>closed</span></div>
+        <p class="note" id="eyesNote">The bar is the eye-closure signal from the face model. The faint band shows its range over the last 15 s.</p>
+        <p class="hint">To set it: close your eyes for a few seconds, open them, and see how far the band reached. Put the marker between your open level and that.</p>
+        <div class="controls" id="eyeControls"></div>
       </div>
 
       <div class="readout">
@@ -373,6 +403,7 @@ const DEFAULTS = {
   volume: 0.6,
   cutoffLow: 110,
   cutoffHigh: 900,
+  resonance: 1,
   breathSmoothSec: 1.5,
   sensitivity: 5,
   invertBreath: false,
@@ -388,13 +419,18 @@ const roundHz = hz => Number(hz.toPrecision(3));
 const FILTER_SLIDERS = [
   { key: 'cutoffLow', label: 'Low cutoff', sub: 'full out-breath', log: true, fmt: fmtHz },
   { key: 'cutoffHigh', label: 'High cutoff', sub: 'full in-breath', log: true, fmt: fmtHz },
+  { key: 'resonance', label: 'Resonance', sub: 'peak at the cutoff', min: 0, max: 24, step: 0.5,
+    fmt: v => `${v.toFixed(1)} dB`,
+    hint: 'Higher adds a whistling peak at the cutoff that rises and falls with your breath.' },
   { key: 'breathSmoothSec', label: 'Breath smoothing', min: 0, max: 8, step: 0.1,
     fmt: v => v < 0.05 ? 'Off' : `${v.toFixed(1)} s average`,
     hint: 'The filter follows your average breath position over about this many seconds. Off reacts at once. Higher is calmer, slower and moves less.' },
 ];
-const SLIDERS = [
-  { key: 'lidThreshold', label: 'Closed threshold', min: 0.3, max: 0.85, step: 0.01, fmt: v => v.toFixed(2), hint: 'Raise it if the noise starts while your eyes are open.' },
+const LID_MIN = 0.1, LID_MAX = 0.95;
+const EYE_SLIDERS = [
   { key: 'holdSec', label: 'Hold before the noise', min: 0.2, max: 8, step: 0.1, fmt: v => `${v.toFixed(1)} s`, hint: 'Eyes stay closed this long first. A blink lasts about 0.1 to 0.4 s.' },
+];
+const SLIDERS = [
   { key: 'fadeInSec', label: 'Fade in', min: 0.5, max: 20, step: 0.5, fmt: v => `${v.toFixed(1)} s` },
   { key: 'fadeOutSec', label: 'Fade out', min: 0.2, max: 6, step: 0.1, fmt: v => `${v.toFixed(1)} s` },
   { key: 'volume', label: 'Volume', min: 0, max: 1, step: 0.01, fmt: v => `${Math.round(v * 100)}%` },
@@ -760,7 +796,7 @@ function createNoiseEngine() {
     src.buffer = makeBrownNoise(ctx, 18);
     src.loop = true;
     const lp1 = ctx.createBiquadFilter();
-    lp1.type = 'lowpass'; lp1.Q.value = 0.9; lp1.frequency.value = cutoffFor(TRACK.restingBreath);
+    lp1.type = 'lowpass'; lp1.Q.value = S.resonance; lp1.frequency.value = cutoffFor(TRACK.restingBreath);
     const lp2 = ctx.createBiquadFilter();
     lp2.type = 'lowpass'; lp2.Q.value = 0.55; lp2.frequency.value = cutoffFor(TRACK.restingBreath) * 1.5;
     const swell = ctx.createGain(); swell.gain.value = 0.8;
@@ -782,7 +818,11 @@ function createNoiseEngine() {
     const f = cutoffFor(breath);
     nodes.lp1.frequency.setTargetAtTime(f, t, 0.08);
     nodes.lp2.frequency.setTargetAtTime(Math.min(f * 1.5, ctx.sampleRate / 2 - 100), t, 0.08);
-    nodes.swell.gain.setTargetAtTime(0.65 + 0.35 * breath, t, 0.12);
+    // Resonance: the lowpass Q in Web Audio is the height of the peak in dB. Half of that is taken
+    // back off the level so a strong peak doesn't make the whole sound much louder.
+    nodes.lp1.Q.setTargetAtTime(S.resonance, t, 0.05);
+    const comp = Math.pow(10, -S.resonance / 40);
+    nodes.swell.gain.setTargetAtTime((0.65 + 0.35 * breath) * comp, t, 0.12);
     // Linear gain rises quickly in loudness, so the noise is audible as soon as the fade starts.
     nodes.master.gain.setTargetAtTime(S.volume * fade * 1.4, t, 0.06);
   }
@@ -807,6 +847,7 @@ uniform vec2 uRes;
 uniform float uTime;
 uniform float uGrainTime;
 uniform float uOpen;
+uniform float uPeak;   // filter resonance, 0..1
 
 float hash(vec2 p) {
   p = fract(p * vec2(123.34, 456.21));
@@ -826,7 +867,9 @@ void main() {
   float sum = 0.0, norm = 0.0, freq = 1.7, amp = 1.0;
   for (int k = 0; k < 7; k++) {
     float fk = float(k);
-    float w = 1.0 / (1.0 + pow(2.0, (fk - cutoff) * 1.6));
+    float d = fk - cutoff;
+    // the lowpass, plus a resonant bump that brings out detail at the cutoff's own scale
+    float w = 1.0 / (1.0 + pow(2.0, d * 1.6)) + uPeak * 1.6 * exp(-d * d * 1.5);
     vec2 drift = vec2(uTime * 0.013 * (fk + 1.0), -uTime * 0.009 * (fk + 1.0));
     sum += w * amp * (vnoise(p * freq + drift + fk * 7.13) - 0.5);
     norm += amp;
@@ -842,6 +885,8 @@ void main() {
   float vig = 1.0 - smoothstep(0.0, aperture, r * 0.85);
 
   float lum = 0.07 + 0.045 * uOpen + smoke * mix(0.95, 0.62, uOpen) + grain * (0.06 + 0.16 * grainPass);
+  float edge = (r * 0.85 - aperture * 0.7) / 0.06;
+  lum += uPeak * 0.14 * exp(-edge * edge);      // resonance: a soft ring at the breathing aperture
   lum = max(lum * mix(0.55, 1.0, vig), 0.0);
   vec3 cool = vec3(0.74, 0.82, 1.0);
   vec3 warm = vec3(1.0, 0.82, 0.58);
@@ -875,10 +920,10 @@ function createNoiseRenderer(canvas) {
   gl.enableVertexAttribArray(aPos);
   gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
   const u = name => gl.getUniformLocation(prog, name);
-  const uRes = u('uRes'), uTime = u('uTime'), uGrainTime = u('uGrainTime'), uOpen = u('uOpen');
+  const uRes = u('uRes'), uTime = u('uTime'), uGrainTime = u('uGrainTime'), uOpen = u('uOpen'), uPeak = u('uPeak');
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
-  function render(t, open) {
+  function render(t, open, peak) {
     const scale = 0.5; // half resolution keeps it cheap and softens the grain
     const w = Math.max(1, Math.round(innerWidth * scale));
     const h = Math.max(1, Math.round(innerHeight * scale));
@@ -890,6 +935,7 @@ function createNoiseRenderer(canvas) {
     gl.uniform1f(uTime, tt);
     gl.uniform1f(uGrainTime, reduceMotion.matches ? Math.floor(t * 4) / 4 : tt);
     gl.uniform1f(uOpen, open);
+    gl.uniform1f(uPeak, peak);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
   return { render };
@@ -964,12 +1010,12 @@ try { noise = createNoiseRenderer(noiseCanvas); } catch (e) { console.error('Noi
 const app = {
   running: false, preview: false, hud: false, armed: false, fade: 0,
   stream: null, faceRes: null, poseRes: null, frameCount: 0, lastPoseT: null, statusMsg: null, statusWarn: false,
-  traceBuf: [], wakeLock: null,
+  traceBuf: [], lidHist: [], wakeLock: null,
 };
 
 const ui = {
   begin: $('begin'), preview: $('preview'), status: $('status'), cameraEmpty: $('cameraEmpty'),
-  eyesValue: $('eyesValue'), eyesNote: $('eyesNote'), lidFill: $('lidFill'), lidTick: $('lidTick'),
+  eyesValue: $('eyesValue'), eyesNote: $('eyesNote'), lidFill: $('lidFill'), lidRecent: $('lidRecent'),
   breathValue: $('breathValue'), breathNote: $('breathNote'),
   noiseValue: $('noiseValue'), noiseFill: $('noiseFill'),
   cutoffValue: $('cutoffValue'), bandRange: $('bandRange'), bandNow: $('bandNow'),
@@ -1055,6 +1101,15 @@ function refreshControls(dragging = null) {
 function buildControls() {
   const filter = $('filterControls');
   for (const s of FILTER_SLIDERS) makeSlider(s, filter);
+  for (const s of EYE_SLIDERS) makeSlider(s, $('eyeControls'));
+  // The closed threshold is the marker on the live eye bar, so it sits on the same 0..1 scale.
+  const lidInput = $('set-lidThreshold');
+  lidInput.addEventListener('input', () => {
+    S.lidThreshold = clamp(parseFloat(lidInput.value), LID_MIN, LID_MAX);
+    saveSettings();
+    refreshControls();
+  });
+  controls.lidThreshold = { spec: { key: 'lidThreshold', fmt: v => v.toFixed(2) }, input: lidInput, out: $('out-lidThreshold') };
   const grid = $('settingsGrid');
   for (const s of SLIDERS) makeSlider(s, grid);
   for (const c of CHECKS) makeCheck(c, grid);
@@ -1071,7 +1126,6 @@ function buildControls() {
 const bandPos = hz => clamp(Math.log(hz / LOG_MIN) / Math.log(LOG_MAX / LOG_MIN), 0, 1) * 100;
 
 function updateStaticCopy() {
-  ui.lidTick.style.left = `${S.lidThreshold * 100}%`;
   const a = bandPos(S.cutoffLow), b = bandPos(S.cutoffHigh);
   ui.bandRange.style.left = `${a}%`;
   ui.bandRange.style.width = `${b - a}%`;
@@ -1101,6 +1155,7 @@ async function begin() {
     breath.reset();
     motion.reset();
     app.traceBuf.length = 0;
+    app.lidHist.length = 0;
     app.running = true;
     ui.begin.textContent = 'Stop';
     ui.preview.disabled = false;
@@ -1301,6 +1356,15 @@ function updateReadouts(now) {
   const L = lids.st, B = breath.st;
   ui.lidFill.style.width = `${clamp(L.lid, 0, 1) * 100}%`;
   ui.lidFill.classList.toggle('closed', L.closed);
+  if (app.running && app.lidHist.length) {
+    let lo = 1, hi = 0;
+    for (const h of app.lidHist) { lo = Math.min(lo, h.v); hi = Math.max(hi, h.v); }
+    ui.lidRecent.style.left = `${lo * 100}%`;
+    ui.lidRecent.style.width = `${Math.max(0.5, (hi - lo) * 100)}%`;
+    ui.eyesNote.textContent = `Now ${L.lid.toFixed(2)}. Last 15 s: ${lo.toFixed(2)} to ${hi.toFixed(2)}. Closed at ${S.lidThreshold.toFixed(2)} and above.`;
+  } else {
+    ui.lidRecent.style.width = '0';
+  }
   ui.noiseFill.style.width = `${app.fade * 100}%`;
 
   if (!app.running) {
@@ -1385,6 +1449,8 @@ function loop() {
     const W = video.videoWidth, H = video.videoHeight;
     try { app.faceRes = models.face.detectForVideo(video, ts); } catch (e) { app.faceRes = null; }
     lids.update(readBlendshapes(app.faceRes), now, ddt);
+    app.lidHist.push({ t: now, v: lids.st.lid });
+    while (app.lidHist.length && app.lidHist[0].t < now - 15) app.lidHist.shift();
     // The pose model only places the shoulder windows, so it can run less often.
     if (models.pose && app.frameCount++ % TRACK.poseEvery === 0) {
       const pdt = app.lastPoseT == null ? 1 / 15 : clamp(now - app.lastPoseT, 0.001, 1);
@@ -1405,7 +1471,7 @@ function loop() {
   }
 
   const visible = app.fade > 0.001;
-  if (visible && noise) noise.render(now, breath.st.out);
+  if (visible && noise) noise.render(now, breath.st.out, S.resonance / 24);
   const eased = 1 - (1 - app.fade) * (1 - app.fade); // ease-out: visible right away, settles gently
   noiseCanvas.style.opacity = visible ? eased.toFixed(3) : '0';
   noiseCanvas.classList.toggle('covering', app.preview && app.fade > 0.5);
