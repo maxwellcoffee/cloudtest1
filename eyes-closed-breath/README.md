@@ -48,8 +48,14 @@ Then open http://localhost:8000.
 4. If it starts too easily or not at all, drag the marker on the Eyes bar. Close your eyes for a few
    seconds, open them, and put the marker between your open level and how far the faint band reached.
 
-**Preview with eyes open** (or <kbd>P</kbd>) forces the closed state so you can watch and hear the filter
-follow your breathing. <kbd>H</kbd> shows the readouts on top of the noise.
+To save power, **Only track breathing while my eyes are closed** (on by default) runs the body tracking only
+while your eyes are closed, the noise is fading, or in Preview, and the eyes are checked 3 times a second
+(**Eye checks per second** in the Eyes panel).
+
+**Preview with eyes open** (or <kbd>P</kbd>) plays the noise and moves the filter with your breathing while
+the page stays in view, so you can watch the breath graph and adjust the sliders as you listen. The
+full-screen picture only appears when your eyes are really closed. <kbd>H</kbd> shows the readouts on top of
+the picture.
 
 ## Pose models
 
@@ -97,17 +103,16 @@ off.
 
 | Color method | How it tells shoulder from background |
 | --- | --- |
-| Average colors | One learned color per side (running two-cluster k-means) |
-| Color, ignoring brightness | The same in an opponent-color space with brightness at a third of the weight, so shadows and exposure changes matter less |
+| Color, ignoring brightness | One learned color per side (running two-cluster k-means) in an opponent-color space with brightness at a third of the weight, so shadows and exposure changes matter less |
 | Color histograms | A 1000-bin color histogram per side, for patterned backgrounds or clothes |
 | Color spread (Gaussian) | Each side's color and how it varies (mean and covariance), compared by likelihood |
-| Sharpest color change | The steepest step from background color towards shoulder color in each column, with sub-pixel peak fitting |
+| Sharpest color change (default) | The steepest step from background color towards shoulder color in each column, with sub-pixel peak fitting |
 | Neural person mask | MediaPipe's selfie segmenter (250 KB) draws the person/background split; it ignores color |
-| Vote | Runs the five color methods together and takes the median of their answers |
+| Vote | Runs the four color methods together and takes the median of their answers |
 
 On a synthetic test (shoulders rising 4 px every 5 s while the head bobbed 10 px every 7 s), shoulder
-movement recovered 3.35 of the 4 px and average colors 3.92 px, both with R² 0.99 against the 5 s breath.
-In a headless browser all seven color methods found both shoulders; sharpest color change was the steadiest
+movement recovered 3.35 of the 4 px and the color outline 3.92 px, both with R² 0.99 against the 5 s breath.
+In a headless browser every color method found both shoulders; sharpest color change was the steadiest
 there.
 
 ### Pulse in your face (camera PPG, experimental)

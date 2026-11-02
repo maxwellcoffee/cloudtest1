@@ -243,7 +243,6 @@ kbd {
   pointer-events: none;
   background: var(--night);
 }
-.noise-layer.covering { pointer-events: auto; cursor: pointer; }
 .overlay-text {
   position: fixed; z-index: 21;
   font: 400 var(--step--2)/1.5 var(--font-data);
@@ -255,12 +254,6 @@ kbd {
   left: max(16px, env(safe-area-inset-left, 0px));
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   right: max(16px, env(safe-area-inset-right, 0px));
-}
-.preview-hint {
-  top: calc(16px + env(safe-area-inset-top, 0px));
-  left: max(16px, env(safe-area-inset-left, 0px));
-  right: max(16px, env(safe-area-inset-right, 0px));
-  text-align: center;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -321,16 +314,18 @@ kbd {
           </select>
           <p class="hint" id="breathSourceHint"></p>
         </div>
+        <div class="setting" id="breathPowerRow">
+          <p class="hint">Saves power: the body tracking runs only while your eyes are closed (and in Preview), and picks up where it left off as soon as they close. Turn it off to watch the breath graph with your eyes open.</p>
+        </div>
         <div class="setting" id="colorMethodRow">
           <label for="set-colorMethod">Color method <span class="sub">· both shoulders at once</span></label>
           <select id="set-colorMethod">
-            <option value="rgb">Average colors</option>
             <option value="opponent">Color, ignoring brightness</option>
             <option value="hist">Color histograms</option>
             <option value="gauss">Color spread (Gaussian)</option>
             <option value="sharp">Sharpest color change</option>
             <option value="mask">Neural person mask (MediaPipe)</option>
-            <option value="vote">Vote of the five color methods</option>
+            <option value="vote">Vote of the four color methods</option>
           </select>
           <p class="hint" id="colorMethodHint"></p>
         </div>
@@ -385,7 +380,6 @@ kbd {
 
 <canvas id="noise" class="noise-layer" aria-hidden="true"></canvas>
 <div id="hud" class="overlay-text hud" hidden></div>
-<div id="previewHint" class="overlay-text preview-hint" hidden>Preview. Press P or click to return.</div>
 
 <script type="module">
 // =====================================================================
@@ -466,7 +460,9 @@ const DEFAULTS = {
   invertBreath: false,
   mirror: true,
   breathSource: 'motion',
-  colorMethod: 'rgb',
+  colorMethod: 'sharp',
+  breathOnlyEyesClosed: true,
+  eyeHz: 3,
 };
 const fmtHz = v => v >= 1000 ? `${+(v / 1000).toFixed(2)} kHz` : `${Math.round(v)} Hz`;
 
@@ -490,6 +486,7 @@ const FILTER_SLIDERS = [
 ];
 const LID_MIN = 0.1, LID_MAX = 0.95;
 const EYE_SLIDERS = [
+  { key: 'eyeHz', label: 'Eye checks per second', min: 1, max: 30, step: 1, fmt: v => `${v} per second`, hint: 'How often the face model looks at your eyes. 3 is plenty to notice closed eyes; more reacts a little sooner but uses more power.' },
   { key: 'holdSec', label: 'Hold before the noise', min: 0.2, max: 8, step: 0.1, fmt: v => `${v.toFixed(1)} s`, hint: 'Eyes stay closed this long first. A blink lasts about 0.1 to 0.4 s.' },
 ];
 const SLIDERS = [
@@ -511,6 +508,7 @@ function loadSettings() {
     if (raw) {
       const saved = JSON.parse(raw);
       if (saved.colorEdge && !saved.breathSource) saved.breathSource = 'outline'; // earlier checkbox
+      if (saved.colorMethod === 'rgb') delete saved.colorMethod; // 'Average colors' was removed
       if (!saved.version) {
         // Saved by the first version: drop its slower fade defaults so the quicker ones apply.
         if (saved.holdSec === 1.5) delete saved.holdSec;
@@ -722,7 +720,10 @@ function createBreathTracker() {
     return { avg, perMin: 60 / avg, variation, count: ps.length };
   }
 
-  return { st, update, tick, reset, summary };
+  // After a pause: carry on from where the breath was instead of starting the range again.
+  function hold(now) { if (st.level != null) st.lastSeen = now; }
+
+  return { st, update, tick, reset, summary, hold };
 }
 
 // =====================================================================
@@ -1069,8 +1070,9 @@ function createShoulderMotion(videoEl) {
     },
   };
 
-  const OUTLINE_METHODS = { rgb: rgbMethod, opponent: meanMethod(tfOpp), hist: histMethod, gauss: gaussMethod, sharp: sharpMethod, mask: maskMethod };
-  const OUTLINE_VOTERS = ['rgb', 'opponent', 'hist', 'gauss', 'sharp'];
+  // (The plain RGB average-color model above is kept only as the basis of Sharpest color change.)
+  const OUTLINE_METHODS = { opponent: meanMethod(tfOpp), hist: histMethod, gauss: gaussMethod, sharp: sharpMethod, mask: maskMethod };
+  const OUTLINE_VOTERS = ['opponent', 'hist', 'gauss', 'sharp'];
 
   // Where to look for a column's outline: last frame's point, else the window's line, else anywhere.
   function guessAt(w, wm, x, xPx) {
@@ -1142,7 +1144,7 @@ function createShoulderMotion(videoEl) {
     st.frameW = W; st.frameH = H;
     const want = edgeRois(W, H);
     if (want.length === 0) { st.rois = null; return null; }
-    const keys = method === 'vote' ? OUTLINE_VOTERS : [OUTLINE_METHODS[method] ? method : 'rgb'];
+    const keys = method === 'vote' ? OUTLINE_VOTERS : [OUTLINE_METHODS[method] ? method : 'sharp'];
     if (!st.rois || windowsDrifted(want) || st.relock) {
       st.rois = want.map(r => {
         const cols = clamp(Math.round(r.w / 4), 12, 48), rows = clamp(Math.round(r.h / 1.5), 24, 128);
@@ -1241,8 +1243,10 @@ function createShoulderMotion(videoEl) {
   }
 
   function relock() { st.rois = null; }
+  // After a pause: keep the windows and the last shoulder positions as they are.
+  function hold(now) { if (st.ls) st.lastPoseAt = now; }
 
-  return { st, updateShoulders, measure, reset, relock };
+  return { st, updateShoulders, measure, reset, relock, hold };
 }
 
 // =====================================================================
@@ -1756,7 +1760,7 @@ try { noise = createNoiseRenderer(noiseCanvas); } catch (e) { console.error('Noi
 const app = {
   running: false, preview: false, hud: false, armed: false, fade: 0,
   stream: null, faceRes: null, poseRes: null, frameCount: 0, lastPoseT: null, posePending: false, statusMsg: null, statusWarn: false,
-  traceBuf: [], lidHist: [], wakeLock: null,
+  traceBuf: [], lidHist: [], wakeLock: null, lastFaceT: null, breathPaused: false, stats: { face: 0, body: 0, pose: 0 },
 };
 
 const ui = {
@@ -1765,7 +1769,7 @@ const ui = {
   breathValue: $('breathValue'), breathNote: $('breathNote'),
   noiseValue: $('noiseValue'), noiseFill: $('noiseFill'),
   cutoffValue: $('cutoffValue'), bandRange: $('bandRange'), bandNow: $('bandNow'),
-  hud: $('hud'), previewHint: $('previewHint'), qualityNote: $('qualityNote'),
+  hud: $('hud'), qualityNote: $('qualityNote'),
 };
 
 function setStatus(msg, warn = false) {
@@ -1850,13 +1854,12 @@ const SOURCE_HINTS = {
   pulse: 'Reads your pulse from tiny color changes in the skin of your face (the boxes), then follows how your heart rate rises as you breathe in and falls as you breathe out. Needs your face still and evenly lit, and lags your breath by a second or two.',
 };
 const METHOD_HINTS = {
-  rgb: 'One learned color for the background and one for you. Simple and steady.',
   opponent: 'Compares hue more than brightness, so shadows, camera exposure changes and lamp flicker move it less.',
   hist: 'Learns the whole mix of colors on each side, for patterned backgrounds or clothes.',
   gauss: 'Learns each side’s color and how much it varies, so shading on skin or fabric still counts as you.',
   sharp: 'Finds the steepest change from background color to shoulder color in each column, to a fraction of a pixel. Precise when the outline is crisp.',
   mask: 'A small neural network trained to separate people from backgrounds draws the outline; it ignores color. Downloads 250 KB.',
-  vote: 'Runs the five color methods together and takes the middle answer, so one method’s mistake is outvoted.',
+  vote: 'Runs the four color methods together and takes the middle answer, so one method’s mistake is outvoted.',
 };
 
 function syncBreathUI() {
@@ -1907,6 +1910,7 @@ function buildControls() {
   const filter = $('filterControls');
   for (const s of FILTER_SLIDERS) makeSlider(s, filter);
   for (const s of EYE_SLIDERS) makeSlider(s, $('eyeControls'));
+  makeCheck({ key: 'breathOnlyEyesClosed', label: 'Only track breathing while my eyes are closed', prepend: true }, $('breathPowerRow'));
   const srcSel = $('set-breathSource'), methodSel = $('set-colorMethod');
   srcSel.addEventListener('change', () => {
     S.breathSource = srcSel.value; saveSettings(); syncBreathUI();
@@ -1990,6 +1994,8 @@ async function begin() {
     pulse.reset();
     app.traceBuf.length = 0;
     app.lidHist.length = 0;
+    app.lastFaceT = null;
+    app.breathPaused = false;
     app.running = true;
     ui.begin.textContent = 'Stop';
     ui.preview.disabled = false;
@@ -2031,7 +2037,6 @@ function stop() {
 function setPreview(on) {
   app.preview = on && app.running;
   ui.preview.textContent = app.preview ? 'End preview' : 'Preview with eyes open';
-  ui.previewHint.hidden = !app.preview;
 }
 
 async function requestWakeLock() {
@@ -2047,7 +2052,6 @@ document.addEventListener('visibilitychange', () => {
 
 ui.begin.addEventListener('click', () => { app.running ? stop() : begin(); });
 ui.preview.addEventListener('click', () => setPreview(!app.preview));
-noiseCanvas.addEventListener('click', () => { if (app.preview) setPreview(false); });
 addEventListener('keydown', e => {
   if (e.target instanceof HTMLInputElement || e.metaKey || e.ctrlKey || e.altKey) return;
   const k = e.key.toLowerCase();
@@ -2268,7 +2272,10 @@ function updateReadouts(now) {
 
   const sum = breath.summary();
   let breathWarn = false;
-  if (app.running) {
+  if (app.running && app.breathPaused) {
+    ui.breathValue.textContent = 'Paused';
+    ui.breathNote.textContent = 'Breath tracking is resting while your eyes are open. It starts again as soon as they close, or press Preview.';
+  } else if (app.running) {
     if (S.breathSource !== 'pulse' && !models.pose) {
       ui.breathValue.textContent = models.poseLoading ? 'Loading' : 'Off';
       ui.breathNote.textContent = models.poseLoading ? 'Loading the pose model…' : 'The pose model did not load. Pick another pose model, or check the connection.';
@@ -2298,19 +2305,59 @@ function updateReadouts(now) {
   }
   ui.breathNote.classList.toggle('warn', breathWarn);
   updatePoseInfo();
-  ui.qualityNote.textContent = app.running ? qualityText() : '';
+  ui.qualityNote.textContent = app.running && !app.breathPaused ? qualityText() : '';
 
   if (app.running && !app.statusWarn) {
-    ui.status.textContent = !L.faceInView ? 'No face in view' : (models.pose && !B.tracked ? 'Face found. Shoulders not in view.' : 'Tracking eyes and breath');
+    ui.status.textContent = !L.faceInView ? 'No face in view'
+      : app.breathPaused ? 'Watching your eyes. Breath tracking starts when they close.'
+      : (S.breathSource !== 'pulse' && models.pose && !B.tracked ? 'Face found. Shoulders not in view.' : 'Tracking eyes and breath');
   }
 
-  ui.hud.hidden = !(app.hud && app.fade > 0.6); // only once the noise mostly covers the page
+  ui.hud.hidden = !(app.hud && !app.preview && app.fade > 0.6); // only once the noise mostly covers the page
   if (!ui.hud.hidden) {
     const eyes = L.closed ? `eyes closed ${(now - L.closedSince).toFixed(1)} s` : 'eyes open';
     const br = B.tracked ? `breath ${(B.out * 100).toFixed(0)}%` : 'breath lost';
     const rate = sum ? ` · ${sum.avg.toFixed(1)} s per breath` : '';
     ui.hud.textContent = `${eyes} · ${br} · lowpass ${hz} Hz${rate}`;
   }
+}
+
+// Breath tracking for one camera frame: the pose model (every few frames, only for the shoulder
+// sources), the person mask if chosen, then the chosen breath source.
+function bodyStep(now, ts, W, H, ddt) {
+  app.stats.body++;
+  // The pose model only places the shoulder windows, so it can run less often.
+  const pose = S.breathSource === 'pulse' ? null : models.pose; // pulse mode doesn't need the shoulders
+  if (pose && app.frameCount++ % TRACK.poseEvery === 0 && !app.posePending) {
+    app.stats.pose++;
+    const pdt = app.lastPoseT == null ? 1 / 15 : clamp(now - app.lastPoseT, 0.001, 1);
+    app.lastPoseT = now;
+    const t0 = performance.now();
+    const done = r => {
+      const ms = performance.now() - t0;
+      models.poseMs = models.poseMs == null ? ms : models.poseMs * 0.9 + ms * 0.1;
+      if (models.pose === pose) motion.updateShoulders(r, pose.minScore, performance.now() / 1000, pdt);
+    };
+    if (pose.async) {
+      // MoveNet answers asynchronously; skip pose frames until it has.
+      app.posePending = true;
+      pose.detect(video).then(done, () => {}).finally(() => { app.posePending = false; });
+    } else {
+      try { done(pose.detect(video, ts, W, H)); } catch (e) { /* skip this frame */ }
+    }
+  }
+  if (S.breathSource === 'outline' && S.colorMethod === 'mask' && models.seg) {
+    try {
+      models.seg.segmentForVideo(video, ts, res => {
+        const masks = res.confidenceMasks;
+        if (!masks?.length) return;
+        const m = masks[masks.length > 1 ? 1 : 0]; // the person channel
+        motion.st.mask = { data: m.getAsFloat32Array().slice(), w: m.width, h: m.height };
+      });
+    } catch (e) { /* skip this frame */ }
+  }
+  const sample = S.breathSource === 'pulse' ? pulse.update(app.faceRes, W, H, now, ddt) : motion.measure(now, W, H);
+  breath.update(sample, now, ddt);
 }
 
 // ---------- Main loop ----------
@@ -2333,41 +2380,32 @@ function loop() {
     const ts = Math.max(nowMs, lastDetectMs + 1);
     lastDetectMs = ts;
     const W = video.videoWidth, H = video.videoHeight;
-    try { app.faceRes = models.face.detectForVideo(video, ts); } catch (e) { app.faceRes = null; }
-    lids.update(readBlendshapes(app.faceRes), now, ddt);
-    app.lidHist.push({ t: now, v: lids.st.lid });
-    while (app.lidHist.length && app.lidHist[0].t < now - 15) app.lidHist.shift();
-    // The pose model only places the shoulder windows, so it can run less often.
-    const pose = S.breathSource === 'pulse' ? null : models.pose; // pulse mode doesn't need the shoulders
-    if (pose && app.frameCount++ % TRACK.poseEvery === 0 && !app.posePending) {
-      const pdt = app.lastPoseT == null ? 1 / 15 : clamp(now - app.lastPoseT, 0.001, 1);
-      app.lastPoseT = now;
-      const t0 = performance.now();
-      const done = r => {
-        const ms = performance.now() - t0;
-        models.poseMs = models.poseMs == null ? ms : models.poseMs * 0.9 + ms * 0.1;
-        if (models.pose === pose) motion.updateShoulders(r, pose.minScore, performance.now() / 1000, pdt);
-      };
-      if (pose.async) {
-        // MoveNet answers asynchronously; skip pose frames until it has.
-        app.posePending = true;
-        pose.detect(video).then(done, () => {}).finally(() => { app.posePending = false; });
-      } else {
-        try { done(pose.detect(video, ts, W, H)); } catch (e) { /* skip this frame */ }
+    // Eyes: a few checks a second are enough to notice closed eyes.
+    if (app.lastFaceT == null || now - app.lastFaceT >= 1 / S.eyeHz - 0.01) {
+      const fdt = app.lastFaceT == null ? 1 / S.eyeHz : clamp(now - app.lastFaceT, 0.001, 1);
+      app.lastFaceT = now;
+      app.stats.face++;
+      try { app.faceRes = models.face.detectForVideo(video, ts); } catch (e) { app.faceRes = null; }
+      lids.update(readBlendshapes(app.faceRes), now, fdt);
+      app.lidHist.push({ t: now, v: lids.st.lid });
+      while (app.lidHist.length && app.lidHist[0].t < now - 15) app.lidHist.shift();
+    }
+
+    // Body: with "only while eyes are closed" on, the breath tracking (pose model, shoulder windows,
+    // person mask, pulse) runs only while the eyes are closed, the noise is still fading, or in Preview.
+    const needBreath = !S.breathOnlyEyesClosed || app.preview || lids.st.closed || app.armed || app.fade > 0;
+    if (!needBreath) {
+      app.breathPaused = true;
+    } else {
+      if (app.breathPaused) {
+        // Picking up again: keep the shoulder windows and the breath range rather than starting over.
+        app.breathPaused = false;
+        motion.hold(now);
+        breath.hold(now);
+        if (S.breathSource === 'pulse') pulse.reset(); // the beat timing has to start again
       }
+      bodyStep(now, ts, W, H, ddt);
     }
-    if (S.breathSource === 'outline' && S.colorMethod === 'mask' && models.seg) {
-      try {
-        models.seg.segmentForVideo(video, ts, res => {
-          const masks = res.confidenceMasks;
-          if (!masks?.length) return;
-          const m = masks[masks.length > 1 ? 1 : 0]; // the person channel
-          motion.st.mask = { data: m.getAsFloat32Array().slice(), w: m.width, h: m.height };
-        });
-      } catch (e) { /* skip this frame */ }
-    }
-    const sample = S.breathSource === 'pulse' ? pulse.update(app.faceRes, W, H, now, ddt) : motion.measure(now, W, H);
-    breath.update(sample, now, ddt);
   }
 
   breath.tick(now, dt);
@@ -2379,13 +2417,15 @@ function loop() {
     while (app.traceBuf.length && app.traceBuf[0].t < now - TRACK.traceSec) app.traceBuf.shift();
   }
 
-  const visible = app.fade > 0.001;
+  // The full-screen picture is for closed eyes only. In Preview the noise plays and the filter
+  // moves, but the page stays in view so you can watch the readouts.
+  const shown = app.preview ? 0 : app.fade;
+  const visible = shown > 0.001;
   if (visible && noise) noise.render(now, filterAmount(breath.st.out), S.resonance / 24);
-  const eased = 1 - (1 - app.fade) * (1 - app.fade); // ease-out: visible right away, settles gently
+  const eased = 1 - (1 - shown) * (1 - shown); // ease-out: visible right away, settles gently
   noiseCanvas.style.opacity = visible ? eased.toFixed(3) : '0';
-  noiseCanvas.classList.toggle('covering', app.preview && app.fade > 0.5);
 
-  if (app.fade < 0.999) {
+  if (shown < 0.999) {
     drawCamera();
     drawTrace(now);
     ui.bandNow.style.left = `${bandPos(cutoffFor(breath.st.out))}%`;
