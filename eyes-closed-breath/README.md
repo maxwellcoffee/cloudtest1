@@ -57,6 +57,15 @@ the page stays in view, so you can watch the breath graph and adjust the sliders
 full-screen picture only appears when your eyes are really closed. <kbd>H</kbd> shows the readouts on top of
 the picture.
 
+## Breath history
+
+Click the breath graph to open the full history. It fills the screen with five lines, each a stretch of time
+read left to right with the oldest at the top. Pick how long each line is (30 s, 1 min, 2 min or 5 min) at the
+top. Scroll up to go back through the session (up to two hours, ten samples a second). It follows the newest
+line while you're at the bottom; **Back to now** returns there. Shaded stretches are where your eyes were
+closed, and ticks along the bottom of each line mark counted breaths. Gaps are where breath tracking was
+paused or lost. Press Escape or Close to return. The noise picture still covers it when your eyes close.
+
 ## Pose models
 
 The pose model only finds the shoulders so the two windows can be placed; the breath itself comes from the
