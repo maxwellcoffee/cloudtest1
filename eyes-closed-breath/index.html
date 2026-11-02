@@ -426,6 +426,7 @@ const DEFAULTS = {
   resonance: 1,
   poseModel: 'mp-full',
   breathSmoothSec: 1.5,
+  exhaleFloor: 0,
   sensitivity: 5,
   invertBreath: false,
   mirror: true,
@@ -446,6 +447,9 @@ const FILTER_SLIDERS = [
   { key: 'breathSmoothSec', label: 'Breath smoothing', min: 0, max: 8, step: 0.1,
     fmt: v => v < 0.05 ? 'Off' : `${v.toFixed(1)} s average`,
     hint: 'The filter follows your average breath position over about this many seconds. Off reacts at once. Higher is calmer, slower and moves less.' },
+  { key: 'exhaleFloor', label: 'Exhale floor', sub: 'filter stops falling here', min: 0, max: 0.6, step: 0.01,
+    fmt: v => v < 0.005 ? 'Off' : `${Math.round(v * 100)}% up`,
+    hint: 'Once your out-breath drops below this point, the filter stays at the low cutoff instead of following the less reliable bottom of the breath. The dashed line on the breath graph shows it.' },
 ];
 const LID_MIN = 0.1, LID_MAX = 0.95;
 const EYE_SLIDERS = [
@@ -497,7 +501,9 @@ const ema = (prev, x, dt, tau) => prev + (x - prev) * (1 - Math.exp(-dt / tau));
 const cssVar = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 const COLORS = { fg: cssVar('--fg'), muted: cssVar('--muted'), rule: cssVar('--rule'), breath: cssVar('--breath'), lid: cssVar('--lid'), night: cssVar('--night') };
 const FONT_DATA = cssVar('--font-data');
-const cutoffFor = b => S.cutoffLow * Math.pow(Math.max(S.cutoffHigh, S.cutoffLow + 1) / S.cutoffLow, b);
+// How open the filter is for a breath value: 0 at or below the exhale floor, 1 at the top of the breath.
+const filterAmount = b => S.exhaleFloor > 0 ? clamp((b - S.exhaleFloor) / (1 - S.exhaleFloor), 0, 1) : clamp(b, 0, 1);
+const cutoffFor = b => S.cutoffLow * Math.pow(Math.max(S.cutoffHigh, S.cutoffLow + 1) / S.cutoffLow, filterAmount(b));
 
 // =====================================================================
 // Eye closure
@@ -600,11 +606,14 @@ function createBreathTracker() {
     // S.breathSmoothSec seconds. Two chained averages, each with a quarter of the window as its
     // time constant, give the same delay as a plain W-second average without its dead spots
     // (a plain 5 s average cancels a 5 s breath completely).
+    // Below the exhale floor the breath is held at the floor before smoothing, so the shaky bottom
+    // of the out-breath never reaches the filter and the smoothing rounds off the corner.
+    const target = Math.max(st.fast, S.exhaleFloor);
     const W = S.breathSmoothSec;
     if (W < 0.05) {
-      st.s1 = st.s2 = st.out = st.fast;
+      st.s1 = st.s2 = st.out = target;
     } else {
-      st.s1 = ema(st.s1, st.fast, dt, W / 4);
+      st.s1 = ema(st.s1, target, dt, W / 4);
       st.s2 = ema(st.s2, st.s1, dt, W / 4);
       st.out = st.s2;
     }
@@ -841,7 +850,7 @@ function createNoiseEngine() {
     // back off the level so a strong peak doesn't make the whole sound much louder.
     nodes.lp1.Q.setTargetAtTime(S.resonance, t, 0.05);
     const comp = Math.pow(10, -S.resonance / 40);
-    nodes.swell.gain.setTargetAtTime((0.65 + 0.35 * breath) * comp, t, 0.12);
+    nodes.swell.gain.setTargetAtTime((0.65 + 0.35 * filterAmount(breath)) * comp, t, 0.12);
     // Linear gain rises quickly in loudness, so the noise is audible as soon as the fade starts.
     nodes.master.gain.setTargetAtTime(S.volume * fade * 1.4, t, 0.06);
   }
@@ -1466,6 +1475,17 @@ function drawTrace(now) {
   trace.fillText('in', 0, y(1));
   trace.fillText('out', 0, y(0));
 
+  // Exhale floor: the filter stops falling below this line.
+  if (S.exhaleFloor > 0) {
+    trace.save();
+    trace.strokeStyle = COLORS.breath;
+    trace.globalAlpha = 0.6;
+    trace.lineWidth = 1 * dpr;
+    trace.setLineDash([4 * dpr, 4 * dpr]);
+    trace.beginPath(); trace.moveTo(left, y(S.exhaleFloor)); trace.lineTo(w, y(S.exhaleFloor)); trace.stroke();
+    trace.restore();
+  }
+
   for (const m of breath.st.marks) {
     if (now - m > TRACK.traceSec) continue;
     trace.fillStyle = COLORS.muted;
@@ -1636,7 +1656,7 @@ function loop() {
   }
 
   const visible = app.fade > 0.001;
-  if (visible && noise) noise.render(now, breath.st.out, S.resonance / 24);
+  if (visible && noise) noise.render(now, filterAmount(breath.st.out), S.resonance / 24);
   const eased = 1 - (1 - app.fade) * (1 - app.fade); // ease-out: visible right away, settles gently
   noiseCanvas.style.opacity = visible ? eased.toFixed(3) : '0';
   noiseCanvas.classList.toggle('covering', app.preview && app.fade > 0.5);

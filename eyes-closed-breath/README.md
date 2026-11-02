@@ -82,6 +82,7 @@ it doesn't affect the breath.
 | Eyes closed ≥ hold (0.6 s) | Lid state | Noise fades in (2.5 s); eyes open for 0.3 s fades it out (1 s) |
 | Breath 0–1 | Up-down shift of the shoulder windows ÷ shoulder width, adaptive window | Breath trace, breath count |
 | Smoothed breath | Breath averaged over the **Breath smoothing** window (1.5 s) | Lowpass cutoff, exponential from **Low cutoff** (110 Hz) on the out-breath to **High cutoff** (900 Hz) on the in-breath; a small level swell; the picture's fine detail, brightness and aperture |
+| Exhale floor (off) | Slider, 0–60% up the breath range | Below it the breath is held at the floor before smoothing, so the filter stays at the low cutoff through the less reliable bottom of the out-breath; the sweep from low to high cutoff runs between the floor and the top |
 | Resonance (1 dB) | Slider, 0–24 dB | Height of the filter's peak at the cutoff (half of it is taken back off the level); in the picture, detail at the cutoff's scale and a ring at the aperture |
 
 The Lowpass filter panel shows the chosen band on a 20 Hz – 10 kHz scale with the live cutoff. Breath
