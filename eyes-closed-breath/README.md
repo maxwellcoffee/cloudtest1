@@ -1,22 +1,37 @@
 # Breathing Dark
 
-A single web page that watches your eyes and your breathing through the webcam. Close your eyes and dark
-(brown) noise fades in. A lowpass filter on the noise opens as you breathe in and closes as you breathe out.
-A dark noise picture fills the screen and follows the same filter. Open your eyes and it all fades away.
+A web page, installable as a Mac app, that watches your eyes and your breathing through the webcam. Close
+your eyes and dark (brown) noise fades in. A lowpass filter on the noise opens as you breathe in and closes
+as you breathe out. A dark noise picture fills the screen and follows the same filter. Open your eyes and it
+all fades away.
 
-It combines two p5.js sketches by teamhuman:
+Live at https://maxwellcoffee.github.io/cloudtest1/eyes-closed-breath/
+
+It started from two p5.js sketches by teamhuman:
 
 - [eyes wide shut v2](https://editor.p5js.org/teamhuman/sketches/v3yvsugT8): eye closure from MediaPipe Face
   Landmarker blendshapes (`eyeBlinkLeft/Right` minus a quarter of `eyeWideLeft/Right`, smoothed, against a
-  0.55 threshold, held for a while before anything fades in).
-- [breathe 25 with posture](https://editor.p5js.org/teamhuman/sketches/_JShZY0ze): breath from the gap between
-  the nose and the shoulder midline, normalised by an adaptive min/max window, with breaths counted on an
-  up-swing followed by a down-swing.
+  0.55 threshold, held for a moment before anything fades in).
+- [breathe 25 with posture](https://editor.p5js.org/teamhuman/sketches/_JShZY0ze): breathing from shoulder
+  movement, normalised by an adaptive min/max window, with breaths counted on an up-swing followed by a
+  down-swing.
 
-The page is plain JavaScript with no p5. It uses MediaPipe Tasks Vision 0.10.35 from jsDelivr for both the
-face and the pose models, Web Audio for the sound and WebGL for the picture.
+The page is plain JavaScript with no p5. It uses MediaPipe Tasks Vision 0.10.35 from jsDelivr (Face
+Landmarker, and the Pose Landmarker "full" model), Web Audio for the sound and WebGL for the picture.
 
-## Run it
+## Use it as a Mac app
+
+Open the live page, then:
+
+- **Safari** (macOS Sonoma or later): File › Add to Dock.
+- **Chrome or Edge**: press **Install as an app** at the bottom of the page, or choose Install from the menu.
+
+It then opens in its own window from the Dock, Launchpad or Applications. After the first launch the page
+and the models (about 24 MB) are stored on the Mac, so it also opens offline. Whenever there is a
+connection it picks up the latest version from GitHub Pages; every push to the branch Pages deploys from
+updates it.
+
+## Run it locally
 
 The camera only works on a secure page, so serve the folder rather than double-clicking the file:
 
@@ -24,32 +39,48 @@ The camera only works on a secure page, so serve the folder rather than double-c
 cd eyes-closed-breath && python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000 in Chrome, Edge, Firefox or Safari. Any https host (GitHub Pages, Netlify)
-works too. The first load downloads about 20 MB of models.
+Then open http://localhost:8000.
 
-1. Sit so your head and both shoulders are in the frame. Headphones help.
+1. Sit or lie so both shoulders are in the frame. Headphones help.
 2. Press **Begin** and allow the camera.
-3. Close your eyes. After 1.5 s the noise starts and reaches full level over 5 s.
+3. Close your eyes. After 0.6 s the noise starts and reaches full level over 2.5 s.
 
 **Preview with eyes open** (or <kbd>P</kbd>) forces the closed state so you can watch and hear the filter
 follow your breathing. <kbd>H</kbd> shows the readouts on top of the noise.
 
-## How it maps
+## How the breath is measured
+
+The pose model's shoulder points are guesses at the joint inside the body, and they wander by about as much
+as a breath moves. So they are only used to place two windows over the shoulders (the corner brackets in
+the camera view). Each camera frame, the picture inside each window is matched against a stored reference
+frame to find how far it has moved up or down, to a fraction of a pixel (normalised cross-correlation of the
+vertical brightness gradient). The windows are placed again when the shoulders move more than about an
+eighth of a shoulder width or the match gets poor. The head is outside both windows, so tilting or turning
+it doesn't affect the breath.
 
 | Signal | Source | Drives |
 | --- | --- | --- |
 | Lid signal 0–1 | Face blendshapes, smoothed over 0.15 s | Closed when ≥ threshold (0.55), open again below threshold − 0.08 |
-| Eyes closed ≥ hold (1.5 s) | Lid state | Noise fades in (5 s); eyes open for 0.3 s fades it out (1 s) |
-| Breath 0–1 | (shoulder midline y − nose tip y) ÷ shoulder width, adaptive window | Lowpass cutoff, exponential from 110 Hz (out-breath) to 900 Hz (in-breath); a small level swell; the picture's fine detail, brightness and aperture |
+| Eyes closed ≥ hold (0.6 s) | Lid state | Noise fades in (2.5 s); eyes open for 0.3 s fades it out (1 s) |
+| Breath 0–1 | Up-down shift of the shoulder windows ÷ shoulder width, adaptive window | Breath trace, breath count |
+| Smoothed breath | Breath averaged over the **Breath smoothing** window (1.5 s) | Lowpass cutoff, exponential from **Low cutoff** (110 Hz) on the out-breath to **High cutoff** (900 Hz) on the in-breath; a small level swell; the picture's fine detail, brightness and aperture |
 
-Every value above is a slider under **Settings** (saved in the browser), plus breath sensitivity (the
-smallest min/max window), an invert switch for the breath direction and a mirror switch.
+The Lowpass filter panel shows the chosen band on a 20 Hz – 10 kHz scale with the live cutoff. Breath
+smoothing is two chained averages, each with a quarter of the window as its time constant. That has the same
+delay as a plain average over the window but never cancels a breath outright (a plain 5 s average cancels a
+5 s breath completely).
+
+Everything else is under **Settings**, saved in the browser: closed threshold, hold, fades, volume, breath
+sensitivity (the smallest min/max window), an invert switch for the breath direction and a mirror switch.
 
 ## Tips
 
-- If the noise starts while your eyes are open (glasses, a low camera looking down at you, a big smile),
+- If the noise starts while your eyes are open (glasses, a low camera looking up at you, a big smile),
   raise **Closed threshold**. If it never starts, lower it.
-- If the breath trace barely moves, raise **Breath sensitivity** or breathe a little more into the chest and
-  shoulders. If it jitters, lower it. The window settles over the first few breaths.
-- When the shoulders leave the frame the filter settles at a resting position instead of guessing.
-- The tracking runs locally in the browser tab. Video is never uploaded.
+- If the breath trace barely moves, raise **Breath sensitivity**. Bare shoulders in dim light have little
+  texture, so a lamp to one side helps the shoulder windows lock on. If the trace runs backwards, tick
+  **Invert breath direction**.
+- Corner brackets in amber mean a window is locked on; grey means its match is poor and it will be placed
+  again.
+- Looking down with your eyes open can look like closed eyes to the face model.
+- The tracking runs locally in the browser. Video is never uploaded.
