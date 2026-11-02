@@ -537,8 +537,23 @@ const $ = id => document.getElementById(id);
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const ema = (prev, x, dt, tau) => prev + (x - prev) * (1 - Math.exp(-dt / tau));
 const cssVar = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-const COLORS = { fg: cssVar('--fg'), muted: cssVar('--muted'), rule: cssVar('--rule'), breath: cssVar('--breath'), lid: cssVar('--lid'), night: cssVar('--night') };
-const FONT_DATA = cssVar('--font-data');
+// Colors and the data font for the canvases. Read from the CSS tokens, with the same values built in:
+// if the styles aren't ready when this runs (it can happen when the page comes from the offline
+// cache or opens as an installed app), an empty read would otherwise leave the canvases drawing in
+// black with the browser's tiny default font. Read again once the page and its fonts have loaded.
+const TOKEN_DEFAULTS = {
+  fg: ['--fg', '#d7d9e0'], muted: ['--muted', '#858a97'], rule: ['--rule', '#23262f'],
+  breath: ['--breath', '#e1b673'], lid: ['--lid', '#8db4cc'], night: ['--night', '#0a0b0f'],
+};
+const COLORS = {};
+let FONT_DATA = '"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace';
+function readTokens() {
+  for (const [key, [name, fallback]] of Object.entries(TOKEN_DEFAULTS)) COLORS[key] = cssVar(name) || fallback;
+  FONT_DATA = cssVar('--font-data') || FONT_DATA;
+}
+readTokens();
+addEventListener('load', readTokens);
+document.fonts?.ready.then(readTokens).catch(() => {});
 // How open the filter is for a breath value: 0 at or below the exhale floor, 1 at the top of the breath.
 const filterAmount = b => S.exhaleFloor > 0 ? clamp((b - S.exhaleFloor) / (1 - S.exhaleFloor), 0, 1) : clamp(b, 0, 1);
 const cutoffFor = b => S.cutoffLow * Math.pow(Math.max(S.cutoffHigh, S.cutoffLow + 1) / S.cutoffLow, filterAmount(b));
