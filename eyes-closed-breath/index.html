@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Breathing Dark</title>
+<meta name="description" content="Close your eyes and dark noise fades in. Its filter opens as you breathe in and closes as you breathe out.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one screen. Camera mirror on the left, instrument readouts on the right.
+   A full-screen noise layer covers everything once the eyes have been closed long enough. */
+:root {
+  color-scheme: dark;
+  --night: #0a0b0f;            /* page ground, faintly blue */
+  --panel: #111319;            /* camera well */
+  --rule: #23262f;             /* hairlines and meter tracks */
+  --fg: #d7d9e0;               /* text */
+  --muted: #858a97;            /* secondary text */
+  --breath: #e1b673;           /* breath trace and filter readout */
+  --lid: #8db4cc;              /* eyes-closed state */
+  --warn: #d98c7a;             /* tracking problems */
+  --scrim: rgb(10 11 15 / 0.74);
+
+  --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --step--2: 0.75rem;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-3: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--fg);
+  font: 400 var(--step-0)/1.5 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.shell {
+  max-width: 74rem;
+  margin: 0 auto;
+  padding-block: clamp(20px, 4vw, 48px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.intro { display: grid; gap: 10px; }
+h1 {
+  margin: 0;
+  font: 300 var(--step-3)/1.02 var(--font-display);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+h1 em { font-style: italic; color: var(--muted); }
+.lede { margin: 0; max-width: 58ch; color: var(--muted); }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 36px);
+  align-items: start;
+}
+@media (max-width: 780px) { .stage { grid-template-columns: minmax(0, 1fr); } }
+
+.mirror {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  max-width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.mirror canvas { display: block; width: 100%; height: 100%; object-fit: cover; }
+.mirror-empty {
+  position: absolute; inset: 0;
+  display: grid; place-content: center; gap: 8px;
+  padding: 24px; text-align: center; color: var(--muted);
+}
+.mirror-empty p { margin: 0; max-width: 34ch; }
+.mirror-empty strong { color: var(--fg); font-weight: 500; }
+.status {
+  position: absolute; left: 12px; bottom: 12px; right: 12px;
+  width: fit-content; max-width: calc(100% - 24px);
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: var(--scrim);
+  font: 500 var(--step--2)/1.35 var(--font-data);
+  color: var(--fg);
+}
+.status.warn { color: var(--warn); }
+
+.sr-video { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+.readouts { display: grid; gap: 18px; min-width: 0; }
+.readout { display: grid; gap: 8px; padding-bottom: 18px; border-bottom: 1px solid var(--rule); min-width: 0; }
+.readout-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.label {
+  font: 500 var(--step--2)/1 var(--font-data);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.value {
+  font: 500 var(--step-1)/1.1 var(--font-data);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.value.closed { color: var(--lid); }
+.value.breath { color: var(--breath); }
+
+.meter { position: relative; height: 6px; border-radius: 3px; background: var(--rule); }
+.meter-fill {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: 0; border-radius: 3px; background: var(--muted);
+}
+.meter-fill.closed { background: var(--lid); }
+.meter-fill.noise { background: var(--fg); }
+.meter-tick { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; background: var(--fg); }
+
+#breathTrace { display: block; width: 100%; height: 96px; }
+
+.note { margin: 0; color: var(--muted); font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+.note.warn { color: var(--warn); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+button {
+  font: 500 var(--step-0)/1 var(--font-body);
+  padding: 12px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--muted); }
+button.primary { background: var(--fg); border-color: var(--fg); color: var(--night); }
+button.primary:hover:not(:disabled) { background: var(--breath); border-color: var(--breath); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button:focus-visible, summary:focus-visible, input:focus-visible {
+  outline: 2px solid var(--breath);
+  outline-offset: 2px;
+}
+
+.settings { border-top: 1px solid var(--rule); padding-top: 16px; }
+.settings summary {
+  cursor: pointer;
+  width: fit-content;
+  font: 500 var(--step--2)/1.6 var(--font-data);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 20px 32px;
+  margin-top: 18px;
+}
+.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: baseline; align-content: start; }
+.setting label { font-size: var(--step--1); }
+.setting output { font: 400 var(--step--1) var(--font-data); font-variant-numeric: tabular-nums; }
+.setting input[type="range"] { grid-column: 1 / -1; width: 100%; margin: 4px 0 0; accent-color: var(--breath); }
+.setting .hint { grid-column: 1 / -1; margin: 0; font-size: var(--step--2); color: var(--muted); }
+.check { display: flex; gap: 10px; align-items: center; font-size: var(--step--1); cursor: pointer; }
+.check input { accent-color: var(--breath); width: 16px; height: 16px; }
+.reset-row { grid-column: 1 / -1; }
+.reset-row button { font-size: var(--step--1); padding: 8px 12px; }
+
+.footnote { display: flex; flex-wrap: wrap; gap: 6px 24px; margin: 0; color: var(--muted); font-size: var(--step--2); }
+kbd {
+  font: 500 var(--step--2) var(--font-data);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--fg);
+}
+
+/* The dark noise. Opacity follows the fade; it only catches clicks while it covers the page. */
+.noise-layer {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  background: var(--night);
+}
+.noise-layer.covering { pointer-events: auto; cursor: pointer; }
+.overlay-text {
+  position: fixed; z-index: 21;
+  font: 400 var(--step--2)/1.5 var(--font-data);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+.hud {
+  left: max(16px, env(safe-area-inset-left, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+}
+.preview-hint {
+  top: calc(16px + env(safe-area-inset-top, 0px));
+  left: max(16px, env(safe-area-inset-left, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="intro">
+    <h1>Breathing <em>Dark</em></h1>
+    <p class="lede">Close your eyes. After a moment, dark noise rises around you. Its filter opens as you breathe in and settles as you breathe out. Open your eyes and it falls away.</p>
+  </header>
+
+  <section class="stage" aria-label="Tracking">
+    <figure class="mirror">
+      <canvas id="camera" width="640" height="480" aria-label="Camera view with eye and shoulder tracking"></canvas>
+      <div class="mirror-empty" id="cameraEmpty">
+        <p><strong>Sit so your head and both shoulders are in the frame.</strong></p>
+        <p>Press Begin, allow the camera, then close your eyes. Headphones help.</p>
+      </div>
+      <figcaption id="status" class="status" role="status">Camera off</figcaption>
+    </figure>
+    <video id="video" class="sr-video" playsinline muted></video>
+
+    <div class="readouts">
+      <div class="readout">
+        <div class="readout-head"><span class="label">Eyes</span><span class="value" id="eyesValue">Not tracking</span></div>
+        <div class="meter" aria-hidden="true"><div class="meter-fill" id="lidFill"></div><div class="meter-tick" id="lidTick"></div></div>
+        <p class="note" id="eyesNote">Lid signal from the face model. The tick marks the closed threshold.</p>
+      </div>
+
+      <div class="readout">
+        <div class="readout-head"><span class="label">Breath</span><span class="value breath" id="breathValue">Not tracking</span></div>
+        <canvas id="breathTrace" aria-label="Breath over the last 30 seconds"></canvas>
+        <p class="note" id="breathNote">Read from the gap between your nose and your shoulders, which narrows as your shoulders rise on the in-breath.</p>
+      </div>
+
+      <div class="readout">
+        <div class="readout-head"><span class="label">Noise</span><span class="value" id="noiseValue">Silent</span></div>
+        <div class="meter" aria-hidden="true"><div class="meter-fill noise" id="noiseFill"></div></div>
+        <p class="note" id="cutoffNote">Lowpass filter: 110 Hz on the out-breath, 900 Hz on the in-breath.</p>
+      </div>
+
+      <div class="actions">
+        <button id="begin" class="primary" type="button">Begin</button>
+        <button id="preview" type="button" disabled>Preview with eyes open</button>
+      </div>
+    </div>
+  </section>
+
+  <details class="settings" id="settings">
+    <summary>Settings</summary>
+    <div class="settings-grid" id="settingsGrid"></div>
+  </details>
+
+  <p class="footnote">
+    <span><kbd>P</kbd> preview the noise · <kbd>H</kbd> show readouts over the noise</span>
+    <span>Tracking runs in this browser tab. Video is never uploaded.</span>
+  </p>
+</main>
+
+<canvas id="noise" class="noise-layer" aria-hidden="true"></canvas>
+<div id="hud" class="overlay-text hud" hidden></div>
+<div id="previewHint" class="overlay-text preview-hint" hidden>Preview. Press P or click to return.</div>
+
+<script type="module">
+// =====================================================================
+// Breathing Dark
+// Eye closure: MediaPipe Face Landmarker blendshapes, as in the
+//   "eyes wide shut v2" sketch (eyeBlink minus a share of eyeWide,
+//   smoothed, against a threshold, held for a while before anything fades in).
+// Breath: the gap between the nose and the shoulder midline, as in the
+//   "breathe 25 with posture" sketch, with an adaptive min/max window so
+//   small shoulder movements fill the whole 0..1 range.
+// Sound: brown ("dark") noise through a lowpass whose cutoff follows the breath.
+// Picture: a dark noise field whose fine detail and aperture follow the same value.
+// =====================================================================
+
+const MP_VERSION = '0.10.35';
+const MP_URL = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${MP_VERSION}`;
+const FACE_MODEL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
+const POSE_MODEL = 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task';
+
+// ---------- Tracking constants ----------
+const TRACK = {
+  wideWeight: 0.25,        // sketch 1: blink - 0.25 * eyeWide
+  lidSmoothSec: 0.15,      // sketch 1 smoothing 0.8 per frame at ~30 fps
+  lidHysteresis: 0.08,     // must drop this far under the threshold to count as open again
+  openGraceSec: 0.3,       // eyes open this long before the noise starts to fall
+  faceLostGraceSec: 1.5,   // face missing this long counts as eyes open
+
+  gapSmoothSec: 0.4,       // sketch 2 smooths nose and shoulders with EMA alpha 0.02
+  shoulderScaleSec: 4,     // shoulder width, used to make the gap independent of camera distance
+  rangeRelaxSec: 12,       // how fast the min/max window forgets old extremes
+  rangeResetSec: 4,        // shoulders gone this long: start the window again
+  maxSpan: 0.09,           // window never wider than this (in shoulder widths)
+  outSmoothSec: 0.15,
+  breathLostSec: 1.5,
+  restingBreath: 0.4,      // where the filter settles when the shoulders are out of view
+  minVisibility: 0.5,
+
+  inhaleMark: 0.68,        // sketch 2 counts a breath on an up-swing then a down-swing
+  exhaleMark: 0.32,
+  minPeriodSec: 1.2,
+  maxPeriodSec: 30,
+  breathsToAverage: 3,     // sketch 2: numBreathsForHue
+  traceSec: 30,
+};
+
+// ---------- Settings ----------
+const STORE_KEY = 'breathing-dark.settings.v1';
+const DEFAULTS = {
+  lidThreshold: 0.55,
+  holdSec: 1.5,
+  fadeInSec: 5,
+  fadeOutSec: 1,
+  volume: 0.6,
+  cutoffLow: 110,
+  cutoffHigh: 900,
+  sensitivity: 5,
+  invertBreath: false,
+  mirror: true,
+};
+const fmtHz = v => v >= 1000 ? `${(v / 1000).toFixed(2)} kHz` : `${Math.round(v)} Hz`;
+const SLIDERS = [
+  { key: 'lidThreshold', label: 'Closed threshold', min: 0.3, max: 0.85, step: 0.01, fmt: v => v.toFixed(2), hint: 'Raise it if the noise starts while your eyes are open.' },
+  { key: 'holdSec', label: 'Hold before the noise', min: 0.5, max: 8, step: 0.1, fmt: v => `${v.toFixed(1)} s`, hint: 'Eyes stay closed this long first, so blinks are ignored.' },
+  { key: 'fadeInSec', label: 'Fade in', min: 1, max: 20, step: 0.5, fmt: v => `${v.toFixed(1)} s` },
+  { key: 'fadeOutSec', label: 'Fade out', min: 0.2, max: 6, step: 0.1, fmt: v => `${v.toFixed(1)} s` },
+  { key: 'volume', label: 'Volume', min: 0, max: 1, step: 0.01, fmt: v => `${Math.round(v * 100)}%` },
+  { key: 'cutoffLow', label: 'Filter on the out-breath', min: 40, max: 500, step: 5, fmt: fmtHz },
+  { key: 'cutoffHigh', label: 'Filter on the in-breath', min: 300, max: 4000, step: 10, fmt: fmtHz },
+  { key: 'sensitivity', label: 'Breath sensitivity', min: 1, max: 10, step: 0.5, fmt: v => v.toFixed(1), hint: 'Raise it if the trace barely moves. Lower it if it jitters.' },
+];
+const CHECKS = [
+  { key: 'invertBreath', label: 'Invert breath direction' },
+  { key: 'mirror', label: 'Mirror the camera' },
+];
+
+const S = loadSettings();
+function loadSettings() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) return { ...DEFAULTS, ...JSON.parse(raw) };
+  } catch { /* storage blocked: use defaults */ }
+  return { ...DEFAULTS };
+}
+function saveSettings() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch { /* ignore */ }
+}
+// Sensitivity 1..10 maps to the smallest min/max window, 0.03 .. 0.004 shoulder widths.
+const spanFor = s => 0.03 * Math.pow(0.004 / 0.03, (s - 1) / 9);
+
+// ---------- Helpers ----------
+const $ = id => document.getElementById(id);
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+const ema = (prev, x, dt, tau) => prev + (x - prev) * (1 - Math.exp(-dt / tau));
+const cssVar = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const COLORS = { fg: cssVar('--fg'), muted: cssVar('--muted'), rule: cssVar('--rule'), breath: cssVar('--breath'), lid: cssVar('--lid'), night: cssVar('--night') };
+const FONT_DATA = cssVar('--font-data');
+const cutoffFor = b => S.cutoffLow * Math.pow(Math.max(S.cutoffHigh, S.cutoffLow + 1) / S.cutoffLow, b);
+
+// =====================================================================
+// Eye closure
+// =====================================================================
+function createLidTracker() {
+  const st = { lid: 0, raw: 0, closed: false, closedSince: 0, openSince: 0, faceLastSeen: -Infinity, faceInView: false };
+
+  function update(blend, now, dt) {
+    if (blend) {
+      let raw = (blend.blinkL + blend.blinkR) / 2;
+      if (blend.wideL != null && blend.wideR != null) {
+        raw = clamp(raw - TRACK.wideWeight * (blend.wideL + blend.wideR) / 2, 0, 1);
+      }
+      st.raw = raw;
+      st.lid = ema(st.lid, raw, dt, TRACK.lidSmoothSec);
+      st.faceLastSeen = now;
+      if (!st.closed && st.lid >= S.lidThreshold) { st.closed = true; st.closedSince = now; }
+      else if (st.closed && st.lid < S.lidThreshold - TRACK.lidHysteresis) { st.closed = false; st.openSince = now; }
+    } else if (now - st.faceLastSeen > TRACK.faceLostGraceSec) {
+      st.lid = ema(st.lid, 0, dt, TRACK.lidSmoothSec);
+      if (st.closed) { st.closed = false; st.openSince = now; }
+    }
+    st.faceInView = now - st.faceLastSeen <= TRACK.faceLostGraceSec;
+  }
+  function reset() {
+    Object.assign(st, { lid: 0, raw: 0, closed: false, closedSince: 0, openSince: 0, faceLastSeen: -Infinity, faceInView: false });
+  }
+  return { st, update, reset };
+}
+
+function readBlendshapes(faceRes) {
+  const cats = faceRes?.faceBlendshapes?.[0]?.categories;
+  if (!cats || cats.length === 0) return null;
+  const out = { blinkL: 0, blinkR: 0, wideL: null, wideR: null };
+  for (const c of cats) {
+    if (c.categoryName === 'eyeBlinkLeft') out.blinkL = c.score;
+    else if (c.categoryName === 'eyeBlinkRight') out.blinkR = c.score;
+    else if (c.categoryName === 'eyeWideLeft') out.wideL = c.score;
+    else if (c.categoryName === 'eyeWideRight') out.wideR = c.score;
+  }
+  return out;
+}
+
+// =====================================================================
+// Breath
+// =====================================================================
+function createBreathTracker() {
+  const st = {};
+  function reset() {
+    Object.assign(st, {
+      sw: null, gap: null, lo: null, hi: null,
+      raw: TRACK.restingBreath, out: TRACK.restingBreath, vel: 0,
+      lastSeen: -Infinity, tracked: false,
+      stage: 'waitingForUp', lastBreathAt: null, periods: [], marks: [],
+    });
+  }
+  reset();
+
+  // Once per camera frame with a fresh measurement (or null).
+  function update(sample, now, dt) {
+    if (!sample) return;
+    st.sw = st.sw == null ? sample.sw : ema(st.sw, sample.sw, dt, TRACK.shoulderScaleSec);
+    const g = sample.gap / st.sw;
+    const fresh = st.gap == null || now - st.lastSeen > TRACK.rangeResetSec;
+    st.gap = fresh ? g : ema(st.gap, g, dt, TRACK.gapSmoothSec);
+    const d = st.gap;
+    const minSpan = spanFor(S.sensitivity);
+
+    if (fresh || st.lo == null) { st.lo = d - minSpan / 2; st.hi = d + minSpan / 2; }
+    const k = 1 - Math.exp(-dt / TRACK.rangeRelaxSec);
+    st.lo = d < st.lo ? d : st.lo + (d - st.lo) * k;
+    st.hi = d > st.hi ? d : st.hi + (d - st.hi) * k;
+
+    const span = st.hi - st.lo;
+    if (span < minSpan) {
+      const c = (st.hi + st.lo) / 2;
+      st.lo = c - minSpan / 2; st.hi = c + minSpan / 2;
+    } else if (span > TRACK.maxSpan) {
+      if (d - st.lo > st.hi - d) st.lo = st.hi - TRACK.maxSpan; else st.hi = st.lo + TRACK.maxSpan;
+    }
+
+    // A short gap means the shoulders are raised: the in-breath.
+    let b = (st.hi - d) / (st.hi - st.lo);
+    if (S.invertBreath) b = 1 - b;
+    st.raw = clamp(b, 0, 1);
+    st.lastSeen = now;
+  }
+
+  // Every animation frame.
+  function tick(now, dt) {
+    st.tracked = now - st.lastSeen < TRACK.breathLostSec;
+    const prev = st.out;
+    st.out = st.tracked
+      ? ema(st.out, st.raw, dt, TRACK.outSmoothSec)
+      : ema(st.out, TRACK.restingBreath, dt, 2.5);
+    st.vel = ema(st.vel, (st.out - prev) / dt, dt, 0.35);
+
+    if (!st.tracked) return;
+    if (st.stage === 'waitingForUp' && st.out > TRACK.inhaleMark) {
+      st.stage = 'waitingForDown';
+    } else if (st.stage === 'waitingForDown' && st.out < TRACK.exhaleMark) {
+      register(now);
+      st.stage = 'waitingForUp';
+    }
+  }
+
+  function register(now) {
+    if (st.lastBreathAt != null) {
+      const p = now - st.lastBreathAt;
+      if (p < TRACK.minPeriodSec) return;
+      if (p > TRACK.maxPeriodSec) st.periods.length = 0;
+      else {
+        st.periods.push(p);
+        if (st.periods.length > TRACK.breathsToAverage + 1) st.periods.shift();
+      }
+    }
+    st.lastBreathAt = now;
+    st.marks.push(now);
+    while (st.marks.length && st.marks[0] < now - TRACK.traceSec) st.marks.shift();
+  }
+
+  function summary() {
+    const ps = st.periods.slice(-TRACK.breathsToAverage);
+    if (ps.length === 0) return null;
+    const avg = ps.reduce((a, b) => a + b, 0) / ps.length;
+    let variation = null;
+    if (st.periods.length >= 2) {
+      const diffs = [];
+      for (let i = 1; i < st.periods.length; i++) diffs.push(Math.abs(st.periods[i] - st.periods[i - 1]) / st.periods[i - 1] * 100);
+      variation = diffs.reduce((a, b) => a + b, 0) / diffs.length;
+    }
+    return { avg, perMin: 60 / avg, variation, count: ps.length };
+  }
+
+  return { st, update, tick, reset, summary };
+}
+
+function readBreathSample(poseRes, faceRes, W, H) {
+  const pl = poseRes?.landmarks?.[0];
+  if (!pl) return null;
+  const ls = pl[11], rs = pl[12];
+  if (!ls || !rs) return null;
+  if ((ls.visibility ?? 1) < TRACK.minVisibility || (rs.visibility ?? 1) < TRACK.minVisibility) return null;
+  // The face mesh nose tip is steadier than the pose model's nose; fall back to the pose nose.
+  const fl = faceRes?.faceLandmarks?.[0];
+  const nose = fl ? fl[1] : ((pl[0]?.visibility ?? 0) >= TRACK.minVisibility ? pl[0] : null);
+  if (!nose) return null;
+  const sw = Math.hypot((ls.x - rs.x) * W, (ls.y - rs.y) * H);
+  if (sw < 24) return null;
+  const midY = (ls.y + rs.y) / 2 * H;
+  return { gap: midY - nose.y * H, sw, nose, ls, rs };
+}
+
+// =====================================================================
+// Sound: brown noise -> two lowpass stages -> breath swell -> fade -> limiter
+// =====================================================================
+function makeBrownNoise(ctx, seconds) {
+  const rate = ctx.sampleRate;
+  const len = Math.floor(rate * seconds);
+  const xf = Math.floor(rate * 0.5); // crossfade the loop point so it never clicks
+  const buffer = ctx.createBuffer(2, len, rate);
+  for (let ch = 0; ch < 2; ch++) {
+    const raw = new Float32Array(len + xf);
+    let b = 0;
+    for (let i = 0; i < raw.length; i++) {
+      b = (b + 0.02 * (Math.random() * 2 - 1)) / 1.02;
+      raw[i] = b;
+    }
+    const out = buffer.getChannelData(ch);
+    out.set(raw.subarray(0, len));
+    for (let i = 0; i < xf; i++) {
+      const a = (i / xf) * Math.PI / 2;
+      out[i] = raw[i] * Math.sin(a) + raw[len + i] * Math.cos(a);
+    }
+    let peak = 0;
+    for (let i = 0; i < len; i++) peak = Math.max(peak, Math.abs(out[i]));
+    const g = 0.9 / (peak || 1);
+    for (let i = 0; i < len; i++) out[i] *= g;
+  }
+  return buffer;
+}
+
+function createNoiseEngine() {
+  let ctx = null, nodes = null, lastUpdate = 0;
+
+  function start() {
+    if (ctx) return ctx.resume();
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return Promise.resolve();
+    ctx = new AC(); // created inside the click so the browser lets it play
+    const src = ctx.createBufferSource();
+    src.buffer = makeBrownNoise(ctx, 18);
+    src.loop = true;
+    const lp1 = ctx.createBiquadFilter();
+    lp1.type = 'lowpass'; lp1.Q.value = 0.9; lp1.frequency.value = cutoffFor(TRACK.restingBreath);
+    const lp2 = ctx.createBiquadFilter();
+    lp2.type = 'lowpass'; lp2.Q.value = 0.55; lp2.frequency.value = cutoffFor(TRACK.restingBreath) * 1.5;
+    const swell = ctx.createGain(); swell.gain.value = 0.8;
+    const master = ctx.createGain(); master.gain.value = 0;
+    const limiter = ctx.createDynamicsCompressor();
+    limiter.threshold.value = -10; limiter.knee.value = 6; limiter.ratio.value = 8;
+    limiter.attack.value = 0.01; limiter.release.value = 0.3;
+    src.connect(lp1).connect(lp2).connect(swell).connect(master).connect(limiter).connect(ctx.destination);
+    src.start();
+    nodes = { lp1, lp2, swell, master };
+    return ctx.resume();
+  }
+
+  function update(fade, breath) {
+    if (!ctx || !nodes) return;
+    const t = ctx.currentTime;
+    if (t - lastUpdate < 1 / 40) return;
+    lastUpdate = t;
+    const f = cutoffFor(breath);
+    nodes.lp1.frequency.setTargetAtTime(f, t, 0.08);
+    nodes.lp2.frequency.setTargetAtTime(Math.min(f * 1.5, ctx.sampleRate / 2 - 100), t, 0.08);
+    nodes.swell.gain.setTargetAtTime(0.65 + 0.35 * breath, t, 0.12);
+    nodes.master.gain.setTargetAtTime(S.volume * fade * fade * 1.4, t, 0.06);
+  }
+
+  return { start, update, get running() { return !!ctx && ctx.state === 'running'; } };
+}
+
+// =====================================================================
+// Picture: dark noise field. Octaves pass through a soft lowpass whose
+// cutoff rides the breath, and the aperture widens on the in-breath.
+// =====================================================================
+const VERT = `
+attribute vec2 aPos;
+void main() { gl_Position = vec4(aPos, 0.0, 1.0); }`;
+const FRAG = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+uniform vec2 uRes;
+uniform float uTime;
+uniform float uGrainTime;
+uniform float uOpen;
+
+float hash(vec2 p) {
+  p = fract(p * vec2(123.34, 456.21));
+  p += dot(p, p + 45.32);
+  return fract(p.x * p.y);
+}
+float vnoise(vec2 p) {
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f * f * (3.0 - 2.0 * f);
+  float a = hash(i), b = hash(i + vec2(1.0, 0.0));
+  float c = hash(i + vec2(0.0, 1.0)), d = hash(i + vec2(1.0, 1.0));
+  return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+}
+void main() {
+  vec2 p = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;
+  float cutoff = mix(1.3, 5.6, uOpen);          // octave where the filter rolls off
+  float sum = 0.0, norm = 0.0, freq = 1.7, amp = 1.0;
+  for (int k = 0; k < 7; k++) {
+    float fk = float(k);
+    float w = 1.0 / (1.0 + pow(2.0, (fk - cutoff) * 1.6));
+    vec2 drift = vec2(uTime * 0.013 * (fk + 1.0), -uTime * 0.009 * (fk + 1.0));
+    sum += w * amp * (vnoise(p * freq + drift + fk * 7.13) - 0.5);
+    norm += amp;
+    freq *= 2.0;
+    amp *= 0.62;
+  }
+  float smoke = sum / norm;
+  float grain = hash(gl_FragCoord.xy + fract(uGrainTime * 37.17) * vec2(113.1, 271.7)) - 0.5;
+  float grainPass = 1.0 / (1.0 + pow(2.0, (7.0 - cutoff) * 1.1));
+
+  float r = length(p);
+  float aperture = mix(0.55, 1.1, uOpen);
+  float vig = 1.0 - smoothstep(0.0, aperture, r * 0.85);
+
+  float lum = 0.07 + 0.045 * uOpen + smoke * mix(0.95, 0.62, uOpen) + grain * (0.06 + 0.16 * grainPass);
+  lum = max(lum * mix(0.55, 1.0, vig), 0.0);
+  vec3 cool = vec3(0.74, 0.82, 1.0);
+  vec3 warm = vec3(1.0, 0.82, 0.58);
+  vec3 col = lum * mix(cool, warm, 0.28 * uOpen * vig);
+  gl_FragColor = vec4(col, 1.0);
+}`;
+
+function createNoiseRenderer(canvas) {
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false, depth: false, powerPreference: 'low-power' });
+  if (!gl) {
+    const c2 = canvas.getContext('2d');
+    return { render() { if (c2) { c2.fillStyle = COLORS.night; c2.fillRect(0, 0, canvas.width, canvas.height); } } };
+  }
+  const compile = (type, src) => {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+    return s;
+  };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  const aPos = gl.getAttribLocation(prog, 'aPos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+  const u = name => gl.getUniformLocation(prog, name);
+  const uRes = u('uRes'), uTime = u('uTime'), uGrainTime = u('uGrainTime'), uOpen = u('uOpen');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  function render(t, open) {
+    const scale = 0.5; // half resolution keeps it cheap and softens the grain
+    const w = Math.max(1, Math.round(innerWidth * scale));
+    const h = Math.max(1, Math.round(innerHeight * scale));
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+    gl.viewport(0, 0, w, h);
+    const slow = reduceMotion.matches ? 0.4 : 1;
+    const tt = (t * slow) % 1000;
+    gl.uniform2f(uRes, w, h);
+    gl.uniform1f(uTime, tt);
+    gl.uniform1f(uGrainTime, reduceMotion.matches ? Math.floor(t * 4) / 4 : tt);
+    gl.uniform1f(uOpen, open);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  return { render };
+}
+
+// =====================================================================
+// Models
+// =====================================================================
+let modelsPromise = null;
+const models = { face: null, pose: null, poseError: null };
+
+function ensureModels() {
+  if (!modelsPromise) {
+    modelsPromise = loadModels().catch(err => { modelsPromise = null; throw err; });
+  }
+  return modelsPromise;
+}
+
+async function loadModels() {
+  const vision = await import(`${MP_URL}/vision_bundle.mjs`);
+  const fileset = await vision.FilesetResolver.forVisionTasks(`${MP_URL}/wasm`);
+  const withDelegate = async (Task, options) => {
+    try {
+      return await Task.createFromOptions(fileset, { ...options, baseOptions: { ...options.baseOptions, delegate: 'GPU' } });
+    } catch (e) {
+      console.warn('GPU delegate failed, using CPU', e);
+      return await Task.createFromOptions(fileset, { ...options, baseOptions: { ...options.baseOptions, delegate: 'CPU' } });
+    }
+  };
+  const [face, pose] = await Promise.allSettled([
+    withDelegate(vision.FaceLandmarker, {
+      baseOptions: { modelAssetPath: FACE_MODEL },
+      runningMode: 'VIDEO',
+      numFaces: 1,
+      outputFaceBlendshapes: true,
+      minFaceDetectionConfidence: 0.5,
+      minFacePresenceConfidence: 0.5,
+      minTrackingConfidence: 0.5,
+    }),
+    withDelegate(vision.PoseLandmarker, {
+      baseOptions: { modelAssetPath: POSE_MODEL },
+      runningMode: 'VIDEO',
+      numPoses: 1,
+      minPoseDetectionConfidence: 0.5,
+      minPosePresenceConfidence: 0.5,
+      minTrackingConfidence: 0.5,
+    }),
+  ]);
+  if (face.status === 'rejected') throw face.reason;
+  models.face = face.value;
+  if (pose.status === 'fulfilled') models.pose = pose.value;
+  else { models.poseError = pose.reason; console.error('Pose model failed to load', pose.reason); }
+  return models;
+}
+
+// =====================================================================
+// App
+// =====================================================================
+const video = $('video');
+const cameraCanvas = $('camera');
+const cam = cameraCanvas.getContext('2d');
+const traceCanvas = $('breathTrace');
+const trace = traceCanvas.getContext('2d');
+const noiseCanvas = $('noise');
+const lids = createLidTracker();
+const breath = createBreathTracker();
+const engine = createNoiseEngine();
+let noise = null;
+try { noise = createNoiseRenderer(noiseCanvas); } catch (e) { console.error('Noise shader failed', e); }
+
+const app = {
+  running: false, preview: false, hud: false, armed: false, fade: 0,
+  stream: null, faceRes: null, poseRes: null, sample: null, statusMsg: null, statusWarn: false,
+  traceBuf: [], wakeLock: null,
+};
+
+const ui = {
+  begin: $('begin'), preview: $('preview'), status: $('status'), cameraEmpty: $('cameraEmpty'),
+  eyesValue: $('eyesValue'), eyesNote: $('eyesNote'), lidFill: $('lidFill'), lidTick: $('lidTick'),
+  breathValue: $('breathValue'), breathNote: $('breathNote'),
+  noiseValue: $('noiseValue'), noiseFill: $('noiseFill'), cutoffNote: $('cutoffNote'),
+  hud: $('hud'), previewHint: $('previewHint'),
+};
+
+function setStatus(msg, warn = false) {
+  app.statusMsg = msg; app.statusWarn = warn;
+  ui.status.textContent = msg;
+  ui.status.classList.toggle('warn', warn);
+}
+
+// ---------- Settings UI ----------
+function buildSettings() {
+  const grid = $('settingsGrid');
+  grid.textContent = '';
+  for (const s of SLIDERS) {
+    const row = document.createElement('div');
+    row.className = 'setting';
+    const label = document.createElement('label');
+    label.htmlFor = `set-${s.key}`; label.textContent = s.label;
+    const out = document.createElement('output');
+    out.id = `out-${s.key}`; out.htmlFor = `set-${s.key}`; out.textContent = s.fmt(S[s.key]);
+    const input = document.createElement('input');
+    Object.assign(input, { type: 'range', id: `set-${s.key}`, min: s.min, max: s.max, step: s.step, value: S[s.key] });
+    input.addEventListener('input', () => {
+      S[s.key] = parseFloat(input.value);
+      out.textContent = s.fmt(S[s.key]);
+      saveSettings();
+      updateStaticCopy();
+    });
+    row.append(label, out, input);
+    if (s.hint) {
+      const hint = document.createElement('p');
+      hint.className = 'hint'; hint.textContent = s.hint;
+      row.append(hint);
+    }
+    grid.append(row);
+  }
+  for (const c of CHECKS) {
+    const label = document.createElement('label');
+    label.className = 'check';
+    const input = document.createElement('input');
+    Object.assign(input, { type: 'checkbox', id: `set-${c.key}`, checked: !!S[c.key] });
+    input.addEventListener('change', () => { S[c.key] = input.checked; saveSettings(); });
+    label.append(input, document.createTextNode(c.label));
+    grid.append(label);
+  }
+  const resetRow = document.createElement('div');
+  resetRow.className = 'reset-row';
+  const reset = document.createElement('button');
+  reset.type = 'button'; reset.id = 'resetSettings'; reset.textContent = 'Restore defaults';
+  reset.addEventListener('click', () => { Object.assign(S, DEFAULTS); saveSettings(); buildSettings(); updateStaticCopy(); });
+  resetRow.append(reset);
+  grid.append(resetRow);
+}
+
+function updateStaticCopy() {
+  ui.lidTick.style.left = `${S.lidThreshold * 100}%`;
+}
+
+// ---------- Start / stop ----------
+async function begin() {
+  ui.begin.disabled = true;
+  try {
+    const audioStart = engine.start(); // must run inside the click
+    if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+      setStatus('The camera needs a secure page. Open this file from https:// or http://localhost.', true);
+      return;
+    }
+    setStatus('Starting camera…');
+    app.stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+      audio: false,
+    });
+    video.srcObject = app.stream;
+    await video.play();
+    await audioStart;
+    ui.cameraEmpty.hidden = true;
+    setStatus('Loading face and pose models…');
+    await ensureModels();
+    lids.reset();
+    breath.reset();
+    app.traceBuf.length = 0;
+    app.running = true;
+    ui.begin.textContent = 'Stop';
+    ui.preview.disabled = false;
+    setStatus(models.pose ? 'Tracking eyes and breath' : 'Tracking eyes only. The pose model did not load, so breath is not tracked.', !models.pose);
+    requestWakeLock();
+  } catch (err) {
+    console.error(err);
+    stopStream();
+    const name = err?.name;
+    if (name === 'NotAllowedError' || name === 'SecurityError') setStatus('Camera access was blocked. Allow the camera for this page in your browser’s site settings, then press Begin.', true);
+    else if (name === 'NotFoundError' || name === 'OverconstrainedError') setStatus('No camera found. Connect a camera and press Begin.', true);
+    else if (name === 'NotReadableError') setStatus('The camera is in use by another app. Close it and press Begin.', true);
+    else setStatus('The face and pose models did not load. Check your connection and press Begin to try again.', true);
+  } finally {
+    ui.begin.disabled = false;
+  }
+}
+
+function stopStream() {
+  if (app.stream) app.stream.getTracks().forEach(t => t.stop());
+  app.stream = null;
+  video.srcObject = null;
+}
+
+function stop() {
+  app.running = false;
+  setPreview(false);
+  stopStream();
+  ui.begin.textContent = 'Begin';
+  ui.preview.disabled = true;
+  ui.cameraEmpty.hidden = false;
+  cam.clearRect(0, 0, cameraCanvas.width, cameraCanvas.height);
+  app.faceRes = app.poseRes = app.sample = null;
+  setStatus('Stopped');
+  releaseWakeLock();
+}
+
+function setPreview(on) {
+  app.preview = on && app.running;
+  ui.preview.textContent = app.preview ? 'End preview' : 'Preview with eyes open';
+  ui.previewHint.hidden = !app.preview;
+}
+
+async function requestWakeLock() {
+  try { app.wakeLock = await navigator.wakeLock?.request('screen'); } catch { app.wakeLock = null; }
+}
+function releaseWakeLock() {
+  try { app.wakeLock?.release(); } catch { /* ignore */ }
+  app.wakeLock = null;
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && app.running) requestWakeLock();
+});
+
+ui.begin.addEventListener('click', () => { app.running ? stop() : begin(); });
+ui.preview.addEventListener('click', () => setPreview(!app.preview));
+noiseCanvas.addEventListener('click', () => { if (app.preview) setPreview(false); });
+addEventListener('keydown', e => {
+  if (e.target instanceof HTMLInputElement || e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (k === 'p' && app.running) setPreview(!app.preview);
+  else if (k === 'h') { app.hud = !app.hud; }
+  else if (k === 'escape' && app.preview) setPreview(false);
+});
+
+// ---------- Fade logic ----------
+function updateArming(now, dt) {
+  const L = lids.st;
+  if (!app.running) app.armed = false;
+  else if (app.preview) app.armed = true;
+  else if (L.closed && now - L.closedSince >= S.holdSec) app.armed = true;
+  else if (!L.closed && now - L.openSince >= TRACK.openGraceSec) app.armed = false;
+  const step = app.armed ? dt / S.fadeInSec : -dt / S.fadeOutSec;
+  app.fade = clamp(app.fade + step, 0, 1);
+}
+
+// ---------- Drawing ----------
+const RIGHT_EYE = [33, 7, 163, 144, 145, 153, 154, 155, 133, 173, 157, 158, 159, 160, 161, 246];
+const LEFT_EYE = [263, 249, 390, 373, 374, 380, 381, 382, 362, 398, 384, 385, 386, 387, 388, 466];
+
+function drawCamera() {
+  const W = video.videoWidth, H = video.videoHeight;
+  if (!app.running || !W || !H) return;
+  if (cameraCanvas.width !== W || cameraCanvas.height !== H) { cameraCanvas.width = W; cameraCanvas.height = H; }
+  const mx = x => (S.mirror ? 1 - x : x) * W;
+  cam.save();
+  if (S.mirror) cam.setTransform(-1, 0, 0, 1, W, 0);
+  cam.drawImage(video, 0, 0, W, H);
+  cam.restore();
+  cam.fillStyle = 'rgb(10 11 15 / 0.35)';
+  cam.fillRect(0, 0, W, H);
+
+  const fl = app.faceRes?.faceLandmarks?.[0];
+  const lw = Math.max(1.5, W / 320);
+  if (fl) {
+    cam.lineWidth = lw;
+    cam.strokeStyle = lids.st.closed ? COLORS.lid : COLORS.fg;
+    cam.fillStyle = lids.st.closed ? COLORS.lid : 'transparent';
+    for (const eye of [RIGHT_EYE, LEFT_EYE]) {
+      cam.beginPath();
+      eye.forEach((i, n) => { const p = fl[i]; n ? cam.lineTo(mx(p.x), p.y * H) : cam.moveTo(mx(p.x), p.y * H); });
+      cam.closePath();
+      cam.globalAlpha = 0.35; cam.fill();
+      cam.globalAlpha = 0.95; cam.stroke();
+    }
+    cam.globalAlpha = 1;
+  }
+
+  const s = app.sample;
+  if (s) {
+    const nx = mx(s.nose.x), ny = s.nose.y * H;
+    const lx = mx(s.ls.x), ly = s.ls.y * H, rx = mx(s.rs.x), ry = s.rs.y * H;
+    const midX = (lx + rx) / 2, midY = (ly + ry) / 2;
+    cam.strokeStyle = COLORS.fg; cam.globalAlpha = 0.6; cam.lineWidth = lw;
+    cam.beginPath(); cam.moveTo(lx, ly); cam.lineTo(rx, ry); cam.stroke();
+    cam.globalAlpha = 1;
+    cam.strokeStyle = COLORS.breath; cam.lineWidth = lw * 2;
+    cam.beginPath(); cam.moveTo(nx, ny); cam.lineTo(midX, midY); cam.stroke();
+    cam.fillStyle = COLORS.breath;
+    for (const [x, y] of [[nx, ny], [midX, midY]]) { cam.beginPath(); cam.arc(x, y, lw * 2.5, 0, Math.PI * 2); cam.fill(); }
+    cam.fillStyle = COLORS.fg;
+    for (const [x, y] of [[lx, ly], [rx, ry]]) { cam.beginPath(); cam.arc(x, y, lw * 2.5, 0, Math.PI * 2); cam.fill(); }
+  }
+}
+
+function drawTrace(now) {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const w = Math.round(traceCanvas.clientWidth * dpr), h = Math.round(traceCanvas.clientHeight * dpr);
+  if (!w || !h) return;
+  if (traceCanvas.width !== w || traceCanvas.height !== h) { traceCanvas.width = w; traceCanvas.height = h; }
+  trace.clearRect(0, 0, w, h);
+  const pad = 8 * dpr;
+  const left = 30 * dpr;
+  const plotW = w - left;
+  const y = b => pad + (1 - b) * (h - pad * 2);
+  const x = t => left + plotW * (1 - (now - t) / TRACK.traceSec);
+
+  trace.strokeStyle = COLORS.rule; trace.lineWidth = 1;
+  for (const b of [0, 0.5, 1]) { trace.beginPath(); trace.moveTo(left, y(b)); trace.lineTo(w, y(b)); trace.stroke(); }
+  trace.fillStyle = COLORS.muted;
+  trace.font = `${10 * dpr}px ${FONT_DATA}`;
+  trace.textBaseline = 'middle';
+  trace.fillText('in', 0, y(1));
+  trace.fillText('out', 0, y(0));
+
+  for (const m of breath.st.marks) {
+    if (now - m > TRACK.traceSec) continue;
+    trace.fillStyle = COLORS.muted;
+    trace.fillRect(x(m) - dpr / 2, h - pad, dpr, pad);
+  }
+
+  const buf = app.traceBuf;
+  if (buf.length < 2) return;
+  trace.beginPath();
+  trace.moveTo(x(buf[0].t), h);
+  for (const p of buf) trace.lineTo(x(p.t), y(p.b));
+  trace.lineTo(x(buf[buf.length - 1].t), h);
+  trace.closePath();
+  trace.globalAlpha = 0.12; trace.fillStyle = COLORS.breath; trace.fill();
+  trace.globalAlpha = 1;
+
+  trace.lineWidth = 1.5 * dpr;
+  trace.lineJoin = 'round';
+  for (let i = 1; i < buf.length; i++) {
+    const a = buf[i - 1], b = buf[i];
+    trace.strokeStyle = b.tracked ? COLORS.breath : COLORS.muted;
+    trace.beginPath(); trace.moveTo(x(a.t), y(a.b)); trace.lineTo(x(b.t), y(b.b)); trace.stroke();
+  }
+  const last = buf[buf.length - 1];
+  trace.fillStyle = last.tracked ? COLORS.breath : COLORS.muted;
+  trace.beginPath(); trace.arc(x(last.t), y(last.b), 3 * dpr, 0, Math.PI * 2); trace.fill();
+}
+
+// ---------- Readouts (about ten times a second) ----------
+function updateReadouts(now) {
+  const L = lids.st, B = breath.st;
+  ui.lidFill.style.width = `${clamp(L.lid, 0, 1) * 100}%`;
+  ui.lidFill.classList.toggle('closed', L.closed);
+  ui.noiseFill.style.width = `${app.fade * 100}%`;
+
+  if (!app.running) {
+    ui.eyesValue.textContent = 'Not tracking';
+    ui.breathValue.textContent = 'Not tracking';
+  } else if (!L.faceInView) {
+    ui.eyesValue.textContent = 'No face';
+  } else if (L.closed) {
+    ui.eyesValue.textContent = `Closed ${(now - L.closedSince).toFixed(1)} s`;
+  } else {
+    ui.eyesValue.textContent = 'Open';
+  }
+  ui.eyesValue.classList.toggle('closed', app.running && L.closed);
+
+  const closedFor = L.closed ? now - L.closedSince : 0;
+  let noiseText = 'Silent';
+  if (app.preview) noiseText = app.fade < 1 ? `Preview ${Math.round(app.fade * 100)}%` : 'Preview';
+  else if (app.armed && app.fade < 1) noiseText = `Rising ${Math.round(app.fade * 100)}%`;
+  else if (app.armed) noiseText = 'Full';
+  else if (app.fade > 0) noiseText = `Falling ${Math.round(app.fade * 100)}%`;
+  else if (app.running && L.closed) noiseText = `In ${Math.max(0, S.holdSec - closedFor).toFixed(1)} s`;
+  ui.noiseValue.textContent = noiseText;
+
+  const hz = Math.round(cutoffFor(B.out));
+  ui.cutoffNote.textContent = `Lowpass at ${hz} Hz now. It moves between ${fmtHz(S.cutoffLow)} on the out-breath and ${fmtHz(S.cutoffHigh)} on the in-breath.`;
+
+  const sum = breath.summary();
+  let breathWarn = false;
+  if (app.running) {
+    if (!models.pose) {
+      ui.breathValue.textContent = 'Off';
+      ui.breathNote.textContent = 'The pose model did not load, so the filter rests in the middle.';
+      breathWarn = true;
+    } else if (!B.tracked) {
+      ui.breathValue.textContent = 'Lost';
+      ui.breathNote.textContent = 'Shoulders not in view. Sit back so both shoulders show.';
+      breathWarn = true;
+    } else {
+      ui.breathValue.textContent = B.vel > 0.03 ? 'In' : B.vel < -0.03 ? 'Out' : 'Still';
+      if (sum) {
+        const v = sum.variation != null ? ` · varies ±${Math.round(sum.variation)}%` : '';
+        ui.breathNote.textContent = `${sum.avg.toFixed(1)} s per breath · ${sum.perMin.toFixed(1)} per minute${v}`;
+      } else {
+        ui.breathNote.textContent = 'Counting breaths. The window adjusts to your breathing over the first few breaths.';
+      }
+    }
+  }
+  ui.breathNote.classList.toggle('warn', breathWarn);
+
+  if (app.running && !app.statusWarn) {
+    ui.status.textContent = !L.faceInView ? 'No face in view' : (models.pose && !B.tracked ? 'Face found. Shoulders not in view.' : 'Tracking eyes and breath');
+  }
+
+  ui.hud.hidden = !(app.hud && app.fade > 0.6); // only once the noise mostly covers the page
+  if (!ui.hud.hidden) {
+    const eyes = L.closed ? `eyes closed ${(now - L.closedSince).toFixed(1)} s` : 'eyes open';
+    const br = B.tracked ? `breath ${(B.out * 100).toFixed(0)}%` : 'breath lost';
+    const rate = sum ? ` · ${sum.avg.toFixed(1)} s per breath` : '';
+    ui.hud.textContent = `${eyes} · ${br} · lowpass ${hz} Hz${rate}`;
+  }
+}
+
+// ---------- Main loop ----------
+let lastFrameT = performance.now() / 1000;
+let lastDetectT = null;
+let lastVideoTime = -1;
+let lastReadoutT = 0;
+let lastDetectMs = 0;
+
+function loop() {
+  const nowMs = performance.now();
+  const now = nowMs / 1000;
+  const dt = clamp(now - lastFrameT, 0.001, 0.5); // real time, so fades keep their length on slow machines
+  lastFrameT = now;
+
+  if (app.running && models.face && video.readyState >= 2 && video.currentTime !== lastVideoTime) {
+    lastVideoTime = video.currentTime;
+    const ddt = lastDetectT == null ? 1 / 30 : clamp(now - lastDetectT, 0.001, 0.5);
+    lastDetectT = now;
+    const ts = Math.max(nowMs, lastDetectMs + 1);
+    lastDetectMs = ts;
+    try { app.faceRes = models.face.detectForVideo(video, ts); } catch (e) { app.faceRes = null; }
+    try { app.poseRes = models.pose ? models.pose.detectForVideo(video, ts) : null; } catch (e) { app.poseRes = null; }
+    lids.update(readBlendshapes(app.faceRes), now, ddt);
+    app.sample = readBreathSample(app.poseRes, app.faceRes, video.videoWidth, video.videoHeight);
+    breath.update(app.sample, now, ddt);
+  }
+
+  breath.tick(now, dt);
+  updateArming(now, dt);
+  engine.update(app.fade, breath.st.out);
+
+  if (app.running) {
+    app.traceBuf.push({ t: now, b: breath.st.out, tracked: breath.st.tracked });
+    while (app.traceBuf.length && app.traceBuf[0].t < now - TRACK.traceSec) app.traceBuf.shift();
+  }
+
+  const visible = app.fade > 0.001;
+  if (visible && noise) noise.render(now, breath.st.out);
+  const eased = app.fade * app.fade * (3 - 2 * app.fade);
+  noiseCanvas.style.opacity = visible ? eased.toFixed(3) : '0';
+  noiseCanvas.classList.toggle('covering', app.preview && app.fade > 0.5);
+
+  if (app.fade < 0.999) { drawCamera(); drawTrace(now); }
+  if (now - lastReadoutT > 0.1) { updateReadouts(now); lastReadoutT = now; }
+  requestAnimationFrame(loop);
+}
+
+// ---------- Boot ----------
+buildSettings();
+updateStaticCopy();
+updateReadouts(performance.now() / 1000);
+requestAnimationFrame(loop);
+// Start fetching the models right away so Begin is quick. Failures are reported when Begin is pressed.
+ensureModels().catch(err => console.warn('Models not loaded yet', err));
+
+// A handle for tuning from the browser console.
+window.breathingDark = { settings: S, track: TRACK, lids: lids.st, breath: breath.st, app, engine };
+</script>
+</body>
+</html>
