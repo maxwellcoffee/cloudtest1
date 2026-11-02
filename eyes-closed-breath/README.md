@@ -68,9 +68,15 @@ the picture.
 Click the breath graph to open the full history. It fills the screen with five lines, each a stretch of time
 read left to right with the oldest at the top. Pick how long each line is (30 s, 1 min, 2 min or 5 min) at the
 top. Scroll up to go back through the session (up to two hours, ten samples a second). It follows the newest
-line while you're at the bottom; **Back to now** returns there. Shaded stretches are where your eyes were
-closed, and ticks along the bottom of each line mark counted breaths. Gaps are where breath tracking was
-paused or lost. Press Escape or Close to return. The noise picture still covers it when your eyes close.
+line while you're at the bottom; **Back to now** returns there.
+
+With **Only track breathing while my eyes are closed** on, breath is only recorded with your eyes closed.
+**Skip eyes-open gaps** (on by default) joins those stretches end to end so the lines read as continuous
+breathing, with a dashed line and the length of each gap where one was left out. Turn it off to see real
+time instead: lines start on the minute and gaps are labelled "eyes open" or "breath lost". Shaded stretches
+are where your eyes were closed, and ticks along the bottom mark counted breaths. When tracking picks up
+again, the breath line starts from your actual breath rather than from where it was before the pause.
+Press Escape or Close to return; the noise picture still covers the view when your eyes close.
 
 ## Pose models
 
@@ -159,6 +165,14 @@ delay as a plain average over the window but never cancels a breath outright (a 
 The Eyes panel holds the closed threshold (the marker on the live bar) and the hold before the noise.
 Everything else is under **Settings**, saved in the browser: fades, volume, breath sensitivity (the smallest
 min/max window), an invert switch for the breath direction and a mirror switch.
+
+## Sound
+
+Brown noise, made even: its sub-audible drift below 20 Hz is removed, it is set by its average level rather
+than its loudest moment, and rare outlier peaks are rounded off. It runs through two lowpass filters, a
+small swell with the breath, the level control, and a smooth soft clipper (in place of a compressor), so the
+output never hits a hard edge. The audio uses the browser's larger "playback" buffers, which avoids the
+dropouts (heard as small clicks) that can happen while the face and pose models keep the computer busy.
 
 ## Tips
 

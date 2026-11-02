@@ -157,6 +157,8 @@ h1 em { font-style: italic; color: var(--muted); }
 .legend-hint { color: var(--muted); }
 .key-closed { background: var(--lid-dim); height: 8px; }
 .key-mark { background: var(--muted); width: 2px; height: 8px; }
+.key-join { width: 0; height: 12px; border-left: 2px dashed var(--muted); border-radius: 0; }
+.history-row-pick input { accent-color: var(--breath); }
 
 /* Full-screen breath history: under the noise picture, over the page. */
 .history {
@@ -425,7 +427,8 @@ kbd {
         <option value="300">5 min</option>
       </select>
     </label>
-    <p class="legend"><span class="key key-measured"></span>Measured <span class="key key-filter"></span>Smoothed <span class="key key-closed"></span>Eyes closed <span class="key key-mark"></span>Breath counted</p>
+    <label class="history-row-pick" for="historySkip"><input type="checkbox" id="historySkip"> Skip eyes-open gaps</label>
+    <p class="legend"><span class="key key-measured"></span>Measured <span class="key key-filter"></span>Smoothed <span class="key key-closed"></span>Eyes closed <span class="key key-mark"></span>Breath counted <span class="key key-join"></span>Gap skipped</p>
     <span class="history-spacer-flex"></span>
     <button type="button" id="historyNow" class="small" hidden>Back to now</button>
     <button type="button" id="historyClose" class="small">Close</button>
@@ -521,6 +524,8 @@ const DEFAULTS = {
   colorMethod: 'sharp',
   breathOnlyEyesClosed: true,
   continuousNoise: false,
+  historyRowSec: 60,
+  historySkipGaps: true,
   eyeHz: 3,
 };
 const fmtHz = v => v >= 1000 ? `${+(v / 1000).toFixed(2)} kHz` : `${Math.round(v)} Hz`;
@@ -665,7 +670,7 @@ function createBreathTracker() {
   const st = {};
   function reset() {
     Object.assign(st, {
-      level: null, lo: null, hi: null, d1: null, d2: null, jit2: null, jitter: null, levels: [], swing: null,
+      level: null, lo: null, hi: null, paused: false, snap: false, d1: null, d2: null, jit2: null, jitter: null, levels: [], swing: null,
       raw: TRACK.restingBreath, fast: TRACK.restingBreath, s1: TRACK.restingBreath, s2: TRACK.restingBreath,
       out: TRACK.restingBreath, vel: 0,
       lastSeen: -Infinity, tracked: false,
@@ -710,6 +715,13 @@ function createBreathTracker() {
     if (S.invertBreath) b = 1 - b;
     st.raw = clamp(b, 0, 1);
     st.lastSeen = now;
+    if (st.snap) {
+      // First reading after a pause: start the smoothed values at the real breath, not where they were.
+      st.snap = false;
+      st.fast = st.raw;
+      st.s1 = st.s2 = st.out = Math.max(st.raw, S.exhaleFloor);
+      st.vel = 0;
+    }
     st.levels.push({ t: now, v: d });
     while (st.levels[0].t < now - 10) st.levels.shift();
     let mn = Infinity, mx = -Infinity;
@@ -719,6 +731,7 @@ function createBreathTracker() {
 
   // Every animation frame.
   function tick(now, dt) {
+    if (st.paused) return; // tracking is resting (eyes open): hold everything as it was
     st.tracked = now - st.lastSeen < TRACK.breathLostSec;
     // `fast` is the measured breath, lightly de-noised. It drives the readouts and breath counting.
     const prev = st.fast;
@@ -781,9 +794,10 @@ function createBreathTracker() {
   }
 
   // After a pause: carry on from where the breath was instead of starting the range again.
-  function hold(now) { if (st.level != null) st.lastSeen = now; }
+  function hold(now) { if (st.level != null) st.lastSeen = now; st.paused = false; st.snap = true; }
+  function pause() { st.paused = true; }
 
-  return { st, update, tick, reset, summary, hold };
+  return { st, update, tick, reset, summary, hold, pause };
 }
 
 // =====================================================================
@@ -1446,19 +1460,32 @@ function createPulseBreath(videoEl) {
 }
 
 // =====================================================================
-// Sound: brown noise -> two lowpass stages -> breath swell -> fade -> limiter
+// Sound: brown noise -> two lowpass stages -> breath swell -> level -> soft clipper
 // =====================================================================
+// Brown noise made even: integrated white noise with its sub-audible drift (below about 20 Hz)
+// taken out, set by its average level rather than its loudest moment, and with the rare outlier
+// peaks rounded off. The loop point is crossfaded so it never clicks.
 function makeBrownNoise(ctx, seconds) {
   const rate = ctx.sampleRate;
   const len = Math.floor(rate * seconds);
-  const xf = Math.floor(rate * 0.5); // crossfade the loop point so it never clicks
+  const xf = Math.floor(rate * 0.5);
+  const warm = Math.floor(rate * 0.5); // let the filters settle before the part that is kept
+  const hpA = Math.exp(-2 * Math.PI * 20 / rate);
   const buffer = ctx.createBuffer(2, len, rate);
   for (let ch = 0; ch < 2; ch++) {
     const raw = new Float32Array(len + xf);
-    let b = 0;
+    let b = 0, hx = 0, hy = 0;
+    for (let i = -warm; i < raw.length; i++) {
+      b = (b + 0.02 * (Math.random() * 2 - 1)) / 1.02;   // brown: a leaky running sum of white noise
+      hy = hpA * (hy + b - hx); hx = b;                   // one-pole high-pass at 20 Hz
+      if (i >= 0) raw[i] = hy;
+    }
+    let sum = 0;
+    for (let i = 0; i < raw.length; i++) sum += raw[i] * raw[i];
+    const g = 0.22 / (Math.sqrt(sum / raw.length) || 1);
     for (let i = 0; i < raw.length; i++) {
-      b = (b + 0.02 * (Math.random() * 2 - 1)) / 1.02;
-      raw[i] = b;
+      const v = raw[i] * g, a = Math.abs(v);
+      raw[i] = a < 0.6 ? v : Math.sign(v) * (0.6 + 0.35 * Math.tanh((a - 0.6) / 0.35)); // never past 0.95
     }
     const out = buffer.getChannelData(ch);
     out.set(raw.subarray(0, len));
@@ -1466,12 +1493,38 @@ function makeBrownNoise(ctx, seconds) {
       const a = (i / xf) * Math.PI / 2;
       out[i] = raw[i] * Math.sin(a) + raw[len + i] * Math.cos(a);
     }
-    let peak = 0;
-    for (let i = 0; i < len; i++) peak = Math.max(peak, Math.abs(out[i]));
-    const g = 0.9 / (peak || 1);
-    for (let i = 0; i < len; i++) out[i] *= g;
   }
   return buffer;
+}
+
+// A smooth ceiling instead of a compressor: nothing changes below about -3 dB, and louder moments
+// are rounded off so the output can never hit a hard edge (which is what clicks).
+function softClipCurve() {
+  const n = 4096, curve = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const u = (i / (n - 1)) * 4 - 2; // the shaper's -1..1 input stands for -2..2 (see the 0.5 gain before it)
+    const a = Math.abs(u);
+    curve[i] = a < 0.7 ? u : Math.sign(u) * (0.7 + 0.28 * Math.tanh((a - 0.7) / 0.28));
+  }
+  return curve;
+}
+
+// The sound graph. Works on a live AudioContext or an OfflineAudioContext (used for testing).
+function buildNoiseGraph(ctx, dest) {
+  const src = ctx.createBufferSource();
+  src.buffer = makeBrownNoise(ctx, 18);
+  src.loop = true;
+  const lp1 = ctx.createBiquadFilter();
+  lp1.type = 'lowpass'; lp1.Q.value = S.resonance; lp1.frequency.value = cutoffFor(TRACK.restingBreath);
+  const lp2 = ctx.createBiquadFilter();
+  lp2.type = 'lowpass'; lp2.Q.value = 0.55; lp2.frequency.value = cutoffFor(TRACK.restingBreath) * 1.5;
+  const swell = ctx.createGain(); swell.gain.value = 0.8;
+  const master = ctx.createGain(); master.gain.value = 0;
+  const pre = ctx.createGain(); pre.gain.value = 0.5;
+  const clip = ctx.createWaveShaper(); clip.curve = softClipCurve(); clip.oversample = '2x';
+  src.connect(lp1).connect(lp2).connect(swell).connect(master).connect(pre).connect(clip).connect(dest);
+  src.start();
+  return { lp1, lp2, swell, master };
 }
 
 function createNoiseEngine() {
@@ -1481,22 +1534,11 @@ function createNoiseEngine() {
     if (ctx) return ctx.resume();
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return Promise.resolve();
-    ctx = new AC(); // created inside the click so the browser lets it play
-    const src = ctx.createBufferSource();
-    src.buffer = makeBrownNoise(ctx, 18);
-    src.loop = true;
-    const lp1 = ctx.createBiquadFilter();
-    lp1.type = 'lowpass'; lp1.Q.value = S.resonance; lp1.frequency.value = cutoffFor(TRACK.restingBreath);
-    const lp2 = ctx.createBiquadFilter();
-    lp2.type = 'lowpass'; lp2.Q.value = 0.55; lp2.frequency.value = cutoffFor(TRACK.restingBreath) * 1.5;
-    const swell = ctx.createGain(); swell.gain.value = 0.8;
-    const master = ctx.createGain(); master.gain.value = 0;
-    const limiter = ctx.createDynamicsCompressor();
-    limiter.threshold.value = -10; limiter.knee.value = 6; limiter.ratio.value = 8;
-    limiter.attack.value = 0.01; limiter.release.value = 0.3;
-    src.connect(lp1).connect(lp2).connect(swell).connect(master).connect(limiter).connect(ctx.destination);
-    src.start();
-    nodes = { lp1, lp2, swell, master };
+    // Created inside the click so the browser lets it play. 'playback' asks for larger audio buffers:
+    // a little more delay, which doesn't matter here, and far fewer dropouts (heard as clicks) when the
+    // face and pose models keep the computer busy.
+    try { ctx = new AC({ latencyHint: 'playback' }); } catch { ctx = new AC(); }
+    nodes = buildNoiseGraph(ctx, ctx.destination);
     return ctx.resume();
   }
 
@@ -1507,15 +1549,15 @@ function createNoiseEngine() {
     if (t - lastUpdate < 1 / 40) return;
     lastUpdate = t;
     const f = cutoffAt(open);
-    nodes.lp1.frequency.setTargetAtTime(f, t, 0.08);
-    nodes.lp2.frequency.setTargetAtTime(Math.min(f * 1.5, ctx.sampleRate / 2 - 100), t, 0.08);
+    nodes.lp1.frequency.setTargetAtTime(f, t, 0.12);
+    nodes.lp2.frequency.setTargetAtTime(Math.min(f * 1.5, ctx.sampleRate / 2 - 100), t, 0.12);
     // Resonance: the lowpass Q in Web Audio is the height of the peak in dB. Half of that is taken
     // back off the level so a strong peak doesn't make the whole sound much louder.
-    nodes.lp1.Q.setTargetAtTime(S.resonance, t, 0.05);
+    nodes.lp1.Q.setTargetAtTime(S.resonance, t, 0.1);
     const comp = Math.pow(10, -S.resonance / 40);
     nodes.swell.gain.setTargetAtTime((0.65 + 0.35 * open) * comp, t, 0.12);
     // Linear gain rises quickly in loudness, so the noise is audible as soon as the fade starts.
-    nodes.master.gain.setTargetAtTime(S.volume * level * 1.4, t, 0.06);
+    nodes.master.gain.setTargetAtTime(S.volume * level * 1.85, t, 0.06); // matches the earlier loudness
   }
 
   return { start, update, get running() { return !!ctx && ctx.state === 'running'; }, get nodes() { return nodes; } };
@@ -2459,45 +2501,64 @@ function bodyStep(now, ts, W, H, ddt) {
 // bottom it follows the newest line.
 const HISTORY_HZ = 10, HISTORY_MAX_SEC = 2 * 60 * 60, HISTORY_ROWS = 5;
 const breathLog = {
-  open: false, samples: [], marks: [], lastT: -Infinity, lastMark: null, following: true,
-  wallStart: Date.now(), perfStart: performance.now() / 1000, rowSec: 60, lastDraw: 0,
+  open: false, samples: [], marks: [], joins: [], v: 0, lastOkT: null, lastT: -Infinity, lastMark: null, following: true,
+  wallStart: Date.now(), perfStart: performance.now() / 1000, lastDraw: 0,
 };
 const hist = {
   root: $('history'), scroll: $('historyScroll'), canvas: $('historyCanvas'), pad: $('historyPad'),
-  row: $('historyRow'), now: $('historyNow'), close: $('historyClose'), open: $('openHistory'),
+  row: $('historyRow'), skip: $('historySkip'), now: $('historyNow'), close: $('historyClose'), open: $('openHistory'),
 };
 const hctx = hist.canvas.getContext('2d');
 
 function recordHistory(now) {
   if (now - breathLog.lastT < 1 / HISTORY_HZ) return;
+  const ok = breath.st.tracked && !app.breathPaused;
+  // "Tracked time" only advances across tracked samples, so eyes-open gaps can be left out of the view.
+  const prev = breathLog.samples[breathLog.samples.length - 1];
+  if (ok) {
+    if (prev && prev.ok) breathLog.v += Math.min(now - prev.t, 0.2);
+    else if (breathLog.lastOkT != null && now - breathLog.lastOkT > 1) breathLog.joins.push({ v: breathLog.v, t: now, gap: now - breathLog.lastOkT });
+    breathLog.lastOkT = now;
+  }
   breathLog.lastT = now;
-  breathLog.samples.push({
-    t: now, b: breath.st.out, m: breath.st.fast,
-    ok: breath.st.tracked && !app.breathPaused, closed: lids.st.closed,
-  });
+  breathLog.samples.push({ t: now, v: breathLog.v, b: breath.st.out, m: breath.st.fast, ok, closed: lids.st.closed, paused: app.breathPaused });
   if (breath.st.lastBreathAt != null && breath.st.lastBreathAt !== breathLog.lastMark) {
     breathLog.lastMark = breath.st.lastBreathAt;
-    breathLog.marks.push(breath.st.lastBreathAt);
+    breathLog.marks.push({ t: breath.st.lastBreathAt, v: breathLog.v });
   }
   const cutoff = now - HISTORY_MAX_SEC;
   if (breathLog.samples.length && breathLog.samples[0].t < cutoff - 60) {
     let i = 0;
     while (i < breathLog.samples.length && breathLog.samples[i].t < cutoff) i++;
     breathLog.samples.splice(0, i);
-    while (breathLog.marks.length && breathLog.marks[0] < cutoff) breathLog.marks.shift();
+    while (breathLog.marks.length && breathLog.marks[0].t < cutoff) breathLog.marks.shift();
+    while (breathLog.joins.length && breathLog.joins[0].t < cutoff) breathLog.joins.shift();
   }
 }
 
-// Rows are aligned to whole multiples of the row length, so their edges stay put as time passes.
+// Two ways to lay the rows out. Real time: each row is a stretch of the clock, aligned to whole
+// minutes (or half minutes), with gaps where tracking rested. Skip gaps: each row is a stretch of
+// tracked time only, the eyes-closed stretches joined end to end, with a dashed line at each join.
 function historyLayout() {
-  const rowSec = breathLog.rowSec;
-  const first = breathLog.samples.length ? breathLog.samples[0].t : performance.now() / 1000;
-  const t0 = Math.floor(first / rowSec) * rowSec;
-  const nowT = performance.now() / 1000;
-  const rows = Math.max(1, Math.floor((nowT - t0) / rowSec) + 1);
+  const rowSec = S.historyRowSec;
+  const skip = S.historySkipGaps;
+  const S_ = breathLog.samples;
   const viewH = hist.scroll.clientHeight;
   const rowH = viewH / HISTORY_ROWS;
-  return { rowSec, t0, rows, viewH, rowH };
+  let start, end;
+  if (skip) {
+    start = S_.length ? S_[0].v : 0;
+    end = breathLog.v;
+  } else {
+    const nowT = performance.now() / 1000;
+    const first = S_.length ? S_[0].t : nowT;
+    const wall = t => breathLog.wallStart + (t - breathLog.perfStart) * 1000;
+    const alignedWall = Math.floor(wall(first) / (rowSec * 1000)) * rowSec * 1000;
+    start = breathLog.perfStart + (alignedWall - breathLog.wallStart) / 1000;
+    end = nowT;
+  }
+  const rows = Math.max(1, Math.floor((end - start) / rowSec) + 1);
+  return { rowSec, skip, key: skip ? 'v' : 't', t0: start, rows, viewH, rowH };
 }
 
 function syncHistoryScroll() {
@@ -2513,6 +2574,7 @@ function clockAt(t) {
   const d = new Date(breathLog.wallStart + (t - breathLog.perfStart) * 1000);
   return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 }
+const fmtGap = sec => sec >= 60 ? `${Math.floor(sec / 60)} min ${Math.round(sec % 60)} s` : `${Math.round(sec)} s`;
 
 function drawHistory() {
   const L = syncHistoryScroll();
@@ -2522,13 +2584,14 @@ function drawHistory() {
   if (hist.canvas.width !== W || hist.canvas.height !== H) { hist.canvas.width = W; hist.canvas.height = H; }
   const c = hctx;
   c.clearRect(0, 0, W, H);
-  const firstRow = Math.max(0, L.rows - HISTORY_ROWS) > 0 ? hist.scroll.scrollTop / L.rowH : 0;
+  const firstRow = L.rows > HISTORY_ROWS ? hist.scroll.scrollTop / L.rowH : 0;
   const rowH = L.rowH * dpr;
-  const left = 92 * dpr, right = W - Math.max(16, 16) * dpr, plotW = right - left;
+  const left = 92 * dpr, right = W - 16 * dpr, plotW = right - left;
   const pad = 14 * dpr;
+  const K = L.key;
   const S_ = breathLog.samples, n = S_.length;
-  // Binary search for the first sample at or after time t.
-  const indexAt = t => { let lo = 0, hi = n; while (lo < hi) { const mid = (lo + hi) >> 1; if (S_[mid].t < t) lo = mid + 1; else hi = mid; } return lo; };
+  // Binary search for the first sample at or after position p (both keys only ever increase).
+  const indexAt = p => { let lo = 0, hi = n; while (lo < hi) { const mid = (lo + hi) >> 1; if (S_[mid][K] < p) lo = mid + 1; else hi = mid; } return lo; };
 
   c.font = `${11 * dpr}px ${FONT_DATA}`;
   c.textBaseline = 'middle';
@@ -2536,43 +2599,76 @@ function drawHistory() {
   for (let r = startRow; r < Math.min(L.rows, startRow + HISTORY_ROWS + 1); r++) {
     const top = (r - firstRow) * rowH;
     if (top > H || top + rowH < 0) continue;
-    const t0 = L.t0 + r * L.rowSec, t1 = t0 + L.rowSec;
+    const p0 = L.t0 + r * L.rowSec, p1 = p0 + L.rowSec;
     const y = v => top + pad + (1 - v) * (rowH - pad * 2.4);
-    const x = t => left + plotW * (t - t0) / L.rowSec;
+    const x = p => left + plotW * (p - p0) / L.rowSec;
+    const i0 = Math.max(0, indexAt(p0) - 1), i1 = Math.min(n, indexAt(p1) + 1);
 
-    // Row frame: time of the row's start, a divider, ticks every 10 s.
+    // Row frame: the clock time where the row starts, a divider, ticks every 10 s (30 s on long rows).
+    let label = '';
+    if (L.skip) {
+      for (let i = indexAt(p0); i < i1; i++) if (S_[i].ok) { label = clockAt(S_[i].t); break; }
+    } else {
+      label = clockAt(p0);
+    }
     c.fillStyle = COLORS.muted;
-    c.fillText(clockAt(t0), 12 * dpr, top + rowH / 2);
+    c.fillText(label, 12 * dpr, top + rowH / 2);
     c.strokeStyle = COLORS.rule; c.lineWidth = 1;
     c.beginPath(); c.moveTo(0, top + rowH - 0.5); c.lineTo(W, top + rowH - 0.5); c.stroke();
     c.beginPath(); c.moveTo(left, y(0.5)); c.lineTo(right, y(0.5)); c.stroke();
-    for (let s = 0; s <= L.rowSec; s += L.rowSec <= 60 ? 10 : 30) {
-      const xx = x(t0 + s);
+    for (let sec = 0; sec <= L.rowSec; sec += L.rowSec <= 60 ? 10 : 30) {
+      const xx = x(p0 + sec);
       c.beginPath(); c.moveTo(xx, y(0) + 3 * dpr); c.lineTo(xx, y(0) + 7 * dpr); c.stroke();
     }
 
-    const i0 = Math.max(0, indexAt(t0) - 1), i1 = Math.min(n, indexAt(t1) + 1);
-    // Eyes-closed stretches as a faint band behind the line.
+    // Eyes-closed stretches as a faint band behind the line (tracked samples only when gaps are skipped).
     c.fillStyle = COLORS.lid; c.globalAlpha = 0.14;
     for (let i = i0; i < i1; i++) {
-      if (!S_[i].closed) continue;
-      let j = i; while (j + 1 < i1 && S_[j + 1].closed) j++;
-      const xa = Math.max(left, x(S_[i].t)), xb = Math.min(right, x(S_[j].t + 1 / HISTORY_HZ));
-      c.fillRect(xa, top + pad * 0.5, xb - xa, rowH - pad * 1.4);
+      if (!S_[i].closed || (L.skip && !S_[i].ok)) continue;
+      let j = i; while (j + 1 < i1 && S_[j + 1].closed && (!L.skip || S_[j + 1].ok)) j++;
+      const xa = Math.max(left, x(S_[i][K])), xb = Math.min(right, x(S_[j][K] + 1 / HISTORY_HZ));
+      if (xb > xa) c.fillRect(xa, top + pad * 0.5, xb - xa, rowH - pad * 1.4);
       i = j;
     }
     c.globalAlpha = 1;
+
+    if (!L.skip) {
+      // Real time: name the longer gaps so they read as rests, not as missing data.
+      c.fillStyle = COLORS.muted; c.globalAlpha = 0.7; c.textAlign = 'center';
+      for (let i = i0; i < i1; i++) {
+        if (S_[i].ok) continue;
+        let j = i; while (j + 1 < i1 && !S_[j + 1].ok) j++;
+        const xa = Math.max(left, x(S_[i].t)), xb = Math.min(right, x(S_[j].t));
+        if (xb - xa > 110 * dpr) {
+          const paused = S_.slice(i, j + 1).filter(q => q.paused).length > (j - i + 1) / 2;
+          c.fillText(paused ? 'eyes open' : 'breath lost', (xa + xb) / 2, y(0.5) - 9 * dpr);
+        }
+        i = j;
+      }
+      c.globalAlpha = 1; c.textAlign = 'start';
+    } else {
+      // Skip gaps: a dashed line where a gap was left out, with how long it was.
+      c.strokeStyle = COLORS.muted; c.fillStyle = COLORS.muted; c.lineWidth = dpr; c.setLineDash([3 * dpr, 3 * dpr]);
+      for (const j of breathLog.joins) {
+        if (j.v < p0 || j.v >= p1) continue;
+        const xx = x(j.v);
+        c.beginPath(); c.moveTo(xx, top + pad * 0.5); c.lineTo(xx, top + rowH - pad * 0.9); c.stroke();
+        c.fillText(`+${fmtGap(j.gap)}`, xx + 4 * dpr, top + pad * 0.9);
+      }
+      c.setLineDash([]);
+    }
 
     // Lines: measured (thin, faint) and smoothed (amber), broken wherever tracking paused or was lost.
     const drawLine = (key, color, width, alpha) => {
       c.strokeStyle = color; c.lineWidth = width * dpr; c.globalAlpha = alpha; c.lineJoin = 'round';
       c.beginPath();
-      let pen = false;
+      let pen = false, lastT = null;
       for (let i = i0; i < i1; i++) {
         const q = S_[i];
-        const gap = i > i0 && q.t - S_[i - 1].t > 0.5;
-        if (!q.ok || gap) { pen = false; if (!q.ok) continue; }
-        const xx = Math.min(right, Math.max(left, x(q.t)));
+        if (!q.ok) { pen = false; continue; }
+        if (lastT != null && q.t - lastT > 0.5) pen = false;
+        lastT = q.t;
+        const xx = Math.min(right, Math.max(left, x(q[K])));
         if (pen) c.lineTo(xx, y(q[key])); else { c.moveTo(xx, y(q[key])); pen = true; }
       }
       c.stroke();
@@ -2583,9 +2679,10 @@ function drawHistory() {
 
     // Counted breaths as ticks along the bottom.
     c.fillStyle = COLORS.muted;
-    for (const m of breathLog.marks) if (m >= t0 && m < t1) c.fillRect(x(m) - dpr / 2, y(0) - 6 * dpr, dpr, 6 * dpr);
+    for (const m of breathLog.marks) { const p = m[K]; if (p >= p0 && p < p1) c.fillRect(x(p) - dpr / 2, y(0) - 6 * dpr, dpr, 6 * dpr); }
   }
-  if (n === 0) {
+  const tracked = S_.some(q => q.ok);
+  if (!tracked) {
     c.fillStyle = COLORS.muted; c.textAlign = 'center';
     c.fillText('No breath recorded yet. Press Begin, then close your eyes or use Preview.', W / 2, H / 2);
     c.textAlign = 'start';
@@ -2609,7 +2706,10 @@ function closeHistory() {
 hist.open.addEventListener('click', openHistory);
 hist.close.addEventListener('click', closeHistory);
 hist.now.addEventListener('click', () => { breathLog.following = true; drawHistory(); });
-hist.row.addEventListener('change', () => { breathLog.rowSec = +hist.row.value; breathLog.following = true; drawHistory(); });
+hist.row.value = String(S.historyRowSec);
+hist.skip.checked = !!S.historySkipGaps;
+hist.row.addEventListener('change', () => { S.historyRowSec = +hist.row.value; saveSettings(); breathLog.following = true; drawHistory(); });
+hist.skip.addEventListener('change', () => { S.historySkipGaps = hist.skip.checked; saveSettings(); breathLog.following = true; drawHistory(); });
 hist.scroll.addEventListener('scroll', () => {
   breathLog.following = hist.scroll.scrollTop >= hist.scroll.scrollHeight - hist.scroll.clientHeight - 2;
   drawHistory();
@@ -2651,7 +2751,7 @@ function loop() {
     // person mask, pulse) runs only while the eyes are closed, the noise is still fading, or in Preview.
     const needBreath = !S.breathOnlyEyesClosed || app.preview || lids.st.closed || app.armed || app.fade > 0;
     if (!needBreath) {
-      app.breathPaused = true;
+      if (!app.breathPaused) { app.breathPaused = true; breath.pause(); }
     } else {
       if (app.breathPaused) {
         // Picking up again: keep the shoulder windows and the breath range rather than starting over.
@@ -2733,7 +2833,7 @@ installBtn.addEventListener('click', async () => {
 addEventListener('appinstalled', () => { installBtn.hidden = true; $('installHint').hidden = true; });
 
 // A handle for tuning from the browser console.
-window.breathingDark = { settings: S, track: TRACK, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog };
+window.breathingDark = { settings: S, track: TRACK, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph };
 </script>
 </body>
 </html>
