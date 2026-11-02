@@ -4,7 +4,7 @@
 // on the next launch. The CDN files are pinned versions that never change, so they are served from
 // the cache once stored.
 
-const SHELL_CACHE = 'breathing-dark-shell-v4';
+const SHELL_CACHE = 'breathing-dark-shell-v5';
 const CDN_CACHE = 'breathing-dark-cdn-v2';
 const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35';
 
@@ -31,7 +31,7 @@ const CDN_HOSTS = new Set(['cdn.jsdelivr.net', 'storage.googleapis.com', 'fonts.
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const shell = await caches.open(SHELL_CACHE);
-    await shell.addAll(SHELL);
+    await shell.addAll(SHELL.map(url => new Request(url, { cache: 'reload' }))); // skip the browser's 10-minute copy
     // The models are large; store them in the background and don't fail the install over them.
     const cdn = await caches.open(CDN_CACHE);
     await Promise.all(CDN.map(async url => {
@@ -63,7 +63,12 @@ self.addEventListener('fetch', event => {
 async function networkFirst(req) {
   const cache = await caches.open(SHELL_CACHE);
   const cached = await cache.match(req, { ignoreSearch: true });
-  const network = fetch(req).then(res => {
+  // GitHub Pages tells browsers to reuse files for 10 minutes; 'no-cache' asks the server every time
+  // instead (a quick "not modified" when nothing changed), so a new version shows on the next load.
+  const fresh = req.mode === 'navigate'
+    ? fetch(req.url, { cache: 'no-cache', credentials: 'same-origin' })
+    : fetch(req, { cache: 'no-cache' });
+  const network = fresh.then(res => {
     if (res.ok) cache.put(req, res.clone());
     return res;
   });

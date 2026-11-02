@@ -1663,6 +1663,11 @@ switchPose(S.poseModel).catch(() => { /* shown in the Breath panel */ });
 // The service worker keeps the page and models on this computer, so the installed app also opens offline.
 if ('serviceWorker' in navigator && window.isSecureContext) {
   addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Offline support unavailable', err)));
+  // When a new version takes over, reload to show it, unless a session is running (then it shows next time).
+  const hadController = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (hadController && !app.running) location.reload();
+  });
 }
 const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 const installBtn = $('install');
