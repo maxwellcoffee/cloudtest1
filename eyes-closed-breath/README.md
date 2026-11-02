@@ -76,6 +76,29 @@ vertical brightness gradient). The windows are placed again when the shoulders m
 eighth of a shoulder width or the match gets poor. The head is outside both windows, so tilting or turning
 it doesn't affect the breath.
 
+### Color outline (checkbox)
+
+**Track the shoulder outline by color**, under the pose model picker, measures the shoulders a second way.
+Each window instead reaches a little above the shoulder into the background. The app learns two colors
+there, the background and the shoulder, with a running two-cluster k-means that follows changes in the
+light. Each pixel gets a score for how much more it looks like shoulder than background. Down each column,
+the outline is the row that best splits the column into background above and shoulder below, refined to a
+fraction of a row where the score crosses one half. Once found, the search stays within a narrow band
+around it, so stripes, furniture or hair further up can't pull it away. A line through the column points
+(the dotted line in the camera view), read at a fixed spot, gives the shoulder height.
+
+On a synthetic test (shoulders rising 4 px every 5 s while the head bobbed 10 px every 7 s), the two methods
+compared like this:
+
+| Method | Movement recovered | Noise left after a 5 s fit |
+| --- | --- | --- |
+| Image motion (default) | 3.35 of 4 px | 0.09 px |
+| Color outline | 3.92 of 4 px | 0.16 px |
+
+The color outline measures where the edge actually is, so it doesn't drift and needs no reference frame. It
+needs the shoulders to stand out from what is behind them. If it can't separate them, the Breath panel says
+so.
+
 | Signal | Source | Drives |
 | --- | --- | --- |
 | Lid signal 0–1 | Face blendshapes, smoothed over 0.15 s | Closed when ≥ threshold (0.55), open again below threshold − 0.08 |
