@@ -83,11 +83,12 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 .meter input::-moz-range-thumb { width: 6px; height: 26px; border: 0; border-radius: 2px; background: var(--fg); box-shadow: 0 0 0 2px var(--panel); }
 .meter-scale { display: flex; justify-content: space-between; margin-top: -2px; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
 
-#clip { display: block; width: 100%; height: 88px; border-radius: 6px; background: var(--ground); }
-.dots { display: flex; flex-wrap: wrap; gap: 6px; min-height: 12px; }
-.dot { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--rule); box-sizing: border-box; }
-.dot.done { background: var(--tape); border-color: var(--tape); }
-.dot.now { border-color: var(--tape); background: var(--tape-dim); }
+.cycle { position: relative; height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.cycle-fill { position: absolute; top: 0; bottom: 0; left: 0; width: 0; background: var(--tape); }
+.cycle-mid { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: var(--ground); }
+#lanes { display: block; width: 100%; height: 52px; border-radius: 6px; background: var(--ground); }
+.check { display: flex; align-items: center; gap: 10px; font-size: var(--step--1); cursor: pointer; }
+.check input { width: 16px; height: 16px; accent-color: var(--tape); }
 
 /* The three dials, each a slider with a typed box. */
 .dials { display: grid; gap: 22px; }
@@ -112,17 +113,17 @@ kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); 
 <main class="shell">
   <header>
     <h1>Eight<span>fold</span></h1>
-    <p class="lede">Say something and hear it back, looped. A quiet tick marks the start of each loop. Headphones work best.</p>
+    <p class="lede">Say something and hear it back, looped, layered with what you said before. A quiet tick marks the start of each cycle. Use headphones: the mic is always listening.</p>
   </header>
 
   <section class="deck" aria-label="Looper">
     <div class="deck-top">
       <div>
         <div class="status"><span class="lamp" id="lamp"></span><span id="status" role="status">Press Start</span></div>
-        <p class="status-sub" id="statusSub">It listens for your voice, records one loop, then plays it back.</p>
+        <p class="status-sub" id="statusSub">Each thing you say becomes a loop that layers on top of the others.</p>
       </div>
       <div style="display:flex; gap:8px; flex-wrap:wrap">
-        <button type="button" class="small" id="cancel" disabled>Skip loop</button>
+        <button type="button" class="small" id="cancel" disabled>Clear loops</button>
         <button type="button" class="primary" id="start">Start</button>
       </div>
     </div>
@@ -137,9 +138,9 @@ kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); 
     </div>
 
     <div class="dial">
-      <div class="row-head"><span class="label">Clip</span><span class="mono" id="loopOut">Loop 0 of 8</span></div>
-      <canvas id="clip" aria-label="The recorded clip, with a line where it is playing"></canvas>
-      <div class="dots" id="dots" aria-hidden="true"></div>
+      <div class="row-head"><span class="label">Loops</span><span class="mono" id="loopOut">None yet</span></div>
+      <div class="cycle" aria-hidden="true"><div class="cycle-fill" id="cycleFill"></div><div class="cycle-mid" id="cycleMid"></div></div>
+      <canvas id="lanes" aria-label="Each loop, newest at the top, with lines where it is playing and how many cycles it has left"></canvas>
     </div>
   </section>
 
@@ -150,7 +151,7 @@ kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); 
         <input type="range" id="loopLenRange" min="0.01" max="10" step="0.01" aria-label="Loop length in seconds">
         <div class="num"><input type="number" id="loopLen" min="0.01" max="10" step="0.01" inputmode="decimal"><span>s</span></div>
       </div>
-      <p class="hint">How much of what you say becomes the loop, from 0.01 to 10.00 seconds.</p>
+      <p class="hint">How much of what you say becomes each loop, and the length of the cycle everything plays to, from 0.01 to 10.00 seconds.</p>
     </div>
     <div class="dial">
       <div class="row-head"><label class="label" for="delay">Delay before looping</label></div>
@@ -158,7 +159,7 @@ kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); 
         <input type="range" id="delayRange" min="0.01" max="2" step="0.01" aria-label="Delay in seconds">
         <div class="num"><input type="number" id="delay" min="0.01" max="2" step="0.01" inputmode="decimal"><span>s</span></div>
       </div>
-      <p class="hint">Time from when you start speaking to when the loop starts playing, from 0.01 to 2.00 seconds. If it's shorter than the loop, playback follows just behind your voice.</p>
+      <p class="hint">Time from when you start speaking to when that loop first plays, from 0.01 to 2.00 seconds. While other loops are playing, a new one waits for the next cycle so everything stays in time with the tick.</p>
     </div>
     <div class="dial">
       <div class="row-head"><label class="label" for="repeats">Times to loop</label></div>
@@ -166,7 +167,15 @@ kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); 
         <input type="range" id="repeatsRange" min="1" max="32" step="1" aria-label="Times to loop">
         <div class="num"><input type="number" id="repeats" min="1" max="32" step="1" inputmode="numeric"><span>×</span></div>
       </div>
-      <p class="hint">8 is the standard.</p>
+      <p class="hint">How many cycles each loop stays for. 8 is the standard.</p>
+    </div>
+    <div class="dial">
+      <div class="row-head"><label class="label" for="voices">Loops at once</label></div>
+      <div class="dial-row">
+        <input type="range" id="voicesRange" min="1" max="32" step="1" aria-label="Loops playing at once">
+        <div class="num"><input type="number" id="voices" min="1" max="32" step="1" inputmode="numeric"><span>×</span></div>
+      </div>
+      <p class="hint">The most loops that play at the same moment. Below Times to loop, loops take turns, some playing every second or third cycle. Above it, the extra room goes to some loops playing again from the middle of the cycle.</p>
     </div>
     <div class="extras">
       <div class="dial">
@@ -175,14 +184,18 @@ kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); 
           <input type="range" id="clickVolRange" min="0" max="100" step="1" aria-label="Tick volume in percent">
           <div class="num"><input type="number" id="clickVol" min="0" max="100" step="1" inputmode="numeric"><span>%</span></div>
         </div>
-        <p class="hint">The tick at the start of each loop. Very short loops tick at most five times a second.</p>
+        <p class="hint">The tick at the start of each cycle. Very short cycles tick at most five times a second.</p>
+      </div>
+      <div class="dial">
+        <label class="check"><input type="checkbox" id="speakers"> I'm using speakers, not headphones</label>
+        <p class="hint">Turns on the browser's echo cancelling so the loops are less likely to record themselves. It helps, but headphones work better.</p>
       </div>
       <div><button type="button" class="small" id="reset">Restore defaults</button></div>
     </div>
   </section>
 
   <div class="footnote">
-    <span><kbd>Space</kbd> start or stop · <kbd>Esc</kbd> skip the current loop</span>
+    <span><kbd>Space</kbd> start or stop · <kbd>Esc</kbd> clear all loops</span>
     <span id="installHint">Keep it as a Mac app: in Safari choose File › Add to Dock. In Chrome choose Install from the menu.</span>
     <span>Your voice stays on this computer. Each loop is held in memory while it plays; nothing is saved or uploaded.</span>
     <span><button type="button" class="small" id="install" hidden>Install as an app</button></span>
@@ -200,7 +213,7 @@ const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(
 
 // ---------- Settings ----------
 const STORE = 'eightfold.settings.v1';
-const DEFAULTS = { loopSec: 1, delaySec: 0.25, repeats: 8, triggerDb: -40, clickVol: 35 };
+const DEFAULTS = { loopSec: 1, delaySec: 0.25, repeats: 8, voices: 8, triggerDb: -40, clickVol: 35, speakers: false };
 const S = (() => { try { return { ...DEFAULTS, ...JSON.parse(localStorage.getItem(STORE) || '{}') }; } catch { return { ...DEFAULTS }; } })();
 const save = () => { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch { /* storage blocked */ } };
 
@@ -210,6 +223,7 @@ const DIALS = [
   { key: 'loopSec', range: 'loopLenRange', box: 'loopLen', min: 0.01, max: 10, dec: 2 },
   { key: 'delaySec', range: 'delayRange', box: 'delay', min: 0.01, max: 2, dec: 2 },
   { key: 'repeats', range: 'repeatsRange', box: 'repeats', min: 1, max: 32, dec: 0 },
+  { key: 'voices', range: 'voicesRange', box: 'voices', min: 1, max: 32, dec: 0 },
   { key: 'clickVol', range: 'clickVolRange', box: 'clickVol', min: 0, max: 100, dec: 0 },
 ];
 function showDial(d) { $(d.range).value = S[d.key]; $(d.box).value = Number(S[d.key]).toFixed(d.dec); }
@@ -233,16 +247,36 @@ for (const d of DIALS) {
 const trigger = $('trigger');
 trigger.value = S.triggerDb;
 trigger.addEventListener('input', () => { S.triggerDb = +trigger.value; save(); sendParams(); render(); });
-$('reset').addEventListener('click', () => { Object.assign(S, DEFAULTS); save(); DIALS.forEach(showDial); trigger.value = S.triggerDb; sendParams(); render(); });
+const speakers = $('speakers');
+speakers.checked = !!S.speakers;
+speakers.addEventListener('change', () => { S.speakers = speakers.checked; save(); if (running) connectMic().catch(err => console.error(err)); });
+$('reset').addEventListener('click', () => {
+  const echoChanged = S.speakers !== DEFAULTS.speakers;
+  Object.assign(S, DEFAULTS); save(); DIALS.forEach(showDial); trigger.value = S.triggerDb; speakers.checked = S.speakers;
+  sendParams(); render();
+  if (running && echoChanged) connectMic().catch(err => console.error(err));
+});
 
 // ---------- Audio ----------
-let ctx = null, node = null, stream = null, running = false;
-const live = { env: 0, state: 'idle', rep: 0, repeats: S.repeats, pos: 0, rec: 0, waiting: false, peaks: null };
+let ctx = null, node = null, stream = null, micSrc = null, running = false;
+const live = { env: 0, recording: null, cycle: null, phase: 0, playing: 0, voices: [] };
+const peaks = new Map(); // loop id -> its waveform
 
 function params() {
-  return { loopSec: S.loopSec, delaySec: S.delaySec, repeats: S.repeats, threshold: Math.pow(10, S.triggerDb / 20), clickGain: S.clickVol / 100 };
+  return { loopSec: S.loopSec, delaySec: S.delaySec, repeats: S.repeats, voices: S.voices, threshold: Math.pow(10, S.triggerDb / 20), clickGain: S.clickVol / 100 };
 }
 function sendParams() { node?.port.postMessage({ type: 'params', params: params() }); }
+
+// The mic: raw (no noise suppression or automatic gain) so the loops sound like you. Echo cancelling
+// only when you say you're on speakers.
+async function connectMic() {
+  const next = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: !!S.speakers, noiseSuppression: false, autoGainControl: false } });
+  try { micSrc?.disconnect(); } catch { /* already gone */ }
+  stream?.getTracks().forEach(t => t.stop());
+  stream = next;
+  micSrc = ctx.createMediaStreamSource(stream);
+  if (node) micSrc.connect(node);
+}
 
 async function start() {
   $('start').disabled = true;
@@ -254,14 +288,12 @@ async function start() {
       await ctx.audioWorklet.addModule('looper-worklet.js');
     }
     await ctx.resume();
-    // Raw mic: no echo cancelling, noise suppression or automatic gain, so the loop sounds like you.
-    stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
-    const src = ctx.createMediaStreamSource(stream);
     node = new AudioWorkletNode(ctx, 'eightfold-looper', { numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2], processorOptions: { params: params(), armed: true } });
     node.port.onmessage = e => onWorklet(e.data);
-    src.connect(node).connect(ctx.destination);
+    node.connect(ctx.destination);
+    await connectMic();
     running = true;
-    live.peaks = null;
+    peaks.clear();
   } catch (err) {
     console.error(err);
     stop();
@@ -278,24 +310,28 @@ async function start() {
 function stop() {
   running = false;
   node?.port.postMessage({ type: 'disarm' });
-  try { node?.disconnect(); } catch { /* already gone */ }
-  node = null;
+  try { micSrc?.disconnect(); node?.disconnect(); } catch { /* already gone */ }
+  node = null; micSrc = null;
   stream?.getTracks().forEach(t => t.stop());
   stream = null;
-  Object.assign(live, { env: 0, state: 'idle', rep: 0, pos: 0, rec: 0, waiting: false });
+  Object.assign(live, { env: 0, recording: null, cycle: null, phase: 0, playing: 0, voices: [] });
   render();
 }
 function onWorklet(m) {
-  if (m.type === 'tick') Object.assign(live, { env: m.env, state: m.state, rep: m.rep, repeats: m.repeats, pos: m.pos, rec: m.rec, waiting: m.waiting });
-  else if (m.type === 'onset') { live.peaks = null; live.repeats = m.repeats; }
-  else if (m.type === 'clip') live.peaks = m.peaks;
+  if (m.type === 'tick') {
+    Object.assign(live, { env: m.env, recording: m.recording, cycle: m.cycle, phase: m.phase, playing: m.playing, voices: m.voices });
+    for (const id of peaks.keys()) if (!m.voices.some(v => v.id === id)) peaks.delete(id); // forget finished loops
+  } else if (m.type === 'clip') peaks.set(m.id, m.peaks);
+  else if (m.type === 'cleared') peaks.clear();
 }
+const clearLoops = () => node?.port.postMessage({ type: 'clear' });
 $('start').addEventListener('click', () => (running ? stop() : start()));
-$('cancel').addEventListener('click', () => node?.port.postMessage({ type: 'cancel' }));
+$('cancel').addEventListener('click', clearLoops);
 addEventListener('keydown', e => {
-  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLButtonElement || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === 'Escape') { clearLoops(); return; } // works anywhere, even while typing in a box
+  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLButtonElement) return;
   if (e.code === 'Space') { e.preventDefault(); running ? stop() : start(); }
-  else if (e.key === 'Escape') node?.port.postMessage({ type: 'cancel' });
 });
 
 // ---------- Display ----------
@@ -304,69 +340,82 @@ function readColors() { for (const [k, v, fb] of [['fg', '--fg', '#ece7dc'], ['m
 readColors();
 addEventListener('load', readColors);
 
-const clipCv = $('clip'), cc = clipCv.getContext('2d');
-function drawClip() {
+// One lane per loop, newest at the top: its waveform (gold while it plays), a line for each pass that is
+// playing, and how many cycles it has left. A loop being recorded shows as a red bar filling up.
+const lanesCv = $('lanes'), lc = lanesCv.getContext('2d');
+const LANE = 24, MAX_LANES = 16;
+function drawLanes() {
+  const rows = [];
+  if (live.recording) rows.push({ rec: live.recording });
+  for (const v of [...live.voices].reverse()) if (!live.recording || v.id !== live.recording.id) rows.push({ v });
+  const shown = rows.slice(0, MAX_LANES);
+  const cssH = Math.max(1, shown.length) * LANE + 8;
+  if (lanesCv.style.height !== `${cssH}px`) lanesCv.style.height = `${cssH}px`;
   const dpr = Math.min(devicePixelRatio || 1, 2);
-  const W = Math.round(clipCv.clientWidth * dpr), H = Math.round(clipCv.clientHeight * dpr);
-  if (!W || !H) return;
-  if (clipCv.width !== W || clipCv.height !== H) { clipCv.width = W; clipCv.height = H; }
-  cc.clearRect(0, 0, W, H);
-  const mid = H / 2, pad = 10 * dpr;
-  cc.strokeStyle = COLORS.rule; cc.lineWidth = 1;
-  cc.beginPath(); cc.moveTo(0, mid + 0.5); cc.lineTo(W, mid + 0.5); cc.stroke();
-  const p = live.peaks;
-  if (p) {
-    let max = 0; for (const v of p) max = Math.max(max, v);
-    const g = max > 0 ? (mid - pad) / max : 0;
-    cc.fillStyle = live.state === 'active' && !live.waiting ? COLORS.tape : COLORS.muted;
-    const bw = W / p.length;
-    for (let i = 0; i < p.length; i++) { const h = Math.max(1, p[i] * g); cc.fillRect(i * bw, mid - h, Math.max(1, bw - 0.5), h * 2); }
-  } else if (live.state === 'active' && live.rec < 1) {
-    cc.fillStyle = COLORS.rec; cc.globalAlpha = 0.35; cc.fillRect(0, mid - 3 * dpr, W * live.rec, 6 * dpr); cc.globalAlpha = 1;
-  } else {
-    cc.fillStyle = COLORS.muted; cc.font = `${12 * dpr}px ${cssVar('--font-body') || 'system-ui'}`; cc.textAlign = 'center'; cc.textBaseline = 'middle';
-    cc.fillText(running ? 'Say something…' : 'Press Start, then say something', W / 2, mid);
+  const W = Math.round(lanesCv.clientWidth * dpr), H = Math.round(cssH * dpr);
+  if (!W) return;
+  if (lanesCv.width !== W || lanesCv.height !== H) { lanesCv.width = W; lanesCv.height = H; }
+  lc.clearRect(0, 0, W, H);
+  lc.font = `${11 * dpr}px ${cssVar('--font-data') || 'monospace'}`; lc.textBaseline = 'middle';
+  if (!shown.length) {
+    lc.fillStyle = COLORS.muted; lc.textAlign = 'center';
+    lc.fillText(running ? 'Say something…' : 'Press Start, then say something', W / 2, H / 2);
+    lc.textAlign = 'start'; return;
   }
-  if (live.state === 'active' && !live.waiting) {
-    const x = live.pos * W;
-    cc.fillStyle = COLORS.fg; cc.fillRect(Math.round(x), 0, Math.max(1, Math.round(dpr * 1.5)), H);
+  const left = 8 * dpr, right = W - 78 * dpr, plotW = right - left;
+  shown.forEach((row, r) => {
+    const top = (4 + r * LANE) * dpr, h = (LANE - 6) * dpr, mid = top + h / 2;
+    if (row.rec) {
+      lc.fillStyle = COLORS.rule; lc.fillRect(left, mid - 2 * dpr, plotW, 4 * dpr);
+      lc.fillStyle = COLORS.rec; lc.fillRect(left, mid - 2 * dpr, plotW * row.rec.frac, 4 * dpr);
+      lc.fillStyle = COLORS.fg; lc.fillText('recording', right + 10 * dpr, mid);
+      return;
+    }
+    const v = row.v, pk = peaks.get(v.id), sounding = v.heads.length > 0;
+    if (pk) {
+      let max = 0; for (const x of pk) max = Math.max(max, x);
+      const g = max > 0 ? (h / 2) / max : 0, bw = plotW / pk.length;
+      lc.fillStyle = sounding ? COLORS.tape : COLORS.muted; lc.globalAlpha = sounding ? 1 : 0.55;
+      for (let i = 0; i < pk.length; i++) { const hh = Math.max(dpr * 0.5, pk[i] * g); lc.fillRect(left + i * bw, mid - hh, Math.max(1, bw - 0.4), hh * 2); }
+      lc.globalAlpha = 1;
+    } else {
+      lc.strokeStyle = COLORS.rule; lc.beginPath(); lc.moveTo(left, mid); lc.lineTo(right, mid); lc.stroke();
+    }
+    lc.fillStyle = COLORS.fg;
+    for (const x of v.heads) lc.fillRect(Math.round(left + x * plotW), top, Math.max(1, Math.round(1.5 * dpr)), h);
+    lc.fillStyle = v.waiting ? COLORS.muted : COLORS.fg;
+    lc.fillText(v.waiting ? 'next cycle' : `${v.left} left`, right + 10 * dpr, mid);
+  });
+  if (rows.length > MAX_LANES) {
+    lc.fillStyle = COLORS.muted; lc.textAlign = 'right';
+    lc.fillText(`+${rows.length - MAX_LANES} more`, W - 6 * dpr, H - 6 * dpr); lc.textAlign = 'start';
   }
 }
 
 function render() {
-  const st = live.state;
+  const loops = live.voices.length, playing = live.playing;
   const lamp = $('lamp');
-  lamp.className = 'lamp' + (!running ? '' : st === 'active' && live.waiting ? ' rec' : st === 'active' ? ' loop' : ' listening');
+  lamp.className = 'lamp' + (!running ? '' : live.recording ? ' rec' : loops ? ' loop' : ' listening');
   $('start').textContent = running ? 'Stop' : 'Start';
   $('start').classList.toggle('on', running);
-  $('cancel').disabled = !(running && st === 'active');
+  $('cancel').disabled = !(running && loops > 0);
   if (running) $('statusSub').classList.remove('warn');
-  const n = st === 'active' ? live.repeats : S.repeats;
-  $('status').textContent = !running ? 'Press Start'
-    : st === 'active' && live.waiting ? 'Recording'
-    : st === 'active' ? `Looping ${Math.min(n, live.rep + 1)} of ${n}`
-    : st === 'cooldown' ? 'Done'
-    : 'Listening';
+  $('status').textContent = !running ? 'Press Start' : live.recording ? 'Recording' : loops ? 'Looping' : 'Listening';
   if (running && !$('statusSub').classList.contains('warn')) {
-    $('statusSub').textContent = st === 'active' && live.waiting ? `The loop starts ${S.delaySec.toFixed(2)} s after you started speaking.`
-      : st === 'active' ? `${S.loopSec.toFixed(2)} s loop. The mic is paused until it finishes.`
+    $('statusSub').textContent = loops
+      ? `${loops} ${loops === 1 ? 'loop' : 'loops'}, ${playing} playing now (at most ${S.voices}). Keep talking to add more.`
       : 'Say something. A sound past the marker starts a loop.';
   }
-  $('loopOut').textContent = `Loop ${st === 'active' && !live.waiting ? Math.min(n, live.rep + 1) : 0} of ${n}`;
+  $('loopOut').textContent = live.cycle != null && live.cycle >= 0 ? `Cycle ${live.cycle + 1} · ${S.loopSec.toFixed(2)} s` : 'None yet';
+  $('cycleFill').style.width = `${(live.cycle != null && live.cycle >= 0 ? live.phase : 0) * 100}%`;
+  $('cycleMid').hidden = !(S.voices > S.repeats);
   // Mic level in dB on a −70…−6 scale, the same scale as the trigger marker.
   const db = 20 * Math.log10(Math.max(1e-6, live.env));
   const frac = clamp((db + 70) / 64, 0, 1);
   $('meterFill').style.width = `${frac * 100}%`;
   $('meterFill').classList.toggle('hot', db >= S.triggerDb);
   $('triggerOut').textContent = `Starts at ${S.triggerDb} dB${running ? ` · now ${db < -69 ? '−∞' : Math.round(db)} dB` : ''}`.replace(/-/g, '−');
-  // One dot per loop.
-  const dots = $('dots');
-  if (dots.childElementCount !== n) { dots.textContent = ''; for (let i = 0; i < n; i++) { const d = document.createElement('span'); d.className = 'dot'; dots.append(d); } }
-  [...dots.children].forEach((d, i) => {
-    const done = st === 'active' && !live.waiting && i < live.rep, now = st === 'active' && !live.waiting && i === live.rep;
-    d.className = 'dot' + (done ? ' done' : now ? ' now' : '');
-  });
-  drawClip();
+  drawLanes();
 }
 (function frame() { if (running) render(); requestAnimationFrame(frame); })();
 render();
