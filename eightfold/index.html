@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eightfold</title>
+<meta name="description" content="Say something and hear it looped eight times, with a quiet tick at the start of each loop.">
+<meta name="theme-color" content="#12110f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column, a tape-deck card (status, mic meter, clip and loop count) above three dials. */
+:root {
+  color-scheme: dark;
+  --ground: #12110f;        /* warm graphite */
+  --panel: #1b1a17;
+  --rule: #2e2c28;
+  --fg: #ece7dc;
+  --muted: #9d978b;
+  --tape: #f0c24b;          /* loop light */
+  --rec: #e8705a;           /* recording */
+  --tape-dim: rgb(240 194 75 / 0.18);
+  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --step--2: 0.75rem;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-3: clamp(2.25rem, 6vw, 3.25rem);
+}
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--ground); color: var(--fg); font: 400 var(--step-0)/1.5 var(--font-body); -webkit-font-smoothing: antialiased; }
+.shell {
+  max-width: 46rem; margin: 0 auto; display: grid; gap: 24px;
+  padding-block: clamp(20px, 5vw, 48px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+header { display: grid; gap: 8px; }
+h1 { margin: 0; font: 700 var(--step-3)/1 var(--font-display); letter-spacing: -0.02em; }
+h1 span { color: var(--tape); }
+.lede { margin: 0; max-width: 56ch; color: var(--muted); }
+
+.deck { display: grid; gap: 18px; padding: 20px; background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; }
+.deck-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.status { display: flex; align-items: center; gap: 10px; font: 500 var(--step-1)/1.2 var(--font-display); }
+.lamp { width: 12px; height: 12px; border-radius: 50%; background: var(--rule); flex: none; }
+.lamp.listening { background: var(--muted); }
+.lamp.rec { background: var(--rec); box-shadow: 0 0 10px var(--rec); }
+.lamp.loop { background: var(--tape); box-shadow: 0 0 10px var(--tape); }
+.status-sub { margin: 0; color: var(--muted); font-size: var(--step--1); }
+
+button {
+  font: 600 var(--step-0)/1 var(--font-body); padding: 12px 20px; border-radius: 8px;
+  border: 1px solid var(--rule); background: transparent; color: var(--fg); cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--muted); }
+button.primary { background: var(--tape); border-color: var(--tape); color: var(--ground); }
+button.primary.on { background: transparent; color: var(--fg); border-color: var(--muted); }
+button.small { font-size: var(--step--1); padding: 8px 12px; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+:focus-visible { outline: 2px solid var(--tape); outline-offset: 2px; }
+
+.label { font: 500 var(--step--2)/1 var(--font-data); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.row-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.mono { font-family: var(--font-data); font-variant-numeric: tabular-nums; font-size: var(--step--1); }
+
+/* Mic meter with the trigger level as a draggable marker on it. */
+.meter { position: relative; height: 26px; }
+.meter-track { position: absolute; left: 0; right: 0; top: 10px; height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.meter-fill { position: absolute; top: 0; bottom: 0; left: 0; width: 0; background: var(--muted); border-radius: 3px; }
+.meter-fill.hot { background: var(--rec); }
+.meter input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; -webkit-appearance: none; appearance: none; background: transparent; cursor: ew-resize; }
+.meter input::-webkit-slider-runnable-track { height: 26px; background: transparent; }
+.meter input::-moz-range-track { height: 26px; background: transparent; }
+.meter input::-webkit-slider-thumb { -webkit-appearance: none; width: 6px; height: 26px; border: 0; border-radius: 2px; background: var(--fg); box-shadow: 0 0 0 2px var(--panel); }
+.meter input::-moz-range-thumb { width: 6px; height: 26px; border: 0; border-radius: 2px; background: var(--fg); box-shadow: 0 0 0 2px var(--panel); }
+.meter-scale { display: flex; justify-content: space-between; margin-top: -2px; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
+
+#clip { display: block; width: 100%; height: 88px; border-radius: 6px; background: var(--ground); }
+.dots { display: flex; flex-wrap: wrap; gap: 6px; min-height: 12px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--rule); box-sizing: border-box; }
+.dot.done { background: var(--tape); border-color: var(--tape); }
+.dot.now { border-color: var(--tape); background: var(--tape-dim); }
+
+/* The three dials, each a slider with a typed box. */
+.dials { display: grid; gap: 22px; }
+.dial { display: grid; gap: 8px; }
+.dial-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; }
+.dial input[type="range"] { width: 100%; margin: 0; accent-color: var(--tape); }
+.num { display: flex; align-items: center; gap: 6px; }
+.num input {
+  width: 6.2em; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--rule);
+  background: var(--panel); color: var(--fg); font: 500 var(--step-0)/1 var(--font-data); font-variant-numeric: tabular-nums; text-align: right;
+}
+.num span { color: var(--muted); font-size: var(--step--1); min-width: 1.2em; }
+.hint { margin: 0; color: var(--muted); font-size: var(--step--2); }
+.extras { display: grid; gap: 22px; padding-top: 18px; border-top: 1px solid var(--rule); }
+.footnote { display: grid; gap: 6px; margin: 0; color: var(--muted); font-size: var(--step--2); }
+.warn { color: var(--rec); }
+kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); border-radius: 3px; padding: 1px 5px; color: var(--fg); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="shell">
+  <header>
+    <h1>Eight<span>fold</span></h1>
+    <p class="lede">Say something and hear it back, looped. A quiet tick marks the start of each loop. Headphones work best.</p>
+  </header>
+
+  <section class="deck" aria-label="Looper">
+    <div class="deck-top">
+      <div>
+        <div class="status"><span class="lamp" id="lamp"></span><span id="status" role="status">Press Start</span></div>
+        <p class="status-sub" id="statusSub">It listens for your voice, records one loop, then plays it back.</p>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <button type="button" class="small" id="cancel" disabled>Skip loop</button>
+        <button type="button" class="primary" id="start">Start</button>
+      </div>
+    </div>
+
+    <div class="dial">
+      <div class="row-head"><span class="label">Mic</span><span class="mono" id="triggerOut">Starts at −40 dB</span></div>
+      <div class="meter">
+        <div class="meter-track" aria-hidden="true"><div class="meter-fill" id="meterFill"></div></div>
+        <input type="range" id="trigger" min="-70" max="-6" step="1" value="-40" aria-label="Trigger level: how loud a sound has to be to start a loop">
+      </div>
+      <div class="meter-scale" aria-hidden="true"><span>quiet</span><span>drag the marker to set how loud a sound starts a loop</span><span>loud</span></div>
+    </div>
+
+    <div class="dial">
+      <div class="row-head"><span class="label">Clip</span><span class="mono" id="loopOut">Loop 0 of 8</span></div>
+      <canvas id="clip" aria-label="The recorded clip, with a line where it is playing"></canvas>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="dials" aria-label="Settings">
+    <div class="dial">
+      <div class="row-head"><label class="label" for="loopLen">Loop length</label></div>
+      <div class="dial-row">
+        <input type="range" id="loopLenRange" min="0.01" max="10" step="0.01" aria-label="Loop length in seconds">
+        <div class="num"><input type="number" id="loopLen" min="0.01" max="10" step="0.01" inputmode="decimal"><span>s</span></div>
+      </div>
+      <p class="hint">How much of what you say becomes the loop, from 0.01 to 10.00 seconds.</p>
+    </div>
+    <div class="dial">
+      <div class="row-head"><label class="label" for="delay">Delay before looping</label></div>
+      <div class="dial-row">
+        <input type="range" id="delayRange" min="0.01" max="2" step="0.01" aria-label="Delay in seconds">
+        <div class="num"><input type="number" id="delay" min="0.01" max="2" step="0.01" inputmode="decimal"><span>s</span></div>
+      </div>
+      <p class="hint">Time from when you start speaking to when the loop starts playing, from 0.01 to 2.00 seconds. If it's shorter than the loop, playback follows just behind your voice.</p>
+    </div>
+    <div class="dial">
+      <div class="row-head"><label class="label" for="repeats">Times to loop</label></div>
+      <div class="dial-row">
+        <input type="range" id="repeatsRange" min="1" max="32" step="1" aria-label="Times to loop">
+        <div class="num"><input type="number" id="repeats" min="1" max="32" step="1" inputmode="numeric"><span>×</span></div>
+      </div>
+      <p class="hint">8 is the standard.</p>
+    </div>
+    <div class="extras">
+      <div class="dial">
+        <div class="row-head"><label class="label" for="clickVol">Tick volume</label></div>
+        <div class="dial-row">
+          <input type="range" id="clickVolRange" min="0" max="100" step="1" aria-label="Tick volume in percent">
+          <div class="num"><input type="number" id="clickVol" min="0" max="100" step="1" inputmode="numeric"><span>%</span></div>
+        </div>
+        <p class="hint">The tick at the start of each loop. Very short loops tick at most five times a second.</p>
+      </div>
+      <div><button type="button" class="small" id="reset">Restore defaults</button></div>
+    </div>
+  </section>
+
+  <div class="footnote">
+    <span><kbd>Space</kbd> start or stop · <kbd>Esc</kbd> skip the current loop</span>
+    <span id="installHint">Keep it as a Mac app: in Safari choose File › Add to Dock. In Chrome choose Install from the menu.</span>
+    <span>Your voice stays on this computer. Each loop is held in memory while it plays; nothing is saved or uploaded.</span>
+    <span><button type="button" class="small" id="install" hidden>Install as an app</button></span>
+  </div>
+</main>
+
+<script type="module">
+// =====================================================================
+// Eightfold: say something, hear it looped. The looping itself runs in looper-worklet.js
+// on the audio thread; this page handles the controls and the display.
+// =====================================================================
+const $ = id => document.getElementById(id);
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+// ---------- Settings ----------
+const STORE = 'eightfold.settings.v1';
+const DEFAULTS = { loopSec: 1, delaySec: 0.25, repeats: 8, triggerDb: -40, clickVol: 35 };
+const S = (() => { try { return { ...DEFAULTS, ...JSON.parse(localStorage.getItem(STORE) || '{}') }; } catch { return { ...DEFAULTS }; } })();
+const save = () => { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch { /* storage blocked */ } };
+
+// Each dial: a slider and a typed box that stay in step. Typing is checked when you leave the box
+// or press Enter; out-of-range values are pulled to the nearest end.
+const DIALS = [
+  { key: 'loopSec', range: 'loopLenRange', box: 'loopLen', min: 0.01, max: 10, dec: 2 },
+  { key: 'delaySec', range: 'delayRange', box: 'delay', min: 0.01, max: 2, dec: 2 },
+  { key: 'repeats', range: 'repeatsRange', box: 'repeats', min: 1, max: 32, dec: 0 },
+  { key: 'clickVol', range: 'clickVolRange', box: 'clickVol', min: 0, max: 100, dec: 0 },
+];
+function showDial(d) { $(d.range).value = S[d.key]; $(d.box).value = Number(S[d.key]).toFixed(d.dec); }
+function setDial(d, v, fromBox) {
+  if (!Number.isFinite(v)) { showDial(d); return; }
+  S[d.key] = Number(clamp(v, d.min, d.max).toFixed(d.dec));
+  $(d.range).value = S[d.key];
+  if (!fromBox) $(d.box).value = S[d.key].toFixed(d.dec);
+  save(); sendParams(); render();
+}
+for (const d of DIALS) {
+  $(d.range).addEventListener('input', () => setDial(d, parseFloat($(d.range).value)));
+  const box = $(d.box);
+  box.addEventListener('input', () => { const v = parseFloat(box.value); if (Number.isFinite(v) && v >= d.min && v <= d.max) setDial(d, v, true); });
+  const commit = () => setDial(d, parseFloat(box.value.replace(',', '.')));
+  box.addEventListener('change', commit);
+  box.addEventListener('blur', commit);
+  box.addEventListener('keydown', e => { if (e.key === 'Enter') { commit(); box.select(); } });
+  showDial(d);
+}
+const trigger = $('trigger');
+trigger.value = S.triggerDb;
+trigger.addEventListener('input', () => { S.triggerDb = +trigger.value; save(); sendParams(); render(); });
+$('reset').addEventListener('click', () => { Object.assign(S, DEFAULTS); save(); DIALS.forEach(showDial); trigger.value = S.triggerDb; sendParams(); render(); });
+
+// ---------- Audio ----------
+let ctx = null, node = null, stream = null, running = false;
+const live = { env: 0, state: 'idle', rep: 0, repeats: S.repeats, pos: 0, rec: 0, waiting: false, peaks: null };
+
+function params() {
+  return { loopSec: S.loopSec, delaySec: S.delaySec, repeats: S.repeats, threshold: Math.pow(10, S.triggerDb / 20), clickGain: S.clickVol / 100 };
+}
+function sendParams() { node?.port.postMessage({ type: 'params', params: params() }); }
+
+async function start() {
+  $('start').disabled = true;
+  try {
+    if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) throw Object.assign(new Error('insecure'), { name: 'Insecure' });
+    if (!ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      try { ctx = new AC({ latencyHint: 'interactive' }); } catch { ctx = new AC(); }
+      await ctx.audioWorklet.addModule('looper-worklet.js');
+    }
+    await ctx.resume();
+    // Raw mic: no echo cancelling, noise suppression or automatic gain, so the loop sounds like you.
+    stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+    const src = ctx.createMediaStreamSource(stream);
+    node = new AudioWorkletNode(ctx, 'eightfold-looper', { numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2], processorOptions: { params: params(), armed: true } });
+    node.port.onmessage = e => onWorklet(e.data);
+    src.connect(node).connect(ctx.destination);
+    running = true;
+    live.peaks = null;
+  } catch (err) {
+    console.error(err);
+    stop();
+    $('statusSub').classList.add('warn');
+    $('statusSub').textContent = err.name === 'NotAllowedError' ? 'Microphone access was blocked. Allow the microphone for this page in your browser’s site settings, then press Start.'
+      : err.name === 'NotFoundError' ? 'No microphone found. Connect one and press Start.'
+      : err.name === 'Insecure' ? 'The microphone needs a secure page. Open this from https:// or http://localhost.'
+      : 'Couldn’t start the audio. Reload the page and try again.';
+  } finally {
+    $('start').disabled = false;
+    render();
+  }
+}
+function stop() {
+  running = false;
+  node?.port.postMessage({ type: 'disarm' });
+  try { node?.disconnect(); } catch { /* already gone */ }
+  node = null;
+  stream?.getTracks().forEach(t => t.stop());
+  stream = null;
+  Object.assign(live, { env: 0, state: 'idle', rep: 0, pos: 0, rec: 0, waiting: false });
+  render();
+}
+function onWorklet(m) {
+  if (m.type === 'tick') Object.assign(live, { env: m.env, state: m.state, rep: m.rep, repeats: m.repeats, pos: m.pos, rec: m.rec, waiting: m.waiting });
+  else if (m.type === 'onset') { live.peaks = null; live.repeats = m.repeats; }
+  else if (m.type === 'clip') live.peaks = m.peaks;
+}
+$('start').addEventListener('click', () => (running ? stop() : start()));
+$('cancel').addEventListener('click', () => node?.port.postMessage({ type: 'cancel' }));
+addEventListener('keydown', e => {
+  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLButtonElement || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.code === 'Space') { e.preventDefault(); running ? stop() : start(); }
+  else if (e.key === 'Escape') node?.port.postMessage({ type: 'cancel' });
+});
+
+// ---------- Display ----------
+const COLORS = {};
+function readColors() { for (const [k, v, fb] of [['fg', '--fg', '#ece7dc'], ['muted', '--muted', '#9d978b'], ['rule', '--rule', '#2e2c28'], ['tape', '--tape', '#f0c24b'], ['rec', '--rec', '#e8705a'], ['ground', '--ground', '#12110f']]) COLORS[k] = cssVar(v) || fb; }
+readColors();
+addEventListener('load', readColors);
+
+const clipCv = $('clip'), cc = clipCv.getContext('2d');
+function drawClip() {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const W = Math.round(clipCv.clientWidth * dpr), H = Math.round(clipCv.clientHeight * dpr);
+  if (!W || !H) return;
+  if (clipCv.width !== W || clipCv.height !== H) { clipCv.width = W; clipCv.height = H; }
+  cc.clearRect(0, 0, W, H);
+  const mid = H / 2, pad = 10 * dpr;
+  cc.strokeStyle = COLORS.rule; cc.lineWidth = 1;
+  cc.beginPath(); cc.moveTo(0, mid + 0.5); cc.lineTo(W, mid + 0.5); cc.stroke();
+  const p = live.peaks;
+  if (p) {
+    let max = 0; for (const v of p) max = Math.max(max, v);
+    const g = max > 0 ? (mid - pad) / max : 0;
+    cc.fillStyle = live.state === 'active' && !live.waiting ? COLORS.tape : COLORS.muted;
+    const bw = W / p.length;
+    for (let i = 0; i < p.length; i++) { const h = Math.max(1, p[i] * g); cc.fillRect(i * bw, mid - h, Math.max(1, bw - 0.5), h * 2); }
+  } else if (live.state === 'active' && live.rec < 1) {
+    cc.fillStyle = COLORS.rec; cc.globalAlpha = 0.35; cc.fillRect(0, mid - 3 * dpr, W * live.rec, 6 * dpr); cc.globalAlpha = 1;
+  } else {
+    cc.fillStyle = COLORS.muted; cc.font = `${12 * dpr}px ${cssVar('--font-body') || 'system-ui'}`; cc.textAlign = 'center'; cc.textBaseline = 'middle';
+    cc.fillText(running ? 'Say something…' : 'Press Start, then say something', W / 2, mid);
+  }
+  if (live.state === 'active' && !live.waiting) {
+    const x = live.pos * W;
+    cc.fillStyle = COLORS.fg; cc.fillRect(Math.round(x), 0, Math.max(1, Math.round(dpr * 1.5)), H);
+  }
+}
+
+function render() {
+  const st = live.state;
+  const lamp = $('lamp');
+  lamp.className = 'lamp' + (!running ? '' : st === 'active' && live.waiting ? ' rec' : st === 'active' ? ' loop' : ' listening');
+  $('start').textContent = running ? 'Stop' : 'Start';
+  $('start').classList.toggle('on', running);
+  $('cancel').disabled = !(running && st === 'active');
+  if (running) $('statusSub').classList.remove('warn');
+  const n = st === 'active' ? live.repeats : S.repeats;
+  $('status').textContent = !running ? 'Press Start'
+    : st === 'active' && live.waiting ? 'Recording'
+    : st === 'active' ? `Looping ${Math.min(n, live.rep + 1)} of ${n}`
+    : st === 'cooldown' ? 'Done'
+    : 'Listening';
+  if (running && !$('statusSub').classList.contains('warn')) {
+    $('statusSub').textContent = st === 'active' && live.waiting ? `The loop starts ${S.delaySec.toFixed(2)} s after you started speaking.`
+      : st === 'active' ? `${S.loopSec.toFixed(2)} s loop. The mic is paused until it finishes.`
+      : 'Say something. A sound past the marker starts a loop.';
+  }
+  $('loopOut').textContent = `Loop ${st === 'active' && !live.waiting ? Math.min(n, live.rep + 1) : 0} of ${n}`;
+  // Mic level in dB on a −70…−6 scale, the same scale as the trigger marker.
+  const db = 20 * Math.log10(Math.max(1e-6, live.env));
+  const frac = clamp((db + 70) / 64, 0, 1);
+  $('meterFill').style.width = `${frac * 100}%`;
+  $('meterFill').classList.toggle('hot', db >= S.triggerDb);
+  $('triggerOut').textContent = `Starts at ${S.triggerDb} dB${running ? ` · now ${db < -69 ? '−∞' : Math.round(db)} dB` : ''}`.replace(/-/g, '−');
+  // One dot per loop.
+  const dots = $('dots');
+  if (dots.childElementCount !== n) { dots.textContent = ''; for (let i = 0; i < n; i++) { const d = document.createElement('span'); d.className = 'dot'; dots.append(d); } }
+  [...dots.children].forEach((d, i) => {
+    const done = st === 'active' && !live.waiting && i < live.rep, now = st === 'active' && !live.waiting && i === live.rep;
+    d.className = 'dot' + (done ? ' done' : now ? ' now' : '');
+  });
+  drawClip();
+}
+(function frame() { if (running) render(); requestAnimationFrame(frame); })();
+render();
+
+// ---------- Install as an app ----------
+if ('serviceWorker' in navigator && window.isSecureContext) {
+  addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Offline support unavailable', err)));
+  const had = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (had && !running) location.reload(); });
+}
+const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+$('installHint').hidden = standalone;
+let installPrompt = null;
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; $('install').hidden = false; $('installHint').hidden = true; });
+$('install').addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice.catch(() => null); installPrompt = null; $('install').hidden = true; });
+addEventListener('appinstalled', () => { $('install').hidden = true; $('installHint').hidden = true; });
+
+window.eightfold = { settings: S, live, get ctx() { return ctx; }, get node() { return node; } };
+</script>
+</body>
+</html>
