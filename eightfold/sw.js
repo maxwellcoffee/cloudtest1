@@ -2,7 +2,7 @@
 // Page files are checked with the server on every load (GitHub Pages otherwise lets browsers reuse
 // them for 10 minutes), so a new version shows up straight away; fonts are kept once fetched.
 
-const SHELL_CACHE = 'eightfold-shell-v2';
+const SHELL_CACHE = 'eightfold-shell-v3';
 const FONT_CACHE = 'eightfold-fonts-v1';
 const SHELL = [
   './', './index.html', './looper-worklet.js', './manifest.webmanifest',

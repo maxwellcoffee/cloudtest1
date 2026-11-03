@@ -82,11 +82,55 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 .meter input::-webkit-slider-thumb { -webkit-appearance: none; width: 6px; height: 26px; border: 0; border-radius: 2px; background: var(--fg); box-shadow: 0 0 0 2px var(--panel); }
 .meter input::-moz-range-thumb { width: 6px; height: 26px; border: 0; border-radius: 2px; background: var(--fg); box-shadow: 0 0 0 2px var(--panel); }
 .meter-scale { display: flex; justify-content: space-between; margin-top: -2px; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
+@media (max-width: 520px) { .meter-scale span:nth-child(2) { display: none; } }
 
 .cycle { position: relative; height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
 .cycle-fill { position: absolute; top: 0; bottom: 0; left: 0; width: 0; background: var(--tape); }
 .cycle-mid { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: var(--ground); }
-#lanes { display: block; width: 100%; height: 52px; border-radius: 6px; background: var(--ground); }
+/* Loops display: fixed rows by age. The top row is what's coming next; each loop moves down a row per cycle. */
+.lanes {
+  --lane-h: 30px;
+  position: relative; overflow: hidden; border-radius: 6px; background-color: var(--ground);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 calc(var(--lane-h) - 1px), rgb(236 231 220 / 0.05) calc(var(--lane-h) - 1px) var(--lane-h));
+  background-position: 0 4px;
+  transition: height 200ms ease-out;
+}
+.lanes-next { position: absolute; left: 0; right: 0; top: 0; height: calc(var(--lane-h) + 4px); background: rgb(236 231 220 / 0.03); border-bottom: 1px solid var(--rule); }
+.lanes-empty { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 12px; text-align: center; color: var(--muted); font: 400 var(--step--1)/1.4 var(--font-data); }
+.lane {
+  position: absolute; left: 0; right: 0; top: 4px; height: var(--lane-h);
+  display: grid; grid-template-columns: minmax(0, 1fr) 13.5ch 32px 32px; align-items: center; gap: 6px; padding: 0 6px 0 8px;
+  transition: transform 240ms ease-out, opacity 220ms ease-out;
+  animation: lane-in 220ms ease-out;
+}
+.lane.gone { opacity: 0; }
+@keyframes lane-in { from { opacity: 0; } }
+.lane canvas { display: block; width: 100%; height: 18px; }
+.lane-label { font: 400 var(--step--2)/1 var(--font-data); font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; color: var(--fg); }
+.lane-label.muted { color: var(--muted); }
+.lane-label.rec { color: var(--rec); }
+.lane button { font: 500 var(--step--2)/1 var(--font-data); padding: 0; height: 24px; border-radius: 5px; color: var(--muted); }
+.lane button:hover:not(:disabled) { color: var(--fg); }
+@media (prefers-reduced-motion: reduce) { .lane, .lanes { animation: none; } }
+
+/* Sync: tap along with the click so the delay can be set from your timing. */
+.sync { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--tape-dim); border-radius: 10px; background: rgb(240 194 75 / 0.05); }
+.sync p { margin: 0; }
+.sync-say { font-size: var(--step--1); max-width: 62ch; }
+.sync-dots { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-height: 18px; }
+.sync-dot { width: 14px; height: 14px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--rule); transition: transform 90ms ease-out, background-color 90ms, border-color 90ms; }
+.sync-dot.count { width: 10px; height: 10px; }
+.sync-dot.first { margin-left: 12px; }
+.sync-dot.now { border-color: var(--fg); transform: scale(1.3); }
+.sync-dot.hit { background: var(--tape); border-color: var(--tape); }
+.sync-dot.miss { border-color: var(--rec); }
+.sync-strip { position: relative; height: 26px; border-radius: 4px; background: var(--ground); }
+.sync-strip i { position: absolute; top: 7px; bottom: 7px; width: 2px; margin-left: -1px; background: var(--tape); }
+.sync-strip i.zero { top: 3px; bottom: 3px; background: var(--muted); }
+.sync-strip i.med { top: 2px; bottom: 2px; width: 3px; margin-left: -1.5px; background: var(--fg); }
+.sync-scale { position: relative; height: 12px; margin-top: -6px; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
+.sync-scale span { position: absolute; top: 0; white-space: nowrap; }
+.sync-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .check { display: flex; align-items: center; gap: 10px; font-size: var(--step--1); cursor: pointer; }
 .check input { width: 16px; height: 16px; accent-color: var(--tape); }
 
@@ -123,8 +167,24 @@ kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); 
         <p class="status-sub" id="statusSub">Each thing you say becomes a loop that layers on top of the others.</p>
       </div>
       <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <button type="button" class="small" id="syncBtn">Sync</button>
         <button type="button" class="small" id="cancel" disabled>Clear loops</button>
         <button type="button" class="primary" id="start">Start</button>
+      </div>
+    </div>
+
+    <div class="sync" id="syncPanel" hidden>
+      <div class="row-head"><span class="label">Sync to the click</span><button type="button" class="small" id="syncCancel">Cancel</button></div>
+      <p class="sync-say" id="syncSay">Make a short, sharp sound right on each click: a clap, a tap on the desk, or “ta”. Three clicks to find the beat, then eight that count. Go by the sound, not the dots.</p>
+      <div class="sync-dots" id="syncDots" aria-hidden="true"></div>
+      <div>
+        <div class="sync-strip" id="syncStrip" aria-hidden="true"></div>
+        <div class="sync-scale" id="syncScale" aria-hidden="true"></div>
+      </div>
+      <p class="mono" id="syncResult" role="status"></p>
+      <div class="sync-actions" id="syncActions" hidden>
+        <button type="button" class="small" id="syncAgain">Again</button>
+        <button type="button" class="small" id="syncDone">Done</button>
       </div>
     </div>
 
@@ -140,7 +200,7 @@ kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); 
     <div class="dial">
       <div class="row-head"><span class="label">Loops</span><span class="mono" id="loopOut">None yet</span></div>
       <div class="cycle" aria-hidden="true"><div class="cycle-fill" id="cycleFill"></div><div class="cycle-mid" id="cycleMid"></div></div>
-      <canvas id="lanes" aria-label="Each loop, newest at the top, with lines where it is playing and how many cycles it has left"></canvas>
+      <div class="lanes" id="lanes" tabindex="-1" role="list" aria-label="Loops, newest at the top. Each moves down a row every cycle until its cycles run out."><div class="lanes-next" aria-hidden="true"></div><div class="lanes-empty" id="lanesEmpty"></div></div>
     </div>
   </section>
 
@@ -159,7 +219,8 @@ kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); 
         <input type="range" id="delayRange" min="0.01" max="2" step="0.01" aria-label="Delay in seconds">
         <div class="num"><input type="number" id="delay" min="0.01" max="2" step="0.01" inputmode="decimal"><span>s</span></div>
       </div>
-      <p class="hint">Time from when you start speaking to when that loop first plays, from 0.01 to 2.00 seconds. While other loops are playing, a new one waits for the next cycle so everything stays in time with the tick.</p>
+      <p class="hint">Time from when you start speaking to when that loop first plays, from 0.01 to 2.00 seconds. While other loops are playing, a new one waits for the next cycle so everything stays in time with the tick. Sync sets it from your own timing.</p>
+      <p class="hint" id="syncNote" hidden></p>
     </div>
     <div class="dial">
       <div class="row-head"><label class="label" for="repeats">Times to loop</label></div>
@@ -213,7 +274,8 @@ const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(
 
 // ---------- Settings ----------
 const STORE = 'eightfold.settings.v1';
-const DEFAULTS = { loopSec: 1, delaySec: 0.25, repeats: 8, voices: 8, triggerDb: -40, clickVol: 35, speakers: false };
+// syncLatency: after Sync, how long after a click your sound reaches the looper (seconds), or null.
+const DEFAULTS = { loopSec: 1, delaySec: 0.25, repeats: 8, voices: 8, triggerDb: -40, clickVol: 35, speakers: false, syncLatency: null };
 const S = (() => { try { return { ...DEFAULTS, ...JSON.parse(localStorage.getItem(STORE) || '{}') }; } catch { return { ...DEFAULTS }; } })();
 const save = () => { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch { /* storage blocked */ } };
 
@@ -227,12 +289,33 @@ const DIALS = [
   { key: 'clickVol', range: 'clickVolRange', box: 'clickVol', min: 0, max: 100, dec: 0 },
 ];
 function showDial(d) { $(d.range).value = S[d.key]; $(d.box).value = Number(S[d.key]).toFixed(d.dec); }
+const DELAY = DIALS.find(d => d.key === 'delaySec');
+// The synced delay: the loop length minus your latency (wrapped into one loop). Then a sound you make on
+// the click starts a new clip exactly where the next one would begin, so it comes back on the click.
+function syncedDelay(L, lam) {
+  let d = L - (((lam % L) + L) % L);
+  if (d < 0.01) d += L;
+  return Math.round(d * 1000) / 1000;
+}
 function setDial(d, v, fromBox) {
   if (!Number.isFinite(v)) { showDial(d); return; }
+  // Leaving a box without changing it does nothing (so a synced delay above 2.00 s survives a click in the box).
+  if (Number(v.toFixed(d.dec)) === Number(Number(S[d.key]).toFixed(d.dec))) { if (!fromBox) showDial(d); return; }
   S[d.key] = Number(clamp(v, d.min, d.max).toFixed(d.dec));
   $(d.range).value = S[d.key];
   if (!fromBox) $(d.box).value = S[d.key].toFixed(d.dec);
-  save(); sendParams(); render();
+  if (d.key === 'delaySec') S.syncLatency = null;               // setting the delay by hand ends the sync
+  if (d.key === 'loopSec' && S.syncLatency != null) { S.delaySec = syncedDelay(S.loopSec, S.syncLatency); showDial(DELAY); }
+  save(); sendParams(); showSyncNote(); render();
+}
+function showSyncNote() {
+  const note = $('syncNote'), lam = S.syncLatency;
+  note.hidden = lam == null;
+  if (lam == null) return;
+  const ms = Math.round(Math.abs(lam) * 1000);
+  note.textContent = `Synced: your sound arrives ${ms} ms ${lam >= 0 ? 'after' : 'before'} the click, so the delay is ${S.delaySec.toFixed(3)} s, the loop length minus that.`
+    + (S.delaySec > DELAY.max ? ' That is past the end of the slider because the loop is long.' : '')
+    + ' It follows the loop length; moving the delay yourself ends the sync.';
 }
 for (const d of DIALS) {
   $(d.range).addEventListener('input', () => setDial(d, parseFloat($(d.range).value)));
@@ -244,6 +327,7 @@ for (const d of DIALS) {
   box.addEventListener('keydown', e => { if (e.key === 'Enter') { commit(); box.select(); } });
   showDial(d);
 }
+showSyncNote();
 const trigger = $('trigger');
 trigger.value = S.triggerDb;
 trigger.addEventListener('input', () => { S.triggerDb = +trigger.value; save(); sendParams(); render(); });
@@ -253,13 +337,13 @@ speakers.addEventListener('change', () => { S.speakers = speakers.checked; save(
 $('reset').addEventListener('click', () => {
   const echoChanged = S.speakers !== DEFAULTS.speakers;
   Object.assign(S, DEFAULTS); save(); DIALS.forEach(showDial); trigger.value = S.triggerDb; speakers.checked = S.speakers;
-  sendParams(); render();
+  sendParams(); showSyncNote(); render();
   if (running && echoChanged) connectMic().catch(err => console.error(err));
 });
 
 // ---------- Audio ----------
 let ctx = null, node = null, stream = null, micSrc = null, running = false;
-const live = { env: 0, recording: null, cycle: null, phase: 0, playing: 0, voices: [] };
+const live = { env: 0, syncing: false, recording: null, cycle: null, phase: 0, playing: 0, voices: [] };
 const peaks = new Map(); // loop id -> its waveform
 
 function params() {
@@ -309,27 +393,130 @@ async function start() {
 }
 function stop() {
   running = false;
+  closeSync();
   node?.port.postMessage({ type: 'disarm' });
   try { micSrc?.disconnect(); node?.disconnect(); } catch { /* already gone */ }
   node = null; micSrc = null;
   stream?.getTracks().forEach(t => t.stop());
   stream = null;
-  Object.assign(live, { env: 0, recording: null, cycle: null, phase: 0, playing: 0, voices: [] });
+  Object.assign(live, { env: 0, syncing: false, recording: null, cycle: null, phase: 0, playing: 0, voices: [] });
   render();
 }
 function onWorklet(m) {
   if (m.type === 'tick') {
-    Object.assign(live, { env: m.env, recording: m.recording, cycle: m.cycle, phase: m.phase, playing: m.playing, voices: m.voices });
+    Object.assign(live, { env: m.env, syncing: m.syncing, recording: m.recording, cycle: m.cycle, phase: m.phase, playing: m.playing, voices: m.voices });
     for (const id of peaks.keys()) if (!m.voices.some(v => v.id === id)) peaks.delete(id); // forget finished loops
   } else if (m.type === 'clip') peaks.set(m.id, m.peaks);
   else if (m.type === 'cleared') peaks.clear();
+  else if (m.type === 'syncClick' && sync) { sync.clicks.push(m.frame); sync.now = m.n; drawSync(); }
+  else if (m.type === 'syncHit' && sync) { sync.hits.push(m.frame); drawSync(); }
+  else if (m.type === 'syncResult' && sync) finishSync(m.offsets);
+  else if (m.type === 'syncCancelled') closeSync();
 }
 const clearLoops = () => node?.port.postMessage({ type: 'clear' });
 $('start').addEventListener('click', () => (running ? stop() : start()));
 $('cancel').addEventListener('click', clearLoops);
+
+// ---------- Sync ----------
+// Clicks at the loop length (or a steady beat near it), three to find the beat and eight that count. The
+// audio thread hears each short sound and reports how long after its click it arrived: the speaker delay,
+// your timing and the mic delay together. The delay is then set to the loop length minus the middle value.
+const COUNT_IN = 3, TAPS = 8;
+let sync = null; // { interval, I, clicks: [frames], hits: [frames], now, result }
+function syncInterval(L) {
+  if (L >= 0.75 && L <= 2) return L;
+  if (L < 0.75) return L * Math.ceil(0.75 / L); // every few cycles, so it stays on the loop's beat
+  return 1;
+}
+async function startSync() {
+  if (!running) { await start(); if (!running) return; }
+  const interval = syncInterval(S.loopSec);
+  sync = { interval, I: interval * ctx.sampleRate, clicks: [], hits: [], now: -1, result: null };
+  $('syncPanel').hidden = false;
+  $('syncCancel').hidden = false;
+  $('syncActions').hidden = true;
+  $('syncResult').textContent = '';
+  $('syncResult').classList.remove('warn');
+  $('syncSay').textContent = 'Make a short, sharp sound right on each click: a clap, a tap on the desk, or “ta”. Three clicks to find the beat, then eight that count. Go by the sound, not the dots.';
+  // The strip runs over the window a sound can count for: a third of a beat early to 0.6 of a beat late.
+  const lo = -0.35 * interval, hi = 0.6 * interval;
+  sync.lo = lo; sync.hi = hi;
+  const pct = s => `${((s - lo) / (hi - lo)) * 100}%`;
+  $('syncScale').innerHTML = `<span style="left:0">${Math.round(lo * 1000)} ms</span><span style="left:${pct(0)}; transform:translateX(-50%)">click</span><span style="right:0">+${Math.round(hi * 1000)} ms</span>`.replace(/-/g, '−');
+  drawSync();
+  node.port.postMessage({ type: 'sync', interval, countIn: COUNT_IN, taps: TAPS });
+  render();
+}
+// For each counted click, the first sound from a third of a beat early to 0.6 of a beat late (the same
+// rule the audio thread uses).
+function matchSync() {
+  const used = new Set(), out = [];
+  for (let k = COUNT_IN; k < sync.clicks.length; k++) {
+    const c = sync.clicks[k];
+    const h = sync.hits.find(x => !used.has(x) && x >= c - 0.35 * sync.I && x < c + 0.6 * sync.I);
+    if (h != null) used.add(h);
+    out[k - COUNT_IN] = h == null ? null : (h - c) / ctx.sampleRate;
+  }
+  return out;
+}
+function drawSync() {
+  if (!sync) return;
+  const offs = sync.result || matchSync();
+  let dots = '';
+  for (let n = 0; n < COUNT_IN + TAPS; n++) {
+    const counted = n >= COUNT_IN, k = n - COUNT_IN, o = counted ? offs[k] : undefined;
+    // A counted click is missed once the next one has gone by with nothing heard for it.
+    const missed = counted && o == null && (sync.result || sync.clicks.length > n + 1);
+    const cls = ['sync-dot', counted ? '' : 'count', n === COUNT_IN ? 'first' : '', n === sync.now && !sync.result ? 'now' : '', o != null ? 'hit' : '', missed ? 'miss' : ''];
+    dots += `<span class="${cls.filter(Boolean).join(' ')}"></span>`;
+  }
+  $('syncDots').innerHTML = dots;
+  const pct = s => `${clamp((s - sync.lo) / (sync.hi - sync.lo), 0, 1) * 100}%`;
+  let marks = `<i class="zero" style="left:${pct(0)}"></i>`;
+  for (const o of offs) if (o != null) marks += `<i style="left:${pct(o)}"></i>`;
+  if (sync.median != null) marks += `<i class="med" style="left:${pct(sync.median)}"></i>`;
+  $('syncStrip').innerHTML = marks;
+}
+function finishSync(offsets) {
+  sync.result = offsets;
+  const ok = offsets.filter(x => x != null).sort((a, b) => a - b);
+  $('syncCancel').hidden = true;
+  $('syncActions').hidden = false;
+  $('syncSay').textContent = ok.length >= 5 ? 'Done. Now sing or speak on the click: what lands on the click comes back on the click.' : 'Not enough to go on.';
+  if (ok.length < 5) {
+    $('syncResult').classList.add('warn');
+    $('syncResult').textContent = `Heard ${ok.length} of ${TAPS}. Try a louder, sharper sound, or drag the marker on the mic meter left so quieter sounds count. The delay is unchanged.`;
+  } else {
+    const mid = ok.length >> 1, lam = ok.length % 2 ? ok[mid] : (ok[mid - 1] + ok[mid]) / 2;
+    const spread = ok.map(x => Math.abs(x - lam)).sort((a, b) => a - b)[ok.length >> 1]; // typical distance from the middle
+    sync.median = lam;
+    S.syncLatency = Math.round(lam * 1000) / 1000;
+    S.delaySec = syncedDelay(S.loopSec, S.syncLatency);
+    save(); showDial(DELAY); sendParams(); showSyncNote();
+    const ms = Math.round(Math.abs(lam) * 1000);
+    $('syncResult').classList.remove('warn');
+    $('syncResult').textContent = `Heard ${ok.length} of ${TAPS}. Your sound arrives ${ms} ms ${lam >= 0 ? 'after' : 'before'} the click, so the delay is now ${S.delaySec.toFixed(3)} s.`
+      + (spread > 0.03 ? ` Your taps varied by about ±${Math.round(spread * 1000)} ms; try again for a steadier reading.` : '');
+  }
+  drawSync();
+  $('syncDone').focus();
+  render();
+}
+function closeSync() {
+  if (!sync && $('syncPanel').hidden) return;
+  if (sync && !sync.result) node?.port.postMessage({ type: 'syncCancel' });
+  sync = null;
+  $('syncPanel').hidden = true;
+  render();
+}
+$('syncBtn').addEventListener('click', () => { if (!sync || sync.result) startSync().catch(err => console.error(err)); });
+$('syncCancel').addEventListener('click', closeSync);
+$('syncDone').addEventListener('click', closeSync);
+$('syncAgain').addEventListener('click', () => startSync().catch(err => console.error(err)));
+
 addEventListener('keydown', e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
-  if (e.key === 'Escape') { clearLoops(); return; } // works anywhere, even while typing in a box
+  if (e.key === 'Escape') { if (sync && !sync.result) closeSync(); else clearLoops(); return; } // works anywhere, even while typing in a box
   if (e.target instanceof HTMLInputElement || e.target instanceof HTMLButtonElement) return;
   if (e.code === 'Space') { e.preventDefault(); running ? stop() : start(); }
 });
@@ -340,70 +527,134 @@ function readColors() { for (const [k, v, fb] of [['fg', '--fg', '#ece7dc'], ['m
 readColors();
 addEventListener('load', readColors);
 
-// One lane per loop, newest at the top: its waveform (gold while it plays), a line for each pass that is
-// playing, and how many cycles it has left. A loop being recorded shows as a red bar filling up.
-const lanesCv = $('lanes'), lc = lanesCv.getContext('2d');
-const LANE = 24, MAX_LANES = 16;
-function drawLanes() {
-  const rows = [];
-  if (live.recording) rows.push({ rec: live.recording });
-  for (const v of [...live.voices].reverse()) if (!live.recording || v.id !== live.recording.id) rows.push({ v });
-  const shown = rows.slice(0, MAX_LANES);
-  const cssH = Math.max(1, shown.length) * LANE + 8;
-  if (lanesCv.style.height !== `${cssH}px`) lanesCv.style.height = `${cssH}px`;
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  const W = Math.round(lanesCv.clientWidth * dpr), H = Math.round(cssH * dpr);
-  if (!W) return;
-  if (lanesCv.width !== W || lanesCv.height !== H) { lanesCv.width = W; lanesCv.height = H; }
-  lc.clearRect(0, 0, W, H);
-  lc.font = `${11 * dpr}px ${cssVar('--font-data') || 'monospace'}`; lc.textBaseline = 'middle';
-  if (!shown.length) {
-    lc.fillStyle = COLORS.muted; lc.textAlign = 'center';
-    lc.fillText(running ? 'Say something…' : 'Press Start, then say something', W / 2, H / 2);
-    lc.textAlign = 'start'; return;
+// One row per loop, placed by age. The top row is what's coming next: the loop being recorded, or one
+// waiting for its first cycle. Below it, the loop in its first cycle, then its second, and so on, so each
+// loop moves down one row per cycle, the newest is always on top, and a new loop never pushes the others
+// around. The panel keeps one row per cycle a loop lasts, so its height only changes with Times to loop
+// (or when a loop is doubled past it). Each row: the waveform (gold while it plays, with a line for each
+// pass that is sounding), cycles left, and buttons to halve or double how long that loop stays.
+const LANE_H = 30, LANE_PAD = 4, MAX_ROWS = 65;
+const lanesEl = $('lanes'), lanesEmpty = $('lanesEmpty');
+const laneEls = new Map(); // loop id -> { el, cv, c, label, half, dbl, row, text, total }
+lanesEl.style.setProperty('--lane-h', `${LANE_H}px`);
+function makeLane(id) {
+  const el = document.createElement('div');
+  el.className = 'lane'; el.dataset.id = id; el.setAttribute('role', 'listitem');
+  el.innerHTML = '<canvas aria-hidden="true"></canvas><span class="lane-label"></span>'
+    + '<button type="button" data-f="0.5">½</button><button type="button" data-f="2">×2</button>';
+  lanesEl.append(el);
+  const cv = el.querySelector('canvas');
+  const r = { el, cv, c: cv.getContext('2d'), label: el.querySelector('.lane-label'), half: el.querySelector('[data-f="0.5"]'), dbl: el.querySelector('[data-f="2"]'), row: -1, text: '', total: -1 };
+  laneEls.set(id, r);
+  return r;
+}
+function dropLane(id) {
+  const r = laneEls.get(id);
+  laneEls.delete(id);
+  if (r.el.contains(document.activeElement)) lanesEl.focus?.();
+  r.el.classList.add('gone');
+  setTimeout(() => r.el.remove(), 240);
+}
+lanesEl.addEventListener('click', e => {
+  const b = e.target.closest('button[data-f]');
+  if (!b) return;
+  node?.port.postMessage({ type: 'extend', id: Number(b.closest('.lane').dataset.id), factor: Number(b.dataset.f) });
+});
+
+// Which row each loop goes in (row 0 = up next). Rows are fixed slots, so nothing shifts when loops come and go.
+function placeLanes() {
+  const cyc = live.cycle ?? -1, place = new Map();
+  let rows = 1 + Math.max(S.repeats, ...live.voices.map(v => v.total));
+  rows = Math.min(rows, MAX_ROWS);
+  const pending = live.voices.filter(v => v.waiting).sort((a, b) => b.id - a.id);
+  if (pending.length) place.set(pending[0].id, 0);
+  const active = live.voices.filter(v => !v.waiting).map(v => ({ v, age: cyc - v.firstCycle })).sort((a, b) => a.age - b.age || b.v.id - a.v.id);
+  const taken = new Set([0]);
+  for (const { v, age } of active) {
+    let r = 1 + Math.max(0, age);
+    while (taken.has(r) && r < rows) r++;             // two loops the same age (after a loop length change): next row down
+    if (r >= rows) { r = rows - 1; while (r > 0 && taken.has(r)) r--; }
+    if (r <= 0) continue;                               // no room left: shown as "+n more"
+    taken.add(r); place.set(v.id, r);
   }
-  const left = 8 * dpr, right = W - 78 * dpr, plotW = right - left;
-  shown.forEach((row, r) => {
-    const top = (4 + r * LANE) * dpr, h = (LANE - 6) * dpr, mid = top + h / 2;
-    if (row.rec) {
-      lc.fillStyle = COLORS.rule; lc.fillRect(left, mid - 2 * dpr, plotW, 4 * dpr);
-      lc.fillStyle = COLORS.rec; lc.fillRect(left, mid - 2 * dpr, plotW * row.rec.frac, 4 * dpr);
-      lc.fillStyle = COLORS.fg; lc.fillText('recording', right + 10 * dpr, mid);
-      return;
+  return { rows, place, waitingMore: Math.max(0, pending.length - 1), hidden: live.voices.length - place.size };
+}
+
+function paintLane(r, v, rec, W, H, dpr) {
+  if (r.cv.width !== W || r.cv.height !== H) { r.cv.width = W; r.cv.height = H; }
+  const c = r.c, mid = H / 2, pk = peaks.get(v.id), sounding = v.heads.length > 0;
+  c.clearRect(0, 0, W, H);
+  if (pk) {
+    let max = 0; for (const x of pk) max = Math.max(max, x);
+    const g = max > 0 ? (H / 2) / max : 0, bw = W / pk.length;
+    c.fillStyle = sounding ? COLORS.tape : COLORS.muted; c.globalAlpha = sounding ? 1 : 0.55;
+    for (let i = 0; i < pk.length; i++) { const hh = Math.max(dpr * 0.5, pk[i] * g); c.fillRect(i * bw, mid - hh, Math.max(1, bw - 0.4), hh * 2); }
+    c.globalAlpha = 1;
+  } else {
+    c.fillStyle = COLORS.rule; c.fillRect(0, mid - 2 * dpr, W, 4 * dpr);
+  }
+  if (rec) { c.fillStyle = COLORS.rec; c.fillRect(0, mid - 2 * dpr, W * rec.frac, 4 * dpr); }
+  c.fillStyle = COLORS.fg;
+  for (const x of v.heads) c.fillRect(Math.round(x * W), 0, Math.max(1, Math.round(1.5 * dpr)), H);
+}
+
+function drawLanes() {
+  const { rows, place, waitingMore, hidden } = placeLanes();
+  const h = `${rows * LANE_H + LANE_PAD * 2}px`;
+  if (lanesEl.style.height !== h) lanesEl.style.height = h;
+  for (const id of [...laneEls.keys()]) if (!place.has(id)) dropLane(id);
+  const empty = place.size === 0;
+  const msg = !empty ? '' : !running ? 'Press Start, then say something' : sync && !sync.result ? 'Syncing…' : 'Say something…';
+  if (lanesEmpty.textContent !== msg) lanesEmpty.textContent = msg;
+  lanesEmpty.hidden = !empty;
+  if (empty) return;
+  const dpr = Math.min(devicePixelRatio || 1, 2), cyc = live.cycle ?? -1;
+  let W = 0;
+  for (const v of live.voices) {
+    const row = place.get(v.id);
+    if (row == null) continue;
+    const r = laneEls.get(v.id) || makeLane(v.id);
+    if (r.row !== row) { r.row = row; r.el.style.transform = `translateY(${row * LANE_H}px)`; }
+    const rec = live.recording && live.recording.id === v.id ? live.recording : null;
+    const ahead = v.firstCycle - cyc;
+    let text = rec ? 'recording' : v.waiting ? (ahead <= 1 ? 'next cycle' : `in ${ahead} cycles`) : `${v.left} of ${v.total} left`;
+    if (row === 0 && waitingMore) text += ` +${waitingMore}`;
+    if (row === rows - 1 && hidden) text = `+${hidden} more · ${text}`;
+    if (r.text !== text) {
+      r.text = text; r.label.textContent = text;
+      r.label.className = 'lane-label' + (rec ? ' rec' : v.waiting || !v.heads.length ? ' muted' : '');
+      r.el.setAttribute('aria-label', `Loop ${v.id}: ${text}`);
     }
-    const v = row.v, pk = peaks.get(v.id), sounding = v.heads.length > 0;
-    if (pk) {
-      let max = 0; for (const x of pk) max = Math.max(max, x);
-      const g = max > 0 ? (h / 2) / max : 0, bw = plotW / pk.length;
-      lc.fillStyle = sounding ? COLORS.tape : COLORS.muted; lc.globalAlpha = sounding ? 1 : 0.55;
-      for (let i = 0; i < pk.length; i++) { const hh = Math.max(dpr * 0.5, pk[i] * g); lc.fillRect(left + i * bw, mid - hh, Math.max(1, bw - 0.4), hh * 2); }
-      lc.globalAlpha = 1;
-    } else {
-      lc.strokeStyle = COLORS.rule; lc.beginPath(); lc.moveTo(left, mid); lc.lineTo(right, mid); lc.stroke();
+    r.label.classList.toggle('muted', !rec && (v.waiting || !v.heads.length));
+    // Halving never cuts the cycle a loop is in, so it can't go below the cycles it has already had.
+    const halfTo = Math.max(1, v.total >> 1, v.waiting ? 1 : cyc - v.firstCycle + 1);
+    if (r.total !== v.total || r.halfTo !== halfTo) {
+      r.total = v.total; r.halfTo = halfTo;
+      r.half.disabled = halfTo >= v.total; r.dbl.disabled = v.total >= 1024;
+      r.half.title = halfTo >= v.total ? (v.total <= 1 ? 'Plays for one cycle already' : 'Already on its last cycle') : `Halve: ${halfTo} ${halfTo === 1 ? 'cycle' : 'cycles'} in all instead of ${v.total}`;
+      r.dbl.title = `Double: ${v.total * 2} cycles in all instead of ${v.total}`;
+      r.half.setAttribute('aria-label', `${r.half.title}, loop ${v.id}`);
+      r.dbl.setAttribute('aria-label', `${r.dbl.title}, loop ${v.id}`);
     }
-    lc.fillStyle = COLORS.fg;
-    for (const x of v.heads) lc.fillRect(Math.round(left + x * plotW), top, Math.max(1, Math.round(1.5 * dpr)), h);
-    lc.fillStyle = v.waiting ? COLORS.muted : COLORS.fg;
-    lc.fillText(v.waiting ? 'next cycle' : `${v.left} left`, right + 10 * dpr, mid);
-  });
-  if (rows.length > MAX_LANES) {
-    lc.fillStyle = COLORS.muted; lc.textAlign = 'right';
-    lc.fillText(`+${rows.length - MAX_LANES} more`, W - 6 * dpr, H - 6 * dpr); lc.textAlign = 'start';
+    if (!W) W = Math.round(r.cv.clientWidth * dpr);
+    if (W) paintLane(r, v, rec, W, Math.round(18 * dpr), dpr);
   }
 }
 
 function render() {
   const loops = live.voices.length, playing = live.playing;
   const lamp = $('lamp');
-  lamp.className = 'lamp' + (!running ? '' : live.recording ? ' rec' : loops ? ' loop' : ' listening');
+  const syncing = running && !!sync && !sync.result;
+  lamp.className = 'lamp' + (!running ? '' : syncing ? ' loop' : live.recording ? ' rec' : loops ? ' loop' : ' listening');
   $('start').textContent = running ? 'Stop' : 'Start';
   $('start').classList.toggle('on', running);
-  $('cancel').disabled = !(running && loops > 0);
+  $('cancel').disabled = !(running && loops > 0) || syncing;
+  $('syncBtn').disabled = syncing;
   if (running) $('statusSub').classList.remove('warn');
-  $('status').textContent = !running ? 'Press Start' : live.recording ? 'Recording' : loops ? 'Looping' : 'Listening';
+  $('status').textContent = !running ? 'Press Start' : syncing ? 'Syncing' : live.recording ? 'Recording' : loops ? 'Looping' : 'Listening';
   if (running && !$('statusSub').classList.contains('warn')) {
-    $('statusSub').textContent = loops
-      ? `${loops} ${loops === 1 ? 'loop' : 'loops'}, ${playing} playing now (at most ${S.voices}). Keep talking to add more.`
+    $('statusSub').textContent = syncing ? 'Make a short sound on each click. Nothing is recorded while syncing.'
+      : loops ? `${loops} ${loops === 1 ? 'loop' : 'loops'}, ${playing} playing now (at most ${S.voices}). Keep talking to add more.`
       : 'Say something. A sound past the marker starts a loop.';
   }
   $('loopOut').textContent = live.cycle != null && live.cycle >= 0 ? `Cycle ${live.cycle + 1} · ${S.loopSec.toFixed(2)} s` : 'None yet';
