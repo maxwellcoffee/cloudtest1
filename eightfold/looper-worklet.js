@@ -19,8 +19,9 @@
 // When the cap is higher than "times to loop", spare room is filled by playing some loops again from
 // the midpoint of the cycle, also in turn.
 //
-// Sync: plays clicks and listens for a short sound at each one, then reports how long after each click
-// the sound arrived (speaker and mic delays plus your own timing). The page uses that to set the delay.
+// Sync: plays clicks and records what the mic hears. Just after each counted click it sends the page the
+// sound from a third of a beat before the click to 0.6 of a beat after, and the page finds where each tap
+// peaks (speaker and mic delays plus your own timing) to set the delay.
 
 class Looper extends AudioWorkletProcessor {
   constructor(options) {
@@ -76,38 +77,37 @@ class Looper extends AudioWorkletProcessor {
 
   startSync(m) {
     this.clear();
-    const sr = this.sr, I = Math.max(1, Math.round(m.interval * sr));
-    this.sync = { I, next: this.frame + Math.round(0.6 * sr), n: 0, countIn: m.countIn, total: m.countIn + m.taps, clicks: [], onsets: [], ready: true, quiet: 0 };
+    const sr = this.sr, I = Math.max(1, Math.round(m.interval * sr)), total = m.countIn + m.taps;
+    const lead = Math.round(0.6 * sr), before = Math.round(0.35 * I), after = Math.round(0.6 * I);
+    this.sync = {
+      I, t0: this.frame, next: this.frame + lead, n: 0, countIn: m.countIn, total, before, after, last: -1,
+      buf: new Float32Array(lead + (total - 1) * I + after + 2), // everything the mic hears while syncing
+      windows: [],                                                // counted clicks whose sound isn't sent yet
+    };
   }
 
-  // Every sample while syncing: listen for short sounds, play the clicks, and finish after the last one.
-  stepSync(t) {
-    const s = this.sync, sr = this.sr, th = this.params.threshold;
-    if (s.ready && this.env > th) {
-      s.onsets.push(t); s.ready = false; s.quiet = 0;
-      this.port.postMessage({ type: 'syncHit', frame: t });
-    } else if (!s.ready) {
-      // Ready again once it has been quiet (under half the trigger) for 30 ms.
-      if (this.env < th * 0.5) { if (++s.quiet > 0.03 * sr) s.ready = true; } else s.quiet = 0;
-    }
+  // Every sample while syncing: keep what the mic hears, play the clicks, send each counted click's sound
+  // once its window has gone by, and finish after the last one.
+  stepSync(t, x) {
+    const s = this.sync, i = t - s.t0;
+    if (i >= 0 && i < s.buf.length) s.buf[i] = x;
     if (s.n < s.total && t >= s.next) {
-      s.clicks.push(t);
       this.clickPos = 0;
       this.port.postMessage({ type: 'syncClick', n: s.n, frame: t, countIn: s.n < s.countIn });
+      if (s.n >= s.countIn) s.windows.push({ k: s.n - s.countIn, c: t });
+      s.last = t;
       s.n++;
       s.next = t + s.I;
     }
-    if (s.n >= s.total && t >= s.clicks[s.clicks.length - 1] + 0.6 * s.I) {
-      // For each counted click, the first sound from a third of a beat before it to 0.6 of a beat after.
-      const used = new Set(), offsets = [];
-      for (let k = s.countIn; k < s.clicks.length; k++) {
-        const c = s.clicks[k];
-        const o = s.onsets.find(x => !used.has(x) && x >= c - 0.35 * s.I && x < c + 0.6 * s.I);
-        if (o != null) { used.add(o); offsets.push((o - c) / sr); } else offsets.push(null);
-      }
+    if (s.windows.length && t >= s.windows[0].c + s.after - 1) {
+      const w = s.windows.shift(), a = w.c - s.before - s.t0;
+      const wave = s.buf.slice(a, a + s.before + s.after);
+      this.port.postMessage({ type: 'syncWave', k: w.k, wave, click: s.before, sampleRate: this.sr }, [wave.buffer]);
+    }
+    if (s.n >= s.total && !s.windows.length && t >= s.last + s.after - 1) {
       this.sync = null;
       this.env = 0;
-      this.port.postMessage({ type: 'syncResult', offsets });
+      this.port.postMessage({ type: 'syncDone' });
     }
   }
 
@@ -224,7 +224,7 @@ class Looper extends AudioWorkletProcessor {
       this.ring[this.rpos] = x;
       this.rpos = (this.rpos + 1) % this.ring.length;
 
-      if (this.sync) this.stepSync(t);
+      if (this.sync) this.stepSync(t, x);
       // Recording: one loop at a time; the next can start on the sample after this one is full.
       if (this.armed && !this.sync) {
         if (!this.rec && this.env > this.params.threshold) this.startRec(t);

@@ -124,12 +124,17 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 .sync-dot.now { border-color: var(--fg); transform: scale(1.3); }
 .sync-dot.hit { background: var(--tape); border-color: var(--tape); }
 .sync-dot.miss { border-color: var(--rec); }
-.sync-strip { position: relative; height: 26px; border-radius: 4px; background: var(--ground); }
-.sync-strip i { position: absolute; top: 7px; bottom: 7px; width: 2px; margin-left: -1px; background: var(--tape); }
-.sync-strip i.zero { top: 3px; bottom: 3px; background: var(--muted); }
-.sync-strip i.med { top: 2px; bottom: 2px; width: 3px; margin-left: -1.5px; background: var(--fg); }
-.sync-scale { position: relative; height: 12px; margin-top: -6px; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
-.sync-scale span { position: absolute; top: 0; white-space: nowrap; }
+/* One row per counted tap: its sound around the click, where it peaks, and whether it counts. */
+.sync-waves { display: grid; gap: 3px; }
+.sync-wave, .sync-axis { display: grid; grid-template-columns: 2ch minmax(0, 1fr) 11ch; gap: 8px; align-items: center; }
+.sync-wave canvas { display: block; width: 100%; height: 28px; border-radius: 3px; background: var(--ground); }
+.sync-n { font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); text-align: right; }
+.sync-read { font: 400 var(--step--2)/1.2 var(--font-data); font-variant-numeric: tabular-nums; color: var(--muted); }
+.sync-read.good { color: var(--fg); }
+.sync-read.bad { color: var(--rec); }
+.sync-scale { position: relative; height: 14px; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
+.sync-scale > span { position: absolute; top: 2px; white-space: nowrap; }
+@media (max-width: 520px) { .sync-scale .unit { display: none; } }
 .sync-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .check { display: flex; align-items: center; gap: 10px; font-size: var(--step--1); cursor: pointer; }
 .check input { width: 16px; height: 16px; accent-color: var(--tape); }
@@ -175,12 +180,9 @@ kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); 
 
     <div class="sync" id="syncPanel" hidden>
       <div class="row-head"><span class="label">Sync to the click</span><button type="button" class="small" id="syncCancel">Cancel</button></div>
-      <p class="sync-say" id="syncSay">Make a short, sharp sound right on each click: a clap, a tap on the desk, or “ta”. Three clicks to find the beat, then eight that count. Go by the sound, not the dots.</p>
+      <p class="sync-say" id="syncSay">Make a short, sharp sound right on each click: a clap, a tap on the desk, or “ta”. Three clicks to find the beat, then eight that count, each shown below as a wave. Go by the sound, not the dots.</p>
       <div class="sync-dots" id="syncDots" aria-hidden="true"></div>
-      <div>
-        <div class="sync-strip" id="syncStrip" aria-hidden="true"></div>
-        <div class="sync-scale" id="syncScale" aria-hidden="true"></div>
-      </div>
+      <div class="sync-waves" id="syncWaves" aria-label="The sound of each tap around its click"></div>
       <p class="mono" id="syncResult" role="status"></p>
       <div class="sync-actions" id="syncActions" hidden>
         <button type="button" class="small" id="syncAgain">Again</button>
@@ -274,7 +276,7 @@ const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(
 
 // ---------- Settings ----------
 const STORE = 'eightfold.settings.v1';
-// syncLatency: after Sync, how long after a click your sound reaches the looper (seconds), or null.
+// syncLatency: after Sync, how long after a click your sound peaks at the looper (seconds), or null.
 const DEFAULTS = { loopSec: 1, delaySec: 0.25, repeats: 8, voices: 8, triggerDb: -40, clickVol: 35, speakers: false, syncLatency: null };
 const S = (() => { try { return { ...DEFAULTS, ...JSON.parse(localStorage.getItem(STORE) || '{}') }; } catch { return { ...DEFAULTS }; } })();
 const save = () => { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch { /* storage blocked */ } };
@@ -313,7 +315,7 @@ function showSyncNote() {
   note.hidden = lam == null;
   if (lam == null) return;
   const ms = Math.round(Math.abs(lam) * 1000);
-  note.textContent = `Synced: your sound arrives ${ms} ms ${lam >= 0 ? 'after' : 'before'} the click, so the delay is ${S.delaySec.toFixed(3)} s, the loop length minus that.`
+  note.textContent = `Synced: your sound peaks ${ms} ms ${lam >= 0 ? 'after' : 'before'} the click, so the delay is ${S.delaySec.toFixed(3)} s, the loop length minus that.`
     + (S.delaySec > DELAY.max ? ' That is past the end of the slider because the loop is long.' : '')
     + ' It follows the loop length; moving the delay yourself ends the sync.';
 }
@@ -408,9 +410,9 @@ function onWorklet(m) {
     for (const id of peaks.keys()) if (!m.voices.some(v => v.id === id)) peaks.delete(id); // forget finished loops
   } else if (m.type === 'clip') peaks.set(m.id, m.peaks);
   else if (m.type === 'cleared') peaks.clear();
-  else if (m.type === 'syncClick' && sync) { sync.clicks.push(m.frame); sync.now = m.n; drawSync(); }
-  else if (m.type === 'syncHit' && sync) { sync.hits.push(m.frame); drawSync(); }
-  else if (m.type === 'syncResult' && sync) finishSync(m.offsets);
+  else if (m.type === 'syncClick' && sync && !sync.result) { sync.now = m.n; drawSyncDots(); }
+  else if (m.type === 'syncWave' && sync && !sync.result) addSyncWave(m);
+  else if (m.type === 'syncDone' && sync && !sync.result) finishSync();
   else if (m.type === 'syncCancelled') closeSync();
 }
 const clearLoops = () => node?.port.postMessage({ type: 'clear' });
@@ -418,87 +420,162 @@ $('start').addEventListener('click', () => (running ? stop() : start()));
 $('cancel').addEventListener('click', clearLoops);
 
 // ---------- Sync ----------
-// Clicks at the loop length (or a steady beat near it), three to find the beat and eight that count. The
-// audio thread hears each short sound and reports how long after its click it arrived: the speaker delay,
-// your timing and the mic delay together. The delay is then set to the loop length minus the middle value.
-const COUNT_IN = 3, TAPS = 8;
-let sync = null; // { interval, I, clicks: [frames], hits: [frames], now, result }
+// Clicks at the loop length (or a steady beat near it), three to find the beat and eight that count. After
+// each counted click the audio thread sends what the mic heard around it, from a third of a beat before to
+// 0.6 of a beat after. Each one is drawn as a wave, and its peak is found: how long after the click your
+// sound peaked, which is the speaker delay, your timing and the mic delay together. Taps that give a clean
+// reading (loud enough, clear of the background, one sound, not cut off, and in line with the others) are
+// averaged, and the delay is set to the loop length minus that.
+const COUNT_IN = 3, TAPS = 8, MIN_GOOD = 4;
+let sync = null; // { interval, now, taps: [{ wave, click, sr, offset, at, why }], result }
 function syncInterval(L) {
   if (L >= 0.75 && L <= 2) return L;
   if (L < 0.75) return L * Math.ceil(0.75 / L); // every few cycles, so it stays on the loop's beat
   return 1;
 }
+
+// Where one tap peaks, and whether it is a clean reading. x is the sound around the click; the click is at
+// sample `click`. The level is an RMS envelope over 8 ms (long enough to smooth over the cycles of a voice).
+function analyzeTap(x, click, sr, th) {
+  const n = x.length, h = Math.max(1, Math.round(0.004 * sr));
+  const P = new Float64Array(n + 1);
+  for (let i = 0; i < n; i++) P[i + 1] = P[i] + x[i] * x[i];
+  const env = new Float32Array(n);
+  for (let i = 0; i < n; i++) { const a = Math.max(0, i - h), b = Math.min(n, i + h); env[i] = Math.sqrt((P[b] - P[a]) / (b - a)); }
+  let pk = 0, at = 0;
+  for (let i = 0; i < n; i++) if (env[i] > pk) { pk = env[i]; at = i; }
+  const floor = Float32Array.from(env).sort()[n >> 1];   // the background: most of the window is quiet
+  // The peak point itself: the loudest sample in that loudest 8 ms.
+  let amp = 0, top = at;
+  for (let i = Math.max(0, at - h); i < Math.min(n, at + h); i++) if (Math.abs(x[i]) > amp) { amp = Math.abs(x[i]); top = i; }
+  // The sound around the peak: out until it drops below a quarter of the peak. Anything as loud as half the
+  // peak outside that is a second sound (a double tap, or an echo).
+  let lo = at, hi = at;
+  while (lo > 0 && env[lo] >= 0.25 * pk) lo--;
+  while (hi < n - 1 && env[hi] >= 0.25 * pk) hi++;
+  let other = 0;
+  for (let i = 0; i < n; i++) if (i < lo || i > hi) other = Math.max(other, env[i]);
+  const edge = Math.round(0.015 * sr);
+  let why = null;
+  if (amp < 0.5 * th) why = 'too quiet';
+  else if (pk < 5 * floor) why = 'unclear';
+  else if (at < edge || at >= n - edge) why = 'cut off';
+  else if (other >= 0.5 * pk) why = 'two sounds';
+  return { offset: (top - click) / sr, at: top, why };
+}
+// The clean readings: those that passed on their own, less any far from the rest (more than 35 ms, or three
+// times the usual spread, from the middle one).
+function cleanTaps(taps) {
+  const ok = taps.filter(t => t && !t.why);
+  if (ok.length < 3) return ok;
+  const med = list => { const v = [...list].sort((a, b) => a - b), m = v.length >> 1; return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2; };
+  const m = med(ok.map(t => t.offset)), mad = med(ok.map(t => Math.abs(t.offset - m)));
+  const lim = Math.max(0.035, 3 * 1.4826 * mad);
+  for (const t of ok) if (Math.abs(t.offset - m) > lim) t.why = 'off the rest';
+  return ok.filter(t => !t.why);
+}
+
 async function startSync() {
   if (!running) { await start(); if (!running) return; }
   const interval = syncInterval(S.loopSec);
-  sync = { interval, I: interval * ctx.sampleRate, clicks: [], hits: [], now: -1, result: null };
+  sync = { interval, now: -1, taps: [], result: null, mean: null };
   $('syncPanel').hidden = false;
   $('syncCancel').hidden = false;
   $('syncActions').hidden = true;
   $('syncResult').textContent = '';
   $('syncResult').classList.remove('warn');
-  $('syncSay').textContent = 'Make a short, sharp sound right on each click: a clap, a tap on the desk, or “ta”. Three clicks to find the beat, then eight that count. Go by the sound, not the dots.';
-  // The strip runs over the window a sound can count for: a third of a beat early to 0.6 of a beat late.
-  const lo = -0.35 * interval, hi = 0.6 * interval;
-  sync.lo = lo; sync.hi = hi;
-  const pct = s => `${((s - lo) / (hi - lo)) * 100}%`;
-  $('syncScale').innerHTML = `<span style="left:0">${Math.round(lo * 1000)} ms</span><span style="left:${pct(0)}; transform:translateX(-50%)">click</span><span style="right:0">+${Math.round(hi * 1000)} ms</span>`.replace(/-/g, '−');
-  drawSync();
+  $('syncSay').textContent = 'Make a short, sharp sound right on each click: a clap, a tap on the desk, or “ta”. Three clicks to find the beat, then eight that count, each shown below as a wave. Go by the sound, not the dots.';
+  // Eight empty rows, then the time scale under them: a third of a beat before the click to 0.6 after.
+  const lo = -0.35 * interval, hi = 0.6 * interval, pct = v => `${((v - lo) / (hi - lo)) * 100}%`;
+  let rows = '';
+  for (let k = 0; k < TAPS; k++) rows += `<div class="sync-wave"><span class="sync-n">${k + 1}</span><canvas></canvas><span class="sync-read">–</span></div>`;
+  rows += `<div class="sync-axis" aria-hidden="true"><span></span><div class="sync-scale"><span style="left:0">${Math.round(lo * 1000)}<span class="unit"> ms</span></span><span style="left:${pct(0)}; transform:translateX(-50%)">click</span><span style="right:0">+${Math.round(hi * 1000)} ms</span></div><span></span></div>`;
+  $('syncWaves').innerHTML = rows.replace(/>-(\d)/g, '>−$1');
+  drawSyncDots();
   node.port.postMessage({ type: 'sync', interval, countIn: COUNT_IN, taps: TAPS });
   render();
 }
-// For each counted click, the first sound from a third of a beat early to 0.6 of a beat late (the same
-// rule the audio thread uses).
-function matchSync() {
-  const used = new Set(), out = [];
-  for (let k = COUNT_IN; k < sync.clicks.length; k++) {
-    const c = sync.clicks[k];
-    const h = sync.hits.find(x => !used.has(x) && x >= c - 0.35 * sync.I && x < c + 0.6 * sync.I);
-    if (h != null) used.add(h);
-    out[k - COUNT_IN] = h == null ? null : (h - c) / ctx.sampleRate;
-  }
-  return out;
+function addSyncWave(m) {
+  const th = Math.pow(10, S.triggerDb / 20);
+  sync.taps[m.k] = { wave: m.wave, click: m.click, sr: m.sampleRate, ...analyzeTap(m.wave, m.click, m.sampleRate, th) };
+  drawSyncDots();
+  drawSyncWave(m.k);
 }
-function drawSync() {
+function drawSyncDots() {
   if (!sync) return;
-  const offs = sync.result || matchSync();
   let dots = '';
   for (let n = 0; n < COUNT_IN + TAPS; n++) {
-    const counted = n >= COUNT_IN, k = n - COUNT_IN, o = counted ? offs[k] : undefined;
-    // A counted click is missed once the next one has gone by with nothing heard for it.
-    const missed = counted && o == null && (sync.result || sync.clicks.length > n + 1);
-    const cls = ['sync-dot', counted ? '' : 'count', n === COUNT_IN ? 'first' : '', n === sync.now && !sync.result ? 'now' : '', o != null ? 'hit' : '', missed ? 'miss' : ''];
+    const counted = n >= COUNT_IN, tap = counted ? sync.taps[n - COUNT_IN] : null;
+    const cls = ['sync-dot', counted ? '' : 'count', n === COUNT_IN ? 'first' : '', n === sync.now && !sync.result ? 'now' : '', tap ? (tap.why ? 'miss' : 'hit') : ''];
     dots += `<span class="${cls.filter(Boolean).join(' ')}"></span>`;
   }
   $('syncDots').innerHTML = dots;
-  const pct = s => `${clamp((s - sync.lo) / (sync.hi - sync.lo), 0, 1) * 100}%`;
-  let marks = `<i class="zero" style="left:${pct(0)}"></i>`;
-  for (const o of offs) if (o != null) marks += `<i style="left:${pct(o)}"></i>`;
-  if (sync.median != null) marks += `<i class="med" style="left:${pct(sync.median)}"></i>`;
-  $('syncStrip').innerHTML = marks;
 }
-function finishSync(offsets) {
-  sync.result = offsets;
-  const ok = offsets.filter(x => x != null).sort((a, b) => a - b);
+// One tap's row: the wave (gold for a clean reading), a line at the click, a line where it peaks, and after
+// the sync, the average of the clean readings as a dashed line.
+function drawSyncWave(k) {
+  const row = $('syncWaves').children[k], tap = sync?.taps[k];
+  if (!row || !tap) return;
+  const cv = row.querySelector('canvas'), read = row.querySelector('.sync-read');
+  const dpr = Math.min(devicePixelRatio || 1, 2), W = Math.round(cv.clientWidth * dpr), H = Math.round(28 * dpr);
+  if (!W) return;
+  if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+  const c = cv.getContext('2d'), x = tap.wave, n = x.length, mid = H / 2, xAt = i => (i / n) * W;
+  c.clearRect(0, 0, W, H);
+  // Scaled to this tap's loudest point, but never louder-looking than the trigger level, so silence stays flat.
+  let max = 0; for (let i = 0; i < n; i++) max = Math.max(max, Math.abs(x[i]));
+  const g = (mid - dpr) / Math.max(max, Math.pow(10, S.triggerDb / 20));
+  c.fillStyle = tap.why ? COLORS.muted : COLORS.tape; c.globalAlpha = tap.why ? 0.6 : 1;
+  for (let px = 0; px < W; px++) {
+    const a = Math.floor(px * n / W), b = Math.max(a + 1, Math.floor((px + 1) * n / W));
+    let lo = 0, hi = 0; for (let i = a; i < b; i++) { if (x[i] < lo) lo = x[i]; if (x[i] > hi) hi = x[i]; }
+    c.fillRect(px, mid - hi * g, 1, Math.max(dpr * 0.5, (hi - lo) * g));
+  }
+  c.globalAlpha = 1;
+  c.fillStyle = COLORS.muted; c.fillRect(Math.round(xAt(tap.click)), 0, Math.max(1, Math.round(dpr)), H);
+  if (tap.why !== 'too quiet') { c.fillStyle = tap.why ? COLORS.rec : COLORS.fg; c.fillRect(Math.round(xAt(tap.at) - dpr), 0, Math.round(2 * dpr), H); }
+  if (sync.mean != null) {
+    c.strokeStyle = COLORS.fg; c.lineWidth = dpr; c.setLineDash([3 * dpr, 3 * dpr]);
+    const mx = Math.round(xAt(tap.click + sync.mean * tap.sr)) + 0.5;
+    c.beginPath(); c.moveTo(mx, 0); c.lineTo(mx, H); c.stroke(); c.setLineDash([]);
+  }
+  const ms = Math.round(tap.offset * 1000);
+  read.textContent = tap.why || `${ms >= 0 ? '+' : '−'}${Math.abs(ms)} ms`;
+  read.className = 'sync-read ' + (tap.why ? 'bad' : 'good');
+  row.setAttribute('aria-label', `Tap ${k + 1}: ${tap.why || `peaks ${Math.abs(ms)} ms ${ms >= 0 ? 'after' : 'before'} the click`}`);
+}
+const drawSyncWaves = () => { if (sync) for (let k = 0; k < TAPS; k++) drawSyncWave(k); };
+addEventListener('resize', drawSyncWaves);
+
+function finishSync() {
+  const good = cleanTaps(sync.taps);
+  for (let k = 0; k < TAPS; k++) if (!sync.taps[k]) sync.taps[k] = null;
+  sync.result = true;
+  // What was left out, and why: "2 too quiet, 1 two sounds".
+  const why = {};
+  for (let k = 0; k < TAPS; k++) { const r = sync.taps[k] ? sync.taps[k].why : 'not heard'; if (r) why[r] = (why[r] || 0) + 1; }
+  const leftOut = Object.entries(why).map(([r, k]) => `${k} ${r}`).join(', ');
   $('syncCancel').hidden = true;
   $('syncActions').hidden = false;
-  $('syncSay').textContent = ok.length >= 5 ? 'Done. Now sing or speak on the click: what lands on the click comes back on the click.' : 'Not enough to go on.';
-  if (ok.length < 5) {
+  if (good.length < MIN_GOOD) {
+    $('syncSay').textContent = 'Not enough to go on.';
     $('syncResult').classList.add('warn');
-    $('syncResult').textContent = `Heard ${ok.length} of ${TAPS}. Try a louder, sharper sound, or drag the marker on the mic meter left so quieter sounds count. The delay is unchanged.`;
+    $('syncResult').textContent = `Only ${good.length} clean ${good.length === 1 ? 'reading' : 'readings'} of ${TAPS} (${leftOut}). Try one short, sharp sound per click, a little louder. The delay is unchanged.`;
   } else {
-    const mid = ok.length >> 1, lam = ok.length % 2 ? ok[mid] : (ok[mid - 1] + ok[mid]) / 2;
-    const spread = ok.map(x => Math.abs(x - lam)).sort((a, b) => a - b)[ok.length >> 1]; // typical distance from the middle
-    sync.median = lam;
+    const lam = good.reduce((a, t) => a + t.offset, 0) / good.length;
+    const sd = Math.sqrt(good.reduce((a, t) => a + (t.offset - lam) ** 2, 0) / good.length);
+    sync.mean = lam;
     S.syncLatency = Math.round(lam * 1000) / 1000;
     S.delaySec = syncedDelay(S.loopSec, S.syncLatency);
     save(); showDial(DELAY); sendParams(); showSyncNote();
     const ms = Math.round(Math.abs(lam) * 1000);
+    $('syncSay').textContent = 'Done. Now sing or speak on the click: what lands on the click comes back on the click.';
     $('syncResult').classList.remove('warn');
-    $('syncResult').textContent = `Heard ${ok.length} of ${TAPS}. Your sound arrives ${ms} ms ${lam >= 0 ? 'after' : 'before'} the click, so the delay is now ${S.delaySec.toFixed(3)} s.`
-      + (spread > 0.03 ? ` Your taps varied by about ±${Math.round(spread * 1000)} ms; try again for a steadier reading.` : '');
+    $('syncResult').textContent = `Averaged ${good.length} clean ${good.length === 1 ? 'reading' : 'readings'} of ${TAPS}${leftOut ? ` (left out: ${leftOut})` : ''}. Your sound peaks ${ms} ms ${lam >= 0 ? 'after' : 'before'} the click (±${Math.round(sd * 1000)} ms), so the delay is now ${S.delaySec.toFixed(3)} s.`
+      + (sd > 0.025 ? ' Your taps varied quite a bit; try again for a steadier reading.' : '');
   }
-  drawSync();
+  drawSyncDots();
+  drawSyncWaves();
   $('syncDone').focus();
   render();
 }
@@ -684,7 +761,7 @@ addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt
 $('install').addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice.catch(() => null); installPrompt = null; $('install').hidden = true; });
 addEventListener('appinstalled', () => { $('install').hidden = true; $('installHint').hidden = true; });
 
-window.eightfold = { settings: S, live, get ctx() { return ctx; }, get node() { return node; } };
+window.eightfold = { settings: S, live, analyzeTap, get ctx() { return ctx; }, get node() { return node; }, get sync() { return sync; } };
 </script>
 </body>
 </html>
