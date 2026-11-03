@@ -186,6 +186,13 @@ h1 em { font-style: italic; color: var(--muted); }
 }
 .history-spacer-flex { flex: 1; }
 .history-scroll { position: relative; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.rest-summary { display: flex; justify-content: space-between; gap: 16px; margin-block: 14px 6px; }
+.rest-summary strong { font-family: var(--font-data); font-weight: 400; color: var(--fg); }
+.rest-goal { width: 100%; height: 6px; border: 0; border-radius: 3px; overflow: hidden; accent-color: var(--breath); }
+.rest-goal::-webkit-progress-bar { background: var(--rule); }
+.rest-goal::-webkit-progress-value { background: var(--breath); }
+.rest-goal::-moz-progress-bar { background: var(--breath); }
+.rest-band { margin-block: 8px 0; color: var(--good); }
 .rest-delta { margin: 0; font-size: var(--step--1); color: var(--muted); }
 .rest-delta.up, .kpi-sub.up { color: var(--good); }
 .range-row { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -372,8 +379,14 @@ kbd {
       </div>
 
       <div class="readout">
-        <div class="readout-head"><span class="label">Rests <span class="sub">· eyes closed 10 s or more</span></span><span class="value" id="restCount">0</span></div>
+        <div class="readout-head"><span class="label">Rests <span class="sub">· eyes closed longer than 10 s</span></span><span class="value" id="restCount">0</span></div>
         <p class="note" id="restNote">In the last 60 minutes.</p>
+        <div class="rest-summary"><span>Today <strong id="restToday">0</strong></span><span id="restGoalLabel">0 / 30 this hour</span></div>
+        <progress class="rest-goal" id="restGoal" max="30" value="0" aria-labelledby="restGoalLabel"></progress>
+        <p class="rest-band" id="restBand">Getting started</p>
+        <p class="hint">Hourly bands: Good 2–10 · Great 11–20 · Excellent 21–30 · Top of the line 31+. Goal: 30 in the last 60 minutes.</p>
+        <p class="hint">One count per continuous closure, after 10 seconds. Opening your eyes ends it. If tracking is interrupted, open your eyes in view before starting another rest. Today follows this computer’s local midnight.</p>
+        <p class="note warn" id="restStorage" hidden>Saving is unavailable. These counts may be lost when this page closes.</p>
         <p class="rest-delta" id="restDelta"></p>
         <div class="actions"><button type="button" class="small" id="openProgress">Show progress</button></div>
       </div>
@@ -475,7 +488,7 @@ kbd {
     <button type="button" id="progressClose" class="small">Close</button>
   </div>
   <div class="progress-body">
-    <div><p class="chart-sub">A rest is a time your eyes stayed closed for 10 seconds or more. Hours are kept only when you spent more than 10 minutes in front of the camera, and they are saved in this browser on this computer.</p></div>
+    <div><p class="chart-sub">A rest counts once after your eyes stay closed longer than 10 seconds. The rolling-hour and local-day totals include every rest. Charts and averages use hours with more than 10 minutes in front of the camera. Saved data stays in this browser on this computer.</p></div>
     <div class="kpis" id="progressKpis"></div>
     <section class="chart-block" aria-labelledby="hourChartTitle">
       <h3 id="hourChartTitle">Rests per hour</h3>
@@ -521,6 +534,7 @@ kbd {
 <div id="hud" class="overlay-text hud" hidden></div>
 
 <script type="module">
+import { REST_SECONDS, HOURLY_GOAL, createRestCycle, restBand, hourKeyOf, hourStart, restTotals, pruneRests, readRests } from './rest-counter.mjs';
 // =====================================================================
 // Breathing Dark
 // Eye closure: MediaPipe Face Landmarker blendshapes, as in the
@@ -2204,6 +2218,8 @@ function stopStream() {
 }
 
 function stop() {
+  restCycle.interrupt();
+  saveRests();
   app.running = false;
   setPreview(false);
   stopStream();
@@ -2797,68 +2813,64 @@ hist.scroll.addEventListener('scroll', () => {
 }, { passive: true });
 addEventListener('resize', () => { if (breathLog.open) drawHistory(); });
 
-// ---------- Rests: eyes closed for 10 s or more ----------
-// Counted per clock hour together with the time your face was in front of the camera. Only hours
-// with more than 10 minutes at the computer are kept; they are saved in this browser.
-const REST = { minSec: 10, mergeSec: 1.5, minPresentSec: 600, avgDays: 7, minHours: 3, keepDays: 400 };
+// ---------- Rests ----------
+const REST = { minPresentSec: 600, avgDays: 7, minHours: 3, keepDays: 400 };
 const RESTS_KEY = 'breathing-dark.rests.v1';
-const restState = { start: null, counted: false, openAt: null, lastSave: 0, hourKey: null };
 const rests = loadRests();
+const restCycle = createRestCycle(rests.activeClosure);
+const restState = restCycle.state;
+let restLastObserved = null, restLastSave = 0, restsDirty = false;
 
-function hourKeyOf(ms) {
-  const d = new Date(ms), p2 = n => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}T${p2(d.getHours())}`;
-}
-function hourStart(key) {
-  const [date, h] = key.split('T');
-  const [y, m, d] = date.split('-').map(Number);
-  return new Date(y, m - 1, d, +h);
-}
 function loadRests() {
-  try {
-    const raw = localStorage.getItem(RESTS_KEY);
-    if (raw) { const v = JSON.parse(raw); return { hours: v.hours || {}, recent: Array.isArray(v.recent) ? v.recent : [] }; }
-  } catch { /* storage blocked or unreadable: start empty */ }
-  return { hours: {}, recent: [] };
+  try { return readRests(localStorage.getItem(RESTS_KEY)); }
+  catch { return readRests(null); }
 }
 function saveRests() {
-  const wall = Date.now(), nowKey = hourKeyOf(wall), oldest = wall - REST.keepDays * 864e5;
-  for (const [k, h] of Object.entries(rests.hours)) {
-    // A finished hour stays only if you were at the computer for more than 10 minutes of it.
-    if (k !== nowKey && (h.presentSec < REST.minPresentSec || hourStart(k).getTime() < oldest)) delete rests.hours[k];
-  }
-  rests.recent = rests.recent.filter(t => t > wall - 2 * 3600e3);
-  try { localStorage.setItem(RESTS_KEY, JSON.stringify(rests)); } catch { /* storage full or blocked */ }
+  if (!restsDirty) return;
+  pruneRests(rests, Date.now(), REST.keepDays);
+  rests.activeClosure = restState.active;
+  try {
+    localStorage.setItem(RESTS_KEY, JSON.stringify(rests));
+    restsDirty = false;
+    $('restStorage').hidden = true;
+  } catch { $('restStorage').hidden = false; }
 }
-addEventListener('pagehide', saveRests);
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveRests(); });
+function interruptRest() {
+  restCycle.interrupt();
+  saveRests();
+}
+addEventListener('pagehide', interruptRest);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') interruptRest();
+});
 
-// Every frame while running. A rest counts once, when the eyes have been closed for 10 s; opening
-// them for less than 1.5 s (a flicker) doesn't end it.
 function updateRests(now, dt) {
-  if (!app.running) return;
-  const wall = Date.now(), key = hourKeyOf(wall);
-  if (restState.hourKey && restState.hourKey !== key) saveRests(); // a new hour: settle the last one
-  restState.hourKey = key;
-  const h = rests.hours[key] || (rests.hours[key] = { rests: 0, presentSec: 0, restSec: 0 });
-  if (lids.st.faceInView) h.presentSec += dt;
-  if (lids.st.closed) {
-    restState.openAt = null;
-    if (restState.start == null) restState.start = now;
-    if (!restState.counted && now - restState.start >= REST.minSec) {
-      restState.counted = true;
-      h.rests++;
-      h.restSec += now - restState.start;
-      rests.recent.push(wall);
-      saveRests();
-    } else if (restState.counted) {
-      h.restSec += dt;
-    }
-  } else if (restState.start != null) {
-    if (restState.openAt == null) restState.openAt = now;
-    if (now - restState.openAt > REST.mergeSec) { restState.start = null; restState.counted = false; restState.openAt = null; }
+  const maxGapSec = Math.max(1, 2 / S.eyeHz);
+  if (!app.running || document.visibilityState !== 'visible' || app.lastFaceT == null || now - app.lastFaceT > maxGapSec) {
+    restCycle.interrupt();
+    return;
   }
-  if (now - restState.lastSave > 20) { restState.lastSave = now; saveRests(); }
+  const wall = Date.now(), key = hourKeyOf(wall);
+  const h = rests.hours[key] || (rests.hours[key] = { rests: 0, presentSec: 0, restSec: 0 });
+  if (lids.st.faceInView) { h.presentSec += dt; restsDirty = true; }
+  if (restState.counted && restState.start != null && !restState.blocked && lids.st.faceInView) h.restSec += dt;
+
+  // Qualify only on a fresh face result, never on a stale closed-eye value between camera frames.
+  if (restLastObserved !== app.lastFaceT) {
+    restLastObserved = app.lastFaceT;
+    const wasActive = restState.active;
+    const counted = restCycle.observe({ now: app.lastFaceT, closed: lids.st.closed,
+      valid: lids.st.faceLastSeen === app.lastFaceT, maxGapSec });
+    if (counted) {
+      h.rests++;
+      h.restSec += app.lastFaceT - restState.start;
+      rests.recent.push(wall);
+      restsDirty = true;
+    }
+    if (wasActive !== restState.active) restsDirty = true;
+    if (counted || wasActive !== restState.active) saveRests();
+  }
+  if (now - restLastSave > 20) { restLastSave = now; saveRests(); }
 }
 
 // The hours that count: more than 10 minutes at the computer (the current hour once it gets there).
@@ -2870,11 +2882,10 @@ function qualifyingHours(days) {
     .sort((a, b) => a.start - b.start);
 }
 function restStats() {
-  const wall = Date.now();
-  const lastHour = rests.recent.filter(t => t > wall - 3600e3).length;
+  const totals = restTotals(rests, Date.now());
   const past = qualifyingHours(REST.avgDays).filter(h => !h.current);
   const avg = past.length >= REST.minHours ? past.reduce((a, h) => a + h.rests, 0) / past.length : null;
-  return { lastHour, avg, avgHours: past.length };
+  return { ...totals, avg, avgHours: past.length };
 }
 const fmt1 = v => (Math.round(v * 10) / 10).toFixed(1);
 function compareText(n, avg) {
@@ -2886,15 +2897,20 @@ function compareText(n, avg) {
     : { text: `▼ ${fmt1(-d)} below your 7-day average of ${fmt1(avg)} per hour`, up: false };
 }
 
-const restUi = { count: $('restCount'), note: $('restNote'), delta: $('restDelta') };
+const restUi = { count: $('restCount'), today: $('restToday'), goal: $('restGoal'), goalLabel: $('restGoalLabel'), band: $('restBand'), note: $('restNote'), delta: $('restDelta') };
 function updateRestReadout(now) {
   const st = restStats();
   restUi.count.textContent = String(st.lastHour);
+  restUi.today.textContent = String(st.today);
+  restUi.goal.value = Math.min(st.lastHour, HOURLY_GOAL);
+  restUi.goalLabel.textContent = `${st.lastHour} / ${HOURLY_GOAL} in the last 60 min`;
+  restUi.band.textContent = `${restBand(st.lastHour)}${st.lastHour >= HOURLY_GOAL ? ' · Hourly goal reached' : ''}`;
   const restingFor = restState.start != null && lids.st.closed ? now - restState.start : 0;
-  restUi.note.textContent = !app.running ? 'In the last 60 minutes. Counting runs while tracking is on.'
-    : restingFor > 0 && !restState.counted ? `Resting ${Math.floor(restingFor)} s… it counts at 10 s.`
-    : restState.counted && lids.st.closed ? `Resting ${Math.floor(restingFor)} s. Counted.`
-    : 'In the last 60 minutes.';
+  if (!app.running) restUi.note.textContent = 'In the last 60 minutes. Counting runs while tracking is on.';
+  else if (restState.blocked) restUi.note.textContent = 'Tracking was interrupted. Open your eyes in view before starting another rest.';
+  else if (restingFor > 0 && !restState.counted) restUi.note.textContent = `Eyes closed ${Math.floor(restingFor)} s. Counts after ${REST_SECONDS} s.`;
+  else if (restState.counted && lids.st.closed) restUi.note.textContent = `Eyes closed ${Math.floor(restingFor)} s. One rest counted.`;
+  else restUi.note.textContent = 'In the last 60 minutes.';
   const cmp = compareText(st.lastHour, st.avg);
   restUi.delta.textContent = st.avg == null
     ? `Your average appears after ${REST.minHours} hours with more than 10 minutes at the computer (${st.avgHours} so far).`
@@ -2928,9 +2944,9 @@ function sizeCanvas(cv) {
 }
 
 function renderKpis(list, st) {
-  const wall = Date.now(), today = new Date(); today.setHours(0, 0, 0, 0);
+  const today = new Date(); today.setHours(0, 0, 0, 0);
   const todayHours = qualifyingHours(1).filter(h => h.start >= today);
-  const todayRests = Object.entries(rests.hours).filter(([k]) => hourStart(k) >= today).reduce((a, [, h]) => a + h.rests, 0);
+  const todayRests = st.today;
   const best = list.reduce((b, h) => (!b || h.rests > b.rests ? h : b), null);
   const cmp = compareText(st.lastHour, st.avg);
   const tiles = [
@@ -3161,7 +3177,7 @@ prog.clear.addEventListener('click', () => {
     return;
   }
   clearArmed = 0;
-  rests.hours = {}; rests.recent = []; saveRests();
+  rests.hours = {}; rests.recent = []; restsDirty = true; saveRests();
   prog.clear.textContent = 'Cleared';
   setTimeout(() => { prog.clear.textContent = 'Clear saved rests'; }, 2000);
   renderProgress();

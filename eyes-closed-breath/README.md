@@ -65,15 +65,35 @@ the picture.
 
 ## Rests and progress
 
-A rest is a time your eyes stay closed for 10 seconds or more; opening them for under 1.5 s doesn't end it.
-The **Rests** panel shows how many you've had in the last 60 minutes, counts up while you rest ("Resting 7 s…
-it counts at 10 s"), and compares the last hour with your average over the past 7 days.
+A rest counts once when your eyes stay continuously closed for **longer than 10 seconds**. Exactly 10
+seconds does not count. Every observed eye opening ends the closure. Tracking loss, a frozen camera,
+stopping, hiding the page or reloading cannot complete a rest or count the same held closure twice; open
+your eyes in view before starting another rest after an interruption. Preview by itself does not count.
 
-Each clock hour is saved with its rests, the minutes your face was in front of the camera and the minutes
-spent resting. Only hours with more than 10 minutes at the computer are kept and shown; the 7-day average
-uses those hours (it appears once there are 3 of them). Data is saved in this browser on this computer
-(about 400 days are kept); **Clear saved rests** at the bottom of the progress view deletes it after a second
-click.
+The **Rests** panel shows the rolling last 60 minutes and **Today**, from midnight in this computer's local
+time zone. A rest belongs to the hour and day when it qualifies. The rolling hour is elapsed time, not a
+clock-hour bucket. The hourly goal is **30**. The labels follow the requested strict “above” thresholds:
+
+| Rests in the last 60 minutes | Label |
+| --- | --- |
+| 0–1 | Getting started |
+| 2–10 | Good |
+| 11–20 | Great |
+| 21–30 | Excellent |
+| 31+ | Top of the line |
+
+At exactly 30 the goal is reached and the label remains Excellent. The live timer shows a closure's
+progress; the 7-day comparison and existing charts remain available.
+
+Every clock hour is saved with its rests, the minutes your face was in front of the camera and the minutes
+spent resting. **All rests remain in the rolling-hour and daily totals**, including sessions under 10
+minutes. Only hours with more than 10 minutes at the computer appear in charts and averages; the 7-day
+average appears after 3 of those hours. Existing saved data is retained, but hours discarded by an older
+version cannot be recovered. Data is saved in this browser on this computer (about 400 days are kept),
+without changing your settings. The page reports when browser storage cannot save. **Clear saved rests**
+at the bottom of the progress view deletes it after a second click.
+
+Run the counter checks with `node --test rest-counter.test.mjs` from this folder.
 
 **Show progress** opens the charts, scoped by a range row (24 hours, 7 days, 30 days, All):
 

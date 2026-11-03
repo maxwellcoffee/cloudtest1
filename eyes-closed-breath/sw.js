@@ -4,13 +4,14 @@
 // on the next launch. The CDN files are pinned versions that never change, so they are served from
 // the cache once stored.
 
-const SHELL_CACHE = 'breathing-dark-shell-v5';
+const SHELL_CACHE = 'breathing-dark-shell-v6';
 const CDN_CACHE = 'breathing-dark-cdn-v2';
 const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35';
 
 const SHELL = [
   './',
   './index.html',
+  './rest-counter.mjs',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',
