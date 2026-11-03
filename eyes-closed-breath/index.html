@@ -28,6 +28,9 @@
   --scrim: rgb(10 11 15 / 0.74);
   --breath-dim: rgb(225 182 115 / 0.3);  /* the chosen cutoff band */
   --lid-dim: rgb(141 180 204 / 0.3);     /* recent range of the eye signal */
+  --chart-rest: #4b8fd9;                 /* rests chart: past hours (validated for this surface) */
+  --chart-now: #c98500;                  /* rests chart: the current hour */
+  --good: #7cc49a;                       /* above your average */
 
   --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
   --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -183,6 +186,42 @@ h1 em { font-style: italic; color: var(--muted); }
 }
 .history-spacer-flex { flex: 1; }
 .history-scroll { position: relative; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.rest-delta { margin: 0; font-size: var(--step--1); color: var(--muted); }
+.rest-delta.up, .kpi-sub.up { color: var(--good); }
+.range-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.range-row button[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--night); }
+.progress-body {
+  flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  display: grid; align-content: start; gap: 28px;
+  padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.progress-body > * { width: 100%; max-width: 76rem; margin: 0 auto; min-width: 0; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: 12px; }
+.kpi { display: grid; gap: 4px; align-content: start; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 8px; }
+.kpi-label { font-size: var(--step--1); color: var(--muted); }
+.kpi-value { font: 600 1.75rem/1.1 var(--font-body); color: var(--fg); }
+.kpi-sub { font-size: var(--step--2); color: var(--muted); }
+.chart-block { display: grid; gap: 8px; }
+.chart-block h3 { margin: 0; font: 500 var(--step-0)/1.3 var(--font-body); }
+.chart-sub { margin: 0; max-width: 72ch; font-size: var(--step--1); color: var(--muted); }
+#hourChart { display: block; width: 100%; height: 260px; border-radius: 4px; }
+#dayChart { display: block; width: 100%; height: 200px; border-radius: 4px; }
+#hourChart:focus-visible, #dayChart:focus-visible { outline: 2px solid var(--breath); outline-offset: 2px; }
+.chart-tip {
+  position: fixed; z-index: 40; pointer-events: none;
+  display: grid; gap: 2px; max-width: 16rem;
+  padding: 8px 10px; border: 1px solid var(--rule); border-radius: 6px;
+  background: var(--panel); color: var(--muted); font-size: var(--step--2);
+}
+.chart-tip strong { font: 600 var(--step-0)/1.2 var(--font-body); color: var(--fg); }
+.table-view summary { cursor: pointer; width: fit-content; font-size: var(--step--1); color: var(--muted); }
+.table-wrap { overflow: auto; max-height: 360px; margin-top: 10px; }
+.table-wrap table { border-collapse: collapse; font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+.table-wrap th, .table-wrap td { padding: 6px 14px 6px 0; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
+.table-wrap th { font-weight: 500; color: var(--muted); position: sticky; top: 0; background: var(--night); }
+.progress-foot { display: flex; justify-content: flex-end; }
 #historyCanvas { position: sticky; top: 0; display: block; width: 100%; height: 100%; }
 #historyPad { width: 1px; }
 .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 0; font-size: var(--step--2); color: var(--muted); }
@@ -333,6 +372,13 @@ kbd {
       </div>
 
       <div class="readout">
+        <div class="readout-head"><span class="label">Rests <span class="sub">· eyes closed 10 s or more</span></span><span class="value" id="restCount">0</span></div>
+        <p class="note" id="restNote">In the last 60 minutes.</p>
+        <p class="rest-delta" id="restDelta"></p>
+        <div class="actions"><button type="button" class="small" id="openProgress">Show progress</button></div>
+      </div>
+
+      <div class="readout">
         <div class="readout-head"><span class="label">Breath</span><span class="value breath" id="breathValue">Not tracking</span></div>
         <button type="button" class="trace-button" id="openHistory" aria-label="Open the full breath history">
           <canvas id="breathTrace" aria-hidden="true"></canvas>
@@ -416,6 +462,39 @@ kbd {
   </p>
 </main>
 
+<div id="progress" class="history" role="dialog" aria-modal="true" aria-labelledby="progressTitle" hidden>
+  <div class="history-bar">
+    <h2 id="progressTitle">Your rests</h2>
+    <div class="range-row" role="group" aria-label="Time range">
+      <button type="button" class="small" data-days="1">24 hours</button>
+      <button type="button" class="small" data-days="7" aria-pressed="true">7 days</button>
+      <button type="button" class="small" data-days="30">30 days</button>
+      <button type="button" class="small" data-days="0">All</button>
+    </div>
+    <span class="history-spacer-flex"></span>
+    <button type="button" id="progressClose" class="small">Close</button>
+  </div>
+  <div class="progress-body">
+    <div><p class="chart-sub">A rest is a time your eyes stayed closed for 10 seconds or more. Hours are kept only when you spent more than 10 minutes in front of the camera, and they are saved in this browser on this computer.</p></div>
+    <div class="kpis" id="progressKpis"></div>
+    <section class="chart-block" aria-labelledby="hourChartTitle">
+      <h3 id="hourChartTitle">Rests per hour</h3>
+      <p class="chart-sub">Each bar is one hour at the computer. The dashed line is your average over the past 7 days; the current hour is the gold bar.</p>
+      <canvas id="hourChart" tabindex="0" aria-label="Rests per hour; use the arrow keys to read each hour"></canvas>
+    </section>
+    <section class="chart-block" aria-labelledby="dayChartTitle">
+      <h3 id="dayChartTitle">Average rests per hour, by day</h3>
+      <p class="chart-sub">How your daily average is changing.</p>
+      <canvas id="dayChart" tabindex="0" aria-label="Average rests per hour by day; use the arrow keys to read each day"></canvas>
+    </section>
+    <details class="table-view">
+      <summary>Show as a table</summary>
+      <div class="table-wrap"><table id="progressTable"><thead><tr><th scope="col">Hour</th><th scope="col">Rests</th><th scope="col">Minutes at the computer</th><th scope="col">Minutes resting</th></tr></thead><tbody></tbody></table></div>
+    </details>
+    <div class="progress-foot"><button type="button" class="small" id="clearRests">Clear saved rests</button></div>
+  </div>
+</div>
+<div id="chartTip" class="chart-tip" role="tooltip" hidden></div>
 <div id="history" class="history" role="dialog" aria-modal="true" aria-labelledby="historyTitle" hidden>
   <div class="history-bar">
     <h2 id="historyTitle">Breath history</h2>
@@ -2161,6 +2240,7 @@ addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
   if (k === 'p' && app.running) setPreview(!app.preview);
   else if (k === 'h') { app.hud = !app.hud; }
+  else if (k === 'escape' && prog.isOpen) closeProgress();
   else if (k === 'escape' && breathLog.open) closeHistory();
   else if (k === 'escape' && app.preview) setPreview(false);
 });
@@ -2441,6 +2521,7 @@ function updateReadouts(now) {
   ui.breathNote.classList.toggle('warn', breathWarn);
   updatePoseInfo();
   ui.qualityNote.textContent = app.running && !app.breathPaused ? qualityText() : '';
+  updateRestReadout(now);
 
   if (app.running && !app.statusWarn) {
     ui.status.textContent = !L.faceInView ? 'No face in view'
@@ -2716,6 +2797,381 @@ hist.scroll.addEventListener('scroll', () => {
 }, { passive: true });
 addEventListener('resize', () => { if (breathLog.open) drawHistory(); });
 
+// ---------- Rests: eyes closed for 10 s or more ----------
+// Counted per clock hour together with the time your face was in front of the camera. Only hours
+// with more than 10 minutes at the computer are kept; they are saved in this browser.
+const REST = { minSec: 10, mergeSec: 1.5, minPresentSec: 600, avgDays: 7, minHours: 3, keepDays: 400 };
+const RESTS_KEY = 'breathing-dark.rests.v1';
+const restState = { start: null, counted: false, openAt: null, lastSave: 0, hourKey: null };
+const rests = loadRests();
+
+function hourKeyOf(ms) {
+  const d = new Date(ms), p2 = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}T${p2(d.getHours())}`;
+}
+function hourStart(key) {
+  const [date, h] = key.split('T');
+  const [y, m, d] = date.split('-').map(Number);
+  return new Date(y, m - 1, d, +h);
+}
+function loadRests() {
+  try {
+    const raw = localStorage.getItem(RESTS_KEY);
+    if (raw) { const v = JSON.parse(raw); return { hours: v.hours || {}, recent: Array.isArray(v.recent) ? v.recent : [] }; }
+  } catch { /* storage blocked or unreadable: start empty */ }
+  return { hours: {}, recent: [] };
+}
+function saveRests() {
+  const wall = Date.now(), nowKey = hourKeyOf(wall), oldest = wall - REST.keepDays * 864e5;
+  for (const [k, h] of Object.entries(rests.hours)) {
+    // A finished hour stays only if you were at the computer for more than 10 minutes of it.
+    if (k !== nowKey && (h.presentSec < REST.minPresentSec || hourStart(k).getTime() < oldest)) delete rests.hours[k];
+  }
+  rests.recent = rests.recent.filter(t => t > wall - 2 * 3600e3);
+  try { localStorage.setItem(RESTS_KEY, JSON.stringify(rests)); } catch { /* storage full or blocked */ }
+}
+addEventListener('pagehide', saveRests);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveRests(); });
+
+// Every frame while running. A rest counts once, when the eyes have been closed for 10 s; opening
+// them for less than 1.5 s (a flicker) doesn't end it.
+function updateRests(now, dt) {
+  if (!app.running) return;
+  const wall = Date.now(), key = hourKeyOf(wall);
+  if (restState.hourKey && restState.hourKey !== key) saveRests(); // a new hour: settle the last one
+  restState.hourKey = key;
+  const h = rests.hours[key] || (rests.hours[key] = { rests: 0, presentSec: 0, restSec: 0 });
+  if (lids.st.faceInView) h.presentSec += dt;
+  if (lids.st.closed) {
+    restState.openAt = null;
+    if (restState.start == null) restState.start = now;
+    if (!restState.counted && now - restState.start >= REST.minSec) {
+      restState.counted = true;
+      h.rests++;
+      h.restSec += now - restState.start;
+      rests.recent.push(wall);
+      saveRests();
+    } else if (restState.counted) {
+      h.restSec += dt;
+    }
+  } else if (restState.start != null) {
+    if (restState.openAt == null) restState.openAt = now;
+    if (now - restState.openAt > REST.mergeSec) { restState.start = null; restState.counted = false; restState.openAt = null; }
+  }
+  if (now - restState.lastSave > 20) { restState.lastSave = now; saveRests(); }
+}
+
+// The hours that count: more than 10 minutes at the computer (the current hour once it gets there).
+function qualifyingHours(days) {
+  const wall = Date.now(), nowKey = hourKeyOf(wall), from = days ? wall - days * 864e5 : -Infinity;
+  return Object.entries(rests.hours)
+    .filter(([k, h]) => h.presentSec >= REST.minPresentSec && hourStart(k).getTime() >= from - 3600e3)
+    .map(([k, h]) => ({ key: k, start: hourStart(k), ...h, current: k === nowKey }))
+    .sort((a, b) => a.start - b.start);
+}
+function restStats() {
+  const wall = Date.now();
+  const lastHour = rests.recent.filter(t => t > wall - 3600e3).length;
+  const past = qualifyingHours(REST.avgDays).filter(h => !h.current);
+  const avg = past.length >= REST.minHours ? past.reduce((a, h) => a + h.rests, 0) / past.length : null;
+  return { lastHour, avg, avgHours: past.length };
+}
+const fmt1 = v => (Math.round(v * 10) / 10).toFixed(1);
+function compareText(n, avg) {
+  if (avg == null) return { text: '', up: false };
+  const d = n - avg;
+  if (Math.abs(d) < 0.25) return { text: `About your 7-day average of ${fmt1(avg)} per hour`, up: false };
+  return d > 0
+    ? { text: `▲ ${fmt1(d)} above your 7-day average of ${fmt1(avg)} per hour`, up: true }
+    : { text: `▼ ${fmt1(-d)} below your 7-day average of ${fmt1(avg)} per hour`, up: false };
+}
+
+const restUi = { count: $('restCount'), note: $('restNote'), delta: $('restDelta') };
+function updateRestReadout(now) {
+  const st = restStats();
+  restUi.count.textContent = String(st.lastHour);
+  const restingFor = restState.start != null && lids.st.closed ? now - restState.start : 0;
+  restUi.note.textContent = !app.running ? 'In the last 60 minutes. Counting runs while tracking is on.'
+    : restingFor > 0 && !restState.counted ? `Resting ${Math.floor(restingFor)} s… it counts at 10 s.`
+    : restState.counted && lids.st.closed ? `Resting ${Math.floor(restingFor)} s. Counted.`
+    : 'In the last 60 minutes.';
+  const cmp = compareText(st.lastHour, st.avg);
+  restUi.delta.textContent = st.avg == null
+    ? `Your average appears after ${REST.minHours} hours with more than 10 minutes at the computer (${st.avgHours} so far).`
+    : !app.running ? `Your 7-day average is ${fmt1(st.avg)} rests per hour.`
+    : cmp.text;
+  restUi.delta.classList.toggle('up', app.running && cmp.up);
+}
+
+// ---------- Progress view ----------
+const prog = {
+  isOpen: false, lastDraw: 0, days: 7, hourHover: -1, dayHover: -1, bars: [], dayPts: [],
+  root: $('progress'), close: $('progressClose'), open: $('openProgress'), kpis: $('progressKpis'),
+  hour: $('hourChart'), day: $('dayChart'), tip: $('chartTip'), tbody: $('progressTable').tBodies[0], clear: $('clearRests'),
+};
+const fmtHour = d => d.toLocaleTimeString([], { hour: 'numeric' }).replace(':00', '');
+const fmtDay = d => d.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+const hourRange = d => `${fmtHour(d)}–${fmtHour(new Date(d.getTime() + 3600e3))}`;
+const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+const CHART = { rest: '#4b8fd9', now: '#c98500', good: '#7cc49a' };
+function readChartTokens() { CHART.rest = cssVar('--chart-rest') || CHART.rest; CHART.now = cssVar('--chart-now') || CHART.now; }
+
+function niceTop(max) {
+  const step = max <= 5 ? 1 : max <= 12 ? 2 : max <= 30 ? 5 : 10;
+  return { top: Math.max(step, Math.ceil(max / step) * step), step };
+}
+function sizeCanvas(cv) {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const W = Math.round(cv.clientWidth * dpr), H = Math.round(cv.clientHeight * dpr);
+  if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+  return { dpr, W, H, c: cv.getContext('2d') };
+}
+
+function renderKpis(list, st) {
+  const wall = Date.now(), today = new Date(); today.setHours(0, 0, 0, 0);
+  const todayHours = qualifyingHours(1).filter(h => h.start >= today);
+  const todayRests = Object.entries(rests.hours).filter(([k]) => hourStart(k) >= today).reduce((a, [, h]) => a + h.rests, 0);
+  const best = list.reduce((b, h) => (!b || h.rests > b.rests ? h : b), null);
+  const cmp = compareText(st.lastHour, st.avg);
+  const tiles = [
+    { label: 'Last 60 minutes', value: String(st.lastHour), sub: st.avg == null ? 'rests' : cmp.text, up: cmp.up },
+    { label: '7-day average', value: st.avg == null ? '—' : fmt1(st.avg), sub: st.avg == null ? `needs ${REST.minHours} hours at the computer (${st.avgHours} so far)` : `rests per hour, from ${plural(st.avgHours, 'hour', 'hours')}` },
+    { label: 'Today', value: String(todayRests), sub: todayHours.length ? `rests, in ${plural(todayHours.length, 'hour', 'hours')} at the computer` : 'rests so far today' },
+    { label: 'Best hour', value: best ? String(best.rests) : '—', sub: best ? `${fmtDay(best.start)}, ${hourRange(best.start)}` : 'in this range' },
+  ];
+  prog.kpis.textContent = '';
+  for (const t of tiles) {
+    const el = document.createElement('div'); el.className = 'kpi';
+    const a = document.createElement('div'); a.className = 'kpi-label'; a.textContent = t.label;
+    const b = document.createElement('div'); b.className = 'kpi-value'; b.textContent = t.value;
+    const c = document.createElement('div'); c.className = 'kpi-sub' + (t.up ? ' up' : ''); c.textContent = t.sub;
+    el.append(a, b, c); prog.kpis.append(el);
+  }
+}
+
+function drawHourChart(list, avg) {
+  const { dpr, W, H, c } = sizeCanvas(prog.hour);
+  if (!W || !H) return;
+  c.clearRect(0, 0, W, H);
+  c.font = `${11 * dpr}px ${FONT_DATA}`; c.textBaseline = 'middle';
+  const left = 34 * dpr, right = W - (avg != null ? 104 : 12) * dpr, top = 18 * dpr, bottom = H - 42 * dpr;
+  prog.bars = [];
+  if (!list.length) {
+    c.fillStyle = COLORS.muted; c.textAlign = 'center';
+    c.fillText('No hours yet. An hour appears here once you spend more than 10 minutes of it in front of the camera.', W / 2, H / 2);
+    c.textAlign = 'start'; return;
+  }
+  const { top: yTop, step } = niceTop(Math.max(1, avg || 0, ...list.map(h => h.rests)));
+  const y = v => bottom - (bottom - top) * v / yTop;
+  // Gridlines: solid hairlines, one shade off the surface; integer ticks on the left.
+  c.strokeStyle = COLORS.rule; c.lineWidth = 1; c.fillStyle = COLORS.muted; c.textAlign = 'right';
+  for (let v = 0; v <= yTop; v += step) {
+    c.beginPath(); c.moveTo(left, Math.round(y(v)) + 0.5); c.lineTo(right, Math.round(y(v)) + 0.5); c.stroke();
+    c.fillText(String(v), left - 8 * dpr, y(v));
+  }
+  c.textAlign = 'start';
+  const slot = (right - left) / list.length;
+  const bw = Math.max(2 * dpr, Math.min(24 * dpr, slot - 2 * dpr)); // capped at 24 px, 2 px gap between bars
+  let lastHourLabel = -Infinity, lastDayKey = null;
+  list.forEach((h, i) => {
+    const cx = left + slot * (i + 0.5), x0 = cx - bw / 2;
+    prog.bars.push({ x0: left + slot * i, x1: left + slot * (i + 1), cx, h });
+    c.fillStyle = h.current ? CHART.now : CHART.rest;
+    if (h.rests > 0) {
+      const yy = y(h.rests), r = Math.min(4 * dpr, bw / 2, bottom - yy);
+      c.beginPath();
+      c.moveTo(x0, bottom); c.lineTo(x0, yy + r); c.quadraticCurveTo(x0, yy, x0 + r, yy);
+      c.lineTo(x0 + bw - r, yy); c.quadraticCurveTo(x0 + bw, yy, x0 + bw, yy + r); c.lineTo(x0 + bw, bottom); c.closePath();
+      c.fill();
+    } else {
+      c.globalAlpha = 0.5; c.fillRect(x0, bottom - 2 * dpr, bw, 2 * dpr); c.globalAlpha = 1; // an hour with no rests
+    }
+    if (i === prog.hourHover) { c.fillStyle = 'rgba(255,255,255,0.18)'; c.fillRect(left + slot * i, top, slot, bottom - top); }
+    // Labels: the current hour's value at its tip; hour of day under bars with room; the day under the first bar of each day.
+    c.fillStyle = COLORS.muted; c.textAlign = 'center';
+    if (h.current) { c.fillStyle = COLORS.fg; c.fillText(`${h.rests} so far`, cx, y(h.rests) - 10 * dpr); c.fillStyle = COLORS.muted; }
+    if (cx - lastHourLabel > 44 * dpr) { c.fillText(fmtHour(h.start), cx, bottom + 13 * dpr); lastHourLabel = cx; }
+    const dayKey = h.key.slice(0, 10);
+    if (dayKey !== lastDayKey) {
+      c.textAlign = 'start'; c.fillText(fmtDay(h.start), Math.max(left, cx - bw / 2), bottom + 30 * dpr);
+      c.strokeStyle = COLORS.rule; c.beginPath(); c.moveTo(left + slot * i + 0.5, bottom); c.lineTo(left + slot * i + 0.5, bottom + 22 * dpr); c.stroke();
+      lastDayKey = dayKey;
+    }
+    c.textAlign = 'start';
+  });
+  // The 7-day average as a dashed reference line, labelled at its right end.
+  if (avg != null) {
+    c.strokeStyle = COLORS.fg; c.globalAlpha = 0.75; c.lineWidth = 1.5 * dpr; c.setLineDash([5 * dpr, 4 * dpr]);
+    c.beginPath(); c.moveTo(left, y(avg)); c.lineTo(right, y(avg)); c.stroke(); c.setLineDash([]); c.globalAlpha = 1;
+    c.fillStyle = COLORS.muted; c.fillText(`7-day avg ${fmt1(avg)}`, right + 8 * dpr, y(avg));
+  }
+}
+
+function dayData(list) {
+  const by = new Map();
+  for (const h of list) {
+    const k = h.key.slice(0, 10);
+    const e = by.get(k) || { key: k, date: new Date(h.start.getFullYear(), h.start.getMonth(), h.start.getDate()), hours: 0, rests: 0 };
+    e.hours++; e.rests += h.rests; by.set(k, e);
+  }
+  return [...by.values()].sort((a, b) => a.date - b.date).map(e => ({ ...e, avg: e.rests / e.hours }));
+}
+
+function drawDayChart(days) {
+  const { dpr, W, H, c } = sizeCanvas(prog.day);
+  if (!W || !H) return;
+  c.clearRect(0, 0, W, H);
+  c.font = `${11 * dpr}px ${FONT_DATA}`; c.textBaseline = 'middle';
+  prog.dayPts = [];
+  if (days.length < 2) {
+    c.fillStyle = COLORS.muted; c.textAlign = 'center';
+    c.fillText(days.length ? 'One day so far. The trend appears from the second day.' : 'No days yet.', W / 2, H / 2);
+    c.textAlign = 'start'; return;
+  }
+  const left = 34 * dpr, right = W - 56 * dpr, top = 16 * dpr, bottom = H - 26 * dpr;
+  const { top: yTop, step } = niceTop(Math.max(1, ...days.map(d => d.avg)));
+  const y = v => bottom - (bottom - top) * v / yTop;
+  const t0 = days[0].date.getTime(), t1 = days[days.length - 1].date.getTime();
+  const x = t => left + (right - left) * (t - t0) / Math.max(1, t1 - t0);
+  c.strokeStyle = COLORS.rule; c.lineWidth = 1; c.fillStyle = COLORS.muted; c.textAlign = 'right';
+  for (let v = 0; v <= yTop; v += step) {
+    c.beginPath(); c.moveTo(left, Math.round(y(v)) + 0.5); c.lineTo(right, Math.round(y(v)) + 0.5); c.stroke();
+    c.fillText(String(v), left - 8 * dpr, y(v));
+  }
+  c.textAlign = 'center';
+  let lastLabel = -Infinity;
+  days.forEach((d, i) => {
+    const xx = x(d.date.getTime());
+    prog.dayPts.push({ x: xx, d });
+    if (xx - lastLabel > 80 * dpr || i === days.length - 1) {
+      if (i === days.length - 1 && xx - lastLabel < 80 * dpr) return;
+      c.fillText(fmtDay(d.date), Math.min(Math.max(xx, left + 30 * dpr), right - 30 * dpr), bottom + 14 * dpr); lastLabel = xx;
+    }
+  });
+  c.textAlign = 'start';
+  // Area wash, then the 2 px line, then the end dot with a surface ring and its value.
+  c.beginPath();
+  prog.dayPts.forEach((p, i) => (i ? c.lineTo(p.x, y(p.d.avg)) : c.moveTo(p.x, y(p.d.avg))));
+  c.lineTo(prog.dayPts.at(-1).x, bottom); c.lineTo(prog.dayPts[0].x, bottom); c.closePath();
+  c.fillStyle = CHART.rest; c.globalAlpha = 0.1; c.fill(); c.globalAlpha = 1;
+  c.beginPath();
+  prog.dayPts.forEach((p, i) => (i ? c.lineTo(p.x, y(p.d.avg)) : c.moveTo(p.x, y(p.d.avg))));
+  c.strokeStyle = CHART.rest; c.lineWidth = 2 * dpr; c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke();
+  const end = prog.dayPts.at(-1);
+  c.beginPath(); c.arc(end.x, y(end.d.avg), 6 * dpr, 0, Math.PI * 2); c.fillStyle = COLORS.night; c.fill();
+  c.beginPath(); c.arc(end.x, y(end.d.avg), 4 * dpr, 0, Math.PI * 2); c.fillStyle = CHART.rest; c.fill();
+  c.fillStyle = COLORS.fg; c.fillText(fmt1(end.d.avg), end.x + 10 * dpr, y(end.d.avg));
+  if (prog.dayHover >= 0 && prog.dayPts[prog.dayHover]) {
+    const p = prog.dayPts[prog.dayHover];
+    c.strokeStyle = COLORS.muted; c.lineWidth = 1; c.beginPath(); c.moveTo(Math.round(p.x) + 0.5, top); c.lineTo(Math.round(p.x) + 0.5, bottom); c.stroke();
+    c.beginPath(); c.arc(p.x, y(p.d.avg), 6 * dpr, 0, Math.PI * 2); c.fillStyle = COLORS.night; c.fill();
+    c.beginPath(); c.arc(p.x, y(p.d.avg), 4 * dpr, 0, Math.PI * 2); c.fillStyle = CHART.rest; c.fill();
+  }
+}
+
+function renderTable() {
+  const all = qualifyingHours(prog.days).reverse();
+  prog.tbody.textContent = '';
+  for (const h of all.slice(0, 500)) {
+    const tr = document.createElement('tr');
+    for (const v of [`${fmtDay(h.start)}, ${hourRange(h.start)}${h.current ? ' (now)' : ''}`, String(h.rests), String(Math.round(h.presentSec / 60)), String(Math.round(h.restSec / 60))]) {
+      const td = document.createElement('td'); td.textContent = v; tr.append(td);
+    }
+    prog.tbody.append(tr);
+  }
+}
+
+function renderProgress() {
+  readChartTokens();
+  const st = restStats(), list = qualifyingHours(prog.days);
+  renderKpis(list, st);
+  drawHourChart(list, st.avg);
+  drawDayChart(dayData(list));
+  renderTable();
+}
+
+// Tooltips: value first, then what it is. The same details show for keyboard focus.
+function showTip(lines, clientX, clientY) {
+  prog.tip.textContent = '';
+  lines.forEach((t, i) => { const el = document.createElement(i ? 'span' : 'strong'); el.textContent = t; prog.tip.append(el); });
+  prog.tip.hidden = false;
+  const r = prog.tip.getBoundingClientRect();
+  prog.tip.style.left = `${Math.min(innerWidth - r.width - 8, Math.max(8, clientX + 14))}px`;
+  prog.tip.style.top = `${Math.min(innerHeight - r.height - 8, Math.max(8, clientY - r.height - 12))}px`;
+}
+function hideTip() { prog.tip.hidden = true; }
+function hourTip(i, clientX, clientY) {
+  const b = prog.bars[i];
+  if (!b) { hideTip(); return; }
+  const h = b.h, avg = restStats().avg;
+  showTip([plural(h.rests, 'rest', 'rests'), `${fmtDay(h.start)}, ${hourRange(h.start)}${h.current ? ' (so far)' : ''}`,
+    `${Math.round(h.presentSec / 60)} min at the computer · ${Math.round(h.restSec / 60)} min resting`,
+    ...(avg != null ? [`7-day average ${fmt1(avg)}`] : [])], clientX, clientY);
+}
+function dayTip(i, clientX, clientY) {
+  const p = prog.dayPts[i];
+  if (!p) { hideTip(); return; }
+  showTip([`${fmt1(p.d.avg)} rests per hour`, fmtDay(p.d.date), `${plural(p.d.rests, 'rest', 'rests')} in ${plural(p.d.hours, 'hour', 'hours')}`], clientX, clientY);
+}
+function canvasX(cv, e) { const r = cv.getBoundingClientRect(); return (e.clientX - r.left) * (cv.width / r.width); }
+prog.hour.addEventListener('pointermove', e => {
+  const x = canvasX(prog.hour, e);
+  const i = prog.bars.findIndex(b => x >= b.x0 && x < b.x1);
+  if (i !== prog.hourHover) { prog.hourHover = i; drawHourChart(qualifyingHours(prog.days), restStats().avg); }
+  if (i >= 0) hourTip(i, e.clientX, e.clientY); else hideTip();
+});
+prog.hour.addEventListener('pointerleave', () => { prog.hourHover = -1; hideTip(); renderProgress(); });
+prog.day.addEventListener('pointermove', e => {
+  if (!prog.dayPts.length) return;
+  const x = canvasX(prog.day, e);
+  let i = 0; prog.dayPts.forEach((p, k) => { if (Math.abs(p.x - x) < Math.abs(prog.dayPts[i].x - x)) i = k; });
+  if (i !== prog.dayHover) { prog.dayHover = i; drawDayChart(dayData(qualifyingHours(prog.days))); }
+  dayTip(i, e.clientX, e.clientY);
+});
+prog.day.addEventListener('pointerleave', () => { prog.dayHover = -1; hideTip(); renderProgress(); });
+function keyNav(cv, getIndex, setIndex, count, tip, redraw) {
+  cv.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    e.preventDefault();
+    const n = count(); if (!n) return;
+    const i = clamp((getIndex() < 0 ? n : getIndex()) + (e.key === 'ArrowRight' ? 1 : -1), 0, n - 1);
+    setIndex(i); redraw();
+    const r = cv.getBoundingClientRect(), dpr = cv.width / r.width;
+    const px = cv === prog.hour ? prog.bars[i].cx : prog.dayPts[i].x;
+    tip(i, r.left + px / dpr, r.top + 30);
+  });
+  cv.addEventListener('blur', () => { setIndex(-1); hideTip(); redraw(); });
+}
+keyNav(prog.hour, () => prog.hourHover, i => { prog.hourHover = i; }, () => prog.bars.length, hourTip, () => drawHourChart(qualifyingHours(prog.days), restStats().avg));
+keyNav(prog.day, () => prog.dayHover, i => { prog.dayHover = i; }, () => prog.dayPts.length, dayTip, () => drawDayChart(dayData(qualifyingHours(prog.days))));
+
+for (const btn of prog.root.querySelectorAll('.range-row button')) {
+  btn.addEventListener('click', () => {
+    prog.days = +btn.dataset.days;
+    for (const b of prog.root.querySelectorAll('.range-row button')) b.setAttribute('aria-pressed', String(b === btn));
+    renderProgress();
+  });
+}
+let clearArmed = 0;
+prog.clear.addEventListener('click', () => {
+  if (Date.now() - clearArmed > 4000) {
+    clearArmed = Date.now();
+    prog.clear.textContent = 'Click again to delete all saved hours';
+    setTimeout(() => { if (Date.now() - clearArmed >= 4000) prog.clear.textContent = 'Clear saved rests'; }, 4100);
+    return;
+  }
+  clearArmed = 0;
+  rests.hours = {}; rests.recent = []; saveRests();
+  prog.clear.textContent = 'Cleared';
+  setTimeout(() => { prog.clear.textContent = 'Clear saved rests'; }, 2000);
+  renderProgress();
+});
+function openProgress() { prog.isOpen = true; prog.root.hidden = false; renderProgress(); prog.close.focus(); }
+function closeProgress() { prog.isOpen = false; prog.root.hidden = true; hideTip(); prog.open.focus(); }
+prog.open.addEventListener('click', openProgress);
+prog.close.addEventListener('click', closeProgress);
+addEventListener('resize', () => { if (prog.isOpen) renderProgress(); });
+
 // ---------- Main loop ----------
 let lastFrameT = performance.now() / 1000;
 let lastDetectT = null;
@@ -2767,6 +3223,7 @@ function loop() {
   breath.tick(now, dt);
   updateArming(now, dt);
   updateSound(dt);
+  updateRests(now, dt);
   engine.update(app.level, app.open);
 
   if (app.running) {
@@ -2790,6 +3247,7 @@ function loop() {
   }
   if (now - lastReadoutT > 0.1) { updateReadouts(now); lastReadoutT = now; }
   if (breathLog.open && now - breathLog.lastDraw > 1 / 15) { breathLog.lastDraw = now; drawHistory(); }
+  if (prog.isOpen && now - prog.lastDraw > 2) { prog.lastDraw = now; renderProgress(); }
   requestAnimationFrame(loop);
 }
 
@@ -2833,7 +3291,7 @@ installBtn.addEventListener('click', async () => {
 addEventListener('appinstalled', () => { installBtn.hidden = true; $('installHint').hidden = true; });
 
 // A handle for tuning from the browser console.
-window.breathingDark = { settings: S, track: TRACK, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph };
+window.breathingDark = { settings: S, track: TRACK, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph, rests, restState };
 </script>
 </body>
 </html>

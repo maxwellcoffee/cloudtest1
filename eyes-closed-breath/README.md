@@ -63,6 +63,27 @@ the page stays in view, so you can watch the breath graph and adjust the sliders
 full-screen picture only appears when your eyes are really closed. <kbd>H</kbd> shows the readouts on top of
 the picture.
 
+## Rests and progress
+
+A rest is a time your eyes stay closed for 10 seconds or more; opening them for under 1.5 s doesn't end it.
+The **Rests** panel shows how many you've had in the last 60 minutes, counts up while you rest ("Resting 7 s…
+it counts at 10 s"), and compares the last hour with your average over the past 7 days.
+
+Each clock hour is saved with its rests, the minutes your face was in front of the camera and the minutes
+spent resting. Only hours with more than 10 minutes at the computer are kept and shown; the 7-day average
+uses those hours (it appears once there are 3 of them). Data is saved in this browser on this computer
+(about 400 days are kept); **Clear saved rests** at the bottom of the progress view deletes it after a second
+click.
+
+**Show progress** opens the charts, scoped by a range row (24 hours, 7 days, 30 days, All):
+
+- Four figures: the last 60 minutes against your 7-day average, the 7-day average, today's rests, and your
+  best hour.
+- **Rests per hour**: a bar for each hour at the computer, with the 7-day average as a dashed line and the
+  current hour in gold once it passes 10 minutes. Hover or use the arrow keys for each hour's details.
+- **Average rests per hour, by day**: the trend of your daily average.
+- **Show as a table**: every hour in the range with its rests, minutes at the computer and minutes resting.
+
 ## Breath history
 
 Click the breath graph to open the full history. It fills the screen with five lines, each a stretch of time
