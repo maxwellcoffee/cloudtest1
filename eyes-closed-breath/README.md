@@ -52,6 +52,15 @@ To save power, **Only track breathing while my eyes are closed** (on by default)
 while your eyes are closed, the noise is fading, or in Preview, and the eyes are checked 3 times a second
 (**Eye checks per second** in the Eyes panel).
 
+**Power-saving hibernate** (Eyes panel, on by default) saves battery when you're away. After 5 minutes with
+no face in view, the camera turns off (its light goes out), the face and body models stop, the page redraws
+only a few times a second, and the screen is allowed to sleep. Every 10 minutes the camera comes back on for
+10 seconds and only the face model runs, a few checks a second, looking for you. If it finds your face,
+everything picks up where it left off; if not, it sleeps for another 10 minutes. Moving the mouse, pressing a
+key, or this window coming back into view looks straight away instead of waiting for the next check, and
+checks wait while the window is hidden. Closed eyes still count as a face in view, so it never hibernates
+while you rest. Unticking the box while it hibernates turns the camera straight back on.
+
 **Continuous noise** (Noise panel, off by default) keeps the noise playing the whole time tracking runs.
 With your eyes closed the filter follows your breath as usual. With them open, or when your breath isn't
 being tracked (no face, breath lost, or tracking paused to save power), the filter glides down to the low

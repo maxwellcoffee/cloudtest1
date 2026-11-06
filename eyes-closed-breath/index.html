@@ -354,6 +354,10 @@ kbd {
         <p><strong>Sit so your head and both shoulders are in the frame.</strong></p>
         <p>Press Begin, allow the camera, then close your eyes. Headphones help.</p>
       </div>
+      <div class="mirror-empty" id="cameraSleep" hidden>
+        <p><strong>Hibernating to save power.</strong></p>
+        <p>No face for 5 minutes, so the camera is off. It looks for you every 10 minutes, or as soon as you move the mouse or press a key.</p>
+      </div>
       <figcaption id="status" class="status" role="status">Camera off</figcaption>
     </figure>
     <video id="video" class="sr-video" playsinline muted></video>
@@ -376,6 +380,9 @@ kbd {
         <p class="note" id="eyesNote">The bar is the eye-closure signal from the face model. The faint band shows its range over the last 15 s.</p>
         <p class="hint">To set it: close your eyes for a few seconds, open them, and see how far the band reached. Put the marker between your open level and that.</p>
         <div class="controls" id="eyeControls"></div>
+        <div class="setting" id="hibernateRow">
+          <p class="hint">Saves battery when you're away: after 5 minutes with no face in view, the camera and the face and body models switch off and the screen may sleep. Every 10 minutes the camera comes on for 10 seconds to look for you, until it finds you. Moving the mouse, pressing a key or coming back to this window looks straight away.</p>
+        </div>
       </div>
 
       <div class="readout">
@@ -616,6 +623,7 @@ const DEFAULTS = {
   breathSource: 'motion',
   colorMethod: 'sharp',
   breathOnlyEyesClosed: true,
+  hibernate: true,
   continuousNoise: false,
   historyRowSec: 60,
   historySkipGaps: true,
@@ -2107,6 +2115,7 @@ function buildControls() {
   for (const s of FILTER_SLIDERS) makeSlider(s, filter);
   for (const s of EYE_SLIDERS) makeSlider(s, $('eyeControls'));
   makeCheck({ key: 'breathOnlyEyesClosed', label: 'Only track breathing while my eyes are closed', prepend: true }, $('breathPowerRow'));
+  makeCheck({ key: 'hibernate', label: 'Power-saving hibernate', prepend: true, onChange: hibernateSettingChanged }, $('hibernateRow'));
   makeCheck({ key: 'continuousNoise', label: 'Continuous noise', prepend: true }, $('continuousRow'));
   const srcSel = $('set-breathSource'), methodSel = $('set-colorMethod');
   srcSel.addEventListener('change', () => {
@@ -2172,16 +2181,8 @@ async function begin() {
       return;
     }
     setStatus('Starting camera…');
-    app.stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
-      audio: false,
-    });
-    video.srcObject = app.stream;
-    await video.play();
+    await openCamera();
     await audioStart;
-    ui.cameraEmpty.hidden = true;
-    video.width = video.videoWidth;   // MoveNet reads the element's size attributes
-    video.height = video.videoHeight;
     setStatus('Loading face and pose models…');
     await ensureModels();
     await switchPose(S.poseModel).catch(() => { /* reported in the Breath panel */ });
@@ -2194,6 +2195,7 @@ async function begin() {
     app.lastFaceT = null;
     app.breathPaused = false;
     app.running = true;
+    hibReset();
     ui.begin.textContent = 'Stop';
     ui.preview.disabled = false;
     setStatus(models.pose ? 'Tracking eyes and breath' : 'Tracking eyes only. The pose model did not load, so breath is not tracked.', !models.pose);
@@ -2211,6 +2213,21 @@ async function begin() {
   }
 }
 
+const getCamera = () => navigator.mediaDevices.getUserMedia({
+  video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+  audio: false,
+});
+async function openCamera() { await attachCamera(await getCamera()); }
+async function attachCamera(stream) {
+  stopStream();
+  app.stream = stream;
+  video.srcObject = stream;
+  await video.play();
+  ui.cameraEmpty.hidden = true;
+  video.width = video.videoWidth;   // MoveNet reads the element's size attributes
+  video.height = video.videoHeight;
+}
+
 function stopStream() {
   if (app.stream) app.stream.getTracks().forEach(t => t.stop());
   app.stream = null;
@@ -2221,6 +2238,7 @@ function stop() {
   restCycle.interrupt();
   saveRests();
   app.running = false;
+  hibReset();
   setPreview(false);
   stopStream();
   ui.begin.textContent = 'Begin';
@@ -2246,8 +2264,103 @@ function releaseWakeLock() {
   app.wakeLock = null;
 }
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && app.running) requestWakeLock();
+  if (document.visibilityState === 'visible' && app.running && hib.mode === 'awake') requestWakeLock();
 });
+
+// ---------- Power-saving hibernate ----------
+// With "Power-saving hibernate" on: no face in view for 5 minutes switches the camera and the models off and
+// lets the screen sleep. Every 10 minutes the camera comes back on for 10 seconds and only the face model
+// runs, a few checks a second, looking for you. If it finds a face, everything picks up again; if not, it
+// goes back to sleep for another 10 minutes. Moving the mouse, pressing a key, or this window coming back
+// into view looks straight away. Checks wait while the window is hidden, since nothing runs then anyway.
+const HIB = { idleSec: 300, sleepSec: 600, checkSec: 10, openTimeoutSec: 15, inputGapSec: 5 };
+const hib = { mode: 'awake', since: 0, nextCheck: 0, checkFrom: 0, checkEnd: 0, opening: false, openDeadline: 0, token: 0, lastCheckEnd: -Infinity, error: null, sleeps: 0, checks: 0 };
+const nowSec = () => performance.now() / 1000;
+
+function hibReset() {
+  hib.token++; // drops any check still starting the camera
+  Object.assign(hib, { mode: 'awake', since: nowSec(), opening: false, error: null });
+  $('cameraSleep').hidden = true;
+}
+function hibSleep(now) {
+  hib.token++;
+  Object.assign(hib, { mode: 'sleeping', opening: false, nextCheck: now + HIB.sleepSec });
+  hib.sleeps++;
+  stopStream();
+  setPreview(false);
+  cam.clearRect(0, 0, cameraCanvas.width, cameraCanvas.height);
+  app.faceRes = app.poseRes = null;
+  if (!app.breathPaused) { app.breathPaused = true; breath.pause(); }
+  releaseWakeLock();
+  ui.cameraEmpty.hidden = true;
+  $('cameraSleep').hidden = false;
+}
+function hibWake(now) {
+  Object.assign(hib, { mode: 'awake', since: now, opening: false, error: null });
+  $('cameraSleep').hidden = true;
+  if (document.visibilityState === 'visible') requestWakeLock();
+}
+// Turn the camera on and look for a face for HIB.checkSec. hibTick decides how it ends.
+async function hibCheck(now) {
+  if (hib.mode !== 'sleeping' || !app.running) return;
+  const token = ++hib.token;
+  Object.assign(hib, { mode: 'checking', opening: true, openDeadline: now + HIB.openTimeoutSec });
+  hib.checks++;
+  let stream = null;
+  try {
+    stream = await getCamera();
+    if (token !== hib.token) { stream.getTracks().forEach(t => t.stop()); return; } // stopped or given up meanwhile
+    await attachCamera(stream);
+    if (token !== hib.token) return;
+    const t = nowSec();
+    Object.assign(hib, { opening: false, error: null, checkFrom: t, checkEnd: t + HIB.checkSec });
+    if (!S.hibernate) hibWake(t); // turned off while the camera was starting
+  } catch (err) {
+    if (token !== hib.token) return;
+    console.warn('The camera did not come back on', err);
+    hibSleep(nowSec());
+    hib.error = err?.name === 'NotReadableError' ? 'The camera is in use by another app.'
+      : err?.name === 'NotAllowedError' ? 'Camera access was blocked.' : 'The camera did not come back on.';
+  }
+}
+function hibTick() {
+  if (!app.running) return;
+  const now = nowSec();
+  if (hib.mode === 'awake') {
+    if (S.hibernate && now - Math.max(lids.st.faceLastSeen, hib.since) >= HIB.idleSec) hibSleep(now);
+  } else if (hib.mode === 'sleeping') {
+    if (now >= hib.nextCheck && document.visibilityState === 'visible') hibCheck(now);
+  } else if (hib.opening) {
+    if (now > hib.openDeadline) { hibSleep(now); hib.error = 'The camera took too long to start.'; }
+  } else if (lids.st.faceLastSeen >= hib.checkFrom || !S.hibernate) {
+    hibWake(now);                                   // found you (or hibernate was turned off)
+  } else if (now >= hib.checkEnd) {
+    hib.lastCheckEnd = now;
+    hibSleep(now);                                  // nobody there: another 10 minutes
+  }
+}
+setInterval(hibTick, 1000); // keeps going while the window is hidden, when the drawing loop doesn't run
+
+// You're back: look now rather than at the next 10-minute check.
+function hibPoke() {
+  if (hib.mode !== 'sleeping' || !app.running || document.visibilityState !== 'visible') return;
+  const now = nowSec();
+  if (now - hib.lastCheckEnd >= HIB.inputGapSec) hibCheck(now);
+}
+for (const ev of ['pointerdown', 'pointermove', 'keydown', 'wheel', 'focus']) addEventListener(ev, hibPoke, { passive: true });
+document.addEventListener('visibilitychange', hibPoke);
+
+// Turned on: count the 5 minutes from now. Turned off while hibernating: camera back on, and wake.
+function hibernateSettingChanged() {
+  if (S.hibernate) hib.since = nowSec();
+  else if (hib.mode === 'sleeping') hibCheck(nowSec());
+}
+const mmss = sec => { const s = Math.max(0, Math.round(sec)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+function hibStatusText(now) {
+  if (hib.mode === 'checking') return hib.opening ? 'Turning the camera on to look for you…' : `Looking for you… ${Math.max(0, Math.ceil(hib.checkEnd - now))} s`;
+  const when = document.visibilityState === 'visible' ? `Looks for you in ${mmss(hib.nextCheck - now)}` : 'Looks for you when this window is back in view';
+  return `Hibernating: camera off to save power. ${when}, or move the mouse.${hib.error ? ` ${hib.error}` : ''}`;
+}
 
 ui.begin.addEventListener('click', () => { app.running ? stop() : begin(); });
 ui.preview.addEventListener('click', () => setPreview(!app.preview));
@@ -2474,6 +2587,8 @@ function updateReadouts(now) {
   if (!app.running) {
     ui.eyesValue.textContent = 'Not tracking';
     ui.breathValue.textContent = 'Not tracking';
+  } else if (hib.mode !== 'awake') {
+    ui.eyesValue.textContent = hib.mode === 'sleeping' ? 'Hibernating' : 'Looking';
   } else if (!L.faceInView) {
     ui.eyesValue.textContent = 'No face';
   } else if (L.closed) {
@@ -2503,7 +2618,10 @@ function updateReadouts(now) {
 
   const sum = breath.summary();
   let breathWarn = false;
-  if (app.running && app.breathPaused) {
+  if (app.running && hib.mode !== 'awake') {
+    ui.breathValue.textContent = 'Paused';
+    ui.breathNote.textContent = 'The camera is off while no one is in view. Tracking picks up again by itself when you’re back.';
+  } else if (app.running && app.breathPaused) {
     ui.breathValue.textContent = 'Paused';
     ui.breathNote.textContent = 'Breath tracking is resting while your eyes are open. It starts again as soon as they close, or press Preview.';
   } else if (app.running) {
@@ -2539,7 +2657,15 @@ function updateReadouts(now) {
   ui.qualityNote.textContent = app.running && !app.breathPaused ? qualityText() : '';
   updateRestReadout(now);
 
-  if (app.running && !app.statusWarn) {
+  $('cameraSleep').hidden = !(app.running && hib.mode === 'sleeping');
+  if (app.running && hib.mode !== 'awake') {
+    ui.status.textContent = hibStatusText(now);
+    ui.status.classList.toggle('warn', !!hib.error);
+  } else if (app.running && app.statusWarn) {
+    ui.status.textContent = app.statusMsg;
+    ui.status.classList.add('warn');
+  } else if (app.running) {
+    ui.status.classList.remove('warn');
     ui.status.textContent = !L.faceInView ? 'No face in view'
       : app.breathPaused ? 'Watching your eyes. Breath tracking starts when they close.'
       : (S.breathSource !== 'pulse' && models.pose && !B.tracked ? 'Face found. Shoulders not in view.' : 'Tracking eyes and breath');
@@ -3221,7 +3347,7 @@ function loop() {
 
     // Body: with "only while eyes are closed" on, the breath tracking (pose model, shoulder windows,
     // person mask, pulse) runs only while the eyes are closed, the noise is still fading, or in Preview.
-    const needBreath = !S.breathOnlyEyesClosed || app.preview || lids.st.closed || app.armed || app.fade > 0;
+    const needBreath = hib.mode === 'awake' && (!S.breathOnlyEyesClosed || app.preview || lids.st.closed || app.armed || app.fade > 0);
     if (!needBreath) {
       if (!app.breathPaused) { app.breathPaused = true; breath.pause(); }
     } else {
@@ -3236,6 +3362,7 @@ function loop() {
     }
   }
 
+  hibTick();
   breath.tick(now, dt);
   updateArming(now, dt);
   updateSound(dt);
@@ -3264,7 +3391,9 @@ function loop() {
   if (now - lastReadoutT > 0.1) { updateReadouts(now); lastReadoutT = now; }
   if (breathLog.open && now - breathLog.lastDraw > 1 / 15) { breathLog.lastDraw = now; drawHistory(); }
   if (prog.isOpen && now - prog.lastDraw > 2) { prog.lastDraw = now; renderProgress(); }
-  requestAnimationFrame(loop);
+  // Hibernating: a few frames a second is plenty for the readouts and the sound.
+  if (hib.mode === 'sleeping') setTimeout(() => requestAnimationFrame(loop), 250);
+  else requestAnimationFrame(loop);
 }
 
 // ---------- Boot ----------
@@ -3307,7 +3436,7 @@ installBtn.addEventListener('click', async () => {
 addEventListener('appinstalled', () => { installBtn.hidden = true; $('installHint').hidden = true; });
 
 // A handle for tuning from the browser console.
-window.breathingDark = { settings: S, track: TRACK, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph, rests, restState };
+window.breathingDark = { settings: S, track: TRACK, hib, HIB, hibSleep, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph, rests, restState };
 </script>
 </body>
 </html>
