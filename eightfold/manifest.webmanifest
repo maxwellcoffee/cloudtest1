@@ -1,0 +1,15 @@
+{
+  "name": "Eightfold",
+  "short_name": "Eightfold",
+  "description": "Say something and hear it looped eight times, with a quiet tick at the start of each loop.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#12110f",
+  "theme_color": "#12110f",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eightfold</title>
+<meta name="description" content="Say something and hear it looped eight times, with a quiet tick at the start of each loop.">
+<meta name="theme-color" content="#12110f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column, a tape-deck card (status, mic meter, clip and loop count) above three dials. */
+:root {
+  color-scheme: dark;
+  --ground: #12110f;        /* warm graphite */
+  --panel: #1b1a17;
+  --rule: #2e2c28;
+  --fg: #ece7dc;
+  --muted: #9d978b;
+  --tape: #f0c24b;          /* loop light */
+  --rec: #e8705a;           /* recording */
+  --tape-dim: rgb(240 194 75 / 0.18);
+  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --step--2: 0.75rem;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-3: clamp(2.25rem, 6vw, 3.25rem);
+}
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--ground); color: var(--fg); font: 400 var(--step-0)/1.5 var(--font-body); -webkit-font-smoothing: antialiased; }
+.shell {
+  max-width: 46rem; margin: 0 auto; display: grid; gap: 24px;
+  padding-block: clamp(20px, 5vw, 48px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+header { display: grid; gap: 8px; }
+h1 { margin: 0; font: 700 var(--step-3)/1 var(--font-display); letter-spacing: -0.02em; }
+h1 span { color: var(--tape); }
+.lede { margin: 0; max-width: 56ch; color: var(--muted); }
+
+.deck { display: grid; gap: 18px; padding: 20px; background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; }
+.deck-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.status { display: flex; align-items: center; gap: 10px; font: 500 var(--step-1)/1.2 var(--font-display); }
+.lamp { width: 12px; height: 12px; border-radius: 50%; background: var(--rule); flex: none; }
+.lamp.listening { background: var(--muted); }
+.lamp.rec { background: var(--rec); box-shadow: 0 0 10px var(--rec); }
+.lamp.loop { background: var(--tape); box-shadow: 0 0 10px var(--tape); }
+.status-sub { margin: 0; color: var(--muted); font-size: var(--step--1); }
+
+button {
+  font: 600 var(--step-0)/1 var(--font-body); padding: 12px 20px; border-radius: 8px;
+  border: 1px solid var(--rule); background: transparent; color: var(--fg); cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--muted); }
+button.primary { background: var(--tape); border-color: var(--tape); color: var(--ground); }
+button.primary.on { background: transparent; color: var(--fg); border-color: var(--muted); }
+button.small { font-size: var(--step--1); padding: 8px 12px; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+:focus-visible { outline: 2px solid var(--tape); outline-offset: 2px; }
+
+.label { font: 500 var(--step--2)/1 var(--font-data); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.row-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.mono { font-family: var(--font-data); font-variant-numeric: tabular-nums; font-size: var(--step--1); }
+
+/* Mic meter with the trigger level as a draggable marker on it. */
+.meter { position: relative; height: 26px; }
+.meter-track { position: absolute; left: 0; right: 0; top: 10px; height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.meter-fill { position: absolute; top: 0; bottom: 0; left: 0; width: 0; background: var(--muted); border-radius: 3px; }
+.meter-fill.hot { background: var(--rec); }
+.meter input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; -webkit-appearance: none; appearance: none; background: transparent; cursor: ew-resize; }
+.meter input::-webkit-slider-runnable-track { height: 26px; background: transparent; }
+.meter input::-moz-range-track { height: 26px; background: transparent; }
+.meter input::-webkit-slider-thumb { -webkit-appearance: none; width: 6px; height: 26px; border: 0; border-radius: 2px; background: var(--fg); box-shadow: 0 0 0 2px var(--panel); }
+.meter input::-moz-range-thumb { width: 6px; height: 26px; border: 0; border-radius: 2px; background: var(--fg); box-shadow: 0 0 0 2px var(--panel); }
+.meter-scale { display: flex; justify-content: space-between; margin-top: -2px; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
+@media (max-width: 520px) { .meter-scale span:nth-child(2) { display: none; } }
+
+.cycle { position: relative; height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.cycle-fill { position: absolute; top: 0; bottom: 0; left: 0; width: 0; background: var(--tape); }
+.cycle-mid { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: var(--ground); }
+/* Loops display: fixed rows by age. The top row is what's coming next; each loop moves down a row per cycle. */
+.lanes {
+  --lane-h: 30px;
+  position: relative; overflow: hidden; border-radius: 6px; background-color: var(--ground);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 calc(var(--lane-h) - 1px), rgb(236 231 220 / 0.05) calc(var(--lane-h) - 1px) var(--lane-h));
+  background-position: 0 4px;
+  transition: height 200ms ease-out;
+}
+.lanes-next { position: absolute; left: 0; right: 0; top: 0; height: calc(var(--lane-h) + 4px); background: rgb(236 231 220 / 0.03); border-bottom: 1px solid var(--rule); }
+.lanes-empty { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 12px; text-align: center; color: var(--muted); font: 400 var(--step--1)/1.4 var(--font-data); }
+.lane {
+  position: absolute; left: 0; right: 0; top: 4px; height: var(--lane-h);
+  display: grid; grid-template-columns: minmax(0, 1fr) 13.5ch 32px 32px; align-items: center; gap: 6px; padding: 0 6px 0 8px;
+  transition: transform 240ms ease-out, opacity 220ms ease-out;
+  animation: lane-in 220ms ease-out;
+}
+.lane.gone { opacity: 0; }
+@keyframes lane-in { from { opacity: 0; } }
+.lane canvas { display: block; width: 100%; height: 18px; }
+.lane-label { font: 400 var(--step--2)/1 var(--font-data); font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; color: var(--fg); }
+.lane-label.muted { color: var(--muted); }
+.lane-label.rec { color: var(--rec); }
+.lane button { font: 500 var(--step--2)/1 var(--font-data); padding: 0; height: 24px; border-radius: 5px; color: var(--muted); }
+.lane button:hover:not(:disabled) { color: var(--fg); }
+@media (prefers-reduced-motion: reduce) { .lane, .lanes { animation: none; } }
+
+/* Sync: tap along with the click so the delay can be set from your timing. */
+.sync { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--tape-dim); border-radius: 10px; background: rgb(240 194 75 / 0.05); }
+.sync p { margin: 0; }
+.sync-say { font-size: var(--step--1); max-width: 62ch; }
+.sync-dots { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-height: 18px; }
+.sync-dot { width: 14px; height: 14px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--rule); transition: transform 90ms ease-out, background-color 90ms, border-color 90ms; }
+.sync-dot.count { width: 10px; height: 10px; }
+.sync-dot.first { margin-left: 12px; }
+.sync-dot.now { border-color: var(--fg); transform: scale(1.3); }
+.sync-dot.hit { background: var(--tape); border-color: var(--tape); }
+.sync-dot.miss { border-color: var(--rec); }
+/* One row per counted tap: its sound around the click, where it peaks, and whether it counts. */
+.sync-waves { display: grid; gap: 3px; }
+.sync-wave, .sync-axis { display: grid; grid-template-columns: 2ch minmax(0, 1fr) 11ch; gap: 8px; align-items: center; }
+.sync-wave canvas { display: block; width: 100%; height: 28px; border-radius: 3px; background: var(--ground); }
+.sync-n { font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); text-align: right; }
+.sync-read { font: 400 var(--step--2)/1.2 var(--font-data); font-variant-numeric: tabular-nums; color: var(--muted); }
+.sync-read.good { color: var(--fg); }
+.sync-read.bad { color: var(--rec); }
+.sync-scale { position: relative; height: 14px; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
+.sync-scale > span { position: absolute; top: 2px; white-space: nowrap; }
+@media (max-width: 520px) { .sync-scale .unit { display: none; } }
+.sync-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.check { display: flex; align-items: center; gap: 10px; font-size: var(--step--1); cursor: pointer; }
+.check input { width: 16px; height: 16px; accent-color: var(--tape); }
+
+/* The three dials, each a slider with a typed box. */
+.dials { display: grid; gap: 22px; }
+.dial { display: grid; gap: 8px; }
+.dial-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; }
+.dial input[type="range"] { width: 100%; margin: 0; accent-color: var(--tape); }
+.num { display: flex; align-items: center; gap: 6px; }
+.num input {
+  width: 6.2em; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--rule);
+  background: var(--panel); color: var(--fg); font: 500 var(--step-0)/1 var(--font-data); font-variant-numeric: tabular-nums; text-align: right;
+}
+.num span { color: var(--muted); font-size: var(--step--1); min-width: 1.2em; }
+.hint { margin: 0; color: var(--muted); font-size: var(--step--2); }
+.extras { display: grid; gap: 22px; padding-top: 18px; border-top: 1px solid var(--rule); }
+.footnote { display: grid; gap: 6px; margin: 0; color: var(--muted); font-size: var(--step--2); }
+.warn { color: var(--rec); }
+kbd { font: 500 var(--step--2) var(--font-data); border: 1px solid var(--rule); border-radius: 3px; padding: 1px 5px; color: var(--fg); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="shell">
+  <header>
+    <h1>Eight<span>fold</span></h1>
+    <p class="lede">Say something and hear it back, looped, layered with what you said before. A quiet tick marks the start of each cycle. Use headphones: the mic is always listening.</p>
+  </header>
+
+  <section class="deck" aria-label="Looper">
+    <div class="deck-top">
+      <div>
+        <div class="status"><span class="lamp" id="lamp"></span><span id="status" role="status">Press Start</span></div>
+        <p class="status-sub" id="statusSub">Each thing you say becomes a loop that layers on top of the others.</p>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <button type="button" class="small" id="syncBtn">Sync</button>
+        <button type="button" class="small" id="cancel" disabled>Clear loops</button>
+        <button type="button" class="primary" id="start">Start</button>
+      </div>
+    </div>
+
+    <div class="sync" id="syncPanel" hidden>
+      <div class="row-head"><span class="label">Sync to the click</span><button type="button" class="small" id="syncCancel">Cancel</button></div>
+      <p class="sync-say" id="syncSay">Make a short, sharp sound right on each click: a clap, a tap on the desk, or “ta”. Three clicks to find the beat, then eight that count, each shown below as a wave. Go by the sound, not the dots.</p>
+      <div class="sync-dots" id="syncDots" aria-hidden="true"></div>
+      <div class="sync-waves" id="syncWaves" aria-label="The sound of each tap around its click"></div>
+      <p class="mono" id="syncResult" role="status"></p>
+      <div class="sync-actions" id="syncActions" hidden>
+        <button type="button" class="small" id="syncAgain">Again</button>
+        <button type="button" class="small" id="syncDone">Done</button>
+      </div>
+    </div>
+
+    <div class="dial">
+      <div class="row-head"><span class="label">Mic</span><span class="mono" id="triggerOut">Starts at −40 dB</span></div>
+      <div class="meter">
+        <div class="meter-track" aria-hidden="true"><div class="meter-fill" id="meterFill"></div></div>
+        <input type="range" id="trigger" min="-70" max="-6" step="1" value="-40" aria-label="Trigger level: how loud a sound has to be to start a loop">
+      </div>
+      <div class="meter-scale" aria-hidden="true"><span>quiet</span><span>drag the marker to set how loud a sound starts a loop</span><span>loud</span></div>
+    </div>
+
+    <div class="dial">
+      <div class="row-head"><span class="label">Loops</span><span class="mono" id="loopOut">None yet</span></div>
+      <div class="cycle" aria-hidden="true"><div class="cycle-fill" id="cycleFill"></div><div class="cycle-mid" id="cycleMid"></div></div>
+      <div class="lanes" id="lanes" tabindex="-1" role="list" aria-label="Loops, newest at the top. Each moves down a row every cycle until its cycles run out."><div class="lanes-next" aria-hidden="true"></div><div class="lanes-empty" id="lanesEmpty"></div></div>
+    </div>
+  </section>
+
+  <section class="dials" aria-label="Settings">
+    <div class="dial">
+      <div class="row-head"><label class="label" for="loopLen">Loop length</label></div>
+      <div class="dial-row">
+        <input type="range" id="loopLenRange" min="0.01" max="10" step="0.01" aria-label="Loop length in seconds">
+        <div class="num"><input type="number" id="loopLen" min="0.01" max="10" step="0.01" inputmode="decimal"><span>s</span></div>
+      </div>
+      <p class="hint">How much of what you say becomes each loop, and the length of the cycle everything plays to, from 0.01 to 10.00 seconds.</p>
+    </div>
+    <div class="dial">
+      <div class="row-head"><label class="label" for="delay">Delay before looping</label></div>
+      <div class="dial-row">
+        <input type="range" id="delayRange" min="0.01" max="2" step="0.01" aria-label="Delay in seconds">
+        <div class="num"><input type="number" id="delay" min="0.01" max="2" step="0.01" inputmode="decimal"><span>s</span></div>
+      </div>
+      <p class="hint">Time from when you start speaking to when that loop first plays, from 0.01 to 2.00 seconds. While other loops are playing, a new one waits for the next cycle so everything stays in time with the tick. Sync sets it from your own timing.</p>
+      <p class="hint" id="syncNote" hidden></p>
+    </div>
+    <div class="dial">
+      <div class="row-head"><label class="label" for="repeats">Times to loop</label></div>
+      <div class="dial-row">
+        <input type="range" id="repeatsRange" min="1" max="32" step="1" aria-label="Times to loop">
+        <div class="num"><input type="number" id="repeats" min="1" max="32" step="1" inputmode="numeric"><span>×</span></div>
+      </div>
+      <p class="hint">How many cycles each loop stays for. 8 is the standard.</p>
+    </div>
+    <div class="dial">
+      <div class="row-head"><label class="label" for="voices">Loops at once</label></div>
+      <div class="dial-row">
+        <input type="range" id="voicesRange" min="1" max="32" step="1" aria-label="Loops playing at once">
+        <div class="num"><input type="number" id="voices" min="1" max="32" step="1" inputmode="numeric"><span>×</span></div>
+      </div>
+      <p class="hint">The most loops that play at the same moment. Below Times to loop, loops take turns, some playing every second or third cycle. Above it, the extra room goes to some loops playing again from the middle of the cycle.</p>
+    </div>
+    <div class="extras">
+      <div class="dial">
+        <div class="row-head"><label class="label" for="clickVol">Tick volume</label></div>
+        <div class="dial-row">
+          <input type="range" id="clickVolRange" min="0" max="100" step="1" aria-label="Tick volume in percent">
+          <div class="num"><input type="number" id="clickVol" min="0" max="100" step="1" inputmode="numeric"><span>%</span></div>
+        </div>
+        <p class="hint">The tick at the start of each cycle. Very short cycles tick at most five times a second.</p>
+      </div>
+      <div class="dial">
+        <label class="check"><input type="checkbox" id="speakers"> I'm using speakers, not headphones</label>
+        <p class="hint">Turns on the browser's echo cancelling so the loops are less likely to record themselves. It helps, but headphones work better.</p>
+      </div>
+      <div><button type="button" class="small" id="reset">Restore defaults</button></div>
+    </div>
+  </section>
+
+  <div class="footnote">
+    <span><kbd>Space</kbd> start or stop · <kbd>Esc</kbd> clear all loops</span>
+    <span id="installHint">Keep it as a Mac app: in Safari choose File › Add to Dock. In Chrome choose Install from the menu.</span>
+    <span>Your voice stays on this computer. Each loop is held in memory while it plays; nothing is saved or uploaded.</span>
+    <span><button type="button" class="small" id="install" hidden>Install as an app</button></span>
+  </div>
+</main>
+
+<script type="module">
+// =====================================================================
+// Eightfold: say something, hear it looped. The looping itself runs in looper-worklet.js
+// on the audio thread; this page handles the controls and the display.
+// =====================================================================
+const $ = id => document.getElementById(id);
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+// ---------- Settings ----------
+const STORE = 'eightfold.settings.v1';
+// syncLatency: after Sync, how long after a click your sound peaks at the looper (seconds), or null.
+const DEFAULTS = { loopSec: 1, delaySec: 0.25, repeats: 8, voices: 8, triggerDb: -40, clickVol: 35, speakers: false, syncLatency: null };
+const S = (() => { try { return { ...DEFAULTS, ...JSON.parse(localStorage.getItem(STORE) || '{}') }; } catch { return { ...DEFAULTS }; } })();
+const save = () => { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch { /* storage blocked */ } };
+
+// Each dial: a slider and a typed box that stay in step. Typing is checked when you leave the box
+// or press Enter; out-of-range values are pulled to the nearest end.
+const DIALS = [
+  { key: 'loopSec', range: 'loopLenRange', box: 'loopLen', min: 0.01, max: 10, dec: 2 },
+  { key: 'delaySec', range: 'delayRange', box: 'delay', min: 0.01, max: 2, dec: 2 },
+  { key: 'repeats', range: 'repeatsRange', box: 'repeats', min: 1, max: 32, dec: 0 },
+  { key: 'voices', range: 'voicesRange', box: 'voices', min: 1, max: 32, dec: 0 },
+  { key: 'clickVol', range: 'clickVolRange', box: 'clickVol', min: 0, max: 100, dec: 0 },
+];
+function showDial(d) { $(d.range).value = S[d.key]; $(d.box).value = Number(S[d.key]).toFixed(d.dec); }
+const DELAY = DIALS.find(d => d.key === 'delaySec');
+// The synced delay: the loop length minus your latency (wrapped into one loop). Then a sound you make on
+// the click starts a new clip exactly where the next one would begin, so it comes back on the click.
+function syncedDelay(L, lam) {
+  let d = L - (((lam % L) + L) % L);
+  if (d < 0.01) d += L;
+  return Math.round(d * 1000) / 1000;
+}
+function setDial(d, v, fromBox) {
+  if (!Number.isFinite(v)) { showDial(d); return; }
+  // Leaving a box without changing it does nothing (so a synced delay above 2.00 s survives a click in the box).
+  if (Number(v.toFixed(d.dec)) === Number(Number(S[d.key]).toFixed(d.dec))) { if (!fromBox) showDial(d); return; }
+  S[d.key] = Number(clamp(v, d.min, d.max).toFixed(d.dec));
+  $(d.range).value = S[d.key];
+  if (!fromBox) $(d.box).value = S[d.key].toFixed(d.dec);
+  if (d.key === 'delaySec') S.syncLatency = null;               // setting the delay by hand ends the sync
+  if (d.key === 'loopSec' && S.syncLatency != null) { S.delaySec = syncedDelay(S.loopSec, S.syncLatency); showDial(DELAY); }
+  save(); sendParams(); showSyncNote(); render();
+}
+function showSyncNote() {
+  const note = $('syncNote'), lam = S.syncLatency;
+  note.hidden = lam == null;
+  if (lam == null) return;
+  const ms = Math.round(Math.abs(lam) * 1000);
+  note.textContent = `Synced: your sound peaks ${ms} ms ${lam >= 0 ? 'after' : 'before'} the click, so the delay is ${S.delaySec.toFixed(3)} s, the loop length minus that.`
+    + (S.delaySec > DELAY.max ? ' That is past the end of the slider because the loop is long.' : '')
+    + ' It follows the loop length; moving the delay yourself ends the sync.';
+}
+for (const d of DIALS) {
+  $(d.range).addEventListener('input', () => setDial(d, parseFloat($(d.range).value)));
+  const box = $(d.box);
+  box.addEventListener('input', () => { const v = parseFloat(box.value); if (Number.isFinite(v) && v >= d.min && v <= d.max) setDial(d, v, true); });
+  const commit = () => setDial(d, parseFloat(box.value.replace(',', '.')));
+  box.addEventListener('change', commit);
+  box.addEventListener('blur', commit);
+  box.addEventListener('keydown', e => { if (e.key === 'Enter') { commit(); box.select(); } });
+  showDial(d);
+}
+showSyncNote();
+const trigger = $('trigger');
+trigger.value = S.triggerDb;
+trigger.addEventListener('input', () => { S.triggerDb = +trigger.value; save(); sendParams(); render(); });
+const speakers = $('speakers');
+speakers.checked = !!S.speakers;
+speakers.addEventListener('change', () => { S.speakers = speakers.checked; save(); if (running) connectMic().catch(err => console.error(err)); });
+$('reset').addEventListener('click', () => {
+  const echoChanged = S.speakers !== DEFAULTS.speakers;
+  Object.assign(S, DEFAULTS); save(); DIALS.forEach(showDial); trigger.value = S.triggerDb; speakers.checked = S.speakers;
+  sendParams(); showSyncNote(); render();
+  if (running && echoChanged) connectMic().catch(err => console.error(err));
+});
+
+// ---------- Audio ----------
+let ctx = null, node = null, stream = null, micSrc = null, running = false;
+const live = { env: 0, syncing: false, recording: null, cycle: null, phase: 0, playing: 0, voices: [] };
+const peaks = new Map(); // loop id -> its waveform
+
+function params() {
+  return { loopSec: S.loopSec, delaySec: S.delaySec, repeats: S.repeats, voices: S.voices, threshold: Math.pow(10, S.triggerDb / 20), clickGain: S.clickVol / 100 };
+}
+function sendParams() { node?.port.postMessage({ type: 'params', params: params() }); }
+
+// The mic: raw (no noise suppression or automatic gain) so the loops sound like you. Echo cancelling
+// only when you say you're on speakers.
+async function connectMic() {
+  const next = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: !!S.speakers, noiseSuppression: false, autoGainControl: false } });
+  try { micSrc?.disconnect(); } catch { /* already gone */ }
+  stream?.getTracks().forEach(t => t.stop());
+  stream = next;
+  micSrc = ctx.createMediaStreamSource(stream);
+  if (node) micSrc.connect(node);
+}
+
+async function start() {
+  $('start').disabled = true;
+  try {
+    if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) throw Object.assign(new Error('insecure'), { name: 'Insecure' });
+    if (!ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      try { ctx = new AC({ latencyHint: 'interactive' }); } catch { ctx = new AC(); }
+      await ctx.audioWorklet.addModule('looper-worklet.js');
+    }
+    await ctx.resume();
+    node = new AudioWorkletNode(ctx, 'eightfold-looper', { numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2], processorOptions: { params: params(), armed: true } });
+    node.port.onmessage = e => onWorklet(e.data);
+    node.connect(ctx.destination);
+    await connectMic();
+    running = true;
+    peaks.clear();
+  } catch (err) {
+    console.error(err);
+    stop();
+    $('statusSub').classList.add('warn');
+    $('statusSub').textContent = err.name === 'NotAllowedError' ? 'Microphone access was blocked. Allow the microphone for this page in your browser’s site settings, then press Start.'
+      : err.name === 'NotFoundError' ? 'No microphone found. Connect one and press Start.'
+      : err.name === 'Insecure' ? 'The microphone needs a secure page. Open this from https:// or http://localhost.'
+      : 'Couldn’t start the audio. Reload the page and try again.';
+  } finally {
+    $('start').disabled = false;
+    render();
+  }
+}
+function stop() {
+  running = false;
+  closeSync();
+  node?.port.postMessage({ type: 'disarm' });
+  try { micSrc?.disconnect(); node?.disconnect(); } catch { /* already gone */ }
+  node = null; micSrc = null;
+  stream?.getTracks().forEach(t => t.stop());
+  stream = null;
+  Object.assign(live, { env: 0, syncing: false, recording: null, cycle: null, phase: 0, playing: 0, voices: [] });
+  render();
+}
+function onWorklet(m) {
+  if (m.type === 'tick') {
+    Object.assign(live, { env: m.env, syncing: m.syncing, recording: m.recording, cycle: m.cycle, phase: m.phase, playing: m.playing, voices: m.voices });
+    for (const id of peaks.keys()) if (!m.voices.some(v => v.id === id)) peaks.delete(id); // forget finished loops
+  } else if (m.type === 'clip') peaks.set(m.id, m.peaks);
+  else if (m.type === 'cleared') peaks.clear();
+  else if (m.type === 'syncClick' && sync && !sync.result) { sync.now = m.n; drawSyncDots(); }
+  else if (m.type === 'syncWave' && sync && !sync.result) addSyncWave(m);
+  else if (m.type === 'syncDone' && sync && !sync.result) finishSync();
+  else if (m.type === 'syncCancelled') closeSync();
+}
+const clearLoops = () => node?.port.postMessage({ type: 'clear' });
+$('start').addEventListener('click', () => (running ? stop() : start()));
+$('cancel').addEventListener('click', clearLoops);
+
+// ---------- Sync ----------
+// Clicks at the loop length (or a steady beat near it), three to find the beat and eight that count. After
+// each counted click the audio thread sends what the mic heard around it, from a third of a beat before to
+// 0.6 of a beat after. Each one is drawn as a wave, and its peak is found: how long after the click your
+// sound peaked, which is the speaker delay, your timing and the mic delay together. Taps that give a clean
+// reading (loud enough, clear of the background, one sound, not cut off, and in line with the others) are
+// averaged, and the delay is set to the loop length minus that.
+const COUNT_IN = 3, TAPS = 8, MIN_GOOD = 4;
+let sync = null; // { interval, now, taps: [{ wave, click, sr, offset, at, why }], result }
+function syncInterval(L) {
+  if (L >= 0.75 && L <= 2) return L;
+  if (L < 0.75) return L * Math.ceil(0.75 / L); // every few cycles, so it stays on the loop's beat
+  return 1;
+}
+
+// Where one tap peaks, and whether it is a clean reading. x is the sound around the click; the click is at
+// sample `click`. The level is an RMS envelope over 8 ms (long enough to smooth over the cycles of a voice).
+function analyzeTap(x, click, sr, th) {
+  const n = x.length, h = Math.max(1, Math.round(0.004 * sr));
+  const P = new Float64Array(n + 1);
+  for (let i = 0; i < n; i++) P[i + 1] = P[i] + x[i] * x[i];
+  const env = new Float32Array(n);
+  for (let i = 0; i < n; i++) { const a = Math.max(0, i - h), b = Math.min(n, i + h); env[i] = Math.sqrt((P[b] - P[a]) / (b - a)); }
+  let pk = 0, at = 0;
+  for (let i = 0; i < n; i++) if (env[i] > pk) { pk = env[i]; at = i; }
+  const floor = Float32Array.from(env).sort()[n >> 1];   // the background: most of the window is quiet
+  // The peak point itself: the loudest sample in that loudest 8 ms.
+  let amp = 0, top = at;
+  for (let i = Math.max(0, at - h); i < Math.min(n, at + h); i++) if (Math.abs(x[i]) > amp) { amp = Math.abs(x[i]); top = i; }
+  // The sound around the peak: out until it drops below a quarter of the peak. Anything as loud as half the
+  // peak outside that is a second sound (a double tap, or an echo).
+  let lo = at, hi = at;
+  while (lo > 0 && env[lo] >= 0.25 * pk) lo--;
+  while (hi < n - 1 && env[hi] >= 0.25 * pk) hi++;
+  let other = 0;
+  for (let i = 0; i < n; i++) if (i < lo || i > hi) other = Math.max(other, env[i]);
+  const edge = Math.round(0.015 * sr);
+  let why = null;
+  if (amp < 0.5 * th) why = 'too quiet';
+  else if (pk < 5 * floor) why = 'unclear';
+  else if (at < edge || at >= n - edge) why = 'cut off';
+  else if (other >= 0.5 * pk) why = 'two sounds';
+  return { offset: (top - click) / sr, at: top, why };
+}
+// The clean readings: those that passed on their own, less any far from the rest (more than 35 ms, or three
+// times the usual spread, from the middle one).
+function cleanTaps(taps) {
+  const ok = taps.filter(t => t && !t.why);
+  if (ok.length < 3) return ok;
+  const med = list => { const v = [...list].sort((a, b) => a - b), m = v.length >> 1; return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2; };
+  const m = med(ok.map(t => t.offset)), mad = med(ok.map(t => Math.abs(t.offset - m)));
+  const lim = Math.max(0.035, 3 * 1.4826 * mad);
+  for (const t of ok) if (Math.abs(t.offset - m) > lim) t.why = 'off the rest';
+  return ok.filter(t => !t.why);
+}
+
+async function startSync() {
+  if (!running) { await start(); if (!running) return; }
+  const interval = syncInterval(S.loopSec);
+  sync = { interval, now: -1, taps: [], result: null, mean: null };
+  $('syncPanel').hidden = false;
+  $('syncCancel').hidden = false;
+  $('syncActions').hidden = true;
+  $('syncResult').textContent = '';
+  $('syncResult').classList.remove('warn');
+  $('syncSay').textContent = 'Make a short, sharp sound right on each click: a clap, a tap on the desk, or “ta”. Three clicks to find the beat, then eight that count, each shown below as a wave. Go by the sound, not the dots.';
+  // Eight empty rows, then the time scale under them: a third of a beat before the click to 0.6 after.
+  const lo = -0.35 * interval, hi = 0.6 * interval, pct = v => `${((v - lo) / (hi - lo)) * 100}%`;
+  let rows = '';
+  for (let k = 0; k < TAPS; k++) rows += `<div class="sync-wave"><span class="sync-n">${k + 1}</span><canvas></canvas><span class="sync-read">–</span></div>`;
+  rows += `<div class="sync-axis" aria-hidden="true"><span></span><div class="sync-scale"><span style="left:0">${Math.round(lo * 1000)}<span class="unit"> ms</span></span><span style="left:${pct(0)}; transform:translateX(-50%)">click</span><span style="right:0">+${Math.round(hi * 1000)} ms</span></div><span></span></div>`;
+  $('syncWaves').innerHTML = rows.replace(/>-(\d)/g, '>−$1');
+  drawSyncDots();
+  node.port.postMessage({ type: 'sync', interval, countIn: COUNT_IN, taps: TAPS });
+  render();
+}
+function addSyncWave(m) {
+  const th = Math.pow(10, S.triggerDb / 20);
+  sync.taps[m.k] = { wave: m.wave, click: m.click, sr: m.sampleRate, ...analyzeTap(m.wave, m.click, m.sampleRate, th) };
+  drawSyncDots();
+  drawSyncWave(m.k);
+}
+function drawSyncDots() {
+  if (!sync) return;
+  let dots = '';
+  for (let n = 0; n < COUNT_IN + TAPS; n++) {
+    const counted = n >= COUNT_IN, tap = counted ? sync.taps[n - COUNT_IN] : null;
+    const cls = ['sync-dot', counted ? '' : 'count', n === COUNT_IN ? 'first' : '', n === sync.now && !sync.result ? 'now' : '', tap ? (tap.why ? 'miss' : 'hit') : ''];
+    dots += `<span class="${cls.filter(Boolean).join(' ')}"></span>`;
+  }
+  $('syncDots').innerHTML = dots;
+}
+// One tap's row: the wave (gold for a clean reading), a line at the click, a line where it peaks, and after
+// the sync, the average of the clean readings as a dashed line.
+function drawSyncWave(k) {
+  const row = $('syncWaves').children[k], tap = sync?.taps[k];
+  if (!row || !tap) return;
+  const cv = row.querySelector('canvas'), read = row.querySelector('.sync-read');
+  const dpr = Math.min(devicePixelRatio || 1, 2), W = Math.round(cv.clientWidth * dpr), H = Math.round(28 * dpr);
+  if (!W) return;
+  if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+  const c = cv.getContext('2d'), x = tap.wave, n = x.length, mid = H / 2, xAt = i => (i / n) * W;
+  c.clearRect(0, 0, W, H);
+  // Scaled to this tap's loudest point, but never louder-looking than the trigger level, so silence stays flat.
+  let max = 0; for (let i = 0; i < n; i++) max = Math.max(max, Math.abs(x[i]));
+  const g = (mid - dpr) / Math.max(max, Math.pow(10, S.triggerDb / 20));
+  c.fillStyle = tap.why ? COLORS.muted : COLORS.tape; c.globalAlpha = tap.why ? 0.6 : 1;
+  for (let px = 0; px < W; px++) {
+    const a = Math.floor(px * n / W), b = Math.max(a + 1, Math.floor((px + 1) * n / W));
+    let lo = 0, hi = 0; for (let i = a; i < b; i++) { if (x[i] < lo) lo = x[i]; if (x[i] > hi) hi = x[i]; }
+    c.fillRect(px, mid - hi * g, 1, Math.max(dpr * 0.5, (hi - lo) * g));
+  }
+  c.globalAlpha = 1;
+  c.fillStyle = COLORS.muted; c.fillRect(Math.round(xAt(tap.click)), 0, Math.max(1, Math.round(dpr)), H);
+  if (tap.why !== 'too quiet') { c.fillStyle = tap.why ? COLORS.rec : COLORS.fg; c.fillRect(Math.round(xAt(tap.at) - dpr), 0, Math.round(2 * dpr), H); }
+  if (sync.mean != null) {
+    c.strokeStyle = COLORS.fg; c.lineWidth = dpr; c.setLineDash([3 * dpr, 3 * dpr]);
+    const mx = Math.round(xAt(tap.click + sync.mean * tap.sr)) + 0.5;
+    c.beginPath(); c.moveTo(mx, 0); c.lineTo(mx, H); c.stroke(); c.setLineDash([]);
+  }
+  const ms = Math.round(tap.offset * 1000);
+  read.textContent = tap.why || `${ms >= 0 ? '+' : '−'}${Math.abs(ms)} ms`;
+  read.className = 'sync-read ' + (tap.why ? 'bad' : 'good');
+  row.setAttribute('aria-label', `Tap ${k + 1}: ${tap.why || `peaks ${Math.abs(ms)} ms ${ms >= 0 ? 'after' : 'before'} the click`}`);
+}
+const drawSyncWaves = () => { if (sync) for (let k = 0; k < TAPS; k++) drawSyncWave(k); };
+addEventListener('resize', drawSyncWaves);
+
+function finishSync() {
+  const good = cleanTaps(sync.taps);
+  for (let k = 0; k < TAPS; k++) if (!sync.taps[k]) sync.taps[k] = null;
+  sync.result = true;
+  // What was left out, and why: "2 too quiet, 1 two sounds".
+  const why = {};
+  for (let k = 0; k < TAPS; k++) { const r = sync.taps[k] ? sync.taps[k].why : 'not heard'; if (r) why[r] = (why[r] || 0) + 1; }
+  const leftOut = Object.entries(why).map(([r, k]) => `${k} ${r}`).join(', ');
+  $('syncCancel').hidden = true;
+  $('syncActions').hidden = false;
+  if (good.length < MIN_GOOD) {
+    $('syncSay').textContent = 'Not enough to go on.';
+    $('syncResult').classList.add('warn');
+    $('syncResult').textContent = `Only ${good.length} clean ${good.length === 1 ? 'reading' : 'readings'} of ${TAPS} (${leftOut}). Try one short, sharp sound per click, a little louder. The delay is unchanged.`;
+  } else {
+    const lam = good.reduce((a, t) => a + t.offset, 0) / good.length;
+    const sd = Math.sqrt(good.reduce((a, t) => a + (t.offset - lam) ** 2, 0) / good.length);
+    sync.mean = lam;
+    S.syncLatency = Math.round(lam * 1000) / 1000;
+    S.delaySec = syncedDelay(S.loopSec, S.syncLatency);
+    save(); showDial(DELAY); sendParams(); showSyncNote();
+    const ms = Math.round(Math.abs(lam) * 1000);
+    $('syncSay').textContent = 'Done. Now sing or speak on the click: what lands on the click comes back on the click.';
+    $('syncResult').classList.remove('warn');
+    $('syncResult').textContent = `Averaged ${good.length} clean ${good.length === 1 ? 'reading' : 'readings'} of ${TAPS}${leftOut ? ` (left out: ${leftOut})` : ''}. Your sound peaks ${ms} ms ${lam >= 0 ? 'after' : 'before'} the click (±${Math.round(sd * 1000)} ms), so the delay is now ${S.delaySec.toFixed(3)} s.`
+      + (sd > 0.025 ? ' Your taps varied quite a bit; try again for a steadier reading.' : '');
+  }
+  drawSyncDots();
+  drawSyncWaves();
+  $('syncDone').focus();
+  render();
+}
+function closeSync() {
+  if (!sync && $('syncPanel').hidden) return;
+  if (sync && !sync.result) node?.port.postMessage({ type: 'syncCancel' });
+  sync = null;
+  $('syncPanel').hidden = true;
+  render();
+}
+$('syncBtn').addEventListener('click', () => { if (!sync || sync.result) startSync().catch(err => console.error(err)); });
+$('syncCancel').addEventListener('click', closeSync);
+$('syncDone').addEventListener('click', closeSync);
+$('syncAgain').addEventListener('click', () => startSync().catch(err => console.error(err)));
+
+addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === 'Escape') { if (sync && !sync.result) closeSync(); else clearLoops(); return; } // works anywhere, even while typing in a box
+  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLButtonElement) return;
+  if (e.code === 'Space') { e.preventDefault(); running ? stop() : start(); }
+});
+
+// ---------- Display ----------
+const COLORS = {};
+function readColors() { for (const [k, v, fb] of [['fg', '--fg', '#ece7dc'], ['muted', '--muted', '#9d978b'], ['rule', '--rule', '#2e2c28'], ['tape', '--tape', '#f0c24b'], ['rec', '--rec', '#e8705a'], ['ground', '--ground', '#12110f']]) COLORS[k] = cssVar(v) || fb; }
+readColors();
+addEventListener('load', readColors);
+
+// One row per loop, placed by age. The top row is what's coming next: the loop being recorded, or one
+// waiting for its first cycle. Below it, the loop in its first cycle, then its second, and so on, so each
+// loop moves down one row per cycle, the newest is always on top, and a new loop never pushes the others
+// around. The panel keeps one row per cycle a loop lasts, so its height only changes with Times to loop
+// (or when a loop is doubled past it). Each row: the waveform (gold while it plays, with a line for each
+// pass that is sounding), cycles left, and buttons to halve or double how long that loop stays.
+const LANE_H = 30, LANE_PAD = 4, MAX_ROWS = 65;
+const lanesEl = $('lanes'), lanesEmpty = $('lanesEmpty');
+const laneEls = new Map(); // loop id -> { el, cv, c, label, half, dbl, row, text, total }
+lanesEl.style.setProperty('--lane-h', `${LANE_H}px`);
+function makeLane(id) {
+  const el = document.createElement('div');
+  el.className = 'lane'; el.dataset.id = id; el.setAttribute('role', 'listitem');
+  el.innerHTML = '<canvas aria-hidden="true"></canvas><span class="lane-label"></span>'
+    + '<button type="button" data-f="0.5">½</button><button type="button" data-f="2">×2</button>';
+  lanesEl.append(el);
+  const cv = el.querySelector('canvas');
+  const r = { el, cv, c: cv.getContext('2d'), label: el.querySelector('.lane-label'), half: el.querySelector('[data-f="0.5"]'), dbl: el.querySelector('[data-f="2"]'), row: -1, text: '', total: -1 };
+  laneEls.set(id, r);
+  return r;
+}
+function dropLane(id) {
+  const r = laneEls.get(id);
+  laneEls.delete(id);
+  if (r.el.contains(document.activeElement)) lanesEl.focus?.();
+  r.el.classList.add('gone');
+  setTimeout(() => r.el.remove(), 240);
+}
+lanesEl.addEventListener('click', e => {
+  const b = e.target.closest('button[data-f]');
+  if (!b) return;
+  node?.port.postMessage({ type: 'extend', id: Number(b.closest('.lane').dataset.id), factor: Number(b.dataset.f) });
+});
+
+// Which row each loop goes in (row 0 = up next). Rows are fixed slots, so nothing shifts when loops come and go.
+function placeLanes() {
+  const cyc = live.cycle ?? -1, place = new Map();
+  let rows = 1 + Math.max(S.repeats, ...live.voices.map(v => v.total));
+  rows = Math.min(rows, MAX_ROWS);
+  const pending = live.voices.filter(v => v.waiting).sort((a, b) => b.id - a.id);
+  if (pending.length) place.set(pending[0].id, 0);
+  const active = live.voices.filter(v => !v.waiting).map(v => ({ v, age: cyc - v.firstCycle })).sort((a, b) => a.age - b.age || b.v.id - a.v.id);
+  const taken = new Set([0]);
+  for (const { v, age } of active) {
+    let r = 1 + Math.max(0, age);
+    while (taken.has(r) && r < rows) r++;             // two loops the same age (after a loop length change): next row down
+    if (r >= rows) { r = rows - 1; while (r > 0 && taken.has(r)) r--; }
+    if (r <= 0) continue;                               // no room left: shown as "+n more"
+    taken.add(r); place.set(v.id, r);
+  }
+  return { rows, place, waitingMore: Math.max(0, pending.length - 1), hidden: live.voices.length - place.size };
+}
+
+function paintLane(r, v, rec, W, H, dpr) {
+  if (r.cv.width !== W || r.cv.height !== H) { r.cv.width = W; r.cv.height = H; }
+  const c = r.c, mid = H / 2, pk = peaks.get(v.id), sounding = v.heads.length > 0;
+  c.clearRect(0, 0, W, H);
+  if (pk) {
+    let max = 0; for (const x of pk) max = Math.max(max, x);
+    const g = max > 0 ? (H / 2) / max : 0, bw = W / pk.length;
+    c.fillStyle = sounding ? COLORS.tape : COLORS.muted; c.globalAlpha = sounding ? 1 : 0.55;
+    for (let i = 0; i < pk.length; i++) { const hh = Math.max(dpr * 0.5, pk[i] * g); c.fillRect(i * bw, mid - hh, Math.max(1, bw - 0.4), hh * 2); }
+    c.globalAlpha = 1;
+  } else {
+    c.fillStyle = COLORS.rule; c.fillRect(0, mid - 2 * dpr, W, 4 * dpr);
+  }
+  if (rec) { c.fillStyle = COLORS.rec; c.fillRect(0, mid - 2 * dpr, W * rec.frac, 4 * dpr); }
+  c.fillStyle = COLORS.fg;
+  for (const x of v.heads) c.fillRect(Math.round(x * W), 0, Math.max(1, Math.round(1.5 * dpr)), H);
+}
+
+function drawLanes() {
+  const { rows, place, waitingMore, hidden } = placeLanes();
+  const h = `${rows * LANE_H + LANE_PAD * 2}px`;
+  if (lanesEl.style.height !== h) lanesEl.style.height = h;
+  for (const id of [...laneEls.keys()]) if (!place.has(id)) dropLane(id);
+  const empty = place.size === 0;
+  const msg = !empty ? '' : !running ? 'Press Start, then say something' : sync && !sync.result ? 'Syncing…' : 'Say something…';
+  if (lanesEmpty.textContent !== msg) lanesEmpty.textContent = msg;
+  lanesEmpty.hidden = !empty;
+  if (empty) return;
+  const dpr = Math.min(devicePixelRatio || 1, 2), cyc = live.cycle ?? -1;
+  let W = 0;
+  for (const v of live.voices) {
+    const row = place.get(v.id);
+    if (row == null) continue;
+    const r = laneEls.get(v.id) || makeLane(v.id);
+    if (r.row !== row) { r.row = row; r.el.style.transform = `translateY(${row * LANE_H}px)`; }
+    const rec = live.recording && live.recording.id === v.id ? live.recording : null;
+    const ahead = v.firstCycle - cyc;
+    let text = rec ? 'recording' : v.waiting ? (ahead <= 1 ? 'next cycle' : `in ${ahead} cycles`) : `${v.left} of ${v.total} left`;
+    if (row === 0 && waitingMore) text += ` +${waitingMore}`;
+    if (row === rows - 1 && hidden) text = `+${hidden} more · ${text}`;
+    if (r.text !== text) {
+      r.text = text; r.label.textContent = text;
+      r.label.className = 'lane-label' + (rec ? ' rec' : v.waiting || !v.heads.length ? ' muted' : '');
+      r.el.setAttribute('aria-label', `Loop ${v.id}: ${text}`);
+    }
+    r.label.classList.toggle('muted', !rec && (v.waiting || !v.heads.length));
+    // Halving never cuts the cycle a loop is in, so it can't go below the cycles it has already had.
+    const halfTo = Math.max(1, v.total >> 1, v.waiting ? 1 : cyc - v.firstCycle + 1);
+    if (r.total !== v.total || r.halfTo !== halfTo) {
+      r.total = v.total; r.halfTo = halfTo;
+      r.half.disabled = halfTo >= v.total; r.dbl.disabled = v.total >= 1024;
+      r.half.title = halfTo >= v.total ? (v.total <= 1 ? 'Plays for one cycle already' : 'Already on its last cycle') : `Halve: ${halfTo} ${halfTo === 1 ? 'cycle' : 'cycles'} in all instead of ${v.total}`;
+      r.dbl.title = `Double: ${v.total * 2} cycles in all instead of ${v.total}`;
+      r.half.setAttribute('aria-label', `${r.half.title}, loop ${v.id}`);
+      r.dbl.setAttribute('aria-label', `${r.dbl.title}, loop ${v.id}`);
+    }
+    if (!W) W = Math.round(r.cv.clientWidth * dpr);
+    if (W) paintLane(r, v, rec, W, Math.round(18 * dpr), dpr);
+  }
+}
+
+function render() {
+  const loops = live.voices.length, playing = live.playing;
+  const lamp = $('lamp');
+  const syncing = running && !!sync && !sync.result;
+  lamp.className = 'lamp' + (!running ? '' : syncing ? ' loop' : live.recording ? ' rec' : loops ? ' loop' : ' listening');
+  $('start').textContent = running ? 'Stop' : 'Start';
+  $('start').classList.toggle('on', running);
+  $('cancel').disabled = !(running && loops > 0) || syncing;
+  $('syncBtn').disabled = syncing;
+  if (running) $('statusSub').classList.remove('warn');
+  $('status').textContent = !running ? 'Press Start' : syncing ? 'Syncing' : live.recording ? 'Recording' : loops ? 'Looping' : 'Listening';
+  if (running && !$('statusSub').classList.contains('warn')) {
+    $('statusSub').textContent = syncing ? 'Make a short sound on each click. Nothing is recorded while syncing.'
+      : loops ? `${loops} ${loops === 1 ? 'loop' : 'loops'}, ${playing} playing now (at most ${S.voices}). Keep talking to add more.`
+      : 'Say something. A sound past the marker starts a loop.';
+  }
+  $('loopOut').textContent = live.cycle != null && live.cycle >= 0 ? `Cycle ${live.cycle + 1} · ${S.loopSec.toFixed(2)} s` : 'None yet';
+  $('cycleFill').style.width = `${(live.cycle != null && live.cycle >= 0 ? live.phase : 0) * 100}%`;
+  $('cycleMid').hidden = !(S.voices > S.repeats);
+  // Mic level in dB on a −70…−6 scale, the same scale as the trigger marker.
+  const db = 20 * Math.log10(Math.max(1e-6, live.env));
+  const frac = clamp((db + 70) / 64, 0, 1);
+  $('meterFill').style.width = `${frac * 100}%`;
+  $('meterFill').classList.toggle('hot', db >= S.triggerDb);
+  $('triggerOut').textContent = `Starts at ${S.triggerDb} dB${running ? ` · now ${db < -69 ? '−∞' : Math.round(db)} dB` : ''}`.replace(/-/g, '−');
+  drawLanes();
+}
+(function frame() { if (running) render(); requestAnimationFrame(frame); })();
+render();
+
+// ---------- Install as an app ----------
+if ('serviceWorker' in navigator && window.isSecureContext) {
+  addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Offline support unavailable', err)));
+  const had = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (had && !running) location.reload(); });
+}
+const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+$('installHint').hidden = standalone;
+let installPrompt = null;
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; $('install').hidden = false; $('installHint').hidden = true; });
+$('install').addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice.catch(() => null); installPrompt = null; $('install').hidden = true; });
+addEventListener('appinstalled', () => { $('install').hidden = true; $('installHint').hidden = true; });
+
+window.eightfold = { settings: S, live, analyzeTap, get ctx() { return ctx; }, get node() { return node; }, get sync() { return sync; } };
+</script>
+</body>
+</html>

@@ -1,0 +1,3442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Breathing Dark</title>
+<meta name="description" content="Close your eyes and dark noise fades in. Its filter opens as you breathe in and closes as you breathe out.">
+<meta name="theme-color" content="#0a0b0f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one screen. Camera mirror on the left, instrument readouts on the right.
+   A full-screen noise layer covers everything once the eyes have been closed long enough. */
+:root {
+  color-scheme: dark;
+  --night: #0a0b0f;            /* page ground, faintly blue */
+  --panel: #111319;            /* camera well */
+  --rule: #23262f;             /* hairlines and meter tracks */
+  --fg: #d7d9e0;               /* text */
+  --muted: #858a97;            /* secondary text */
+  --breath: #e1b673;           /* breath trace and filter readout */
+  --lid: #8db4cc;              /* eyes-closed state */
+  --warn: #d98c7a;             /* tracking problems */
+  --scrim: rgb(10 11 15 / 0.74);
+  --breath-dim: rgb(225 182 115 / 0.3);  /* the chosen cutoff band */
+  --lid-dim: rgb(141 180 204 / 0.3);     /* recent range of the eye signal */
+  --chart-rest: #4b8fd9;                 /* rests chart: past hours (validated for this surface) */
+  --chart-now: #c98500;                  /* rests chart: the current hour */
+  --good: #7cc49a;                       /* above your average */
+
+  --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --step--2: 0.75rem;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-3: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--fg);
+  font: 400 var(--step-0)/1.5 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.shell {
+  max-width: 74rem;
+  margin: 0 auto;
+  padding-block: clamp(20px, 4vw, 48px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.intro { display: grid; gap: 10px; }
+h1 {
+  margin: 0;
+  font: 300 var(--step-3)/1.02 var(--font-display);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+h1 em { font-style: italic; color: var(--muted); }
+.lede { margin: 0; max-width: 58ch; color: var(--muted); }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 36px);
+  align-items: start;
+}
+@media (max-width: 780px) { .stage { grid-template-columns: minmax(0, 1fr); } }
+
+.mirror {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  max-width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.mirror canvas { display: block; width: 100%; height: 100%; object-fit: cover; }
+.mirror-empty {
+  position: absolute; inset: 0;
+  display: grid; place-content: center; gap: 8px;
+  padding: 24px; text-align: center; color: var(--muted);
+}
+.mirror-empty p { margin: 0; max-width: 34ch; }
+.mirror-empty strong { color: var(--fg); font-weight: 500; }
+.status {
+  position: absolute; left: 12px; bottom: 12px; right: 12px;
+  width: fit-content; max-width: calc(100% - 24px);
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: var(--scrim);
+  font: 500 var(--step--2)/1.35 var(--font-data);
+  color: var(--fg);
+}
+.status.warn { color: var(--warn); }
+
+.sr-video { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+.readouts { display: grid; gap: 18px; min-width: 0; }
+.readout { display: grid; gap: 8px; padding-bottom: 18px; border-bottom: 1px solid var(--rule); min-width: 0; }
+.readout-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.label {
+  font: 500 var(--step--2)/1 var(--font-data);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.value {
+  font: 500 var(--step-1)/1.1 var(--font-data);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.value.closed { color: var(--lid); }
+.value.breath { color: var(--breath); }
+
+.meter { position: relative; height: 6px; border-radius: 3px; background: var(--rule); }
+.meter-fill {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: 0; border-radius: 3px; background: var(--muted);
+}
+.meter-fill.closed { background: var(--lid); }
+.meter-fill.noise { background: var(--fg); }
+.lid-meter { position: relative; height: 26px; }
+.lid-track { position: absolute; left: 0; right: 0; top: 10px; height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.lid-recent { position: absolute; top: 0; bottom: 0; width: 0; background: var(--lid-dim); }
+.lid-slider {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
+  -webkit-appearance: none; appearance: none; background: transparent; cursor: ew-resize;
+}
+.lid-slider::-webkit-slider-runnable-track { height: 26px; background: transparent; border: 0; }
+.lid-slider::-moz-range-track { height: 26px; background: transparent; border: 0; }
+.lid-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 6px; height: 26px; border: 0; border-radius: 2px;
+  background: var(--fg); box-shadow: 0 0 0 2px var(--night);
+}
+.lid-slider::-moz-range-thumb { width: 6px; height: 26px; border: 0; border-radius: 2px; background: var(--fg); box-shadow: 0 0 0 2px var(--night); }
+.lid-scale { display: flex; justify-content: space-between; margin-top: -2px; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
+.readout > .hint { margin: 0; font-size: var(--step--2); color: var(--muted); }
+
+#breathTrace { display: block; width: 100%; height: 96px; }
+.trace-button { display: block; width: 100%; padding: 0; border: 0; border-radius: 4px; background: transparent; cursor: zoom-in; }
+.trace-button:hover:not(:disabled) { background: var(--panel); }
+.legend-hint { color: var(--muted); }
+.key-closed { background: var(--lid-dim); height: 8px; }
+.key-mark { background: var(--muted); width: 2px; height: 8px; }
+.key-join { width: 0; height: 12px; border-left: 2px dashed var(--muted); border-radius: 0; }
+.history-row-pick input { accent-color: var(--breath); }
+
+/* Full-screen breath history: under the noise picture, over the page. */
+.history {
+  position: fixed; inset: 0; z-index: 15;
+  display: flex; flex-direction: column;
+  background: var(--night);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.history-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px;
+  padding-block: 12px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  border-bottom: 1px solid var(--rule);
+}
+.history-bar h2 { margin: 0; font: 300 var(--step-1)/1 var(--font-display); }
+.history-row-pick { display: flex; align-items: center; gap: 8px; font-size: var(--step--1); color: var(--muted); }
+.history-row-pick select {
+  padding: 6px 8px; font: 400 var(--step--1) var(--font-body); color: var(--fg);
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 6px;
+}
+.history-spacer-flex { flex: 1; }
+.history-scroll { position: relative; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.rest-summary { display: flex; justify-content: space-between; gap: 16px; margin-block: 14px 6px; }
+.rest-summary strong { font-family: var(--font-data); font-weight: 400; color: var(--fg); }
+.rest-goal { width: 100%; height: 6px; border: 0; border-radius: 3px; overflow: hidden; accent-color: var(--breath); }
+.rest-goal::-webkit-progress-bar { background: var(--rule); }
+.rest-goal::-webkit-progress-value { background: var(--breath); }
+.rest-goal::-moz-progress-bar { background: var(--breath); }
+.rest-band { margin-block: 8px 0; color: var(--good); }
+.rest-delta { margin: 0; font-size: var(--step--1); color: var(--muted); }
+.rest-delta.up, .kpi-sub.up { color: var(--good); }
+.range-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.range-row button[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--night); }
+.progress-body {
+  flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  display: grid; align-content: start; gap: 28px;
+  padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.progress-body > * { width: 100%; max-width: 76rem; margin: 0 auto; min-width: 0; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: 12px; }
+.kpi { display: grid; gap: 4px; align-content: start; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 8px; }
+.kpi-label { font-size: var(--step--1); color: var(--muted); }
+.kpi-value { font: 600 1.75rem/1.1 var(--font-body); color: var(--fg); }
+.kpi-sub { font-size: var(--step--2); color: var(--muted); }
+.chart-block { display: grid; gap: 8px; }
+.chart-block h3 { margin: 0; font: 500 var(--step-0)/1.3 var(--font-body); }
+.chart-sub { margin: 0; max-width: 72ch; font-size: var(--step--1); color: var(--muted); }
+#hourChart { display: block; width: 100%; height: 260px; border-radius: 4px; }
+#dayChart { display: block; width: 100%; height: 200px; border-radius: 4px; }
+#hourChart:focus-visible, #dayChart:focus-visible { outline: 2px solid var(--breath); outline-offset: 2px; }
+.chart-tip {
+  position: fixed; z-index: 40; pointer-events: none;
+  display: grid; gap: 2px; max-width: 16rem;
+  padding: 8px 10px; border: 1px solid var(--rule); border-radius: 6px;
+  background: var(--panel); color: var(--muted); font-size: var(--step--2);
+}
+.chart-tip strong { font: 600 var(--step-0)/1.2 var(--font-body); color: var(--fg); }
+.table-view summary { cursor: pointer; width: fit-content; font-size: var(--step--1); color: var(--muted); }
+.table-wrap { overflow: auto; max-height: 360px; margin-top: 10px; }
+.table-wrap table { border-collapse: collapse; font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+.table-wrap th, .table-wrap td { padding: 6px 14px 6px 0; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
+.table-wrap th { font-weight: 500; color: var(--muted); position: sticky; top: 0; background: var(--night); }
+.progress-foot { display: flex; justify-content: flex-end; }
+#historyCanvas { position: sticky; top: 0; display: block; width: 100%; height: 100%; }
+#historyPad { width: 1px; }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 0; font-size: var(--step--2); color: var(--muted); }
+.key { display: inline-block; width: 14px; height: 2px; border-radius: 1px; }
+.key + .key, .legend .key:not(:first-child) { margin-left: 8px; }
+.key-measured { background: var(--muted); }
+.key-filter { background: var(--breath); height: 3px; }
+
+.band { position: relative; height: 10px; border-radius: 5px; background: var(--rule); margin-top: 4px; }
+.band-range { position: absolute; top: 0; bottom: 0; border-radius: 5px; background: var(--breath-dim); }
+.band-now { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; border-radius: 1px; background: var(--breath); }
+.band-scale { position: relative; height: 1.1em; font: 400 var(--step--2)/1 var(--font-data); color: var(--muted); }
+.band-scale span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.band-scale span:first-child { transform: none; }
+.band-scale span:last-child { transform: translateX(-100%); }
+.controls { display: grid; gap: 16px; margin-top: 8px; }
+.sub { color: var(--muted); }
+
+.note { margin: 0; color: var(--muted); font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+.note.warn { color: var(--warn); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+button {
+  font: 500 var(--step-0)/1 var(--font-body);
+  padding: 12px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--muted); }
+button.primary { background: var(--fg); border-color: var(--fg); color: var(--night); }
+button.primary:hover:not(:disabled) { background: var(--breath); border-color: var(--breath); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button:focus-visible, summary:focus-visible, input:focus-visible {
+  outline: 2px solid var(--breath);
+  outline-offset: 2px;
+}
+
+.settings { border-top: 1px solid var(--rule); padding-top: 16px; }
+.settings summary {
+  cursor: pointer;
+  width: fit-content;
+  font: 500 var(--step--2)/1.6 var(--font-data);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 20px 32px;
+  margin-top: 18px;
+}
+.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: baseline; align-content: start; }
+.setting label { font-size: var(--step--1); }
+.setting output { font: 400 var(--step--1) var(--font-data); font-variant-numeric: tabular-nums; }
+.setting input[type="range"] { grid-column: 1 / -1; width: 100%; margin: 4px 0 0; accent-color: var(--breath); }
+.setting .hint { grid-column: 1 / -1; margin: 0; font-size: var(--step--2); color: var(--muted); }
+.setting select {
+  grid-column: 1 / -1; width: 100%; margin-top: 4px; padding: 8px 10px;
+  font: 400 var(--step--1) var(--font-body); color: var(--fg);
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 6px;
+}
+.setting select:focus-visible { outline: 2px solid var(--breath); outline-offset: 2px; }
+.setting output.warn { color: var(--warn); }
+.check { display: flex; gap: 10px; align-items: center; font-size: var(--step--1); cursor: pointer; }
+.setting > .check { grid-column: 1 / -1; }
+.note.quality { font-family: var(--font-data); font-size: var(--step--2); }
+.check input { accent-color: var(--breath); width: 16px; height: 16px; }
+.reset-row { grid-column: 1 / -1; }
+.reset-row button { font-size: var(--step--1); padding: 8px 12px; }
+
+.footnote { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 24px; margin: 0; color: var(--muted); font-size: var(--step--2); }
+button.small { font-size: var(--step--1); padding: 8px 12px; }
+kbd {
+  font: 500 var(--step--2) var(--font-data);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--fg);
+}
+
+/* The dark noise. Opacity follows the fade; it only catches clicks while it covers the page. */
+.noise-layer {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  background: var(--night);
+}
+.overlay-text {
+  position: fixed; z-index: 21;
+  font: 400 var(--step--2)/1.5 var(--font-data);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+.hud {
+  left: max(16px, env(safe-area-inset-left, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="intro">
+    <h1>Breathing <em>Dark</em></h1>
+    <p class="lede">Close your eyes. After a moment, dark noise rises around you. Its filter opens as you breathe in and settles as you breathe out. Open your eyes and it falls away.</p>
+  </header>
+
+  <section class="stage" aria-label="Tracking">
+    <figure class="mirror">
+      <canvas id="camera" width="640" height="480" aria-label="Camera view with eye and shoulder tracking"></canvas>
+      <div class="mirror-empty" id="cameraEmpty">
+        <p><strong>Sit so your head and both shoulders are in the frame.</strong></p>
+        <p>Press Begin, allow the camera, then close your eyes. Headphones help.</p>
+      </div>
+      <div class="mirror-empty" id="cameraSleep" hidden>
+        <p><strong>Hibernating to save power.</strong></p>
+        <p>No face for 5 minutes, so the camera is off. It looks for you every 10 minutes, or as soon as you move the mouse or press a key.</p>
+      </div>
+      <figcaption id="status" class="status" role="status">Camera off</figcaption>
+    </figure>
+    <video id="video" class="sr-video" playsinline muted></video>
+
+    <div class="readouts">
+      <div class="readout">
+        <div class="readout-head"><span class="label">Eyes</span><span class="value" id="eyesValue">Not tracking</span></div>
+        <div class="setting">
+          <label for="set-lidThreshold">Closed threshold <span class="sub">· drag the marker</span></label>
+          <output id="out-lidThreshold" for="set-lidThreshold">0.55</output>
+        </div>
+        <div class="lid-meter">
+          <div class="lid-track" aria-hidden="true">
+            <div class="lid-recent" id="lidRecent"></div>
+            <div class="meter-fill" id="lidFill"></div>
+          </div>
+          <input type="range" id="set-lidThreshold" class="lid-slider" min="0" max="1" step="0.01" value="0.55">
+        </div>
+        <div class="lid-scale" aria-hidden="true"><span>open</span><span>closed</span></div>
+        <p class="note" id="eyesNote">The bar is the eye-closure signal from the face model. The faint band shows its range over the last 15 s.</p>
+        <p class="hint">To set it: close your eyes for a few seconds, open them, and see how far the band reached. Put the marker between your open level and that.</p>
+        <div class="controls" id="eyeControls"></div>
+        <div class="setting" id="hibernateRow">
+          <p class="hint">Saves battery when you're away: after 5 minutes with no face in view, the camera and the face and body models switch off and the screen may sleep. Every 10 minutes the camera comes on for 10 seconds to look for you, until it finds you. Moving the mouse, pressing a key or coming back to this window looks straight away.</p>
+        </div>
+      </div>
+
+      <div class="readout">
+        <div class="readout-head"><span class="label">Rests <span class="sub">· eyes closed longer than 10 s</span></span><span class="value" id="restCount">0</span></div>
+        <p class="note" id="restNote">In the last 60 minutes.</p>
+        <div class="rest-summary"><span>Today <strong id="restToday">0</strong></span><span id="restGoalLabel">0 / 30 this hour</span></div>
+        <progress class="rest-goal" id="restGoal" max="30" value="0" aria-labelledby="restGoalLabel"></progress>
+        <p class="rest-band" id="restBand">Getting started</p>
+        <p class="hint">Hourly bands: Good 2–10 · Great 11–20 · Excellent 21–30 · Top of the line 31+. Goal: 30 in the last 60 minutes.</p>
+        <p class="hint">One count per continuous closure, after 10 seconds. Opening your eyes ends it. If tracking is interrupted, open your eyes in view before starting another rest. Today follows this computer’s local midnight.</p>
+        <p class="note warn" id="restStorage" hidden>Saving is unavailable. These counts may be lost when this page closes.</p>
+        <p class="rest-delta" id="restDelta"></p>
+        <div class="actions"><button type="button" class="small" id="openProgress">Show progress</button></div>
+      </div>
+
+      <div class="readout">
+        <div class="readout-head"><span class="label">Breath</span><span class="value breath" id="breathValue">Not tracking</span></div>
+        <button type="button" class="trace-button" id="openHistory" aria-label="Open the full breath history">
+          <canvas id="breathTrace" aria-hidden="true"></canvas>
+        </button>
+        <p class="legend"><span class="key key-measured"></span>Measured <span class="key key-filter"></span>Smoothed, moves the filter <span class="legend-hint">· click the graph for the full history</span></p>
+        <p class="note" id="breathNote">Press Begin to start tracking.</p>
+        <p class="note quality" id="qualityNote"></p>
+        <div class="setting">
+          <label for="set-breathSource">Breath from</label>
+          <select id="set-breathSource">
+            <option value="motion">Shoulder movement (image motion)</option>
+            <option value="outline">Shoulder outline by color</option>
+            <option value="pulse">Pulse in your face (camera PPG, experimental)</option>
+          </select>
+          <p class="hint" id="breathSourceHint"></p>
+        </div>
+        <div class="setting" id="breathPowerRow">
+          <p class="hint">Saves power: the body tracking runs only while your eyes are closed (and in Preview), and picks up where it left off as soon as they close. Turn it off to watch the breath graph with your eyes open.</p>
+        </div>
+        <div class="setting" id="colorMethodRow">
+          <label for="set-colorMethod">Color method <span class="sub">· both shoulders at once</span></label>
+          <select id="set-colorMethod">
+            <option value="opponent">Color, ignoring brightness</option>
+            <option value="hist">Color histograms</option>
+            <option value="gauss">Color spread (Gaussian)</option>
+            <option value="sharp">Sharpest color change</option>
+            <option value="mask">Neural person mask (MediaPipe)</option>
+            <option value="vote">Vote of the four color methods</option>
+          </select>
+          <p class="hint" id="colorMethodHint"></p>
+        </div>
+        <div class="setting" id="poseRow">
+          <label for="set-poseModel">Pose model <span class="sub">· finds the shoulders</span></label>
+          <output id="poseInfo" for="set-poseModel"></output>
+          <select id="set-poseModel">
+            <optgroup label="MediaPipe Pose">
+              <option value="mp-full">MediaPipe Full · 9 MB</option>
+              <option value="mp-heavy">MediaPipe Heavy · 31 MB, most accurate</option>
+            </optgroup>
+            <optgroup label="TensorFlow.js MoveNet">
+              <option value="movenet-lightning">MoveNet Lightning · 5 MB, fastest</option>
+              <option value="movenet-thunder">MoveNet Thunder · 13 MB</option>
+            </optgroup>
+          </select>
+          <p class="hint">Only places the shoulder windows, so a steadier model means fewer re-locks. The time per frame shows how hard your computer is working.</p>
+        </div>
+      </div>
+
+      <div class="readout">
+        <div class="readout-head"><span class="label">Noise</span><span class="value" id="noiseValue">Silent</span></div>
+        <div class="meter" aria-hidden="true"><div class="meter-fill noise" id="noiseFill"></div></div>
+        <div class="setting" id="continuousRow">
+          <p class="hint">The noise keeps playing the whole time. With your eyes closed the filter follows your breath; with them open, or when your breath isn't being tracked, it glides down to the low cutoff and rests there.</p>
+        </div>
+      </div>
+
+      <div class="readout">
+        <div class="readout-head"><span class="label">Lowpass filter</span><span class="value breath" id="cutoffValue">255 Hz</span></div>
+        <div class="band" aria-hidden="true"><div class="band-range" id="bandRange"></div><div class="band-now" id="bandNow"></div></div>
+        <div class="band-scale" aria-hidden="true"><span style="left:0%">20</span><span style="left:25.9%">100</span><span style="left:62.9%">1k</span><span style="left:100%">10k Hz</span></div>
+        <div class="controls" id="filterControls"></div>
+      </div>
+
+      <div class="actions">
+        <button id="begin" class="primary" type="button">Begin</button>
+        <button id="preview" type="button" disabled>Preview with eyes open</button>
+      </div>
+    </div>
+  </section>
+
+  <details class="settings" id="settings">
+    <summary>Settings</summary>
+    <div class="settings-grid" id="settingsGrid"></div>
+  </details>
+
+  <p class="footnote">
+    <span><kbd>P</kbd> preview the noise · <kbd>H</kbd> show readouts over the noise</span>
+    <span>Tracking runs on this computer. Video is never uploaded.</span>
+    <span id="installHint">Keep it as a Mac app: in Safari choose File › Add to Dock. In Chrome choose Install from the menu.</span>
+    <button id="install" type="button" class="small" hidden>Install as an app</button>
+  </p>
+</main>
+
+<div id="progress" class="history" role="dialog" aria-modal="true" aria-labelledby="progressTitle" hidden>
+  <div class="history-bar">
+    <h2 id="progressTitle">Your rests</h2>
+    <div class="range-row" role="group" aria-label="Time range">
+      <button type="button" class="small" data-days="1">24 hours</button>
+      <button type="button" class="small" data-days="7" aria-pressed="true">7 days</button>
+      <button type="button" class="small" data-days="30">30 days</button>
+      <button type="button" class="small" data-days="0">All</button>
+    </div>
+    <span class="history-spacer-flex"></span>
+    <button type="button" id="progressClose" class="small">Close</button>
+  </div>
+  <div class="progress-body">
+    <div><p class="chart-sub">A rest counts once after your eyes stay closed longer than 10 seconds. The rolling-hour and local-day totals include every rest. Charts and averages use hours with more than 10 minutes in front of the camera. Saved data stays in this browser on this computer.</p></div>
+    <div class="kpis" id="progressKpis"></div>
+    <section class="chart-block" aria-labelledby="hourChartTitle">
+      <h3 id="hourChartTitle">Rests per hour</h3>
+      <p class="chart-sub">Each bar is one hour at the computer. The dashed line is your average over the past 7 days; the current hour is the gold bar.</p>
+      <canvas id="hourChart" tabindex="0" aria-label="Rests per hour; use the arrow keys to read each hour"></canvas>
+    </section>
+    <section class="chart-block" aria-labelledby="dayChartTitle">
+      <h3 id="dayChartTitle">Average rests per hour, by day</h3>
+      <p class="chart-sub">How your daily average is changing.</p>
+      <canvas id="dayChart" tabindex="0" aria-label="Average rests per hour by day; use the arrow keys to read each day"></canvas>
+    </section>
+    <details class="table-view">
+      <summary>Show as a table</summary>
+      <div class="table-wrap"><table id="progressTable"><thead><tr><th scope="col">Hour</th><th scope="col">Rests</th><th scope="col">Minutes at the computer</th><th scope="col">Minutes resting</th></tr></thead><tbody></tbody></table></div>
+    </details>
+    <div class="progress-foot"><button type="button" class="small" id="clearRests">Clear saved rests</button></div>
+  </div>
+</div>
+<div id="chartTip" class="chart-tip" role="tooltip" hidden></div>
+<div id="history" class="history" role="dialog" aria-modal="true" aria-labelledby="historyTitle" hidden>
+  <div class="history-bar">
+    <h2 id="historyTitle">Breath history</h2>
+    <label class="history-row-pick" for="historyRow">Each line
+      <select id="historyRow">
+        <option value="30">30 s</option>
+        <option value="60" selected>1 min</option>
+        <option value="120">2 min</option>
+        <option value="300">5 min</option>
+      </select>
+    </label>
+    <label class="history-row-pick" for="historySkip"><input type="checkbox" id="historySkip"> Skip eyes-open gaps</label>
+    <p class="legend"><span class="key key-measured"></span>Measured <span class="key key-filter"></span>Smoothed <span class="key key-closed"></span>Eyes closed <span class="key key-mark"></span>Breath counted <span class="key key-join"></span>Gap skipped</p>
+    <span class="history-spacer-flex"></span>
+    <button type="button" id="historyNow" class="small" hidden>Back to now</button>
+    <button type="button" id="historyClose" class="small">Close</button>
+  </div>
+  <div class="history-scroll" id="historyScroll">
+    <canvas id="historyCanvas" aria-label="Breath history, five lines at a time; scroll for earlier"></canvas>
+    <div id="historyPad"></div>
+  </div>
+</div>
+<canvas id="noise" class="noise-layer" aria-hidden="true"></canvas>
+<div id="hud" class="overlay-text hud" hidden></div>
+
+<script type="module">
+import { REST_SECONDS, HOURLY_GOAL, createRestCycle, restBand, hourKeyOf, hourStart, restTotals, pruneRests, readRests } from './rest-counter.mjs';
+// =====================================================================
+// Breathing Dark
+// Eye closure: MediaPipe Face Landmarker blendshapes, as in the
+//   "eyes wide shut v2" sketch (eyeBlink minus a share of eyeWide,
+//   smoothed, against a threshold, held for a while before anything fades in).
+// Breath: the gap between the nose and the shoulder midline, as in the
+//   "breathe 25 with posture" sketch, with an adaptive min/max window so
+//   small shoulder movements fill the whole 0..1 range.
+// Sound: brown ("dark") noise through a lowpass whose cutoff follows the breath.
+// Picture: a dark noise field whose fine detail and aperture follow the same value.
+// =====================================================================
+
+const MP_VERSION = '0.10.35';
+const MP_URL = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${MP_VERSION}`;
+const FACE_MODEL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
+
+// ---------- Tracking constants ----------
+const TRACK = {
+  wideWeight: 0.25,        // sketch 1: blink - 0.25 * eyeWide
+  lidSmoothSec: 0.15,      // sketch 1 smoothing 0.8 per frame at ~30 fps
+  lidHysteresis: 0.08,     // must drop this far under the threshold to count as open again
+  openGraceSec: 0.3,       // eyes open this long before the noise starts to fall
+  faceLostGraceSec: 1.5,   // face missing this long counts as eyes open
+
+  levelSmoothSec: 0.2,     // light de-noising; the Breath smoothing slider adds the rest
+  shoulderPosSec: 1.0,     // smoothing of the pose model's shoulder points (they only place the windows)
+  shoulderScaleSec: 4,     // shoulder width, used to make the motion independent of camera distance
+  roiWidth: 0.42,          // shoulder windows, in shoulder widths
+  roiHeight: 0.5,
+  maxShiftRows: 12,        // search range for the up-down match
+  minMatch: 0.2,           // match quality (0..1) below this is ignored; unrelated images score about 0
+  relockMove: 0.12,        // shoulders moved this far (shoulder widths): place the windows again
+  edgeWidth: 0.36,         // color-outline windows, in shoulder widths: this wide around each shoulder point,
+  edgeAbove: 0.35,         //   reaching this far above it (background) ...
+  edgeBelow: 0.3,          //   ... and this far below it, in case the shoulder point sits too high
+  edgeBand: 0.05,          // once found, the outline is searched for within this distance of where it was
+  edgeStep: 1.4,           // how cleanly a column must split into background and shoulder (max 2)
+  edgeLearnRate: 0.05,     // how quickly the two learned colors follow changes in light
+  minSeparation: 0.3,      // how clearly a color method must split shoulder from background (0..1)
+  minEdgeColumns: 0.3,     // share of columns that must show a clear outline
+  poseEvery: 2,            // run the pose model on every second camera frame
+  gateGlideSec: 2.5,       // continuous noise: time to glide between following the breath and the low cutoff
+  ppgScale: 0.003,         // pulse mode: breath units per beat-per-minute of heart-rate swing
+  ppgMaxIrregular: 0.15,   // pulse mode: beat-to-beat variation above this means no clear pulse
+  rangeRelaxSec: 12,       // how fast the min/max window forgets old extremes
+  rangeResetSec: 4,        // shoulders gone this long: start the window again
+  maxSpan: 0.09,           // window never wider than this (in shoulder widths)
+  outSmoothSec: 0.15,
+  breathLostSec: 1.5,
+  restingBreath: 0.4,      // where the filter settles when the shoulders are out of view
+
+  inhaleMark: 0.68,        // sketch 2 counts a breath on an up-swing then a down-swing
+  exhaleMark: 0.32,
+  minPeriodSec: 1.2,
+  maxPeriodSec: 30,
+  breathsToAverage: 3,     // sketch 2: numBreathsForHue
+  traceSec: 30,
+};
+
+// ---------- Settings ----------
+const STORE_KEY = 'breathing-dark.settings.v1';
+const SETTINGS_VERSION = 2;
+const DEFAULTS = {
+  version: SETTINGS_VERSION,
+  lidThreshold: 0.55,
+  holdSec: 0.6,
+  fadeInSec: 2.5,
+  fadeOutSec: 1,
+  volume: 0.6,
+  cutoffLow: 110,
+  cutoffHigh: 900,
+  resonance: 1,
+  poseModel: 'mp-full',
+  breathSmoothSec: 1.5,
+  exhaleFloor: 0,
+  sensitivity: 5,
+  invertBreath: false,
+  mirror: true,
+  breathSource: 'motion',
+  colorMethod: 'sharp',
+  breathOnlyEyesClosed: true,
+  hibernate: true,
+  continuousNoise: false,
+  historyRowSec: 60,
+  historySkipGaps: true,
+  eyeHz: 3,
+};
+const fmtHz = v => v >= 1000 ? `${+(v / 1000).toFixed(2)} kHz` : `${Math.round(v)} Hz`;
+
+// Cutoff sliders run on a log scale from 20 Hz to 10 kHz, the way pitch is heard.
+const LOG_MIN = 20, LOG_MAX = 10000, LOG_STEPS = 1000, MIN_BAND_RATIO = 1.25;
+const hzToPos = hz => Math.round(LOG_STEPS * Math.log(hz / LOG_MIN) / Math.log(LOG_MAX / LOG_MIN));
+const posToHz = pos => LOG_MIN * Math.pow(LOG_MAX / LOG_MIN, pos / LOG_STEPS);
+const roundHz = hz => Number(hz.toPrecision(3));
+const FILTER_SLIDERS = [
+  { key: 'cutoffLow', label: 'Low cutoff', sub: 'full out-breath', log: true, fmt: fmtHz },
+  { key: 'cutoffHigh', label: 'High cutoff', sub: 'full in-breath', log: true, fmt: fmtHz },
+  { key: 'resonance', label: 'Resonance', sub: 'peak at the cutoff', min: 0, max: 24, step: 0.5,
+    fmt: v => `${v.toFixed(1)} dB`,
+    hint: 'Higher adds a whistling peak at the cutoff that rises and falls with your breath.' },
+  { key: 'breathSmoothSec', label: 'Breath smoothing', min: 0, max: 8, step: 0.1,
+    fmt: v => v < 0.05 ? 'Off' : `${v.toFixed(1)} s average`,
+    hint: 'The filter follows your average breath position over about this many seconds. Off reacts at once. Higher is calmer, slower and moves less.' },
+  { key: 'exhaleFloor', label: 'Exhale floor', sub: 'filter stops falling here', min: 0, max: 0.6, step: 0.01,
+    fmt: v => v < 0.005 ? 'Off' : `${Math.round(v * 100)}% up`,
+    hint: 'Once your out-breath drops below this point, the filter stays at the low cutoff instead of following the less reliable bottom of the breath. The dashed line on the breath graph shows it.' },
+];
+const LID_MIN = 0.1, LID_MAX = 0.95;
+const EYE_SLIDERS = [
+  { key: 'eyeHz', label: 'Eye checks per second', min: 1, max: 30, step: 1, fmt: v => `${v} per second`, hint: 'How often the face model looks at your eyes. 3 is plenty to notice closed eyes; more reacts a little sooner but uses more power.' },
+  { key: 'holdSec', label: 'Hold before the noise', min: 0.2, max: 8, step: 0.1, fmt: v => `${v.toFixed(1)} s`, hint: 'Eyes stay closed this long first. A blink lasts about 0.1 to 0.4 s.' },
+];
+const SLIDERS = [
+  { key: 'fadeInSec', label: 'Fade in', min: 0.5, max: 20, step: 0.5, fmt: v => `${v.toFixed(1)} s` },
+  { key: 'fadeOutSec', label: 'Fade out', min: 0.2, max: 6, step: 0.1, fmt: v => `${v.toFixed(1)} s` },
+  { key: 'volume', label: 'Volume', min: 0, max: 1, step: 0.01, fmt: v => `${Math.round(v * 100)}%` },
+  { key: 'sensitivity', label: 'Breath sensitivity', min: 1, max: 10, step: 0.5, fmt: v => v.toFixed(1), hint: 'Raise it if the trace barely moves. Lower it if it jitters.' },
+];
+const CHECKS = [
+  { key: 'invertBreath', label: 'Invert breath direction' },
+  { key: 'mirror', label: 'Mirror the camera' },
+];
+
+const S = loadSettings();
+function loadSettings() {
+  let s = { ...DEFAULTS };
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      if (saved.colorEdge && !saved.breathSource) saved.breathSource = 'outline'; // earlier checkbox
+      if (saved.colorMethod === 'rgb') delete saved.colorMethod; // 'Average colors' was removed
+      if (!saved.version) {
+        // Saved by the first version: drop its slower fade defaults so the quicker ones apply.
+        if (saved.holdSec === 1.5) delete saved.holdSec;
+        if (saved.fadeInSec === 5) delete saved.fadeInSec;
+      }
+      s = { ...DEFAULTS, ...saved, version: SETTINGS_VERSION };
+    }
+  } catch { /* storage blocked: use defaults */ }
+  s.cutoffLow = clampNum(s.cutoffLow, LOG_MIN, LOG_MAX / MIN_BAND_RATIO, DEFAULTS.cutoffLow);
+  s.cutoffHigh = clampNum(s.cutoffHigh, s.cutoffLow * MIN_BAND_RATIO, LOG_MAX, DEFAULTS.cutoffHigh);
+  return s;
+}
+function clampNum(v, lo, hi, fallback) {
+  return Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : fallback;
+}
+function saveSettings() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch { /* ignore */ }
+}
+// Sensitivity 1..10 maps to the smallest min/max window, 0.03 .. 0.004 shoulder widths.
+const spanFor = s => 0.03 * Math.pow(0.004 / 0.03, (s - 1) / 9);
+
+// ---------- Helpers ----------
+const $ = id => document.getElementById(id);
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+const ema = (prev, x, dt, tau) => prev + (x - prev) * (1 - Math.exp(-dt / tau));
+const cssVar = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+// Colors and the data font for the canvases. Read from the CSS tokens, with the same values built in:
+// if the styles aren't ready when this runs (it can happen when the page comes from the offline
+// cache or opens as an installed app), an empty read would otherwise leave the canvases drawing in
+// black with the browser's tiny default font. Read again once the page and its fonts have loaded.
+const TOKEN_DEFAULTS = {
+  fg: ['--fg', '#d7d9e0'], muted: ['--muted', '#858a97'], rule: ['--rule', '#23262f'],
+  breath: ['--breath', '#e1b673'], lid: ['--lid', '#8db4cc'], night: ['--night', '#0a0b0f'],
+};
+const COLORS = {};
+let FONT_DATA = '"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace';
+function readTokens() {
+  for (const [key, [name, fallback]] of Object.entries(TOKEN_DEFAULTS)) COLORS[key] = cssVar(name) || fallback;
+  FONT_DATA = cssVar('--font-data') || FONT_DATA;
+}
+readTokens();
+addEventListener('load', readTokens);
+document.fonts?.ready.then(readTokens).catch(() => {});
+// How open the filter is for a breath value: 0 at or below the exhale floor, 1 at the top of the breath.
+const filterAmount = b => S.exhaleFloor > 0 ? clamp((b - S.exhaleFloor) / (1 - S.exhaleFloor), 0, 1) : clamp(b, 0, 1);
+const cutoffAt = open => S.cutoffLow * Math.pow(Math.max(S.cutoffHigh, S.cutoffLow + 1) / S.cutoffLow, open);
+const cutoffFor = b => cutoffAt(filterAmount(b));
+
+// =====================================================================
+// Eye closure
+// =====================================================================
+function createLidTracker() {
+  const st = { lid: 0, raw: 0, closed: false, closedSince: 0, openSince: 0, faceLastSeen: -Infinity, faceInView: false };
+
+  function update(blend, now, dt) {
+    if (blend) {
+      let raw = (blend.blinkL + blend.blinkR) / 2;
+      if (blend.wideL != null && blend.wideR != null) {
+        raw = clamp(raw - TRACK.wideWeight * (blend.wideL + blend.wideR) / 2, 0, 1);
+      }
+      st.raw = raw;
+      st.lid = ema(st.lid, raw, dt, TRACK.lidSmoothSec);
+      st.faceLastSeen = now;
+      if (!st.closed && st.lid >= S.lidThreshold) { st.closed = true; st.closedSince = now; }
+      else if (st.closed && st.lid < S.lidThreshold - TRACK.lidHysteresis) { st.closed = false; st.openSince = now; }
+    } else if (now - st.faceLastSeen > TRACK.faceLostGraceSec) {
+      st.lid = ema(st.lid, 0, dt, TRACK.lidSmoothSec);
+      if (st.closed) { st.closed = false; st.openSince = now; }
+    }
+    st.faceInView = now - st.faceLastSeen <= TRACK.faceLostGraceSec;
+  }
+  function reset() {
+    Object.assign(st, { lid: 0, raw: 0, closed: false, closedSince: 0, openSince: 0, faceLastSeen: -Infinity, faceInView: false });
+  }
+  return { st, update, reset };
+}
+
+function readBlendshapes(faceRes) {
+  const cats = faceRes?.faceBlendshapes?.[0]?.categories;
+  if (!cats || cats.length === 0) return null;
+  const out = { blinkL: 0, blinkR: 0, wideL: null, wideR: null };
+  for (const c of cats) {
+    if (c.categoryName === 'eyeBlinkLeft') out.blinkL = c.score;
+    else if (c.categoryName === 'eyeBlinkRight') out.blinkR = c.score;
+    else if (c.categoryName === 'eyeWideLeft') out.wideL = c.score;
+    else if (c.categoryName === 'eyeWideRight') out.wideR = c.score;
+  }
+  return out;
+}
+
+// =====================================================================
+// Breath
+// =====================================================================
+function createBreathTracker() {
+  const st = {};
+  function reset() {
+    Object.assign(st, {
+      level: null, lo: null, hi: null, paused: false, snap: false, d1: null, d2: null, jit2: null, jitter: null, levels: [], swing: null,
+      raw: TRACK.restingBreath, fast: TRACK.restingBreath, s1: TRACK.restingBreath, s2: TRACK.restingBreath,
+      out: TRACK.restingBreath, vel: 0,
+      lastSeen: -Infinity, tracked: false,
+      stage: 'waitingForUp', lastBreathAt: null, periods: [], marks: [],
+    });
+  }
+  reset();
+
+  // Once per camera frame with a fresh measurement { d, reset } (or null).
+  // d is the shoulder height in shoulder widths, larger = lower.
+  function update(sample, now, dt) {
+    if (!sample) return;
+    // Steadiness: noise from the second difference of raw samples (slow breathing cancels out),
+    // and the breath's swing over the last 10 s.
+    if (sample.reset) { st.d1 = st.d2 = null; st.levels = []; }
+    if (st.d1 != null && st.d2 != null) {
+      const sd = sample.d - 2 * st.d1 + st.d2;
+      st.jit2 = st.jit2 == null ? sd * sd / 6 : ema(st.jit2, sd * sd / 6, dt, 3);
+      st.jitter = Math.sqrt(st.jit2);
+    }
+    st.d2 = st.d1; st.d1 = sample.d;
+    const fresh = sample.reset || st.level == null || now - st.lastSeen > TRACK.rangeResetSec;
+    st.level = fresh ? sample.d : ema(st.level, sample.d, dt, TRACK.levelSmoothSec);
+    const d = st.level;
+    const minSpan = spanFor(S.sensitivity);
+
+    if (fresh || st.lo == null) { st.lo = d - minSpan / 2; st.hi = d + minSpan / 2; }
+    const k = 1 - Math.exp(-dt / TRACK.rangeRelaxSec);
+    st.lo = d < st.lo ? d : st.lo + (d - st.lo) * k;
+    st.hi = d > st.hi ? d : st.hi + (d - st.hi) * k;
+
+    const span = st.hi - st.lo;
+    if (span < minSpan) {
+      const c = (st.hi + st.lo) / 2;
+      st.lo = c - minSpan / 2; st.hi = c + minSpan / 2;
+    } else if (span > TRACK.maxSpan) {
+      if (d - st.lo > st.hi - d) st.lo = st.hi - TRACK.maxSpan; else st.hi = st.lo + TRACK.maxSpan;
+    }
+
+    // Shoulders raised (small d) is the in-breath.
+    let b = (st.hi - d) / (st.hi - st.lo);
+    if (S.invertBreath) b = 1 - b;
+    st.raw = clamp(b, 0, 1);
+    st.lastSeen = now;
+    if (st.snap) {
+      // First reading after a pause: start the smoothed values at the real breath, not where they were.
+      st.snap = false;
+      st.fast = st.raw;
+      st.s1 = st.s2 = st.out = Math.max(st.raw, S.exhaleFloor);
+      st.vel = 0;
+    }
+    st.levels.push({ t: now, v: d });
+    while (st.levels[0].t < now - 10) st.levels.shift();
+    let mn = Infinity, mx = -Infinity;
+    for (const q of st.levels) { mn = Math.min(mn, q.v); mx = Math.max(mx, q.v); }
+    st.swing = mx - mn;
+  }
+
+  // Every animation frame.
+  function tick(now, dt) {
+    if (st.paused) return; // tracking is resting (eyes open): hold everything as it was
+    st.tracked = now - st.lastSeen < TRACK.breathLostSec;
+    // `fast` is the measured breath, lightly de-noised. It drives the readouts and breath counting.
+    const prev = st.fast;
+    st.fast = st.tracked
+      ? ema(st.fast, st.raw, dt, TRACK.outSmoothSec)
+      : ema(st.fast, TRACK.restingBreath, dt, 2.5);
+    st.vel = ema(st.vel, (st.fast - prev) / dt, dt, 0.35);
+
+    // `out` drives the filter: a weighted average of recent breath positions over about
+    // S.breathSmoothSec seconds. Two chained averages, each with a quarter of the window as its
+    // time constant, give the same delay as a plain W-second average without its dead spots
+    // (a plain 5 s average cancels a 5 s breath completely).
+    // Below the exhale floor the breath is held at the floor before smoothing, so the shaky bottom
+    // of the out-breath never reaches the filter and the smoothing rounds off the corner.
+    const target = Math.max(st.fast, S.exhaleFloor);
+    const W = S.breathSmoothSec;
+    if (W < 0.05) {
+      st.s1 = st.s2 = st.out = target;
+    } else {
+      st.s1 = ema(st.s1, target, dt, W / 4);
+      st.s2 = ema(st.s2, st.s1, dt, W / 4);
+      st.out = st.s2;
+    }
+
+    if (!st.tracked) return;
+    if (st.stage === 'waitingForUp' && st.fast > TRACK.inhaleMark) {
+      st.stage = 'waitingForDown';
+    } else if (st.stage === 'waitingForDown' && st.fast < TRACK.exhaleMark) {
+      register(now);
+      st.stage = 'waitingForUp';
+    }
+  }
+
+  function register(now) {
+    if (st.lastBreathAt != null) {
+      const p = now - st.lastBreathAt;
+      if (p < TRACK.minPeriodSec) return;
+      if (p > TRACK.maxPeriodSec) st.periods.length = 0;
+      else {
+        st.periods.push(p);
+        if (st.periods.length > TRACK.breathsToAverage + 1) st.periods.shift();
+      }
+    }
+    st.lastBreathAt = now;
+    st.marks.push(now);
+    while (st.marks.length && st.marks[0] < now - TRACK.traceSec) st.marks.shift();
+  }
+
+  function summary() {
+    const ps = st.periods.slice(-TRACK.breathsToAverage);
+    if (ps.length === 0) return null;
+    const avg = ps.reduce((a, b) => a + b, 0) / ps.length;
+    let variation = null;
+    if (st.periods.length >= 2) {
+      const diffs = [];
+      for (let i = 1; i < st.periods.length; i++) diffs.push(Math.abs(st.periods[i] - st.periods[i - 1]) / st.periods[i - 1] * 100);
+      variation = diffs.reduce((a, b) => a + b, 0) / diffs.length;
+    }
+    return { avg, perMin: 60 / avg, variation, count: ps.length };
+  }
+
+  // After a pause: carry on from where the breath was instead of starting the range again.
+  function hold(now) { if (st.level != null) st.lastSeen = now; st.paused = false; st.snap = true; }
+  function pause() { st.paused = true; }
+
+  return { st, update, tick, reset, summary, hold, pause };
+}
+
+// =====================================================================
+// Shoulder motion
+// The pose model only says roughly where the shoulders are: it guesses the joint inside the body,
+// and that guess wanders by about as much as a breath moves. So the breath is read from the image
+// itself. Two windows sit over the shoulders' outlines, and each camera frame is matched against a
+// stored reference frame to find how far the picture inside has moved up or down, to a fraction of
+// a pixel. The head is outside both windows, so tilting it changes nothing.
+// =====================================================================
+function createShoulderMotion(videoEl) {
+  const work = document.createElement('canvas');
+  work.width = 64; work.height = 128;
+  const wctx = work.getContext('2d', { willReadFrequently: true });
+  const st = {};
+
+  function reset() {
+    Object.assign(st, { ls: null, rs: null, sw: null, lastPoseAt: -Infinity, rois: null, relock: false, lowSince: null,
+      mode: null, lowReason: null, needReset: false, body: null, edgeShift: 0, sides: 0, oneSince: null, lastPlacedAt: -Infinity });
+  }
+  reset();
+
+  // From the pose model, a few times a second: smoothed shoulder positions in video pixels.
+  function updateShoulders(pose, minScore, now, dt) {
+    if (!pose) return;
+    const A = pose.ls, B = pose.rs;
+    if (A.score < minScore || B.score < minScore) return;
+    const sw = Math.hypot(A.x - B.x, A.y - B.y);
+    if (sw < 24) return;
+    const k = st.ls ? 1 - Math.exp(-dt / TRACK.shoulderPosSec) : 1;
+    const mix = (p, q) => (p ? { x: p.x + (q.x - p.x) * k, y: p.y + (q.y - p.y) * k } : q);
+    st.ls = mix(st.ls, A);
+    st.rs = mix(st.rs, B);
+    st.sw = st.sw == null ? sw : ema(st.sw, sw, dt, TRACK.shoulderScaleSec);
+    st.lastPoseAt = now;
+  }
+
+  // A window over each shoulder, reaching further above the joint, where the outline is.
+  function wantedRois(W, H) {
+    const out = [];
+    for (const p of [st.ls, st.rs]) {
+      const w = st.sw * TRACK.roiWidth, h = st.sw * TRACK.roiHeight;
+      const x0 = Math.max(0, p.x - w / 2), x1 = Math.min(W, p.x + w / 2);
+      const y0 = Math.max(0, p.y - h * 0.62), y1 = Math.min(H, p.y + h * 0.38);
+      if (x1 - x0 < 16 || y1 - y0 < 24) continue;
+      out.push({ x: x0, y: y0, w: x1 - x0, h: y1 - y0, cx: p.x, cy: p.y });
+    }
+    return out;
+  }
+
+  // Vertical brightness gradient of a window, sampled finely in height and coarsely in width.
+  function capture(roi) {
+    const rows = clamp(Math.round(roi.h / 1.5), 24, 128);
+    const cols = clamp(Math.round(roi.w / 3), 12, 64);
+    wctx.drawImage(videoEl, roi.x, roi.y, roi.w, roi.h, 0, 0, cols, rows);
+    const px = wctx.getImageData(0, 0, cols, rows).data;
+    const g = new Float32Array((rows - 1) * cols);
+    for (let y = 0; y < rows - 1; y++) {
+      for (let x = 0; x < cols; x++) {
+        const i = (y * cols + x) * 4, j = i + cols * 4;
+        const l0 = 0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2];
+        const l1 = 0.299 * px[j] + 0.587 * px[j + 1] + 0.114 * px[j + 2];
+        g[y * cols + x] = l1 - l0;
+      }
+    }
+    return { g, cols, rows: rows - 1, pxPerRow: roi.h / rows };
+  }
+
+  // How far `cur` has moved down relative to `ref`, in rows, by normalised cross-correlation.
+  function matchVertical(ref, cur, cols, rows, maxShift) {
+    const scores = new Float32Array(maxShift * 2 + 1);
+    let best = -Infinity, bestS = 0;
+    for (let s = -maxShift; s <= maxShift; s++) {
+      let sab = 0, saa = 0, sbb = 0;
+      const y0 = Math.max(0, -s), y1 = Math.min(rows, rows - s);
+      for (let y = y0; y < y1; y++) {
+        const ra = y * cols, rb = (y + s) * cols;
+        for (let x = 0; x < cols; x++) {
+          const a = ref[ra + x], b = cur[rb + x];
+          sab += a * b; saa += a * a; sbb += b * b;
+        }
+      }
+      const sc = sab / Math.sqrt(saa * sbb + 1e-6);
+      scores[s + maxShift] = sc;
+      if (sc > best) { best = sc; bestS = s; }
+    }
+    let sub = 0;
+    if (bestS > -maxShift && bestS < maxShift) {
+      const l = scores[bestS - 1 + maxShift], c = scores[bestS + maxShift], r = scores[bestS + 1 + maxShift];
+      const den = l - 2 * c + r;
+      if (den < 0) sub = clamp(0.5 * (l - r) / den, -0.5, 0.5);
+    }
+    return { shift: bestS + sub, score: best };
+  }
+
+  // Every camera frame. Returns { d, reset } where d is how far the shoulders sit below where they
+  // were when the windows were placed, in shoulder widths (smaller = raised = in-breath), or null
+  // when nothing is reliable.
+  function measure(now, W, H) {
+    const mode = S.breathSource === 'outline' ? `edge:${S.colorMethod}` : 'motion';
+    if (st.mode !== mode) { st.mode = mode; st.rois = null; }
+    if (!st.ls || now - st.lastPoseAt > TRACK.breathLostSec) { st.rois = null; return null; }
+    return S.breathSource === 'outline' ? measureEdge(now, W, H, S.colorMethod) : measureMotion(now, W, H);
+  }
+
+  function windowsDrifted(want) {
+    return st.rois && (st.rois.length !== want.length ||
+      want.some((w, i) => Math.hypot(w.cx - st.rois[i].cx, w.cy - st.rois[i].cy) > TRACK.relockMove * st.sw));
+  }
+
+  function lowConfidence(now, reason) {
+    st.lowReason = reason;
+    if (st.lowSince == null) st.lowSince = now;
+    else if (now - st.lowSince > 0.5) st.relock = true;
+    return null;
+  }
+
+  // ---- Color outline: both shoulders measured together ----
+  // A window sits over each shoulder, reaching up into the background. A color method turns every
+  // pixel into a score for how much more it looks like shoulder than background (or, for "Sharpest
+  // color change", finds the steepest change between them). Down each column the outline is the row
+  // that best splits it into background above and shoulder below, refined to a fraction of a row,
+  // and once found it is only searched for near where it was. Every outline point from both
+  // shoulders then votes on one shared shift since the windows were placed (the median), so the two
+  // shoulders are always measured together. The shoulder's own colors are first learned from the
+  // upper chest between the shoulders, which is reliably you even when a shoulder point is off.
+  function edgeRois(W, H) {
+    const out = [];
+    for (const p of [st.ls, st.rs]) {
+      const w = st.sw * TRACK.edgeWidth;
+      const x0 = Math.max(0, p.x - w / 2), x1 = Math.min(W, p.x + w / 2);
+      const y0 = Math.max(0, p.y - st.sw * TRACK.edgeAbove), y1 = Math.min(H, p.y + st.sw * TRACK.edgeBelow);
+      if (x1 - x0 < 16 || y1 - y0 < 24) continue;
+      out.push({ x: x0, y: y0, w: x1 - x0, h: y1 - y0, cx: p.x, cy: p.y });
+    }
+    return out;
+  }
+
+  function captureRGB(r) {
+    wctx.drawImage(videoEl, r.x, r.y, r.w, r.h, 0, 0, r.cols, r.rows);
+    return wctx.getImageData(0, 0, r.cols, r.rows).data;
+  }
+
+  // The upper chest just below the point between the shoulders, as RGBA pixels.
+  function chestPixels(W, H) {
+    const mx = (st.ls.x + st.rs.x) / 2, my = (st.ls.y + st.rs.y) / 2;
+    const x0 = Math.max(0, mx - st.sw * 0.15), x1 = Math.min(W, mx + st.sw * 0.15);
+    const y0 = Math.max(0, my + st.sw * 0.08), y1 = Math.min(H, my + st.sw * 0.3);
+    if (x1 - x0 < 8 || y1 - y0 < 8) return null;
+    return captureRGB({ x: x0, y: y0, w: x1 - x0, h: y1 - y0, cols: 12, rows: 10 }).slice();
+  }
+
+  // Pixel lists for seeding: the top fifth of each window is background; the chest (or, failing
+  // that, the bottom quarter of the windows) is shoulder.
+  function rowsOf(px, cols, y0, y1) { return px.subarray(y0 * cols * 4, y1 * cols * 4); }
+
+  // --- Feature spaces for the mean-color methods ---
+  const tfRGB = (r, g, b, o) => { o[0] = r; o[1] = g; o[2] = b; };
+  // Opponent colors: two hue axes at full weight, brightness at a third, so shadows matter less.
+  const tfOpp = (r, g, b, o) => { o[0] = (r - g) * 0.7071; o[1] = (r + g - 2 * b) * 0.4082; o[2] = (r + g + b) * 0.1925; };
+
+  function meanOf(pxList, tf) {
+    const f = new Float32Array(3), m = [0, 0, 0];
+    let n = 0;
+    for (const px of pxList) for (let j = 0; j < px.length; j += 4) {
+      tf(px[j], px[j + 1], px[j + 2], f); m[0] += f[0]; m[1] += f[1]; m[2] += f[2]; n++;
+    }
+    return m.map(v => v / Math.max(1, n));
+  }
+
+  // One average color per side (k-means with two clusters, kept running).
+  function meanMethod(tf) {
+    const f = new Float32Array(3);
+    return {
+      seed(wins, chest, sm) {
+        for (const w of wins) w.ms[sm.key].bg = meanOf([rowsOf(w.px, w.cols, 0, Math.ceil(w.rows * 0.2))], tf);
+        sm.body = meanOf(chest ? [chest] : wins.map(w => rowsOf(w.px, w.cols, Math.floor(w.rows * 0.75), w.rows)), tf);
+      },
+      newAcc: () => ({ s: [0, 0, 0], n: 0 }),
+      score(w, wm, sm, acc) {
+        const px = w.px, p = new Float32Array(w.cols * w.rows), bg = wm.bg, bd = sm.body, sBg = [0, 0, 0];
+        let nBg = 0;
+        for (let i = 0, j = 0; i < p.length; i++, j += 4) {
+          tf(px[j], px[j + 1], px[j + 2], f);
+          const dB = (f[0] - bg[0]) ** 2 + (f[1] - bg[1]) ** 2 + (f[2] - bg[2]) ** 2;
+          const dF = (f[0] - bd[0]) ** 2 + (f[1] - bd[1]) ** 2 + (f[2] - bd[2]) ** 2;
+          const v = dB / (dB + dF + 1e-6);
+          p[i] = v;
+          if (v < 0.3) { sBg[0] += f[0]; sBg[1] += f[1]; sBg[2] += f[2]; nBg++; }
+          else if (v > 0.7) { acc.s[0] += f[0]; acc.s[1] += f[1]; acc.s[2] += f[2]; acc.n++; }
+        }
+        if (nBg > w.cols) for (let c = 0; c < 3; c++) bg[c] += TRACK.edgeLearnRate * (sBg[c] / nBg - bg[c]);
+        return p;
+      },
+      learn(sm, acc) { if (acc.n > 8) for (let c = 0; c < 3; c++) sm.body[c] += TRACK.edgeLearnRate * (acc.s[c] / acc.n - sm.body[c]); },
+    };
+  }
+
+  // Color histograms: the whole spread of colors on each side, 10 levels per channel.
+  const HB = 10, HN = HB * HB * HB, binOf = (r, g, b) => ((r * HB) >> 8) * HB * HB + ((g * HB) >> 8) * HB + ((b * HB) >> 8);
+  function histOf(pxList) {
+    const h = new Float32Array(HN).fill(0.5);
+    let n = HN * 0.5;
+    for (const px of pxList) for (let j = 0; j < px.length; j += 4) { h[binOf(px[j], px[j + 1], px[j + 2])] += 1; n += 1; }
+    for (let i = 0; i < HN; i++) h[i] /= n;
+    return h;
+  }
+  const histMethod = {
+    seed(wins, chest, sm) {
+      for (const w of wins) w.ms[sm.key].bg = histOf([rowsOf(w.px, w.cols, 0, Math.ceil(w.rows * 0.2))]);
+      sm.body = histOf(chest ? [chest] : wins.map(w => rowsOf(w.px, w.cols, Math.floor(w.rows * 0.75), w.rows)));
+    },
+    newAcc: () => ({ h: new Float32Array(HN), n: 0 }),
+    score(w, wm, sm, acc) {
+      const px = w.px, p = new Float32Array(w.cols * w.rows), hBg = new Float32Array(HN);
+      let nBg = 0;
+      for (let i = 0, j = 0; i < p.length; i++, j += 4) {
+        const k = binOf(px[j], px[j + 1], px[j + 2]);
+        const v = sm.body[k] / (sm.body[k] + wm.bg[k]);
+        p[i] = v;
+        if (v < 0.25) { hBg[k]++; nBg++; } else if (v > 0.75) { acc.h[k]++; acc.n++; }
+      }
+      if (nBg > w.cols) { const a = TRACK.edgeLearnRate; for (let k = 0; k < HN; k++) wm.bg[k] = (1 - a) * wm.bg[k] + a * (hBg[k] + 0.5 / HN * nBg) / (nBg * 1.5); }
+      return p;
+    },
+    learn(sm, acc) { if (acc.n > 8) { const a = TRACK.edgeLearnRate; for (let k = 0; k < HN; k++) sm.body[k] = (1 - a) * sm.body[k] + a * (acc.h[k] + 0.5 / HN * acc.n) / (acc.n * 1.5); } },
+  };
+
+  // Color spread: each side as a Gaussian (average color plus how it varies), compared by likelihood.
+  function gaussStats(pxList) {
+    const s = [0, 0, 0], ss = [0, 0, 0, 0, 0, 0];
+    let n = 0;
+    for (const px of pxList) for (let j = 0; j < px.length; j += 4) {
+      const r = px[j], g = px[j + 1], b = px[j + 2];
+      s[0] += r; s[1] += g; s[2] += b;
+      ss[0] += r * r; ss[1] += r * g; ss[2] += r * b; ss[3] += g * g; ss[4] += g * b; ss[5] += b * b; n++;
+    }
+    return { s, ss, n };
+  }
+  function gaussModel({ s, ss, n }) {
+    n = Math.max(n, 1);
+    const m = s.map(v => v / n);
+    const reg = 30; // keeps a little spread so a flat area still has a sensible model
+    const c = [ss[0] / n - m[0] * m[0] + reg, ss[1] / n - m[0] * m[1], ss[2] / n - m[0] * m[2],
+               ss[3] / n - m[1] * m[1] + reg, ss[4] / n - m[1] * m[2], ss[5] / n - m[2] * m[2] + reg];
+    return withInverse({ m, c });
+  }
+  function withInverse(g) {
+    const [a, b, c, d, e, f] = g.c; // symmetric [[a b c][b d e][c e f]]
+    const A = d * f - e * e, B = c * e - b * f, C = b * e - c * d;
+    const det = a * A + b * B + c * C;
+    const k = 1 / (det || 1e-6);
+    g.inv = [A * k, B * k, C * k, (a * f - c * c) * k, (b * c - a * e) * k, (a * d - b * b) * k];
+    g.logdet = Math.log(Math.max(det, 1e-6));
+    return g;
+  }
+  function gaussBlend(g, st2, rate) {
+    const t = gaussModel(st2);
+    for (let i = 0; i < 3; i++) g.m[i] += rate * (t.m[i] - g.m[i]);
+    for (let i = 0; i < 6; i++) g.c[i] += rate * (t.c[i] - g.c[i]);
+    withInverse(g);
+  }
+  function gaussLL(g, r, gg, b) {
+    const x = r - g.m[0], y = gg - g.m[1], z = b - g.m[2], I = g.inv;
+    return -0.5 * (I[0] * x * x + I[3] * y * y + I[5] * z * z + 2 * (I[1] * x * y + I[2] * x * z + I[4] * y * z)) - 0.5 * g.logdet;
+  }
+  const gaussMethod = {
+    seed(wins, chest, sm) {
+      for (const w of wins) w.ms[sm.key].bg = gaussModel(gaussStats([rowsOf(w.px, w.cols, 0, Math.ceil(w.rows * 0.2))]));
+      sm.body = gaussModel(gaussStats(chest ? [chest] : wins.map(w => rowsOf(w.px, w.cols, Math.floor(w.rows * 0.75), w.rows))));
+    },
+    newAcc: () => ({ s: [0, 0, 0], ss: [0, 0, 0, 0, 0, 0], n: 0 }),
+    score(w, wm, sm, acc) {
+      const px = w.px, p = new Float32Array(w.cols * w.rows), bgAcc = { s: [0, 0, 0], ss: [0, 0, 0, 0, 0, 0], n: 0 };
+      for (let i = 0, j = 0; i < p.length; i++, j += 4) {
+        const r = px[j], g = px[j + 1], b = px[j + 2];
+        const z = clamp(gaussLL(wm.bg, r, g, b) - gaussLL(sm.body, r, g, b), -30, 30);
+        const v = 1 / (1 + Math.exp(z));
+        p[i] = v;
+        const t = v < 0.2 ? bgAcc : v > 0.8 ? acc : null;
+        if (t) { t.s[0] += r; t.s[1] += g; t.s[2] += b; t.ss[0] += r * r; t.ss[1] += r * g; t.ss[2] += r * b; t.ss[3] += g * g; t.ss[4] += g * b; t.ss[5] += b * b; t.n++; }
+      }
+      if (bgAcc.n > w.cols) gaussBlend(wm.bg, bgAcc, TRACK.edgeLearnRate);
+      return p;
+    },
+    learn(sm, acc) { if (acc.n > 8) gaussBlend(sm.body, acc, TRACK.edgeLearnRate); },
+  };
+
+  // Sharpest color change: per column, the steepest step from the background color towards the
+  // shoulder color (the change projected on the line between the two learned colors).
+  const rgbMethod = meanMethod(tfRGB);
+  const sharpMethod = {
+    seed: rgbMethod.seed, newAcc: rgbMethod.newAcc, score: rgbMethod.score, learn: rgbMethod.learn,
+    points(w, wm, sm, p) {
+      const { cols, rows, px } = w;
+      const dir = [sm.body[0] - wm.bg[0], sm.body[1] - wm.bg[1], sm.body[2] - wm.bg[2]];
+      const len = Math.hypot(...dir) || 1;
+      dir[0] /= len; dir[1] /= len; dir[2] /= len;
+      const L = (x, y) => { const j = (y * cols + x) * 4; return px[j] * dir[0] + px[j + 1] * dir[1] + px[j + 2] * dir[2]; };
+      const pxPerRow = w.h / rows, pxPerCol = w.w / cols;
+      const band = Math.max(3, Math.round(st.sw * TRACK.edgeBand / pxPerRow));
+      const pts = [];
+      const D = new Float32Array(rows - 1);
+      for (let x = 0; x < cols; x++) {
+        const xa = Math.max(0, x - 1), xb = Math.min(cols - 1, x + 1);
+        for (let y = 0; y < rows - 1; y++) D[y] = (L(xa, y + 1) - L(xa, y) + 2 * (L(x, y + 1) - L(x, y)) + L(xb, y + 1) - L(xb, y)) / 4;
+        const xPx = w.x + (x + 0.5) * pxPerCol;
+        let lo = 1, hi = rows - 3;
+        const guess = guessAt(w, wm, x, xPx);
+        if (Number.isFinite(guess)) { const row = Math.round((guess - w.y) / pxPerRow - 1); lo = Math.max(lo, row - band); hi = Math.min(hi, row + band); }
+        let best = -Infinity, by = -1;
+        for (let y = lo; y <= hi; y++) if (D[y] > best) { best = D[y]; by = y; }
+        const sorted = Array.from(D, Math.abs).sort((a, b) => a - b);
+        const typical = sorted[sorted.length >> 1] || 0;
+        if (by < 1 || best < Math.max(6, 4 * typical)) { wm.prev[x] = NaN; continue; }
+        const l = D[by - 1], c = D[by], r = D[by + 1], den = l - 2 * c + r;
+        const off = den < 0 ? clamp(0.5 * (l - r) / den, -0.5, 0.5) : 0;
+        const yPx = w.y + (by + 1 + off) * pxPerRow; // between rows by and by+1
+        wm.prev[x] = yPx;
+        pts.push({ col: x, x: xPx, y: yPx });
+      }
+      return pts;
+    },
+  };
+
+  // Neural person mask: MediaPipe's selfie segmenter scores every pixel as person or not.
+  const maskMethod = {
+    score(w) {
+      const m = st.mask;
+      if (!m) return null;
+      const p = new Float32Array(w.cols * w.rows);
+      const sx = m.w / st.frameW, sy = m.h / st.frameH;
+      for (let y = 0; y < w.rows; y++) {
+        const fy = Math.min(m.h - 1.001, Math.max(0, (w.y + (y + 0.5) * w.h / w.rows) * sy - 0.5));
+        const y0 = Math.floor(fy), ty = fy - y0;
+        for (let x = 0; x < w.cols; x++) {
+          const fx = Math.min(m.w - 1.001, Math.max(0, (w.x + (x + 0.5) * w.w / w.cols) * sx - 0.5));
+          const x0 = Math.floor(fx), tx = fx - x0, i = y0 * m.w + x0;
+          const top = m.data[i] * (1 - tx) + m.data[i + 1] * tx, bot = m.data[i + m.w] * (1 - tx) + m.data[i + m.w + 1] * tx;
+          p[y * w.cols + x] = top * (1 - ty) + bot * ty;
+        }
+      }
+      return p;
+    },
+  };
+
+  // (The plain RGB average-color model above is kept only as the basis of Sharpest color change.)
+  const OUTLINE_METHODS = { opponent: meanMethod(tfOpp), hist: histMethod, gauss: gaussMethod, sharp: sharpMethod, mask: maskMethod };
+  const OUTLINE_VOTERS = ['opponent', 'hist', 'gauss', 'sharp'];
+
+  // Where to look for a column's outline: last frame's point, else the window's line, else anywhere.
+  function guessAt(w, wm, x, xPx) {
+    if (Number.isFinite(wm.prev[x])) return wm.prev[x];
+    return wm.fit ? wm.fit.a + wm.fit.b * (xPx - w.cx) : NaN;
+  }
+
+  // Outline points from a score map: the best background-above / shoulder-below split per column.
+  function splitPoints(w, wm, p) {
+    const { cols, rows } = w;
+    const pxPerRow = w.h / rows, pxPerCol = w.w / cols;
+    const band = Math.max(3, Math.round(st.sw * TRACK.edgeBand / pxPerRow));
+    const pts = [];
+    const pre = new Float32Array(rows + 1);
+    for (let x = 0; x < cols; x++) {
+      for (let y = 0; y < rows; y++) pre[y + 1] = pre[y] + p[y * cols + x];
+      const xPx = w.x + (x + 0.5) * pxPerCol;
+      let lo = 2, hi = rows - 2;
+      const guess = guessAt(w, wm, x, xPx);
+      if (Number.isFinite(guess)) { const row = Math.round((guess - w.y) / pxPerRow - 0.5); lo = Math.max(lo, row - band); hi = Math.min(hi, row + band); }
+      let best = -1, bestY = -1, bestBg = 0, bestBody = 0;
+      for (let y = lo; y <= hi; y++) {
+        const bgness = 1 - pre[y] / y;                       // share of background above
+        const bodyness = (pre[rows] - pre[y]) / (rows - y);  // share of shoulder below
+        if (bgness + bodyness > best) { best = bgness + bodyness; bestY = y; bestBg = bgness; bestBody = bodyness; }
+      }
+      if (bestY < 0 || best < TRACK.edgeStep || bestBg < 0.6 || bestBody < 0.6) { wm.prev[x] = NaN; continue; }
+      const at = y => p[clamp(y, 0, rows - 1) * cols + x];
+      let yy = bestY - 0.5;
+      for (const y of [bestY, bestY - 1, bestY + 1, bestY - 2, bestY + 2]) {
+        const v0 = at(y - 1), v1 = at(y);
+        if (v0 < 0.5 && v1 >= 0.5) { yy = y - 1 + (0.5 - v0) / (v1 - v0); break; }
+      }
+      const yPx = w.y + (yy + 0.5) * pxPerRow;
+      wm.prev[x] = yPx;
+      pts.push({ col: x, x: xPx, y: yPx });
+    }
+    return pts;
+  }
+
+  function fitLine(w, wm) {
+    const pts = wm.pts;
+    if (pts.length < 3) return;
+    const fit = list => {
+      let sx = 0, sy = 0, sxx = 0, sxy = 0;
+      for (const q of list) { const dx = q.x - w.cx; sx += dx; sy += q.y; sxx += dx * dx; sxy += dx * q.y; }
+      const n = list.length, den = n * sxx - sx * sx;
+      const slope = den > 1e-6 ? (n * sxy - sx * sy) / den : 0;
+      return { a: (sy - slope * sx) / n, b: slope };
+    };
+    let f = fit(pts);
+    const res = pts.map(q => Math.abs(q.y - (f.a + f.b * (q.x - w.cx))));
+    const mad = [...res].sort((a, b) => a - b)[res.length >> 1] || 0;
+    const kept = pts.filter((q, i) => res[i] <= Math.max(1.5, 3 * mad));
+    if (kept.length >= 3) f = fit(kept);
+    wm.fit = f;
+  }
+
+  // How clearly a score map separates the two sides: 0 = not at all, 1 = every pixel is sure.
+  function separation(p) {
+    let s = 0;
+    for (let i = 0; i < p.length; i++) s += Math.abs(2 * p[i] - 1);
+    return s / p.length;
+  }
+
+  const median = a => { const b = [...a].sort((x, y) => x - y), m = b.length >> 1; return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2; };
+
+  function measureEdge(now, W, H, method) {
+    st.frameW = W; st.frameH = H;
+    const want = edgeRois(W, H);
+    if (want.length === 0) { st.rois = null; return null; }
+    const keys = method === 'vote' ? OUTLINE_VOTERS : [OUTLINE_METHODS[method] ? method : 'sharp'];
+    if (!st.rois || windowsDrifted(want) || st.relock) {
+      st.rois = want.map(r => {
+        const cols = clamp(Math.round(r.w / 4), 12, 48), rows = clamp(Math.round(r.h / 1.5), 24, 128);
+        const w = { ...r, cols, rows, ms: {} };
+        w.px = captureRGB(w).slice();
+        return w;
+      });
+      const chest = chestPixels(W, H);
+      st.ms = {};
+      for (const k of keys) {
+        st.ms[k] = { key: k, shift: 0 };
+        for (const w of st.rois) w.ms[k] = { base: new Float32Array(w.cols).fill(NaN), prev: new Float32Array(w.cols).fill(NaN), fit: null, pts: [], ok: false };
+        OUTLINE_METHODS[k].seed?.(st.rois, chest, st.ms[k]);
+      }
+      st.relock = false;
+      st.lowSince = null;
+      st.lastPlacedAt = now;
+      st.needReset = true; // the breath range starts again from the new windows
+    } else {
+      for (const w of st.rois) w.px = captureRGB(w).slice();
+    }
+
+    const shifts = [];
+    let sides = 0, reason = null, points = 0;
+    for (const k of keys) {
+      const M = OUTLINE_METHODS[k], sm = st.ms[k];
+      const acc = M.newAcc ? M.newAcc() : null;
+      for (const w of st.rois) {
+        const wm = w.ms[k];
+        const p = M.score(w, wm, sm, acc);
+        if (!p) { wm.ok = false; wm.pts = []; wm.reason = 'loading'; continue; }
+        wm.pts = M.points ? M.points(w, wm, sm, p) : splitPoints(w, wm, p);
+        wm.sep = separation(p);
+        wm.ok = wm.sep >= TRACK.minSeparation && wm.pts.length >= w.cols * TRACK.minEdgeColumns;
+        wm.reason = wm.sep < TRACK.minSeparation ? 'contrast' : 'edges';
+        fitLine(w, wm);
+      }
+      if (acc) M.learn(sm, acc);
+      const ok = st.rois.filter(w => w.ms[k].ok);
+      if (ok.length === 0) { reason = reason || st.rois[0].ms[k].reason; continue; }
+      sides = Math.max(sides, ok.length);
+      // Every outline point from both shoulders: how far it moved since its column was first seen.
+      const deltas = [];
+      for (const w of ok) {
+        const wm = w.ms[k];
+        for (const q of wm.pts) {
+          if (!Number.isFinite(wm.base[q.col])) wm.base[q.col] = q.y - sm.shift;
+          deltas.push(q.y - wm.base[q.col]);
+        }
+        points += wm.pts.length;
+      }
+      sm.shift = median(deltas);
+      shifts.push(sm.shift);
+    }
+    st.sides = sides;
+    st.points = points;
+    if (shifts.length === 0) return lowConfidence(now, reason);
+
+    // Both shoulders are wanted. If only one has been found for a second, place both windows again
+    // (at most every 5 s) so the other one is picked up.
+    if (sides < 2 || st.rois.length < 2) {
+      if (st.oneSince == null) st.oneSince = now;
+      if (now - st.oneSince > 1 && now - st.lastPlacedAt > 5) { st.relock = true; st.oneSince = null; }
+      st.lowReason = 'one-side';
+    } else {
+      st.oneSince = null;
+      st.lowReason = null;
+    }
+    st.lowSince = null;
+    const reset = st.needReset;
+    st.needReset = false;
+    return { d: median(shifts) / st.sw, reset };
+  }
+
+  // ---- Image motion: how far the picture in each window moved against a reference frame ----
+  function measureMotion(now, W, H) {
+    const want = wantedRois(W, H);
+    if (want.length === 0) { st.rois = null; return null; }
+    if (!st.rois || windowsDrifted(want) || st.relock) {
+      st.rois = want.map(r => ({ ...r, ref: capture(r), shift: 0, score: 1 }));
+      st.relock = false;
+      st.lowSince = null;
+      return { d: 0, reset: true };
+    }
+    let sum = 0, wsum = 0;
+    for (const r of st.rois) {
+      const cur = capture(r);
+      const m = matchVertical(r.ref.g, cur.g, cur.cols, cur.rows, TRACK.maxShiftRows);
+      r.shift = m.shift; r.score = m.score;
+      if (Math.abs(m.shift) > TRACK.maxShiftRows * 0.8) st.relock = true; // drifted far: start a new reference
+      if (m.score >= TRACK.minMatch) { sum += m.shift * r.ref.pxPerRow * m.score; wsum += m.score; }
+    }
+    if (wsum === 0) return lowConfidence(now, 'match');
+    st.lowSince = null; st.lowReason = null;
+    return { d: (sum / wsum) / st.sw, reset: false };
+  }
+
+  function relock() { st.rois = null; }
+  // After a pause: keep the windows and the last shoulder positions as they are.
+  function hold(now) { if (st.ls) st.lastPoseAt = now; }
+
+  return { st, updateShoulders, measure, reset, relock, hold };
+}
+
+// =====================================================================
+// Pulse breath (camera PPG, experimental)
+// The skin of the forehead and cheeks changes color very slightly with every heartbeat as blood
+// fills the small vessels. The face model says where that skin is; its average color, frame by
+// frame, goes through the POS method (Wang et al., 2017), which separates the pulse from changes
+// in lighting. Beats are the peaks of that pulse, and the time between beats gives the heart rate.
+// Heart rate rises as you breathe in and falls as you breathe out (respiratory sinus arrhythmia),
+// so the slow swing of the heart rate is used as the breath. It lags the breath by a beat or two.
+// =====================================================================
+function createPulseBreath(videoEl) {
+  const work = document.createElement('canvas');
+  work.width = 16; work.height = 16;
+  const wctx = work.getContext('2d', { willReadFrequently: true });
+  const st = {};
+
+  function biquad(type, f0, fs) {
+    const w0 = 2 * Math.PI * f0 / fs, c = Math.cos(w0), al = Math.sin(w0) / (2 * Math.SQRT1_2), a0 = 1 + al;
+    const b = type === 'lp' ? [(1 - c) / 2, 1 - c, (1 - c) / 2] : [(1 + c) / 2, -(1 + c), (1 + c) / 2];
+    return { b0: b[0] / a0, b1: b[1] / a0, b2: b[2] / a0, a1: -2 * c / a0, a2: (1 - al) / a0, x1: 0, x2: 0, y1: 0, y2: 0 };
+  }
+  const runF = (f, x) => {
+    const y = f.b0 * x + f.b1 * f.x1 + f.b2 * f.x2 - f.a1 * f.y1 - f.a2 * f.y2;
+    f.x2 = f.x1; f.x1 = x; f.y2 = f.y1; f.y1 = y;
+    return y;
+  };
+  // Pulse band, 0.7-3 Hz (42-180 beats per minute): a high-pass and a low-pass in a row.
+  const bandPass = fs => [biquad('hp', 0.7, fs), biquad('lp', 3.0, fs)];
+  const runBand = (fs, x) => runF(fs[1], runF(fs[0], x));
+
+  function reset() {
+    Object.assign(st, {
+      rois: [], fs: 30, filtFs: 0, f1: null, f2: null, mean: null, v1: 0, v2: 0,
+      hist: [], amp: 0, lastPeakT: null, ibis: [], hrNow: null, hrFast: null, hrSlow: null,
+      bpm: null, regularity: null, lastBeatAt: -Infinity, lastGoodBeatAt: -Infinity, started: false, face: false,
+    });
+  }
+  reset();
+
+  function skinRois(fl, W, H) {
+    const P = i => ({ x: fl[i].x * W, y: fl[i].y * H });
+    const a = P(33), b = P(263);
+    const E = Math.hypot(a.x - b.x, a.y - b.y); // distance between the outer eye corners
+    if (E < 20) return [];
+    const box = (c, w, h) => {
+      const x0 = Math.max(0, c.x - w / 2), y0 = Math.max(0, c.y - h / 2);
+      return { x: x0, y: y0, w: Math.min(W, c.x + w / 2) - x0, h: Math.min(H, c.y + h / 2) - y0 };
+    };
+    // Forehead, and the two cheeks below the eyes.
+    return [box(P(151), E * 0.7, E * 0.28), box(P(205), E * 0.3, E * 0.3), box(P(425), E * 0.3, E * 0.3)]
+      .filter(r => r.w > 4 && r.h > 4);
+  }
+
+  function meanRGB(rois) {
+    let R = 0, G = 0, B = 0, n = 0;
+    for (const r of rois) {
+      const cols = 12, rows = clamp(Math.round(12 * r.h / r.w), 4, 16);
+      wctx.drawImage(videoEl, r.x, r.y, r.w, r.h, 0, 0, cols, rows);
+      const px = wctx.getImageData(0, 0, cols, rows).data;
+      for (let j = 0; j < px.length; j += 4) { R += px[j]; G += px[j + 1]; B += px[j + 2]; n++; }
+    }
+    return n ? [R / n, G / n, B / n] : null;
+  }
+
+  // Every camera frame. Returns { d, reset } (d: minus the heart-rate swing, scaled), or null.
+  function update(faceRes, W, H, now, dt) {
+    const fl = faceRes?.faceLandmarks?.[0];
+    st.face = !!fl;
+    if (!fl) return null;
+    st.rois = skinRois(fl, W, H);
+    const c = meanRGB(st.rois);
+    if (!c) return null;
+
+    st.fs = ema(st.fs, 1 / Math.max(dt, 1e-3), dt, 2);
+    if (!st.f1 || Math.abs(st.fs - st.filtFs) / st.filtFs > 0.15) {
+      st.filtFs = st.fs; st.f1 = bandPass(st.fs); st.f2 = bandPass(st.fs);
+    }
+
+    // POS: normalise each channel by its recent average, then project onto two axes that are
+    // insensitive to brightness changes, and mix them so lighting flicker cancels out.
+    st.mean = st.mean ? st.mean.map((m, i) => ema(m, c[i], dt, 1.6)) : c.slice();
+    const n = c.map((v, i) => v / st.mean[i]);
+    const s1 = runBand(st.f1, n[1] - n[2]);
+    const s2 = runBand(st.f2, n[1] + n[2] - 2 * n[0]);
+    st.v1 = ema(st.v1, s1 * s1, dt, 1.6);
+    st.v2 = ema(st.v2, s2 * s2, dt, 1.6);
+    const h = s1 + Math.sqrt(st.v1 / (st.v2 + 1e-12)) * s2;
+
+    // Beats: local maxima above the running level, at least 0.33 s apart, timed between frames.
+    st.amp = ema(st.amp, Math.abs(h), dt, 2);
+    st.hist.push({ t: now, v: h });
+    if (st.hist.length > 3) st.hist.shift();
+    if (st.hist.length === 3) {
+      const [a, b, cc] = st.hist;
+      if (b.v > a.v && b.v >= cc.v && b.v > 0.8 * st.amp && (st.lastPeakT == null || b.t - st.lastPeakT > 0.33)) {
+        const den = a.v - 2 * b.v + cc.v;
+        const off = den < 0 ? clamp(0.5 * (a.v - cc.v) / den, -0.5, 0.5) : 0;
+        const tp = b.t + off * (cc.t - a.t) / 2;
+        beat(tp);
+      }
+    }
+
+    // The heart rate, smoothed over about one beat, against its slow average: the breathing swing.
+    // No steady pulse yet, or the beats are too irregular to be a real pulse (noise finds 'beats' too).
+    if (st.hrNow == null || now - st.lastGoodBeatAt > 4 || st.regularity > TRACK.ppgMaxIrregular) return null;
+    st.hrFast = st.hrFast == null ? st.hrNow : ema(st.hrFast, st.hrNow, dt, 0.6);
+    st.hrSlow = st.hrSlow == null ? st.hrNow : ema(st.hrSlow, st.hrNow, dt, 8);
+    const reset = !st.started;
+    st.started = true;
+    return { d: -(st.hrFast - st.hrSlow) * TRACK.ppgScale, reset };
+  }
+
+  function beat(tp) {
+    st.lastBeatAt = tp;
+    if (st.lastPeakT != null) {
+      const ibi = tp - st.lastPeakT;
+      const med = st.ibis.length >= 3 ? [...st.ibis].sort((x, y) => x - y)[st.ibis.length >> 1] : null;
+      if (ibi > 0.33 && ibi < 1.5 && (med == null || Math.abs(ibi - med) / med < 0.3)) {
+        st.ibis.push(ibi);
+        if (st.ibis.length > 12) st.ibis.shift();
+        if (st.ibis.length >= 4) {
+          st.hrNow = 60 / ibi;
+          st.lastGoodBeatAt = tp;
+          const m = st.ibis.reduce((x, y) => x + y, 0) / st.ibis.length;
+          st.bpm = 60 / m;
+          st.regularity = Math.sqrt(st.ibis.reduce((x, y) => x + (y - m) ** 2, 0) / st.ibis.length) / m;
+        }
+      } else if (ibi >= 1.5) {
+        st.ibis.length = 0; // a long gap: start counting again
+      }
+    }
+    st.lastPeakT = tp;
+  }
+
+  return { st, update, reset };
+}
+
+// =====================================================================
+// Sound: brown noise -> two lowpass stages -> breath swell -> level -> soft clipper
+// =====================================================================
+// Brown noise made even: integrated white noise with its sub-audible drift (below about 20 Hz)
+// taken out, set by its average level rather than its loudest moment, and with the rare outlier
+// peaks rounded off. The loop point is crossfaded so it never clicks.
+function makeBrownNoise(ctx, seconds) {
+  const rate = ctx.sampleRate;
+  const len = Math.floor(rate * seconds);
+  const xf = Math.floor(rate * 0.5);
+  const warm = Math.floor(rate * 0.5); // let the filters settle before the part that is kept
+  const hpA = Math.exp(-2 * Math.PI * 20 / rate);
+  const buffer = ctx.createBuffer(2, len, rate);
+  for (let ch = 0; ch < 2; ch++) {
+    const raw = new Float32Array(len + xf);
+    let b = 0, hx = 0, hy = 0;
+    for (let i = -warm; i < raw.length; i++) {
+      b = (b + 0.02 * (Math.random() * 2 - 1)) / 1.02;   // brown: a leaky running sum of white noise
+      hy = hpA * (hy + b - hx); hx = b;                   // one-pole high-pass at 20 Hz
+      if (i >= 0) raw[i] = hy;
+    }
+    let sum = 0;
+    for (let i = 0; i < raw.length; i++) sum += raw[i] * raw[i];
+    const g = 0.22 / (Math.sqrt(sum / raw.length) || 1);
+    for (let i = 0; i < raw.length; i++) {
+      const v = raw[i] * g, a = Math.abs(v);
+      raw[i] = a < 0.6 ? v : Math.sign(v) * (0.6 + 0.35 * Math.tanh((a - 0.6) / 0.35)); // never past 0.95
+    }
+    const out = buffer.getChannelData(ch);
+    out.set(raw.subarray(0, len));
+    for (let i = 0; i < xf; i++) {
+      const a = (i / xf) * Math.PI / 2;
+      out[i] = raw[i] * Math.sin(a) + raw[len + i] * Math.cos(a);
+    }
+  }
+  return buffer;
+}
+
+// A smooth ceiling instead of a compressor: nothing changes below about -3 dB, and louder moments
+// are rounded off so the output can never hit a hard edge (which is what clicks).
+function softClipCurve() {
+  const n = 4096, curve = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const u = (i / (n - 1)) * 4 - 2; // the shaper's -1..1 input stands for -2..2 (see the 0.5 gain before it)
+    const a = Math.abs(u);
+    curve[i] = a < 0.7 ? u : Math.sign(u) * (0.7 + 0.28 * Math.tanh((a - 0.7) / 0.28));
+  }
+  return curve;
+}
+
+// The sound graph. Works on a live AudioContext or an OfflineAudioContext (used for testing).
+function buildNoiseGraph(ctx, dest) {
+  const src = ctx.createBufferSource();
+  src.buffer = makeBrownNoise(ctx, 18);
+  src.loop = true;
+  const lp1 = ctx.createBiquadFilter();
+  lp1.type = 'lowpass'; lp1.Q.value = S.resonance; lp1.frequency.value = cutoffFor(TRACK.restingBreath);
+  const lp2 = ctx.createBiquadFilter();
+  lp2.type = 'lowpass'; lp2.Q.value = 0.55; lp2.frequency.value = cutoffFor(TRACK.restingBreath) * 1.5;
+  const swell = ctx.createGain(); swell.gain.value = 0.8;
+  const master = ctx.createGain(); master.gain.value = 0;
+  const pre = ctx.createGain(); pre.gain.value = 0.5;
+  const clip = ctx.createWaveShaper(); clip.curve = softClipCurve(); clip.oversample = '2x';
+  src.connect(lp1).connect(lp2).connect(swell).connect(master).connect(pre).connect(clip).connect(dest);
+  src.start();
+  return { lp1, lp2, swell, master };
+}
+
+function createNoiseEngine() {
+  let ctx = null, nodes = null, lastUpdate = 0;
+
+  function start() {
+    if (ctx) return ctx.resume();
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return Promise.resolve();
+    // Created inside the click so the browser lets it play. 'playback' asks for larger audio buffers:
+    // a little more delay, which doesn't matter here, and far fewer dropouts (heard as clicks) when the
+    // face and pose models keep the computer busy.
+    try { ctx = new AC({ latencyHint: 'playback' }); } catch { ctx = new AC(); }
+    nodes = buildNoiseGraph(ctx, ctx.destination);
+    return ctx.resume();
+  }
+
+  // level: 0..1 loudness of the noise; open: 0..1 how far the filter is open (0 = low cutoff).
+  function update(level, open) {
+    if (!ctx || !nodes) return;
+    const t = ctx.currentTime;
+    if (t - lastUpdate < 1 / 40) return;
+    lastUpdate = t;
+    const f = cutoffAt(open);
+    nodes.lp1.frequency.setTargetAtTime(f, t, 0.12);
+    nodes.lp2.frequency.setTargetAtTime(Math.min(f * 1.5, ctx.sampleRate / 2 - 100), t, 0.12);
+    // Resonance: the lowpass Q in Web Audio is the height of the peak in dB. Half of that is taken
+    // back off the level so a strong peak doesn't make the whole sound much louder.
+    nodes.lp1.Q.setTargetAtTime(S.resonance, t, 0.1);
+    const comp = Math.pow(10, -S.resonance / 40);
+    nodes.swell.gain.setTargetAtTime((0.65 + 0.35 * open) * comp, t, 0.12);
+    // Linear gain rises quickly in loudness, so the noise is audible as soon as the fade starts.
+    nodes.master.gain.setTargetAtTime(S.volume * level * 1.85, t, 0.06); // matches the earlier loudness
+  }
+
+  return { start, update, get running() { return !!ctx && ctx.state === 'running'; }, get nodes() { return nodes; } };
+}
+
+// =====================================================================
+// Picture: dark noise field. Octaves pass through a soft lowpass whose
+// cutoff rides the breath, and the aperture widens on the in-breath.
+// =====================================================================
+const VERT = `
+attribute vec2 aPos;
+void main() { gl_Position = vec4(aPos, 0.0, 1.0); }`;
+const FRAG = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+uniform vec2 uRes;
+uniform float uTime;
+uniform float uGrainTime;
+uniform float uOpen;
+uniform float uPeak;   // filter resonance, 0..1
+
+float hash(vec2 p) {
+  p = fract(p * vec2(123.34, 456.21));
+  p += dot(p, p + 45.32);
+  return fract(p.x * p.y);
+}
+float vnoise(vec2 p) {
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f * f * (3.0 - 2.0 * f);
+  float a = hash(i), b = hash(i + vec2(1.0, 0.0));
+  float c = hash(i + vec2(0.0, 1.0)), d = hash(i + vec2(1.0, 1.0));
+  return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+}
+void main() {
+  vec2 p = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;
+  float cutoff = mix(1.3, 5.6, uOpen);          // octave where the filter rolls off
+  float sum = 0.0, norm = 0.0, freq = 1.7, amp = 1.0;
+  for (int k = 0; k < 7; k++) {
+    float fk = float(k);
+    float d = fk - cutoff;
+    // the lowpass, plus a resonant bump that brings out detail at the cutoff's own scale
+    float w = 1.0 / (1.0 + pow(2.0, d * 1.6)) + uPeak * 1.6 * exp(-d * d * 1.5);
+    vec2 drift = vec2(uTime * 0.013 * (fk + 1.0), -uTime * 0.009 * (fk + 1.0));
+    sum += w * amp * (vnoise(p * freq + drift + fk * 7.13) - 0.5);
+    norm += amp;
+    freq *= 2.0;
+    amp *= 0.62;
+  }
+  float smoke = sum / norm;
+  float grain = hash(gl_FragCoord.xy + fract(uGrainTime * 37.17) * vec2(113.1, 271.7)) - 0.5;
+  float grainPass = 1.0 / (1.0 + pow(2.0, (7.0 - cutoff) * 1.1));
+
+  float r = length(p);
+  float aperture = mix(0.55, 1.1, uOpen);
+  float vig = 1.0 - smoothstep(0.0, aperture, r * 0.85);
+
+  float lum = 0.07 + 0.045 * uOpen + smoke * mix(0.95, 0.62, uOpen) + grain * (0.06 + 0.16 * grainPass);
+  float edge = (r * 0.85 - aperture * 0.7) / 0.06;
+  lum += uPeak * 0.14 * exp(-edge * edge);      // resonance: a soft ring at the breathing aperture
+  lum = max(lum * mix(0.55, 1.0, vig), 0.0);
+  vec3 cool = vec3(0.74, 0.82, 1.0);
+  vec3 warm = vec3(1.0, 0.82, 0.58);
+  vec3 col = lum * mix(cool, warm, 0.28 * uOpen * vig);
+  gl_FragColor = vec4(col, 1.0);
+}`;
+
+function createNoiseRenderer(canvas) {
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false, depth: false, powerPreference: 'low-power' });
+  if (!gl) {
+    const c2 = canvas.getContext('2d');
+    return { render() { if (c2) { c2.fillStyle = COLORS.night; c2.fillRect(0, 0, canvas.width, canvas.height); } } };
+  }
+  const compile = (type, src) => {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+    return s;
+  };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  const aPos = gl.getAttribLocation(prog, 'aPos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+  const u = name => gl.getUniformLocation(prog, name);
+  const uRes = u('uRes'), uTime = u('uTime'), uGrainTime = u('uGrainTime'), uOpen = u('uOpen'), uPeak = u('uPeak');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  function render(t, open, peak) {
+    const scale = 0.5; // half resolution keeps it cheap and softens the grain
+    const w = Math.max(1, Math.round(innerWidth * scale));
+    const h = Math.max(1, Math.round(innerHeight * scale));
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+    gl.viewport(0, 0, w, h);
+    const slow = reduceMotion.matches ? 0.4 : 1;
+    const tt = (t * slow) % 1000;
+    gl.uniform2f(uRes, w, h);
+    gl.uniform1f(uTime, tt);
+    gl.uniform1f(uGrainTime, reduceMotion.matches ? Math.floor(t * 4) / 4 : tt);
+    gl.uniform1f(uOpen, open);
+    gl.uniform1f(uPeak, peak);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  return { render };
+}
+
+// =====================================================================
+// Models
+// =====================================================================
+// The face model is always MediaPipe. The pose model (which only finds the shoulders) can be switched
+// between two libraries, two sizes each. Each pose backend returns both shoulders in video pixels.
+const POSE_MODELS = {
+  'mp-full': { library: 'MediaPipe Pose', name: 'Full', size: '9 MB', kind: 'mediapipe',
+    url: 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task' },
+  'mp-heavy': { library: 'MediaPipe Pose', name: 'Heavy', size: '31 MB', kind: 'mediapipe',
+    url: 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/1/pose_landmarker_heavy.task' },
+  'movenet-lightning': { library: 'TensorFlow.js MoveNet', name: 'Lightning', size: '5 MB', kind: 'movenet', type: 'SINGLEPOSE_LIGHTNING' },
+  'movenet-thunder': { library: 'TensorFlow.js MoveNet', name: 'Thunder', size: '13 MB', kind: 'movenet', type: 'SINGLEPOSE_THUNDER' },
+};
+const TFJS_SCRIPTS = [
+  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js',
+  'https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@2.1.3/dist/pose-detection.min.js',
+];
+
+let visionPromise = null, facePromise = null, tfPromise = null;
+const models = { face: null, pose: null, poseId: null, poseLoading: null, poseError: null, poseMs: null };
+
+function ensureVision() {
+  if (!visionPromise) {
+    visionPromise = (async () => {
+      const vision = await import(`${MP_URL}/vision_bundle.mjs`);
+      const fileset = await vision.FilesetResolver.forVisionTasks(`${MP_URL}/wasm`);
+      return { vision, fileset };
+    })().catch(err => { visionPromise = null; throw err; });
+  }
+  return visionPromise;
+}
+
+async function withDelegate(Task, options) {
+  const { fileset } = await ensureVision();
+  try {
+    return await Task.createFromOptions(fileset, { ...options, baseOptions: { ...options.baseOptions, delegate: 'GPU' } });
+  } catch (e) {
+    console.warn('GPU delegate failed, using CPU', e);
+    return await Task.createFromOptions(fileset, { ...options, baseOptions: { ...options.baseOptions, delegate: 'CPU' } });
+  }
+}
+
+function ensureModels() {
+  if (!facePromise) {
+    facePromise = (async () => {
+      const { vision } = await ensureVision();
+      models.face = await withDelegate(vision.FaceLandmarker, {
+        baseOptions: { modelAssetPath: FACE_MODEL },
+        runningMode: 'VIDEO',
+        numFaces: 1,
+        outputFaceBlendshapes: true,
+        minFaceDetectionConfidence: 0.5,
+        minFacePresenceConfidence: 0.5,
+        minTrackingConfidence: 0.5,
+      });
+      return models;
+    })().catch(err => { facePromise = null; throw err; });
+  }
+  return facePromise;
+}
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src; s.async = false; s.crossOrigin = 'anonymous';
+    s.onload = resolve; s.onerror = () => reject(new Error(`Could not load ${src}`));
+    document.head.append(s);
+  });
+}
+
+function ensureTf() {
+  if (!tfPromise) {
+    tfPromise = (async () => {
+      for (const src of TFJS_SCRIPTS) await loadScript(src);
+      await window.tf.setBackend('webgl').catch(() => window.tf.setBackend('cpu'));
+      await window.tf.ready();
+    })().catch(err => { tfPromise = null; throw err; });
+  }
+  return tfPromise;
+}
+
+async function createPoseBackend(id) {
+  const m = POSE_MODELS[id];
+  if (m.kind === 'mediapipe') {
+    const { vision } = await ensureVision();
+    const lm = await withDelegate(vision.PoseLandmarker, {
+      baseOptions: { modelAssetPath: m.url },
+      runningMode: 'VIDEO',
+      numPoses: 1,
+      minPoseDetectionConfidence: 0.5,
+      minPosePresenceConfidence: 0.5,
+      minTrackingConfidence: 0.5,
+    });
+    return {
+      id, async: false, minScore: 0.5,
+      detect(videoEl, ts, W, H) {
+        const pl = lm.detectForVideo(videoEl, ts)?.landmarks?.[0];
+        if (!pl) return null;
+        const p = k => ({ x: pl[k].x * W, y: pl[k].y * H, score: pl[k].visibility ?? 1 });
+        return { ls: p(11), rs: p(12) };
+      },
+      close() { try { lm.close(); } catch { /* already closed */ } },
+    };
+  }
+  await ensureTf();
+  const pd = window.poseDetection;
+  const detector = await pd.createDetector(pd.SupportedModels.MoveNet, {
+    modelType: pd.movenet.modelType[m.type],
+    enableSmoothing: true,
+  });
+  return {
+    id, async: true, minScore: 0.3,
+    async detect(videoEl) {
+      const kp = (await detector.estimatePoses(videoEl, { flipHorizontal: false }))?.[0]?.keypoints;
+      if (!kp) return null;
+      const p = k => ({ x: kp[k].x, y: kp[k].y, score: kp[k].score ?? 0 });
+      return { ls: p(5), rs: p(6) };
+    },
+    close() { try { detector.dispose(); } catch { /* already disposed */ } },
+  };
+}
+
+// Loads the chosen pose model and swaps it in when ready; the previous one keeps running meanwhile.
+let poseLoad = null; // { id, promise } while a model is loading
+function switchPose(id) {
+  if (!POSE_MODELS[id]) id = DEFAULTS.poseModel;
+  if (models.poseId === id && models.pose) return Promise.resolve(models.pose);
+  if (poseLoad && poseLoad.id === id) return poseLoad.promise;
+  models.poseError = null;
+  const promise = (async () => {
+    try {
+      const backend = await createPoseBackend(id);
+      if (poseLoad?.id !== id) { backend.close(); return models.pose; } // a later choice won
+      const old = models.pose;
+      models.pose = backend;
+      models.poseId = id;
+      models.poseMs = null;
+      old?.close();
+      motion.reset();
+      breath.reset();
+      return backend;
+    } catch (err) {
+      console.error('Pose model failed to load', err);
+      if (poseLoad?.id === id) models.poseError = id;
+      throw err;
+    } finally {
+      if (poseLoad?.id === id) poseLoad = null;
+      models.poseLoading = poseLoad?.id ?? null;
+      updatePoseInfo();
+    }
+  })();
+  poseLoad = { id, promise };
+  models.poseLoading = id;
+  updatePoseInfo();
+  return promise;
+}
+
+function updatePoseInfo() {
+  const el = $('poseInfo');
+  if (!el) return;
+  const m = POSE_MODELS[models.poseLoading || models.poseId || S.poseModel];
+  if (models.poseLoading) el.textContent = `Loading ${m.name} (${m.size})…`;
+  else if (models.poseError) el.textContent = 'Did not load. Check the connection or pick another.';
+  else if (models.pose && models.poseMs != null) el.textContent = `${Math.round(models.poseMs)} ms per frame`;
+  else if (models.pose) el.textContent = 'Ready';
+  else el.textContent = '';
+  el.classList.toggle('warn', !!models.poseError);
+}
+
+// =====================================================================
+// App
+// =====================================================================
+const video = $('video');
+const cameraCanvas = $('camera');
+const cam = cameraCanvas.getContext('2d');
+const traceCanvas = $('breathTrace');
+const trace = traceCanvas.getContext('2d');
+const noiseCanvas = $('noise');
+const lids = createLidTracker();
+const breath = createBreathTracker();
+const motion = createShoulderMotion(video);
+const pulse = createPulseBreath(video);
+const engine = createNoiseEngine();
+let noise = null;
+try { noise = createNoiseRenderer(noiseCanvas); } catch (e) { console.error('Noise shader failed', e); }
+
+const app = {
+  running: false, preview: false, hud: false, armed: false, fade: 0,
+  stream: null, faceRes: null, poseRes: null, frameCount: 0, lastPoseT: null, posePending: false, statusMsg: null, statusWarn: false,
+  traceBuf: [], lidHist: [], wakeLock: null, lastFaceT: null, breathPaused: false, stats: { face: 0, body: 0, pose: 0 }, level: 0, open: 0, gate: 0, gateTarget: false,
+};
+
+const ui = {
+  begin: $('begin'), preview: $('preview'), status: $('status'), cameraEmpty: $('cameraEmpty'),
+  eyesValue: $('eyesValue'), eyesNote: $('eyesNote'), lidFill: $('lidFill'), lidRecent: $('lidRecent'),
+  breathValue: $('breathValue'), breathNote: $('breathNote'),
+  noiseValue: $('noiseValue'), noiseFill: $('noiseFill'),
+  cutoffValue: $('cutoffValue'), bandRange: $('bandRange'), bandNow: $('bandNow'),
+  hud: $('hud'), qualityNote: $('qualityNote'),
+};
+
+function setStatus(msg, warn = false) {
+  app.statusMsg = msg; app.statusWarn = warn;
+  ui.status.textContent = msg;
+  ui.status.classList.toggle('warn', warn);
+}
+
+// ---------- Settings UI ----------
+const controls = {};
+
+function makeSlider(spec, parent) {
+  const row = document.createElement('div');
+  row.className = 'setting';
+  const label = document.createElement('label');
+  label.htmlFor = `set-${spec.key}`;
+  label.textContent = spec.label;
+  if (spec.sub) {
+    const sub = document.createElement('span');
+    sub.className = 'sub';
+    sub.textContent = ` · ${spec.sub}`;
+    label.append(sub);
+  }
+  const out = document.createElement('output');
+  out.id = `out-${spec.key}`; out.htmlFor = `set-${spec.key}`;
+  const input = document.createElement('input');
+  input.type = 'range';
+  input.id = `set-${spec.key}`;
+  if (spec.log) Object.assign(input, { min: 0, max: LOG_STEPS, step: 1 });
+  else Object.assign(input, { min: spec.min, max: spec.max, step: spec.step });
+  input.addEventListener('input', () => {
+    S[spec.key] = spec.log ? roundHz(posToHz(+input.value)) : parseFloat(input.value);
+    if (spec.key === 'cutoffLow' || spec.key === 'cutoffHigh') keepBandOrder(spec.key);
+    saveSettings();
+    refreshControls(spec.key);
+    updateStaticCopy();
+  });
+  row.append(label, out, input);
+  if (spec.hint) {
+    const hint = document.createElement('p');
+    hint.className = 'hint'; hint.textContent = spec.hint;
+    row.append(hint);
+  }
+  parent.append(row);
+  controls[spec.key] = { spec, input, out };
+}
+
+function makeCheck(spec, parent) {
+  const label = document.createElement('label');
+  label.className = 'check';
+  const input = document.createElement('input');
+  Object.assign(input, { type: 'checkbox', id: `set-${spec.key}` });
+  input.addEventListener('change', () => { S[spec.key] = input.checked; saveSettings(); spec.onChange?.(); });
+  label.append(input, document.createTextNode(spec.label));
+  if (spec.prepend) parent.prepend(label); else parent.append(label);
+  controls[spec.key] = { spec: { ...spec, check: true }, input };
+}
+
+// The high cutoff always stays at least a quarter above the low one.
+function keepBandOrder(changed) {
+  if (changed === 'cutoffLow') {
+    if (S.cutoffHigh < S.cutoffLow * MIN_BAND_RATIO) S.cutoffHigh = Math.min(LOG_MAX, roundHz(S.cutoffLow * MIN_BAND_RATIO));
+    if (S.cutoffHigh < S.cutoffLow * MIN_BAND_RATIO) S.cutoffLow = roundHz(S.cutoffHigh / MIN_BAND_RATIO);
+  } else {
+    if (S.cutoffLow > S.cutoffHigh / MIN_BAND_RATIO) S.cutoffLow = Math.max(LOG_MIN, roundHz(S.cutoffHigh / MIN_BAND_RATIO));
+    if (S.cutoffLow > S.cutoffHigh / MIN_BAND_RATIO) S.cutoffHigh = roundHz(S.cutoffLow * MIN_BAND_RATIO);
+  }
+}
+
+// Writes the current settings into every control. Skips the slider being dragged so its thumb doesn't jump.
+function refreshControls(dragging = null) {
+  for (const [key, { spec, input, out }] of Object.entries(controls)) {
+    if (spec.check) { input.checked = !!S[key]; continue; }
+    if (key !== dragging) input.value = spec.log ? hzToPos(S[key]) : S[key];
+    out.textContent = spec.fmt(S[key]);
+  }
+}
+
+const SOURCE_HINTS = {
+  motion: 'Follows how the picture over each shoulder moves up and down. Steady, and needs no particular colors.',
+  outline: 'Finds the outline where both shoulders meet the background and follows it (the dotted line). Pick a color method below.',
+  pulse: 'Reads your pulse from tiny color changes in the skin of your face (the boxes), then follows how your heart rate rises as you breathe in and falls as you breathe out. Needs your face still and evenly lit, and lags your breath by a second or two.',
+};
+const METHOD_HINTS = {
+  opponent: 'Compares hue more than brightness, so shadows, camera exposure changes and lamp flicker move it less.',
+  hist: 'Learns the whole mix of colors on each side, for patterned backgrounds or clothes.',
+  gauss: 'Learns each side’s color and how much it varies, so shading on skin or fabric still counts as you.',
+  sharp: 'Finds the steepest change from background color to shoulder color in each column, to a fraction of a pixel. Precise when the outline is crisp.',
+  mask: 'A small neural network trained to separate people from backgrounds draws the outline; it ignores color. Downloads 250 KB.',
+  vote: 'Runs the four color methods together and takes the middle answer, so one method’s mistake is outvoted.',
+};
+
+function syncBreathUI() {
+  $('set-breathSource').value = S.breathSource;
+  $('set-colorMethod').value = S.colorMethod;
+  $('colorMethodRow').hidden = S.breathSource !== 'outline';
+  $('poseRow').hidden = S.breathSource === 'pulse';
+  $('breathSourceHint').textContent = SOURCE_HINTS[S.breathSource] || '';
+  $('colorMethodHint').textContent = METHOD_HINTS[S.colorMethod] || '';
+}
+
+// A live measure of how steady the breath signal is, to compare sources and color methods.
+function qualityText() {
+  const B = breath.st;
+  if (S.breathSource === 'pulse') {
+    const P = pulse.st;
+    if (!P.bpm) return 'Pulse: not found yet';
+    if (P.regularity > TRACK.ppgMaxIrregular) return `Pulse unclear: beats vary ±${Math.round(P.regularity * 100)}%`;
+    const swing = B.swing != null ? ` · heart-rate swing ${(B.swing / TRACK.ppgScale).toFixed(1)} bpm` : '';
+    return `Pulse ${Math.round(P.bpm)} bpm · beat-to-beat ±${Math.round((P.regularity || 0) * 100)}%${swing}`;
+  }
+  const sw = motion.st.sw;
+  if (!sw || B.jitter == null) return '';
+  const parts = [`Jitter ${(B.jitter * sw).toFixed(2)} px`];
+  if (B.swing != null) parts.push(`breath swing ${(B.swing * sw).toFixed(1)} px`);
+  if (S.breathSource === 'outline') parts.push(`${motion.st.sides || 0} of 2 shoulders, ${motion.st.points || 0} outline points`);
+  return parts.join(' · ');
+}
+
+let segPromise = null;
+const SEG_MODEL = 'https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/1/selfie_segmenter.tflite';
+function ensureSegmenter() {
+  if (!segPromise) {
+    segPromise = (async () => {
+      const { vision } = await ensureVision();
+      models.seg = await withDelegate(vision.ImageSegmenter, {
+        baseOptions: { modelAssetPath: SEG_MODEL },
+        runningMode: 'VIDEO',
+        outputConfidenceMasks: true,
+        outputCategoryMask: false,
+      });
+    })().catch(err => { segPromise = null; console.error('Person mask model failed to load', err); throw err; });
+  }
+  return segPromise;
+}
+
+function buildControls() {
+  const filter = $('filterControls');
+  for (const s of FILTER_SLIDERS) makeSlider(s, filter);
+  for (const s of EYE_SLIDERS) makeSlider(s, $('eyeControls'));
+  makeCheck({ key: 'breathOnlyEyesClosed', label: 'Only track breathing while my eyes are closed', prepend: true }, $('breathPowerRow'));
+  makeCheck({ key: 'hibernate', label: 'Power-saving hibernate', prepend: true, onChange: hibernateSettingChanged }, $('hibernateRow'));
+  makeCheck({ key: 'continuousNoise', label: 'Continuous noise', prepend: true }, $('continuousRow'));
+  const srcSel = $('set-breathSource'), methodSel = $('set-colorMethod');
+  srcSel.addEventListener('change', () => {
+    S.breathSource = srcSel.value; saveSettings(); syncBreathUI();
+    breath.reset(); pulse.reset(); motion.relock();
+    if (S.breathSource === 'outline' && S.colorMethod === 'mask') ensureSegmenter().catch(() => {});
+  });
+  methodSel.addEventListener('change', () => {
+    S.colorMethod = methodSel.value; saveSettings(); syncBreathUI();
+    breath.reset(); motion.relock();
+    if (S.colorMethod === 'mask') ensureSegmenter().catch(() => {});
+  });
+  // The closed threshold is the marker on the live eye bar, so it sits on the same 0..1 scale.
+  const lidInput = $('set-lidThreshold');
+  lidInput.addEventListener('input', () => {
+    S.lidThreshold = clamp(parseFloat(lidInput.value), LID_MIN, LID_MAX);
+    saveSettings();
+    refreshControls();
+  });
+  controls.lidThreshold = { spec: { key: 'lidThreshold', fmt: v => v.toFixed(2) }, input: lidInput, out: $('out-lidThreshold') };
+  const poseSelect = $('set-poseModel');
+  poseSelect.value = POSE_MODELS[S.poseModel] ? S.poseModel : DEFAULTS.poseModel;
+  poseSelect.addEventListener('change', () => {
+    S.poseModel = poseSelect.value;
+    saveSettings();
+    switchPose(S.poseModel).catch(() => { /* shown next to the picker */ });
+  });
+  const grid = $('settingsGrid');
+  for (const s of SLIDERS) makeSlider(s, grid);
+  for (const c of CHECKS) makeCheck(c, grid);
+  const resetRow = document.createElement('div');
+  resetRow.className = 'reset-row';
+  const reset = document.createElement('button');
+  reset.type = 'button'; reset.id = 'resetSettings'; reset.textContent = 'Restore defaults';
+  reset.addEventListener('click', () => {
+    Object.assign(S, DEFAULTS); saveSettings(); refreshControls(); updateStaticCopy();
+    $('set-poseModel').value = S.poseModel;
+    switchPose(S.poseModel).catch(() => {});
+    syncBreathUI(); breath.reset(); motion.relock();
+  });
+  resetRow.append(reset);
+  grid.append(resetRow);
+  refreshControls();
+  syncBreathUI();
+  if (S.breathSource === 'outline' && S.colorMethod === 'mask') ensureSegmenter().catch(() => {});
+}
+
+const bandPos = hz => clamp(Math.log(hz / LOG_MIN) / Math.log(LOG_MAX / LOG_MIN), 0, 1) * 100;
+
+function updateStaticCopy() {
+  const a = bandPos(S.cutoffLow), b = bandPos(S.cutoffHigh);
+  ui.bandRange.style.left = `${a}%`;
+  ui.bandRange.style.width = `${b - a}%`;
+}
+
+// ---------- Start / stop ----------
+async function begin() {
+  ui.begin.disabled = true;
+  try {
+    const audioStart = engine.start(); // must run inside the click
+    if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+      setStatus('The camera needs a secure page. Open this file from https:// or http://localhost.', true);
+      return;
+    }
+    setStatus('Starting camera…');
+    await openCamera();
+    await audioStart;
+    setStatus('Loading face and pose models…');
+    await ensureModels();
+    await switchPose(S.poseModel).catch(() => { /* reported in the Breath panel */ });
+    lids.reset();
+    breath.reset();
+    motion.reset();
+    pulse.reset();
+    app.traceBuf.length = 0;
+    app.lidHist.length = 0;
+    app.lastFaceT = null;
+    app.breathPaused = false;
+    app.running = true;
+    hibReset();
+    ui.begin.textContent = 'Stop';
+    ui.preview.disabled = false;
+    setStatus(models.pose ? 'Tracking eyes and breath' : 'Tracking eyes only. The pose model did not load, so breath is not tracked.', !models.pose);
+    requestWakeLock();
+  } catch (err) {
+    console.error(err);
+    stopStream();
+    const name = err?.name;
+    if (name === 'NotAllowedError' || name === 'SecurityError') setStatus('Camera access was blocked. Allow the camera for this page in your browser’s site settings, then press Begin.', true);
+    else if (name === 'NotFoundError' || name === 'OverconstrainedError') setStatus('No camera found. Connect a camera and press Begin.', true);
+    else if (name === 'NotReadableError') setStatus('The camera is in use by another app. Close it and press Begin.', true);
+    else setStatus('The face and pose models did not load. Check your connection and press Begin to try again.', true);
+  } finally {
+    ui.begin.disabled = false;
+  }
+}
+
+const getCamera = () => navigator.mediaDevices.getUserMedia({
+  video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+  audio: false,
+});
+async function openCamera() { await attachCamera(await getCamera()); }
+async function attachCamera(stream) {
+  stopStream();
+  app.stream = stream;
+  video.srcObject = stream;
+  await video.play();
+  ui.cameraEmpty.hidden = true;
+  video.width = video.videoWidth;   // MoveNet reads the element's size attributes
+  video.height = video.videoHeight;
+}
+
+function stopStream() {
+  if (app.stream) app.stream.getTracks().forEach(t => t.stop());
+  app.stream = null;
+  video.srcObject = null;
+}
+
+function stop() {
+  restCycle.interrupt();
+  saveRests();
+  app.running = false;
+  hibReset();
+  setPreview(false);
+  stopStream();
+  ui.begin.textContent = 'Begin';
+  ui.preview.disabled = true;
+  ui.cameraEmpty.hidden = false;
+  cam.clearRect(0, 0, cameraCanvas.width, cameraCanvas.height);
+  app.faceRes = app.poseRes = null;
+  motion.reset();
+  setStatus('Stopped');
+  releaseWakeLock();
+}
+
+function setPreview(on) {
+  app.preview = on && app.running;
+  ui.preview.textContent = app.preview ? 'End preview' : 'Preview with eyes open';
+}
+
+async function requestWakeLock() {
+  try { app.wakeLock = await navigator.wakeLock?.request('screen'); } catch { app.wakeLock = null; }
+}
+function releaseWakeLock() {
+  try { app.wakeLock?.release(); } catch { /* ignore */ }
+  app.wakeLock = null;
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && app.running && hib.mode === 'awake') requestWakeLock();
+});
+
+// ---------- Power-saving hibernate ----------
+// With "Power-saving hibernate" on: no face in view for 5 minutes switches the camera and the models off and
+// lets the screen sleep. Every 10 minutes the camera comes back on for 10 seconds and only the face model
+// runs, a few checks a second, looking for you. If it finds a face, everything picks up again; if not, it
+// goes back to sleep for another 10 minutes. Moving the mouse, pressing a key, or this window coming back
+// into view looks straight away. Checks wait while the window is hidden, since nothing runs then anyway.
+const HIB = { idleSec: 300, sleepSec: 600, checkSec: 10, openTimeoutSec: 15, inputGapSec: 5 };
+const hib = { mode: 'awake', since: 0, nextCheck: 0, checkFrom: 0, checkEnd: 0, opening: false, openDeadline: 0, token: 0, lastCheckEnd: -Infinity, error: null, sleeps: 0, checks: 0 };
+const nowSec = () => performance.now() / 1000;
+
+function hibReset() {
+  hib.token++; // drops any check still starting the camera
+  Object.assign(hib, { mode: 'awake', since: nowSec(), opening: false, error: null });
+  $('cameraSleep').hidden = true;
+}
+function hibSleep(now) {
+  hib.token++;
+  Object.assign(hib, { mode: 'sleeping', opening: false, nextCheck: now + HIB.sleepSec });
+  hib.sleeps++;
+  stopStream();
+  setPreview(false);
+  cam.clearRect(0, 0, cameraCanvas.width, cameraCanvas.height);
+  app.faceRes = app.poseRes = null;
+  if (!app.breathPaused) { app.breathPaused = true; breath.pause(); }
+  releaseWakeLock();
+  ui.cameraEmpty.hidden = true;
+  $('cameraSleep').hidden = false;
+}
+function hibWake(now) {
+  Object.assign(hib, { mode: 'awake', since: now, opening: false, error: null });
+  $('cameraSleep').hidden = true;
+  if (document.visibilityState === 'visible') requestWakeLock();
+}
+// Turn the camera on and look for a face for HIB.checkSec. hibTick decides how it ends.
+async function hibCheck(now) {
+  if (hib.mode !== 'sleeping' || !app.running) return;
+  const token = ++hib.token;
+  Object.assign(hib, { mode: 'checking', opening: true, openDeadline: now + HIB.openTimeoutSec });
+  hib.checks++;
+  let stream = null;
+  try {
+    stream = await getCamera();
+    if (token !== hib.token) { stream.getTracks().forEach(t => t.stop()); return; } // stopped or given up meanwhile
+    await attachCamera(stream);
+    if (token !== hib.token) return;
+    const t = nowSec();
+    Object.assign(hib, { opening: false, error: null, checkFrom: t, checkEnd: t + HIB.checkSec });
+    if (!S.hibernate) hibWake(t); // turned off while the camera was starting
+  } catch (err) {
+    if (token !== hib.token) return;
+    console.warn('The camera did not come back on', err);
+    hibSleep(nowSec());
+    hib.error = err?.name === 'NotReadableError' ? 'The camera is in use by another app.'
+      : err?.name === 'NotAllowedError' ? 'Camera access was blocked.' : 'The camera did not come back on.';
+  }
+}
+function hibTick() {
+  if (!app.running) return;
+  const now = nowSec();
+  if (hib.mode === 'awake') {
+    if (S.hibernate && now - Math.max(lids.st.faceLastSeen, hib.since) >= HIB.idleSec) hibSleep(now);
+  } else if (hib.mode === 'sleeping') {
+    if (now >= hib.nextCheck && document.visibilityState === 'visible') hibCheck(now);
+  } else if (hib.opening) {
+    if (now > hib.openDeadline) { hibSleep(now); hib.error = 'The camera took too long to start.'; }
+  } else if (lids.st.faceLastSeen >= hib.checkFrom || !S.hibernate) {
+    hibWake(now);                                   // found you (or hibernate was turned off)
+  } else if (now >= hib.checkEnd) {
+    hib.lastCheckEnd = now;
+    hibSleep(now);                                  // nobody there: another 10 minutes
+  }
+}
+setInterval(hibTick, 1000); // keeps going while the window is hidden, when the drawing loop doesn't run
+
+// You're back: look now rather than at the next 10-minute check.
+function hibPoke() {
+  if (hib.mode !== 'sleeping' || !app.running || document.visibilityState !== 'visible') return;
+  const now = nowSec();
+  if (now - hib.lastCheckEnd >= HIB.inputGapSec) hibCheck(now);
+}
+for (const ev of ['pointerdown', 'pointermove', 'keydown', 'wheel', 'focus']) addEventListener(ev, hibPoke, { passive: true });
+document.addEventListener('visibilitychange', hibPoke);
+
+// Turned on: count the 5 minutes from now. Turned off while hibernating: camera back on, and wake.
+function hibernateSettingChanged() {
+  if (S.hibernate) hib.since = nowSec();
+  else if (hib.mode === 'sleeping') hibCheck(nowSec());
+}
+const mmss = sec => { const s = Math.max(0, Math.round(sec)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+function hibStatusText(now) {
+  if (hib.mode === 'checking') return hib.opening ? 'Turning the camera on to look for you…' : `Looking for you… ${Math.max(0, Math.ceil(hib.checkEnd - now))} s`;
+  const when = document.visibilityState === 'visible' ? `Looks for you in ${mmss(hib.nextCheck - now)}` : 'Looks for you when this window is back in view';
+  return `Hibernating: camera off to save power. ${when}, or move the mouse.${hib.error ? ` ${hib.error}` : ''}`;
+}
+
+ui.begin.addEventListener('click', () => { app.running ? stop() : begin(); });
+ui.preview.addEventListener('click', () => setPreview(!app.preview));
+addEventListener('keydown', e => {
+  if (e.target instanceof HTMLInputElement || e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (k === 'p' && app.running) setPreview(!app.preview);
+  else if (k === 'h') { app.hud = !app.hud; }
+  else if (k === 'escape' && prog.isOpen) closeProgress();
+  else if (k === 'escape' && breathLog.open) closeHistory();
+  else if (k === 'escape' && app.preview) setPreview(false);
+});
+
+// ---------- Fade logic ----------
+function updateArming(now, dt) {
+  const L = lids.st;
+  if (!app.running) app.armed = false;
+  else if (app.preview) app.armed = true;
+  else if (L.closed && now - L.closedSince >= S.holdSec) app.armed = true;
+  else if (!L.closed && now - L.openSince >= TRACK.openGraceSec) app.armed = false;
+  const step = app.armed ? dt / S.fadeInSec : -dt / S.fadeOutSec;
+  app.fade = clamp(app.fade + step, 0, 1);
+}
+
+// ---------- Sound level and filter ----------
+// Normally the noise is heard only while it is faded in (eyes closed), and the filter follows the
+// breath. With Continuous noise the sound stays on while tracking runs, and a gate decides whether
+// the filter follows the breath (eyes closed, breath tracked) or glides down to the low cutoff.
+function updateSound(dt) {
+  const breathOpen = filterAmount(breath.st.out);
+  if (!S.continuousNoise) {
+    app.level = app.fade;
+    app.gate = app.fade; // so switching the setting on mid-session starts from where things are
+    app.gateTarget = app.armed;
+    app.open = breathOpen;
+    return;
+  }
+  // Loudness: up over the fade-in time while running, down over the fade-out time when stopped.
+  const want = app.running || app.preview ? 1 : 0;
+  app.level = want ? Math.min(1, app.level + dt / S.fadeInSec) : Math.max(0, app.level - dt / S.fadeOutSec);
+  // Follow the breath only while the eyes are closed (or in Preview) and the breath is tracked.
+  app.gateTarget = (app.armed || app.preview) && breath.st.tracked && !app.breathPaused;
+  const step = dt / TRACK.gateGlideSec;
+  app.gate = app.gateTarget ? Math.min(1, app.gate + step) : Math.max(0, app.gate - step);
+  const eased = app.gate * app.gate * (3 - 2 * app.gate); // gentle at both ends
+  app.open = eased * breathOpen;
+}
+
+// ---------- Drawing ----------
+const RIGHT_EYE = [33, 7, 163, 144, 145, 153, 154, 155, 133, 173, 157, 158, 159, 160, 161, 246];
+const LEFT_EYE = [263, 249, 390, 373, 374, 380, 381, 382, 362, 398, 384, 385, 386, 387, 388, 466];
+
+function drawCamera() {
+  const W = video.videoWidth, H = video.videoHeight;
+  if (!app.running || !W || !H) return;
+  if (cameraCanvas.width !== W || cameraCanvas.height !== H) { cameraCanvas.width = W; cameraCanvas.height = H; }
+  const mx = x => (S.mirror ? 1 - x : x) * W;
+  cam.save();
+  if (S.mirror) cam.setTransform(-1, 0, 0, 1, W, 0);
+  cam.drawImage(video, 0, 0, W, H);
+  cam.restore();
+  cam.fillStyle = 'rgb(10 11 15 / 0.35)';
+  cam.fillRect(0, 0, W, H);
+
+  const fl = app.faceRes?.faceLandmarks?.[0];
+  const lw = Math.max(1.5, W / 320);
+  if (fl) {
+    cam.lineWidth = lw;
+    cam.strokeStyle = lids.st.closed ? COLORS.lid : COLORS.fg;
+    cam.fillStyle = lids.st.closed ? COLORS.lid : 'transparent';
+    for (const eye of [RIGHT_EYE, LEFT_EYE]) {
+      cam.beginPath();
+      eye.forEach((i, n) => { const p = fl[i]; n ? cam.lineTo(mx(p.x), p.y * H) : cam.moveTo(mx(p.x), p.y * H); });
+      cam.closePath();
+      cam.globalAlpha = 0.35; cam.fill();
+      cam.globalAlpha = 0.95; cam.stroke();
+    }
+    cam.globalAlpha = 1;
+  }
+
+  // Shoulder points from the pose model (faint), and the two windows the breath is read from.
+  const M = motion.st;
+  const px = x => (S.mirror ? W - x : x);
+  if (M.ls && M.rs && S.breathSource !== 'pulse') {
+    cam.globalAlpha = 0.45; cam.strokeStyle = COLORS.fg; cam.fillStyle = COLORS.fg; cam.lineWidth = lw;
+    cam.beginPath(); cam.moveTo(px(M.ls.x), M.ls.y); cam.lineTo(px(M.rs.x), M.rs.y); cam.stroke();
+    for (const p of [M.ls, M.rs]) { cam.beginPath(); cam.arc(px(p.x), p.y, lw * 2, 0, Math.PI * 2); cam.fill(); }
+    cam.globalAlpha = 1;
+  }
+  if (S.breathSource === 'pulse') {
+    const since = performance.now() / 1000 - pulse.st.lastBeatAt;
+    cam.strokeStyle = COLORS.breath;
+    cam.lineWidth = lw;
+    cam.globalAlpha = 0.45 + 0.55 * Math.exp(-since * 5); // brightens on each detected beat
+    for (const r of pulse.st.rois) {
+      const x0 = S.mirror ? W - (r.x + r.w) : r.x;
+      cam.strokeRect(x0, r.y, r.w, r.h);
+    }
+    cam.globalAlpha = 1;
+  }
+  if (M.rois && S.breathSource !== 'pulse') {
+    for (const r of M.rois) {
+      const edgeMode = !!M.mode?.startsWith('edge') && !!r.ms;
+      const wms = edgeMode ? Object.values(r.ms) : [];
+      const good = edgeMode ? wms.some(m => m.ok) : r.score >= TRACK.minMatch;
+      const x0 = S.mirror ? W - (r.x + r.w) : r.x;
+      cam.strokeStyle = good ? COLORS.breath : COLORS.muted;
+      cam.lineWidth = lw;
+      const c = Math.min(r.w, r.h) * 0.22; // corner brackets
+      cam.beginPath();
+      for (const [ax, ay, sx, sy] of [[x0, r.y, 1, 1], [x0 + r.w, r.y, -1, 1], [x0, r.y + r.h, 1, -1], [x0 + r.w, r.y + r.h, -1, -1]]) {
+        cam.moveTo(ax + sx * c, ay); cam.lineTo(ax, ay); cam.lineTo(ax, ay + sy * c);
+      }
+      cam.stroke();
+      if (edgeMode) {
+        // The outline points found in each column, and (for one method) the line fitted through them.
+        // In Vote mode every method's points are drawn faintly.
+        const single = wms.length === 1;
+        for (const wm of wms) {
+          cam.fillStyle = wm.ok ? COLORS.breath : COLORS.muted;
+          cam.globalAlpha = single ? 1 : 0.5;
+          for (const q of wm.pts) { cam.beginPath(); cam.arc(px(q.x), q.y, lw * 0.9, 0, Math.PI * 2); cam.fill(); }
+          if (single && wm.fit && wm.ok) {
+            const yAt = x => wm.fit.a + wm.fit.b * (x - r.cx);
+            cam.lineWidth = lw * 1.5;
+            cam.beginPath(); cam.moveTo(px(r.x), yAt(r.x)); cam.lineTo(px(r.x + r.w), yAt(r.x + r.w)); cam.stroke();
+          }
+        }
+        cam.globalAlpha = 1;
+      } else {
+        // A level line that moves with the measured shift, exaggerated four times so it is visible.
+        const yLine = r.y + r.h / 2 + (r.shift || 0) * r.ref.pxPerRow * 4;
+        cam.lineWidth = lw * 1.5;
+        cam.beginPath(); cam.moveTo(x0 + r.w * 0.2, yLine); cam.lineTo(x0 + r.w * 0.8, yLine); cam.stroke();
+      }
+    }
+  }
+}
+
+function drawTrace(now) {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const w = Math.round(traceCanvas.clientWidth * dpr), h = Math.round(traceCanvas.clientHeight * dpr);
+  if (!w || !h) return;
+  if (traceCanvas.width !== w || traceCanvas.height !== h) { traceCanvas.width = w; traceCanvas.height = h; }
+  trace.clearRect(0, 0, w, h);
+  const pad = 8 * dpr;
+  const left = 30 * dpr;
+  const plotW = w - left;
+  const y = b => pad + (1 - b) * (h - pad * 2);
+  const x = t => left + plotW * (1 - (now - t) / TRACK.traceSec);
+
+  trace.strokeStyle = COLORS.rule; trace.lineWidth = 1;
+  for (const b of [0, 0.5, 1]) { trace.beginPath(); trace.moveTo(left, y(b)); trace.lineTo(w, y(b)); trace.stroke(); }
+  trace.fillStyle = COLORS.muted;
+  trace.font = `${10 * dpr}px ${FONT_DATA}`;
+  trace.textBaseline = 'middle';
+  trace.fillText('in', 0, y(1));
+  trace.fillText('out', 0, y(0));
+
+  // Exhale floor: the filter stops falling below this line.
+  if (S.exhaleFloor > 0) {
+    trace.save();
+    trace.strokeStyle = COLORS.breath;
+    trace.globalAlpha = 0.6;
+    trace.lineWidth = 1 * dpr;
+    trace.setLineDash([4 * dpr, 4 * dpr]);
+    trace.beginPath(); trace.moveTo(left, y(S.exhaleFloor)); trace.lineTo(w, y(S.exhaleFloor)); trace.stroke();
+    trace.restore();
+  }
+
+  for (const m of breath.st.marks) {
+    if (now - m > TRACK.traceSec) continue;
+    trace.fillStyle = COLORS.muted;
+    trace.fillRect(x(m) - dpr / 2, h - pad, dpr, pad);
+  }
+
+  const buf = app.traceBuf;
+  if (buf.length < 2) return;
+
+  // Measured breath: thin and faint, so the smoothing is visible against it.
+  trace.strokeStyle = COLORS.muted;
+  trace.lineWidth = 1 * dpr;
+  trace.beginPath();
+  buf.forEach((p, i) => (i ? trace.lineTo(x(p.t), y(p.m)) : trace.moveTo(x(p.t), y(p.m))));
+  trace.stroke();
+
+  // Smoothed breath, which drives the filter.
+  trace.beginPath();
+  trace.moveTo(x(buf[0].t), h);
+  for (const p of buf) trace.lineTo(x(p.t), y(p.b));
+  trace.lineTo(x(buf[buf.length - 1].t), h);
+  trace.closePath();
+  trace.globalAlpha = 0.12; trace.fillStyle = COLORS.breath; trace.fill();
+  trace.globalAlpha = 1;
+
+  trace.lineWidth = 1.5 * dpr;
+  trace.lineJoin = 'round';
+  for (let i = 1; i < buf.length; i++) {
+    const a = buf[i - 1], b = buf[i];
+    trace.strokeStyle = b.tracked ? COLORS.breath : COLORS.muted;
+    trace.beginPath(); trace.moveTo(x(a.t), y(a.b)); trace.lineTo(x(b.t), y(b.b)); trace.stroke();
+  }
+  const last = buf[buf.length - 1];
+  trace.fillStyle = last.tracked ? COLORS.breath : COLORS.muted;
+  trace.beginPath(); trace.arc(x(last.t), y(last.b), 3 * dpr, 0, Math.PI * 2); trace.fill();
+}
+
+// ---------- Readouts (about ten times a second) ----------
+function updateReadouts(now) {
+  const L = lids.st, B = breath.st;
+  ui.lidFill.style.width = `${clamp(L.lid, 0, 1) * 100}%`;
+  ui.lidFill.classList.toggle('closed', L.closed);
+  if (app.running && app.lidHist.length) {
+    let lo = 1, hi = 0;
+    for (const h of app.lidHist) { lo = Math.min(lo, h.v); hi = Math.max(hi, h.v); }
+    ui.lidRecent.style.left = `${lo * 100}%`;
+    ui.lidRecent.style.width = `${Math.max(0.5, (hi - lo) * 100)}%`;
+    ui.eyesNote.textContent = `Now ${L.lid.toFixed(2)}. Last 15 s: ${lo.toFixed(2)} to ${hi.toFixed(2)}. Closed at ${S.lidThreshold.toFixed(2)} and above.`;
+  } else {
+    ui.lidRecent.style.width = '0';
+  }
+  ui.noiseFill.style.width = `${app.level * 100}%`;
+
+  if (!app.running) {
+    ui.eyesValue.textContent = 'Not tracking';
+    ui.breathValue.textContent = 'Not tracking';
+  } else if (hib.mode !== 'awake') {
+    ui.eyesValue.textContent = hib.mode === 'sleeping' ? 'Hibernating' : 'Looking';
+  } else if (!L.faceInView) {
+    ui.eyesValue.textContent = 'No face';
+  } else if (L.closed) {
+    ui.eyesValue.textContent = `Closed ${(now - L.closedSince).toFixed(1)} s`;
+  } else {
+    ui.eyesValue.textContent = 'Open';
+  }
+  ui.eyesValue.classList.toggle('closed', app.running && L.closed);
+
+  const closedFor = L.closed ? now - L.closedSince : 0;
+  let noiseText = 'Silent';
+  if (app.preview) noiseText = app.fade < 1 ? `Preview ${Math.round(app.fade * 100)}%` : 'Preview';
+  else if (app.armed && app.fade < 1) noiseText = `Rising ${Math.round(app.fade * 100)}%`;
+  else if (app.armed) noiseText = 'Full';
+  else if (app.fade > 0) noiseText = `Falling ${Math.round(app.fade * 100)}%`;
+  else if (app.running && L.closed) noiseText = `In ${Math.max(0, S.holdSec - closedFor).toFixed(1)} s`;
+  if (S.continuousNoise && (app.running || app.level > 0.01) && !app.preview) {
+    noiseText = app.level < 0.99 && !app.running ? 'Stopping'
+      : app.gate > 0.98 ? 'Following breath'
+      : app.gate < 0.02 ? 'At low cutoff'
+      : app.gateTarget ? 'Opening' : 'Gliding to low cutoff';
+  }
+  ui.noiseValue.textContent = noiseText;
+
+  const hz = Math.round(cutoffAt(app.open));
+  ui.cutoffValue.textContent = fmtHz(hz);
+
+  const sum = breath.summary();
+  let breathWarn = false;
+  if (app.running && hib.mode !== 'awake') {
+    ui.breathValue.textContent = 'Paused';
+    ui.breathNote.textContent = 'The camera is off while no one is in view. Tracking picks up again by itself when you’re back.';
+  } else if (app.running && app.breathPaused) {
+    ui.breathValue.textContent = 'Paused';
+    ui.breathNote.textContent = 'Breath tracking is resting while your eyes are open. It starts again as soon as they close, or press Preview.';
+  } else if (app.running) {
+    if (S.breathSource !== 'pulse' && !models.pose) {
+      ui.breathValue.textContent = models.poseLoading ? 'Loading' : 'Off';
+      ui.breathNote.textContent = models.poseLoading ? 'Loading the pose model…' : 'The pose model did not load. Pick another pose model, or check the connection.';
+      breathWarn = !models.poseLoading;
+    } else if (!B.tracked) {
+      ui.breathValue.textContent = 'Lost';
+      ui.breathNote.textContent = S.breathSource === 'pulse'
+        ? (pulse.st.face ? 'Looking for your pulse. Keep your face still and evenly lit; it takes about 10 seconds to lock on.' : 'No face in view.')
+        : S.breathSource === 'outline' && S.colorMethod === 'mask' && !models.seg ? 'Loading the person mask model…'
+        : !motion.st.ls ? 'Shoulders not in view. Sit back so both shoulders show.'
+        : motion.st.lowReason === 'contrast' ? 'This color method can’t tell your shoulders from the background. Try another method or more light.'
+        : motion.st.lowReason === 'edges' ? 'No clear shoulder outline in the windows. Try another color method or more light.'
+        : 'Hold still for a moment while the shoulder windows settle.';
+      breathWarn = true;
+    } else {
+      ui.breathValue.textContent = B.vel > 0.03 ? 'In' : B.vel < -0.03 ? 'Out' : 'Still';
+      if (S.breathSource === 'outline' && motion.st.lowReason === 'one-side') {
+        ui.breathNote.textContent = 'Only one shoulder outline found. Placing the windows again to find the other; make sure both shoulders are in view.';
+        breathWarn = true;
+      } else if (sum) {
+        const v = sum.variation != null ? ` · varies ±${Math.round(sum.variation)}%` : '';
+        ui.breathNote.textContent = `${sum.avg.toFixed(1)} s per breath · ${sum.perMin.toFixed(1)} per minute${v}`;
+      } else {
+        ui.breathNote.textContent = 'Counting breaths. The window adjusts to your breathing over the first few breaths.';
+      }
+    }
+  }
+  ui.breathNote.classList.toggle('warn', breathWarn);
+  updatePoseInfo();
+  ui.qualityNote.textContent = app.running && !app.breathPaused ? qualityText() : '';
+  updateRestReadout(now);
+
+  $('cameraSleep').hidden = !(app.running && hib.mode === 'sleeping');
+  if (app.running && hib.mode !== 'awake') {
+    ui.status.textContent = hibStatusText(now);
+    ui.status.classList.toggle('warn', !!hib.error);
+  } else if (app.running && app.statusWarn) {
+    ui.status.textContent = app.statusMsg;
+    ui.status.classList.add('warn');
+  } else if (app.running) {
+    ui.status.classList.remove('warn');
+    ui.status.textContent = !L.faceInView ? 'No face in view'
+      : app.breathPaused ? 'Watching your eyes. Breath tracking starts when they close.'
+      : (S.breathSource !== 'pulse' && models.pose && !B.tracked ? 'Face found. Shoulders not in view.' : 'Tracking eyes and breath');
+  }
+
+  ui.hud.hidden = !(app.hud && !app.preview && app.fade > 0.6); // only once the noise mostly covers the page
+  if (!ui.hud.hidden) {
+    const eyes = L.closed ? `eyes closed ${(now - L.closedSince).toFixed(1)} s` : 'eyes open';
+    const br = B.tracked ? `breath ${(B.out * 100).toFixed(0)}%` : 'breath lost';
+    const rate = sum ? ` · ${sum.avg.toFixed(1)} s per breath` : '';
+    ui.hud.textContent = `${eyes} · ${br} · lowpass ${hz} Hz${rate}`;
+  }
+}
+
+// Breath tracking for one camera frame: the pose model (every few frames, only for the shoulder
+// sources), the person mask if chosen, then the chosen breath source.
+function bodyStep(now, ts, W, H, ddt) {
+  app.stats.body++;
+  // The pose model only places the shoulder windows, so it can run less often.
+  const pose = S.breathSource === 'pulse' ? null : models.pose; // pulse mode doesn't need the shoulders
+  if (pose && app.frameCount++ % TRACK.poseEvery === 0 && !app.posePending) {
+    app.stats.pose++;
+    const pdt = app.lastPoseT == null ? 1 / 15 : clamp(now - app.lastPoseT, 0.001, 1);
+    app.lastPoseT = now;
+    const t0 = performance.now();
+    const done = r => {
+      const ms = performance.now() - t0;
+      models.poseMs = models.poseMs == null ? ms : models.poseMs * 0.9 + ms * 0.1;
+      if (models.pose === pose) motion.updateShoulders(r, pose.minScore, performance.now() / 1000, pdt);
+    };
+    if (pose.async) {
+      // MoveNet answers asynchronously; skip pose frames until it has.
+      app.posePending = true;
+      pose.detect(video).then(done, () => {}).finally(() => { app.posePending = false; });
+    } else {
+      try { done(pose.detect(video, ts, W, H)); } catch (e) { /* skip this frame */ }
+    }
+  }
+  if (S.breathSource === 'outline' && S.colorMethod === 'mask' && models.seg) {
+    try {
+      models.seg.segmentForVideo(video, ts, res => {
+        const masks = res.confidenceMasks;
+        if (!masks?.length) return;
+        const m = masks[masks.length > 1 ? 1 : 0]; // the person channel
+        motion.st.mask = { data: m.getAsFloat32Array().slice(), w: m.width, h: m.height };
+      });
+    } catch (e) { /* skip this frame */ }
+  }
+  const sample = S.breathSource === 'pulse' ? pulse.update(app.faceRes, W, H, now, ddt) : motion.measure(now, W, H);
+  breath.update(sample, now, ddt);
+}
+
+// ---------- Breath history (full screen) ----------
+// Ten samples a second for up to two hours. Shown five lines at a time, each line a fixed stretch of
+// time read left to right, oldest at the top; scrolling goes back in time. While the view is at the
+// bottom it follows the newest line.
+const HISTORY_HZ = 10, HISTORY_MAX_SEC = 2 * 60 * 60, HISTORY_ROWS = 5;
+const breathLog = {
+  open: false, samples: [], marks: [], joins: [], v: 0, lastOkT: null, lastT: -Infinity, lastMark: null, following: true,
+  wallStart: Date.now(), perfStart: performance.now() / 1000, lastDraw: 0,
+};
+const hist = {
+  root: $('history'), scroll: $('historyScroll'), canvas: $('historyCanvas'), pad: $('historyPad'),
+  row: $('historyRow'), skip: $('historySkip'), now: $('historyNow'), close: $('historyClose'), open: $('openHistory'),
+};
+const hctx = hist.canvas.getContext('2d');
+
+function recordHistory(now) {
+  if (now - breathLog.lastT < 1 / HISTORY_HZ) return;
+  const ok = breath.st.tracked && !app.breathPaused;
+  // "Tracked time" only advances across tracked samples, so eyes-open gaps can be left out of the view.
+  const prev = breathLog.samples[breathLog.samples.length - 1];
+  if (ok) {
+    if (prev && prev.ok) breathLog.v += Math.min(now - prev.t, 0.2);
+    else if (breathLog.lastOkT != null && now - breathLog.lastOkT > 1) breathLog.joins.push({ v: breathLog.v, t: now, gap: now - breathLog.lastOkT });
+    breathLog.lastOkT = now;
+  }
+  breathLog.lastT = now;
+  breathLog.samples.push({ t: now, v: breathLog.v, b: breath.st.out, m: breath.st.fast, ok, closed: lids.st.closed, paused: app.breathPaused });
+  if (breath.st.lastBreathAt != null && breath.st.lastBreathAt !== breathLog.lastMark) {
+    breathLog.lastMark = breath.st.lastBreathAt;
+    breathLog.marks.push({ t: breath.st.lastBreathAt, v: breathLog.v });
+  }
+  const cutoff = now - HISTORY_MAX_SEC;
+  if (breathLog.samples.length && breathLog.samples[0].t < cutoff - 60) {
+    let i = 0;
+    while (i < breathLog.samples.length && breathLog.samples[i].t < cutoff) i++;
+    breathLog.samples.splice(0, i);
+    while (breathLog.marks.length && breathLog.marks[0].t < cutoff) breathLog.marks.shift();
+    while (breathLog.joins.length && breathLog.joins[0].t < cutoff) breathLog.joins.shift();
+  }
+}
+
+// Two ways to lay the rows out. Real time: each row is a stretch of the clock, aligned to whole
+// minutes (or half minutes), with gaps where tracking rested. Skip gaps: each row is a stretch of
+// tracked time only, the eyes-closed stretches joined end to end, with a dashed line at each join.
+function historyLayout() {
+  const rowSec = S.historyRowSec;
+  const skip = S.historySkipGaps;
+  const S_ = breathLog.samples;
+  const viewH = hist.scroll.clientHeight;
+  const rowH = viewH / HISTORY_ROWS;
+  let start, end;
+  if (skip) {
+    start = S_.length ? S_[0].v : 0;
+    end = breathLog.v;
+  } else {
+    const nowT = performance.now() / 1000;
+    const first = S_.length ? S_[0].t : nowT;
+    const wall = t => breathLog.wallStart + (t - breathLog.perfStart) * 1000;
+    const alignedWall = Math.floor(wall(first) / (rowSec * 1000)) * rowSec * 1000;
+    start = breathLog.perfStart + (alignedWall - breathLog.wallStart) / 1000;
+    end = nowT;
+  }
+  const rows = Math.max(1, Math.floor((end - start) / rowSec) + 1);
+  return { rowSec, skip, key: skip ? 'v' : 't', t0: start, rows, viewH, rowH };
+}
+
+function syncHistoryScroll() {
+  const L = historyLayout();
+  // The canvas takes one screen; the pad below it makes up the rest of the scroll height.
+  hist.pad.style.height = `${Math.max(0, L.rows - HISTORY_ROWS) * L.rowH}px`;
+  const max = hist.scroll.scrollHeight - hist.scroll.clientHeight;
+  if (breathLog.following) hist.scroll.scrollTop = max;
+  return L;
+}
+
+function clockAt(t) {
+  const d = new Date(breathLog.wallStart + (t - breathLog.perfStart) * 1000);
+  return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+const fmtGap = sec => sec >= 60 ? `${Math.floor(sec / 60)} min ${Math.round(sec % 60)} s` : `${Math.round(sec)} s`;
+
+function drawHistory() {
+  const L = syncHistoryScroll();
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const W = Math.round(hist.canvas.clientWidth * dpr), H = Math.round(hist.canvas.clientHeight * dpr);
+  if (!W || !H) return;
+  if (hist.canvas.width !== W || hist.canvas.height !== H) { hist.canvas.width = W; hist.canvas.height = H; }
+  const c = hctx;
+  c.clearRect(0, 0, W, H);
+  const firstRow = L.rows > HISTORY_ROWS ? hist.scroll.scrollTop / L.rowH : 0;
+  const rowH = L.rowH * dpr;
+  const left = 92 * dpr, right = W - 16 * dpr, plotW = right - left;
+  const pad = 14 * dpr;
+  const K = L.key;
+  const S_ = breathLog.samples, n = S_.length;
+  // Binary search for the first sample at or after position p (both keys only ever increase).
+  const indexAt = p => { let lo = 0, hi = n; while (lo < hi) { const mid = (lo + hi) >> 1; if (S_[mid][K] < p) lo = mid + 1; else hi = mid; } return lo; };
+
+  c.font = `${11 * dpr}px ${FONT_DATA}`;
+  c.textBaseline = 'middle';
+  const startRow = Math.floor(firstRow);
+  for (let r = startRow; r < Math.min(L.rows, startRow + HISTORY_ROWS + 1); r++) {
+    const top = (r - firstRow) * rowH;
+    if (top > H || top + rowH < 0) continue;
+    const p0 = L.t0 + r * L.rowSec, p1 = p0 + L.rowSec;
+    const y = v => top + pad + (1 - v) * (rowH - pad * 2.4);
+    const x = p => left + plotW * (p - p0) / L.rowSec;
+    const i0 = Math.max(0, indexAt(p0) - 1), i1 = Math.min(n, indexAt(p1) + 1);
+
+    // Row frame: the clock time where the row starts, a divider, ticks every 10 s (30 s on long rows).
+    let label = '';
+    if (L.skip) {
+      for (let i = indexAt(p0); i < i1; i++) if (S_[i].ok) { label = clockAt(S_[i].t); break; }
+    } else {
+      label = clockAt(p0);
+    }
+    c.fillStyle = COLORS.muted;
+    c.fillText(label, 12 * dpr, top + rowH / 2);
+    c.strokeStyle = COLORS.rule; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(0, top + rowH - 0.5); c.lineTo(W, top + rowH - 0.5); c.stroke();
+    c.beginPath(); c.moveTo(left, y(0.5)); c.lineTo(right, y(0.5)); c.stroke();
+    for (let sec = 0; sec <= L.rowSec; sec += L.rowSec <= 60 ? 10 : 30) {
+      const xx = x(p0 + sec);
+      c.beginPath(); c.moveTo(xx, y(0) + 3 * dpr); c.lineTo(xx, y(0) + 7 * dpr); c.stroke();
+    }
+
+    // Eyes-closed stretches as a faint band behind the line (tracked samples only when gaps are skipped).
+    c.fillStyle = COLORS.lid; c.globalAlpha = 0.14;
+    for (let i = i0; i < i1; i++) {
+      if (!S_[i].closed || (L.skip && !S_[i].ok)) continue;
+      let j = i; while (j + 1 < i1 && S_[j + 1].closed && (!L.skip || S_[j + 1].ok)) j++;
+      const xa = Math.max(left, x(S_[i][K])), xb = Math.min(right, x(S_[j][K] + 1 / HISTORY_HZ));
+      if (xb > xa) c.fillRect(xa, top + pad * 0.5, xb - xa, rowH - pad * 1.4);
+      i = j;
+    }
+    c.globalAlpha = 1;
+
+    if (!L.skip) {
+      // Real time: name the longer gaps so they read as rests, not as missing data.
+      c.fillStyle = COLORS.muted; c.globalAlpha = 0.7; c.textAlign = 'center';
+      for (let i = i0; i < i1; i++) {
+        if (S_[i].ok) continue;
+        let j = i; while (j + 1 < i1 && !S_[j + 1].ok) j++;
+        const xa = Math.max(left, x(S_[i].t)), xb = Math.min(right, x(S_[j].t));
+        if (xb - xa > 110 * dpr) {
+          const paused = S_.slice(i, j + 1).filter(q => q.paused).length > (j - i + 1) / 2;
+          c.fillText(paused ? 'eyes open' : 'breath lost', (xa + xb) / 2, y(0.5) - 9 * dpr);
+        }
+        i = j;
+      }
+      c.globalAlpha = 1; c.textAlign = 'start';
+    } else {
+      // Skip gaps: a dashed line where a gap was left out, with how long it was.
+      c.strokeStyle = COLORS.muted; c.fillStyle = COLORS.muted; c.lineWidth = dpr; c.setLineDash([3 * dpr, 3 * dpr]);
+      for (const j of breathLog.joins) {
+        if (j.v < p0 || j.v >= p1) continue;
+        const xx = x(j.v);
+        c.beginPath(); c.moveTo(xx, top + pad * 0.5); c.lineTo(xx, top + rowH - pad * 0.9); c.stroke();
+        c.fillText(`+${fmtGap(j.gap)}`, xx + 4 * dpr, top + pad * 0.9);
+      }
+      c.setLineDash([]);
+    }
+
+    // Lines: measured (thin, faint) and smoothed (amber), broken wherever tracking paused or was lost.
+    const drawLine = (key, color, width, alpha) => {
+      c.strokeStyle = color; c.lineWidth = width * dpr; c.globalAlpha = alpha; c.lineJoin = 'round';
+      c.beginPath();
+      let pen = false, lastT = null;
+      for (let i = i0; i < i1; i++) {
+        const q = S_[i];
+        if (!q.ok) { pen = false; continue; }
+        if (lastT != null && q.t - lastT > 0.5) pen = false;
+        lastT = q.t;
+        const xx = Math.min(right, Math.max(left, x(q[K])));
+        if (pen) c.lineTo(xx, y(q[key])); else { c.moveTo(xx, y(q[key])); pen = true; }
+      }
+      c.stroke();
+      c.globalAlpha = 1;
+    };
+    drawLine('m', COLORS.muted, 1, 0.8);
+    drawLine('b', COLORS.breath, 1.6, 1);
+
+    // Counted breaths as ticks along the bottom.
+    c.fillStyle = COLORS.muted;
+    for (const m of breathLog.marks) { const p = m[K]; if (p >= p0 && p < p1) c.fillRect(x(p) - dpr / 2, y(0) - 6 * dpr, dpr, 6 * dpr); }
+  }
+  const tracked = S_.some(q => q.ok);
+  if (!tracked) {
+    c.fillStyle = COLORS.muted; c.textAlign = 'center';
+    c.fillText('No breath recorded yet. Press Begin, then close your eyes or use Preview.', W / 2, H / 2);
+    c.textAlign = 'start';
+  }
+  const atBottom = hist.scroll.scrollTop >= hist.scroll.scrollHeight - hist.scroll.clientHeight - 2;
+  hist.now.hidden = atBottom;
+}
+
+function openHistory() {
+  breathLog.open = true;
+  breathLog.following = true;
+  hist.root.hidden = false;
+  drawHistory();
+  hist.close.focus();
+}
+function closeHistory() {
+  breathLog.open = false;
+  hist.root.hidden = true;
+  hist.open.focus();
+}
+hist.open.addEventListener('click', openHistory);
+hist.close.addEventListener('click', closeHistory);
+hist.now.addEventListener('click', () => { breathLog.following = true; drawHistory(); });
+hist.row.value = String(S.historyRowSec);
+hist.skip.checked = !!S.historySkipGaps;
+hist.row.addEventListener('change', () => { S.historyRowSec = +hist.row.value; saveSettings(); breathLog.following = true; drawHistory(); });
+hist.skip.addEventListener('change', () => { S.historySkipGaps = hist.skip.checked; saveSettings(); breathLog.following = true; drawHistory(); });
+hist.scroll.addEventListener('scroll', () => {
+  breathLog.following = hist.scroll.scrollTop >= hist.scroll.scrollHeight - hist.scroll.clientHeight - 2;
+  drawHistory();
+}, { passive: true });
+addEventListener('resize', () => { if (breathLog.open) drawHistory(); });
+
+// ---------- Rests ----------
+const REST = { minPresentSec: 600, avgDays: 7, minHours: 3, keepDays: 400 };
+const RESTS_KEY = 'breathing-dark.rests.v1';
+const rests = loadRests();
+const restCycle = createRestCycle(rests.activeClosure);
+const restState = restCycle.state;
+let restLastObserved = null, restLastSave = 0, restsDirty = false;
+
+function loadRests() {
+  try { return readRests(localStorage.getItem(RESTS_KEY)); }
+  catch { return readRests(null); }
+}
+function saveRests() {
+  if (!restsDirty) return;
+  pruneRests(rests, Date.now(), REST.keepDays);
+  rests.activeClosure = restState.active;
+  try {
+    localStorage.setItem(RESTS_KEY, JSON.stringify(rests));
+    restsDirty = false;
+    $('restStorage').hidden = true;
+  } catch { $('restStorage').hidden = false; }
+}
+function interruptRest() {
+  restCycle.interrupt();
+  saveRests();
+}
+addEventListener('pagehide', interruptRest);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') interruptRest();
+});
+
+function updateRests(now, dt) {
+  const maxGapSec = Math.max(1, 2 / S.eyeHz);
+  if (!app.running || document.visibilityState !== 'visible' || app.lastFaceT == null || now - app.lastFaceT > maxGapSec) {
+    restCycle.interrupt();
+    return;
+  }
+  const wall = Date.now(), key = hourKeyOf(wall);
+  const h = rests.hours[key] || (rests.hours[key] = { rests: 0, presentSec: 0, restSec: 0 });
+  if (lids.st.faceInView) { h.presentSec += dt; restsDirty = true; }
+  if (restState.counted && restState.start != null && !restState.blocked && lids.st.faceInView) h.restSec += dt;
+
+  // Qualify only on a fresh face result, never on a stale closed-eye value between camera frames.
+  if (restLastObserved !== app.lastFaceT) {
+    restLastObserved = app.lastFaceT;
+    const wasActive = restState.active;
+    const counted = restCycle.observe({ now: app.lastFaceT, closed: lids.st.closed,
+      valid: lids.st.faceLastSeen === app.lastFaceT, maxGapSec });
+    if (counted) {
+      h.rests++;
+      h.restSec += app.lastFaceT - restState.start;
+      rests.recent.push(wall);
+      restsDirty = true;
+    }
+    if (wasActive !== restState.active) restsDirty = true;
+    if (counted || wasActive !== restState.active) saveRests();
+  }
+  if (now - restLastSave > 20) { restLastSave = now; saveRests(); }
+}
+
+// The hours that count: more than 10 minutes at the computer (the current hour once it gets there).
+function qualifyingHours(days) {
+  const wall = Date.now(), nowKey = hourKeyOf(wall), from = days ? wall - days * 864e5 : -Infinity;
+  return Object.entries(rests.hours)
+    .filter(([k, h]) => h.presentSec >= REST.minPresentSec && hourStart(k).getTime() >= from - 3600e3)
+    .map(([k, h]) => ({ key: k, start: hourStart(k), ...h, current: k === nowKey }))
+    .sort((a, b) => a.start - b.start);
+}
+function restStats() {
+  const totals = restTotals(rests, Date.now());
+  const past = qualifyingHours(REST.avgDays).filter(h => !h.current);
+  const avg = past.length >= REST.minHours ? past.reduce((a, h) => a + h.rests, 0) / past.length : null;
+  return { ...totals, avg, avgHours: past.length };
+}
+const fmt1 = v => (Math.round(v * 10) / 10).toFixed(1);
+function compareText(n, avg) {
+  if (avg == null) return { text: '', up: false };
+  const d = n - avg;
+  if (Math.abs(d) < 0.25) return { text: `About your 7-day average of ${fmt1(avg)} per hour`, up: false };
+  return d > 0
+    ? { text: `▲ ${fmt1(d)} above your 7-day average of ${fmt1(avg)} per hour`, up: true }
+    : { text: `▼ ${fmt1(-d)} below your 7-day average of ${fmt1(avg)} per hour`, up: false };
+}
+
+const restUi = { count: $('restCount'), today: $('restToday'), goal: $('restGoal'), goalLabel: $('restGoalLabel'), band: $('restBand'), note: $('restNote'), delta: $('restDelta') };
+function updateRestReadout(now) {
+  const st = restStats();
+  restUi.count.textContent = String(st.lastHour);
+  restUi.today.textContent = String(st.today);
+  restUi.goal.value = Math.min(st.lastHour, HOURLY_GOAL);
+  restUi.goalLabel.textContent = `${st.lastHour} / ${HOURLY_GOAL} in the last 60 min`;
+  restUi.band.textContent = `${restBand(st.lastHour)}${st.lastHour >= HOURLY_GOAL ? ' · Hourly goal reached' : ''}`;
+  const restingFor = restState.start != null && lids.st.closed ? now - restState.start : 0;
+  if (!app.running) restUi.note.textContent = 'In the last 60 minutes. Counting runs while tracking is on.';
+  else if (restState.blocked) restUi.note.textContent = 'Tracking was interrupted. Open your eyes in view before starting another rest.';
+  else if (restingFor > 0 && !restState.counted) restUi.note.textContent = `Eyes closed ${Math.floor(restingFor)} s. Counts after ${REST_SECONDS} s.`;
+  else if (restState.counted && lids.st.closed) restUi.note.textContent = `Eyes closed ${Math.floor(restingFor)} s. One rest counted.`;
+  else restUi.note.textContent = 'In the last 60 minutes.';
+  const cmp = compareText(st.lastHour, st.avg);
+  restUi.delta.textContent = st.avg == null
+    ? `Your average appears after ${REST.minHours} hours with more than 10 minutes at the computer (${st.avgHours} so far).`
+    : !app.running ? `Your 7-day average is ${fmt1(st.avg)} rests per hour.`
+    : cmp.text;
+  restUi.delta.classList.toggle('up', app.running && cmp.up);
+}
+
+// ---------- Progress view ----------
+const prog = {
+  isOpen: false, lastDraw: 0, days: 7, hourHover: -1, dayHover: -1, bars: [], dayPts: [],
+  root: $('progress'), close: $('progressClose'), open: $('openProgress'), kpis: $('progressKpis'),
+  hour: $('hourChart'), day: $('dayChart'), tip: $('chartTip'), tbody: $('progressTable').tBodies[0], clear: $('clearRests'),
+};
+const fmtHour = d => d.toLocaleTimeString([], { hour: 'numeric' }).replace(':00', '');
+const fmtDay = d => d.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+const hourRange = d => `${fmtHour(d)}–${fmtHour(new Date(d.getTime() + 3600e3))}`;
+const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+const CHART = { rest: '#4b8fd9', now: '#c98500', good: '#7cc49a' };
+function readChartTokens() { CHART.rest = cssVar('--chart-rest') || CHART.rest; CHART.now = cssVar('--chart-now') || CHART.now; }
+
+function niceTop(max) {
+  const step = max <= 5 ? 1 : max <= 12 ? 2 : max <= 30 ? 5 : 10;
+  return { top: Math.max(step, Math.ceil(max / step) * step), step };
+}
+function sizeCanvas(cv) {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const W = Math.round(cv.clientWidth * dpr), H = Math.round(cv.clientHeight * dpr);
+  if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+  return { dpr, W, H, c: cv.getContext('2d') };
+}
+
+function renderKpis(list, st) {
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const todayHours = qualifyingHours(1).filter(h => h.start >= today);
+  const todayRests = st.today;
+  const best = list.reduce((b, h) => (!b || h.rests > b.rests ? h : b), null);
+  const cmp = compareText(st.lastHour, st.avg);
+  const tiles = [
+    { label: 'Last 60 minutes', value: String(st.lastHour), sub: st.avg == null ? 'rests' : cmp.text, up: cmp.up },
+    { label: '7-day average', value: st.avg == null ? '—' : fmt1(st.avg), sub: st.avg == null ? `needs ${REST.minHours} hours at the computer (${st.avgHours} so far)` : `rests per hour, from ${plural(st.avgHours, 'hour', 'hours')}` },
+    { label: 'Today', value: String(todayRests), sub: todayHours.length ? `rests, in ${plural(todayHours.length, 'hour', 'hours')} at the computer` : 'rests so far today' },
+    { label: 'Best hour', value: best ? String(best.rests) : '—', sub: best ? `${fmtDay(best.start)}, ${hourRange(best.start)}` : 'in this range' },
+  ];
+  prog.kpis.textContent = '';
+  for (const t of tiles) {
+    const el = document.createElement('div'); el.className = 'kpi';
+    const a = document.createElement('div'); a.className = 'kpi-label'; a.textContent = t.label;
+    const b = document.createElement('div'); b.className = 'kpi-value'; b.textContent = t.value;
+    const c = document.createElement('div'); c.className = 'kpi-sub' + (t.up ? ' up' : ''); c.textContent = t.sub;
+    el.append(a, b, c); prog.kpis.append(el);
+  }
+}
+
+function drawHourChart(list, avg) {
+  const { dpr, W, H, c } = sizeCanvas(prog.hour);
+  if (!W || !H) return;
+  c.clearRect(0, 0, W, H);
+  c.font = `${11 * dpr}px ${FONT_DATA}`; c.textBaseline = 'middle';
+  const left = 34 * dpr, right = W - (avg != null ? 104 : 12) * dpr, top = 18 * dpr, bottom = H - 42 * dpr;
+  prog.bars = [];
+  if (!list.length) {
+    c.fillStyle = COLORS.muted; c.textAlign = 'center';
+    c.fillText('No hours yet. An hour appears here once you spend more than 10 minutes of it in front of the camera.', W / 2, H / 2);
+    c.textAlign = 'start'; return;
+  }
+  const { top: yTop, step } = niceTop(Math.max(1, avg || 0, ...list.map(h => h.rests)));
+  const y = v => bottom - (bottom - top) * v / yTop;
+  // Gridlines: solid hairlines, one shade off the surface; integer ticks on the left.
+  c.strokeStyle = COLORS.rule; c.lineWidth = 1; c.fillStyle = COLORS.muted; c.textAlign = 'right';
+  for (let v = 0; v <= yTop; v += step) {
+    c.beginPath(); c.moveTo(left, Math.round(y(v)) + 0.5); c.lineTo(right, Math.round(y(v)) + 0.5); c.stroke();
+    c.fillText(String(v), left - 8 * dpr, y(v));
+  }
+  c.textAlign = 'start';
+  const slot = (right - left) / list.length;
+  const bw = Math.max(2 * dpr, Math.min(24 * dpr, slot - 2 * dpr)); // capped at 24 px, 2 px gap between bars
+  let lastHourLabel = -Infinity, lastDayKey = null;
+  list.forEach((h, i) => {
+    const cx = left + slot * (i + 0.5), x0 = cx - bw / 2;
+    prog.bars.push({ x0: left + slot * i, x1: left + slot * (i + 1), cx, h });
+    c.fillStyle = h.current ? CHART.now : CHART.rest;
+    if (h.rests > 0) {
+      const yy = y(h.rests), r = Math.min(4 * dpr, bw / 2, bottom - yy);
+      c.beginPath();
+      c.moveTo(x0, bottom); c.lineTo(x0, yy + r); c.quadraticCurveTo(x0, yy, x0 + r, yy);
+      c.lineTo(x0 + bw - r, yy); c.quadraticCurveTo(x0 + bw, yy, x0 + bw, yy + r); c.lineTo(x0 + bw, bottom); c.closePath();
+      c.fill();
+    } else {
+      c.globalAlpha = 0.5; c.fillRect(x0, bottom - 2 * dpr, bw, 2 * dpr); c.globalAlpha = 1; // an hour with no rests
+    }
+    if (i === prog.hourHover) { c.fillStyle = 'rgba(255,255,255,0.18)'; c.fillRect(left + slot * i, top, slot, bottom - top); }
+    // Labels: the current hour's value at its tip; hour of day under bars with room; the day under the first bar of each day.
+    c.fillStyle = COLORS.muted; c.textAlign = 'center';
+    if (h.current) { c.fillStyle = COLORS.fg; c.fillText(`${h.rests} so far`, cx, y(h.rests) - 10 * dpr); c.fillStyle = COLORS.muted; }
+    if (cx - lastHourLabel > 44 * dpr) { c.fillText(fmtHour(h.start), cx, bottom + 13 * dpr); lastHourLabel = cx; }
+    const dayKey = h.key.slice(0, 10);
+    if (dayKey !== lastDayKey) {
+      c.textAlign = 'start'; c.fillText(fmtDay(h.start), Math.max(left, cx - bw / 2), bottom + 30 * dpr);
+      c.strokeStyle = COLORS.rule; c.beginPath(); c.moveTo(left + slot * i + 0.5, bottom); c.lineTo(left + slot * i + 0.5, bottom + 22 * dpr); c.stroke();
+      lastDayKey = dayKey;
+    }
+    c.textAlign = 'start';
+  });
+  // The 7-day average as a dashed reference line, labelled at its right end.
+  if (avg != null) {
+    c.strokeStyle = COLORS.fg; c.globalAlpha = 0.75; c.lineWidth = 1.5 * dpr; c.setLineDash([5 * dpr, 4 * dpr]);
+    c.beginPath(); c.moveTo(left, y(avg)); c.lineTo(right, y(avg)); c.stroke(); c.setLineDash([]); c.globalAlpha = 1;
+    c.fillStyle = COLORS.muted; c.fillText(`7-day avg ${fmt1(avg)}`, right + 8 * dpr, y(avg));
+  }
+}
+
+function dayData(list) {
+  const by = new Map();
+  for (const h of list) {
+    const k = h.key.slice(0, 10);
+    const e = by.get(k) || { key: k, date: new Date(h.start.getFullYear(), h.start.getMonth(), h.start.getDate()), hours: 0, rests: 0 };
+    e.hours++; e.rests += h.rests; by.set(k, e);
+  }
+  return [...by.values()].sort((a, b) => a.date - b.date).map(e => ({ ...e, avg: e.rests / e.hours }));
+}
+
+function drawDayChart(days) {
+  const { dpr, W, H, c } = sizeCanvas(prog.day);
+  if (!W || !H) return;
+  c.clearRect(0, 0, W, H);
+  c.font = `${11 * dpr}px ${FONT_DATA}`; c.textBaseline = 'middle';
+  prog.dayPts = [];
+  if (days.length < 2) {
+    c.fillStyle = COLORS.muted; c.textAlign = 'center';
+    c.fillText(days.length ? 'One day so far. The trend appears from the second day.' : 'No days yet.', W / 2, H / 2);
+    c.textAlign = 'start'; return;
+  }
+  const left = 34 * dpr, right = W - 56 * dpr, top = 16 * dpr, bottom = H - 26 * dpr;
+  const { top: yTop, step } = niceTop(Math.max(1, ...days.map(d => d.avg)));
+  const y = v => bottom - (bottom - top) * v / yTop;
+  const t0 = days[0].date.getTime(), t1 = days[days.length - 1].date.getTime();
+  const x = t => left + (right - left) * (t - t0) / Math.max(1, t1 - t0);
+  c.strokeStyle = COLORS.rule; c.lineWidth = 1; c.fillStyle = COLORS.muted; c.textAlign = 'right';
+  for (let v = 0; v <= yTop; v += step) {
+    c.beginPath(); c.moveTo(left, Math.round(y(v)) + 0.5); c.lineTo(right, Math.round(y(v)) + 0.5); c.stroke();
+    c.fillText(String(v), left - 8 * dpr, y(v));
+  }
+  c.textAlign = 'center';
+  let lastLabel = -Infinity;
+  days.forEach((d, i) => {
+    const xx = x(d.date.getTime());
+    prog.dayPts.push({ x: xx, d });
+    if (xx - lastLabel > 80 * dpr || i === days.length - 1) {
+      if (i === days.length - 1 && xx - lastLabel < 80 * dpr) return;
+      c.fillText(fmtDay(d.date), Math.min(Math.max(xx, left + 30 * dpr), right - 30 * dpr), bottom + 14 * dpr); lastLabel = xx;
+    }
+  });
+  c.textAlign = 'start';
+  // Area wash, then the 2 px line, then the end dot with a surface ring and its value.
+  c.beginPath();
+  prog.dayPts.forEach((p, i) => (i ? c.lineTo(p.x, y(p.d.avg)) : c.moveTo(p.x, y(p.d.avg))));
+  c.lineTo(prog.dayPts.at(-1).x, bottom); c.lineTo(prog.dayPts[0].x, bottom); c.closePath();
+  c.fillStyle = CHART.rest; c.globalAlpha = 0.1; c.fill(); c.globalAlpha = 1;
+  c.beginPath();
+  prog.dayPts.forEach((p, i) => (i ? c.lineTo(p.x, y(p.d.avg)) : c.moveTo(p.x, y(p.d.avg))));
+  c.strokeStyle = CHART.rest; c.lineWidth = 2 * dpr; c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke();
+  const end = prog.dayPts.at(-1);
+  c.beginPath(); c.arc(end.x, y(end.d.avg), 6 * dpr, 0, Math.PI * 2); c.fillStyle = COLORS.night; c.fill();
+  c.beginPath(); c.arc(end.x, y(end.d.avg), 4 * dpr, 0, Math.PI * 2); c.fillStyle = CHART.rest; c.fill();
+  c.fillStyle = COLORS.fg; c.fillText(fmt1(end.d.avg), end.x + 10 * dpr, y(end.d.avg));
+  if (prog.dayHover >= 0 && prog.dayPts[prog.dayHover]) {
+    const p = prog.dayPts[prog.dayHover];
+    c.strokeStyle = COLORS.muted; c.lineWidth = 1; c.beginPath(); c.moveTo(Math.round(p.x) + 0.5, top); c.lineTo(Math.round(p.x) + 0.5, bottom); c.stroke();
+    c.beginPath(); c.arc(p.x, y(p.d.avg), 6 * dpr, 0, Math.PI * 2); c.fillStyle = COLORS.night; c.fill();
+    c.beginPath(); c.arc(p.x, y(p.d.avg), 4 * dpr, 0, Math.PI * 2); c.fillStyle = CHART.rest; c.fill();
+  }
+}
+
+function renderTable() {
+  const all = qualifyingHours(prog.days).reverse();
+  prog.tbody.textContent = '';
+  for (const h of all.slice(0, 500)) {
+    const tr = document.createElement('tr');
+    for (const v of [`${fmtDay(h.start)}, ${hourRange(h.start)}${h.current ? ' (now)' : ''}`, String(h.rests), String(Math.round(h.presentSec / 60)), String(Math.round(h.restSec / 60))]) {
+      const td = document.createElement('td'); td.textContent = v; tr.append(td);
+    }
+    prog.tbody.append(tr);
+  }
+}
+
+function renderProgress() {
+  readChartTokens();
+  const st = restStats(), list = qualifyingHours(prog.days);
+  renderKpis(list, st);
+  drawHourChart(list, st.avg);
+  drawDayChart(dayData(list));
+  renderTable();
+}
+
+// Tooltips: value first, then what it is. The same details show for keyboard focus.
+function showTip(lines, clientX, clientY) {
+  prog.tip.textContent = '';
+  lines.forEach((t, i) => { const el = document.createElement(i ? 'span' : 'strong'); el.textContent = t; prog.tip.append(el); });
+  prog.tip.hidden = false;
+  const r = prog.tip.getBoundingClientRect();
+  prog.tip.style.left = `${Math.min(innerWidth - r.width - 8, Math.max(8, clientX + 14))}px`;
+  prog.tip.style.top = `${Math.min(innerHeight - r.height - 8, Math.max(8, clientY - r.height - 12))}px`;
+}
+function hideTip() { prog.tip.hidden = true; }
+function hourTip(i, clientX, clientY) {
+  const b = prog.bars[i];
+  if (!b) { hideTip(); return; }
+  const h = b.h, avg = restStats().avg;
+  showTip([plural(h.rests, 'rest', 'rests'), `${fmtDay(h.start)}, ${hourRange(h.start)}${h.current ? ' (so far)' : ''}`,
+    `${Math.round(h.presentSec / 60)} min at the computer · ${Math.round(h.restSec / 60)} min resting`,
+    ...(avg != null ? [`7-day average ${fmt1(avg)}`] : [])], clientX, clientY);
+}
+function dayTip(i, clientX, clientY) {
+  const p = prog.dayPts[i];
+  if (!p) { hideTip(); return; }
+  showTip([`${fmt1(p.d.avg)} rests per hour`, fmtDay(p.d.date), `${plural(p.d.rests, 'rest', 'rests')} in ${plural(p.d.hours, 'hour', 'hours')}`], clientX, clientY);
+}
+function canvasX(cv, e) { const r = cv.getBoundingClientRect(); return (e.clientX - r.left) * (cv.width / r.width); }
+prog.hour.addEventListener('pointermove', e => {
+  const x = canvasX(prog.hour, e);
+  const i = prog.bars.findIndex(b => x >= b.x0 && x < b.x1);
+  if (i !== prog.hourHover) { prog.hourHover = i; drawHourChart(qualifyingHours(prog.days), restStats().avg); }
+  if (i >= 0) hourTip(i, e.clientX, e.clientY); else hideTip();
+});
+prog.hour.addEventListener('pointerleave', () => { prog.hourHover = -1; hideTip(); renderProgress(); });
+prog.day.addEventListener('pointermove', e => {
+  if (!prog.dayPts.length) return;
+  const x = canvasX(prog.day, e);
+  let i = 0; prog.dayPts.forEach((p, k) => { if (Math.abs(p.x - x) < Math.abs(prog.dayPts[i].x - x)) i = k; });
+  if (i !== prog.dayHover) { prog.dayHover = i; drawDayChart(dayData(qualifyingHours(prog.days))); }
+  dayTip(i, e.clientX, e.clientY);
+});
+prog.day.addEventListener('pointerleave', () => { prog.dayHover = -1; hideTip(); renderProgress(); });
+function keyNav(cv, getIndex, setIndex, count, tip, redraw) {
+  cv.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    e.preventDefault();
+    const n = count(); if (!n) return;
+    const i = clamp((getIndex() < 0 ? n : getIndex()) + (e.key === 'ArrowRight' ? 1 : -1), 0, n - 1);
+    setIndex(i); redraw();
+    const r = cv.getBoundingClientRect(), dpr = cv.width / r.width;
+    const px = cv === prog.hour ? prog.bars[i].cx : prog.dayPts[i].x;
+    tip(i, r.left + px / dpr, r.top + 30);
+  });
+  cv.addEventListener('blur', () => { setIndex(-1); hideTip(); redraw(); });
+}
+keyNav(prog.hour, () => prog.hourHover, i => { prog.hourHover = i; }, () => prog.bars.length, hourTip, () => drawHourChart(qualifyingHours(prog.days), restStats().avg));
+keyNav(prog.day, () => prog.dayHover, i => { prog.dayHover = i; }, () => prog.dayPts.length, dayTip, () => drawDayChart(dayData(qualifyingHours(prog.days))));
+
+for (const btn of prog.root.querySelectorAll('.range-row button')) {
+  btn.addEventListener('click', () => {
+    prog.days = +btn.dataset.days;
+    for (const b of prog.root.querySelectorAll('.range-row button')) b.setAttribute('aria-pressed', String(b === btn));
+    renderProgress();
+  });
+}
+let clearArmed = 0;
+prog.clear.addEventListener('click', () => {
+  if (Date.now() - clearArmed > 4000) {
+    clearArmed = Date.now();
+    prog.clear.textContent = 'Click again to delete all saved hours';
+    setTimeout(() => { if (Date.now() - clearArmed >= 4000) prog.clear.textContent = 'Clear saved rests'; }, 4100);
+    return;
+  }
+  clearArmed = 0;
+  rests.hours = {}; rests.recent = []; restsDirty = true; saveRests();
+  prog.clear.textContent = 'Cleared';
+  setTimeout(() => { prog.clear.textContent = 'Clear saved rests'; }, 2000);
+  renderProgress();
+});
+function openProgress() { prog.isOpen = true; prog.root.hidden = false; renderProgress(); prog.close.focus(); }
+function closeProgress() { prog.isOpen = false; prog.root.hidden = true; hideTip(); prog.open.focus(); }
+prog.open.addEventListener('click', openProgress);
+prog.close.addEventListener('click', closeProgress);
+addEventListener('resize', () => { if (prog.isOpen) renderProgress(); });
+
+// ---------- Main loop ----------
+let lastFrameT = performance.now() / 1000;
+let lastDetectT = null;
+let lastVideoTime = -1;
+let lastReadoutT = 0;
+let lastDetectMs = 0;
+
+function loop() {
+  const nowMs = performance.now();
+  const now = nowMs / 1000;
+  const dt = clamp(now - lastFrameT, 0.001, 0.5); // real time, so fades keep their length on slow machines
+  lastFrameT = now;
+
+  if (app.running && models.face && video.readyState >= 2 && video.currentTime !== lastVideoTime) {
+    lastVideoTime = video.currentTime;
+    const ddt = lastDetectT == null ? 1 / 30 : clamp(now - lastDetectT, 0.001, 0.5);
+    lastDetectT = now;
+    const ts = Math.max(nowMs, lastDetectMs + 1);
+    lastDetectMs = ts;
+    const W = video.videoWidth, H = video.videoHeight;
+    // Eyes: a few checks a second are enough to notice closed eyes.
+    if (app.lastFaceT == null || now - app.lastFaceT >= 1 / S.eyeHz - 0.01) {
+      const fdt = app.lastFaceT == null ? 1 / S.eyeHz : clamp(now - app.lastFaceT, 0.001, 1);
+      app.lastFaceT = now;
+      app.stats.face++;
+      try { app.faceRes = models.face.detectForVideo(video, ts); } catch (e) { app.faceRes = null; }
+      lids.update(readBlendshapes(app.faceRes), now, fdt);
+      app.lidHist.push({ t: now, v: lids.st.lid });
+      while (app.lidHist.length && app.lidHist[0].t < now - 15) app.lidHist.shift();
+    }
+
+    // Body: with "only while eyes are closed" on, the breath tracking (pose model, shoulder windows,
+    // person mask, pulse) runs only while the eyes are closed, the noise is still fading, or in Preview.
+    const needBreath = hib.mode === 'awake' && (!S.breathOnlyEyesClosed || app.preview || lids.st.closed || app.armed || app.fade > 0);
+    if (!needBreath) {
+      if (!app.breathPaused) { app.breathPaused = true; breath.pause(); }
+    } else {
+      if (app.breathPaused) {
+        // Picking up again: keep the shoulder windows and the breath range rather than starting over.
+        app.breathPaused = false;
+        motion.hold(now);
+        breath.hold(now);
+        if (S.breathSource === 'pulse') pulse.reset(); // the beat timing has to start again
+      }
+      bodyStep(now, ts, W, H, ddt);
+    }
+  }
+
+  hibTick();
+  breath.tick(now, dt);
+  updateArming(now, dt);
+  updateSound(dt);
+  updateRests(now, dt);
+  engine.update(app.level, app.open);
+
+  if (app.running) {
+    app.traceBuf.push({ t: now, b: breath.st.out, m: breath.st.fast, tracked: breath.st.tracked });
+    recordHistory(now);
+    while (app.traceBuf.length && app.traceBuf[0].t < now - TRACK.traceSec) app.traceBuf.shift();
+  }
+
+  // The full-screen picture is for closed eyes only. In Preview the noise plays and the filter
+  // moves, but the page stays in view so you can watch the readouts.
+  const shown = app.preview ? 0 : app.fade;
+  const visible = shown > 0.001;
+  if (visible && noise) noise.render(now, app.open, S.resonance / 24);
+  const eased = 1 - (1 - shown) * (1 - shown); // ease-out: visible right away, settles gently
+  noiseCanvas.style.opacity = visible ? eased.toFixed(3) : '0';
+
+  if (shown < 0.999) {
+    drawCamera();
+    drawTrace(now);
+    ui.bandNow.style.left = `${bandPos(cutoffAt(app.open))}%`;
+  }
+  if (now - lastReadoutT > 0.1) { updateReadouts(now); lastReadoutT = now; }
+  if (breathLog.open && now - breathLog.lastDraw > 1 / 15) { breathLog.lastDraw = now; drawHistory(); }
+  if (prog.isOpen && now - prog.lastDraw > 2) { prog.lastDraw = now; renderProgress(); }
+  // Hibernating: a few frames a second is plenty for the readouts and the sound.
+  if (hib.mode === 'sleeping') setTimeout(() => requestAnimationFrame(loop), 250);
+  else requestAnimationFrame(loop);
+}
+
+// ---------- Boot ----------
+buildControls();
+updateStaticCopy();
+updateReadouts(performance.now() / 1000);
+requestAnimationFrame(loop);
+// Start fetching the models right away so Begin is quick. Failures are reported when Begin is pressed.
+ensureModels().catch(err => console.warn('Models not loaded yet', err));
+switchPose(S.poseModel).catch(() => { /* shown in the Breath panel */ });
+
+// ---------- Install as an app ----------
+// The service worker keeps the page and models on this computer, so the installed app also opens offline.
+if ('serviceWorker' in navigator && window.isSecureContext) {
+  addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Offline support unavailable', err)));
+  // When a new version takes over, reload to show it, unless a session is running (then it shows next time).
+  const hadController = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (hadController && !app.running) location.reload();
+  });
+}
+const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const installBtn = $('install');
+$('installHint').hidden = standalone;
+let installPrompt = null;
+addEventListener('beforeinstallprompt', e => {
+  // Chrome and Edge: offer a one-click install instead of the menu instructions.
+  e.preventDefault();
+  installPrompt = e;
+  installBtn.hidden = false;
+  $('installHint').hidden = true;
+});
+installBtn.addEventListener('click', async () => {
+  if (!installPrompt) return;
+  installPrompt.prompt();
+  await installPrompt.userChoice.catch(() => null);
+  installPrompt = null;
+  installBtn.hidden = true;
+});
+addEventListener('appinstalled', () => { installBtn.hidden = true; $('installHint').hidden = true; });
+
+// A handle for tuning from the browser console.
+window.breathingDark = { settings: S, track: TRACK, hib, HIB, hibSleep, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph, rests, restState };
+</script>
+</body>
+</html>
