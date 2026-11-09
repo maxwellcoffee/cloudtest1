@@ -67,7 +67,8 @@ checks wait while the window is hidden. Closed eyes still count as a face in vie
 while you rest. Unticking the box while it hibernates turns the camera straight back on.
 
 **Sync the closed threshold** (Eyes panel, on by default) places the threshold marker for you. When tracking
-starts, and every 5 minutes after, if your face is in view, the eyes are read on every camera frame (up to 30
+starts (which is when the app opens), when you come back after 10 seconds or more out of view or after the
+camera hibernated, and every 5 minutes after, if your face is in view, the eyes are read on every camera frame (up to 30
 times a second) for 30 seconds. From those readings it works out two ranges:
 
 - **Open**: the steady readings at the low level.
@@ -257,8 +258,15 @@ min/max window), an invert switch for the breath direction and a mirror switch.
 
 ## Sound
 
-Brown noise, made even: its sub-audible drift below 20 Hz is removed, it is set by its average level rather
-than its loudest moment, and rare outlier peaks are rounded off. It runs through two lowpass filters, a
+The noise is a recording: `brown-noise.mp3`, 2 minutes 22 seconds cut from "Brown Noise" by OTONO on the
+Internet Archive (https://archive.org/details/BrownNoise_201410, marked public domain), with the fade at each
+end of the original left out. The page turns it into a seamless loop: the last second is crossfaded into the
+first, so the loop point can't be heard, and the right ear hears the same loop started halfway round, so the
+two ears differ. Until the file has loaded (and if it can't be fetched) a short generated brown noise plays
+instead, and the two are faded into each other.
+
+Either way the noise is made even: its sub-audible drift below 20 Hz is removed, it is set by its average
+level rather than its loudest moment, and rare outlier peaks are rounded off. It runs through two lowpass filters, a
 small swell with the breath, the level control, and a smooth soft clipper (in place of a compressor), so the
 output never hits a hard edge. The audio uses the browser's larger "playback" buffers, which avoids the
 dropouts (heard as small clicks) that can happen while the face and pose models keep the computer busy.

@@ -1608,9 +1608,9 @@ function createPulseBreath(videoEl) {
 }
 
 // =====================================================================
-// Sound: brown noise -> two lowpass stages -> breath swell -> level -> soft clipper
+// Sound: brown noise (a looped recording) -> two lowpass stages -> breath swell -> level -> soft clipper
 // =====================================================================
-// Brown noise made even: integrated white noise with its sub-audible drift (below about 20 Hz)
+// The stand-in until the recording has loaded. Brown noise made even: integrated white noise with its sub-audible drift (below about 20 Hz)
 // taken out, set by its average level rather than its loudest moment, and with the rare outlier
 // peaks rounded off. The loop point is crossfaded so it never clicks.
 function makeBrownNoise(ctx, seconds) {
@@ -1645,6 +1645,45 @@ function makeBrownNoise(ctx, seconds) {
   return buffer;
 }
 
+// The recording (brown-noise.mp3, see the README for where it is from) made into a seamless stereo loop:
+// the ends are trimmed (MP3 files start and end with a few ms of padding), drift below about 20 Hz is
+// taken out, the last second is crossfaded into the first so the loop point can't be heard, and the level
+// and peaks are set the same way as the generated noise. The recording is mono, so the right channel is
+// the same loop started halfway round, which makes the two ears different at every moment.
+function loopFromRecording(ctx, decoded) {
+  const rate = decoded.sampleRate;
+  const trim = Math.floor(rate * 0.1), xf = Math.floor(rate * 1);
+  const raw = decoded.getChannelData(0).slice(trim, decoded.length - trim);
+  const len = raw.length - xf;
+  if (len < rate * 10) throw new Error('recording too short');
+  const hpA = Math.exp(-2 * Math.PI * 20 / rate);
+  let hx = raw[0], hy = 0, sum = 0;
+  for (let i = 0; i < raw.length; i++) { const x = raw[i]; hy = hpA * (hy + x - hx); hx = x; raw[i] = hy; sum += hy * hy; }
+  const g = 0.22 / (Math.sqrt(sum / raw.length) || 1);
+  for (let i = 0; i < raw.length; i++) {
+    const v = raw[i] * g, a = Math.abs(v);
+    raw[i] = a < 0.6 ? v : Math.sign(v) * (0.6 + 0.35 * Math.tanh((a - 0.6) / 0.35)); // never past 0.95
+  }
+  const buffer = ctx.createBuffer(2, len, rate);
+  const left = buffer.getChannelData(0), right = buffer.getChannelData(1);
+  left.set(raw.subarray(0, len));
+  for (let i = 0; i < xf; i++) {
+    const a = (i / xf) * Math.PI / 2;
+    left[i] = raw[i] * Math.sin(a) + raw[len + i] * Math.cos(a);
+  }
+  const half = len >> 1;
+  right.set(left.subarray(half), 0);
+  right.set(left.subarray(0, half), len - half);
+  return buffer;
+}
+const NOISE_FILE = './brown-noise.mp3';
+async function loadNoiseRecording(ctx) {
+  const res = await fetch(NOISE_FILE);
+  if (!res.ok) throw new Error(`recording: HTTP ${res.status}`);
+  const decoded = await ctx.decodeAudioData(await res.arrayBuffer());
+  return loopFromRecording(ctx, decoded);
+}
+
 // A smooth ceiling instead of a compressor: nothing changes below about -3 dB, and louder moments
 // are rounded off so the output can never hit a hard edge (which is what clicks).
 function softClipCurve() {
@@ -1662,6 +1701,7 @@ function buildNoiseGraph(ctx, dest) {
   const src = ctx.createBufferSource();
   src.buffer = makeBrownNoise(ctx, 18);
   src.loop = true;
+  const srcGain = ctx.createGain();
   const lp1 = ctx.createBiquadFilter();
   lp1.type = 'lowpass'; lp1.Q.value = S.resonance; lp1.frequency.value = cutoffFor(TRACK.restingBreath);
   const lp2 = ctx.createBiquadFilter();
@@ -1670,13 +1710,28 @@ function buildNoiseGraph(ctx, dest) {
   const master = ctx.createGain(); master.gain.value = 0;
   const pre = ctx.createGain(); pre.gain.value = 0.5;
   const clip = ctx.createWaveShaper(); clip.curve = softClipCurve(); clip.oversample = '2x';
-  src.connect(lp1).connect(lp2).connect(swell).connect(master).connect(pre).connect(clip).connect(dest);
+  src.connect(srcGain).connect(lp1).connect(lp2).connect(swell).connect(master).connect(pre).connect(clip).connect(dest);
   src.start();
-  return { lp1, lp2, swell, master };
+  return { lp1, lp2, swell, master, src, srcGain };
+}
+// Swap the playing noise for another loop, fading one into the other over a second and a half.
+function swapNoiseSource(ctx, nodes, buffer) {
+  const t = ctx.currentTime, sec = 1.5;
+  const src = ctx.createBufferSource();
+  src.buffer = buffer; src.loop = true;
+  const srcGain = ctx.createGain();
+  srcGain.gain.setValueAtTime(0, t); srcGain.gain.linearRampToValueAtTime(1, t + sec);
+  src.connect(srcGain).connect(nodes.lp1);
+  src.start();
+  const old = nodes.src, oldGain = nodes.srcGain;
+  oldGain.gain.setValueAtTime(1, t); oldGain.gain.linearRampToValueAtTime(0, t + sec);
+  old.stop(t + sec + 0.1);
+  old.onended = () => { old.disconnect(); oldGain.disconnect(); };
+  nodes.src = src; nodes.srcGain = srcGain;
 }
 
 function createNoiseEngine() {
-  let ctx = null, nodes = null, lastUpdate = 0;
+  let ctx = null, nodes = null, lastUpdate = 0, source = 'generated';
 
   function start() {
     if (ctx) return ctx.resume();
@@ -1686,7 +1741,11 @@ function createNoiseEngine() {
     // a little more delay, which doesn't matter here, and far fewer dropouts (heard as clicks) when the
     // face and pose models keep the computer busy.
     try { ctx = new AC({ latencyHint: 'playback' }); } catch { ctx = new AC(); }
+    // Generated noise plays straight away; the recording takes over as soon as it has loaded, and the
+    // generated noise stays if it can't be fetched (first launch offline).
     nodes = buildNoiseGraph(ctx, ctx.destination);
+    loadNoiseRecording(ctx).then(buffer => { swapNoiseSource(ctx, nodes, buffer); source = 'recording'; })
+      .catch(err => { source = 'generated (recording failed)'; console.warn('Brown noise recording not loaded:', err); });
     return ctx.resume();
   }
 
@@ -1709,7 +1768,7 @@ function createNoiseEngine() {
     nodes.master.gain.setTargetAtTime(S.volume * level * 1.85, t, 0.06); // matches the earlier loudness
   }
 
-  return { start, update, get running() { return !!ctx && ctx.state === 'running'; }, get nodes() { return nodes; } };
+  return { start, update, get running() { return !!ctx && ctx.state === 'running'; }, get nodes() { return nodes; }, get source() { return source; } };
 }
 
 // =====================================================================
@@ -2378,6 +2437,7 @@ function hibSleep(now) {
 }
 function hibWake(now) {
   Object.assign(hib, { mode: 'awake', since: now, opening: false, error: null });
+  syncReset(); // back after the camera slept: sync again
   $('cameraSleep').hidden = true;
   if (document.visibilityState === 'visible') requestWakeLock();
 }
@@ -2444,13 +2504,15 @@ function hibStatusText(now) {
 }
 
 // ---------- Sync the closed threshold ----------
-// With "Sync the closed threshold" on: when tracking starts and every 5 minutes after, if a face is in view,
+// With "Sync the closed threshold" on: when tracking starts, when someone comes back after being out of view
+// for 10 seconds or more, and every 5 minutes after, if a face is in view,
 // the face model reads the eyes on every camera frame (up to 30 a second) for 30 seconds. lid-sync.mjs turns
 // those readings into an open range and a closed range (from rests, or from blink peaks), the remembered
 // ranges move towards them, and the threshold goes halfway between the top of open and the bottom of closed.
 // The ranges are kept in this browser, so a burst that only saw open eyes can still place the marker.
 const LID_RANGES_KEY = 'breathing-dark.lidRanges';
-const lidSync = { active: false, from: 0, until: 0, nextAt: 0, samples: [], model: loadLidRanges(), last: null, runs: 0 };
+const SYNC_AWAY_SEC = 10; // face out of view this long counts as having left
+const lidSync = { active: false, from: 0, until: 0, nextAt: 0, goneSince: null, samples: [], model: loadLidRanges(), last: null, runs: 0 };
 function loadLidRanges() { try { return readLidModel(localStorage.getItem(LID_RANGES_KEY)); } catch { return readLidModel(null); } }
 function saveLidRanges() { try { localStorage.setItem(LID_RANGES_KEY, JSON.stringify(lidSync.model)); } catch { /* storage blocked */ } }
 function syncReset() { Object.assign(lidSync, { active: false, nextAt: nowSec(), samples: [] }); } // due straight away
@@ -2462,6 +2524,12 @@ function syncForget() {
 function syncSettingChanged() { syncReset(); }
 function syncTick(now) {
   if (!S.syncLid || !app.running || hib.mode !== 'awake') { lidSync.active = false; return; }
+  // Someone who was away and is back (maybe someone else, or in different light) gets a fresh sync.
+  if (!lids.st.faceInView) lidSync.goneSince ??= now;
+  else {
+    if (lidSync.goneSince != null && now - lidSync.goneSince >= SYNC_AWAY_SEC) syncReset();
+    lidSync.goneSince = null;
+  }
   if (!lidSync.active) {
     if (now >= lidSync.nextAt && lids.st.faceInView) {
       Object.assign(lidSync, { active: true, from: now, until: now + SYNC.windowSec, nextAt: now + SYNC.everySec, samples: [] });
@@ -3734,7 +3802,7 @@ installBtn.addEventListener('click', async () => {
 addEventListener('appinstalled', () => { installBtn.hidden = true; $('installHint').hidden = true; });
 
 // A handle for tuning from the browser console.
-window.breathingDark = { settings: S, track: TRACK, hib, HIB, hibSleep, lidSync, SYNC, nudge, NUDGE, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph, rests, restState };
+window.breathingDark = { settings: S, track: TRACK, hib, HIB, hibSleep, lidSync, SYNC, nudge, NUDGE, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph, loopFromRecording, rests, restState };
 </script>
 </body>
 </html>
