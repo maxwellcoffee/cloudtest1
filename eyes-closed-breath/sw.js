@@ -4,7 +4,7 @@
 // on the next launch. The CDN files are pinned versions that never change, so they are served from
 // the cache once stored.
 
-const SHELL_CACHE = 'breathing-dark-shell-v7';
+const SHELL_CACHE = 'breathing-dark-shell-v8';
 const CDN_CACHE = 'breathing-dark-cdn-v2';
 const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35';
 
@@ -24,7 +24,7 @@ const CDN = [
   `${MP}/wasm/vision_wasm_internal.js`,
   `${MP}/wasm/vision_wasm_internal.wasm`,
   'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',
-  'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task',
+  'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/1/pose_landmarker_heavy.task',
 ];
 // tfhub.dev serves the MoveNet models (through a redirect); they are stored the first time they are used.
 const CDN_HOSTS = new Set(['cdn.jsdelivr.net', 'storage.googleapis.com', 'fonts.googleapis.com', 'fonts.gstatic.com', 'tfhub.dev']);

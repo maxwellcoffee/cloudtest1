@@ -354,6 +354,10 @@ kbd {
         <p><strong>Sit so your head and both shoulders are in the frame.</strong></p>
         <p>Press Begin, allow the camera, then close your eyes. Headphones help.</p>
       </div>
+      <div class="mirror-empty" id="cameraPaused" hidden>
+        <p><strong>Paused for an hour.</strong></p>
+        <p id="cameraPausedNote">Tracking starts again by itself. Press Resume now to start sooner.</p>
+      </div>
       <div class="mirror-empty" id="cameraSleep" hidden>
         <p><strong>Hibernating to save power.</strong></p>
         <p>No face for 5 minutes, so the camera is off. It looks for you every 10 minutes, or as soon as you move the mouse or press a key.</p>
@@ -374,7 +378,7 @@ kbd {
             <div class="lid-recent" id="lidRecent"></div>
             <div class="meter-fill" id="lidFill"></div>
           </div>
-          <input type="range" id="set-lidThreshold" class="lid-slider" min="0" max="1" step="0.01" value="0.55">
+          <input type="range" id="set-lidThreshold" class="lid-slider" min="0" max="1" step="0.01" value="0.58">
         </div>
         <div class="lid-scale" aria-hidden="true"><span>open</span><span>closed</span></div>
         <p class="note" id="eyesNote">The bar is the eye-closure signal from the face model. The faint band shows its range over the last 15 s.</p>
@@ -453,6 +457,10 @@ kbd {
         <div class="setting" id="continuousRow">
           <p class="hint">The noise keeps playing the whole time. With your eyes closed the filter follows your breath; with them open, or when your breath isn't being tracked, it glides down to the low cutoff and rests there.</p>
         </div>
+        <div class="setting" id="nudgeRow">
+          <p class="hint">After 5 minutes in view of the camera without closing your eyes for 5 seconds, the noise’s pitch starts rising slowly from the low cutoff, doubling every 3 minutes, until you close your eyes for 5 seconds. With Continuous noise off, the noise also comes in so you hear it.</p>
+          <p class="note" id="nudgeNote"></p>
+        </div>
       </div>
 
       <div class="readout">
@@ -464,8 +472,10 @@ kbd {
 
       <div class="actions">
         <button id="begin" class="primary" type="button">Begin</button>
+        <button id="pauseHour" type="button">Pause for an hour</button>
         <button id="preview" type="button" disabled>Preview with eyes open</button>
       </div>
+      <p class="note warn" id="soundNote" hidden>Click anywhere or press a key to turn the sound on. Browsers hold sound back until you do, once per visit.</p>
     </div>
   </section>
 
@@ -606,28 +616,29 @@ const STORE_KEY = 'breathing-dark.settings.v1';
 const SETTINGS_VERSION = 2;
 const DEFAULTS = {
   version: SETTINGS_VERSION,
-  lidThreshold: 0.55,
-  holdSec: 0.6,
+  lidThreshold: 0.58,
+  holdSec: 0.2,
   fadeInSec: 2.5,
   fadeOutSec: 1,
   volume: 0.6,
-  cutoffLow: 110,
-  cutoffHigh: 900,
-  resonance: 1,
-  poseModel: 'mp-full',
-  breathSmoothSec: 1.5,
-  exhaleFloor: 0,
+  cutoffLow: 152,
+  cutoffHigh: 300,
+  resonance: 0,
+  poseModel: 'mp-heavy',
+  breathSmoothSec: 0.7,
+  exhaleFloor: 0.18,
   sensitivity: 5,
   invertBreath: false,
   mirror: true,
-  breathSource: 'motion',
-  colorMethod: 'sharp',
+  breathSource: 'outline',
+  colorMethod: 'vote',
   breathOnlyEyesClosed: true,
   hibernate: true,
-  continuousNoise: false,
+  restNudge: true,
+  continuousNoise: true,
   historyRowSec: 60,
   historySkipGaps: true,
-  eyeHz: 3,
+  eyeHz: 1,
 };
 const fmtHz = v => v >= 1000 ? `${+(v / 1000).toFixed(2)} kHz` : `${Math.round(v)} Hz`;
 
@@ -651,7 +662,7 @@ const FILTER_SLIDERS = [
 ];
 const LID_MIN = 0.1, LID_MAX = 0.95;
 const EYE_SLIDERS = [
-  { key: 'eyeHz', label: 'Eye checks per second', min: 1, max: 30, step: 1, fmt: v => `${v} per second`, hint: 'How often the face model looks at your eyes. 3 is plenty to notice closed eyes; more reacts a little sooner but uses more power.' },
+  { key: 'eyeHz', label: 'Eye checks per second', min: 1, max: 30, step: 1, fmt: v => `${v} per second`, hint: 'How often the face model looks at your eyes. 1 is enough to notice closed eyes and uses the least power; more reacts a little sooner.' },
   { key: 'holdSec', label: 'Hold before the noise', min: 0.2, max: 8, step: 0.1, fmt: v => `${v.toFixed(1)} s`, hint: 'Eyes stay closed this long first. A blink lasts about 0.1 to 0.4 s.' },
 ];
 const SLIDERS = [
@@ -1643,13 +1654,14 @@ function createNoiseEngine() {
     return ctx.resume();
   }
 
-  // level: 0..1 loudness of the noise; open: 0..1 how far the filter is open (0 = low cutoff).
-  function update(level, open) {
+  // level: 0..1 loudness of the noise; open: 0..1 how far the filter is open (0 = low cutoff);
+  // pitch: the rest nudge's multiplier on the cutoff (1 = none).
+  function update(level, open, pitch = 1) {
     if (!ctx || !nodes) return;
     const t = ctx.currentTime;
     if (t - lastUpdate < 1 / 40) return;
     lastUpdate = t;
-    const f = cutoffAt(open);
+    const f = Math.min(LOG_MAX, cutoffAt(open) * pitch);
     nodes.lp1.frequency.setTargetAtTime(f, t, 0.12);
     nodes.lp2.frequency.setTargetAtTime(Math.min(f * 1.5, ctx.sampleRate / 2 - 100), t, 0.12);
     // Resonance: the lowpass Q in Web Audio is the height of the peak in dB. Half of that is taken
@@ -2117,6 +2129,7 @@ function buildControls() {
   makeCheck({ key: 'breathOnlyEyesClosed', label: 'Only track breathing while my eyes are closed', prepend: true }, $('breathPowerRow'));
   makeCheck({ key: 'hibernate', label: 'Power-saving hibernate', prepend: true, onChange: hibernateSettingChanged }, $('hibernateRow'));
   makeCheck({ key: 'continuousNoise', label: 'Continuous noise', prepend: true }, $('continuousRow'));
+  makeCheck({ key: 'restNudge', label: 'Nudge me to rest my eyes', prepend: true }, $('nudgeRow'));
   const srcSel = $('set-breathSource'), methodSel = $('set-colorMethod');
   srcSel.addEventListener('change', () => {
     S.breathSource = srcSel.value; saveSettings(); syncBreathUI();
@@ -2172,17 +2185,22 @@ function updateStaticCopy() {
 }
 
 // ---------- Start / stop ----------
-async function begin() {
+// auto: started when the page opened, not by a click. The sound may then have to wait for the first
+// click or key press, so it isn't waited for.
+async function begin({ auto = false } = {}) {
+  if (app.running || app.starting) return;
+  app.starting = true;
   ui.begin.disabled = true;
   try {
-    const audioStart = engine.start(); // must run inside the click
+    const audioStart = engine.start(); // inside the click when there is one, so the browser lets it play
+    if (auto) audioStart.catch(() => {});
     if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
       setStatus('The camera needs a secure page. Open this file from https:// or http://localhost.', true);
       return;
     }
     setStatus('Starting camera…');
     await openCamera();
-    await audioStart;
+    if (!auto) await audioStart;
     setStatus('Loading face and pose models…');
     await ensureModels();
     await switchPose(S.poseModel).catch(() => { /* reported in the Breath panel */ });
@@ -2209,6 +2227,7 @@ async function begin() {
     else if (name === 'NotReadableError') setStatus('The camera is in use by another app. Close it and press Begin.', true);
     else setStatus('The face and pose models did not load. Check your connection and press Begin to try again.', true);
   } finally {
+    app.starting = false;
     ui.begin.disabled = false;
   }
 }
@@ -2362,7 +2381,54 @@ function hibStatusText(now) {
   return `Hibernating: camera off to save power. ${when}, or move the mouse.${hib.error ? ` ${hib.error}` : ''}`;
 }
 
-ui.begin.addEventListener('click', () => { app.running ? stop() : begin(); });
+// ---------- Pause for an hour ----------
+// Stops tracking (camera, models and noise) and starts again by itself an hour later. The time is kept
+// in this browser, so closing and reopening the page within the hour stays paused.
+const PAUSE_KEY = 'breathing-dark.pausedUntil';
+const PAUSE_MS = 3600e3;
+let pausedUntil = (() => { try { const v = Number(localStorage.getItem(PAUSE_KEY)); return v > Date.now() ? v : 0; } catch { return 0; } })();
+let pauseTimer = null;
+function setPausedUntil(t) {
+  pausedUntil = t;
+  try { if (t) localStorage.setItem(PAUSE_KEY, String(t)); else localStorage.removeItem(PAUSE_KEY); } catch { /* storage blocked */ }
+  clearTimeout(pauseTimer);
+  if (t) pauseTimer = setTimeout(checkPauseEnd, Math.min(60e3, Math.max(0, t - Date.now()) + 50)); // re-checked each minute, so a sleeping Mac catches up
+  showPause();
+}
+const clock = t => new Date(t).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+function showPause() {
+  const on = !!pausedUntil && !app.running;
+  $('pauseHour').textContent = pausedUntil ? 'Resume now' : 'Pause for an hour';
+  $('cameraPaused').hidden = !on;
+  if (on) {
+    ui.cameraEmpty.hidden = true;
+    $('cameraPausedNote').textContent = `Tracking starts again by itself at ${clock(pausedUntil)}. Press Resume now to start sooner.`;
+    setStatus(`Paused until ${clock(pausedUntil)}`);
+  } else if (!app.running) ui.cameraEmpty.hidden = false;
+}
+function checkPauseEnd() {
+  if (!pausedUntil) return;
+  if (Date.now() < pausedUntil) { setPausedUntil(pausedUntil); return; }
+  setPausedUntil(0);
+  begin({ auto: true });
+}
+function pauseForAnHour() {
+  if (app.running) stop();
+  setPausedUntil(Date.now() + PAUSE_MS);
+}
+$('pauseHour').addEventListener('click', () => {
+  if (pausedUntil) { setPausedUntil(0); begin(); } else pauseForAnHour();
+});
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') checkPauseEnd(); });
+
+// Browsers may hold the sound back on a page that started by itself; the first click or key press lets it play.
+function unlockSound() { if (app.running) engine.start().catch(() => {}); }
+for (const ev of ['pointerdown', 'keydown', 'touchend']) addEventListener(ev, unlockSound, { capture: true, passive: true });
+
+ui.begin.addEventListener('click', () => {
+  if (app.running) stop();
+  else { if (pausedUntil) setPausedUntil(0); begin(); }
+});
 ui.preview.addEventListener('click', () => setPreview(!app.preview));
 addEventListener('keydown', e => {
   if (e.target instanceof HTMLInputElement || e.metaKey || e.ctrlKey || e.altKey) return;
@@ -2392,10 +2458,13 @@ function updateArming(now, dt) {
 function updateSound(dt) {
   const breathOpen = filterAmount(breath.st.out);
   if (!S.continuousNoise) {
-    app.level = app.fade;
+    // The rest nudge can bring the noise in with your eyes open. The filter follows the breath in
+    // proportion to how much of the loudness comes from closed eyes, so it sits at the low cutoff
+    // while only the nudge is sounding and moves smoothly between the two.
+    app.level = Math.max(app.fade, nudge.level);
     app.gate = app.fade; // so switching the setting on mid-session starts from where things are
     app.gateTarget = app.armed;
-    app.open = breathOpen;
+    app.open = app.level > 0 ? breathOpen * (app.fade / app.level) : breathOpen;
     return;
   }
   // Loudness: up over the fade-in time while running, down over the fade-out time when stopped.
@@ -2407,6 +2476,45 @@ function updateSound(dt) {
   app.gate = app.gateTarget ? Math.min(1, app.gate + step) : Math.max(0, app.gate - step);
   const eased = app.gate * app.gate * (3 - 2 * app.gate); // gentle at both ends
   app.open = eased * breathOpen;
+}
+
+// ---------- Rest nudge ----------
+// With "Nudge me to rest my eyes" on: after 5 minutes in view of the camera without closing your eyes for
+// 5 seconds, the cutoff's pitch starts rising, doubling every 3 minutes, until you close your eyes for 5
+// seconds. Without Continuous noise, the noise also fades in (at the low cutoff) so the nudge is heard.
+// Time out of view pauses the count; 5 minutes away (or Stop) starts it over.
+const NUDGE = { afterSec: 300, restSec: 5, doubleSec: 180, fadeInSec: 10, fadeOutSec: 3, releaseSec: 3, awaySec: 300 };
+const nudge = { inViewSec: 0, awaySec: 0, active: false, factor: 1, level: 0, releaseRate: 0, rests: 0 };
+function nudgeReset() { Object.assign(nudge, { inViewSec: 0, awaySec: 0, active: false }); }
+function updateNudge(now, dt) {
+  const L = lids.st;
+  const on = S.restNudge && app.running && !app.preview;
+  const inView = L.faceInView && hib.mode === 'awake';
+  const rested = L.closed && now - L.closedSince >= NUDGE.restSec;
+  if (!on) nudgeReset();
+  else if (rested) { if (nudge.inViewSec > 0 || nudge.active) nudge.rests++; nudgeReset(); }
+  else if (inView) { nudge.inViewSec += dt; nudge.awaySec = 0; }
+  else if ((nudge.awaySec += dt) >= NUDGE.awaySec) nudgeReset();
+  const wasActive = nudge.active;
+  nudge.active = on && nudge.inViewSec >= NUDGE.afterSec;
+  if (nudge.active) {
+    nudge.factor = Math.pow(2, (nudge.inViewSec - NUDGE.afterSec) / NUDGE.doubleSec);
+  } else {
+    // Back down over a few seconds rather than all at once.
+    if (wasActive) nudge.releaseRate = Math.max(Math.log2(nudge.factor), 0.1) / NUDGE.releaseSec;
+    nudge.factor = Math.max(1, nudge.factor * Math.pow(2, -nudge.releaseRate * dt));
+  }
+  const want = nudge.active && !S.continuousNoise ? 1 : 0;
+  nudge.level = want ? Math.min(1, nudge.level + dt / NUDGE.fadeInSec) : Math.max(0, nudge.level - dt / NUDGE.fadeOutSec);
+}
+const cutoffNow = () => Math.min(LOG_MAX, cutoffAt(app.open) * nudge.factor);
+function nudgeText() {
+  if (!S.restNudge) return '';
+  if (!app.running) return 'Starts counting when you press Begin.';
+  if (nudge.active) return `Nudging: the pitch is ×${nudge.factor.toFixed(2)} and doubles every 3 minutes. Close your eyes for 5 seconds to stop it.`;
+  if (nudge.factor > 1.001) return 'Rested. The pitch is settling back down.';
+  const left = NUDGE.afterSec - nudge.inViewSec;
+  return `${mmss(left)} until the nudge, unless you close your eyes for 5 seconds first.${hib.mode === 'awake' && lids.st.faceInView ? '' : ' Paused while you’re out of view.'}`;
 }
 
 // ---------- Drawing ----------
@@ -2570,6 +2678,8 @@ function drawTrace(now) {
 
 // ---------- Readouts (about ten times a second) ----------
 function updateReadouts(now) {
+  const soundHeld = app.running && !!engine.nodes && !engine.running;
+  if ($('soundNote').hidden === soundHeld) $('soundNote').hidden = !soundHeld;
   const L = lids.st, B = breath.st;
   ui.lidFill.style.width = `${clamp(L.lid, 0, 1) * 100}%`;
   ui.lidFill.classList.toggle('closed', L.closed);
@@ -2611,9 +2721,12 @@ function updateReadouts(now) {
       : app.gate < 0.02 ? 'At low cutoff'
       : app.gateTarget ? 'Opening' : 'Gliding to low cutoff';
   }
+  if (nudge.active && !app.armed && !app.preview) noiseText = `Rest nudge ×${nudge.factor.toFixed(2)}`;
   ui.noiseValue.textContent = noiseText;
+  const nn = nudgeText();
+  if ($('nudgeNote').textContent !== nn) $('nudgeNote').textContent = nn;
 
-  const hz = Math.round(cutoffAt(app.open));
+  const hz = Math.round(cutoffNow());
   ui.cutoffValue.textContent = fmtHz(hz);
 
   const sum = breath.summary();
@@ -3365,9 +3478,10 @@ function loop() {
   hibTick();
   breath.tick(now, dt);
   updateArming(now, dt);
+  updateNudge(now, dt);
   updateSound(dt);
   updateRests(now, dt);
-  engine.update(app.level, app.open);
+  engine.update(app.level, app.open, nudge.factor);
 
   if (app.running) {
     app.traceBuf.push({ t: now, b: breath.st.out, m: breath.st.fast, tracked: breath.st.tracked });
@@ -3386,7 +3500,7 @@ function loop() {
   if (shown < 0.999) {
     drawCamera();
     drawTrace(now);
-    ui.bandNow.style.left = `${bandPos(cutoffAt(app.open))}%`;
+    ui.bandNow.style.left = `${bandPos(cutoffNow())}%`;
   }
   if (now - lastReadoutT > 0.1) { updateReadouts(now); lastReadoutT = now; }
   if (breathLog.open && now - breathLog.lastDraw > 1 / 15) { breathLog.lastDraw = now; drawHistory(); }
@@ -3404,6 +3518,9 @@ requestAnimationFrame(loop);
 // Start fetching the models right away so Begin is quick. Failures are reported when Begin is pressed.
 ensureModels().catch(err => console.warn('Models not loaded yet', err));
 switchPose(S.poseModel).catch(() => { /* shown in the Breath panel */ });
+// Start tracking as soon as the page opens, unless it's paused (then it starts when the hour is up).
+if (pausedUntil) setPausedUntil(pausedUntil);
+else begin({ auto: true });
 
 // ---------- Install as an app ----------
 // The service worker keeps the page and models on this computer, so the installed app also opens offline.
@@ -3436,7 +3553,7 @@ installBtn.addEventListener('click', async () => {
 addEventListener('appinstalled', () => { installBtn.hidden = true; $('installHint').hidden = true; });
 
 // A handle for tuning from the browser console.
-window.breathingDark = { settings: S, track: TRACK, hib, HIB, hibSleep, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph, rests, restState };
+window.breathingDark = { settings: S, track: TRACK, hib, HIB, hibSleep, nudge, NUDGE, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph, rests, restState };
 </script>
 </body>
 </html>

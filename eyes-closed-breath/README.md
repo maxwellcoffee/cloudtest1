@@ -43,29 +43,42 @@ cd eyes-closed-breath && python3 -m http.server 8000
 Then open http://localhost:8000.
 
 1. Sit or lie so both shoulders are in the frame. Headphones help.
-2. Press **Begin** and allow the camera.
-3. Close your eyes. After 0.6 s the noise starts and reaches full level over 2.5 s.
+2. Open the page. Tracking starts by itself; allow the camera the first time. Browsers usually hold sound
+   back until you've clicked or pressed a key once on the page, and a note under the buttons says so.
+3. Close your eyes. After 0.2 s the noise follows your breath, reaching full level over 2.5 s.
 4. If it starts too easily or not at all, drag the marker on the Eyes bar. Close your eyes for a few
    seconds, open them, and put the marker between your open level and how far the faint band reached.
 
 To save power, **Only track breathing while my eyes are closed** (on by default) runs the body tracking only
-while your eyes are closed, the noise is fading, or in Preview, and the eyes are checked 3 times a second
+while your eyes are closed, the noise is fading, or in Preview, and the eyes are checked once a second
 (**Eye checks per second** in the Eyes panel).
+
+**Stop** ends tracking until you press Begin again. **Pause for an hour** stops it and starts it again by
+itself an hour later. The time is kept in the browser, so reopening the page within the hour stays paused.
+While paused, the button reads **Resume now**.
 
 **Power-saving hibernate** (Eyes panel, on by default) saves battery when you're away. After 5 minutes with
 no face in view, the camera turns off (its light goes out), the face and body models stop, the page redraws
 only a few times a second, and the screen is allowed to sleep. Every 10 minutes the camera comes back on for
-10 seconds and only the face model runs, a few checks a second, looking for you. If it finds your face,
+10 seconds and only the face model runs, at the eye-check rate, looking for you. If it finds your face,
 everything picks up where it left off; if not, it sleeps for another 10 minutes. Moving the mouse, pressing a
 key, or this window coming back into view looks straight away instead of waiting for the next check, and
 checks wait while the window is hidden. Closed eyes still count as a face in view, so it never hibernates
 while you rest. Unticking the box while it hibernates turns the camera straight back on.
 
-**Continuous noise** (Noise panel, off by default) keeps the noise playing the whole time tracking runs.
+**Continuous noise** (Noise panel, on by default) keeps the noise playing the whole time tracking runs.
 With your eyes closed the filter follows your breath as usual. With them open, or when your breath isn't
 being tracked (no face, breath lost, or tracking paused to save power), the filter glides down to the low
 cutoff over 2.5 s and rests there, and glides back up when your eyes close. The full-screen picture still
 appears only with your eyes closed.
+
+**Nudge me to rest my eyes** (Noise panel, on by default) is a reminder to close them. After 5 minutes in
+view of the camera without closing your eyes for at least 5 seconds, the noise's pitch starts rising from
+the low cutoff, doubling every 3 minutes (at most 10 kHz). Closing your eyes for 5 seconds stops it, and the
+pitch settles back over 3 seconds. A shorter closure doesn't count, and the pitch keeps rising through it.
+Time out of view pauses the count; 5 minutes away, or Stop, starts it over. With Continuous noise off, the
+noise also fades in over 10 seconds so the nudge is heard. The note under the checkbox counts down to the
+nudge.
 
 **Preview with eyes open** (or <kbd>P</kbd>) plays the noise and moves the filter with your breathing while
 the page stays in view, so you can watch the breath graph and adjust the sliders as you listen. The
@@ -136,12 +149,12 @@ takes over when ready. The panel shows the time each frame takes.
 
 | Model | Library | Download | Notes |
 | --- | --- | --- | --- |
-| MediaPipe Full (default) | MediaPipe Tasks Vision | 9 MB | Good balance |
-| MediaPipe Heavy | MediaPipe Tasks Vision | 31 MB | Most accurate, slowest |
+| MediaPipe Full | MediaPipe Tasks Vision | 9 MB | Good balance |
+| MediaPipe Heavy (default) | MediaPipe Tasks Vision | 31 MB | Most accurate, slowest |
 | MoveNet Lightning | TensorFlow.js pose-detection | 5 MB | Fastest; the model the original breathing sketch used |
 | MoveNet Thunder | TensorFlow.js pose-detection | 13 MB | More accurate MoveNet |
 
-MediaPipe Full is stored for offline use straight away; the others are stored the first time you pick them.
+MediaPipe Heavy is stored for offline use straight away; the others are stored the first time you pick them.
 
 ## How the breath is measured
 
@@ -150,7 +163,7 @@ current source is: jitter (frame-to-frame noise, in pixels), breath swing (how f
 measurement over the last 10 s), and for the outline, how many shoulders were found. Switch sources and
 color methods while breathing normally and keep the one with the lowest jitter for the largest swing.
 
-### Shoulder movement (default)
+### Shoulder movement
 
 The pose model's shoulder points are guesses at the joint inside the body, and they wander by about as much
 as a breath moves. So they are only used to place two windows over the shoulders (the corner brackets in
@@ -160,7 +173,7 @@ vertical brightness gradient). The windows are placed again when the shoulders m
 eighth of a shoulder width or the match gets poor. The head is outside both windows, so tilting or turning
 it doesn't affect the breath.
 
-### Shoulder outline by color
+### Shoulder outline by color (default)
 
 Each window reaches a little above the shoulder into the background. A color method scores every pixel
 for how much more it looks like shoulder than background. Down each column, the outline is the row that best
@@ -177,9 +190,9 @@ off.
 | Color, ignoring brightness | One learned color per side (running two-cluster k-means) in an opponent-color space with brightness at a third of the weight, so shadows and exposure changes matter less |
 | Color histograms | A 1000-bin color histogram per side, for patterned backgrounds or clothes |
 | Color spread (Gaussian) | Each side's color and how it varies (mean and covariance), compared by likelihood |
-| Sharpest color change (default) | The steepest step from background color towards shoulder color in each column, with sub-pixel peak fitting |
+| Sharpest color change | The steepest step from background color towards shoulder color in each column, with sub-pixel peak fitting |
 | Neural person mask | MediaPipe's selfie segmenter (250 KB) draws the person/background split; it ignores color |
-| Vote | Runs the four color methods together and takes the median of their answers |
+| Vote (default) | Runs the four color methods together and takes the median of their answers |
 
 On a synthetic test (shoulders rising 4 px every 5 s while the head bobbed 10 px every 7 s), shoulder
 movement recovered 3.35 of the 4 px and the color outline 3.92 px, both with R² 0.99 against the 5 s breath.
@@ -200,12 +213,12 @@ swing larger), and always lags the breath by a beat or two.
 
 | Signal | Source | Drives |
 | --- | --- | --- |
-| Lid signal 0–1 | Face blendshapes, smoothed over 0.15 s | Closed when ≥ threshold (0.55), open again below threshold − 0.08 |
-| Eyes closed ≥ hold (0.6 s) | Lid state | Noise fades in (2.5 s); eyes open for 0.3 s fades it out (1 s) |
+| Lid signal 0–1 | Face blendshapes, smoothed over 0.15 s | Closed when ≥ threshold (0.58), open again below threshold − 0.08 |
+| Eyes closed ≥ hold (0.2 s) | Lid state | Noise fades in (2.5 s); eyes open for 0.3 s fades it out (1 s) |
 | Breath 0–1 | The chosen source (shoulder shift ÷ shoulder width, or heart-rate swing), adaptive window | Breath trace, breath count |
-| Smoothed breath | Breath averaged over the **Breath smoothing** window (1.5 s) | Lowpass cutoff, exponential from **Low cutoff** (110 Hz) on the out-breath to **High cutoff** (900 Hz) on the in-breath; a small level swell; the picture's fine detail, brightness and aperture |
-| Exhale floor (off) | Slider, 0–60% up the breath range | Below it the breath is held at the floor before smoothing, so the filter stays at the low cutoff through the less reliable bottom of the out-breath; the sweep from low to high cutoff runs between the floor and the top |
-| Resonance (1 dB) | Slider, 0–24 dB | Height of the filter's peak at the cutoff (half of it is taken back off the level); in the picture, detail at the cutoff's scale and a ring at the aperture |
+| Smoothed breath | Breath averaged over the **Breath smoothing** window (0.7 s) | Lowpass cutoff, exponential from **Low cutoff** (152 Hz) on the out-breath to **High cutoff** (300 Hz) on the in-breath; a small level swell; the picture's fine detail, brightness and aperture |
+| Exhale floor (18%) | Slider, 0–60% up the breath range | Below it the breath is held at the floor before smoothing, so the filter stays at the low cutoff through the less reliable bottom of the out-breath; the sweep from low to high cutoff runs between the floor and the top |
+| Resonance (0 dB) | Slider, 0–24 dB | Height of the filter's peak at the cutoff (half of it is taken back off the level); in the picture, detail at the cutoff's scale and a ring at the aperture |
 
 The Lowpass filter panel shows the chosen band on a 20 Hz – 10 kHz scale with the live cutoff. Breath
 smoothing is two chained averages, each with a quarter of the window as its time constant. That has the same
