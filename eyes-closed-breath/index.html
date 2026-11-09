@@ -610,6 +610,8 @@ const TRACK = {
   minSeparation: 0.3,      // how clearly a color method must split shoulder from background (0..1)
   minEdgeColumns: 0.3,     // share of columns that must show a clear outline
   poseEvery: 2,            // run the pose model on every second camera frame
+  closedLift: 0.15,        // eyes closed: the filter opens at least this far up the cutoff range, however small the breath reads
+  closedLiftSec: 0.5,      // time for that lift to come in or go
   gateGlideSec: 2.5,       // continuous noise: time to glide between following the breath and the low cutoff
   ppgScale: 0.003,         // pulse mode: breath units per beat-per-minute of heart-rate swing
   ppgMaxIrregular: 0.15,   // pulse mode: beat-to-beat variation above this means no clear pulse
@@ -1995,7 +1997,7 @@ try { noise = createNoiseRenderer(noiseCanvas); } catch (e) { console.error('Noi
 const app = {
   running: false, preview: false, hud: false, armed: false, fade: 0,
   stream: null, faceRes: null, poseRes: null, frameCount: 0, lastPoseT: null, posePending: false, statusMsg: null, statusWarn: false,
-  traceBuf: [], lidHist: [], wakeLock: null, lastFaceT: null, breathPaused: false, stats: { face: 0, body: 0, pose: 0 }, level: 0, open: 0, gate: 0, gateTarget: false,
+  traceBuf: [], lidHist: [], wakeLock: null, lastFaceT: null, breathPaused: false, stats: { face: 0, body: 0, pose: 0 }, level: 0, open: 0, lift: 0, gate: 0, gateTarget: false,
 };
 
 const ui = {
@@ -2556,8 +2558,13 @@ function updateArming(now, dt) {
 // Normally the noise is heard only while it is faded in (eyes closed), and the filter follows the
 // breath. With Continuous noise the sound stays on while tracking runs, and a gate decides whether
 // the filter follows the breath (eyes closed, breath tracked) or glides down to the low cutoff.
+// Closed eyes also lift the filter a little by themselves, so you hear that they were seen even when
+// the shoulders barely move. The breath then sweeps the rest of the range above the lift.
 function updateSound(dt) {
   const breathOpen = filterAmount(breath.st.out);
+  app.lift = clamp(app.lift + (app.armed ? dt : -dt) / TRACK.closedLiftSec, 0, 1);
+  const lift = TRACK.closedLift * app.lift * app.lift * (3 - 2 * app.lift);
+  const lifted = open => lift + (1 - lift) * open;
   if (!S.continuousNoise) {
     // The rest nudge can bring the noise in with your eyes open. The filter follows the breath in
     // proportion to how much of the loudness comes from closed eyes, so it sits at the low cutoff
@@ -2565,7 +2572,7 @@ function updateSound(dt) {
     app.level = Math.max(app.fade, nudge.level);
     app.gate = app.fade; // so switching the setting on mid-session starts from where things are
     app.gateTarget = app.armed;
-    app.open = app.level > 0 ? breathOpen * (app.fade / app.level) : breathOpen;
+    app.open = lifted(app.level > 0 ? breathOpen * (app.fade / app.level) : breathOpen);
     return;
   }
   // Loudness: up over the fade-in time while running, down over the fade-out time when stopped.
@@ -2576,7 +2583,7 @@ function updateSound(dt) {
   const step = dt / TRACK.gateGlideSec;
   app.gate = app.gateTarget ? Math.min(1, app.gate + step) : Math.max(0, app.gate - step);
   const eased = app.gate * app.gate * (3 - 2 * app.gate); // gentle at both ends
-  app.open = eased * breathOpen;
+  app.open = lifted(eased * breathOpen);
 }
 
 // ---------- Rest nudge ----------

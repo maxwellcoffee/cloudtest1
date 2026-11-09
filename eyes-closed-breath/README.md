@@ -242,6 +242,7 @@ swing larger), and always lags the breath by a beat or two.
 | Eyes closed ≥ hold (0.2 s) | Lid state | Noise fades in (2.5 s); eyes open for 0.3 s fades it out (1 s) |
 | Breath 0–1 | The chosen source (shoulder shift ÷ shoulder width, or heart-rate swing), adaptive window | Breath trace, breath count |
 | Smoothed breath | Breath averaged over the **Breath smoothing** window (0.7 s) | Lowpass cutoff, exponential from **Low cutoff** (152 Hz) on the out-breath to **High cutoff** (300 Hz) on the in-breath; a small level swell; the picture's fine detail, brightness and aperture |
+| Eyes closed | Lid state, eased over 0.5 s | The filter opens at least 15% of the way up the cutoff range (152 → about 168 Hz), so closed eyes are heard as a slightly higher pitch even when the shoulders barely move; the breath sweeps the rest of the range above that |
 | Exhale floor (18%) | Slider, 0–60% up the breath range | Below it the breath is held at the floor before smoothing, so the filter stays at the low cutoff through the less reliable bottom of the out-breath; the sweep from low to high cutoff runs between the floor and the top |
 | Resonance (0 dB) | Slider, 0–24 dB | Height of the filter's peak at the cutoff (half of it is taken back off the level); in the picture, detail at the cutoff's scale and a ring at the aperture |
 
