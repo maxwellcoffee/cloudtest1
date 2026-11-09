@@ -139,6 +139,10 @@ h1 em { font-style: italic; color: var(--muted); }
 .lid-meter { position: relative; height: 26px; }
 .lid-track { position: absolute; left: 0; right: 0; top: 10px; height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
 .lid-recent { position: absolute; top: 0; bottom: 0; width: 0; background: var(--lid-dim); }
+/* Sync: the open and closed ranges it remembers, as two thin bands above the bar. */
+.lid-range { position: absolute; top: 3px; height: 3px; border-radius: 1.5px; }
+.lid-range.open { background: var(--muted); }
+.lid-range.closed { background: var(--lid); }
 .lid-slider {
   position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
   -webkit-appearance: none; appearance: none; background: transparent; cursor: ew-resize;
@@ -300,6 +304,11 @@ button:focus-visible, summary:focus-visible, input:focus-visible {
 .setting > .check { grid-column: 1 / -1; }
 .note.quality { font-family: var(--font-data); font-size: var(--step--2); }
 .check input { accent-color: var(--breath); width: 16px; height: 16px; }
+/* A checkbox that belongs to the one above it. */
+.setting > .sub-check { grid-column: 1 / -1; padding-left: 26px; }
+.sub-check .check { align-items: flex-start; }
+.sub-check .check input { flex: none; margin-top: 2px; }
+.sub-check .check:has(input:disabled) { color: var(--muted); cursor: default; }
 .reset-row { grid-column: 1 / -1; }
 .reset-row button { font-size: var(--step--1); padding: 8px 12px; }
 
@@ -370,7 +379,7 @@ kbd {
       <div class="readout">
         <div class="readout-head"><span class="label">Eyes</span><span class="value" id="eyesValue">Not tracking</span></div>
         <div class="setting">
-          <label for="set-lidThreshold">Closed threshold <span class="sub">· drag the marker</span></label>
+          <label for="set-lidThreshold">Closed threshold <span class="sub" id="lidSub">· drag the marker</span></label>
           <output id="out-lidThreshold" for="set-lidThreshold">0.55</output>
         </div>
         <div class="lid-meter">
@@ -378,11 +387,17 @@ kbd {
             <div class="lid-recent" id="lidRecent"></div>
             <div class="meter-fill" id="lidFill"></div>
           </div>
+          <div class="lid-range open" id="lidOpenRange" hidden></div>
+          <div class="lid-range closed" id="lidClosedRange" hidden></div>
           <input type="range" id="set-lidThreshold" class="lid-slider" min="0" max="1" step="0.01" value="0.58">
         </div>
         <div class="lid-scale" aria-hidden="true"><span>open</span><span>closed</span></div>
         <p class="note" id="eyesNote">The bar is the eye-closure signal from the face model. The faint band shows its range over the last 15 s.</p>
-        <p class="hint">To set it: close your eyes for a few seconds, open them, and see how far the band reached. Put the marker between your open level and that.</p>
+        <p class="hint">To set it by hand: close your eyes for a few seconds, open them, and see how far the band reached. Put the marker between your open level and that.</p>
+        <div class="setting" id="syncRow">
+          <p class="note" id="syncNote"></p>
+          <p class="hint">Sets the marker for you. When tracking starts and every 5 minutes after, if your face is in view, it reads your eyes up to 30 times a second for 30 seconds. From your blinks and rests it works out the range your eyes read when open and when closed (the two thin bands above the bar), and puts the marker halfway between them. Moving the marker yourself turns this off.</p>
+        </div>
         <div class="controls" id="eyeControls"></div>
         <div class="setting" id="hibernateRow">
           <p class="hint">Saves battery when you're away: after 5 minutes with no face in view, the camera and the face and body models switch off and the screen may sleep. Every 10 minutes the camera comes on for 10 seconds to look for you, until it finds you. Moving the mouse, pressing a key or coming back to this window looks straight away.</p>
@@ -458,7 +473,8 @@ kbd {
           <p class="hint">The noise keeps playing the whole time. With your eyes closed the filter follows your breath; with them open, or when your breath isn't being tracked, it glides down to the low cutoff and rests there.</p>
         </div>
         <div class="setting" id="nudgeRow">
-          <p class="hint">After 5 minutes in view of the camera without closing your eyes for 5 seconds, the noise’s pitch starts rising slowly from the low cutoff, doubling every 3 minutes, until you close your eyes for 5 seconds. With Continuous noise off, the noise also comes in so you hear it.</p>
+          <p class="hint">After 5 minutes in view of the camera without closing your eyes for 5 seconds, the noise’s pitch starts rising slowly from the low cutoff, doubling every 3 minutes, until you close your eyes for 5 seconds.</p>
+          <div class="sub-check" id="nudgeNoiseRow" hidden></div>
           <p class="note" id="nudgeNote"></p>
         </div>
       </div>
@@ -552,6 +568,7 @@ kbd {
 
 <script type="module">
 import { REST_SECONDS, HOURLY_GOAL, createRestCycle, restBand, hourKeyOf, hourStart, restTotals, pruneRests, readRests } from './rest-counter.mjs';
+import { SYNC, analyzeLidWindow, blendLidModel, syncedThreshold, readLidModel } from './lid-sync.mjs';
 // =====================================================================
 // Breathing Dark
 // Eye closure: MediaPipe Face Landmarker blendshapes, as in the
@@ -634,7 +651,9 @@ const DEFAULTS = {
   colorMethod: 'vote',
   breathOnlyEyesClosed: true,
   hibernate: true,
+  syncLid: true,
   restNudge: true,
+  nudgeNoiseIn: true,
   continuousNoise: true,
   historyRowSec: 60,
   historySkipGaps: true,
@@ -1982,6 +2001,7 @@ const app = {
 const ui = {
   begin: $('begin'), preview: $('preview'), status: $('status'), cameraEmpty: $('cameraEmpty'),
   eyesValue: $('eyesValue'), eyesNote: $('eyesNote'), lidFill: $('lidFill'), lidRecent: $('lidRecent'),
+  lidOpenRange: $('lidOpenRange'), lidClosedRange: $('lidClosedRange'), lidSub: $('lidSub'), syncNote: $('syncNote'), nudgeNoiseRow: $('nudgeNoiseRow'),
   breathValue: $('breathValue'), breathNote: $('breathNote'),
   noiseValue: $('noiseValue'), noiseFill: $('noiseFill'),
   cutoffValue: $('cutoffValue'), bandRange: $('bandRange'), bandNow: $('bandNow'),
@@ -2128,8 +2148,10 @@ function buildControls() {
   for (const s of EYE_SLIDERS) makeSlider(s, $('eyeControls'));
   makeCheck({ key: 'breathOnlyEyesClosed', label: 'Only track breathing while my eyes are closed', prepend: true }, $('breathPowerRow'));
   makeCheck({ key: 'hibernate', label: 'Power-saving hibernate', prepend: true, onChange: hibernateSettingChanged }, $('hibernateRow'));
+  makeCheck({ key: 'syncLid', label: 'Sync the closed threshold', prepend: true, onChange: syncSettingChanged }, $('syncRow'));
   makeCheck({ key: 'continuousNoise', label: 'Continuous noise', prepend: true }, $('continuousRow'));
   makeCheck({ key: 'restNudge', label: 'Nudge me to rest my eyes', prepend: true }, $('nudgeRow'));
+  makeCheck({ key: 'nudgeNoiseIn', label: 'The noise comes in after 5 minutes if you haven’t closed your eyes, even with Continuous noise off' }, $('nudgeNoiseRow'));
   const srcSel = $('set-breathSource'), methodSel = $('set-colorMethod');
   srcSel.addEventListener('change', () => {
     S.breathSource = srcSel.value; saveSettings(); syncBreathUI();
@@ -2145,6 +2167,7 @@ function buildControls() {
   const lidInput = $('set-lidThreshold');
   lidInput.addEventListener('input', () => {
     S.lidThreshold = clamp(parseFloat(lidInput.value), LID_MIN, LID_MAX);
+    if (S.syncLid) { S.syncLid = false; lidSync.active = false; } // set by hand: Sync would only move it back
     saveSettings();
     refreshControls();
   });
@@ -2165,6 +2188,7 @@ function buildControls() {
   reset.type = 'button'; reset.id = 'resetSettings'; reset.textContent = 'Restore defaults';
   reset.addEventListener('click', () => {
     Object.assign(S, DEFAULTS); saveSettings(); refreshControls(); updateStaticCopy();
+    syncForget();
     $('set-poseModel').value = S.poseModel;
     switchPose(S.poseModel).catch(() => {});
     syncBreathUI(); breath.reset(); motion.relock();
@@ -2214,6 +2238,7 @@ async function begin({ auto = false } = {}) {
     app.breathPaused = false;
     app.running = true;
     hibReset();
+    syncReset();
     ui.begin.textContent = 'Stop';
     ui.preview.disabled = false;
     setStatus(models.pose ? 'Tracking eyes and breath' : 'Tracking eyes only. The pose model did not load, so breath is not tracked.', !models.pose);
@@ -2258,6 +2283,7 @@ function stop() {
   saveRests();
   app.running = false;
   hibReset();
+  syncReset();
   setPreview(false);
   stopStream();
   ui.begin.textContent = 'Begin';
@@ -2381,6 +2407,81 @@ function hibStatusText(now) {
   return `Hibernating: camera off to save power. ${when}, or move the mouse.${hib.error ? ` ${hib.error}` : ''}`;
 }
 
+// ---------- Sync the closed threshold ----------
+// With "Sync the closed threshold" on: when tracking starts and every 5 minutes after, if a face is in view,
+// the face model reads the eyes on every camera frame (up to 30 a second) for 30 seconds. lid-sync.mjs turns
+// those readings into an open range and a closed range (from rests, or from blink peaks), the remembered
+// ranges move towards them, and the threshold goes halfway between the top of open and the bottom of closed.
+// The ranges are kept in this browser, so a burst that only saw open eyes can still place the marker.
+const LID_RANGES_KEY = 'breathing-dark.lidRanges';
+const lidSync = { active: false, from: 0, until: 0, nextAt: 0, samples: [], model: loadLidRanges(), last: null, runs: 0 };
+function loadLidRanges() { try { return readLidModel(localStorage.getItem(LID_RANGES_KEY)); } catch { return readLidModel(null); } }
+function saveLidRanges() { try { localStorage.setItem(LID_RANGES_KEY, JSON.stringify(lidSync.model)); } catch { /* storage blocked */ } }
+function syncReset() { Object.assign(lidSync, { active: false, nextAt: nowSec(), samples: [] }); } // due straight away
+function syncForget() {
+  lidSync.model = readLidModel(null); lidSync.last = null;
+  try { localStorage.removeItem(LID_RANGES_KEY); } catch { /* storage blocked */ }
+  syncReset();
+}
+function syncSettingChanged() { syncReset(); }
+function syncTick(now) {
+  if (!S.syncLid || !app.running || hib.mode !== 'awake') { lidSync.active = false; return; }
+  if (!lidSync.active) {
+    if (now >= lidSync.nextAt && lids.st.faceInView) {
+      Object.assign(lidSync, { active: true, from: now, until: now + SYNC.windowSec, nextAt: now + SYNC.everySec, samples: [] });
+    }
+  } else if (now >= lidSync.until) syncFinish(now);
+}
+function syncFinish(now) {
+  const found = analyzeLidWindow(lidSync.samples, { threshold: S.lidThreshold });
+  Object.assign(lidSync, { active: false, samples: [] });
+  lidSync.runs++;
+  const was = S.lidThreshold;
+  let placed = false;
+  if (found.open || found.closed) {
+    lidSync.model = blendLidModel(lidSync.model, found, Date.now());
+    saveLidRanges();
+    const t = syncedThreshold(lidSync.model, { min: LID_MIN, max: LID_MAX });
+    placed = t != null;
+    if (placed && Math.abs(t - S.lidThreshold) >= 0.005) { S.lidThreshold = t; saveSettings(); refreshControls(); }
+  }
+  // You weren't there for most of it: try again in a minute rather than five.
+  if (found.note === 'short') lidSync.nextAt = Math.min(lidSync.nextAt, now + SYNC.retrySec);
+  lidSync.last = { at: now, found, was, set: S.lidThreshold, placed };
+}
+const lidSpan = r => `${r.lo.toFixed(2)}–${r.hi.toFixed(2)}`;
+function syncResultText({ found: f, was, set, placed }) {
+  if (f.note === 'short') return `Last sync: only ${Math.round(f.faceSec)} s of readings in the ${SYNC.windowSec} (your face out of view, or the computer busy), so nothing changed.`;
+  let saw;
+  if (f.open && f.closed) {
+    saw = f.closed.from === 'rest' ? `eyes open at ${lidSpan(f.open)} and closed at ${lidSpan(f.closed)}`
+      : `eyes open at ${lidSpan(f.open)} and ${f.closed.blinks} blinks reaching ${lidSpan(f.closed)}`;
+  } else if (f.open) saw = `eyes open at ${lidSpan(f.open)}, with no rest and too few blinks to read the closed level`;
+  else if (f.closed) saw = f.closed.from === 'rest' ? `eyes closed at ${lidSpan(f.closed)} the whole time` : `${f.closed.blinks} blinks reaching ${lidSpan(f.closed)}`;
+  else if (f.note === 'twoLevels') return `Last sync: your eyes sat at two levels on the same side of the marker (around ${f.levels[0].toFixed(2)} and ${f.levels[1].toFixed(2)}) with no blinks to tell which is closed, so nothing changed.`;
+  else return 'Last sync: the readings sat around the marker with no blinks to tell open from closed, so nothing changed.';
+  const m = lidSync.model;
+  const outcome = !placed
+    ? (!m.closed ? 'The marker moves once it has a closed reading too: a rest, or a couple of blinks.'
+      : !m.open ? 'The marker moves once it has an open-eyes reading too.'
+      : 'Open and closed are too close together to place the marker, so it stays.')
+    : Math.abs(set - was) >= 0.005 ? `Marker moved from ${was.toFixed(2)} to ${set.toFixed(2)}.` : `Marker stays at ${set.toFixed(2)}.`;
+  return `Last sync: ${saw}. ${outcome}`;
+}
+function syncText(now) {
+  if (!S.syncLid) return 'Off. The marker stays where you put it.';
+  if (!app.running) return 'Runs when tracking starts.';
+  if (lidSync.active) return `Syncing: reading your eyes up to ${SYNC.hz} times a second. ${Math.max(0, Math.ceil(lidSync.until - now))} s left.`;
+  const next = hib.mode !== 'awake' ? 'Waits while hibernating.'
+    : now >= lidSync.nextAt ? 'Starts when your face is in view.' : `Next in ${mmss(lidSync.nextAt - now)}.`;
+  return lidSync.last ? `${syncResultText(lidSync.last)} ${next}` : next;
+}
+function showLidRange(el, r) {
+  const on = !!r && S.syncLid;
+  if (el.hidden === on) el.hidden = !on;
+  if (on) { el.style.left = `${r.lo * 100}%`; el.style.width = `${Math.max(0.5, (r.hi - r.lo) * 100)}%`; }
+}
+
 // ---------- Pause for an hour ----------
 // Stops tracking (camera, models and noise) and starts again by itself an hour later. The time is kept
 // in this browser, so closing and reopening the page within the hour stays paused.
@@ -2481,7 +2582,8 @@ function updateSound(dt) {
 // ---------- Rest nudge ----------
 // With "Nudge me to rest my eyes" on: after 5 minutes in view of the camera without closing your eyes for
 // 5 seconds, the cutoff's pitch starts rising, doubling every 3 minutes, until you close your eyes for 5
-// seconds. Without Continuous noise, the noise also fades in (at the low cutoff) so the nudge is heard.
+// seconds. Without Continuous noise, the noise also fades in (at the low cutoff) so the nudge is heard,
+// unless its sub-checkbox (shown only while Continuous noise is off) is unticked.
 // Time out of view pauses the count; 5 minutes away (or Stop) starts it over.
 const NUDGE = { afterSec: 300, restSec: 5, doubleSec: 180, fadeInSec: 10, fadeOutSec: 3, releaseSec: 3, awaySec: 300 };
 const nudge = { inViewSec: 0, awaySec: 0, active: false, factor: 1, level: 0, releaseRate: 0, rests: 0 };
@@ -2504,13 +2606,15 @@ function updateNudge(now, dt) {
     if (wasActive) nudge.releaseRate = Math.max(Math.log2(nudge.factor), 0.1) / NUDGE.releaseSec;
     nudge.factor = Math.max(1, nudge.factor * Math.pow(2, -nudge.releaseRate * dt));
   }
-  const want = nudge.active && !S.continuousNoise ? 1 : 0;
+  const want = nudge.active && !S.continuousNoise && S.nudgeNoiseIn ? 1 : 0;
   nudge.level = want ? Math.min(1, nudge.level + dt / NUDGE.fadeInSec) : Math.max(0, nudge.level - dt / NUDGE.fadeOutSec);
 }
 const cutoffNow = () => Math.min(LOG_MAX, cutoffAt(app.open) * nudge.factor);
+const nudgeHeard = () => S.continuousNoise || S.nudgeNoiseIn; // with your eyes open, that is
 function nudgeText() {
   if (!S.restNudge) return '';
   if (!app.running) return 'Starts counting when you press Begin.';
+  if (nudge.active && !nudgeHeard()) return `5 minutes without a rest. The noise stays off, so you’ll only hear the nudge as a higher pitch (×${nudge.factor.toFixed(2)} now) when you close your eyes. 5 seconds closed stops it.`;
   if (nudge.active) return `Nudging: the pitch is ×${nudge.factor.toFixed(2)} and doubles every 3 minutes. Close your eyes for 5 seconds to stop it.`;
   if (nudge.factor > 1.001) return 'Rested. The pitch is settling back down.';
   const left = NUDGE.afterSec - nudge.inViewSec;
@@ -2693,6 +2797,12 @@ function updateReadouts(now) {
     ui.lidRecent.style.width = '0';
   }
   ui.noiseFill.style.width = `${app.level * 100}%`;
+  const st = syncText(now);
+  if (ui.syncNote.textContent !== st) ui.syncNote.textContent = st;
+  const sub = S.syncLid ? '· set by Sync' : '· drag the marker';
+  if (ui.lidSub.textContent !== sub) ui.lidSub.textContent = sub;
+  showLidRange(ui.lidOpenRange, lidSync.model.open);
+  showLidRange(ui.lidClosedRange, lidSync.model.closed);
 
   if (!app.running) {
     ui.eyesValue.textContent = 'Not tracking';
@@ -2721,10 +2831,13 @@ function updateReadouts(now) {
       : app.gate < 0.02 ? 'At low cutoff'
       : app.gateTarget ? 'Opening' : 'Gliding to low cutoff';
   }
-  if (nudge.active && !app.armed && !app.preview) noiseText = `Rest nudge ×${nudge.factor.toFixed(2)}`;
+  if (nudge.active && nudgeHeard() && !app.armed && !app.preview) noiseText = `Rest nudge ×${nudge.factor.toFixed(2)}`;
   ui.noiseValue.textContent = noiseText;
   const nn = nudgeText();
   if ($('nudgeNote').textContent !== nn) $('nudgeNote').textContent = nn;
+  // The sub-checkbox only means something with Continuous noise off, and only does something with the nudge on.
+  if (ui.nudgeNoiseRow.hidden !== S.continuousNoise) ui.nudgeNoiseRow.hidden = S.continuousNoise;
+  if (controls.nudgeNoiseIn.input.disabled === S.restNudge) controls.nudgeNoiseIn.input.disabled = !S.restNudge;
 
   const hz = Math.round(cutoffNow());
   ui.cutoffValue.textContent = fmtHz(hz);
@@ -3447,13 +3560,16 @@ function loop() {
     const ts = Math.max(nowMs, lastDetectMs + 1);
     lastDetectMs = ts;
     const W = video.videoWidth, H = video.videoHeight;
-    // Eyes: a few checks a second are enough to notice closed eyes.
-    if (app.lastFaceT == null || now - app.lastFaceT >= 1 / S.eyeHz - 0.01) {
-      const fdt = app.lastFaceT == null ? 1 / S.eyeHz : clamp(now - app.lastFaceT, 0.001, 1);
+    // Eyes: a few checks a second are enough to notice closed eyes. A sync reads every frame while it has a face.
+    const eyeHz = lidSync.active && lids.st.faceInView ? Math.max(S.eyeHz, SYNC.hz) : S.eyeHz;
+    if (app.lastFaceT == null || now - app.lastFaceT >= 1 / eyeHz - 0.01) {
+      const fdt = app.lastFaceT == null ? 1 / eyeHz : clamp(now - app.lastFaceT, 0.001, 1);
       app.lastFaceT = now;
       app.stats.face++;
       try { app.faceRes = models.face.detectForVideo(video, ts); } catch (e) { app.faceRes = null; }
-      lids.update(readBlendshapes(app.faceRes), now, fdt);
+      const blend = readBlendshapes(app.faceRes);
+      lids.update(blend, now, fdt);
+      if (lidSync.active && blend) lidSync.samples.push({ t: now, v: lids.st.raw });
       app.lidHist.push({ t: now, v: lids.st.lid });
       while (app.lidHist.length && app.lidHist[0].t < now - 15) app.lidHist.shift();
     }
@@ -3476,6 +3592,7 @@ function loop() {
   }
 
   hibTick();
+  syncTick(now);
   breath.tick(now, dt);
   updateArming(now, dt);
   updateNudge(now, dt);
@@ -3553,7 +3670,7 @@ installBtn.addEventListener('click', async () => {
 addEventListener('appinstalled', () => { installBtn.hidden = true; $('installHint').hidden = true; });
 
 // A handle for tuning from the browser console.
-window.breathingDark = { settings: S, track: TRACK, hib, HIB, hibSleep, nudge, NUDGE, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph, rests, restState };
+window.breathingDark = { settings: S, track: TRACK, hib, HIB, hibSleep, lidSync, SYNC, nudge, NUDGE, lids: lids.st, breath: breath.st, motion: motion.st, pulse: pulse.st, app, engine, breathLog, buildNoiseGraph, rests, restState };
 </script>
 </body>
 </html>

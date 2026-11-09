@@ -66,6 +66,26 @@ key, or this window coming back into view looks straight away instead of waiting
 checks wait while the window is hidden. Closed eyes still count as a face in view, so it never hibernates
 while you rest. Unticking the box while it hibernates turns the camera straight back on.
 
+**Sync the closed threshold** (Eyes panel, on by default) places the threshold marker for you. When tracking
+starts, and every 5 minutes after, if your face is in view, the eyes are read on every camera frame (up to 30
+times a second) for 30 seconds. From those readings it works out two ranges:
+
+- **Open**: the steady readings at the low level.
+- **Closed**: the steady readings during a rest of 1.5 s or more, or, with no rest in the 30 seconds, the
+  level your blinks reach (at least two blinks are needed).
+
+The marker goes halfway between the top of the open range and the bottom of the closed range. The two ranges
+are remembered in the browser and shown as thin bands above the bar, so a sync that only saw open eyes can
+still place the marker from an earlier closed reading. A range edge moves quickly when a sync widens the range
+and slowly when it narrows it. The note under the checkbox says what the last sync found and when the next one
+is.
+
+Nothing changes when the reading isn't clear: less than 10 seconds of readings, open and closed less than 0.1
+apart, or two steady levels on the same side of the marker with no blinks to say which is closed (it could be
+closed eyes under a marker set too high, or just looking down). A sync that is due waits for your face, and
+none run while hibernating. Moving the marker yourself unticks the box, and **Restore defaults** forgets the
+remembered ranges.
+
 **Continuous noise** (Noise panel, on by default) keeps the noise playing the whole time tracking runs.
 With your eyes closed the filter follows your breath as usual. With them open, or when your breath isn't
 being tracked (no face, breath lost, or tracking paused to save power), the filter glides down to the low
@@ -76,9 +96,13 @@ appears only with your eyes closed.
 view of the camera without closing your eyes for at least 5 seconds, the noise's pitch starts rising from
 the low cutoff, doubling every 3 minutes (at most 10 kHz). Closing your eyes for 5 seconds stops it, and the
 pitch settles back over 3 seconds. A shorter closure doesn't count, and the pitch keeps rising through it.
-Time out of view pauses the count; 5 minutes away, or Stop, starts it over. With Continuous noise off, the
-noise also fades in over 10 seconds so the nudge is heard. The note under the checkbox counts down to the
-nudge.
+Time out of view pauses the count; 5 minutes away, or Stop, starts it over. The note under the checkbox
+counts down to the nudge.
+
+With Continuous noise off, a second checkbox appears under it: **The noise comes in after 5 minutes if you
+haven't closed your eyes, even with Continuous noise off** (on by default). Ticked, the noise fades in over 10
+seconds so the nudge is heard. Unticked, the noise stays off with your eyes open, and the nudge is only heard
+as a higher pitch when you next close them.
 
 **Preview with eyes open** (or <kbd>P</kbd>) plays the noise and moves the filter with your breathing while
 the page stays in view, so you can watch the breath graph and adjust the sliders as you listen. The
@@ -115,7 +139,8 @@ version cannot be recovered. Data is saved in this browser on this computer (abo
 without changing your settings. The page reports when browser storage cannot save. **Clear saved rests**
 at the bottom of the progress view deletes it after a second click.
 
-Run the counter checks with `node --test rest-counter.test.mjs` from this folder.
+Run the counter checks with `node --test rest-counter.test.mjs` from this folder, and the Sync analysis checks with
+`node --test lid-sync.test.mjs`.
 
 **Show progress** opens the charts, scoped by a range row (24 hours, 7 days, 30 days, All):
 
