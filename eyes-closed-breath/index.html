@@ -613,6 +613,7 @@ const TRACK = {
   closedShiftSec: 0.5,     // closed-eyes pitch shift: time to come in, and to go when the eyes open
   closedShiftOutSec: 1.5,  // time for it to fade away while the eyes stay closed
   closedBriefSec: 2,       // 'for a moment': how long it stays before fading
+  bodyHoldFactor: 2,       // body tracking starts after this many times the hold before the noise
   closedEyeHzBoost: 5,     // extra eye checks a second while the eyes read closed
   gateGlideSec: 2.5,       // continuous noise: time to glide between following the breath and the low cutoff
   ppgScale: 0.003,         // pulse mode: breath units per beat-per-minute of heart-rate swing
@@ -2074,7 +2075,7 @@ try { noise = createNoiseRenderer(noiseCanvas); } catch (e) { console.error('Noi
 const app = {
   running: false, preview: false, hud: false, armed: false, fade: 0,
   stream: null, faceRes: null, poseRes: null, frameCount: 0, lastPoseT: null, posePending: false, statusMsg: null, statusWarn: false,
-  traceBuf: [], lidHist: [], wakeLock: null, lastFaceT: null, breathPaused: false, stats: { face: 0, body: 0, pose: 0 }, level: 0, open: 0, shift: { env: 0, t: 0, done: false, rose: false, armed: false }, gate: 0, gateTarget: false,
+  traceBuf: [], lidHist: [], wakeLock: null, lastFaceT: null, breathPaused: false, bodyOn: false, stats: { face: 0, body: 0, pose: 0 }, level: 0, open: 0, shift: { env: 0, t: 0, done: false, rose: false, armed: false }, gate: 0, gateTarget: false,
 };
 
 const ui = {
@@ -3718,9 +3719,12 @@ function loop() {
     }
 
     // Body: with "only while eyes are closed" on, the breath tracking (pose model, shoulder windows,
-    // person mask, pulse) runs only once the eyes have stayed closed for the hold before the noise (so a
-    // blink doesn't start it), while the noise is still fading, or in Preview.
-    const needBreath = hib.mode === 'awake' && (!S.breathOnlyEyesClosed || app.preview || app.armed || app.fade > 0);
+    // person mask, pulse) starts only once the eyes have stayed closed for twice the hold before the noise
+    // (so neither a blink nor a short closure starts it), then runs until the noise has faded out. It also
+    // runs in Preview.
+    if (lids.st.closed && now - lids.st.closedSince >= TRACK.bodyHoldFactor * S.holdSec) app.bodyOn = true;
+    else if (!app.armed && app.fade <= 0) app.bodyOn = false;
+    const needBreath = hib.mode === 'awake' && (!S.breathOnlyEyesClosed || app.preview || app.bodyOn);
     if (!needBreath) {
       if (!app.breathPaused) { app.breathPaused = true; breath.pause(); }
     } else {
