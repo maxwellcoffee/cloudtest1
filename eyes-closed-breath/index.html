@@ -472,6 +472,10 @@ kbd {
         <div class="setting" id="continuousRow">
           <p class="hint">The noise keeps playing the whole time. With your eyes closed the filter follows your breath; with them open, or when your breath isn't being tracked, it glides down to the low cutoff and rests there.</p>
         </div>
+        <div class="setting" id="openFollowRow">
+          <p class="hint">Tracks your body and moves the filter with your breath the whole time, not only with your eyes closed. The noise plays throughout, and with your eyes open it sweeps between the two cutoffs below instead of the main ones; closing your eyes glides over to the main cutoffs. Uses more power, because the body tracking never pauses.</p>
+        </div>
+        <div class="controls" id="openFollowControls" hidden></div>
         <div class="setting" id="nudgeRow">
           <p class="hint">After 5 minutes in view of the camera without closing your eyes for 10 seconds, the noise’s pitch starts rising from the low cutoff, doubling every minute with no upper limit, until you close your eyes and hold them closed for 3 seconds.</p>
           <div class="sub-check" id="nudgeNoiseRow" hidden></div>
@@ -614,6 +618,7 @@ const TRACK = {
   closedShiftOutSec: 1.5,  // time for it to fade away while the eyes stay closed
   closedBriefSec: 2,       // 'for a moment': how long it stays before fading
   bodyHoldFactor: 2,       // body tracking starts after this many times the hold before the noise
+  bandGlideSec: 0.5,       // quickest the cutoffs move between the eyes-open pair and the main pair
   closedEyeHzBoost: 5,     // extra eye checks a second while the eyes read closed
   gateGlideSec: 2.5,       // continuous noise: time to glide between following the breath and the low cutoff
   ppgScale: 0.003,         // pulse mode: breath units per beat-per-minute of heart-rate swing
@@ -663,6 +668,9 @@ const DEFAULTS = {
   restNudge: true,
   nudgeNoiseIn: true,
   continuousNoise: true,
+  openFollow: false,
+  openCutoffLow: 152,
+  openCutoffHigh: 220,
   historyRowSec: 60,
   historySkipGaps: true,
   eyeHz: 1,
@@ -674,6 +682,10 @@ const LOG_MIN = 20, LOG_MAX = 10000, LOG_STEPS = 1000, MIN_BAND_RATIO = 1.25;
 const hzToPos = hz => Math.round(LOG_STEPS * Math.log(hz / LOG_MIN) / Math.log(LOG_MAX / LOG_MIN));
 const posToHz = pos => LOG_MIN * Math.pow(LOG_MAX / LOG_MIN, pos / LOG_STEPS);
 const roundHz = hz => Number(hz.toPrecision(3));
+const OPEN_SLIDERS = [
+  { key: 'openCutoffLow', label: 'Eyes-open low cutoff', sub: 'full out-breath', log: true, fmt: fmtHz },
+  { key: 'openCutoffHigh', label: 'Eyes-open high cutoff', sub: 'full in-breath', log: true, fmt: fmtHz },
+];
 const FILTER_SLIDERS = [
   { key: 'cutoffLow', label: 'Low cutoff', sub: 'full out-breath', log: true, fmt: fmtHz },
   { key: 'cutoffHigh', label: 'High cutoff', sub: 'full in-breath', log: true, fmt: fmtHz },
@@ -687,7 +699,7 @@ const FILTER_SLIDERS = [
     fmt: v => v < 0.005 ? 'Off' : `${Math.round(v * 100)}% up`,
     hint: 'Once your out-breath drops below this point, the filter stays at the low cutoff instead of following the less reliable bottom of the breath. The dashed line on the breath graph shows it.' },
   { key: 'closedShift', label: 'Closed-eyes shift', sub: 'pitch moves when your eyes close', min: -0.5, max: 0.5, step: 0.01,
-    fmt: v => Math.abs(v) < 0.005 ? 'Off' : `${v > 0 ? 'Raises' : 'Lowers'} ${Math.round(Math.abs(v) * 100)}% · ${fmtHz(cutoffAt(v))}`,
+    fmt: v => Math.abs(v) < 0.005 ? 'Off' : `${v > 0 ? 'Raises' : 'Lowers'} ${Math.round(Math.abs(v) * 100)}% · ${fmtHz(cutoffAt(v, 1))}`,
     hint: 'Closing your eyes moves the pitch this far by itself, even when your shoulders barely move. To the right raises it, to the left lowers it below the low cutoff. The amount is a share of the range between the two cutoffs.' },
 ];
 const SHIFT_MODES = {
@@ -732,6 +744,8 @@ function loadSettings() {
   } catch { /* storage blocked: use defaults */ }
   s.cutoffLow = clampNum(s.cutoffLow, LOG_MIN, LOG_MAX / MIN_BAND_RATIO, DEFAULTS.cutoffLow);
   s.cutoffHigh = clampNum(s.cutoffHigh, s.cutoffLow * MIN_BAND_RATIO, LOG_MAX, DEFAULTS.cutoffHigh);
+  s.openCutoffLow = clampNum(s.openCutoffLow, LOG_MIN, LOG_MAX / MIN_BAND_RATIO, DEFAULTS.openCutoffLow);
+  s.openCutoffHigh = clampNum(s.openCutoffHigh, s.openCutoffLow * MIN_BAND_RATIO, LOG_MAX, DEFAULTS.openCutoffHigh);
   s.closedShift = clampNum(s.closedShift, -0.5, 0.5, DEFAULTS.closedShift);
   if (!['hold', 'brief', 'breath'].includes(s.closedShiftMode)) s.closedShiftMode = DEFAULTS.closedShiftMode;
   return s;
@@ -769,7 +783,15 @@ addEventListener('load', readTokens);
 document.fonts?.ready.then(readTokens).catch(() => {});
 // How open the filter is for a breath value: 0 at or below the exhale floor, 1 at the top of the breath.
 const filterAmount = b => S.exhaleFloor > 0 ? clamp((b - S.exhaleFloor) / (1 - S.exhaleFloor), 0, 1) : clamp(b, 0, 1);
-const cutoffAt = open => S.cutoffLow * Math.pow(Math.max(S.cutoffHigh, S.cutoffLow + 1) / S.cutoffLow, open);
+// The cutoff for a filter opening. band: 1 = the main cutoffs (eyes closed), 0 = the eyes-open pair of
+// "Follow my breath with my eyes open too"; in between, the two pairs are blended as pitch is heard.
+let bandMix = 1;
+const mixHz = (a, b, k) => a * Math.pow(b / a, k);
+const cutoffAt = (open, band = bandMix) => {
+  const lo = band >= 1 ? S.cutoffLow : mixHz(S.openCutoffLow, S.cutoffLow, band);
+  const hi = band >= 1 ? S.cutoffHigh : mixHz(S.openCutoffHigh, S.cutoffHigh, band);
+  return lo * Math.pow(Math.max(hi, lo + 1) / lo, open);
+};
 const cutoffFor = b => cutoffAt(filterAmount(b));
 
 // =====================================================================
@@ -2120,6 +2142,7 @@ function makeSlider(spec, parent) {
   input.addEventListener('input', () => {
     S[spec.key] = spec.log ? roundHz(posToHz(+input.value)) : parseFloat(input.value);
     if (spec.key === 'cutoffLow' || spec.key === 'cutoffHigh') keepBandOrder(spec.key);
+    if (spec.key === 'openCutoffLow' || spec.key === 'openCutoffHigh') keepBandOrder(spec.key, 'openCutoffLow', 'openCutoffHigh');
     saveSettings();
     refreshControls(spec.key);
     updateStaticCopy();
@@ -2146,13 +2169,13 @@ function makeCheck(spec, parent) {
 }
 
 // The high cutoff always stays at least a quarter above the low one.
-function keepBandOrder(changed) {
-  if (changed === 'cutoffLow') {
-    if (S.cutoffHigh < S.cutoffLow * MIN_BAND_RATIO) S.cutoffHigh = Math.min(LOG_MAX, roundHz(S.cutoffLow * MIN_BAND_RATIO));
-    if (S.cutoffHigh < S.cutoffLow * MIN_BAND_RATIO) S.cutoffLow = roundHz(S.cutoffHigh / MIN_BAND_RATIO);
+function keepBandOrder(changed, lo = 'cutoffLow', hi = 'cutoffHigh') {
+  if (changed === lo) {
+    if (S[hi] < S[lo] * MIN_BAND_RATIO) S[hi] = Math.min(LOG_MAX, roundHz(S[lo] * MIN_BAND_RATIO));
+    if (S[hi] < S[lo] * MIN_BAND_RATIO) S[lo] = roundHz(S[hi] / MIN_BAND_RATIO);
   } else {
-    if (S.cutoffLow > S.cutoffHigh / MIN_BAND_RATIO) S.cutoffLow = Math.max(LOG_MIN, roundHz(S.cutoffHigh / MIN_BAND_RATIO));
-    if (S.cutoffLow > S.cutoffHigh / MIN_BAND_RATIO) S.cutoffHigh = roundHz(S.cutoffLow * MIN_BAND_RATIO);
+    if (S[lo] > S[hi] / MIN_BAND_RATIO) S[lo] = Math.max(LOG_MIN, roundHz(S[hi] / MIN_BAND_RATIO));
+    if (S[lo] > S[hi] / MIN_BAND_RATIO) S[hi] = roundHz(S[lo] * MIN_BAND_RATIO);
   }
 }
 
@@ -2252,6 +2275,8 @@ function buildControls() {
   makeCheck({ key: 'syncOnOutside', label: 'Sync again when my eyes read outside their usual ranges', onChange: () => { Object.assign(lidSync.out, { since: null, n: 0, kind: null }); } }, $('syncRow'));
   { const h = document.createElement('p'); h.className = 'hint'; h.textContent = 'If your open or closed eyes sit outside the two bands for 3 seconds (new light, a different seat, glasses on or off), a sync starts straight away instead of waiting for the next one. At most once a minute.'; $('syncRow').append(h); }
   makeCheck({ key: 'continuousNoise', label: 'Continuous noise', prepend: true }, $('continuousRow'));
+  makeCheck({ key: 'openFollow', label: 'Follow my breath with my eyes open too', prepend: true }, $('openFollowRow'));
+  for (const sl of OPEN_SLIDERS) makeSlider(sl, $('openFollowControls'));
   makeCheck({ key: 'restNudge', label: 'Nudge me to rest my eyes', prepend: true }, $('nudgeRow'));
   makeCheck({ key: 'nudgeNoiseIn', label: 'The noise comes in after 5 minutes if you haven’t closed your eyes, even with Continuous noise off' }, $('nudgeNoiseRow'));
   const srcSel = $('set-breathSource'), methodSel = $('set-colorMethod');
@@ -2709,7 +2734,11 @@ function closedShift(dt) {
 function updateSound(dt) {
   const breathOpen = filterAmount(breath.st.out);
   const lifted = closedShift(dt);
-  if (!S.continuousNoise) {
+  // Which pair of cutoffs: the eyes-open pair while the eyes are open in "follow with eyes open", gliding
+  // to the main pair as the closed-eyes fade comes in. Preview always uses the main pair.
+  const bandWant = S.openFollow && !app.preview ? app.fade * app.fade * (3 - 2 * app.fade) : 1;
+  bandMix = clamp(bandWant, bandMix - dt / TRACK.bandGlideSec, bandMix + dt / TRACK.bandGlideSec);
+  if (!S.continuousNoise && !S.openFollow) {
     // The rest nudge can bring the noise in with your eyes open. The filter follows the breath in
     // proportion to how much of the loudness comes from closed eyes, so it sits at the low cutoff
     // while only the nudge is sounding and moves smoothly between the two.
@@ -2722,8 +2751,9 @@ function updateSound(dt) {
   // Loudness: up over the fade-in time while running, down over the fade-out time when stopped.
   const want = app.running || app.preview ? 1 : 0;
   app.level = want ? Math.min(1, app.level + dt / S.fadeInSec) : Math.max(0, app.level - dt / S.fadeOutSec);
-  // Follow the breath only while the eyes are closed (or in Preview) and the breath is tracked.
-  app.gateTarget = (app.armed || app.preview) && breath.st.tracked && !app.breathPaused;
+  // Follow the breath only while the eyes are closed (or in Preview, or with "follow with eyes open")
+  // and the breath is tracked.
+  app.gateTarget = (app.armed || app.preview || S.openFollow) && breath.st.tracked && !app.breathPaused;
   const step = dt / TRACK.gateGlideSec;
   app.gate = app.gateTarget ? Math.min(1, app.gate + step) : Math.max(0, app.gate - step);
   const eased = app.gate * app.gate * (3 - 2 * app.gate); // gentle at both ends
@@ -2762,11 +2792,11 @@ function updateNudge(now, dt) {
     }
     nudge.factor = Math.max(1, nudge.factor * Math.pow(2, -nudge.releaseRate * dt));
   }
-  const want = nudge.active && !S.continuousNoise && S.nudgeNoiseIn ? 1 : 0;
+  const want = nudge.active && !S.continuousNoise && !S.openFollow && S.nudgeNoiseIn ? 1 : 0;
   nudge.level = want ? Math.min(1, nudge.level + dt / NUDGE.fadeInSec) : Math.max(0, nudge.level - dt / NUDGE.fadeOutSec);
 }
 const cutoffNow = () => clamp(cutoffAt(app.open) * nudge.factor, LOG_MIN, engine.maxHz);
-const nudgeHeard = () => S.continuousNoise || S.nudgeNoiseIn; // with your eyes open, that is
+const nudgeHeard = () => S.continuousNoise || S.openFollow || S.nudgeNoiseIn; // with your eyes open, that is
 function nudgeText() {
   if (!S.restNudge) return '';
   if (!app.running) return 'Starts counting when you press Begin.';
@@ -2981,7 +3011,7 @@ function updateReadouts(now) {
   else if (app.armed) noiseText = 'Full';
   else if (app.fade > 0) noiseText = `Falling ${Math.round(app.fade * 100)}%`;
   else if (app.running && L.closed) noiseText = `In ${Math.max(0, S.holdSec - closedFor).toFixed(1)} s`;
-  if (S.continuousNoise && (app.running || app.level > 0.01) && !app.preview) {
+  if ((S.continuousNoise || S.openFollow) && (app.running || app.level > 0.01) && !app.preview) {
     noiseText = app.level < 0.99 && !app.running ? 'Stopping'
       : app.gate > 0.98 ? 'Following breath'
       : app.gate < 0.02 ? 'At low cutoff'
@@ -2992,7 +3022,9 @@ function updateReadouts(now) {
   const nn = nudgeText();
   if ($('nudgeNote').textContent !== nn) $('nudgeNote').textContent = nn;
   // The sub-checkbox only means something with Continuous noise off, and only does something with the nudge on.
-  if (ui.nudgeNoiseRow.hidden !== S.continuousNoise) ui.nudgeNoiseRow.hidden = S.continuousNoise;
+  const noiseAlways = S.continuousNoise || S.openFollow;
+  if (ui.nudgeNoiseRow.hidden !== noiseAlways) ui.nudgeNoiseRow.hidden = noiseAlways;
+  if ($('openFollowControls').hidden === S.openFollow) $('openFollowControls').hidden = !S.openFollow;
   if (controls.nudgeNoiseIn.input.disabled === S.restNudge) controls.nudgeNoiseIn.input.disabled = !S.restNudge;
   if (controls.syncOnOutside.input.disabled === S.syncLid) controls.syncOnOutside.input.disabled = !S.syncLid;
 
@@ -3741,7 +3773,7 @@ function loop() {
     // runs in Preview.
     if (lids.st.closed && now - lids.st.closedSince >= TRACK.bodyHoldFactor * S.holdSec) app.bodyOn = true;
     else if (!app.armed && app.fade <= 0) app.bodyOn = false;
-    const needBreath = hib.mode === 'awake' && (!S.breathOnlyEyesClosed || app.preview || app.bodyOn);
+    const needBreath = hib.mode === 'awake' && (!S.breathOnlyEyesClosed || S.openFollow || app.preview || app.bodyOn);
     if (!needBreath) {
       if (!app.breathPaused) { app.breathPaused = true; breath.pause(); }
     } else {

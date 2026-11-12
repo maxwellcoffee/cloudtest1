@@ -102,6 +102,13 @@ being tracked (no face, breath lost, or tracking paused to save power), the filt
 cutoff over 2.5 s and rests there, and glides back up when your eyes close. The full-screen picture still
 appears only with your eyes closed.
 
+**Follow my breath with my eyes open too** (Noise panel, off by default) keeps the body tracking running and
+the filter following your breath the whole time. The noise plays throughout, whatever Continuous noise is set
+to. Two sliders appear under the checkbox, **Eyes-open low cutoff** and **Eyes-open high cutoff** (152 and
+220 Hz to start with): with your eyes open the breath sweeps between those, and when you close your eyes the
+sweep glides over to the main cutoffs as the closed-eyes fade comes in, and back when you open them. It uses
+more power, because the body tracking never pauses.
+
 **Nudge me to rest my eyes** (Noise panel, on by default) is a reminder to close them. After 5 minutes in
 view of the camera without closing your eyes for at least 10 seconds, the noise's pitch starts rising from
 the low cutoff, doubling every minute. It has no cap of its own: it keeps rising until the filter is fully
