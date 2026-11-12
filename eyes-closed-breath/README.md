@@ -96,6 +96,12 @@ three checks in a row), a sync starts straight away, and the note says which it 
 passes through too quickly to count. It happens at most once a minute, and not until a first sync has
 remembered a range.
 
+**Sync while my eyes rest** (under it, on by default) starts a sync once your eyes have been closed for 5
+seconds and keeps it reading until you open them, so every rest updates the closed range. A sync already
+running at that point carries on as this one. The latest 90 seconds of the rest are what it works from. It
+reads your eyes on every camera frame for the whole rest, which uses more power than the usual one check a
+second.
+
 **Continuous noise** (Noise panel, on by default) keeps the noise playing the whole time tracking runs.
 With your eyes closed the filter follows your breath as usual. With them open, or when your breath isn't
 being tracked (no face, breath lost, or tracking paused to save power), the filter glides down to the low

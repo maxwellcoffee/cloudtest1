@@ -665,6 +665,7 @@ const DEFAULTS = {
   hibernate: true,
   syncLid: true,
   syncOnOutside: true,
+  syncOnRest: true,
   restNudge: true,
   nudgeNoiseIn: true,
   continuousNoise: true,
@@ -2274,6 +2275,8 @@ function buildControls() {
   makeCheck({ key: 'syncLid', label: 'Sync the closed threshold', prepend: true, onChange: syncSettingChanged }, $('syncRow'));
   makeCheck({ key: 'syncOnOutside', label: 'Sync again when my eyes read outside their usual ranges', onChange: () => { Object.assign(lidSync.out, { since: null, n: 0, kind: null }); } }, $('syncRow'));
   { const h = document.createElement('p'); h.className = 'hint'; h.textContent = 'If your open or closed eyes sit outside the two bands for 3 seconds (new light, a different seat, glasses on or off), a sync starts straight away instead of waiting for the next one. At most once a minute.'; $('syncRow').append(h); }
+  makeCheck({ key: 'syncOnRest', label: 'Sync while my eyes rest' }, $('syncRow'));
+  { const h = document.createElement('p'); h.className = 'hint'; h.textContent = 'Once your eyes have been closed for 5 seconds a sync starts and keeps reading until you open them, so every rest updates the closed range. It reads your eyes on every camera frame for the whole rest, which uses more power.'; $('syncRow').append(h); }
   makeCheck({ key: 'continuousNoise', label: 'Continuous noise', prepend: true }, $('continuousRow'));
   makeCheck({ key: 'openFollow', label: 'Follow my breath with my eyes open too', prepend: true }, $('openFollowRow'));
   for (const sl of OPEN_SLIDERS) makeSlider(sl, $('openFollowControls'));
@@ -2543,11 +2546,13 @@ function hibStatusText(now) {
 // ranges move towards them, and the threshold goes halfway between the top of open and the bottom of closed.
 // The ranges are kept in this browser, so a burst that only saw open eyes can still place the marker.
 const LID_RANGES_KEY = 'breathing-dark.lidRanges';
+const SYNC_REST_SEC = 5;  // eyes closed this long start a sync that lasts until they open
+const SYNC_REST_KEEP_SEC = 90; // of which the latest this much is analysed
 const SYNC_AWAY_SEC = 10; // face out of view this long counts as having left
-const lidSync = { active: false, from: 0, until: 0, nextAt: 0, goneSince: null, out: { since: null, n: 0, kind: null }, outBlockUntil: 0, why: null, samples: [], model: loadLidRanges(), last: null, runs: 0 };
+const lidSync = { active: false, from: 0, until: 0, nextAt: 0, goneSince: null, out: { since: null, n: 0, kind: null }, outBlockUntil: 0, why: null, rest: false, restFor: null, samples: [], model: loadLidRanges(), last: null, runs: 0 };
 function loadLidRanges() { try { return readLidModel(localStorage.getItem(LID_RANGES_KEY)); } catch { return readLidModel(null); } }
 function saveLidRanges() { try { localStorage.setItem(LID_RANGES_KEY, JSON.stringify(lidSync.model)); } catch { /* storage blocked */ } }
-function syncReset() { Object.assign(lidSync, { active: false, nextAt: nowSec(), samples: [], why: null }); } // due straight away
+function syncReset() { Object.assign(lidSync, { active: false, rest: false, nextAt: nowSec(), samples: [], why: null }); } // due straight away
 function syncForget() {
   lidSync.model = readLidModel(null); lidSync.last = null;
   try { localStorage.removeItem(LID_RANGES_KEY); } catch { /* storage blocked */ }
@@ -2572,6 +2577,17 @@ function syncTick(now) {
     if (lidSync.goneSince != null && now - lidSync.goneSince >= SYNC_AWAY_SEC) syncReset();
     lidSync.goneSince = null;
   }
+  // With its checkbox on: eyes closed for 5 s start a sync (or take over the one running) that reads until
+  // they open again. One per closure.
+  const L = lids.st;
+  if (S.syncOnRest && !lidSync.rest && L.closed && L.faceInView && now - L.closedSince >= SYNC_REST_SEC && lidSync.restFor !== L.closedSince) {
+    if (!lidSync.active) Object.assign(lidSync, { active: true, from: now, samples: [] });
+    Object.assign(lidSync, { rest: true, restFor: L.closedSince, until: Infinity, why: 'rest' });
+  }
+  if (lidSync.rest) {
+    if (!L.closed || !S.syncOnRest) syncFinish(now);
+    return;
+  }
   if (!lidSync.active) {
     if (now >= lidSync.nextAt) lidSync.why ??= 'due';
     if (now >= lidSync.nextAt && lids.st.faceInView) {
@@ -2580,8 +2596,9 @@ function syncTick(now) {
   } else if (now >= lidSync.until) syncFinish(now);
 }
 function syncFinish(now) {
+  const rest = lidSync.rest;
   const found = analyzeLidWindow(lidSync.samples, { threshold: S.lidThreshold });
-  Object.assign(lidSync, { active: false, samples: [], why: null });
+  Object.assign(lidSync, { active: false, rest: false, samples: [], why: null });
   lidSync.runs++;
   const was = S.lidThreshold;
   let placed = false;
@@ -2593,12 +2610,12 @@ function syncFinish(now) {
     if (placed && Math.abs(t - S.lidThreshold) >= 0.005) { S.lidThreshold = t; saveSettings(); refreshControls(); }
   }
   // You weren't there for most of it: try again in a minute rather than five.
-  if (found.note === 'short') lidSync.nextAt = Math.min(lidSync.nextAt, now + SYNC.retrySec);
-  lidSync.last = { at: now, found, was, set: S.lidThreshold, placed };
+  if (found.note === 'short' && !rest) lidSync.nextAt = Math.min(lidSync.nextAt, now + SYNC.retrySec);
+  lidSync.last = { at: now, found, was, set: S.lidThreshold, placed, rest };
 }
 const lidSpan = r => `${r.lo.toFixed(2)}–${r.hi.toFixed(2)}`;
-function syncResultText({ found: f, was, set, placed }) {
-  if (f.note === 'short') return `Last sync: only ${Math.round(f.faceSec)} s of readings in the ${SYNC.windowSec} (your face out of view, or the computer busy), so nothing changed.`;
+function syncResultText({ found: f, was, set, placed, rest }) {
+  if (f.note === 'short') return `Last sync: only ${Math.round(f.faceSec)} s of readings ${rest ? 'during the rest' : `in the ${SYNC.windowSec}`} (your face out of view, or the computer busy), so nothing changed.`;
   let saw;
   if (f.open && f.closed) {
     saw = f.closed.from === 'rest' ? `eyes open at ${lidSpan(f.open)} and closed at ${lidSpan(f.closed)}`
@@ -2619,6 +2636,7 @@ const SYNC_WHY = { belowOpen: ' (your eyes read below their usual open range)', 
 function syncText(now) {
   if (!S.syncLid) return 'Off. The marker stays where you put it.';
   if (!app.running) return 'Runs when tracking starts.';
+  if (lidSync.rest) return `Syncing while your eyes rest: reading them up to ${SYNC.hz} times a second until you open them.`;
   if (lidSync.active) return `Syncing${SYNC_WHY[lidSync.why] || ''}: reading your eyes up to ${SYNC.hz} times a second. ${Math.max(0, Math.ceil(lidSync.until - now))} s left.`;
   const next = hib.mode !== 'awake' ? 'Waits while hibernating.'
     : now >= lidSync.nextAt ? 'Starts when your face is in view.' : `Next in ${mmss(lidSync.nextAt - now)}.`;
@@ -3027,6 +3045,7 @@ function updateReadouts(now) {
   if ($('openFollowControls').hidden === S.openFollow) $('openFollowControls').hidden = !S.openFollow;
   if (controls.nudgeNoiseIn.input.disabled === S.restNudge) controls.nudgeNoiseIn.input.disabled = !S.restNudge;
   if (controls.syncOnOutside.input.disabled === S.syncLid) controls.syncOnOutside.input.disabled = !S.syncLid;
+  if (controls.syncOnRest.input.disabled === S.syncLid) controls.syncOnRest.input.disabled = !S.syncLid;
 
   const hz = Math.round(cutoffNow());
   ui.cutoffValue.textContent = fmtHz(hz);
@@ -3762,6 +3781,7 @@ function loop() {
       const blend = readBlendshapes(app.faceRes);
       lids.update(blend, now, fdt);
       if (lidSync.active && blend) lidSync.samples.push({ t: now, v: lids.st.raw });
+      if (lidSync.rest) { const cut = lidSync.samples.findIndex(x => x.t >= now - SYNC_REST_KEEP_SEC); if (cut > 300) lidSync.samples.splice(0, cut); }
       syncWatchOutside(now, blend);
       app.lidHist.push({ t: now, v: lids.st.lid });
       while (app.lidHist.length && app.lidHist[0].t < now - 15) app.lidHist.shift();
