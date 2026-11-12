@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { SYNC, analyzeLidWindow, blendLidModel, syncedThreshold, readLidModel } from './lid-sync.mjs';
+import { SYNC, analyzeLidWindow, blendLidModel, syncedThreshold, readLidModel, outsideLidRanges, trackOutside } from './lid-sync.mjs';
 
 // A small repeatable random source, so the tests always see the same readings.
 function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32); }
@@ -196,4 +196,38 @@ test('a very slow computer (one or two readings a second) still reads a rest, an
   assert.equal(w.closed.from, 'rest');
   near(w.open.hi, 0.24, 0.02, 'open high');
   near(w.closed.lo, 0.56, 0.02, 'closed low');
+});
+
+test('readings are placed against the remembered ranges', () => {
+  const model = { open: { lo: 0.2, hi: 0.26 }, closed: { lo: 0.54, hi: 0.6 } };
+  assert.equal(outsideLidRanges(0.23, model), null);
+  assert.equal(outsideLidRanges(0.3, model), null, 'within the margin of open');
+  assert.equal(outsideLidRanges(0.5, model), null, 'within the margin of closed');
+  assert.equal(outsideLidRanges(0.1, model), 'belowOpen');
+  assert.equal(outsideLidRanges(0.4, model), 'between');
+  assert.equal(outsideLidRanges(0.75, model), 'aboveClosed');
+  assert.equal(outsideLidRanges(0.4, { open: null, closed: null }), null, 'nothing remembered yet');
+  assert.equal(outsideLidRanges(0.6, { open: model.open, closed: null }), 'between', 'only open known');
+  assert.equal(outsideLidRanges(0.1, { open: null, closed: model.closed }), 'between', 'only closed known');
+});
+
+test('only readings that stay outside the ranges ask for a new sync', () => {
+  const model = { open: { lo: 0.2, hi: 0.26 }, closed: { lo: 0.54, hi: 0.6 } };
+  const run = (level, hz = 1, sec = 12) => {
+    const st = { since: null, n: 0, kind: null }, hits = [];
+    for (let i = 0; i <= sec * hz; i++) { const t = i / hz, k = trackOutside(st, t, level(t), model); if (k) hits.push([t, k]); }
+    return hits;
+  };
+  assert.deepEqual(run(() => 0.23), [], 'open, in range');
+  assert.deepEqual(run(t => (t >= 4 ? 0.57 : 0.23)), [], 'closing, in range');
+  // A blink or a slow close passes through the gap without staying there.
+  assert.deepEqual(run(t => (t >= 4 && t < 4.4 ? 0.4 : 0.23), 6), [], 'a blink through the gap');
+  assert.deepEqual(run(t => (t >= 4 && t < 6 ? 0.4 : t >= 6 ? 0.57 : 0.23), 6), [], '2 s in the gap');
+  // Open eyes now reading 0.38 (new light): asked for after 3 s.
+  const drift = run(t => (t >= 2 ? 0.38 : 0.23));
+  assert.deepEqual(drift[0], [5, 'between']);
+  assert.deepEqual(run(() => 0.75, 1, 4)[0], [3, 'aboveClosed']);
+  assert.deepEqual(run(() => 0.08, 1, 4)[0], [3, 'belowOpen']);
+  // Moving from one side to another starts the count again.
+  assert.deepEqual(run(t => (t < 2 ? 0.08 : 0.4), 1, 4), []);
 });

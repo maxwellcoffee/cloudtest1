@@ -24,6 +24,10 @@ export const SYNC = {
   widen: 0.6,           // how far a remembered range edge moves towards a new reading that widens the range
   narrow: 0.2,          // and towards one that narrows it
   blinkWeight: 0.5,     // blink peaks move the closed range by this much of the above
+  outMargin: 0.05,      // a reading this far past a remembered range is outside it
+  outSec: 3,            // outside for this long, on every reading, asks for a new sync
+  outMinReadings: 3,
+  outCooldownSec: 60,   // and not again for this long after one was asked for
 };
 
 const median = sorted => {
@@ -168,6 +172,32 @@ export function syncedThreshold(model, { min = 0.1, max = 0.95, opts = SYNC } = 
   if (model.closed.lo - model.open.hi < opts.minGap) return null;
   const mid = (model.open.hi + model.closed.lo) / 2;
   return Math.min(max, Math.max(min, Math.round(mid * 100) / 100));
+}
+
+// Where a reading sits against the remembered ranges: null when it is within one of them (give or take
+// the margin) or when nothing is remembered yet, otherwise 'belowOpen', 'between' or 'aboveClosed'.
+// With only one range remembered, 'between' stands for the unknown side of it.
+export function outsideLidRanges(v, model, opts = SYNC) {
+  const o = model?.open, c = model?.closed, m = opts.outMargin;
+  if (!Number.isFinite(v) || (!o && !c)) return null;
+  const within = r => r && v >= r.lo - m && v <= r.hi + m;
+  if (within(o) || within(c)) return null;
+  if (o && v < o.lo) return 'belowOpen';
+  if (c && v > c.hi) return 'aboveClosed';
+  return 'between';
+}
+
+// Follows the readings one at a time and says when they have been outside the ranges long enough.
+// state: { since, n, kind }; returns the kind once, when a new sync should start, else null.
+export function trackOutside(state, t, v, model, opts = SYNC) {
+  const kind = outsideLidRanges(v, model, opts);
+  if (!kind || kind !== state.kind) { state.since = kind ? t : null; state.n = kind ? 1 : 0; state.kind = kind; return null; }
+  state.n++;
+  if (t - state.since >= opts.outSec && state.n >= opts.outMinReadings) {
+    state.since = null; state.n = 0; state.kind = null;
+    return kind;
+  }
+  return null;
 }
 
 export function readLidModel(raw) {

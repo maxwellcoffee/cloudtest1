@@ -89,6 +89,13 @@ closed eyes under a marker set too high, or just looking down). A sync that is d
 none run while hibernating. Moving the marker yourself unticks the box, and **Restore defaults** forgets the
 remembered ranges.
 
+**Sync again when my eyes read outside their usual ranges** (under it, on by default) starts a sync without
+waiting for the next one. Each eye check is compared with the two remembered ranges: when the readings stay
+more than 0.05 below the open range, above the closed range, or in between the two for 3 seconds (at least
+three checks in a row), a sync starts straight away, and the note says which it was. A blink or a slow close
+passes through too quickly to count. It happens at most once a minute, and not until a first sync has
+remembered a range.
+
 **Continuous noise** (Noise panel, on by default) keeps the noise playing the whole time tracking runs.
 With your eyes closed the filter follows your breath as usual. With them open, or when your breath isn't
 being tracked (no face, breath lost, or tracking paused to save power), the filter glides down to the low
