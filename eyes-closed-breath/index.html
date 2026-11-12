@@ -473,7 +473,7 @@ kbd {
           <p class="hint">The noise keeps playing the whole time. With your eyes closed the filter follows your breath; with them open, or when your breath isn't being tracked, it glides down to the low cutoff and rests there.</p>
         </div>
         <div class="setting" id="nudgeRow">
-          <p class="hint">After 5 minutes in view of the camera without closing your eyes for 5 seconds, the noise’s pitch starts rising slowly from the low cutoff, doubling every 3 minutes, until you close your eyes for 5 seconds.</p>
+          <p class="hint">After 5 minutes in view of the camera without closing your eyes for 10 seconds, the noise’s pitch starts rising from the low cutoff, doubling every minute with no upper limit, until you close your eyes and hold them closed for 3 seconds.</p>
           <div class="sub-check" id="nudgeNoiseRow" hidden></div>
           <p class="note" id="nudgeNote"></p>
         </div>
@@ -1757,9 +1757,10 @@ function createNoiseEngine() {
     const t = ctx.currentTime;
     if (t - lastUpdate < 1 / 40) return;
     lastUpdate = t;
-    const f = clamp(cutoffAt(open) * pitch, LOG_MIN, LOG_MAX);
+    // The sliders stop at 10 kHz; the rest nudge may push past that, up to what the output can carry.
+    const f = clamp(cutoffAt(open) * pitch, LOG_MIN, ctx.sampleRate / 2 - 100);
     nodes.lp1.frequency.setTargetAtTime(f, t, 0.12);
-    nodes.lp2.frequency.setTargetAtTime(Math.min(f * 1.5, ctx.sampleRate / 2 - 100), t, 0.12);
+    nodes.lp2.frequency.setTargetAtTime(Math.min(f * 1.5, ctx.sampleRate / 2 - 50), t, 0.12);
     // Resonance: the lowpass Q in Web Audio is the height of the peak in dB. Half of that is taken
     // back off the level so a strong peak doesn't make the whole sound much louder.
     nodes.lp1.Q.setTargetAtTime(S.resonance, t, 0.1);
@@ -1769,7 +1770,8 @@ function createNoiseEngine() {
     nodes.master.gain.setTargetAtTime(S.volume * level * 1.85, t, 0.06); // matches the earlier loudness
   }
 
-  return { start, update, get running() { return !!ctx && ctx.state === 'running'; }, get nodes() { return nodes; }, get source() { return source; } };
+  return { start, update, get running() { return !!ctx && ctx.state === 'running'; }, get nodes() { return nodes; }, get source() { return source; },
+    get maxHz() { return (ctx ? ctx.sampleRate : 44100) / 2 - 100; } }; // the highest cutoff the output can carry
 }
 
 // =====================================================================
@@ -2714,44 +2716,49 @@ function updateSound(dt) {
 
 // ---------- Rest nudge ----------
 // With "Nudge me to rest my eyes" on: after 5 minutes in view of the camera without closing your eyes for
-// 5 seconds, the cutoff's pitch starts rising, doubling every 3 minutes, until you close your eyes for 5
-// seconds. Without Continuous noise, the noise also fades in (at the low cutoff) so the nudge is heard,
-// unless its sub-checkbox (shown only while Continuous noise is off) is unticked.
-// Time out of view pauses the count; 5 minutes away (or Stop) starts it over.
-const NUDGE = { afterSec: 300, restSec: 5, doubleSec: 180, fadeInSec: 10, fadeOutSec: 3, releaseSec: 3, awaySec: 300 };
+// 10 seconds, the cutoff's pitch starts rising, doubling every minute, until you close your eyes and hold
+// them closed for 3 seconds. There is no cap of its own: it rises until the filter is fully open (the
+// highest frequency the sound output can carry). Without Continuous noise, the noise also fades in (at the
+// low cutoff) so the nudge is heard, unless its sub-checkbox (shown only while Continuous noise is off) is
+// unticked. Time out of view pauses the count; 5 minutes away (or Stop) starts it over.
+const NUDGE = { afterSec: 300, resetSec: 10, stopSec: 3, doubleSec: 60, fadeInSec: 10, fadeOutSec: 3, releaseSec: 3, awaySec: 300 };
 const nudge = { inViewSec: 0, awaySec: 0, active: false, factor: 1, level: 0, releaseRate: 0, rests: 0 };
 function nudgeReset() { Object.assign(nudge, { inViewSec: 0, awaySec: 0, active: false }); }
 function updateNudge(now, dt) {
   const L = lids.st;
   const on = S.restNudge && app.running && !app.preview;
   const inView = L.faceInView && hib.mode === 'awake';
-  const rested = L.closed && now - L.closedSince >= NUDGE.restSec;
+  // Before the nudge, 10 s closed starts the 5 minutes over; once it is nudging, 3 s closed stops it.
+  const wasActive = nudge.active;
+  const rested = L.closed && now - L.closedSince >= (wasActive ? NUDGE.stopSec : NUDGE.resetSec);
   if (!on) nudgeReset();
   else if (rested) { if (nudge.inViewSec > 0 || nudge.active) nudge.rests++; nudgeReset(); }
   else if (inView) { nudge.inViewSec += dt; nudge.awaySec = 0; }
   else if ((nudge.awaySec += dt) >= NUDGE.awaySec) nudgeReset();
-  const wasActive = nudge.active;
   nudge.active = on && nudge.inViewSec >= NUDGE.afterSec;
   if (nudge.active) {
     nudge.factor = Math.pow(2, (nudge.inViewSec - NUDGE.afterSec) / NUDGE.doubleSec);
   } else {
     // Back down over a few seconds rather than all at once.
-    if (wasActive) nudge.releaseRate = Math.max(Math.log2(nudge.factor), 0.1) / NUDGE.releaseSec;
+    if (wasActive) {
+      nudge.factor = Math.min(nudge.factor, engine.maxHz / LOG_MIN); // settle from where the filter really was
+      nudge.releaseRate = Math.max(Math.log2(nudge.factor), 0.1) / NUDGE.releaseSec;
+    }
     nudge.factor = Math.max(1, nudge.factor * Math.pow(2, -nudge.releaseRate * dt));
   }
   const want = nudge.active && !S.continuousNoise && S.nudgeNoiseIn ? 1 : 0;
   nudge.level = want ? Math.min(1, nudge.level + dt / NUDGE.fadeInSec) : Math.max(0, nudge.level - dt / NUDGE.fadeOutSec);
 }
-const cutoffNow = () => clamp(cutoffAt(app.open) * nudge.factor, LOG_MIN, LOG_MAX);
+const cutoffNow = () => clamp(cutoffAt(app.open) * nudge.factor, LOG_MIN, engine.maxHz);
 const nudgeHeard = () => S.continuousNoise || S.nudgeNoiseIn; // with your eyes open, that is
 function nudgeText() {
   if (!S.restNudge) return '';
   if (!app.running) return 'Starts counting when you press Begin.';
-  if (nudge.active && !nudgeHeard()) return `5 minutes without a rest. The noise stays off, so you’ll only hear the nudge as a higher pitch (×${nudge.factor.toFixed(2)} now) when you close your eyes. 5 seconds closed stops it.`;
-  if (nudge.active) return `Nudging: the pitch is ×${nudge.factor.toFixed(2)} and doubles every 3 minutes. Close your eyes for 5 seconds to stop it.`;
+  if (nudge.active && !nudgeHeard()) return `5 minutes without a rest. The noise stays off, so you’ll only hear the nudge as a higher pitch (${fmtHz(cutoffNow())} now) when you close your eyes. 3 seconds closed stops it.`;
+  if (nudge.active) return `Nudging: the cutoff is at ${fmtHz(cutoffNow())} and doubles every minute. Close your eyes and hold for 3 seconds to stop it.`;
   if (nudge.factor > 1.001) return 'Rested. The pitch is settling back down.';
   const left = NUDGE.afterSec - nudge.inViewSec;
-  return `${mmss(left)} until the nudge, unless you close your eyes for 5 seconds first.${hib.mode === 'awake' && lids.st.faceInView ? '' : ' Paused while you’re out of view.'}`;
+  return `${mmss(left)} until the nudge, unless you close your eyes for 10 seconds first.${hib.mode === 'awake' && lids.st.faceInView ? '' : ' Paused while you’re out of view.'}`;
 }
 
 // ---------- Drawing ----------

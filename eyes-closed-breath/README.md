@@ -95,9 +95,11 @@ cutoff over 2.5 s and rests there, and glides back up when your eyes close. The 
 appears only with your eyes closed.
 
 **Nudge me to rest my eyes** (Noise panel, on by default) is a reminder to close them. After 5 minutes in
-view of the camera without closing your eyes for at least 5 seconds, the noise's pitch starts rising from
-the low cutoff, doubling every 3 minutes (at most 10 kHz). Closing your eyes for 5 seconds stops it, and the
-pitch settles back over 3 seconds. A shorter closure doesn't count, and the pitch keeps rising through it.
+view of the camera without closing your eyes for at least 10 seconds, the noise's pitch starts rising from
+the low cutoff, doubling every minute. It has no cap of its own: it keeps rising until the filter is fully
+open (the top of what the sound output can carry, about 22 kHz, reached after about 7 minutes from 152 Hz).
+Closing your eyes and holding them closed for 3 seconds stops it, and the pitch settles back over 3 seconds.
+A shorter closure doesn't count, and the pitch keeps rising through it.
 Time out of view pauses the count; 5 minutes away, or Stop, starts it over. The note under the checkbox
 counts down to the nudge.
 
