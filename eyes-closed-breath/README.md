@@ -50,8 +50,9 @@ Then open http://localhost:8000.
    seconds, open them, and put the marker between your open level and how far the faint band reached.
 
 To save power, **Only track breathing while my eyes are closed** (on by default) runs the body tracking only
-while your eyes are closed, the noise is fading, or in Preview, and the eyes are checked once a second
-(**Eye checks per second** in the Eyes panel).
+once your eyes have stayed closed for the **Hold before the noise** (so a blink doesn't start it), while the
+noise is fading, or in Preview. The eyes are checked once a second (**Eye checks per second** in the Eyes
+panel); from the check that sees them closed, that goes up by 5 a second until a check sees them open again.
 
 **Stop** ends tracking until you press Begin again. **Pause for an hour** stops it and starts it again by
 itself an hour later. The time is kept in the browser, so reopening the page within the hour stays paused.

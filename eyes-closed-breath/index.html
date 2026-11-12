@@ -613,6 +613,7 @@ const TRACK = {
   closedShiftSec: 0.5,     // closed-eyes pitch shift: time to come in, and to go when the eyes open
   closedShiftOutSec: 1.5,  // time for it to fade away while the eyes stay closed
   closedBriefSec: 2,       // 'for a moment': how long it stays before fading
+  closedEyeHzBoost: 5,     // extra eye checks a second while the eyes read closed
   gateGlideSec: 2.5,       // continuous noise: time to glide between following the breath and the low cutoff
   ppgScale: 0.003,         // pulse mode: breath units per beat-per-minute of heart-rate swing
   ppgMaxIrregular: 0.15,   // pulse mode: beat-to-beat variation above this means no clear pulse
@@ -696,7 +697,7 @@ const SHIFT_MODES = {
 };
 const LID_MIN = 0.1, LID_MAX = 0.95;
 const EYE_SLIDERS = [
-  { key: 'eyeHz', label: 'Eye checks per second', min: 1, max: 30, step: 1, fmt: v => `${v} per second`, hint: 'How often the face model looks at your eyes. 1 is enough to notice closed eyes and uses the least power; more reacts a little sooner.' },
+  { key: 'eyeHz', label: 'Eye checks per second', min: 1, max: 30, step: 1, fmt: v => `${v} per second`, hint: 'How often the face model looks at your eyes. 1 is enough to notice closed eyes and uses the least power; more reacts a little sooner. While they read closed it checks 5 more times a second, until it sees them open.' },
   { key: 'holdSec', label: 'Hold before the noise', min: 0.2, max: 8, step: 0.1, fmt: v => `${v.toFixed(1)} s`, hint: 'Eyes stay closed this long first. A blink lasts about 0.1 to 0.4 s.' },
 ];
 const SLIDERS = [
@@ -3693,7 +3694,10 @@ function loop() {
     lastDetectMs = ts;
     const W = video.videoWidth, H = video.videoHeight;
     // Eyes: a few checks a second are enough to notice closed eyes. A sync reads every frame while it has a face.
-    const eyeHz = lidSync.active && lids.st.faceInView ? Math.max(S.eyeHz, SYNC.hz) : S.eyeHz;
+    // Once a check sees them closed, checks come 5 a second faster until one sees them open again, so the
+    // hold is confirmed quickly and opening is noticed sooner.
+    const baseHz = S.eyeHz + (lids.st.closed ? TRACK.closedEyeHzBoost : 0);
+    const eyeHz = lidSync.active && lids.st.faceInView ? Math.max(baseHz, SYNC.hz) : baseHz;
     if (app.lastFaceT == null || now - app.lastFaceT >= 1 / eyeHz - 0.01) {
       const fdt = app.lastFaceT == null ? 1 / eyeHz : clamp(now - app.lastFaceT, 0.001, 1);
       app.lastFaceT = now;
@@ -3707,8 +3711,9 @@ function loop() {
     }
 
     // Body: with "only while eyes are closed" on, the breath tracking (pose model, shoulder windows,
-    // person mask, pulse) runs only while the eyes are closed, the noise is still fading, or in Preview.
-    const needBreath = hib.mode === 'awake' && (!S.breathOnlyEyesClosed || app.preview || lids.st.closed || app.armed || app.fade > 0);
+    // person mask, pulse) runs only once the eyes have stayed closed for the hold before the noise (so a
+    // blink doesn't start it), while the noise is still fading, or in Preview.
+    const needBreath = hib.mode === 'awake' && (!S.breathOnlyEyesClosed || app.preview || app.armed || app.fade > 0);
     if (!needBreath) {
       if (!app.breathPaused) { app.breathPaused = true; breath.pause(); }
     } else {
