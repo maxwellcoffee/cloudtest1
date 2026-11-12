@@ -1,0 +1,309 @@
+# Breathing Dark
+
+A web page, installable as a Mac app, that watches your eyes and your breathing through the webcam. Close
+your eyes and dark (brown) noise fades in. A lowpass filter on the noise opens as you breathe in and closes
+as you breathe out. A dark noise picture fills the screen and follows the same filter. Open your eyes and it
+all fades away.
+
+Live at https://maxwellcoffee.github.io/cloudtest1/eyes-closed-breath/
+
+It started from two p5.js sketches by teamhuman:
+
+- [eyes wide shut v2](https://editor.p5js.org/teamhuman/sketches/v3yvsugT8): eye closure from MediaPipe Face
+  Landmarker blendshapes (`eyeBlinkLeft/Right` minus a quarter of `eyeWideLeft/Right`, smoothed, against a
+  0.55 threshold, held for a moment before anything fades in).
+- [breathe 25 with posture](https://editor.p5js.org/teamhuman/sketches/_JShZY0ze): breathing from shoulder
+  movement, normalised by an adaptive min/max window, with breaths counted on an up-swing followed by a
+  down-swing.
+
+The page is plain JavaScript with no p5. It uses MediaPipe Tasks Vision 0.10.35 from jsDelivr for the face
+and (by default) the pose, TensorFlow.js 4.22.0 with pose-detection 2.1.3 when a MoveNet model is chosen,
+Web Audio for the sound and WebGL for the picture.
+
+## Use it as a Mac app
+
+Open the live page, then:
+
+- **Safari** (macOS Sonoma or later): File › Add to Dock.
+- **Chrome or Edge**: press **Install as an app** at the bottom of the page, or choose Install from the menu.
+
+It then opens in its own window from the Dock, Launchpad or Applications. After the first launch the page
+and the models (about 24 MB) are stored on the Mac, so it also opens offline. Whenever there is a
+connection it picks up the latest version from GitHub Pages; every push to the branch Pages deploys from
+updates it.
+
+## Run it locally
+
+The camera only works on a secure page, so serve the folder rather than double-clicking the file:
+
+```sh
+cd eyes-closed-breath && python3 -m http.server 8000
+```
+
+Then open http://localhost:8000.
+
+1. Sit or lie so both shoulders are in the frame. Headphones help.
+2. Open the page. Tracking starts by itself; allow the camera the first time. Browsers usually hold sound
+   back until you've clicked or pressed a key once on the page, and a note under the buttons says so.
+3. Close your eyes. After 0.2 s the noise follows your breath, reaching full level over 2.5 s.
+4. If it starts too easily or not at all, drag the marker on the Eyes bar. Close your eyes for a few
+   seconds, open them, and put the marker between your open level and how far the faint band reached.
+
+To save power, **Only track breathing while my eyes are closed** (on by default) runs the body tracking only
+once your eyes have stayed closed for twice the **Hold before the noise** (0.4 s by default, so neither a
+blink nor a short closure starts it), then until the noise has faded out, and in Preview. The noise itself
+still starts after one hold, at the low cutoff, and follows your breath once the body tracking is running. The eyes are checked once a second (**Eye checks per second** in the Eyes
+panel); from the check that sees them closed, that goes up by 5 a second until a check sees them open again.
+
+**Stop** ends tracking until you press Begin again. **Pause for an hour** stops it and starts it again by
+itself an hour later. The time is kept in the browser, so reopening the page within the hour stays paused.
+While paused, the button reads **Resume now**.
+
+**Power-saving hibernate** (Eyes panel, on by default) saves battery when you're away. After 5 minutes with
+no face in view, the camera turns off (its light goes out), the face and body models stop, the page redraws
+only a few times a second, and the screen is allowed to sleep. Every 10 minutes the camera comes back on for
+10 seconds and only the face model runs, at the eye-check rate, looking for you. If it finds your face,
+everything picks up where it left off; if not, it sleeps for another 10 minutes. Moving the mouse, pressing a
+key, or this window coming back into view looks straight away instead of waiting for the next check, and
+checks wait while the window is hidden. Closed eyes still count as a face in view, so it never hibernates
+while you rest. Unticking the box while it hibernates turns the camera straight back on.
+
+**Sync the closed threshold** (Eyes panel, on by default) places the threshold marker for you. When tracking
+starts (which is when the app opens), when you come back after 10 seconds or more out of view or after the
+camera hibernated, and every 5 minutes after, if your face is in view, the eyes are read on every camera frame (up to 30
+times a second) for 30 seconds. From those readings it works out two ranges:
+
+- **Open**: the steady readings at the low level.
+- **Closed**: the steady readings during a rest of 1.5 s or more, or, with no rest in the 30 seconds, the
+  level your blinks reach (at least two blinks are needed).
+
+The marker goes halfway between the top of the open range and the bottom of the closed range. The two ranges
+are remembered in the browser and shown as thin bands above the bar, so a sync that only saw open eyes can
+still place the marker from an earlier closed reading. A range edge moves quickly when a sync widens the range
+and slowly when it narrows it. The note under the checkbox says what the last sync found and when the next one
+is.
+
+Nothing changes when the reading isn't clear: less than 10 seconds of readings, open and closed less than 0.1
+apart, or two steady levels on the same side of the marker with no blinks to say which is closed (it could be
+closed eyes under a marker set too high, or just looking down). A sync that is due waits for your face, and
+none run while hibernating. Moving the marker yourself unticks the box, and **Restore defaults** forgets the
+remembered ranges.
+
+**Sync again when my eyes read outside their usual ranges** (under it, on by default) starts a sync without
+waiting for the next one. Each eye check is compared with the two remembered ranges: when the readings stay
+more than 0.05 below the open range, above the closed range, or in between the two for 3 seconds (at least
+three checks in a row), a sync starts straight away, and the note says which it was. A blink or a slow close
+passes through too quickly to count. It happens at most once a minute, and not until a first sync has
+remembered a range.
+
+**Sync while my eyes rest** (under it, on by default) starts a sync once your eyes have been closed for 5
+seconds and keeps it reading until you open them, so every rest updates the closed range. A sync already
+running at that point carries on as this one. The latest 90 seconds of the rest are what it works from. It
+reads your eyes on every camera frame for the whole rest, which uses more power than the usual one check a
+second.
+
+**Continuous noise** (Noise panel, on by default) keeps the noise playing the whole time tracking runs.
+With your eyes closed the filter follows your breath as usual. With them open, or when your breath isn't
+being tracked (no face, breath lost, or tracking paused to save power), the filter glides down to the low
+cutoff over 2.5 s and rests there, and glides back up when your eyes close. The full-screen picture still
+appears only with your eyes closed.
+
+**Follow my breath with my eyes open too** (Noise panel, off by default) keeps the body tracking running and
+the filter following your breath the whole time. The noise plays throughout, whatever Continuous noise is set
+to. Two sliders appear under the checkbox, **Eyes-open low cutoff** and **Eyes-open high cutoff** (152 and
+220 Hz to start with): with your eyes open the breath sweeps between those, and when you close your eyes the
+sweep glides over to the main cutoffs as the closed-eyes fade comes in, and back when you open them. It uses
+more power, because the body tracking never pauses.
+
+**Nudge me to rest my eyes** (Noise panel, on by default) is a reminder to close them. After 5 minutes in
+view of the camera without closing your eyes for at least 10 seconds, the noise's pitch starts rising from
+the low cutoff, doubling every minute. It has no cap of its own: it keeps rising until the filter is fully
+open (the top of what the sound output can carry, about 22 kHz, reached after about 7 minutes from 152 Hz).
+Closing your eyes and holding them closed for 3 seconds stops it, and the pitch settles back over 3 seconds.
+A shorter closure doesn't count, and the pitch keeps rising through it.
+Time out of view pauses the count; 5 minutes away, or Stop, starts it over. The note under the checkbox
+counts down to the nudge.
+
+With Continuous noise off, a second checkbox appears under it: **The noise comes in after 5 minutes if you
+haven't closed your eyes, even with Continuous noise off** (on by default). Ticked, the noise fades in over 10
+seconds so the nudge is heard. Unticked, the noise stays off with your eyes open, and the nudge is only heard
+as a higher pitch when you next close them.
+
+**Preview with eyes open** (or <kbd>P</kbd>) plays the noise and moves the filter with your breathing while
+the page stays in view, so you can watch the breath graph and adjust the sliders as you listen. The
+full-screen picture only appears when your eyes are really closed. <kbd>H</kbd> shows the readouts on top of
+the picture.
+
+## Rests and progress
+
+A rest counts once when your eyes stay continuously closed for **longer than 10 seconds**. Exactly 10
+seconds does not count. Every observed eye opening ends the closure. Tracking loss, a frozen camera,
+stopping, hiding the page or reloading cannot complete a rest or count the same held closure twice; open
+your eyes in view before starting another rest after an interruption. Preview by itself does not count.
+
+The **Rests** panel shows the rolling last 60 minutes and **Today**, from midnight in this computer's local
+time zone. A rest belongs to the hour and day when it qualifies. The rolling hour is elapsed time, not a
+clock-hour bucket. The hourly goal is **30**. The labels follow the requested strict “above” thresholds:
+
+| Rests in the last 60 minutes | Label |
+| --- | --- |
+| 0–1 | Getting started |
+| 2–10 | Good |
+| 11–20 | Great |
+| 21–30 | Excellent |
+| 31+ | Top of the line |
+
+At exactly 30 the goal is reached and the label remains Excellent. The live timer shows a closure's
+progress; the 7-day comparison and existing charts remain available.
+
+Every clock hour is saved with its rests, the minutes your face was in front of the camera and the minutes
+spent resting. **All rests remain in the rolling-hour and daily totals**, including sessions under 10
+minutes. Only hours with more than 10 minutes at the computer appear in charts and averages; the 7-day
+average appears after 3 of those hours. Existing saved data is retained, but hours discarded by an older
+version cannot be recovered. Data is saved in this browser on this computer (about 400 days are kept),
+without changing your settings. The page reports when browser storage cannot save. **Clear saved rests**
+at the bottom of the progress view deletes it after a second click.
+
+Run the counter checks with `node --test rest-counter.test.mjs` from this folder, and the Sync analysis checks with
+`node --test lid-sync.test.mjs`.
+
+**Show progress** opens the charts, scoped by a range row (24 hours, 7 days, 30 days, All):
+
+- Four figures: the last 60 minutes against your 7-day average, the 7-day average, today's rests, and your
+  best hour.
+- **Rests per hour**: a bar for each hour at the computer, with the 7-day average as a dashed line and the
+  current hour in gold once it passes 10 minutes. Hover or use the arrow keys for each hour's details.
+- **Average rests per hour, by day**: the trend of your daily average.
+- **Show as a table**: every hour in the range with its rests, minutes at the computer and minutes resting.
+
+## Breath history
+
+Click the breath graph to open the full history. It fills the screen with five lines, each a stretch of time
+read left to right with the oldest at the top. Pick how long each line is (30 s, 1 min, 2 min or 5 min) at the
+top. Scroll up to go back through the session (up to two hours, ten samples a second). It follows the newest
+line while you're at the bottom; **Back to now** returns there.
+
+With **Only track breathing while my eyes are closed** on, breath is only recorded with your eyes closed.
+**Skip eyes-open gaps** (on by default) joins those stretches end to end so the lines read as continuous
+breathing, with a dashed line and the length of each gap where one was left out. Turn it off to see real
+time instead: lines start on the minute and gaps are labelled "eyes open" or "breath lost". Shaded stretches
+are where your eyes were closed, and ticks along the bottom mark counted breaths. When tracking picks up
+again, the breath line starts from your actual breath rather than from where it was before the pause.
+Press Escape or Close to return; the noise picture still covers the view when your eyes close.
+
+## Pose models
+
+The pose model only finds the shoulders so the two windows can be placed; the breath itself comes from the
+image inside the windows. Pick one under **Pose model** in the Breath panel; it loads in the background and
+takes over when ready. The panel shows the time each frame takes.
+
+| Model | Library | Download | Notes |
+| --- | --- | --- | --- |
+| MediaPipe Full | MediaPipe Tasks Vision | 9 MB | Good balance |
+| MediaPipe Heavy (default) | MediaPipe Tasks Vision | 31 MB | Most accurate, slowest |
+| MoveNet Lightning | TensorFlow.js pose-detection | 5 MB | Fastest; the model the original breathing sketch used |
+| MoveNet Thunder | TensorFlow.js pose-detection | 13 MB | More accurate MoveNet |
+
+MediaPipe Heavy is stored for offline use straight away; the others are stored the first time you pick them.
+
+## How the breath is measured
+
+Pick a source under **Breath from** in the Breath panel. A line under the graph shows how steady the
+current source is: jitter (frame-to-frame noise, in pixels), breath swing (how far the breath moved the
+measurement over the last 10 s), and for the outline, how many shoulders were found. Switch sources and
+color methods while breathing normally and keep the one with the lowest jitter for the largest swing.
+
+### Shoulder movement
+
+The pose model's shoulder points are guesses at the joint inside the body, and they wander by about as much
+as a breath moves. So they are only used to place two windows over the shoulders (the corner brackets in
+the camera view). Each camera frame, the picture inside each window is matched against a stored reference
+frame to find how far it has moved up or down, to a fraction of a pixel (normalised cross-correlation of the
+vertical brightness gradient). The windows are placed again when the shoulders move more than about an
+eighth of a shoulder width or the match gets poor. The head is outside both windows, so tilting or turning
+it doesn't affect the breath.
+
+### Shoulder outline by color (default)
+
+Each window reaches a little above the shoulder into the background. A color method scores every pixel
+for how much more it looks like shoulder than background. Down each column, the outline is the row that best
+splits the column into background above and shoulder below, refined to a fraction of a row. Once found, it
+is only searched for in a narrow band around where it was, so stripes, furniture or hair further up can't
+pull it away. Every outline point from **both shoulders** then votes on one shared shift since the windows
+were placed (the median), so the two shoulders are always measured together. If only one shoulder's outline
+is found for a second, both windows are placed again to pick up the other. The shoulder's colors are first
+learned from the upper chest between the shoulders, which is reliably you even when a shoulder point is
+off.
+
+| Color method | How it tells shoulder from background |
+| --- | --- |
+| Color, ignoring brightness | One learned color per side (running two-cluster k-means) in an opponent-color space with brightness at a third of the weight, so shadows and exposure changes matter less |
+| Color histograms | A 1000-bin color histogram per side, for patterned backgrounds or clothes |
+| Color spread (Gaussian) | Each side's color and how it varies (mean and covariance), compared by likelihood |
+| Sharpest color change | The steepest step from background color towards shoulder color in each column, with sub-pixel peak fitting |
+| Neural person mask | MediaPipe's selfie segmenter (250 KB) draws the person/background split; it ignores color |
+| Vote (default) | Runs the four color methods together and takes the median of their answers |
+
+On a synthetic test (shoulders rising 4 px every 5 s while the head bobbed 10 px every 7 s), shoulder
+movement recovered 3.35 of the 4 px and the color outline 3.92 px, both with R² 0.99 against the 5 s breath.
+In a headless browser every color method found both shoulders; sharpest color change was the steadiest
+there.
+
+### Pulse in your face (camera PPG, experimental)
+
+The skin of the forehead and cheeks (the boxes in the camera view, which brighten on each detected beat)
+changes color very slightly with every heartbeat. Its average color goes through the POS method (Wang et
+al., 2017), which separates the pulse from lighting changes; beats are the peaks, and the time between beats
+gives the heart rate. Heart rate rises as you breathe in and falls as you breathe out (respiratory sinus
+arrhythmia), and that slow swing is used as the breath. A pulse whose beats vary by more than 15% is treated
+as not found. On a synthetic 30 fps face (62 bpm swinging ±6 bpm with 5 s breaths, camera noise and lighting
+drift) it read the heart rate within 1 bpm and followed the breath with a correlation of 0.88, about 1.8 s
+behind. It needs your face still and evenly lit, works best with slow relaxed breathing (which makes the
+swing larger), and always lags the breath by a beat or two.
+
+| Signal | Source | Drives |
+| --- | --- | --- |
+| Lid signal 0–1 | Face blendshapes, smoothed over 0.15 s | Closed when ≥ threshold (0.58), open again below threshold − 0.08 |
+| Eyes closed ≥ hold (0.2 s) | Lid state | Noise fades in (2.5 s); eyes open for 0.3 s fades it out (1 s) |
+| Breath 0–1 | The chosen source (shoulder shift ÷ shoulder width, or heart-rate swing), adaptive window | Breath trace, breath count |
+| Smoothed breath | Breath averaged over the **Breath smoothing** window (0.7 s) | Lowpass cutoff, exponential from **Low cutoff** (152 Hz) on the out-breath to **High cutoff** (300 Hz) on the in-breath; a small level swell; the picture's fine detail, brightness and aperture |
+| Closed-eyes shift (+15%) | Slider, −50% to +50% of the cutoff range, and **The shift lasts** | Closing your eyes moves the filter by itself (152 → about 168 Hz by default), eased over 0.5 s, so closed eyes are heard even when the shoulders barely move. Negative values lower it below the low cutoff. It lasts **while my eyes are closed** (the breath sweeps from the shifted point up to the high cutoff), **only for a moment** (fades after 2 s), or **until my breath reaches it** (raised: held until the breath opens the filter that far by itself; lowered: until the breath has risen and come back down close to the low cutoff) |
+| Exhale floor (18%) | Slider, 0–60% up the breath range | Below it the breath is held at the floor before smoothing, so the filter stays at the low cutoff through the less reliable bottom of the out-breath; the sweep from low to high cutoff runs between the floor and the top |
+| Resonance (0 dB) | Slider, 0–24 dB | Height of the filter's peak at the cutoff (half of it is taken back off the level); in the picture, detail at the cutoff's scale and a ring at the aperture |
+
+The Lowpass filter panel shows the chosen band on a 20 Hz – 10 kHz scale with the live cutoff. Breath
+smoothing is two chained averages, each with a quarter of the window as its time constant. That has the same
+delay as a plain average over the window but never cancels a breath outright (a plain 5 s average cancels a
+5 s breath completely).
+
+The Eyes panel holds the closed threshold (the marker on the live bar) and the hold before the noise.
+Everything else is under **Settings**, saved in the browser: fades, volume, breath sensitivity (the smallest
+min/max window), an invert switch for the breath direction and a mirror switch.
+
+## Sound
+
+The noise is a recording: `brown-noise.mp3`, 2 minutes 22 seconds cut from "Brown Noise" by OTONO on the
+Internet Archive (https://archive.org/details/BrownNoise_201410, marked public domain), with the fade at each
+end of the original left out. The page turns it into a seamless loop: the last second is crossfaded into the
+first, so the loop point can't be heard, and the right ear hears the same loop started halfway round, so the
+two ears differ. Until the file has loaded (and if it can't be fetched) a short generated brown noise plays
+instead, and the two are faded into each other.
+
+Either way the noise is made even: its sub-audible drift below 20 Hz is removed, it is set by its average
+level rather than its loudest moment, and rare outlier peaks are rounded off. It runs through two lowpass filters, a
+small swell with the breath, the level control, and a smooth soft clipper (in place of a compressor), so the
+output never hits a hard edge. The audio uses the browser's larger "playback" buffers, which avoids the
+dropouts (heard as small clicks) that can happen while the face and pose models keep the computer busy.
+
+## Tips
+
+- If the noise starts while your eyes are open (glasses, a low camera looking up at you, a big smile),
+  drag the Eyes marker to the right. If it never starts, drag it left.
+- If the shoulder windows keep jumping (grey brackets), try MediaPipe Heavy or MoveNet Thunder.
+- If the breath trace barely moves, raise **Breath sensitivity**. Bare shoulders in dim light have little
+  texture, so a lamp to one side helps the shoulder windows lock on. If the trace runs backwards, tick
+  **Invert breath direction**.
+- Corner brackets in amber mean a window is locked on; grey means its match is poor and it will be placed
+  again.
+- Looking down with your eyes open can look like closed eyes to the face model.
+- The tracking runs locally in the browser. Video is never uploaded.
