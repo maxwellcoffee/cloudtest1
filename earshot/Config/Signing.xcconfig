@@ -1,0 +1,15 @@
+// Signing.xcconfig
+// Attached to every Earshot target by project.yml. It only pulls in
+// Local.xcconfig, a git-ignored file with your machine-specific signing
+// settings. Create it with `scripts/bootstrap.sh YOURTEAMID` or by hand:
+//
+//   DEVELOPMENT_TEAM = ABCDE12345
+//   // Optional, if com.example.earshot.* is not available to your team:
+//   EARSHOT_BUNDLE_ID_PREFIX = com.yourname.earshot
+//
+// Find your team ID in Xcode > Settings > Accounts, or at
+// developer.apple.com/account under Membership details.
+// When Local.xcconfig is missing, the optional include below is skipped and
+// the project-level defaults from project.yml apply (no team).
+
+#include? "Local.xcconfig"
