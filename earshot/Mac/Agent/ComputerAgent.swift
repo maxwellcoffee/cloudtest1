@@ -282,6 +282,66 @@ private enum AgentTools {
     }
 }
 
+// MARK: - Model capabilities
+
+/// What the configured model accepts. The Main model is free text, and older models answer a 400 to
+/// adaptive thinking (they take budget_tokens) and/or to `output_config.effort`.
+private enum AgentModelSupport {
+    private static let families: Set<String> = ["opus", "sonnet", "haiku", "fable", "mythos"]
+    private static let efforts: Set<String> = ["low", "medium", "high", "xhigh", "max"]
+
+    /// Family and version of a Claude model id: "claude-opus-4-6" → ("opus", 4, 6),
+    /// "claude-sonnet-4-20250514" → ("sonnet", 4, 0), "claude-3-5-haiku-latest" → ("haiku", 3, 5).
+    /// nil when the id isn't recognisable (then it is treated as a current model).
+    static func version(of model: String) -> (family: String, major: Int, minor: Int)? {
+        let tokens = model.lowercased()
+            .split(whereSeparator: { !$0.isLetter && !$0.isNumber })
+            .map(String.init)
+        /// A one- or two-digit version number (dates such as 20250514 are not versions).
+        func number(at index: Int) -> Int? {
+            guard index >= 0, index < tokens.count, tokens[index].count <= 2 else { return nil }
+            return Int(tokens[index])
+        }
+        guard let familyIndex = tokens.firstIndex(where: { families.contains($0) }) else { return nil }
+        let family = tokens[familyIndex]
+        // Legacy ids put the version first: claude-3-5-sonnet-20241022.
+        if let claudeIndex = tokens.firstIndex(of: "claude"), claudeIndex < familyIndex,
+           let major = number(at: claudeIndex + 1) {
+            let minor = claudeIndex + 2 < familyIndex ? (number(at: claudeIndex + 2) ?? 0) : 0
+            return (family, major, minor)
+        }
+        guard let major = number(at: familyIndex + 1) else { return nil }
+        return (family, major, number(at: familyIndex + 2) ?? 0)
+    }
+
+    /// Adaptive thinking: Opus / Sonnet 4.6 and every later model; Haiku 4.5 and older take budget_tokens.
+    static func supportsAdaptiveThinking(_ model: String) -> Bool {
+        guard let v = version(of: model) else { return true }
+        if v.major != 4 { return v.major > 4 }
+        return v.family != "haiku" && v.minor >= 6
+    }
+
+    /// The effort to send, or nil when the model rejects `output_config.effort`. Levels a model
+    /// lacks are lowered to "high" (xhigh arrived with Opus 4.7; Opus 4.5 knows low/medium/high).
+    static func effort(_ requested: String?, for model: String) -> String? {
+        guard let level = requested?.trimmed.lowercased(), efforts.contains(level) else { return nil }
+        guard let v = version(of: model) else { return level }
+        if v.major != 4 { return v.major > 4 ? level : nil }
+        switch v.family {
+        case "opus":
+            if v.minor >= 7 { return level }
+            if v.minor == 6 { return level == "xhigh" ? "high" : level }
+            if v.minor == 5 { return level == "xhigh" || level == "max" ? "high" : level }
+            return nil
+        case "sonnet":
+            if v.minor >= 6 { return level == "xhigh" ? "high" : level }
+            return nil
+        default:
+            return nil
+        }
+    }
+}
+
 /// Result of one agent loop, handed from the worker task back to `run`.
 private struct AgentLoopOutcome: Sendable {
     var status: AgentRunStatus
@@ -359,6 +419,8 @@ final class ComputerAgent: ObservableObject {
             loopTask.cancel()
         }
         worker = nil
+        // An Inbox .agentTask action waits on this run: tell it how the run ended (nil for other origins).
+        ActionExecutor.agentRunReport?.record(outcome.status)
 
         var finished = current ?? AgentRun(id: UUID().uuidString, task: cleanTask, origin: origin, steps: [],
                                            status: .running, finalText: "", startedAt: Date(), endedAt: nil)
@@ -429,7 +491,9 @@ final class ComputerAgent: ObservableObject {
         let tools = AgentTools.definitions(computerUse: computerUse)
         let system = systemPrompt(settings: settings, origin: origin, computerUse: computerUse)
         let model = settings.claudeModel.nilIfEmpty ?? "claude-opus-5-5"
-        let effort = settings.agentEffort.nilIfEmpty
+        // Older models reject effort and/or adaptive thinking, so send only what this model accepts.
+        let effort = AgentModelSupport.effort(settings.agentEffort, for: model)
+        let thinkingDisplay: String? = AgentModelSupport.supportsAdaptiveThinking(model) ? "summarized" : nil
         let maxSteps = max(1, settings.agentMaxSteps)
         var messages: [JSONValue] = [ClaudeClient.userMessage(task)]
         var lastText = ""
@@ -447,7 +511,7 @@ final class ComputerAgent: ObservableObject {
 
             let built = ClaudeClient.makeBody(model: model, system: system, messages: messages,
                                               maxTokens: ComputerAgent.maxTokens, effort: effort,
-                                              tools: tools, thinkingDisplay: "summarized")
+                                              tools: tools, thinkingDisplay: thinkingDisplay)
             let response: ClaudeResponse
             do {
                 response = try await client.createMessage(built.body, betas: built.betas)

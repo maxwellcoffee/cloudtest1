@@ -160,9 +160,32 @@ private struct MailRecipient {
     var address: String
 }
 
+/// How the agent run started for one `.agentTask` action ended. The executor binds one as the
+/// task-local `ActionExecutor.agentRunReport` around the agent runner; `ComputerAgent.run`, which runs
+/// in a task created inside that call (and so inherits the binding), records the run's status in it.
+final class AgentRunReport: @unchecked Sendable {
+    private let lock = NSLock()
+    private var storedStatus: AgentRunStatus?
+
+    var status: AgentRunStatus? {
+        lock.lock()
+        defer { lock.unlock() }
+        return storedStatus
+    }
+
+    func record(_ status: AgentRunStatus) {
+        lock.lock()
+        storedStatus = status
+        lock.unlock()
+    }
+}
+
 // MARK: - Executor
 
 final class ActionExecutor: @unchecked Sendable {
+    /// Bound while an `.agentTask` action's runner executes (see `AgentRunReport`).
+    @TaskLocal static var agentRunReport: AgentRunReport?
+
     private let db: Database
     private let calendar: CalendarService
     private let lock = NSLock()
@@ -257,8 +280,22 @@ final class ActionExecutor: @unchecked Sendable {
         case .agentTask:
             guard let runner = agentRunner else { return failure("Agent unavailable") }
             let task = payload.task?.nilIfEmpty ?? action.title
-            let text = await runner(task)
-            return ActionResult(success: true, message: text.nilIfEmpty ?? "The agent finished the task.")
+            // The runner only returns the final text; the run's status comes back through the report.
+            let report = AgentRunReport()
+            let text = await ActionExecutor.$agentRunReport.withValue(report) {
+                await runner(task)
+            }
+            switch report.status {
+            case .some(.done):
+                return success(text.nilIfEmpty ?? "The agent finished the task.")
+            case .some(let status):
+                // Failed, cancelled or stopped: the final text explains why ("Cancelled. …", an API error, …).
+                return failure(text.nilIfEmpty ?? "The agent run ended as \(status.rawValue).")
+            case .none:
+                // No run reported back: the agent never started (the runner only returned a message).
+                Log.error("ActionExecutor: the agent runner returned without a reported run for \(action.id).")
+                return failure(text.nilIfEmpty ?? "The agent did not run.")
+            }
         }
     }
 

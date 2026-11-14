@@ -615,12 +615,40 @@ final class ComputerControl: @unchecked Sendable {
     // MARK: Keyboard
 
     private func postKey(_ code: CGKeyCode, down: Bool, flags: CGEventFlags) throws {
+        if let auxKey = ComputerControl.auxControlKey(for: code) {
+            try postAuxControlKey(auxKey, down: down)
+            return
+        }
         let source = CGEventSource(stateID: .hidSystemState)
         guard let event = CGEvent(keyboardEventSource: source, virtualKey: code, keyDown: down) else {
             throw ComputerControlError.eventFailed("keyboard event")
         }
         event.flags = flags
         event.post(tap: .cghidEventTap)
+    }
+
+    /// The volume keys reach macOS as system-defined aux-control events, not as virtual key codes:
+    /// NX_KEYTYPE_SOUND_UP (0), NX_KEYTYPE_SOUND_DOWN (1), NX_KEYTYPE_MUTE (7).
+    private static func auxControlKey(for code: CGKeyCode) -> Int? {
+        switch Int(code) {
+        case kVK_VolumeUp: return 0
+        case kVK_VolumeDown: return 1
+        case kVK_Mute: return 7
+        default: return nil
+        }
+    }
+
+    /// Posts an NSSystemDefined event (subtype 8, aux control button) for a media key.
+    private func postAuxControlKey(_ keyType: Int, down: Bool) throws {
+        let keyState = down ? 0xA : 0xB
+        guard let event = NSEvent.otherEvent(with: .systemDefined, location: .zero,
+                                             modifierFlags: NSEvent.ModifierFlags(rawValue: UInt(keyState) << 8),
+                                             timestamp: 0, windowNumber: 0, context: nil, subtype: 8,
+                                             data1: (keyType << 16) | (keyState << 8), data2: -1),
+              let cgEvent = event.cgEvent else {
+            throw ComputerControlError.eventFailed("media key event")
+        }
+        cgEvent.post(tap: .cghidEventTap)
     }
 
     private func pressModifiers(_ stroke: KeyStroke) throws {

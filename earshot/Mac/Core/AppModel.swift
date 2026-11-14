@@ -84,16 +84,26 @@ final class AppModel: ObservableObject, WatchBridge {
 
     // MARK: - Navigation state
 
-    @Published var sidebarSelection: SidebarItem? = .today
+    @Published var sidebarSelection: SidebarItem? = .today {
+        didSet {
+            // Leaving Today ends a jump to a cited utterance, so Today follows the live transcript again.
+            if sidebarSelection != .today && highlightedUtteranceID != nil {
+                highlightedUtteranceID = nil
+            }
+        }
+    }
     /// Start of the day shown in Today.
     @Published var selectedDay: Date = Date().startOfDay {
         didSet {
             if !Calendar.current.isDate(oldValue, inSameDayAs: selectedDay) {
+                // A highlight belongs to the day it was shown on (`show(date:utteranceID:)` sets it after the day).
+                if highlightedUtteranceID != nil { highlightedUtteranceID = nil }
                 scheduleReload([.segments, .utterances], delay: 0.05)
             }
         }
     }
-    /// Utterance to scroll to and highlight in Today (citations, "show source").
+    /// Utterance to scroll to and highlight in Today (citations, "show source"). While set, Today
+    /// does not auto-scroll to new speech; it is cleared when the day changes or Today is left.
     @Published var highlightedUtteranceID: Int64? = nil
     @Published var selectedDigestID: String? = nil
     @Published var banner: Banner? = nil
@@ -139,6 +149,8 @@ final class AppModel: ObservableObject, WatchBridge {
     /// Agent runs started through the app (running + waiting).
     @Published private(set) var agentQueueDepth = 0
     @Published private(set) var isExporting = false
+    /// True while Settings → Erase all data is running (the wipe runs off the main thread).
+    @Published private(set) var isErasing = false
     @Published private(set) var exportError: String? = nil
     @Published private(set) var lastExportURL: URL? = nil
 
@@ -158,9 +170,22 @@ final class AppModel: ObservableObject, WatchBridge {
     private var lastIntervalAnalysisAt: Date = .distantPast
     private var lastRetentionAt: Date = .distantPast
     private var tickInFlight = false
+    /// Accepted watch requests by request id, loaded lazily from the key-value store (nil until then).
+    private var handledWatchRequests: [String: HandledWatchRequest]?
 
     /// Transcription-triggered analysis runs at most this often.
     private static let autoAnalysisSpacing: TimeInterval = 180
+    private static let handledWatchRequestsKey = "watch.handledRequests.v1"
+    /// A watch resends a request until it sees a response; older ids are forgotten.
+    private static let handledWatchRequestLifetime: TimeInterval = 7 * 86_400
+    private static let handledWatchRequestLimit = 300
+
+    /// The acknowledgement already sent for a watch request (see `watchDidRequest`).
+    private struct HandledWatchRequest: Codable {
+        var ack: WatchRequestAck
+        var at: Date
+    }
+    private typealias HandledWatchRequestTable = [String: HandledWatchRequest]
 
     // MARK: - Init
 
@@ -671,7 +696,7 @@ final class AppModel: ObservableObject, WatchBridge {
     /// Starts an analysis pass unless one is already running. Returns false when skipped.
     @discardableResult
     private func startAnalysis(force: Bool, automatic: Bool) -> Bool {
-        if analysisTask != nil || insightEngine.isRunning { return false }
+        if analysisTask != nil || insightEngine.isRunning || isErasing { return false }
         if automatic { lastAutoAnalysisAt = Date() }
         isAnalyzing = true
         analysisStatus = force ? "Analyzing your day…" : "Checking for new speech…"
@@ -708,7 +733,9 @@ final class AppModel: ObservableObject, WatchBridge {
             showBanner(.warning, "Add an Anthropic API key in Settings → AI (or choose the on-device model) to analyze your day.")
             return
         }
-        if !startAnalysis(force: true, automatic: false) {
+        if isErasing {
+            showBanner(.info, "Earshot is erasing your data. Try again when it has finished.")
+        } else if !startAnalysis(force: true, automatic: false) {
             showBanner(.info, "An analysis is already running.")
         }
     }
@@ -1236,17 +1263,46 @@ final class AppModel: ObservableObject, WatchBridge {
         }.value
     }
 
-    /// Settings → Data → Erase all data. Keeps settings and API keys.
+    /// Settings → Data → Erase all data. Keeps settings and API keys. The database wipe (a DELETE
+    /// on every table plus VACUUM) and the audio deletion run off the main thread.
     func eraseAllData() {
-        db.wipeAll()
+        guard !isErasing else { return }
+        isErasing = true
+        // Stop AppModel's own passes over the old data so they don't write results after the wipe.
+        // (New analysis passes are refused while `isErasing` is set.)
+        analysisTask?.cancel()
+        digestCheckTask?.cancel()
+        clearLoadedData()
+        Log.info("AppModel: erasing all data.")
+
+        let db = self.db
         let audioRoot = AppPaths.supportDirectory.appendingPathComponent("Audio", isDirectory: true)
-        if FileManager.default.fileExists(atPath: audioRoot.path) {
-            do {
-                try FileManager.default.removeItem(at: audioRoot)
-            } catch {
-                Log.error("AppModel: could not delete stored audio: \(error.localizedDescription)")
+        Task { [weak self] in
+            await Task.detached(priority: .userInitiated) {
+                db.wipeAll()
+                if FileManager.default.fileExists(atPath: audioRoot.path) {
+                    do {
+                        try FileManager.default.removeItem(at: audioRoot)
+                    } catch {
+                        Log.error("AppModel: could not delete stored audio: \(error.localizedDescription)")
+                    }
+                }
+            }.value
+            guard let self else { return }
+            // A reload that ran while the wipe was waiting for the database may have brought old rows back.
+            self.clearLoadedData()
+            self.handledWatchRequests = nil
+            self.isErasing = false
+            for scope in DataScope.allCases {
+                EarshotEvents.post(scope)
             }
+            Log.info("AppModel: erased all data.")
+            self.showBanner(.success, "All Earshot data was erased.")
         }
+    }
+
+    /// Empties every published collection loaded from the database (used by `eraseAllData`).
+    private func clearLoadedData() {
         utterances = []
         segments = []
         bookmarks = []
@@ -1262,11 +1318,6 @@ final class AppModel: ObservableObject, WatchBridge {
         todayWordCount = 0
         selectedDigestID = nil
         highlightedUtteranceID = nil
-        for scope in DataScope.allCases {
-            EarshotEvents.post(scope)
-        }
-        Log.info("AppModel: erased all data.")
-        showBanner(.success, "All Earshot data was erased.")
     }
 
     /// Settings → Data → "Export Everything…": asks for a folder, writes an open-format copy of the
@@ -1333,6 +1384,52 @@ final class AppModel: ObservableObject, WatchBridge {
     }
 
     func watchDidRequest(_ request: WatchRequest, device: PairedDevice) async -> WatchRequestAck {
+        // The watch keeps a request in its outbox until it gets a response, so one whose response
+        // was lost comes back with the same id: send the same acknowledgement again instead of
+        // repeating its side effects (a second agent run, answer or note). This runs on the main
+        // actor without suspending, so a duplicate cannot slip in between the check and the record.
+        if let previous = loadHandledWatchRequests()[request.id] {
+            Log.info("AppModel: \(request.kind.rawValue) request \(request.id) from \(device.name) was already handled; acknowledging again.")
+            return previous.ack
+        }
+        let ack = handleWatchRequest(request, device: device)
+        if ack.accepted { recordHandledWatchRequest(ack) }
+        return ack
+    }
+
+    private func loadHandledWatchRequests() -> [String: HandledWatchRequest] {
+        if let cached = handledWatchRequests { return cached }
+        var loaded: [String: HandledWatchRequest] = [:]
+        if let raw = db.kvGet(AppModel.handledWatchRequestsKey) {
+            if let decoded = try? JSONDecoder().decode(HandledWatchRequestTable.self, from: Data(raw.utf8)) {
+                loaded = decoded
+            } else {
+                Log.error("AppModel: could not read the handled watch requests; starting afresh.")
+            }
+        }
+        handledWatchRequests = loaded
+        return loaded
+    }
+
+    private func recordHandledWatchRequest(_ ack: WatchRequestAck) {
+        let now = Date()
+        let cutoff = now.addingTimeInterval(-AppModel.handledWatchRequestLifetime)
+        var records = loadHandledWatchRequests().filter { $0.value.at >= cutoff }
+        records[ack.id] = HandledWatchRequest(ack: ack, at: now)
+        if records.count > AppModel.handledWatchRequestLimit {
+            let newest = records.sorted { $0.value.at > $1.value.at }.prefix(AppModel.handledWatchRequestLimit)
+            records = Dictionary(newest.map { ($0.key, $0.value) }, uniquingKeysWith: { first, _ in first })
+        }
+        handledWatchRequests = records
+        do {
+            let data = try JSONEncoder().encode(records)
+            db.kvSet(AppModel.handledWatchRequestsKey, String(decoding: data, as: UTF8.self))
+        } catch {
+            Log.error("AppModel: could not save the handled watch requests: \(error.localizedDescription)")
+        }
+    }
+
+    private func handleWatchRequest(_ request: WatchRequest, device: PairedDevice) -> WatchRequestAck {
         let requestID = request.id
         guard let text = request.text.nilIfEmpty else {
             return WatchRequestAck(id: requestID, accepted: false, message: "I didn't catch that. Try again.")
@@ -1422,7 +1519,9 @@ final class AppModel: ObservableObject, WatchBridge {
         Log.info("AppModel: \(bookmark.kind.rawValue) from \(device.name) at \(bookmark.at.timeText).")
     }
 
-    func todaySnapshot() async -> TodaySnapshot {
+    /// Nonisolated, so it runs off the main actor: every watch asks for it on each /sync (about once
+    /// a minute while recording) and it runs several SQLite queries plus an EventKit lookup.
+    nonisolated func todaySnapshot() async -> TodaySnapshot {
         TodayBuilder.snapshot(db: db)
     }
 }
