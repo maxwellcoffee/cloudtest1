@@ -380,7 +380,7 @@ final class WatchStore: ObservableObject {
                 return "That code didn't work. Check the code on your Mac — it changes every 10 minutes."
             case .http(429, _):
                 return "Too many attempts. Wait a minute and try again."
-            case .http(404, _):
+            case .http(404, _), .invalidResponse:
                 return "\(address) answered, but it isn't Earshot. Check the address and port."
             default:
                 return clientError.errorDescription ?? "Pairing failed."

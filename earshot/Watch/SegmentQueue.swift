@@ -507,6 +507,10 @@ final class SegmentQueue: ObservableObject {
             case .invalidURL:
                 applyBackoff("The Mac address isn't valid")
                 return .stop
+            case .invalidResponse:
+                // Not Earshot's JSON (a login page, a web server): keep the item, retry later.
+                applyBackoff("\(MacClient.describe(error)) (check the Mac address in Settings)")
+                return .stop
             case .http(let status, _) where !MacClient.isTransient(error) && !Self.rejectionStatuses.contains(status):
                 // Whatever answered (a wrong address, a proxy or a tunnel) refuses every
                 // request alike: keep the item and retry later instead of dropping it.

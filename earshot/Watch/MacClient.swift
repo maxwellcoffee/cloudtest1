@@ -18,7 +18,8 @@ enum MacClientError: LocalizedError, Equatable {
     case http(Int, String?)
     /// The address the user typed cannot be turned into a URL.
     case invalidURL
-    /// The reply was not an HTTP response.
+    /// The reply was not an HTTP response, or a success reply that isn't JSON: something
+    /// other than Earshot answered (a tunnel's login page after a redirect, a web server).
     case invalidResponse
     /// The body could not be decoded.
     case decoding(String)
@@ -277,6 +278,10 @@ final class MacClient {
         guard let http = response as? HTTPURLResponse else { throw MacClientError.invalidResponse }
         switch http.statusCode {
         case 200..<300:
+            // The Mac always answers JSON. Anything else came from whatever sits at the address
+            // (URLSession follows redirects, e.g. to a login page): the request never reached
+            // the Mac, so this is transient and the queued item is kept.
+            guard Self.isJSON(response.mimeType) else { throw MacClientError.invalidResponse }
             return
         case 401:
             throw MacClientError.unauthorized
@@ -284,6 +289,11 @@ final class MacClient {
             let body = try? EarshotAPI.makeDecoder().decode(ErrorMessageBody.self, from: data)
             throw MacClientError.http(http.statusCode, body?.error ?? body?.message)
         }
+    }
+
+    private nonisolated static func isJSON(_ mimeType: String?) -> Bool {
+        guard let mimeType = mimeType?.lowercased() else { return false }
+        return mimeType.hasSuffix("/json") || mimeType.hasSuffix("+json")
     }
 
     private func encode<Body: Encodable>(_ body: Body) throws -> Data {
