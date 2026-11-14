@@ -6,7 +6,7 @@ Scores are 1–5: value to the user, novelty, feasibility on watchOS/macOS today
 
 ## Capture
 
-### 1. One-tap Day Session with speech-only encoder  `MVP` · value 5 · novelty 2 · feasibility 4
+### 1. One-tap Day Session with speech-only encoder  `MVP` · value 5 · novelty 2 · feasibility 4 — ✅ built: Partly: one tap starts all-day capture into 16 kHz AAC chunks; near-silent chunks are dropped on the watch. No speech-only encoder yet.
 
 Start one capture in the morning with a single tap. It keeps running wrist-down with the orange mic indicator, but only speech is ever encoded and stored, so a full day costs tens of MB and little radio time.
 
@@ -14,7 +14,7 @@ Start one capture in the morning with a single tap. It keeps running wrist-down 
 
 *Inspired by:* Bee founders' VAD-ASR-LLM pipeline; Apple DTS/WWDR forum guidance; Granola's Watch background recording
 
-### 2. Chunk ledger: nothing is deleted until the Mac confirms  `MVP` · value 5 · novelty 2 · feasibility 5
+### 2. Chunk ledger: nothing is deleted until the Mac confirms  `MVP` · value 5 · novelty 2 · feasibility 5 — ✅ built: Built: chunks wait in an on-disk queue and are deleted only after the Mac acknowledges them; the watch shows queued count and last sync.
 
 Each 2-minute chunk shows its stage (Saved, On iPhone, On Mac, Transcribed), and the complication shows how many minutes are still pending. A failed upload can never wipe out a day.
 
@@ -22,7 +22,7 @@ Each 2-minute chunk shows its stage (Saved, On iPhone, On Mac, Transcribed), and
 
 *Inspired by:* Omi's lost ~11 h Watch recording; Granola's sync states and 'Waiting to sync' list; DTS note that background transfers can be deferred
 
-### 3. Interruption catcher with one-tap resume and honest gaps  `MVP` · value 5 · novelty 3 · feasibility 4
+### 3. Interruption catcher with one-tap resume and honest gaps  `MVP` · value 5 · novelty 3 · feasibility 4 — ✅ built: Built: calls and Siri close the chunk with a reason, a notification asks you to reopen, and recording resumes when the app is opened.
 
 When a phone call, Siri or another audio app stops capture, the watch taps once ('Capture stopped at 2:14, tap to resume') and the complication turns into a Resume button. The Mac timeline marks the gap, so no summary invents what was said during it.
 
@@ -30,7 +30,7 @@ When a phone call, Siri or another audio app stops capture, the watch taps once 
 
 *Inspired by:* Apple forum 750432 (no background resume); Granola can't resume interrupted recordings; Fieldy review: no alert on disconnect
 
-### 4. Capture profiles with an honest battery forecast  `MVP` · value 5 · novelty 2 · feasibility 4
+### 4. Capture profiles with an honest battery forecast  `MVP` · value 5 · novelty 2 · feasibility 4 — ✅ built: Partly: the Record page shows an estimate of battery hours left at the current drain and a tip when it will not last the evening. No capture profiles yet.
 
 Choose All-day light, Meeting (full fidelity) or Voice notes only. The watch shows the estimated capture hours left, measured on your own watch, and drops to a lighter profile at low battery instead of dying at 6 pm.
 
@@ -38,7 +38,7 @@ Choose All-day light, Meeting (full fidelity) or Voice notes only. The watch sho
 
 *Inspired by:* Battery complaints about Limitless, Humane and Rabbit; Bee and Fieldy market on battery life
 
-### 5. Press-and-hold voice notes and ask mode  `MVP` · value 5 · novelty 2 · feasibility 5
+### 5. Press-and-hold voice notes and ask mode  `MVP` · value 5 · novelty 2 · feasibility 5 — ✅ built: Partly: Ask, Do and Note from the wrist through dictation. No press-and-hold capture.
 
 Hold the in-app button, or Double Tap, to dictate a thought, task or question tagged #idea, #task, #journal or #ask. A haptic tick confirms, and the cleaned-up text comes back to your wrist so you can check it.
 
@@ -46,7 +46,7 @@ Hold the in-app button, or Double Tap, to dictate a thought, task or question ta
 
 *Inspired by:* Pebble Index 01, Sandbar Stream, Plaud, Just Press Record, Monologue Notes
 
-### 6. Wrist bookmarks that teach the app what matters  `MVP` · value 4 · novelty 3 · feasibility 5
+### 6. Wrist bookmarks that teach the app what matters  `MVP` · value 4 · novelty 3 · feasibility 5 — ✅ built: Built: a Mark button (and Double Tap on watchOS 11+) bookmarks the moment; bookmarked moments are weighted in analysis.
 
 Double Tap during a conversation drops a 'this matters' bookmark. The whole surrounding conversation, not a fixed 30 seconds, gets a title, is exempt from auto-expiry and is quoted verbatim in the recap.
 
@@ -86,7 +86,7 @@ Tell the app 'I need my watch until 10:30 pm', or let it learn when you usually 
 
 *Inspired by:* original
 
-### 11. Desk-mode handoff to the Mac mic  `Later` · value 3 · novelty 5 · feasibility 3
+### 11. Desk-mode handoff to the Mac mic  `Later` · value 3 · novelty 5 · feasibility 3 — ✅ built: Partly: the Mac microphone can record into the same pipeline (desk mode). No automatic handoff from the watch.
 
 When you sit down at your unlocked Mac, the Mac takes over room capture and the watch goes nearly idle, saving hours of battery on desk-heavy days. When you walk away, the watch picks encoding back up with no gap.
 
@@ -104,7 +104,7 @@ The watch learns to tell speech from a sleeve brushing the mic, typing, or wind 
 
 ## Understanding
 
-### 13. On-Mac transcription engine  `MVP` · value 5 · novelty 2 · feasibility 5
+### 13. On-Mac transcription engine  `MVP` · value 5 · novelty 2 · feasibility 5 — ✅ built: Built: Apple SpeechAnalyzer on macOS 26, Apple Speech on older macOS, or any Whisper-compatible API.
 
 All watch audio is transcribed privately on your Mac, or on your iPhone when the Mac is away, with word-level timestamps and fast enough to clear a whole day in minutes. Cloud transcription is off by default.
 
@@ -170,7 +170,7 @@ Tells apart a sentence said to a colleague ('I'll send it Friday'), to yourself 
 
 ## Memory & Recall
 
-### 21. Offline hybrid search that still works in month three  `MVP` · value 5 · novelty 2 · feasibility 5
+### 21. Offline hybrid search that still works in month three  `MVP` · value 5 · novelty 2 · feasibility 5 — ✅ built: Partly: local SQLite full-text search over every utterance. No embeddings yet.
 
 'What did the contractor say about the deck, sometime in August, at the house' finds the exact passage even when the wording differs. Filter by person, place, date, language or scene, fully offline.
 
@@ -178,7 +178,7 @@ Tells apart a sentence said to a colleague ('I'll send it Friday'), to yourself 
 
 *Inspired by:* jock.pl after 6 months of Limitless: 'fancy transcription service with a mediocre search'; Rewind's 'where did I see it' search
 
-### 22. Chat with your memory on the Mac, with citations  `MVP` · value 5 · novelty 2 · feasibility 5
+### 22. Chat with your memory on the Mac, with citations  `MVP` · value 5 · novelty 2 · feasibility 5 — ✅ built: Built: the Ask tab answers from your transcripts with time-stamped quotes.
 
 Ask anything about your days and get answers that cite the conversation, speaker, timestamp and audio clip. You can scope a question to a person, project or week, and if nothing was recorded at that time, it says so instead of guessing.
 
@@ -186,7 +186,7 @@ Ask anything about your days and get answers that cite the conversation, speaker
 
 *Inspired by:* Limitless/Omi 'Ask', Granola/Otter chat
 
-### 23. Ask My Day from the wrist  `Next` · value 5 · novelty 2 · feasibility 4
+### 23. Ask My Day from the wrist  `Next` · value 5 · novelty 2 · feasibility 4 — ✅ built: Built: ask from the wrist and the answer comes back as a prompt on the watch.
 
 Raise your wrist and ask 'What did Priya say about the launch date?' You get a two-line answer with the speaker, time and place, plus an Open on Mac link.
 
@@ -244,7 +244,7 @@ Conversations are tagged with real places. When you return somewhere a meaningfu
 
 ## Summaries & Insights
 
-### 30. Evidence-linked daily recap and morning brief  `MVP` · value 5 · novelty 2 · feasibility 5
+### 30. Evidence-linked daily recap and morning brief  `MVP` · value 5 · novelty 2 · feasibility 5 — ✅ built: Built: daily digest (summary, highlights, promises, goals, patterns, a reflection question, suggestions) and a weekly review, also sent to the watch.
 
 At wind-down time, the Mac (and a short watch version) lists the day's key conversations, decisions, open loops and people seen, each bullet linked to its source. A coverage meter shows how much of the day was actually captured, and each morning the watch shows today's commitments.
 
@@ -294,7 +294,7 @@ Type any pattern you want tracked, such as 'how often I apologize' or 'mentions 
 
 ## Life Progress & Coaching
 
-### 36. Intention tracker and stuck-loop breaker  `Next` · value 5 · novelty 5 · feasibility 4
+### 36. Intention tracker and stuck-loop breaker  `Next` · value 5 · novelty 5 · feasibility 4 — ✅ built: Partly: goals you mention are captured, updated with progress notes and asked about.
 
 The app notices things you keep telling yourself you'll do and whether they happen. When something has come up three or more times with no action, it offers one tiny first step with the setup already done.
 
@@ -318,7 +318,7 @@ Decisions you make out loud are logged with the alternatives and your reasons in
 
 *Inspired by:* original; Annie Duke-style decision journals exist only as manual templates
 
-### 39. Weekly review co-pilot, delta only  `Next` · value 4 · novelty 3 · feasibility 5
+### 39. Weekly review co-pilot, delta only  `Next` · value 4 · novelty 3 · feasibility 5 — ✅ built: Partly: a weekly review with wins, themes, goal progress and if-then plans.
 
 A 10-minute weekly review that reports only what changed: new topics, numbers that moved, loops that closed, promises going stale. It ends with a plan for next week that you approve as one calendar diff.
 
@@ -360,7 +360,7 @@ Habits are tracked from passive evidence (workouts, mindful minutes, saying 'jus
 
 ## Proactive Questions
 
-### 44. Value-of-information question gate  `MVP` · value 5 · novelty 4 · feasibility 4
+### 44. Value-of-information question gate  `MVP` · value 5 · novelty 4 · feasibility 4 — ✅ built: Built: every question must say which decision it unlocks, or it is dropped.
 
 The AI may ask you something only if your answer would change what it does next, and it has to name that action. Everything else gets a sensible default logged under 'Assumptions I made', so most days bring zero to two questions.
 
@@ -368,7 +368,7 @@ The AI may ask you something only if your answer would change what it does next,
 
 *Inspired by:* original; Omi founder: 'The hardest part was to nail proactivity'; HN 'micromanager in a box'; Friend's unprompted texts
 
-### 45. Conversation-boundary delivery  `MVP` · value 5 · novelty 4 · feasibility 4
+### 45. Conversation-boundary delivery  `MVP` · value 5 · novelty 4 · feasibility 4 — ✅ built: Built: questions wait for quiet hours to end, for conversation to pause and for calendar meetings to finish, with daily caps and minimum gaps.
 
 Nudges never arrive while you're talking or listening. They wait for a natural break, such as a conversation ending, standing up to walk or a calendar gap, and they respect quiet hours and a daily cap.
 
@@ -376,7 +376,7 @@ Nudges never arrive while you're talking or listening. They wait for a natural b
 
 *Inspired by:* JITAI (Nahum-Shani 2018); Adamczyk & Bailey on breakpoints; Omi rate limits
 
-### 46. Three-second wrist answers  `MVP` · value 5 · novelty 3 · feasibility 5
+### 46. Three-second wrist answers  `MVP` · value 5 · novelty 3 · feasibility 5 — ✅ built: Built: one-tap answer choices on the watch and in notification actions.
 
 Every question can be answered in about three seconds without opening the app: Double Tap for yes, one of up to three buttons, a Crown scale or one dictated sentence. Every question also offers 'Don't ask about this', which is permanent.
 
@@ -416,7 +416,7 @@ The app runs a transparent experiment on its own nudges. It randomly sends or sk
 
 *Inspired by:* original as a consumer feature; HeartSteps (Klasnja 2019)
 
-### 51. Hands-free spoken replies  `Later` · value 4 · novelty 5 · feasibility 3
+### 51. Hands-free spoken replies  `Later` · value 4 · novelty 5 · feasibility 3 — ✅ built: Built: "Say it" lets you answer out loud; the always-on recorder captures the answer window.
 
 Answer a nudge out loud without raising your wrist ('yeah, tomorrow morning', 'not now'). A subtle haptic confirms what it understood, and only your enrolled voice counts as an answer.
 
@@ -426,7 +426,7 @@ Answer a nudge out loud without raising your wrist ('yeah, tomorrow morning', 'n
 
 ## Mac Actions & Automation
 
-### 52. Blast-radius approval tiers with undo journal  `MVP` · value 5 · novelty 3 · feasibility 5
+### 52. Blast-radius approval tiers with undo journal  `MVP` · value 5 · novelty 3 · feasibility 5 — ✅ built: Partly: actions are tiered low, medium and high risk with per-tier auto-approval. No undo journal yet.
 
 Every proposed action is labeled by how much harm it could do, and that label decides where you approve it. Local, undoable actions take one wrist tap; anything that leaves your Mac needs the Mac review sheet; purchases and deletions need Touch ID. Every action has a timed Undo.
 
@@ -434,7 +434,7 @@ Every proposed action is labeled by how much harm it could do, and that label de
 
 *Inspired by:* Thin approval UX in Rabbit DLAM and Omi's desktop agent; HIG Double Tap semantics; the tiering scheme is original
 
-### 53. Action inbox with batched wrist approval  `MVP` · value 5 · novelty 2 · feasibility 5
+### 53. Action inbox with batched wrist approval  `MVP` · value 5 · novelty 2 · feasibility 5 — ✅ built: Built: the Inbox lists suggested actions and questions; the agent sends approvals to the watch.
 
 Commitments, dates and requests from your conversations become proposed reminders, calendar holds and drafts. They arrive as one batched card ('3 actions from your 2 pm meeting') to approve or dismiss on the wrist or the Mac.
 
@@ -442,7 +442,7 @@ Commitments, dates and requests from your conversations become proposed reminder
 
 *Inspired by:* Fieldy swipe-to-approve; Bee Actions; Omi to-dos
 
-### 54. Deterministic-first tool ladder  `MVP` · value 4 · novelty 3 · feasibility 4
+### 54. Deterministic-first tool ladder  `MVP` · value 4 · novelty 3 · feasibility 4 — ✅ built: Built: the agent uses Reminders, Calendar, Notes, Mail drafts, Shortcuts and AppleScript before falling back to computer use.
 
 The agent always tries the most reliable route first: native frameworks, then Shortcuts, then AppleScript, then the Accessibility tree. The approval card shows which route it used.
 
@@ -450,7 +450,7 @@ The agent always tries the most reliable route first: native frameworks, then Sh
 
 *Inspired by:* Research guidance to prefer deterministic tools over pixel control; brittleness of Rabbit's LAM
 
-### 55. Wrist-to-Mac voice commands  `Next` · value 4 · novelty 3 · feasibility 4
+### 55. Wrist-to-Mac voice commands  `Next` · value 4 · novelty 3 · feasibility 4 — ✅ built: Built: Do requests from the wrist run the Mac agent and report back.
 
 Hold to say 'on my Mac, open the Q3 deck and start my focus playlist' or 'run my standup shortcut'. The Mac plans it, shows the steps on your wrist, and runs them after you approve.
 
@@ -466,7 +466,7 @@ Hold to say 'on my Mac, open the Q3 deck and start my focus playlist' or 'run my
 
 *Inspired by:* original
 
-### 57. Computer-use fallback with replay  `Next` · value 4 · novelty 3 · feasibility 3
+### 57. Computer-use fallback with replay  `Next` · value 4 · novelty 3 · feasibility 3 — ✅ built: Partly: optional Claude computer use with a step log and screenshots for each run.
 
 When no API or script can do the job, the agent operates the app on screen. You get a slow-motion replay you can scrub, and the approval card carries a 'Used screen control' badge.
 
@@ -500,7 +500,7 @@ Five minutes before a meeting, the Mac opens what you'll need (the doc you promi
 
 ## Relationships & Meetings
 
-### 61. Two-way promise ledger  `MVP` · value 5 · novelty 3 · feasibility 5
+### 61. Two-way promise ledger  `MVP` · value 5 · novelty 3 · feasibility 5 — ✅ built: Built: promises are recorded both ways ("You promised" and "Promised to you") with the other person.
 
 Promises are split into 'I owe' and 'Waiting on', each with the exact quote, person and due date. One batched card after a conversation lets you track, edit or dismiss them, and overdue 'Waiting on' items get a polite nudge draft.
 
@@ -508,7 +508,7 @@ Promises are split into 'I owe' and 'Waiting on', each with the exact quote, per
 
 *Inspired by:* Fieldy/Bee/Omi to-do extraction; Omi's cap of 3 a day
 
-### 62. Post-meeting follow-up drafter with off-the-record filter  `MVP` · value 5 · novelty 3 · feasibility 5
+### 62. Post-meeting follow-up drafter with off-the-record filter  `MVP` · value 5 · novelty 3 · feasibility 5 — ✅ built: Partly: suggested actions and the agent can draft follow-up emails in Mail; nothing is ever sent.
 
 When a meeting ends, the app drafts a recap email in your style with decisions, owners and dates, and your watch asks 'Draft recap to 3 attendees?' Anything said off the record ('between us...') is left out automatically.
 
@@ -582,7 +582,7 @@ By default only your own words are kept verbatim. Other voices are kept only for
 
 *Inspired by:* Nirva wearer-focused capture; Limitless help center; EDPB Statement 01/2026; Otter lawsuit
 
-### 71. Pause zones and capture schedules  `MVP` · value 5 · novelty 3 · feasibility 4
+### 71. Pause zones and capture schedules  `MVP` · value 5 · novelty 3 · feasibility 4 — ✅ built: Partly: privacy pause for 15 minutes, an hour or until you resume. No zones or schedules.
 
 Capture stops automatically at places, times and Focus modes you choose: the doctor's office, home after 9 pm, private calendar events, while headphones are playing. The watch tells you whether it's a soft pause (mic open, audio discarded) or a hard stop (mic off, tap to resume).
 
@@ -590,7 +590,7 @@ Capture stops automatically at places, times and Focus modes you choose: the doc
 
 *Inspired by:* Siri Recap time/location schedules; Screenpipe recording schedules; EDPB geofencing recommendation
 
-### 72. Visible recording signals and bystander privacy card  `MVP` · value 5 · novelty 2 · feasibility 5
+### 72. Visible recording signals and bystander privacy card  `MVP` · value 5 · novelty 2 · feasibility 5 — ✅ built: Partly: the system orange microphone indicator and a clear recording state on the watch.
 
 A chime and haptic when capture starts, a distinct recording state on the watch face, and a 'Show card' screen with a QR code to a plain-language page about what is and isn't kept.
 
@@ -598,7 +598,7 @@ A chime and haptic when capture starts, a distinct recording state on the watch 
 
 *Inspired by:* Apple Live Rewind chime and animation; Limitless guidance that the LED alone is not enough
 
-### 73. Local redaction and pseudonymization before the cloud  `MVP` · value 5 · novelty 4 · feasibility 4
+### 73. Local redaction and pseudonymization before the cloud  `MVP` · value 5 · novelty 4 · feasibility 4 — ✅ built: Built: e-mails, phone, card, IBAN and account numbers, SSNs and one-time codes are replaced locally before text goes to Claude.
 
 Before any text reaches Claude, your Mac deletes passwords, one-time codes, card numbers and government IDs, and swaps names, numbers and addresses for placeholders. Claude reasons over '[PERSON_2] promised [ORG_1] the deck by [DATE_1]', and the Mac restores the real values locally.
 
@@ -606,7 +606,7 @@ Before any text reaches Claude, your Mac deletes passwords, one-time codes, card
 
 *Inspired by:* Siri Recap sensitive-data filtering; enterprise DLP pseudonymization
 
-### 74. Shutdown-proof local vault and open export  `MVP` · value 5 · novelty 3 · feasibility 5
+### 74. Shutdown-proof local vault and open export  `MVP` · value 5 · novelty 3 · feasibility 5 — ✅ built: Partly: everything stays in a local SQLite database, and Export writes Markdown transcripts and JSON for all your data.
 
 Your memories live in a folder on your Mac in open formats (Markdown, JSON and audio files) that stay readable without the app. Core features need no account, and one click exports to Obsidian, Apple Notes or Day One.
 
@@ -630,7 +630,7 @@ In one-party jurisdictions, when a new voice joins, nothing they say is kept yet
 
 *Inspired by:* original
 
-### 77. Memory that fades on purpose  `Next` · value 4 · novelty 5 · feasibility 5
+### 77. Memory that fades on purpose  `Next` · value 4 · novelty 5 · feasibility 5 — ✅ built: Partly: raw audio is deleted after a chosen number of days, and you can forget a time range.
 
 Instead of one delete date, detail fades in stages: audio after 3 days, verbatim transcripts after 60, leaving the summary and the facts you confirmed. Anything pinned, bookmarked or tied to an open commitment is kept, and you can set rules per person or place.
 
@@ -680,7 +680,7 @@ A weekly view of your in-person social life as data: minutes in real conversatio
 
 *Inspired by:* original; Mehl et al. 2010 EAR study; Holt-Lunstad et al. 2010
 
-### 83. Evening reflection and bedtime brain dump  `Next` · value 4 · novelty 3 · feasibility 5
+### 83. Evening reflection and bedtime brain dump  `Next` · value 4 · novelty 3 · feasibility 5 — ✅ built: Partly: each digest ends with an evening reflection question.
 
 At wind-down time, the watch offers a two-minute voice chat about the day, using what was captured, plus a dump of tomorrow's worries. The Mac turns it into an editable journal entry and tomorrow's morning list.
 
@@ -746,7 +746,7 @@ Between therapy sessions you journal by voice on the watch: thought records, win
 
 ## Integrations
 
-### 91. Personal-memory MCP server  `MVP` · value 5 · novelty 2 · feasibility 5
+### 91. Personal-memory MCP server  `MVP` · value 5 · novelty 2 · feasibility 5 — ✅ built: Built: a read-only MCP endpoint lets Claude and other agents search memory, read transcripts, open loops, goals and digests.
 
 Claude Desktop, Claude Code or any MCP client can query your memory ('what did the team decide about pricing?') through a local server bundled with the Mac app. It is read-only by default, and every call is logged.
 

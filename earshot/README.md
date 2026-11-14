@@ -585,6 +585,7 @@ MacTests/                   XCTest unit tests
 docs/CONTRACTS.md           module APIs shared by all of the above
 docs/FEATURES.md            feature research and roadmap
 docs/RESEARCH.md            market and platform research notes
+docs/TRANSCRIBE_MERGE_BRIEF.md  brief for merging these features into another watch app
 scripts/bootstrap.sh        set up and generate the project
 scripts/smoke-test-server.sh  exercise the Mac server with curl
 ```
@@ -600,4 +601,20 @@ The MVP covers capture, transcription, search, insights, proactive questions,
 digests, goals, memory chat and approved actions. The wider research behind
 Earshot (100 candidate features across wearables, apps, Apple platform
 constraints, coaching science and research prototypes, prioritised MVP / Next /
-Later) is in [docs/FEATURES.md](docs/FEATURES.md).
+Later) is in [docs/FEATURES.md](docs/FEATURES.md). Each feature that Earshot already has,
+fully or in part, says so there. The market and platform findings behind it are
+in [docs/RESEARCH.md](docs/RESEARCH.md).
+
+Biggest gaps against the research's MVP list:
+
+- **Speaker separation** (#14): transcripts don't say who spoke, so insights
+  phrase things as "you mentioned".
+- **An iPhone relay** (research recommendation): the watch talks to the Mac
+  directly over HTTP. Apple's watchOS networking note allows that, but test
+  whether your Mac's address is reachable when the watch is connected through
+  the iPhone over Bluetooth. If it isn't, use the Mac's address on the same Wi-Fi
+  or an HTTPS tunnel URL until a relay exists.
+- **Complications, Smart Stack and the Action button** (#8, #93): recording
+  starts from inside the app only.
+- **Encryption at rest and undo for actions** (#52, #74): the database is a plain
+  SQLite file in your user folder.
