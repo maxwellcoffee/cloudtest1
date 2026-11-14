@@ -504,6 +504,26 @@ pause on the watch), don't wear it where recording is prohibited, and use
 
 ## Troubleshooting
 
+**First build.** This code was written and reviewed without a Swift compiler.
+Every Apple API was checked against Apple's documentation and the code went
+through several review rounds, but a first Xcode build may still need a few
+small fixes. The spots most likely to need one:
+
+- `Mac/Views/SettingsView.swift`: `TextField(value:format:)` number fields, and
+  generic inference in `confirmationDialog(_:isPresented:presenting:)`.
+- `Mac/Views/TodayView.swift`: `.dropDestination(for: URL.self)` for audio import.
+- `Mac/Core/AppModel.swift`: `[weak self]` captures inside `Task { @MainActor in }`
+  within `@Sendable` callbacks, and the key-path `assign(_:to:)` helper.
+- `Watch/AudioCapture.swift`: the audio tap and converter closures (Sendable
+  annotations differ between SDK versions), and `AVAudioFile.close()`, which is
+  guarded for watchOS 11.
+
+Expect some Sendable warnings in Swift 5 mode. They are warnings, not errors.
+If a build error is unclear, paste it into Claude Code together with the file.
+
+**Unit tests don't load** - hosted tests under the hardened runtime need a
+signing team (library validation checks team IDs). Set your team as for the app.
+
 **"Signing for ... requires a development team"** - add your team to
 `Config/Local.xcconfig` (or run `scripts/bootstrap.sh YOURTEAMID`) and
 regenerate.
