@@ -779,7 +779,7 @@ private struct DataSettingsTab: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("The transcript of the last 15 minutes is deleted permanently.")
+            Text("The transcript and recorded audio of the last 15 minutes are deleted permanently.")
         }
     }
 }

@@ -53,7 +53,7 @@ struct EarshotTodayView: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: { request in
-            Text("The transcript from \(request.from.timeText) to \(request.to.timeText) will be deleted permanently.")
+            Text("The transcript and recorded audio from \(request.from.timeText) to \(request.to.timeText) will be deleted permanently.")
         }
         .sheet(isPresented: $showCustomForget) {
             ForgetRangeSheet(day: model.selectedDay) { from, to in
@@ -904,9 +904,9 @@ private struct InsightCard: View {
             hovering = inside
         }
         .contextMenu {
-            if let source = insight.sourceFrom {
+            if insight.sourceFrom != nil {
                 Button("Show in Transcript") {
-                    model.show(date: source)
+                    model.showSource(of: insight)
                 }
             }
             if insight.kind == .task || insight.kind == .commitment || insight.kind == .event {
@@ -989,7 +989,7 @@ private struct ForgetRangeSheet: View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Forget part of the transcript")
                 .font(.headline)
-            Text("Everything said in this range is deleted from Earshot's archive. This can't be undone.")
+            Text("Everything said in this range is deleted from Earshot's archive: the transcript and the recorded audio. This can't be undone.")
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

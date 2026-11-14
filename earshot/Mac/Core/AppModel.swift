@@ -160,6 +160,8 @@ final class AppModel: ObservableObject, WatchBridge {
     private var timer: Timer?
     private var eventObserver: NSObjectProtocol?
     private var settingsObserver: AnyCancellable?
+    /// Re-publishes MacMicRecorder changes so views that read `model.micRecorder` refresh.
+    private var micObserver: AnyCancellable?
     private var pendingScopes: Set<DataScope> = []
     private var reloadTask: Task<Void, Never>?
     private var analysisTask: Task<Void, Never>?
@@ -170,8 +172,15 @@ final class AppModel: ObservableObject, WatchBridge {
     private var lastIntervalAnalysisAt: Date = .distantPast
     private var lastRetentionAt: Date = .distantPast
     private var tickInFlight = false
+    /// The calendar day the app last treated as today (see `rollOverDayIfNeeded`).
+    private var lastKnownToday = Date().startOfDay
+    /// Set at midnight while Today shows the day that just ended: Today moves to the new day once
+    /// the user is no longer reading a cited passage of it.
+    private var dayRolloverFrom: Date?
     /// Accepted watch requests by request id, loaded lazily from the key-value store (nil until then).
     private var handledWatchRequests: [String: HandledWatchRequest]?
+    /// Recently forgotten time ranges, loaded lazily from the key-value store (nil until then).
+    private var forgottenRanges: [ForgottenRange]?
 
     /// Transcription-triggered analysis runs at most this often.
     private static let autoAnalysisSpacing: TimeInterval = 180
@@ -186,6 +195,23 @@ final class AppModel: ObservableObject, WatchBridge {
         var at: Date
     }
     private typealias HandledWatchRequestTable = [String: HandledWatchRequest]
+
+    /// A time range the user asked to forget. Kept for a while so that audio which was still on the
+    /// watch, in the transcription queue or in the Mac's current segment at that moment is scrubbed
+    /// once it has been transcribed (see `scrubIfForgotten`).
+    private struct ForgottenRange: Codable {
+        var from: Date
+        var to: Date
+        var at: Date
+    }
+    private static let forgottenRangesKey = "forget.ranges.v1"
+    /// A watch can keep audio offline for days; older forget requests are no longer re-applied.
+    private static let forgottenRangeLifetime: TimeInterval = 7 * 86_400
+    private static let forgottenRangeLimit = 200
+    /// Utterances are at most about 25 s long; this finds every one that starts before a range and runs into it.
+    private static let forgetUtteranceLookback: TimeInterval = 900
+    /// Imported recordings can be long; segments that started up to this long before a range are checked.
+    private static let forgetSegmentLookback: TimeInterval = 86_400
 
     // MARK: - Init
 
@@ -313,6 +339,11 @@ final class AppModel: ObservableObject, WatchBridge {
                     self?.refreshAIStatus()
                 }
             }
+        micObserver = micRecorder.objectWillChange
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
     }
 
     // MARK: - Lifecycle
@@ -343,7 +374,11 @@ final class AppModel: ObservableObject, WatchBridge {
             Task { await self.requestStartupPermissions() }
         }
         if settings.settings.macMicEnabled {
-            Task { await self.micRecorder.start() }
+            Task { [weak self] in
+                guard let self else { return }
+                await self.micRecorder.start()
+                self.stopMicIfDisabled()
+            }
         }
         refreshStatus()
 
@@ -376,6 +411,8 @@ final class AppModel: ObservableObject, WatchBridge {
     }
 
     private func minuteTick() async {
+        // Before the in-flight guard: a slow scheduler pass must not hold Today on yesterday.
+        rollOverDayIfNeeded()
         // Skip housekeeping while an erase is running: it would read (and act on) the old data.
         guard !tickInFlight, !isErasing else { return }
         tickInFlight = true
@@ -412,6 +449,30 @@ final class AppModel: ObservableObject, WatchBridge {
 
         refreshAIStatus()
         refreshStatus()
+    }
+
+    /// Moves Today to the new day after midnight (the app keeps running for days in the menu bar).
+    /// Someone who was looking at the day that just ended follows the clock; someone looking at an
+    /// older day stays there. While a cited passage of the old day is open, the move waits for it.
+    private func rollOverDayIfNeeded() {
+        let today = Date().startOfDay
+        if today != lastKnownToday {
+            if Calendar.current.isDate(selectedDay, inSameDayAs: lastKnownToday) {
+                dayRolloverFrom = lastKnownToday
+            }
+            lastKnownToday = today
+            // Recomputes `todayWordCount` for the new day (and the shown day's figures).
+            scheduleReload([.utterances], delay: 0)
+        }
+        guard let from = dayRolloverFrom else { return }
+        guard Calendar.current.isDate(selectedDay, inSameDayAs: from) else {
+            // The user moved to another day (or to today) in the meantime.
+            dayRolloverFrom = nil
+            return
+        }
+        guard highlightedUtteranceID == nil else { return }
+        dayRolloverFrom = nil
+        selectedDay = today   // didSet reloads the segments and utterances of the new day
     }
 
     private func requestStartupPermissions() async {
@@ -667,6 +728,8 @@ final class AppModel: ObservableObject, WatchBridge {
     // MARK: - Transcription & analysis
 
     private func handleTranscribed(_ segment: Segment, _ utterances: [Utterance]) {
+        // Audio recorded before a "forget" but transcribed after it must not bring the speech back.
+        scrubIfForgotten(segment)
         let scheduler = self.scheduler
         Task {
             await scheduler.resolveVoiceAnswers()
@@ -1152,6 +1215,7 @@ final class AppModel: ObservableObject, WatchBridge {
             Task { [weak self] in
                 guard let self else { return }
                 await self.micRecorder.start()
+                if self.stopMicIfDisabled() { return }
                 if let error = self.micRecorder.lastError, !self.micRecorder.isRecording {
                     self.showBanner(.error, "Mac microphone: \(error)")
                 }
@@ -1159,6 +1223,18 @@ final class AppModel: ObservableObject, WatchBridge {
         } else if micRecorder.isRecording {
             micRecorder.stop()
         }
+    }
+
+    /// `micRecorder.start()` can wait on the microphone prompt; if desk mode was switched off in the
+    /// meantime, stops the recording it went on to start. Returns true when desk mode is off.
+    @discardableResult
+    private func stopMicIfDisabled() -> Bool {
+        guard !settings.settings.macMicEnabled else { return false }
+        if micRecorder.isRecording {
+            micRecorder.stop()
+            Log.info("AppModel: desk mode was switched off while the microphone was starting; stopped it.")
+        }
+        return true
     }
 
     // MARK: - Import
@@ -1246,14 +1322,116 @@ final class AppModel: ObservableObject, WatchBridge {
 
     // MARK: - Data
 
-    /// "Forget this": deletes the transcript in a time range.
+    /// "Forget this": deletes the transcript and the recorded audio of a time range. Utterances that
+    /// overlap the range are deleted whole, and so is the audio of every segment that overlaps it.
+    /// Segments still waiting for transcription (or still on the watch) are scrubbed once they are
+    /// transcribed, so their speech outside the range is kept.
     func forget(from: Date, to: Date) {
         guard to > from else { return }
-        db.deleteUtterances(from: from, to: to)
-        utterances.removeAll { $0.endedAt > from && $0.startedAt < to }
+        rememberForgottenRange(from: from, to: to)
+        let removedAudio = scrub(from: from, to: to)
+        utterances.removeAll { AppModel.isForgotten($0, from: from, to: to) }
         EarshotEvents.post(.utterances)
-        Log.info("AppModel: forgot transcript \(from.shortText) – \(to.shortText).")
+        if removedAudio > 0 { EarshotEvents.post(.segments) }
+        Log.info("AppModel: forgot \(from.shortText) – \(to.shortText) (transcript and the audio of \(removedAudio) segment(s)).")
         showBanner(.success, "Forgot \(from.timeText)–\(to.timeText).")
+    }
+
+    /// The rule `scrub(from:to:)` deletes by: the utterance starts in the range, or starts before it
+    /// and runs into it.
+    nonisolated private static func isForgotten(_ utterance: Utterance, from: Date, to: Date) -> Bool {
+        utterance.startedAt < to && (utterance.startedAt >= from || utterance.endedAt > from)
+    }
+
+    /// Deletes the utterances overlapping [from, to) and the stored audio of the segments overlapping
+    /// it, except segments still waiting for (or in) transcription. Returns the number of audio files deleted.
+    @discardableResult
+    private func scrub(from: Date, to: Date) -> Int {
+        // `deleteUtterances` matches on start times only. An utterance that began shortly before the
+        // range and runs into it is deleted on its own: a ±0.5 ms window around its stored start.
+        let straddling = db.utterances(from: from.addingTimeInterval(-AppModel.forgetUtteranceLookback),
+                                       to: from, limit: 5_000)
+            .filter { AppModel.isForgotten($0, from: from, to: to) }
+        for utterance in straddling {
+            db.deleteUtterances(from: utterance.startedAt.addingTimeInterval(-0.0005),
+                                to: utterance.startedAt.addingTimeInterval(0.0005))
+        }
+        db.deleteUtterances(from: from, to: to)
+
+        let fileManager = FileManager.default
+        var removed = 0
+        let candidates = db.segments(from: from.addingTimeInterval(-AppModel.forgetSegmentLookback), to: to)
+        for var segment in candidates where segment.endedAt > from {
+            guard let path = segment.filePath else { continue }
+            switch segment.status {
+            case .received, .transcribing:
+                // Deleting it now would fail its transcription; `scrubIfForgotten` handles it afterwards.
+                continue
+            case .transcribed, .silent, .failed:
+                break
+            }
+            if fileManager.fileExists(atPath: path) {
+                do {
+                    try fileManager.removeItem(atPath: path)
+                } catch {
+                    Log.error("AppModel: could not delete the audio of segment \(segment.id): \(error.localizedDescription)")
+                    continue
+                }
+            }
+            segment.filePath = nil
+            db.upsertSegment(segment)
+            removed += 1
+        }
+        return removed
+    }
+
+    /// Re-applies recent forget requests to a segment that was transcribed after them.
+    private func scrubIfForgotten(_ segment: Segment) {
+        let ranges = loadForgottenRanges().filter { $0.from < segment.endedAt && $0.to > segment.startedAt }
+        guard !ranges.isEmpty else { return }
+        var removedAudio = 0
+        for range in ranges {
+            removedAudio += scrub(from: range.from, to: range.to)
+        }
+        utterances.removeAll { utterance in
+            ranges.contains { AppModel.isForgotten(utterance, from: $0.from, to: $0.to) }
+        }
+        EarshotEvents.post(.utterances)
+        if removedAudio > 0 { EarshotEvents.post(.segments) }
+        Log.info("AppModel: segment \(segment.id) overlaps \(ranges.count) forgotten range(s); scrubbed it.")
+    }
+
+    private func loadForgottenRanges() -> [ForgottenRange] {
+        if let cached = forgottenRanges { return cached }
+        var loaded: [ForgottenRange] = []
+        if let raw = db.kvGet(AppModel.forgottenRangesKey) {
+            if let decoded = try? JSONDecoder().decode([ForgottenRange].self, from: Data(raw.utf8)) {
+                loaded = decoded
+            } else {
+                Log.error("AppModel: could not read the forgotten time ranges; starting afresh.")
+            }
+        }
+        let cutoff = Date().addingTimeInterval(-AppModel.forgottenRangeLifetime)
+        loaded.removeAll { $0.at < cutoff }
+        forgottenRanges = loaded
+        return loaded
+    }
+
+    private func rememberForgottenRange(from: Date, to: Date) {
+        let now = Date()
+        let cutoff = now.addingTimeInterval(-AppModel.forgottenRangeLifetime)
+        var ranges = loadForgottenRanges().filter { $0.at >= cutoff }
+        ranges.append(ForgottenRange(from: from, to: to, at: now))
+        if ranges.count > AppModel.forgottenRangeLimit {
+            ranges.removeFirst(ranges.count - AppModel.forgottenRangeLimit)
+        }
+        forgottenRanges = ranges
+        do {
+            let data = try JSONEncoder().encode(ranges)
+            db.kvSet(AppModel.forgottenRangesKey, String(decoding: data, as: UTF8.self))
+        } catch {
+            Log.error("AppModel: could not save the forgotten time range: \(error.localizedDescription)")
+        }
     }
 
     func searchArchive(_ query: String, limit: Int = 200) async -> [Utterance] {
@@ -1293,6 +1471,7 @@ final class AppModel: ObservableObject, WatchBridge {
             // A reload that ran while the wipe was waiting for the database may have brought old rows back.
             self.clearLoadedData()
             self.handledWatchRequests = nil
+            self.forgottenRanges = nil
             self.isErasing = false
             for scope in DataScope.allCases {
                 EarshotEvents.post(scope)
@@ -1373,6 +1552,25 @@ final class AppModel: ObservableObject, WatchBridge {
         selectedDay = date.startOfDay
         highlightedUtteranceID = utteranceID
         sidebarSelection = .today
+    }
+
+    /// Insight "Show in Transcript": opens Today on the insight's source and highlights the utterance
+    /// it came from (the first one in its source range, else the one starting nearest to it).
+    func showSource(of insight: Insight) {
+        guard let source = insight.sourceFrom else { return }
+        let end = max(insight.sourceTo ?? source, source)
+        let db = self.db
+        Task { [weak self] in
+            let nearby = await Task.detached(priority: .userInitiated) {
+                db.utterances(from: source.addingTimeInterval(-300), to: end.addingTimeInterval(300), limit: 2_000)
+            }.value
+            guard let self else { return }
+            let inside = nearby.first { $0.endedAt >= source && $0.startedAt <= end }
+            let target = inside ?? nearby.min { first, second in
+                abs(first.startedAt.timeIntervalSince(source)) < abs(second.startedAt.timeIntervalSince(source))
+            }
+            self.show(date: target?.startedAt ?? source, utteranceID: target?.id)
+        }
     }
 
     func showDigest(_ id: String) {

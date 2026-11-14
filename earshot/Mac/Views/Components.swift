@@ -8,7 +8,7 @@ import AppKit
 // MARK: - Formatting
 
 enum EarshotFormat {
-    /// The computer's name, resolved once (the host name lookup can be slow).
+    /// The computer's name (cached in AppSettings; the lookup is quick).
     static let defaultMacName: String = AppSettings().effectiveMacName
 
     /// "45 s", "12 min", "1 h 5 min".

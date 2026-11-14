@@ -158,20 +158,60 @@ final class LLMService: @unchecked Sendable {
         switch tier {
         case .background:
             model = backgroundModel(settings)
-            let requested = settings.backgroundEffort.trimmed.lowercased()
-            effort = validEfforts.contains(requested) ? requested : nil
+            effort = settings.backgroundEffort
         case .foreground:
             model = foregroundModel(settings)
             effort = "high"
         }
-        return (model, supportsEffort(model) ? effort : nil)
+        return (model, clampEffort(effort, for: model))
     }
 
-    /// Older models reject `output_config.effort`.
-    private static func supportsEffort(_ model: String) -> Bool {
-        let m = model.lowercased()
-        let unsupported = ["claude-3", "haiku-4", "sonnet-4-5", "sonnet-4-2", "opus-4-1", "opus-4-2"]
-        return !unsupported.contains(where: { m.contains($0) })
+    private static let modelFamilies: Set<String> = ["opus", "sonnet", "haiku", "fable", "mythos"]
+
+    /// The effort to send to `model`, or nil when the model rejects `output_config.effort`
+    /// (Sonnet 4.5, Haiku 4.5 and older). The model fields are free text, so a level the model
+    /// lacks is lowered to "high": xhigh arrived with Opus 4.7, Opus 4.6 / Sonnet 4.6 take
+    /// low/medium/high/max, Opus 4.5 only low/medium/high. Unrecognised ids get the level as is.
+    private static func clampEffort(_ requested: String?, for model: String) -> String? {
+        guard let level = requested?.trimmed.lowercased(), validEfforts.contains(level) else { return nil }
+        guard let v = modelVersion(model) else { return level }
+        if v.major != 4 { return v.major > 4 ? level : nil }
+        switch v.family {
+        case "opus":
+            if v.minor >= 7 { return level }
+            if v.minor == 6 { return level == "xhigh" ? "high" : level }
+            if v.minor == 5 { return level == "xhigh" || level == "max" ? "high" : level }
+            return nil
+        case "sonnet":
+            if v.minor >= 6 { return level == "xhigh" ? "high" : level }
+            return nil
+        default:
+            return nil
+        }
+    }
+
+    /// Family and version of a Claude model id: "claude-opus-4-6" → ("opus", 4, 6),
+    /// "claude-sonnet-4-20250514" → ("sonnet", 4, 0), "claude-3-5-haiku-latest" → ("haiku", 3, 5),
+    /// "anthropic.claude-opus-4-6-v1" → ("opus", 4, 6). nil when the id isn't recognisable.
+    private static func modelVersion(_ model: String) -> (family: String, major: Int, minor: Int)? {
+        let tokens = model.lowercased()
+            .split(whereSeparator: { !$0.isLetter && !$0.isNumber })
+            .map(String.init)
+        /// A one- or two-digit version number (dates such as 20250514 are not versions).
+        func number(at index: Int) -> Int? {
+            guard index >= 0, index < tokens.count, tokens[index].count <= 2 else { return nil }
+            return Int(tokens[index])
+        }
+        guard let familyIndex = tokens.firstIndex(where: { modelFamilies.contains($0) }) else { return nil }
+        let family = tokens[familyIndex]
+        // Legacy ids put the version first: claude-3-5-sonnet-20241022.
+        if let claudeIndex = tokens.firstIndex(of: "claude"), claudeIndex < familyIndex,
+           let major = number(at: claudeIndex + 1) {
+            let minor = claudeIndex + 2 < familyIndex ? (number(at: claudeIndex + 2) ?? 0) : 0
+            return (family, major, minor)
+        }
+        guard let major = number(at: familyIndex + 1) else { return nil }
+        return (family, major, number(at: familyIndex + 2) ?? 0)
     }
 
     // MARK: On-device (Apple Foundation Models)
