@@ -30,6 +30,8 @@ public enum EarshotAPI {
         public static let requests = "/api/v1/requests"
         /// POST Bookmark -> OKResponse
         public static let bookmarks = "/api/v1/bookmarks"
+        /// POST JSON-RPC 2.0 (Model Context Protocol, Streamable HTTP) — Mac only, read-only memory tools
+        public static let mcp = "/mcp"
     }
 
     public enum Header {

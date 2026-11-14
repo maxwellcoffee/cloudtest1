@@ -97,6 +97,13 @@ struct AppSettings: Codable, Hashable, Sendable {
     // Mac microphone ("desk mode")
     var macMicEnabled: Bool = false
 
+    // Privacy & integrations
+    /// Replace emails, phone numbers, card/account numbers and street-address-like strings
+    /// with placeholders before transcript text is sent to a cloud model.
+    var redactBeforeCloud: Bool = true
+    /// Serve the read-only personal-memory MCP endpoint (POST /mcp) for agents such as Claude.
+    var mcpEnabled: Bool = false
+
     var remoteWatchSettings: RemoteWatchSettings {
         RemoteWatchSettings(segmentSeconds: segmentSeconds, silenceThresholdDB: silenceThresholdDB,
                             skipSilentSegments: skipSilentSegments, lowBatteryStopLevel: lowBatteryStopLevel)
@@ -157,6 +164,8 @@ struct AppSettings: Codable, Hashable, Sendable {
         notesFolderPath = v(.notesFolderPath, notesFolderPath)
         alsoCreateAppleNotes = v(.alsoCreateAppleNotes, alsoCreateAppleNotes)
         macMicEnabled = v(.macMicEnabled, macMicEnabled)
+        redactBeforeCloud = v(.redactBeforeCloud, redactBeforeCloud)
+        mcpEnabled = v(.mcpEnabled, mcpEnabled)
     }
 
     /// True when `date` falls inside quiet hours (handles ranges crossing midnight).

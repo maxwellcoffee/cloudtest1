@@ -558,3 +558,69 @@ uploaded oldest-first whenever the Mac is reachable.
 `JSONValue`, `Schema`, `DateParsing`, `AppSettings.isQuietHour`,
 `SegmentMeta` header round-trip, `ClaudeClient.makeBody`, `HTTPParser`,
 `UtteranceAssembler`, `QuestionPolicy`), `README.md`.
+
+---
+
+## Enhancements (round 2, from the 100-feature research)
+
+New `AppSettings` fields (already added): `redactBeforeCloud: Bool = true`,
+`mcpEnabled: Bool = false`. New path `EarshotAPI.Path.mcp = "/mcp"`.
+
+### ai — `Mac/AI/Redactor.swift` (feature #73 local redaction before the cloud)
+
+```swift
+enum Redactor {
+    /// Replaces e-mail addresses, phone numbers, payment-card numbers (Luhn-checked), IBAN/account-like
+    /// numbers, US SSNs and one-time codes with placeholders such as "[email]", "[phone]", "[card]".
+    static func redact(_ text: String) -> String
+}
+```
+`LLMService` applies it to `system` and `user` text for the Claude backend when
+`SettingsStore.current.redactBeforeCloud` (never for the on-device model).
+
+### ai — prompt changes
+* Feature #44 value-of-information gate: every generated question must state the
+  decision or action it unlocks (`decision_unlocked`); questions with an empty value are
+  dropped; the text is stored in `rationale` ("Unlocks: …").
+* Feature #61 two-way promise ledger: commitments carry a direction — titles start with
+  "You promised:" or "Promised to you:" and `people` names the other party.
+
+### infra — `Mac/Server/MCPHandler.swift` (feature #91 personal-memory MCP server)
+
+```swift
+final class MCPHandler: @unchecked Sendable {
+    init(db: Database, memory: MemoryChat)
+    /// Bearer token MCP clients must send; created on first use, stored in the Keychain
+    /// (account "mcp-token"), rotatable.
+    var token: String { get }
+    func rotateToken()
+    /// Handles POST /mcp (JSON-RPC 2.0: initialize, notifications/initialized, ping, tools/list, tools/call).
+    func handle(_ request: HTTPRequest) async -> HTTPResponse
+}
+```
+`APIRouter` gains `var mcp: MCPHandler?` and forwards `POST /mcp` to it when
+`SettingsStore.current.mcpEnabled` (404 otherwise; 401 on a bad token). Read-only
+tools: `search_memory{query, days?}`, `get_transcript{date, start_time?, end_time?}`,
+`list_open_loops{}` (open tasks/commitments/questions), `list_goals{}`,
+`get_digest{date?}`, `ask_memory{question}` (uses `MemoryChat.ask(_, persist: false)`).
+
+### infra — `Mac/Storage/Exporter.swift` (feature #74 shutdown-proof open export)
+
+```swift
+enum Exporter {
+    /// Writes <folder>/Earshot Export <yyyy-MM-dd HHmm>/ with one Markdown transcript per day
+    /// (Transcripts/yyyy-MM-dd.md), insights.json, goals.json, prompts.json, actions.json,
+    /// digests/*.md and a README.md describing the schema. Returns the export folder.
+    static func exportAll(db: Database, to folder: URL) throws -> URL
+}
+```
+
+### ui — additions
+Settings → Data: "Export everything…" (NSOpenPanel choose folder → `Exporter.exportAll`, reveal in
+Finder), redaction toggle; Settings → Integrations: MCP toggle, endpoint URL
+(`http://127.0.0.1:<port>/mcp`), token with copy/rotate, a ready-to-paste client config snippet.
+`AppModel` creates `MCPHandler(db:memory:)` and sets `router.mcp`.
+
+### watch — battery forecast (feature #4)
+`AudioCapture`/`WatchStore` estimate battery drain per hour while recording (sliding window
+of battery samples) and show "≈ N h left at this rate" on the Record page.

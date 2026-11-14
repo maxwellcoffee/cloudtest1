@@ -70,13 +70,19 @@ private struct KeyStroke {
     }
 }
 
+/// Pixel size of the last screenshot sent to the model.
+private struct PixelSize: Sendable {
+    var width: Int
+    var height: Int
+}
+
 /// Lock-protected mutable state shared by concurrent calls.
 private final class ControlState: @unchecked Sendable {
     private let lock = NSLock()
-    private var shotSize: (width: Int, height: Int)?
+    private var shotSize: PixelSize?
     private var leftHeld = false
 
-    var lastScreenshotSize: (width: Int, height: Int)? {
+    var lastScreenshotSize: PixelSize? {
         get { lock.lock(); defer { lock.unlock() }; return shotSize }
         set { lock.lock(); shotSize = newValue; lock.unlock() }
     }
@@ -134,7 +140,7 @@ final class ComputerControl: @unchecked Sendable {
             throw ComputerControlError.imageFailed("could not downscale the capture")
         }
         let png = try ComputerControl.pngData(image)
-        state.lastScreenshotSize = (width: image.width, height: image.height)
+        state.lastScreenshotSize = PixelSize(width: image.width, height: image.height)
         return ScreenCapture(png: png, width: image.width, height: image.height)
     }
 
@@ -207,10 +213,10 @@ final class ComputerControl: @unchecked Sendable {
     }
 
     /// Size of the screenshot the model is working from (takes one if none was taken yet).
-    private func screenshotSize() throws -> (width: Int, height: Int) {
+    private func screenshotSize() throws -> PixelSize {
         if let size = state.lastScreenshotSize, size.width > 0, size.height > 0 { return size }
         let shot = try screenshot()
-        return (width: shot.width, height: shot.height)
+        return PixelSize(width: shot.width, height: shot.height)
     }
 
     /// Captures `region` (screenshot space) at full resolution, scaled to fit the screenshot size.
@@ -476,10 +482,10 @@ final class ComputerControl: @unchecked Sendable {
         try? await Task.sleep(nanoseconds: UInt64(max(milliseconds, 0)) * 1_000_000)
     }
 
-    private func postMouse(_ type: CGEventType, at point: CGPoint, button: CGMouseButton,
+    private func postMouse(_ eventType: CGEventType, at point: CGPoint, button: CGMouseButton,
                            clickState: Int64? = nil, flags: CGEventFlags = []) throws {
         let source = CGEventSource(stateID: .hidSystemState)
-        guard let event = CGEvent(mouseEventSource: source, mouseType: type,
+        guard let event = CGEvent(mouseEventSource: source, mouseType: eventType,
                                   mouseCursorPosition: point, mouseButton: button) else {
             throw ComputerControlError.eventFailed("mouse event")
         }
