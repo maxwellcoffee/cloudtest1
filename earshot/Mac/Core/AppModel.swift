@@ -376,7 +376,8 @@ final class AppModel: ObservableObject, WatchBridge {
     }
 
     private func minuteTick() async {
-        guard !tickInFlight else { return }
+        // Skip housekeeping while an erase is running: it would read (and act on) the old data.
+        guard !tickInFlight, !isErasing else { return }
         tickInFlight = true
         defer { tickInFlight = false }
 
@@ -1327,6 +1328,10 @@ final class AppModel: ObservableObject, WatchBridge {
             showBanner(.info, "An export is already running.")
             return
         }
+        guard !isErasing else {
+            showBanner(.info, "Earshot is erasing your data. Try again when it has finished.")
+            return
+        }
         let panel = NSOpenPanel()
         panel.title = "Export Everything"
         panel.message = "Choose where to save the export. Earshot creates a new “Earshot Export” folder there with your transcripts, insights, goals, questions, actions and digests in Markdown and JSON."
@@ -1414,7 +1419,7 @@ final class AppModel: ObservableObject, WatchBridge {
     private func recordHandledWatchRequest(_ ack: WatchRequestAck) {
         let now = Date()
         let cutoff = now.addingTimeInterval(-AppModel.handledWatchRequestLifetime)
-        var records = loadHandledWatchRequests().filter { $0.value.at >= cutoff }
+        var records: [String: HandledWatchRequest] = loadHandledWatchRequests().filter { $0.value.at >= cutoff }
         records[ack.id] = HandledWatchRequest(ack: ack, at: now)
         if records.count > AppModel.handledWatchRequestLimit {
             let newest = records.sorted { $0.value.at > $1.value.at }.prefix(AppModel.handledWatchRequestLimit)

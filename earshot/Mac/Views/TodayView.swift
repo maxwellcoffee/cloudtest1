@@ -106,10 +106,13 @@ struct EarshotTodayView: View {
             .disabled(model.isViewingToday)
             .help("Next day")
 
+            // Also enabled on today after a jump to a cited utterance: it returns to the live transcript.
             Button("Today") {
+                model.highlightedUtteranceID = nil
                 model.selectedDay = Date().startOfDay
             }
-            .disabled(model.isViewingToday)
+            .disabled(model.isViewingToday && model.highlightedUtteranceID == nil)
+            .help(model.isViewingToday ? "Back to the live transcript" : "Go to today")
         }
         ToolbarItemGroup(placement: .primaryAction) {
             Menu {
@@ -328,7 +331,8 @@ private struct TranscriptPane: View {
                 Divider()
             }
             if showArchive && !query.trimmed.isEmpty {
-                ArchiveResultsList(results: archiveResults, query: query, loading: archiveLoading)
+                ArchiveResultsList(results: archiveResults, query: query, loading: archiveLoading,
+                                   showArchive: $showArchive)
             } else if items.isEmpty {
                 TranscriptEmptyState(query: query)
             } else {
@@ -365,8 +369,17 @@ private struct TranscriptPane: View {
                     }
                 }
             }
-            .onChange(of: model.highlightedUtteranceID, initial: true) { _, newValue in
-                guard let target = newValue else { return }
+            .onChange(of: model.highlightedUtteranceID, initial: true) { oldValue, newValue in
+                guard let target = newValue else {
+                    // The jump ended (Today button, day change): follow the live transcript again.
+                    pendingScrollID = nil
+                    if oldValue != nil && model.isViewingToday && query.isEmpty {
+                        withAnimation(.easeOut(duration: 0.25)) {
+                            proxy.scrollTo(Self.bottomID, anchor: .bottom)
+                        }
+                    }
+                    return
+                }
                 pendingScrollID = target
                 scroll(to: target, in: items, proxy: proxy)
             }
@@ -426,6 +439,7 @@ private struct ArchiveResultsList: View {
     let results: [Utterance]
     let query: String
     let loading: Bool
+    @Binding var showArchive: Bool
 
     var body: some View {
         if results.isEmpty {
@@ -438,6 +452,8 @@ private struct ArchiveResultsList: View {
         } else {
             List(results) { utterance in
                 Button {
+                    // Switch to the day's timeline so the jump to the utterance is visible.
+                    showArchive = false
                     model.show(date: utterance.startedAt, utteranceID: utterance.id)
                     model.showBanner(.info, "Showing \(EarshotFormat.dayTitle(utterance.startedAt)) at \(utterance.startedAt.timeText).")
                 } label: {

@@ -702,7 +702,7 @@ private struct DataSettingsTab: View {
                     Button("Export Everything…") {
                         model.exportAll()
                     }
-                    .disabled(model.isExporting)
+                    .disabled(model.isExporting || model.isErasing)
                     if model.isExporting {
                         ProgressView()
                             .controlSize(.small)
@@ -745,8 +745,17 @@ private struct DataSettingsTab: View {
             }
 
             Section {
-                Button("Erase All Data…", role: .destructive) {
-                    confirmErase = true
+                HStack(spacing: 10) {
+                    Button("Erase All Data…", role: .destructive) {
+                        confirmErase = true
+                    }
+                    .disabled(model.isErasing || model.isExporting)
+                    if model.isErasing {
+                        ProgressView()
+                            .controlSize(.small)
+                        Text("Erasing…")
+                            .foregroundStyle(.secondary)
+                    }
                 }
             } header: {
                 Text("Erase")

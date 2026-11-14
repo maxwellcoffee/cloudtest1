@@ -41,7 +41,22 @@ struct EarshotMacApp: App {
 @MainActor
 private final class EarshotAppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // EarshotTests is hosted by this app. Under XCTest, don't start the services (HTTP server,
+        // transcription of pending segments, desk mode, permission prompts, the minute timer that
+        // calls Claude), which would otherwise run against the real archive next to the user's
+        // everyday Earshot. The unit tests only exercise pure helpers.
+        if EarshotAppDelegate.isRunningUnitTests {
+            Log.info("Earshot: hosted by XCTest; services not started.")
+            return
+        }
         AppModel.shared.start()
+    }
+
+    private static var isRunningUnitTests: Bool {
+        let environment = ProcessInfo.processInfo.environment
+        return environment["XCTestConfigurationFilePath"] != nil
+            || environment["XCTestBundlePath"] != nil
+            || environment["XCTestSessionIdentifier"] != nil
     }
 
     /// Keep running in the menu bar (the watch keeps uploading) when the window closes.
