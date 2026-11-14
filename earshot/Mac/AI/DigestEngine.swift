@@ -38,6 +38,9 @@ final class DigestEngine: @unchecked Sendable {
     private static let retryInterval: TimeInterval = 30 * 60
     private static let minimumWords = 50
 
+    /// (chunk index, condensed text or the error) produced by one concurrent chunk task.
+    private typealias ChunkOutcome = (Int, Result<String, Error>)
+
     init(db: Database, llm: LLMService, calendar: CalendarService) {
         self.db = db
         self.llm = llm
@@ -384,7 +387,7 @@ final class DigestEngine: @unchecked Sendable {
 
         let allInputs = inputs
         let total = allInputs.count
-        let results: [Int: Result<String, Error>] = await withTaskGroup(of: (Int, Result<String, Error>).self,
+        let results: [Int: Result<String, Error>] = await withTaskGroup(of: ChunkOutcome.self,
                                                                          returning: [Int: Result<String, Error>].self) { group in
             var collected: [Int: Result<String, Error>] = [:]
             var nextIndex = 0
@@ -429,7 +432,7 @@ final class DigestEngine: @unchecked Sendable {
         return sections.joined(separator: "\n\n")
     }
 
-    private func condenseChunk(index: Int, input: String) async -> (Int, Result<String, Error>) {
+    private func condenseChunk(index: Int, input: String) async -> ChunkOutcome {
         do {
             let text = try await llm.complete(system: PromptLibrary.digestChunkSystem, user: input,
                                               tier: .background, maxTokens: 6_000)

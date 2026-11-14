@@ -506,8 +506,11 @@ final class QuestionScheduler: @unchecked Sendable {
         // A task the user says is already done.
         var markedDone = false
         let doneTitle = PromptLibrary.text(reply["insight_title_done"])
+        // With redaction on, the model saw (and echoes) titles with placeholders such as "[phone]".
+        let redacted = SettingsStore.current.redactBeforeCloud
+        let openTitles = openItems.map { redacted ? Redactor.redact($0.title) : $0.title }
         if !doneTitle.isEmpty,
-           let index = PromptLibrary.bestMatch(doneTitle, among: openItems.map({ $0.title }), threshold: 0.7),
+           let index = PromptLibrary.bestMatch(doneTitle, among: openTitles, threshold: 0.7),
            var item = db.insight(id: openItems[index].id) ?? Optional(openItems[index]),
            item.status == .open {
             item.status = .done

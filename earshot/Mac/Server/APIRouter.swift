@@ -8,6 +8,11 @@
 //  POST /api/v1/answers    -> OKResponse             (forwarded to the bridge)
 //  POST /api/v1/requests   -> WatchRequestAck        (forwarded to the bridge)
 //  POST /api/v1/bookmarks  -> OKResponse             (forwarded to the bridge)
+//  POST /mcp               -> MCP JSON-RPC           (only while Settings → mcpEnabled; MCPHandler
+//                                                    checks its own bearer token, not the watch pairing)
+//
+//  Every request carrying an Origin header that is not localhost is rejected with
+//  403 (DNS-rebinding protection; the watch and MCP clients send no Origin).
 
 import Foundation
 
@@ -76,8 +81,25 @@ final class APIRouter: @unchecked Sendable {
     private let db: Database
     private let pairing: PairingManager
     private let pipeline: IngestPipeline
+    private let mcpLock = NSLock()
+    /// Guarded by `mcpLock`.
+    private var mcpHandler: MCPHandler?
 
     weak var bridge: WatchBridge?
+
+    /// Personal-memory MCP endpoint (set by AppModel). Served only while `mcpEnabled` is on.
+    var mcp: MCPHandler? {
+        get {
+            mcpLock.lock()
+            defer { mcpLock.unlock() }
+            return mcpHandler
+        }
+        set {
+            mcpLock.lock()
+            mcpHandler = newValue
+            mcpLock.unlock()
+        }
+    }
 
     init(db: Database, pairing: PairingManager, pipeline: IngestPipeline) {
         self.db = db
@@ -105,6 +127,16 @@ final class APIRouter: @unchecked Sendable {
 
     private func route(_ request: HTTPRequest) async throws -> HTTPResponse {
         let path = APIRouter.normalisedPath(request.path)
+        guard APIRouter.isAllowedOrigin(request.header("Origin")) else {
+            throw APIFailure(status: 403, message: "Requests from web pages are not allowed.")
+        }
+        if path == EarshotAPI.Path.mcp {
+            // MCP clients authenticate with the MCP token (checked by MCPHandler), not a watch pairing.
+            guard SettingsStore.current.mcpEnabled, let mcp = self.mcp else {
+                throw APIFailure(status: 404, message: "Not found: \(path)")
+            }
+            return await mcp.handle(request)
+        }
         if path == EarshotAPI.Path.hello {
             try APIRouter.require(request, method: "GET")
             return hello()
@@ -292,6 +324,18 @@ final class APIRouter: @unchecked Sendable {
         current.lastSeen = Date()
         db.upsertDevice(current)
         EarshotEvents.post(.devices)
+    }
+
+    /// True when there is no Origin header, or it names this machine's loopback host
+    /// (DNS-rebinding protection: a web page elsewhere must not reach the local API).
+    private static func isAllowedOrigin(_ origin: String?) -> Bool {
+        guard let raw = origin?.trimmed, !raw.isEmpty else { return true }
+        guard let host = URLComponents(string: raw)?.host?.lowercased(), !host.isEmpty else { return false }
+        var bare = host
+        if bare.hasPrefix("[") && bare.hasSuffix("]") {
+            bare = String(bare.dropFirst().dropLast())
+        }
+        return bare == "localhost" || bare == "127.0.0.1" || bare == "::1"
     }
 
     private static func require(_ request: HTTPRequest, method: String) throws {

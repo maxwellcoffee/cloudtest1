@@ -44,11 +44,80 @@ private enum CaptureError: LocalizedError {
     }
 }
 
+/// Battery samples taken while recording (sliding 60-minute window, in memory only)
+/// and the drain rate they imply, by least-squares regression.
+private struct BatteryDrainWindow {
+    struct Sample {
+        let date: Date
+        /// 0…100
+        let percent: Double
+    }
+
+    static let interval: TimeInterval = 5 * 60
+    static let span: TimeInterval = 60 * 60
+    static let minimumSpan: TimeInterval = 15 * 60
+    /// A longer gap means sampling stopped (stop, pause, interruption): start over.
+    static let maximumGap: TimeInterval = 12 * 60
+    /// Below this (percentage points per hour) the rate is noise; no forecast.
+    static let minimumDrain: Double = 0.5
+
+    private(set) var samples: [Sample] = []
+
+    var latest: Sample? { samples.last }
+
+    var coveredSeconds: TimeInterval {
+        guard let first = samples.first, let last = samples.last else { return 0 }
+        return last.date.timeIntervalSince(first.date)
+    }
+
+    func isDue(at now: Date) -> Bool {
+        guard let last = samples.last else { return true }
+        // A little slack so the one-minute ticker doesn't push samples to 6 minutes.
+        return now.timeIntervalSince(last.date) >= BatteryDrainWindow.interval - 10
+    }
+
+    mutating func add(percent: Double, at date: Date) {
+        if let last = samples.last {
+            let gap = date.timeIntervalSince(last.date)
+            if gap < 0 || gap > BatteryDrainWindow.maximumGap { samples.removeAll() }
+        }
+        samples.append(Sample(date: date, percent: percent))
+        samples.removeAll { date.timeIntervalSince($0.date) > BatteryDrainWindow.span }
+    }
+
+    mutating func reset() {
+        samples.removeAll()
+    }
+
+    /// Percentage points lost per hour (positive while draining); nil until the
+    /// samples cover at least 15 minutes.
+    var drainPerHour: Double? {
+        guard samples.count >= 3, let first = samples.first,
+              coveredSeconds >= BatteryDrainWindow.minimumSpan else { return nil }
+        let hours = samples.map { $0.date.timeIntervalSince(first.date) / 3600 }
+        let count = Double(samples.count)
+        let meanX = hours.reduce(0, +) / count
+        let meanY = samples.reduce(0.0) { $0 + $1.percent } / count
+        var covariance = 0.0
+        var variance = 0.0
+        for index in samples.indices {
+            let dx = hours[index] - meanX
+            covariance += dx * (samples[index].percent - meanY)
+            variance += dx * dx
+        }
+        guard variance > 0 else { return nil }
+        let drain = -covariance / variance
+        return drain.isFinite ? drain : nil
+    }
+}
+
 // MARK: - AudioCapture
 
 @MainActor
 final class AudioCapture: ObservableObject {
-    @Published private(set) var state: RecorderState = .idle
+    @Published private(set) var state: RecorderState = .idle {
+        didSet { recordingStateChanged(from: oldValue) }
+    }
     /// dBFS of the latest buffer (-160…0), for the level bar.
     @Published private(set) var level: Float = -160
     /// Seconds recorded into the current segment.
@@ -61,6 +130,14 @@ final class AudioCapture: ObservableObject {
     @Published private(set) var isInVoiceWindow = false
     /// Latest problem worth showing without changing the state (e.g. a failed resume).
     @Published private(set) var notice: String? = nil
+    /// Start of the current continuous stretch of recording; nil when not recording.
+    @Published private(set) var recordingSince: Date? = nil
+    /// Measured battery drain while recording, in percentage points per hour. Nil until
+    /// the samples cover 15 minutes, and while the watch charges.
+    @Published private(set) var batteryDrainPerHour: Double? = nil
+    /// When recording is expected to stop for low battery (`lowBatteryStopLevel`, else 0 %)
+    /// if the measured drain rate holds. Nil when unknown.
+    @Published private(set) var batteryForecastEnd: Date? = nil
 
     /// Receives every finished, non-silent segment (the file is closed and ready to move).
     var onSegment: (@MainActor (URL, SegmentMeta) -> Void)?
@@ -81,6 +158,28 @@ final class AudioCapture: ObservableObject {
 
     var todayTotalSeconds: Double {
         recordedSecondsToday + (isRecording ? segmentElapsed : 0)
+    }
+
+    /// "Recording since 9:12 AM", while recording.
+    var recordingSinceText: String? {
+        guard isRecording, let since = recordingSince else { return nil }
+        return "Recording since \(EarshotFormat.time(since))"
+    }
+
+    /// "≈ 5 h 20 m left at this rate", once the drain rate is measured.
+    func batteryForecastText(now: Date) -> String? {
+        guard isRecording, let end = batteryForecastEnd else { return nil }
+        let remaining = end.timeIntervalSince(now)
+        guard remaining > 0 else { return nil }
+        return "≈ \(AudioCapture.hoursAndMinutes(remaining)) left at this rate"
+    }
+
+    /// Battery glide path (lite): at the measured rate, recording would stop before 9 PM today.
+    func batteryRunsOutBeforeEvening(now: Date) -> Bool {
+        guard isRecording, let end = batteryForecastEnd, end > now,
+              let evening = Calendar.current.date(bySettingHour: 21, minute: 0, second: 0, of: now),
+              now < evening else { return false }
+        return end < evening
     }
 
     private enum Keys {
@@ -109,6 +208,8 @@ final class AudioCapture: ObservableObject {
     private var pauseTimer: Task<Void, Never>?
     private var observers: [NSObjectProtocol] = []
     private var lastBackgroundPublish = Date.distantPast
+    private var batteryWindow = BatteryDrainWindow()
+    private var batteryWasCharging = false
 
     init(deviceName: String, settings: RemoteWatchSettings) {
         let defaults = UserDefaults.standard
@@ -173,7 +274,7 @@ final class AudioCapture: ObservableObject {
         notice = nil
         LocalNotifier.cancel([NoticeID.resume])
         Haptics.stop()
-        WatchLog.info("Recording stopped by the user")
+        WatchLog.info("Recording stopped by the user (\(drainLogText))")
     }
 
     /// Privacy pause for `duration` seconds, or until resumed when nil.
@@ -236,6 +337,7 @@ final class AudioCapture: ObservableObject {
         writer.update(segmentSeconds: Double(newSettings.segmentSeconds),
                       silenceThreshold: newSettings.silenceThresholdDB)
         checkBattery()
+        refreshBatteryForecast()   // the stop level may have changed
     }
 
     func setForeground(_ active: Bool) {
@@ -261,6 +363,7 @@ final class AudioCapture: ObservableObject {
     func periodicCheck() {
         rollDayIfNeeded()
         checkBattery()
+        sampleBatteryIfDue()
         if isForeground, !isStarting, case .paused(let until?) = state, until.timeIntervalSinceNow <= 0 {
             Task { await self.resume() }
         }
@@ -494,7 +597,10 @@ final class AudioCapture: ObservableObject {
             WatchLog.error("No queue attached; segment \(segment.meta.id) stays in Recording/ until relaunch")
         }
         // Check the battery on every regular rotation (not while another stop is in progress).
-        if segment.meta.reason == .rotation { checkBattery() }
+        if segment.meta.reason == .rotation {
+            checkBattery()
+            sampleBatteryIfDue()
+        }
     }
 
     private func updateMeter(db: Float, elapsed: Double) {
@@ -556,7 +662,7 @@ final class AudioCapture: ObservableObject {
                            body: "Battery is at \(percent)%. Earshot stopped recording to save power.",
                            category: LocalNotifier.infoCategory)
         Haptics.warning()
-        WatchLog.info("Stopped recording at \(percent)% battery")
+        WatchLog.info("Stopped recording at \(percent)% battery (\(drainLogText))")
     }
 
     private func batteryBlockMessage() -> String? {
@@ -577,6 +683,81 @@ final class AudioCapture: ObservableObject {
         @unknown default:
             return false
         }
+    }
+
+    // MARK: Battery forecast
+
+    /// Keeps `recordingSince` in step with the state and samples as soon as recording starts.
+    private func recordingStateChanged(from previous: RecorderState) {
+        let nowRecording = state == .recording
+        guard nowRecording != (previous == .recording) else { return }
+        if nowRecording {
+            recordingSince = Date()
+            sampleBatteryIfDue()
+        } else {
+            recordingSince = nil
+        }
+    }
+
+    /// Takes a battery sample every 5 minutes while recording and refreshes the forecast.
+    /// Charging (or full on the charger) clears the window: those readings say nothing about drain.
+    private func sampleBatteryIfDue() {
+        guard state == .recording else { return }
+        let device = WKInterfaceDevice.current()
+        if AudioCapture.isCharging(device.batteryState) {
+            if !batteryWasCharging {
+                batteryWasCharging = true
+                WatchLog.info("Charging; battery forecast paused")
+            }
+            batteryWindow.reset()
+            refreshBatteryForecast()
+            return
+        }
+        batteryWasCharging = false
+        let now = Date()
+        let level = device.batteryLevel
+        guard level >= 0, level <= 1, batteryWindow.isDue(at: now) else { return }
+        let percent = Double(level) * 100
+        batteryWindow.add(percent: percent, at: now)
+        refreshBatteryForecast()
+
+        let covered = Int(batteryWindow.coveredSeconds / 60)
+        var line = "Battery \(Int(percent.rounded()))%, \(drainLogText) (\(covered) min of samples)"
+        if let forecast = batteryForecastText(now: now) { line += ", \(forecast)" }
+        WatchLog.info(line)
+    }
+
+    /// Recomputes the drain rate and the time recording would stop for low battery.
+    private func refreshBatteryForecast() {
+        let measured = batteryWindow.drainPerHour
+        var end: Date? = nil
+        if let drain = measured, drain >= BatteryDrainWindow.minimumDrain, let latest = batteryWindow.latest {
+            let stopPercent = Double(min(max(settings.lowBatteryStopLevel, 0), 1)) * 100
+            let usable = latest.percent - stopPercent
+            let hours = usable / drain
+            if usable > 0, hours.isFinite, hours <= 48 {
+                end = latest.date.addingTimeInterval(hours * 3600)
+            }
+        }
+        // Assign only on change: @Published notifies on every set.
+        if batteryDrainPerHour != measured { batteryDrainPerHour = measured }
+        if batteryForecastEnd != end { batteryForecastEnd = end }
+    }
+
+    /// For the log: "drain 9.8%/h" or "drain not measured yet".
+    private var drainLogText: String {
+        guard let drain = batteryDrainPerHour else { return "drain not measured yet" }
+        return String(format: "drain %.1f%%/h", drain)
+    }
+
+    /// 19_200 → "5 h 20 m", 2_400 → "40 m" (rounded to 5 minutes, at least 5 m).
+    private nonisolated static func hoursAndMinutes(_ seconds: TimeInterval) -> String {
+        guard seconds.isFinite else { return "?" }
+        let minutes = max(5, Int((min(seconds, 100 * 3600) / 300).rounded()) * 5)
+        let hours = minutes / 60
+        let rest = minutes % 60
+        if hours == 0 { return "\(rest) m" }
+        return rest == 0 ? "\(hours) h" : "\(hours) h \(rest) m"
     }
 
     private func rollDayIfNeeded() {

@@ -37,7 +37,14 @@ struct RecordView: View {
                 stateNotice
 
                 TimelineView(.everyMinute) { context in
-                    StatusText(text: statusLine(now: context.date), systemImage: statusSymbol, tint: statusTint)
+                    VStack(spacing: 4) {
+                        StatusText(text: statusLine(now: context.date), systemImage: statusSymbol, tint: statusTint)
+                        if recorder.isRecording {
+                            BatteryForecastLines(since: recorder.recordingSinceText,
+                                                 forecast: recorder.batteryForecastText(now: context.date),
+                                                 showTip: recorder.batteryRunsOutBeforeEvening(now: context.date))
+                        }
+                    }
                 }
 
                 controls
@@ -227,6 +234,39 @@ struct RecordView: View {
         if store.pairingStatus != .paired { return .secondary }
         if store.lastSyncError != nil || queue.lastError != nil { return .yellow }
         return .secondary
+    }
+}
+
+// MARK: - Battery forecast
+
+/// Small secondary lines under the status: when this stretch of recording began, the
+/// measured battery forecast and, when it falls short of the evening, a glide-path tip.
+private struct BatteryForecastLines: View {
+    let since: String?
+    let forecast: String?
+    let showTip: Bool
+
+    var body: some View {
+        if since != nil || forecast != nil || showTip {
+            VStack(spacing: 2) {
+                if let since {
+                    Text(verbatim: since)
+                }
+                if let forecast {
+                    Text(verbatim: forecast)
+                        .monospacedDigit()
+                }
+                if showTip {
+                    Text(verbatim: "Tip: pause during quiet stretches to reach the evening")
+                        .foregroundStyle(Color.orange)
+                }
+            }
+            .font(.caption2)
+            .foregroundStyle(.secondary)
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity)
+            .accessibilityElement(children: .combine)
+        }
     }
 }
 

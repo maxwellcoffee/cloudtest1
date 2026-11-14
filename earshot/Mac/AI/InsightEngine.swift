@@ -38,6 +38,11 @@ final class InsightEngine: @unchecked Sendable {
     private static let maxActionsPerPass = 3
     /// Above this many queued questions only priority ≥ 4 candidates are added.
     private static let queueSoftLimit = 15
+    /// Two-way promise ledger (feature #61): every commitment title says who promised whom.
+    private static let youPromisedPrefix = "You promised: "
+    private static let promisedToYouPrefix = "Promised to you: "
+    /// Model answers that mean "this question unlocks nothing" (normalised).
+    private static let emptyDecisionAnswers: Set<String> = ["none", "n a", "na", "nothing", "no decision", "null", "unknown"]
 
     init(db: Database, llm: LLMService) {
         self.db = db
@@ -181,7 +186,7 @@ final class InsightEngine: @unchecked Sendable {
                                                schema: PromptLibrary.analysisSchema,
                                                tier: .background, maxTokens: 16_000)
         return apply(reply, utterances: utterances, context: context,
-                     windowStart: windowStart, windowEnd: windowEnd)
+                     windowStart: windowStart, windowEnd: windowEnd, redacted: settings.redactBeforeCloud)
     }
 
     private func loadContext(now: Date, windowStart: Date, windowEnd: Date) -> InsightAnalysisContext {
@@ -261,8 +266,9 @@ final class InsightEngine: @unchecked Sendable {
 
     // MARK: Applying the reply
 
+    /// `redacted`: the model saw redacted text, so titles are compared in their redacted form.
     private func apply(_ reply: JSONValue, utterances: [Utterance], context: InsightAnalysisContext,
-                       windowStart: Date, windowEnd: Date) -> Int {
+                       windowStart: Date, windowEnd: Date, redacted: Bool) -> Int {
         let now = Date()
 
         // Summary (TodayBuilder's headline before the daily digest exists).
@@ -273,13 +279,20 @@ final class InsightEngine: @unchecked Sendable {
         }
 
         // Insights
-        var itemKeys = (context.openItems + context.recentItems).map { PromptLibrary.normalizedTitle($0.title) }
+        var itemKeys = (context.openItems + context.recentItems).map {
+            PromptLibrary.normalizedTitle(InsightEngine.matchTitle($0.title, redacted: redacted))
+        }
         var newInsights: [Insight] = []
         var moodCount = 0
         for raw in reply["items"]?.arrayValue ?? [] {
             if newInsights.count >= InsightEngine.maxItemsPerPass { break }
             guard let kind = InsightKind(rawValue: PromptLibrary.text(raw["kind"]).lowercased()) else { continue }
-            let title = PromptLibrary.text(raw["title"]).clipped(120)
+            var title = PromptLibrary.text(raw["title"])
+            if kind == .commitment {
+                guard let promise = InsightEngine.commitmentTitle(title, direction: PromptLibrary.text(raw["direction"])) else { continue }
+                title = promise
+            }
+            title = title.clipped(120)
             guard !title.isEmpty else { continue }
             let confidence = min(1, max(0, PromptLibrary.number(raw["confidence"]) ?? 0.6))
             guard confidence >= 0.3 else { continue }
@@ -287,7 +300,8 @@ final class InsightEngine: @unchecked Sendable {
                 if moodCount >= 1 { continue }
                 moodCount += 1
             }
-            guard !PromptLibrary.isDuplicate(title, ofNormalized: itemKeys) else { continue }
+            let key = InsightEngine.matchTitle(title, redacted: redacted)
+            guard !PromptLibrary.isDuplicate(key, ofNormalized: itemKeys) else { continue }
             var detail = PromptLibrary.text(raw["detail"])
             let quote = PromptLibrary.text(raw["quote"])
             if !quote.isEmpty {
@@ -300,7 +314,7 @@ final class InsightEngine: @unchecked Sendable {
                                   sourceFrom: source?.from ?? windowStart, sourceTo: source?.to ?? windowEnd,
                                   status: .open, confidence: confidence, createdAt: now)
             newInsights.append(insight)
-            itemKeys.append(PromptLibrary.normalizedTitle(title))
+            itemKeys.append(PromptLibrary.normalizedTitle(key))
         }
 
         // Questions and nudges (queued; the scheduler decides when to ask)
@@ -310,13 +324,16 @@ final class InsightEngine: @unchecked Sendable {
         for raw in reply["questions"]?.arrayValue ?? [] {
             if newPrompts.count >= InsightEngine.maxQuestionsPerPass { break }
             let question = PromptLibrary.text(raw["question"]).clipped(140)
-            guard !question.isEmpty,
+            // Value-of-information gate (feature #44): a question must unlock a decision, plan or action.
+            guard let unlocks = InsightEngine.decisionUnlocked(raw["decision_unlocked"]),
+                  !question.isEmpty,
                   !PromptLibrary.isDuplicate(question, ofNormalized: promptKeys, threshold: 0.7) else { continue }
             let kind: PromptKind = PromptLibrary.text(raw["kind"]).lowercased() == "nudge" ? .nudge : .question
             let requested = PromptLibrary.clampedInt(raw["priority"], 1...5, default: 3)
             let priority = max(1, requested - PromptLibrary.dismissalPenalty(db: db, kind: kind))
             if queuedCount + newPrompts.count >= InsightEngine.queueSoftLimit && priority < 4 { continue }
-            let related = relatedTarget(PromptLibrary.text(raw["related_title"]), newInsights: newInsights, context: context)
+            let related = relatedTarget(PromptLibrary.text(raw["related_title"]), newInsights: newInsights,
+                                        context: context, redacted: redacted)
             var expires = now.addingTimeInterval(InsightEngine.questionLifetime)
             if let due = related.dueAt, due > now.addingTimeInterval(30 * 60), due < expires {
                 expires = due
@@ -324,7 +341,8 @@ final class InsightEngine: @unchecked Sendable {
             let prompt = StoredPrompt.make(kind: kind, title: question, body: "",
                                            choices: PromptLibrary.makeChoices(PromptLibrary.strings(raw["choices"])),
                                            allowsFreeText: true, allowsVoice: true, priority: priority,
-                                           status: .queued, rationale: PromptLibrary.text(raw["why"]).clipped(300),
+                                           status: .queued,
+                                           rationale: InsightEngine.questionRationale(unlocks: unlocks, why: PromptLibrary.text(raw["why"])),
                                            relatedID: related.id, expiresAt: expires, notBefore: nil)
             newPrompts.append(prompt)
             promptKeys.append(PromptLibrary.normalizedTitle(question))
@@ -332,7 +350,7 @@ final class InsightEngine: @unchecked Sendable {
 
         // Proposed actions
         var actionKeys = context.actions.map { PromptLibrary.normalizedTitle($0.title) }
-        let newTitles = newInsights.map { $0.title }
+        let newTitles = newInsights.map { InsightEngine.matchTitle($0.title, redacted: false) }
         var newActions: [ProposedAction] = []
         for raw in reply["actions"]?.arrayValue ?? [] {
             if newActions.count >= InsightEngine.maxActionsPerPass { break }
@@ -384,16 +402,86 @@ final class InsightEngine: @unchecked Sendable {
     }
 
     /// The item or goal a question refers to: (id, due date of the item if any).
-    private func relatedTarget(_ title: String, newInsights: [Insight], context: InsightAnalysisContext) -> (id: String?, dueAt: Date?) {
+    private func relatedTarget(_ title: String, newInsights: [Insight], context: InsightAnalysisContext,
+                               redacted: Bool) -> (id: String?, dueAt: Date?) {
         guard !title.isEmpty else { return (nil, nil) }
+        let query = InsightEngine.matchTitle(title, redacted: redacted)
         let candidates = newInsights + context.openItems
-        if let index = PromptLibrary.bestMatch(title, among: candidates.map({ $0.title }), threshold: 0.6) {
+        let candidateTitles = candidates.map { InsightEngine.matchTitle($0.title, redacted: redacted) }
+        if let index = PromptLibrary.bestMatch(query, among: candidateTitles, threshold: 0.6) {
             return (candidates[index].id, candidates[index].dueAt)
         }
-        if let index = PromptLibrary.bestMatch(title, among: context.goals.map({ $0.title }), threshold: 0.6) {
+        let goalTitles = context.goals.map { InsightEngine.matchTitle($0.title, redacted: redacted) }
+        if let index = PromptLibrary.bestMatch(query, among: goalTitles, threshold: 0.6) {
             return (context.goals[index].id, nil)
         }
         return (nil, nil)
+    }
+
+    // MARK: Promise ledger and question gate
+
+    /// "You promised: …" (the user to someone) or "Promised to you: …" (someone to the user).
+    /// Keeps a prefix the model wrote, otherwise adds one from `direction` ("them_to_you" →
+    /// "Promised to you: "; "you_to_them", "n/a" or missing → "You promised: "). nil when empty.
+    private static func commitmentTitle(_ raw: String, direction: String) -> String? {
+        let title = raw.trimmed
+        let promisedByYou: Bool
+        let core: String
+        if let rest = remainder(of: title, after: "you promised") {
+            promisedByYou = true
+            core = rest
+        } else if let rest = remainder(of: title, after: "promised to you") {
+            promisedByYou = false
+            core = rest
+        } else {
+            promisedByYou = direction.trimmed.lowercased() != "them_to_you"
+            core = title
+        }
+        guard !core.isEmpty else { return nil }
+        return (promisedByYou ? youPromisedPrefix : promisedToYouPrefix) + core
+    }
+
+    /// The text after a leading `phrase` (case-insensitive, then ":", a dash or a space); "" when
+    /// nothing follows; nil when `title` does not start with the phrase as a whole word.
+    private static func remainder(of title: String, after phrase: String) -> String? {
+        guard let range = title.range(of: phrase, options: [.caseInsensitive, .anchored]) else { return nil }
+        var rest = title[range.upperBound...]
+        if let next = rest.first, next.isLetter || next.isNumber { return nil }
+        while let first = rest.first, first.isWhitespace || ":-–—,".contains(first) {
+            rest = rest.dropFirst()
+        }
+        return String(rest).trimmed
+    }
+
+    /// Title used for duplicate checks and matching: without the promise prefix and, when the model
+    /// saw redacted text, with the same placeholders.
+    private static func matchTitle(_ title: String, redacted: Bool) -> String {
+        let text = redacted ? Redactor.redact(title) : title
+        let trimmed = text.trimmed
+        if let rest = remainder(of: trimmed, after: "you promised") ?? remainder(of: trimmed, after: "promised to you"),
+           !rest.isEmpty {
+            return rest
+        }
+        return text
+    }
+
+    /// The decision a question unlocks, or nil when the model said there is none.
+    private static func decisionUnlocked(_ value: JSONValue?) -> String? {
+        var text = PromptLibrary.text(value)
+        while let last = text.last, last == "." || last == "," || last == ";" {
+            text.removeLast()
+        }
+        text = text.trimmed
+        let key = PromptLibrary.normalizedTitle(text)
+        guard !key.isEmpty, !emptyDecisionAnswers.contains(key) else { return nil }
+        return text
+    }
+
+    /// "Unlocks: <decision> — <why>" (shown on the Mac and given to the answer interpreter).
+    private static func questionRationale(unlocks: String, why: String) -> String {
+        let decision = "Unlocks: " + unlocks.clipped(160)
+        guard !why.isEmpty else { return decision }
+        return (decision + " — " + why).clipped(400)
     }
 
     /// Narrows an insight's source to the utterance containing its supporting quote (±30 s).

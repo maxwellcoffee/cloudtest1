@@ -86,10 +86,11 @@ final class LLMService: @unchecked Sendable {
         }
         let client = try claudeClient()
         let route = LLMService.route(tier, settings)
+        let cloud = LLMService.cloudText(system: system, user: user, settings)
         var tokens = max(1_024, maxTokens)
         while true {
             do {
-                return try await client.complete(model: route.model, system: system, user: user,
+                return try await client.complete(model: route.model, system: cloud.system, user: cloud.user,
                                                  maxTokens: tokens, effort: route.effort)
             } catch ClaudeError.truncated where tokens < LLMService.maxRetryTokens {
                 let larger = min(tokens * 2, LLMService.maxRetryTokens)
@@ -106,11 +107,12 @@ final class LLMService: @unchecked Sendable {
         }
         let client = try claudeClient()
         let route = LLMService.route(tier, settings)
+        let cloud = LLMService.cloudText(system: system, user: user, settings)
         var tokens = max(1_024, maxTokens)
         while true {
             do {
-                return try await client.completeJSON(model: route.model, system: system, user: user, schema: schema,
-                                                     maxTokens: tokens, effort: route.effort)
+                return try await client.completeJSON(model: route.model, system: cloud.system, user: cloud.user,
+                                                     schema: schema, maxTokens: tokens, effort: route.effort)
             } catch ClaudeError.truncated where tokens < LLMService.maxRetryTokens {
                 let larger = min(tokens * 2, LLMService.maxRetryTokens)
                 Log.info("LLM: structured reply hit max_tokens (\(tokens)); retrying with \(larger).")
@@ -122,6 +124,14 @@ final class LLMService: @unchecked Sendable {
     // MARK: Claude routing
 
     private static var hasClaudeKey: Bool { !SettingsStore.anthropicKey.trimmed.isEmpty }
+
+    /// The text actually sent to Claude: with `redactBeforeCloud`, e-mail addresses, phone, card,
+    /// account and Social Security numbers and one-time codes are replaced locally with placeholders.
+    /// Deterministic, so the cached system-prompt prefix stays identical. Never used on-device.
+    private static func cloudText(system: String, user: String, _ settings: AppSettings) -> (system: String, user: String) {
+        guard settings.redactBeforeCloud else { return (system, user) }
+        return (Redactor.redact(system), Redactor.redact(user))
+    }
 
     private func claudeClient() throws -> ClaudeClient {
         let key = SettingsStore.anthropicKey.trimmed
