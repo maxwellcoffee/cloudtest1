@@ -1,0 +1,222 @@
+# Earshot — XcodeGen project spec
+#
+#   scripts/bootstrap.sh [TEAM_ID]     installs XcodeGen if needed, generates and opens the project
+#   xcodegen generate                  regenerate after editing this file
+#
+# Earshot.xcodeproj is generated from this file: change settings here, not in
+# Xcode's build settings editor (edits there are lost on the next generate).
+# XcodeGen also rewrites Mac/Info.plist, Watch/Info.plist and
+# Mac/Earshot.entitlements from the `info` / `entitlements` sections below.
+#
+# Signing: DEVELOPMENT_TEAM is empty on purpose. Put your team in
+# Config/Local.xcconfig (git-ignored; `scripts/bootstrap.sh TEAMID` writes it),
+# which Config/Signing.xcconfig includes when present. Target-level xcconfig
+# values override the project-level defaults below, so the team set there wins.
+# Local.xcconfig can also override EARSHOT_BUNDLE_ID_PREFIX if the
+# com.example.earshot.* identifiers are not available to your team.
+#
+# Spec reference: https://github.com/yonaskolb/XcodeGen/blob/master/Docs/ProjectSpec.md
+
+name: Earshot
+
+options:
+  bundleIdPrefix: com.example.earshot
+  deploymentTarget:
+    macOS: "14.0"
+    watchOS: "10.0"
+  createIntermediateGroups: true
+  developmentLanguage: en
+
+fileGroups:
+  - README.md
+  - docs
+  - scripts
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ""
+    # Default bundle identifier prefix; override in Config/Local.xcconfig.
+    EARSHOT_BUNDLE_ID_PREFIX: com.example.earshot
+
+targets:
+  # ---------------------------------------------------------------------------
+  # macOS companion: HTTP server for the watch, transcription, SQLite archive,
+  # Claude insights/questions/digests, memory chat and the Mac agent.
+  # ---------------------------------------------------------------------------
+  Earshot:
+    type: application
+    platform: macOS
+    sources:
+      - path: Mac
+      - path: Shared
+    configFiles:
+      Debug: Config/Signing.xcconfig
+      Release: Config/Signing.xcconfig
+    info:
+      path: Mac/Info.plist
+      properties:
+        CFBundleDisplayName: Earshot
+        CFBundlePackageType: APPL
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+        LSApplicationCategoryType: public.app-category.productivity
+        LSUIElement: false
+        NSMicrophoneUsageDescription: "Earshot can use this Mac's microphone in desk mode to transcribe your day when you are not wearing your Apple Watch."
+        NSSpeechRecognitionUsageDescription: "Earshot transcribes the audio recorded by your Apple Watch or this Mac with Apple speech recognition, on this Mac."
+        NSCalendarsFullAccessUsageDescription: "Earshot checks your calendar so it never interrupts a meeting, and adds events you mention once you approve them."
+        NSRemindersFullAccessUsageDescription: "Earshot turns tasks and commitments you mention into reminders once you approve them."
+        NSAppleEventsUsageDescription: "Earshot automates apps such as Mail, Notes and Shortcuts to carry out actions you approve."
+        NSLocalNetworkUsageDescription: "Earshot runs a small server on your local network so your Apple Watch can upload recordings and receive questions."
+        NSBonjourServices:
+          - _earshot._tcp
+    entitlements:
+      path: Mac/Earshot.entitlements
+      properties:
+        # Not sandboxed: the app automates other apps (Apple Events, Shortcuts,
+        # osascript, computer use) and runs a local HTTP server for the watch.
+        com.apple.security.app-sandbox: false
+        # Hardened-runtime resource access (required because
+        # ENABLE_HARDENED_RUNTIME is on; without them TCC denies access).
+        com.apple.security.automation.apple-events: true
+        com.apple.security.device.audio-input: true
+        com.apple.security.personal-information.calendars: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(EARSHOT_BUNDLE_ID_PREFIX).mac
+        PRODUCT_NAME: Earshot
+        ENABLE_HARDENED_RUNTIME: "YES"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    dependencies:
+      - sdk: libsqlite3.tbd
+      # System frameworks are auto-linked by `import`; listed for clarity.
+      - sdk: AVFoundation.framework
+      - sdk: Speech.framework
+      - sdk: EventKit.framework
+      - sdk: Network.framework
+      # FoundationModels only exists on macOS 26+. Weak-link it so the app
+      # still launches on macOS 14/15, where the on-device model is skipped.
+      - sdk: FoundationModels.framework
+        weak: true
+
+  # ---------------------------------------------------------------------------
+  # watchOS recorder.
+  #
+  # Target type: `type: application` + `platform: watchOS` produces
+  # com.apple.product-type.application with SDKROOT=watchos, i.e. the
+  # single-target watch app introduced in Xcode 14 (code, UI and resources in
+  # one bundle, no WatchKit extension), which Xcode runs directly on the watch.
+  # `application.watchapp2` is the legacy two-target model: a resource-only
+  # WatchKit app that needs a separate `watchkit2-extension` target for its
+  # code and launches through the Carousel remote runnable. Together with
+  # WKApplication + WKWatchOnly in Info.plist, the single-target type gives a
+  # standalone, watch-only app with no iOS companion.
+  # ---------------------------------------------------------------------------
+  EarshotWatch:
+    type: application
+    platform: watchOS
+    # Product file reference name (Earshot.app), matching PRODUCT_NAME below.
+    productName: Earshot
+    sources:
+      - path: Watch
+      - path: Shared/EarshotProtocol.swift
+    configFiles:
+      Debug: Config/Signing.xcconfig
+      Release: Config/Signing.xcconfig
+    info:
+      path: Watch/Info.plist
+      properties:
+        CFBundleDisplayName: Earshot
+        CFBundlePackageType: APPL
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        WKApplication: true
+        WKWatchOnly: true
+        # Lets an audio session started in the foreground keep recording
+        # after the wrist drops.
+        UIBackgroundModes:
+          - audio
+        NSMicrophoneUsageDescription: "Earshot records continuously to transcribe your day on your Mac. Pause anytime."
+        NSLocalNetworkUsageDescription: "Earshot connects to your Mac on your local network to upload recordings and fetch questions."
+        # The Mac server speaks plain HTTP on the LAN (http://<mac-ip>:8737).
+        # NSAllowsLocalNetworking permits plain HTTP to IP addresses, .local
+        # names and single-label host names. Per Apple's documentation, current
+        # OS versions ignore NSAllowsArbitraryLoads when NSAllowsLocalNetworking
+        # is present; it only relaxes ATS on OS versions that predate the
+        # local-networking key. Net effect: plain HTTP works to the Mac on your
+        # LAN, and anything else (for example a tunnel URL) must be https://.
+        # Trade-off: LAN traffic (audio, transcripts, the bearer token) is not
+        # encrypted, so use it only on networks you trust, or put the Mac
+        # behind an HTTPS tunnel. See README.md, "Network security".
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+          NSAllowsArbitraryLoads: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(EARSHOT_BUNDLE_ID_PREFIX).watch
+        PRODUCT_NAME: Earshot
+        SDKROOT: watchos
+        TARGETED_DEVICE_FAMILY: "4"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+
+  # ---------------------------------------------------------------------------
+  # Unit tests for the Mac app's pure logic (hosted by Earshot.app, so
+  # `@testable import Earshot` works). XcodeGen sets TEST_HOST and
+  # BUNDLE_LOADER automatically from the dependency on the Earshot target.
+  # ---------------------------------------------------------------------------
+  EarshotTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: MacTests
+    dependencies:
+      - target: Earshot
+    configFiles:
+      Debug: Config/Signing.xcconfig
+      Release: Config/Signing.xcconfig
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(EARSHOT_BUNDLE_ID_PREFIX).mac.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+
+schemes:
+  Earshot:
+    build:
+      targets:
+        Earshot: all
+        EarshotTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: true
+      coverageTargets:
+        - Earshot
+      targets:
+        - EarshotTests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  EarshotWatch:
+    build:
+      targets:
+        EarshotWatch: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

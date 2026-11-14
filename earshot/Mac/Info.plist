@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Earshot</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.productivity</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>LSUIElement</key>
+	<false/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Earshot automates apps such as Mail, Notes and Shortcuts to carry out actions you approve.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_earshot._tcp</string>
+	</array>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Earshot checks your calendar so it never interrupts a meeting, and adds events you mention once you approve them.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Earshot runs a small server on your local network so your Apple Watch can upload recordings and receive questions.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Earshot can use this Mac's microphone in desk mode to transcribe your day when you are not wearing your Apple Watch.</string>
+	<key>NSRemindersFullAccessUsageDescription</key>
+	<string>Earshot turns tasks and commitments you mention into reminders once you approve them.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Earshot transcribes the audio recorded by your Apple Watch or this Mac with Apple speech recognition, on this Mac.</string>
+</dict>
+</plist>
