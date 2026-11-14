@@ -296,22 +296,43 @@ final class DigestEngine: @unchecked Sendable {
             await runDaily(for: now, key: todayKey, now: now)
         }
 
-        let weekday = cal.component(.weekday, from: now)
-        let weeklyKey = "week-\(todayKey)"
-        if weekday == settings.weeklyReviewWeekday, hour >= settings.dailyDigestHour,
-           (db.kvGet(DigestEngine.weeklyLastRunKey) ?? "") != todayKey, mayAttempt(weeklyKey, now: now) {
-            let weekStart = cal.date(byAdding: .day, value: -6, to: now.startOfDay) ?? now.addingTimeInterval(-6 * 86_400)
-            if db.wordCount(from: weekStart, to: now) > DigestEngine.minimumWords {
-                do {
-                    _ = try await generateWeekly(endingOn: now)
-                    db.kvSet(DigestEngine.weeklyLastRunKey, todayKey)
-                    clearFailure(weeklyKey)
-                } catch {
-                    noteFailure(weeklyKey, now: now)
-                    Log.error("DigestEngine: weekly review failed: \(error.localizedDescription)")
+        // The weekly review, or a catch-up for the latest one missed while the Mac was asleep or off.
+        if let reviewDay = DigestEngine.latestWeeklyReviewDay(now: now, settings: settings, calendar: cal) {
+            let reviewKey = reviewDay.dayKey
+            let weeklyKey = "week-\(reviewKey)"
+            let isToday = reviewKey == todayKey
+            let lastWeekly = db.kvGet(DigestEngine.weeklyLastRunKey) ?? ""
+            if lastWeekly < reviewKey, isToday || db.digest(day: weeklyKey) == nil, mayAttempt(weeklyKey, now: now) {
+                let weekStart = cal.date(byAdding: .day, value: -6, to: reviewDay) ?? reviewDay.addingTimeInterval(-6 * 86_400)
+                let weekEnd = min(reviewDay.endOfDay, now)
+                if db.wordCount(from: weekStart, to: weekEnd) > DigestEngine.minimumWords {
+                    if !isToday { Log.info("DigestEngine: catching up on the weekly review ending \(reviewKey).") }
+                    do {
+                        _ = try await generateWeekly(endingOn: isToday ? now : reviewDay)
+                        let current = db.kvGet(DigestEngine.weeklyLastRunKey) ?? ""
+                        if reviewKey > current { db.kvSet(DigestEngine.weeklyLastRunKey, reviewKey) }
+                        clearFailure(weeklyKey)
+                    } catch {
+                        noteFailure(weeklyKey, now: now)
+                        Log.error("DigestEngine: weekly review ending \(reviewKey) failed: \(error.localizedDescription)")
+                    }
                 }
             }
         }
+    }
+
+    /// The latest day, not after `now`, on which a weekly review was due: the review weekday once
+    /// the digest hour has passed (today only after that hour). Nil for an invalid weekday setting.
+    private static func latestWeeklyReviewDay(now: Date, settings: AppSettings, calendar cal: Calendar) -> Date? {
+        let today = cal.startOfDay(for: now)
+        let hour = cal.component(.hour, from: now)
+        for offset in 0...7 {
+            guard let day = cal.date(byAdding: .day, value: -offset, to: today) else { continue }
+            guard cal.component(.weekday, from: day) == settings.weeklyReviewWeekday else { continue }
+            if offset == 0 && hour < settings.dailyDigestHour { continue }
+            return cal.startOfDay(for: day)
+        }
+        return nil
     }
 
     private func runDaily(for day: Date, key: String, now: Date) async {
@@ -454,8 +475,11 @@ final class DigestEngine: @unchecked Sendable {
             old.status = .expired
             db.upsertPrompt(old)
         }
+        // Digests always come through, but during quiet hours (the default digest hour is also where
+        // quiet hours start) they arrive silently: priority 1 is a passive notification on the watch.
+        let quiet = SettingsStore.current.isQuietHour(Date())
         let prompt = StoredPrompt.make(kind: .digest, title: title, body: body.clipped(300), choices: [],
-                                       allowsFreeText: false, allowsVoice: false, priority: 2,
+                                       allowsFreeText: false, allowsVoice: false, priority: quiet ? 1 : 2,
                                        status: .pending, rationale: rationale, relatedID: relatedID,
                                        expiresAt: Date().addingTimeInterval(18 * 3_600))
         db.upsertPrompt(prompt)

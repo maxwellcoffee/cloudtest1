@@ -82,9 +82,11 @@ enum HTTPParser {
             let lower = name.lowercased()
             if lower == "content-length" || lower == "connection" || lower == "transfer-encoding" { continue }
             if lower == "content-type" { hasContentType = true }
-            // Strip CR/LF so a header value can never split the response.
-            let safeName = name.filter { $0 != "\r" && $0 != "\n" && $0 != ":" }
-            let safeValue = value.filter { $0 != "\r" && $0 != "\n" }
+            // Strip line breaks so a header value can never split the response. Use isNewline:
+            // "\r\n" is a single Character, equal to neither "\r" nor "\n", and a CR or LF
+            // never joins any other grapheme cluster, so this removes every CR and LF.
+            let safeName = name.filter { !$0.isNewline && $0 != ":" }
+            let safeValue = value.filter { !$0.isNewline }
             guard !safeName.isEmpty else { continue }
             head += "\(safeName): \(safeValue)\r\n"
         }

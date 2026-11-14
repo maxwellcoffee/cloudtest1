@@ -5,6 +5,7 @@
 import Foundation
 import Security
 import Combine
+import SystemConfiguration
 
 enum TranscriptionEngine: String, Codable, CaseIterable, Identifiable, Sendable {
     case speechAnalyzer   // Apple SpeechAnalyzer (macOS 26+), on-device
@@ -113,9 +114,22 @@ struct AppSettings: Codable, Hashable, Sendable {
 
     var effectiveMacName: String {
         if let name = macDisplayName.nilIfEmpty { return name }
-        let host = ProcessInfo.processInfo.hostName
-        return host.hasSuffix(".local") ? String(host.dropLast(6)) : host
+        return AppSettings.systemComputerName
     }
+
+    /// The computer name the user sees in System Settings → General → Sharing, resolved once.
+    /// `SCDynamicStoreCopyComputerName` asks configd and makes no network calls, whereas
+    /// `ProcessInfo.hostName` can block on a reverse-DNS lookup and may return a DHCP/DNS name
+    /// such as "foo.lan"; it is only the fallback.
+    private static let systemComputerName: String = {
+        if let computerName = SCDynamicStoreCopyComputerName(nil, nil) {
+            let name = (computerName as String).trimmingCharacters(in: .whitespacesAndNewlines)
+            if !name.isEmpty { return name }
+        }
+        let host = ProcessInfo.processInfo.hostName
+        let stripped = host.hasSuffix(".local") ? String(host.dropLast(6)) : host
+        return stripped.isEmpty ? "Mac" : stripped
+    }()
 
     /// Tolerant decoding so adding new settings never wipes existing ones.
     init() {}

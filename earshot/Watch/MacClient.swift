@@ -42,8 +42,19 @@ enum MacClientError: LocalizedError, Equatable {
     }
 }
 
+/// Error bodies: APIErrorBody (`error`) or a SegmentAck the Mac couldn't store (`message`, HTTP 500).
+private struct ErrorMessageBody: Decodable {
+    var error: String?
+    var message: String?
+}
+
 @MainActor
 final class MacClient {
+    /// The Mac answers /answers, /requests and /bookmarks after waiting up to 20 s for its own
+    /// processing (APIRouter.bridgeTimeout). Giving up any sooner makes the watch send the
+    /// same request again, and the Mac would run a command or save a note twice.
+    private static let bridgedTimeout: TimeInterval = 35
+
     /// Base URL of the Mac, e.g. http://192.168.1.5:8737 (no trailing slash needed).
     private(set) var baseURL: URL?
     /// Bearer token from pairing.
@@ -59,7 +70,8 @@ final class MacClient {
 
     init() {
         let standard = URLSessionConfiguration.default
-        standard.timeoutIntervalForRequest = 20
+        // Each request sets its own timeout (15–35 s); this only must not be shorter.
+        standard.timeoutIntervalForRequest = 40
         standard.timeoutIntervalForResource = 60
         standard.waitsForConnectivity = false
         standard.requestCachePolicy = .reloadIgnoringLocalCacheData
@@ -161,22 +173,22 @@ final class MacClient {
 
     /// POST /sync — status up, prompts/today/settings down.
     func sync(_ report: WatchStatusReport) async throws -> SyncResponse {
-        try await postJSON(EarshotAPI.Path.sync, report, as: SyncResponse.self)
+        try await postJSON(EarshotAPI.Path.sync, report, as: SyncResponse.self, timeout: 20)
     }
 
     /// POST /answers
     func send(answer: PromptAnswer) async throws {
-        _ = try await postJSON(EarshotAPI.Path.answers, answer, as: OKResponse.self)
+        _ = try await postJSON(EarshotAPI.Path.answers, answer, as: OKResponse.self, timeout: Self.bridgedTimeout)
     }
 
     /// POST /requests
     func send(request: WatchRequest) async throws -> WatchRequestAck {
-        try await postJSON(EarshotAPI.Path.requests, request, as: WatchRequestAck.self)
+        try await postJSON(EarshotAPI.Path.requests, request, as: WatchRequestAck.self, timeout: Self.bridgedTimeout)
     }
 
     /// POST /bookmarks
     func send(bookmark: Bookmark) async throws {
-        _ = try await postJSON(EarshotAPI.Path.bookmarks, bookmark, as: OKResponse.self)
+        _ = try await postJSON(EarshotAPI.Path.bookmarks, bookmark, as: OKResponse.self, timeout: Self.bridgedTimeout)
     }
 
     // MARK: - Error helpers
@@ -247,9 +259,9 @@ final class MacClient {
         return URL(string: text + path)
     }
 
-    private func postJSON<Body: Encodable, Response: Decodable>(_ path: String, _ body: Body,
-                                                                as type: Response.Type) async throws -> Response {
-        var request = try makeRequest(path, method: "POST", base: nil, authenticated: true, timeout: 20)
+    private func postJSON<Body: Encodable, Response: Decodable>(_ path: String, _ body: Body, as type: Response.Type,
+                                                                timeout: TimeInterval) async throws -> Response {
+        var request = try makeRequest(path, method: "POST", base: nil, authenticated: true, timeout: timeout)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try encode(body)
         return try await perform(request, as: type)
@@ -269,8 +281,8 @@ final class MacClient {
         case 401:
             throw MacClientError.unauthorized
         default:
-            let message = (try? EarshotAPI.makeDecoder().decode(APIErrorBody.self, from: data))?.error
-            throw MacClientError.http(http.statusCode, message)
+            let body = try? EarshotAPI.makeDecoder().decode(ErrorMessageBody.self, from: data)
+            throw MacClientError.http(http.statusCode, body?.error ?? body?.message)
         }
     }
 

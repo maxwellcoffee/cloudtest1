@@ -227,7 +227,11 @@ final class LLMService: @unchecked Sendable {
                 do {
                     let response = try await session.respond(to: fullPrompt)
                     return response.content
-                } catch let error as LanguageModelSession.GenerationError {
+                } catch is CancellationError {
+                    throw CancellationError()
+                } catch {
+                    // Any failure (GenerationError when built with Xcode 26; LanguageModelError and
+                    // friends with Xcode 27+): retry once with a shorter prompt, then report it.
                     lastFailure = error.localizedDescription
                     Log.error("LLM: on-device generation failed (attempt \(attempt)): \(lastFailure)")
                     budget /= 2

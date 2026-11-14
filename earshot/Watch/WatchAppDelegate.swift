@@ -10,7 +10,8 @@ import WatchKit
 @MainActor
 final class WatchAppDelegate: NSObject, WKApplicationDelegate {
     private static let refreshInterval: TimeInterval = 15 * 60
-    private static let refreshBudget: TimeInterval = 25
+    /// watchOS gives a refresh task only a few seconds; the work is limited to messages and /sync.
+    private static let refreshBudget: TimeInterval = 10
 
     /// UNUserNotificationCenter keeps its delegate weakly; the app delegate owns it.
     private let notificationDelegate = NotificationDelegate()
@@ -40,18 +41,24 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate {
         }
     }
 
-    /// Sync and upload with a fixed time budget, then complete the task and
-    /// schedule the next one.
+    /// Delivers messages and syncs within a short budget, then completes the task. If the
+    /// system runs out of time first, the task is completed right away (an overrunning
+    /// task gets the app terminated).
     private func runRefresh(_ task: WKApplicationRefreshBackgroundTask) {
         let store = WatchStore.shared
         let budget = WatchAppDelegate.refreshBudget
         let deadline = Date().addingTimeInterval(budget)
+        let completion = BackgroundTaskCompletion(task)
+        task.expirationHandler = { @Sendable in
+            WatchLog.info("Background refresh ran out of time")
+            completion.complete()
+        }
+        scheduleNextRefresh()
         Task { @MainActor in
             await store.awaitAtMost(budget) {
                 await store.performBackgroundRefresh(deadline: deadline)
             }
-            self.scheduleNextRefresh()
-            task.setTaskCompletedWithSnapshot(false)
+            completion.complete()
         }
     }
 
@@ -62,6 +69,26 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate {
                 WatchLog.error("Couldn't schedule a background refresh: \(error.localizedDescription)")
             }
         }
+    }
+}
+
+/// Completes a background task exactly once: when the work is done or when its time runs
+/// out, whichever comes first (the expiration handler may be called on another thread).
+private final class BackgroundTaskCompletion: @unchecked Sendable {
+    private let task: WKRefreshBackgroundTask
+    private let lock = NSLock()
+    private var completed = false
+
+    init(_ task: WKRefreshBackgroundTask) {
+        self.task = task
+    }
+
+    func complete() {
+        lock.lock()
+        let first = !completed
+        completed = true
+        lock.unlock()
+        if first { task.setTaskCompletedWithSnapshot(false) }
     }
 }
 

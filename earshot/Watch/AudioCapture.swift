@@ -23,7 +23,9 @@ enum RecorderState: Equatable {
 }
 
 /// Returned by `beginVoiceWindow()`; hand it back to `endVoiceWindow(_:)` or `cancelVoiceWindow(_:)`.
+/// Only the token of the open window has an effect (a stale one is ignored).
 struct VoiceWindowToken {
+    fileprivate let id = UUID()
     fileprivate let previous: RecorderState
     fileprivate let temporary: Bool
 }
@@ -198,6 +200,11 @@ final class AudioCapture: ObservableObject {
         static let lowBattery = "earshot.low-battery"
     }
 
+    /// A voice window nobody closed (its screen went away) is discarded after this long.
+    private static let voiceWindowLimit: TimeInterval = 60
+    /// After an automatic start failed, the one-minute check waits this long before trying again.
+    private static let automaticRetryInterval: TimeInterval = 5 * 60
+
     private var engine = AVAudioEngine()
     private let writer: SegmentWriter
     private var settings: RemoteWatchSettings
@@ -207,7 +214,9 @@ final class AudioCapture: ObservableObject {
     private var isForeground = false
     private var pauseTimer: Task<Void, Never>?
     private var observers: [NSObjectProtocol] = []
-    private var lastBackgroundPublish = Date.distantPast
+    private var voiceWindowID: UUID?
+    private var voiceWindowWatchdog: Task<Void, Never>?
+    private var lastAutomaticStartFailure: Date?
     private var batteryWindow = BatteryDrainWindow()
     private var batteryWasCharging = false
 
@@ -246,8 +255,23 @@ final class AudioCapture: ObservableObject {
 
     /// Starts (or resumes) recording. Must be called while the app is in the foreground.
     func start() async {
+        await startRecording(automatic: false)
+    }
+
+    func resume() async {
+        await startRecording(automatic: false)
+    }
+
+    /// `automatic`: the app started it (activation, pause expiry), not a tap. A failure
+    /// that repeats the previous one then stays quiet (no haptic every minute).
+    @discardableResult
+    private func startRecording(automatic: Bool) async -> Bool {
         let wasPaused = isPrivacyPaused
-        guard await beginCapture(temporary: false) else { return }
+        guard await beginCapture(temporary: false, automatic: automatic) else {
+            if automatic { lastAutomaticStartFailure = Date() }
+            return false
+        }
+        lastAutomaticStartFailure = nil
         setWantsRecording(true)
         if wasPaused { endPrivacyPause() }
         LocalNotifier.cancel([NoticeID.resume, NoticeID.lowBattery])
@@ -255,10 +279,7 @@ final class AudioCapture: ObservableObject {
         notice = nil
         Haptics.start()
         WatchLog.info("Recording started")
-    }
-
-    func resume() async {
-        await start()
+        return true
     }
 
     /// Stops recording and clears the intent to record.
@@ -342,6 +363,8 @@ final class AudioCapture: ObservableObject {
 
     func setForeground(_ active: Bool) {
         isForeground = active
+        // The level bar needs 4 updates a second; in the background only the elapsed time matters.
+        writer.setReportsLevels(active)
         if !active { level = -160 }
     }
 
@@ -353,9 +376,9 @@ final class AudioCapture: ObservableObject {
         case .recording:
             return
         case .paused(let until):
-            if let until, until.timeIntervalSinceNow <= 0 { await resume() }
+            if let until, until.timeIntervalSinceNow <= 0 { await startRecording(automatic: true) }
         case .interrupted, .error, .idle:
-            await start()
+            await startRecording(automatic: true)
         }
     }
 
@@ -364,9 +387,16 @@ final class AudioCapture: ObservableObject {
         rollDayIfNeeded()
         checkBattery()
         sampleBatteryIfDue()
-        if isForeground, !isStarting, case .paused(let until?) = state, until.timeIntervalSinceNow <= 0 {
-            Task { await self.resume() }
+        if isForeground, !isStarting, automaticRetryAllowed,
+           case .paused(let until?) = state, until.timeIntervalSinceNow <= 0 {
+            Task { await self.startRecording(automatic: true) }
         }
+    }
+
+    /// False for a few minutes after an automatic start failed (low battery, microphone busy).
+    private var automaticRetryAllowed: Bool {
+        guard let failed = lastAutomaticStartFailure else { return true }
+        return Date().timeIntervalSince(failed) >= AudioCapture.automaticRetryInterval
     }
 
     /// When the app runs in the background while it should be recording but cannot
@@ -396,19 +426,17 @@ final class AudioCapture: ObservableObject {
         guard !isInVoiceWindow else { return nil }
         let previous = state
         if state == .recording {
-            isInVoiceWindow = true
-            return VoiceWindowToken(previous: previous, temporary: false)
+            return openVoiceWindow(VoiceWindowToken(previous: previous, temporary: false))
         }
-        guard await beginCapture(temporary: true) else { return nil }
-        isInVoiceWindow = true
+        guard await beginCapture(temporary: true, automatic: false) else { return nil }
         WatchLog.info("Microphone started for a voice answer")
-        return VoiceWindowToken(previous: previous, temporary: true)
+        return openVoiceWindow(VoiceWindowToken(previous: previous, temporary: true))
     }
 
     /// Closes the segment holding the spoken answer (so it uploads right away) and
     /// returns the recorder to the state it was in before the window.
     func endVoiceWindow(_ token: VoiceWindowToken) {
-        isInVoiceWindow = false
+        guard closeVoiceWindow(token) else { return }
         guard token.temporary else {
             forceRotate(reason: .voiceAnswer)
             return
@@ -441,7 +469,7 @@ final class AudioCapture: ObservableObject {
 
     /// The window was abandoned: a temporary capture is discarded unheard.
     func cancelVoiceWindow(_ token: VoiceWindowToken) {
-        isInVoiceWindow = false
+        guard closeVoiceWindow(token) else { return }
         guard token.temporary else { return }
         stopEngine()
         if let discarded = writer.end(reason: .voiceAnswer) {
@@ -451,6 +479,36 @@ final class AudioCapture: ObservableObject {
         state = restoredState(token.previous)
         level = -160
         segmentElapsed = 0
+    }
+
+    private func openVoiceWindow(_ token: VoiceWindowToken) -> VoiceWindowToken {
+        isInVoiceWindow = true
+        voiceWindowID = token.id
+        voiceWindowWatchdog?.cancel()
+        voiceWindowWatchdog = Task { [weak self] in
+            try? await Task.sleep(nanoseconds: UInt64(AudioCapture.voiceWindowLimit * 1_000_000_000))
+            guard !Task.isCancelled else { return }
+            self?.voiceWindowTimedOut(token)
+        }
+        return token
+    }
+
+    /// Returns false when `token` is not the open window (already closed or timed out).
+    private func closeVoiceWindow(_ token: VoiceWindowToken) -> Bool {
+        guard voiceWindowID == token.id else { return false }
+        voiceWindowID = nil
+        isInVoiceWindow = false
+        voiceWindowWatchdog?.cancel()
+        voiceWindowWatchdog = nil
+        return true
+    }
+
+    /// Safety net: a window whose screen went away without closing it must not keep the
+    /// microphone on (or block battery checks and auto-resume) until the app is relaunched.
+    private func voiceWindowTimedOut(_ token: VoiceWindowToken) {
+        guard voiceWindowID == token.id else { return }
+        WatchLog.error("A voice window was never closed; discarding it")
+        cancelVoiceWindow(token)
     }
 
     private func restoredState(_ previous: RecorderState) -> RecorderState {
@@ -464,54 +522,72 @@ final class AudioCapture: ObservableObject {
 
     // MARK: Engine
 
-    private func beginCapture(temporary: Bool) async -> Bool {
+    private func beginCapture(temporary: Bool, automatic: Bool) async -> Bool {
         if state == .recording { return true }
         guard !isStarting else { return false }
         isStarting = true
         defer { isStarting = false }
 
         guard await microphonePermission() else {
-            report("Microphone access is off. Allow it in Settings › Privacy & Security › Microphone.")
+            report("Microphone access is off. Allow it in Settings › Privacy & Security › Microphone.",
+                   automatic: automatic)
             return false
         }
         if !temporary, let message = batteryBlockMessage() {
-            report(message)
+            report(message, automatic: automatic)
             return false
         }
         do {
             try startEngine()
         } catch {
             WatchLog.error("Couldn't start recording: \(error.localizedDescription)")
-            report("Couldn't start the microphone (\(error.localizedDescription)). Open Earshot and try again.")
+            report("Couldn't start the microphone (\(error.localizedDescription)). Open Earshot and try again.",
+                   automatic: automatic)
             return false
         }
         state = .recording
         return true
     }
 
+    /// Activates the audio session and starts the engine. On failure nothing is left
+    /// half-started: an active session without a running engine would keep other apps'
+    /// audio interrupted while nothing is recorded.
     private func startEngine() throws {
         let session = AVAudioSession.sharedInstance()
-        try session.setCategory(.record, mode: .default, options: [])
+        do {
+            // Mixable play-and-record: `.record` silences virtually all system output while
+            // the session is active (all day here), and a non-mixable session stops other
+            // apps' audio and is interrupted whenever one of them starts playing. No
+            // Bluetooth options, so the built-in microphone stays the input.
+            try session.setCategory(.playAndRecord, mode: .default, options: [.mixWithOthers])
+        } catch {
+            WatchLog.error("Mixable recording unavailable (\(error.localizedDescription)); using the record category")
+            try session.setCategory(.record, mode: .default, options: [])
+        }
+        // Otherwise the system mutes this app's haptics and system sounds while it records.
+        try? session.setAllowHapticsAndSystemSoundsDuringRecording(true)
         try session.setActive(true, options: [])
 
-        removeTap()
-        if engine.isRunning { engine.stop() }
-        let input = engine.inputNode
-        let format = input.outputFormat(forBus: 0)
-        guard format.sampleRate > 0, format.channelCount > 0 else { throw CaptureError.noMicrophone }
-
-        writer.begin(inputFormat: format)
-        writer.installTap(on: input, format: format)
-        tapInstalled = true
-        engine.prepare()
         do {
+            removeTap()
+            if engine.isRunning { engine.stop() }
+            let input = engine.inputNode
+            let format = input.outputFormat(forBus: 0)
+            guard format.sampleRate > 0, format.channelCount > 0 else { throw CaptureError.noMicrophone }
+
+            writer.begin(inputFormat: format)
+            writer.installTap(on: input, format: format)
+            tapInstalled = true
+            engine.prepare()
             try engine.start()
+            WatchLog.info("Engine running at \(Int(format.sampleRate)) Hz, \(format.channelCount) channel(s)")
         } catch {
             removeTap()
+            if engine.isRunning { engine.stop() }
             finishSegment(reason: .interruption, stopAccepting: true)
+            deactivateSession()
             throw error
         }
-        WatchLog.info("Engine running at \(Int(format.sampleRate)) Hz, \(format.channelCount) channel(s)")
     }
 
     private func removeTap() {
@@ -547,7 +623,9 @@ final class AudioCapture: ObservableObject {
     }
 
     /// Shows a problem; a paused or interrupted state is kept so nothing is lost.
-    private func report(_ message: String) {
+    /// An automatic attempt that fails the same way as the last one stays quiet.
+    private func report(_ message: String, automatic: Bool) {
+        let repeated = notice == message
         notice = message
         switch state {
         case .paused, .interrupted:
@@ -555,7 +633,7 @@ final class AudioCapture: ObservableObject {
         case .idle, .recording, .error:
             state = .error(message)
         }
-        Haptics.failure()
+        if isForeground, !(automatic && repeated) { Haptics.failure() }
     }
 
     private func becomeInterrupted(_ body: String) {
@@ -563,9 +641,10 @@ final class AudioCapture: ObservableObject {
         level = -160
         segmentElapsed = 0
         UserDefaults.standard.set(true, forKey: Keys.resumeReminderSent)
+        // The notification alerts the user; haptics only play while the app is in front.
         LocalNotifier.post(id: NoticeID.resume, title: "Recording paused", body: body,
                            category: LocalNotifier.resumeCategory)
-        Haptics.warning()
+        if isForeground { Haptics.warning() }
     }
 
     // MARK: Segments
@@ -603,16 +682,12 @@ final class AudioCapture: ObservableObject {
         }
     }
 
+    /// The writer reports every 0.25 s in the foreground and every 10 s in the background
+    /// (see `setForeground(_:)`), so the main thread stays idle while the screen is off.
     private func updateMeter(db: Float, elapsed: Double) {
         guard state == .recording else { return }
-        if isForeground {
-            level = db
-            segmentElapsed = elapsed
-        } else if Date().timeIntervalSince(lastBackgroundPublish) >= 10 {
-            // Keep UI work minimal while the screen is off.
-            lastBackgroundPublish = Date()
-            segmentElapsed = elapsed
-        }
+        if isForeground { level = db }
+        segmentElapsed = elapsed
     }
 
     private func handleWriterFailure(_ message: String) {
@@ -625,7 +700,7 @@ final class AudioCapture: ObservableObject {
         level = -160
         LocalNotifier.post(id: NoticeID.resume, title: "Recording stopped", body: message,
                            category: LocalNotifier.resumeCategory)
-        Haptics.warning()
+        if isForeground { Haptics.warning() }
     }
 
     private func connectWriter() {
@@ -661,7 +736,7 @@ final class AudioCapture: ObservableObject {
         LocalNotifier.post(id: NoticeID.lowBattery, title: "Recording stopped",
                            body: "Battery is at \(percent)%. Earshot stopped recording to save power.",
                            category: LocalNotifier.infoCategory)
-        Haptics.warning()
+        if isForeground { Haptics.warning() }
         WatchLog.info("Stopped recording at \(percent)% battery (\(drainLogText))")
     }
 
@@ -807,7 +882,7 @@ final class AudioCapture: ObservableObject {
         // In the background the microphone can't start; the scheduled notification
         // brings the user back and the app resumes when it becomes active.
         guard isForeground, !isStarting else { return }
-        await resume()
+        await startRecording(automatic: true)
     }
 
     // MARK: Session notifications
@@ -969,6 +1044,8 @@ private final class SegmentWriter: @unchecked Sendable {
     private var anchor: Date?
     private var runFrames: Int64 = 0
     private var lastLevelReport = Date.distantPast
+    /// 0.25 s while the app is in front, 10 s in the background.
+    private var levelInterval: TimeInterval = 10
     private var conversionErrors = 0
 
     init(directory: URL, device: String) {
@@ -987,6 +1064,16 @@ private final class SegmentWriter: @unchecked Sendable {
         queue.async {
             self.segmentSeconds = seconds
             self.silenceThreshold = silenceThreshold
+        }
+    }
+
+    /// Frequent level reports for the meter on screen, or one every 10 s in the background
+    /// (each report wakes the main thread).
+    func setReportsLevels(_ frequent: Bool) {
+        let interval: TimeInterval = frequent ? 0.25 : 10
+        queue.async {
+            self.levelInterval = interval
+            if frequent { self.lastLevelReport = .distantPast }
         }
     }
 
@@ -1065,7 +1152,7 @@ private final class SegmentWriter: @unchecked Sendable {
         runFrames += frames
 
         let elapsed = Double(segment.frames) / segment.sampleRate
-        if item.arrival.timeIntervalSince(lastLevelReport) >= 0.25 {
+        if item.arrival.timeIntervalSince(lastLevelReport) >= levelInterval {
             lastLevelReport = item.arrival
             handlers.level(levels.rms, elapsed)
         }

@@ -92,6 +92,11 @@ final class PromptCenter: ObservableObject {
 
     private static let historyWindow: TimeInterval = 24 * 60 * 60
     private static let maxCategories = 20
+    /// A prompt answered here that the Mac still lists after this long is shown again.
+    private static let reaskDelay: TimeInterval = 10 * 60
+    /// …unless an answer reached the Mac this recently (the list may predate it, or the Mac
+    /// may still be working on the answer).
+    private static let deliveryGrace: TimeInterval = 5 * 60
 
     init(queue: SegmentQueue) {
         self.queue = queue
@@ -135,11 +140,15 @@ final class PromptCenter: ObservableObject {
             if let index = items.firstIndex(where: { $0.id == wire.id }) {
                 var item = items[index]
                 item.prompt = wire
-                if item.answerMode == .snoozed,
-                   let answeredAt = item.answeredAt,
-                   now.timeIntervalSince(answeredAt) > 10 * 60,
-                   !queue.hasPendingAnswer(for: wire.id) {
-                    // The Mac asks again after a "Later".
+                let deliveredJustNow = queue.lastAnswerDelivery(for: wire.id)
+                    .map { now.timeIntervalSince($0) < PromptCenter.deliveryGrace } ?? false
+                if let answeredAt = item.answeredAt,
+                   now.timeIntervalSince(answeredAt) > PromptCenter.reaskDelay,
+                   !queue.hasPendingAnswer(for: wire.id),
+                   !deliveredJustNow {
+                    // Answered here, yet the Mac lists only prompts it hasn't settled: it asks
+                    // again (after "Later", or a choice or reply it reads as "later"), or it
+                    // never took the answer (dropped, or not accepted for this prompt).
                     item.answeredAt = nil
                     item.answerMode = nil
                     item.answerSummary = nil
@@ -185,8 +194,15 @@ final class PromptCenter: ObservableObject {
             let prompts = fresh.map(\.prompt)
             Task {
                 await self.registerCategories()
-                for prompt in prompts { self.postNotification(for: prompt) }
-                self.markShown(freshIDs)
+                let settings = await UNUserNotificationCenter.current().notificationSettings()
+                var posted: [String] = []
+                for prompt in prompts {
+                    if await self.postNotification(for: prompt) { posted.append(prompt.id) }
+                }
+                // Reported to the Mac as delivered only when the notification can appear;
+                // otherwise the prompt counts as shown once the Inbox shows it (the Mac stops
+                // listing delivered prompts after a few hours).
+                if settings.authorizationStatus == .authorized { self.markShown(posted) }
             }
         }
     }
@@ -285,9 +301,16 @@ final class PromptCenter: ObservableObject {
             answer(promptID, mode: .text, text: text)
             return nil
         case LocalNotifier.notNowAction:
+            if item(id: promptID)?.prompt.kind == .approval {
+                // On the Mac a dismissal denies an approval; leave it pending instead.
+                markShown([promptID])
+                return nil
+            }
             answer(promptID, mode: .dismissed)
             return nil
         case UNNotificationDismissActionIdentifier:
+            // Delivered only for categories with .customDismissAction (none today); kept so an
+            // explicit dismissal never opens the prompt.
             markShown([promptID])
             return nil
         default:
@@ -330,7 +353,8 @@ final class PromptCenter: ObservableObject {
         _ = await center.notificationCategories()
     }
 
-    private func postNotification(for prompt: WirePrompt) {
+    /// Returns true when the notification was scheduled.
+    private func postNotification(for prompt: WirePrompt) async -> Bool {
         let content = UNMutableNotificationContent()
         content.title = prompt.title.isEmpty ? PromptStyle.label(prompt.kind) : prompt.title
         content.body = prompt.body
@@ -341,11 +365,12 @@ final class PromptCenter: ObservableObject {
         content.interruptionLevel = prompt.priority <= 1 ? .passive : .active
         let request = UNNotificationRequest(identifier: LocalNotifier.promptRequestPrefix + prompt.id,
                                             content: content, trigger: nil)
-        let promptID = prompt.id
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error {
-                WatchLog.error("Couldn't show prompt \(promptID): \(error.localizedDescription)")
-            }
+        do {
+            try await UNUserNotificationCenter.current().add(request)
+            return true
+        } catch {
+            WatchLog.error("Couldn't show prompt \(prompt.id): \(error.localizedDescription)")
+            return false
         }
     }
 
@@ -361,7 +386,11 @@ final class PromptCenter: ObservableObject {
                                                          options: [], textInputButtonTitle: "Send",
                                                          textInputPlaceholder: "Your answer"))
         }
-        actions.append(UNNotificationAction(identifier: LocalNotifier.notNowAction, title: "Not now", options: []))
+        if prompt.kind != .approval {
+            // For an approval the Mac reads "Not now" as Deny; Approve and Deny are there, and
+            // leaving the notification alone keeps the request pending.
+            actions.append(UNNotificationAction(identifier: LocalNotifier.notNowAction, title: "Not now", options: []))
+        }
         return UNNotificationCategory(identifier: LocalNotifier.promptCategoryPrefix + prompt.id,
                                       actions: actions, intentIdentifiers: [], options: [])
     }

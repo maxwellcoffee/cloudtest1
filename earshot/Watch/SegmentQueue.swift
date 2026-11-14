@@ -7,10 +7,11 @@
 //  On disk (Application Support/Queue):
 //    <id>.m4a + <id>.json   one finished segment and its SegmentMeta
 //    outbox.json            pending answers / requests / bookmarks
-//    upload-state.json      per-segment rejection counts
+//    upload-state.json      per-segment rejection and failure counts
 //
 //  A segment's files are deleted only after the Mac answered SegmentAck.accepted
-//  for that id (or when the 2 GB storage cap forces the quietest ones out).
+//  for that id (or when the 2 GB storage cap, or a nearly full watch, forces the
+//  quietest ones out).
 
 import AVFoundation
 import Combine
@@ -96,6 +97,8 @@ final class SegmentQueue: ObservableObject {
 
     /// Called when the Mac answers 401: the token is no longer valid.
     var onUnauthorized: (@MainActor () -> Void)?
+    /// Called after a pass that delivered audio (the radio is awake right then).
+    var onSegmentsUploaded: (@MainActor () -> Void)?
 
     let queueDirectory: URL
     let recordingDirectory: URL
@@ -123,9 +126,30 @@ final class SegmentQueue: ObservableObject {
     private enum FailureAction { case stop, skip }
     private enum UploadOutcome { case accepted, skipped, stop }
 
+    /// Per-segment upload trouble (upload-state.json).
+    private struct UploadState: Codable {
+        /// The Mac refused the segment as it is (HTTP 400, 413, 422): sending it again won't help.
+        var rejections: [String: Int] = [:]
+        /// The Mac failed to store it (HTTP 5xx) or the upload timed out: it may work later.
+        var failures: [String: Int] = [:]
+    }
+
     private static let backoffSteps: [TimeInterval] = [15, 30, 60, 120, 300]
     private static let batchAge: TimeInterval = 5 * 60
     private static let reservedFiles: Set<String> = ["outbox.json", "upload-state.json"]
+    /// HTTP statuses that mean "this item is unacceptable as it is". Any other non-transient
+    /// status (403, 404, 405, …) means something other than Earshot answered: keep everything.
+    private static let rejectionStatuses: Set<Int> = [400, 413, 422]
+    /// A segment rejected this often is sent again only by "Sync now".
+    private static let parkAfterRejections = 3
+    /// A spoken answer waits at most this long for its audio to reach the Mac first.
+    private static let voiceAnswerHoldLimit: TimeInterval = 15 * 60
+    /// The Mac's default voice window, for answers that don't say.
+    private static let defaultVoiceWindow: TimeInterval = 25
+    /// Free space left on the watch for the file being written and for the system.
+    private static let freeSpaceReserve: Int64 = 100 * 1024 * 1024
+    /// Background time asked for by `uploadSoon(reason:)`.
+    private static let expiringActivitySeconds: TimeInterval = 25
     private enum Keys {
         static let lastUploadAt = "queue.lastUploadAt"
     }
@@ -137,7 +161,9 @@ final class SegmentQueue: ObservableObject {
 
     private var segments: [QueuedSegment] = []
     private var outbox: [OutboxItem] = []
-    private var rejections: [String: Int] = [:]
+    private var uploadState = UploadState()
+    /// When an answer last reached the Mac, by prompt id (this run only).
+    private var answerDeliveries: [String: Date] = [:]
 
     private var pending: PassOptions?
     private var running = false
@@ -156,7 +182,7 @@ final class SegmentQueue: ObservableObject {
         stateURL = queueDir.appendingPathComponent("upload-state.json")
         lastUploadAt = UserDefaults.standard.object(forKey: Keys.lastUploadAt) as? Date
         loadOutbox()
-        loadRejections()
+        loadUploadState()
         rebuildIndex()
     }
 
@@ -180,6 +206,11 @@ final class SegmentQueue: ObservableObject {
             if case .request(let request) = item.payload { return request.id == requestID }
             return false
         }
+    }
+
+    /// When an answer to `promptID` last reached the Mac since launch, if it did.
+    func lastAnswerDelivery(for promptID: String) -> Date? {
+        answerDeliveries[promptID]
     }
 
     // MARK: Enqueue
@@ -231,6 +262,29 @@ final class SegmentQueue: ObservableObject {
                              includeSegments: includeSegments, deadline: deadline))
     }
 
+    /// Uploads now and asks watchOS for a little background time to finish. After Stop, a
+    /// privacy pause or an interruption the app no longer records, so it would otherwise be
+    /// suspended within seconds of the wrist going down, with the last segment still queued.
+    func uploadSoon(reason: String) {
+        let seconds = Self.expiringActivitySeconds
+        let waitLimit = seconds + 2
+        let finished = DispatchSemaphore(value: 0)
+        ProcessInfo.processInfo.performExpiringActivity(withReason: reason) { expired in
+            guard !expired else {
+                // Out of time (or no time granted): let the first call return.
+                finished.signal()
+                return
+            }
+            Task { @MainActor in
+                await self.runPass(ignoreBackoff: true, forceSegments: true, includeSegments: true,
+                                   deadline: Date().addingTimeInterval(seconds))
+                finished.signal()
+            }
+            // The background time lasts as long as this block runs.
+            _ = finished.wait(timeout: .now() + waitLimit)
+        }
+    }
+
     /// Schedules a pass and waits until it has finished.
     func runPass(ignoreBackoff: Bool, forceSegments: Bool, includeSegments: Bool, deadline: Date?) async {
         let options = PassOptions(ignoreBackoff: ignoreBackoff, forceSegments: forceSegments,
@@ -276,29 +330,40 @@ final class SegmentQueue: ObservableObject {
         guard await flushOutbox(deadline: options.deadline) else { return }
         guard options.includeSegments, shouldUploadSegments(force: options.forceSegments) else { return }
 
-        for segment in uploadOrder() {
+        var uploaded = 0
+        defer { if uploaded > 0 { onSegmentsUploaded?() } }
+        // The next segment is picked afresh each time, so a voice answer queued while a long
+        // backlog uploads goes next instead of after the whole backlog.
+        var tried = Set<String>()
+        while let segment = nextSegment(excluding: tried, includeParked: options.forceSegments) {
             if let deadline = options.deadline, Date().addingTimeInterval(8) > deadline { return }
+            tried.insert(segment.id)
             // Answers and requests jump ahead of a long audio backlog.
             guard await flushOutbox(deadline: options.deadline) else { return }
             guard segments.contains(where: { $0.id == segment.id }) else { continue }
-            let outcome = await upload(segment)
-            switch outcome {
-            case .accepted, .skipped:
+            switch await upload(segment) {
+            case .accepted:
+                uploaded += 1
+            case .skipped:
                 continue
             case .stop:
                 return
             }
         }
+        // A spoken answer held back for its audio goes out right after the audio.
+        _ = await flushOutbox(deadline: options.deadline)
     }
 
-    /// Sends outbox items oldest first. Returns false when the pass should stop.
+    /// Sends outbox items oldest first (a spoken answer waits for its audio). Returns false
+    /// when the pass should stop.
     private func flushOutbox(deadline: Date?) async -> Bool {
-        while let item = outbox.first {
+        while let item = outbox.first(where: { !isWaitingForAudio($0) }) {
             if let deadline, Date().addingTimeInterval(2) > deadline { return false }
             do {
                 switch item.payload {
                 case .answer(let answer):
                     try await client.send(answer: answer)
+                    noteAnswerDelivered(answer.promptID)
                 case .request(let request):
                     let ack = try await client.send(request: request)
                     requestAcks[request.id] = ack
@@ -329,27 +394,59 @@ final class SegmentQueue: ObservableObject {
         return true
     }
 
-    /// Batch radio use: two or more segments, an old one, a voice answer, or an explicit request.
+    /// A spoken answer is held back while audio covering its window is still on the watch:
+    /// the Mac settles a voice answer soon after it arrives when no audio for the window has
+    /// reached it yet. Held at most `voiceAnswerHoldLimit` (the audio may be stuck).
+    private func isWaitingForAudio(_ item: OutboxItem) -> Bool {
+        guard case .answer(let answer) = item.payload, answer.mode == .voiceWindow,
+              Date().timeIntervalSince(item.createdAt) < Self.voiceAnswerHoldLimit else { return false }
+        let start = answer.answeredAt
+        let end = start.addingTimeInterval(answer.voiceWindowSeconds ?? Self.defaultVoiceWindow)
+        return segments.contains { segment in
+            !isParked(segment.id)
+                && segment.meta.startedAt <= end
+                && segment.meta.startedAt.addingTimeInterval(segment.meta.duration) >= start
+        }
+    }
+
+    /// Batch radio use: two or more fresh segments, an old one, one that ends a stretch of
+    /// recording (stop, pause, interruption, low battery, voice answer), or an explicit request.
     private func shouldUploadSegments(force: Bool) -> Bool {
-        guard let oldest = segments.first else { return false }
-        if force || segments.count >= 2 { return true }
-        if segments.contains(where: { $0.meta.reason == .voiceAnswer }) { return true }
+        if force { return !segments.isEmpty }
+        let waiting = segments.filter { !isParked($0.id) }
+        guard let oldest = waiting.first else { return false }
+        // Segments that failed before don't make a batch on their own; they go along with one.
+        let fresh = waiting.filter { troubleCount($0.id) == 0 }
+        if fresh.count >= 2 { return true }
+        if fresh.contains(where: { $0.meta.reason != .rotation }) { return true }
+        if waiting.contains(where: { $0.meta.reason == .voiceAnswer }) { return true }
         let endedAt = oldest.meta.startedAt.addingTimeInterval(oldest.meta.duration)
         return Date().timeIntervalSince(endedAt) >= Self.batchAge
     }
 
-    /// Voice answers first (the Mac is waiting for them), then oldest first;
-    /// segments the Mac rejected before go last so they never block the queue.
-    private func uploadOrder() -> [QueuedSegment] {
-        segments.sorted { a, b in
-            let aRejected = (rejections[a.id] ?? 0) > 0
-            let bRejected = (rejections[b.id] ?? 0) > 0
-            if aRejected != bRejected { return !aRejected }
-            let aVoice = a.meta.reason == .voiceAnswer
-            let bVoice = b.meta.reason == .voiceAnswer
-            if aVoice != bVoice { return aVoice }
-            return a.meta.startedAt < b.meta.startedAt
-        }
+    /// The next segment to send: voice answers first (the Mac is waiting for them), then
+    /// oldest first. Segments that failed or were rejected before go last, least troubled
+    /// first, so one bad segment never blocks the queue; parked ones only when forced.
+    private func nextSegment(excluding tried: Set<String>, includeParked: Bool) -> QueuedSegment? {
+        segments
+            .filter { !tried.contains($0.id) && (includeParked || !isParked($0.id)) }
+            .min { a, b in
+                let aTrouble = troubleCount(a.id)
+                let bTrouble = troubleCount(b.id)
+                if aTrouble != bTrouble { return aTrouble < bTrouble }
+                let aVoice = a.meta.reason == .voiceAnswer
+                let bVoice = b.meta.reason == .voiceAnswer
+                if aVoice != bVoice { return aVoice }
+                return a.meta.startedAt < b.meta.startedAt
+            }
+    }
+
+    private func troubleCount(_ id: String) -> Int {
+        (uploadState.rejections[id] ?? 0) + (uploadState.failures[id] ?? 0)
+    }
+
+    private func isParked(_ id: String) -> Bool {
+        (uploadState.rejections[id] ?? 0) >= Self.parkAfterRejections
     }
 
     private func upload(_ segment: QueuedSegment) async -> UploadOutcome {
@@ -368,8 +465,7 @@ final class SegmentQueue: ObservableObject {
                 noteSuccess()
                 return .accepted
             }
-            rejections[segment.id, default: 0] += 1
-            saveRejections()
+            noteFailure(segment.id)
             let reason = ack.message ?? (ack.id == segment.id ? "Mac couldn't store the audio" : "Mac acknowledged a different segment")
             WatchLog.error("Segment \(segment.id) not accepted: \(reason)")
             applyBackoff(reason)
@@ -377,15 +473,26 @@ final class SegmentQueue: ObservableObject {
         } catch {
             switch classify(error) {
             case .stop:
+                // The Mac failed on this segment (5xx, e.g. a failed write) or it timed out:
+                // the next pass tries the other segments first instead of stalling on it.
+                if Self.isSegmentFailure(error) { noteFailure(segment.id) }
                 return .stop
             case .skip:
-                rejections[segment.id, default: 0] += 1
-                saveRejections()
+                let count = noteRejection(segment.id)
                 lastError = "Mac rejected a segment: \(MacClient.describe(error))"
-                WatchLog.error("Segment \(segment.id) rejected: \(MacClient.describe(error))")
+                let parked = count >= Self.parkAfterRejections ? "; it is sent again only by Sync now" : ""
+                WatchLog.error("Segment \(segment.id) rejected \(count)×: \(MacClient.describe(error))\(parked)")
                 return .skipped
             }
         }
+    }
+
+    private static func isSegmentFailure(_ error: Error) -> Bool {
+        if let clientError = error as? MacClientError, case .http(let status, _) = clientError {
+            return status >= 500
+        }
+        if let urlError = error as? URLError { return urlError.code == .timedOut }
+        return false
     }
 
     private func classify(_ error: Error) -> FailureAction {
@@ -396,6 +503,14 @@ final class SegmentQueue: ObservableObject {
                 onUnauthorized?()
                 return .stop
             case .notPaired:
+                return .stop
+            case .invalidURL:
+                applyBackoff("The Mac address isn't valid")
+                return .stop
+            case .http(let status, _) where !MacClient.isTransient(error) && !Self.rejectionStatuses.contains(status):
+                // Whatever answered (a wrong address, a proxy or a tunnel) refuses every
+                // request alike: keep the item and retry later instead of dropping it.
+                applyBackoff("\(MacClient.describe(error)) (check the Mac address in Settings)")
                 return .stop
             default:
                 break
@@ -443,14 +558,19 @@ final class SegmentQueue: ObservableObject {
 
     private func enforceDiskCap() {
         var total = segments.reduce(Int64(0)) { $0 + $1.bytes }
-        guard total > Self.diskCapBytes else { return }
+        var cap = Self.diskCapBytes
+        if let free = Self.freeBytes(at: queueDirectory) {
+            // On a nearly full watch, make room before writing new audio fails.
+            cap = min(cap, max(0, total + free - Self.freeSpaceReserve))
+        }
+        guard total > cap else { return }
         let victims = segments.sorted { a, b in
             if a.meta.speechRatio != b.meta.speechRatio { return a.meta.speechRatio < b.meta.speechRatio }
             return a.meta.startedAt < b.meta.startedAt
         }
         var deleted = 0
         for victim in victims {
-            guard total > Self.diskCapBytes, segments.count > 1 else { break }
+            guard total > cap, segments.count > 1 else { break }
             total -= victim.bytes
             removeSegment(victim.id)
             deleted += 1
@@ -462,6 +582,13 @@ final class SegmentQueue: ObservableObject {
         }
     }
 
+    /// Free space on the volume holding `url`; nil when it can't be read.
+    private static func freeBytes(at url: URL) -> Int64? {
+        guard let attributes = try? FileManager.default.attributesOfFileSystem(forPath: url.path),
+              let free = attributes[.systemFreeSize] as? NSNumber else { return nil }
+        return free.int64Value
+    }
+
     // MARK: Index & recovery
 
     private func removeSegment(_ id: String) {
@@ -469,7 +596,9 @@ final class SegmentQueue: ObservableObject {
         let segment = segments.remove(at: index)
         try? FileManager.default.removeItem(at: segment.audioURL)
         try? FileManager.default.removeItem(at: segment.metaURL)
-        if rejections.removeValue(forKey: id) != nil { saveRejections() }
+        let hadRejections = uploadState.rejections.removeValue(forKey: id) != nil
+        let hadFailures = uploadState.failures.removeValue(forKey: id) != nil
+        if hadRejections || hadFailures { saveUploadState() }
         refreshStats()
     }
 
@@ -553,10 +682,12 @@ final class SegmentQueue: ObservableObject {
 
         segments = result.sorted { $0.meta.startedAt < $1.meta.startedAt }
         let known = Set(segments.map(\.id))
-        let staleRejections = rejections.keys.filter { !known.contains($0) }
-        if !staleRejections.isEmpty {
-            for key in staleRejections { rejections.removeValue(forKey: key) }
-            saveRejections()
+        let rejectionsBefore = uploadState.rejections.count
+        let failuresBefore = uploadState.failures.count
+        uploadState.rejections = uploadState.rejections.filter { known.contains($0.key) }
+        uploadState.failures = uploadState.failures.filter { known.contains($0.key) }
+        if uploadState.rejections.count != rejectionsBefore || uploadState.failures.count != failuresBefore {
+            saveUploadState()
         }
         enforceDiskCap()
         refreshStats()
@@ -635,15 +766,39 @@ final class SegmentQueue: ObservableObject {
         }
     }
 
-    private func loadRejections() {
-        guard let data = try? Data(contentsOf: stateURL),
-              let decoded = try? JSONDecoder().decode([String: Int].self, from: data) else { return }
-        rejections = decoded
+    private func noteAnswerDelivered(_ promptID: String) {
+        let now = Date()
+        answerDeliveries = answerDeliveries.filter { now.timeIntervalSince($0.value) < 3_600 }
+        answerDeliveries[promptID] = now
     }
 
-    private func saveRejections() {
+    private func noteFailure(_ id: String) {
+        uploadState.failures[id, default: 0] += 1
+        saveUploadState()
+    }
+
+    /// Returns how often the segment has been rejected.
+    private func noteRejection(_ id: String) -> Int {
+        let count = (uploadState.rejections[id] ?? 0) + 1
+        uploadState.rejections[id] = count
+        saveUploadState()
+        return count
+    }
+
+    private func loadUploadState() {
+        guard let data = try? Data(contentsOf: stateURL) else { return }
+        let decoder = JSONDecoder()
+        if let legacy = try? decoder.decode([String: Int].self, from: data) {
+            // Earlier versions stored rejection counts only.
+            uploadState = UploadState(rejections: legacy, failures: [:])
+        } else if let decoded = try? decoder.decode(UploadState.self, from: data) {
+            uploadState = decoded
+        }
+    }
+
+    private func saveUploadState() {
         do {
-            let data = try JSONEncoder().encode(rejections)
+            let data = try JSONEncoder().encode(uploadState)
             try data.write(to: stateURL, options: .atomic)
         } catch {
             WatchLog.error("Couldn't save upload state: \(error.localizedDescription)")

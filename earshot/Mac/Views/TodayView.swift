@@ -659,7 +659,10 @@ private struct TranscriptEmptyState: View {
             ContentUnavailableView {
                 Label("Nothing transcribed yet today", systemImage: "waveform")
             } description: {
-                Text("Pair your Apple Watch in Devices and start recording, or turn on this Mac's microphone when you're at your desk. You can also drop audio files here.")
+                VStack(spacing: 10) {
+                    Text("Pair your Apple Watch in Devices and start recording, or turn on this Mac's microphone when you're at your desk. You can also drop audio files here.")
+                    TodayPrivacyNote(store: model.settings)
+                }
             } actions: {
                 HStack(spacing: 10) {
                     Button("Pair a Watch") {
@@ -685,6 +688,23 @@ private struct TranscriptEmptyState: View {
                 }
             }
         }
+    }
+}
+
+/// One line in the empty state about local redaction before the cloud.
+private struct TodayPrivacyNote: View {
+    @ObservedObject var store: SettingsStore
+
+    var body: some View {
+        Label {
+            Text(store.settings.redactBeforeCloud
+                 ? "Privacy: transcripts are stored only on this Mac. Before text is sent to Claude, e-mail addresses, phone, card and account numbers, Social Security numbers and one-time codes are replaced with placeholders, right here on your Mac."
+                 : "Privacy: transcripts are stored only on this Mac. Redaction of personal details before text is sent to Claude is off; turn it on in Settings → Data.")
+        } icon: {
+            Image(systemName: "lock.shield")
+        }
+        .font(.callout)
+        .foregroundStyle(.secondary)
     }
 }
 

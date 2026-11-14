@@ -79,6 +79,8 @@ final class AppModel: ObservableObject, WatchBridge {
     let approvals: ApprovalCenter
     let agent: ComputerAgent
     let micRecorder: MacMicRecorder
+    /// Personal-memory MCP endpoint (POST /mcp), served while `mcpEnabled` is on.
+    let mcp: MCPHandler
 
     // MARK: - Navigation state
 
@@ -136,6 +138,9 @@ final class AppModel: ObservableObject, WatchBridge {
     @Published private(set) var importsInProgress = 0
     /// Agent runs started through the app (running + waiting).
     @Published private(set) var agentQueueDepth = 0
+    @Published private(set) var isExporting = false
+    @Published private(set) var exportError: String? = nil
+    @Published private(set) var lastExportURL: URL? = nil
 
     // MARK: - Private state
 
@@ -172,6 +177,7 @@ final class AppModel: ObservableObject, WatchBridge {
         let memory = MemoryChat(db: database, llm: llm)
         let executor = ActionExecutor(db: database, calendar: calendar)
         let approvals = ApprovalCenter(db: database)
+        let mcp = MCPHandler(db: database, memory: memory)
 
         self.settings = settingsStore
         self.db = database
@@ -191,8 +197,10 @@ final class AppModel: ObservableObject, WatchBridge {
         self.agent = ComputerAgent(db: database, executor: executor, approvals: approvals,
                                    memory: memory, calendar: calendar)
         self.micRecorder = MacMicRecorder(pipeline: pipeline)
+        self.mcp = mcp
 
         databaseWarning = opened.warning
+        router.mcp = mcp
         router.bridge = self
         wireCallbacks()
         observeChanges()
@@ -1067,6 +1075,15 @@ final class AppModel: ObservableObject, WatchBridge {
         }
     }
 
+    // MARK: - MCP
+
+    /// Settings → Integrations → Rotate: replaces the MCP bearer token; clients need the new one.
+    func rotateMCPToken() {
+        mcp.rotateToken()
+        objectWillChange.send()
+        showBanner(.success, "Created a new MCP token. Update it in your MCP clients.")
+    }
+
     // MARK: - Permissions
 
     @discardableResult
@@ -1250,6 +1267,48 @@ final class AppModel: ObservableObject, WatchBridge {
         }
         Log.info("AppModel: erased all data.")
         showBanner(.success, "All Earshot data was erased.")
+    }
+
+    /// Settings → Data → "Export Everything…": asks for a folder, writes an open-format copy of the
+    /// archive there (off the main thread), then reveals it in Finder.
+    func exportAll() {
+        guard !isExporting else {
+            showBanner(.info, "An export is already running.")
+            return
+        }
+        let panel = NSOpenPanel()
+        panel.title = "Export Everything"
+        panel.message = "Choose where to save the export. Earshot creates a new “Earshot Export” folder there with your transcripts, insights, goals, questions, actions and digests in Markdown and JSON."
+        panel.prompt = "Export"
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.canCreateDirectories = true
+        panel.allowsMultipleSelection = false
+        panel.directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        guard panel.runModal() == .OK, let folder = panel.url else { return }
+
+        isExporting = true
+        exportError = nil
+        Log.info("AppModel: exporting everything to \(folder.path).")
+        let db = self.db
+        Task { [weak self] in
+            do {
+                let exported = try await Task.detached(priority: .userInitiated) {
+                    try Exporter.exportAll(db: db, to: folder)
+                }.value
+                guard let self else { return }
+                self.isExporting = false
+                self.lastExportURL = exported
+                NSWorkspace.shared.activateFileViewerSelecting([exported])
+                self.showBanner(.success, "Exported everything to “\(exported.lastPathComponent)”.")
+            } catch {
+                Log.error("AppModel: export failed: \(error.localizedDescription)")
+                guard let self else { return }
+                self.isExporting = false
+                self.exportError = error.localizedDescription
+                self.showBanner(.error, "Export failed: \(error.localizedDescription)")
+            }
+        }
     }
 
     // MARK: - Navigation helpers

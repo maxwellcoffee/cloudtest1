@@ -36,6 +36,8 @@ private struct SettingsTabs: View {
                 .tabItem { Label("Permissions", systemImage: "lock.shield") }
             DataSettingsTab(store: store)
                 .tabItem { Label("Data", systemImage: "externaldrive") }
+            IntegrationsSettingsTab(store: store)
+                .tabItem { Label("Integrations", systemImage: "puzzlepiece.extension") }
         }
         .padding(.top, 6)
     }
@@ -688,6 +690,49 @@ private struct DataSettingsTab: View {
             }
 
             Section {
+                Toggle("Redact personal details before text goes to the cloud", isOn: $store.settings.redactBeforeCloud)
+            } header: {
+                Text("Privacy")
+            } footer: {
+                SettingsFooter("Before transcript text is sent to Claude for analysis, questions, digests and Ask, Earshot replaces e-mail addresses, phone numbers, payment-card numbers, IBANs and account numbers, US Social Security numbers and one-time codes or PINs with placeholders such as [email], [phone] or [card]. Redaction runs on your Mac and your stored transcripts keep the original text. Names and other details are still sent; the on-device model needs no redaction, and agent tasks are sent as written because the agent needs real addresses to act.")
+            }
+
+            Section {
+                HStack(spacing: 10) {
+                    Button("Export Everything…") {
+                        model.exportAll()
+                    }
+                    .disabled(model.isExporting)
+                    if model.isExporting {
+                        ProgressView()
+                            .controlSize(.small)
+                        Text("Exporting…")
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                if let error = model.exportError, !model.isExporting {
+                    EarshotNotice("Export failed: \(error)", tint: .red)
+                }
+                if let exported = model.lastExportURL, !model.isExporting {
+                    LabeledContent("Last export") {
+                        HStack(spacing: 8) {
+                            Text(exported.lastPathComponent)
+                                .lineLimit(1)
+                                .truncationMode(.middle)
+                                .foregroundStyle(.secondary)
+                            Button("Show in Finder") {
+                                NSWorkspace.shared.activateFileViewerSelecting([exported])
+                            }
+                        }
+                    }
+                }
+            } header: {
+                Text("Export")
+            } footer: {
+                SettingsFooter("Saves a copy of everything in open formats you can read without Earshot: one Markdown transcript per day, digests as Markdown, insights, goals, questions and actions as JSON, and a README that explains every file. Raw audio is not included.")
+            }
+
+            Section {
                 Button("Forget the Last 15 Minutes…") {
                     confirmForget = true
                 }
@@ -727,5 +772,160 @@ private struct DataSettingsTab: View {
         } message: {
             Text("The transcript of the last 15 minutes is deleted permanently.")
         }
+    }
+}
+
+// MARK: - Integrations
+
+private struct IntegrationsSettingsTab: View {
+    @EnvironmentObject var model: AppModel
+    @ObservedObject var store: SettingsStore
+    @State private var showToken = false
+    @State private var confirmRotate = false
+    /// Which value was just copied ("endpoint", "token", "config"), for the button's feedback.
+    @State private var copiedItem: String? = nil
+
+    private var token: String { model.mcp.token }
+
+    private var endpoint: String {
+        "http://127.0.0.1:\(String(model.server.port))\(EarshotAPI.Path.mcp)"
+    }
+
+    private var maskedToken: String {
+        String(repeating: "•", count: 16) + String(token.suffix(4))
+    }
+
+    private var statusText: String {
+        if !store.settings.mcpEnabled { return "Off" }
+        if model.serverRunning { return "Serving on port \(String(model.server.port))" }
+        if let error = model.serverError?.nilIfEmpty { return "Server not running: \(error)" }
+        return "Server not running"
+    }
+
+    private var statusColor: Color {
+        if !store.settings.mcpEnabled { return .gray }
+        return model.serverRunning ? .green : .orange
+    }
+
+    var body: some View {
+        Form {
+            Section {
+                Toggle("Let AI apps read my memory over MCP", isOn: $store.settings.mcpEnabled)
+                LabeledContent("Status") {
+                    HStack(spacing: 6) {
+                        EarshotStatusDot(statusColor)
+                        Text(statusText)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.trailing)
+                    }
+                }
+            } header: {
+                Text("Model Context Protocol")
+            } footer: {
+                SettingsFooter("Claude and other MCP clients can search your transcripts, read a day's transcript, list open tasks, promises and questions, read goals and digests, and ask your memory a question. Every tool is read-only: nothing can be changed or deleted through MCP.")
+            }
+
+            Section {
+                LabeledContent("Endpoint") {
+                    HStack(spacing: 8) {
+                        Text(endpoint)
+                            .font(.system(.body, design: .monospaced))
+                            .textSelection(.enabled)
+                        Button(copyTitle("Copy", item: "endpoint")) {
+                            copyToPasteboard(endpoint, item: "endpoint")
+                        }
+                    }
+                }
+                LabeledContent("Token") {
+                    HStack(spacing: 8) {
+                        Text(showToken ? token : maskedToken)
+                            .font(.system(.body, design: .monospaced))
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                            .textSelection(.enabled)
+                        Button {
+                            showToken.toggle()
+                        } label: {
+                            Image(systemName: showToken ? "eye.slash" : "eye")
+                        }
+                        .buttonStyle(.borderless)
+                        .help(showToken ? "Hide the token" : "Show the token")
+                        Button(copyTitle("Copy", item: "token")) {
+                            copyToPasteboard(token, item: "token")
+                        }
+                        Button("Rotate…") {
+                            confirmRotate = true
+                        }
+                    }
+                }
+                if store.settings.serverPort != Int(model.server.port) {
+                    SettingsFooter("The port changes to \(String(store.settings.serverPort)) after you restart Earshot.")
+                }
+            } header: {
+                Text("Connection")
+            } footer: {
+                SettingsFooter("Clients send the token as “Authorization: Bearer <token>”. Anyone with it can read your memory, so treat it like a password. Rotate it to cut off every client at once.")
+            }
+
+            Section {
+                Text(IntegrationsSettingsTab.clientConfig(url: endpoint, token: showToken ? token : maskedToken))
+                    .font(.system(.callout, design: .monospaced))
+                    .textSelection(.enabled)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                HStack {
+                    Spacer()
+                    Button(copyTitle("Copy Configuration", item: "config")) {
+                        copyToPasteboard(IntegrationsSettingsTab.clientConfig(url: endpoint, token: token), item: "config")
+                    }
+                }
+            } header: {
+                Text("Client configuration")
+            } footer: {
+                SettingsFooter("Paste this into your MCP client's configuration, for example a project's .mcp.json for Claude Code. The copied text contains the real token.")
+            }
+        }
+        .formStyle(.grouped)
+        .confirmationDialog("Create a new MCP token?", isPresented: $confirmRotate, titleVisibility: .visible) {
+            Button("Rotate Token", role: .destructive) {
+                model.rotateMCPToken()
+                copiedItem = nil
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Apps using the current token lose access until you give them the new one.")
+        }
+    }
+
+    /// "Copied" for two seconds after `item` was copied, otherwise `title`.
+    private func copyTitle(_ title: String, item: String) -> String {
+        copiedItem == item ? "Copied" : title
+    }
+
+    private func copyToPasteboard(_ text: String, item: String) {
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
+        copiedItem = item
+        Task {
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            if copiedItem == item { copiedItem = nil }
+        }
+    }
+
+    /// A ready-to-paste MCP client entry (Streamable HTTP with a bearer token).
+    private static func clientConfig(url: String, token: String) -> String {
+        """
+        {
+          "mcpServers": {
+            "earshot": {
+              "type": "http",
+              "url": "\(url)",
+              "headers": {
+                "Authorization": "Bearer \(token)"
+              }
+            }
+          }
+        }
+        """
     }
 }

@@ -66,6 +66,13 @@ final class WatchStore: ObservableObject {
     }
 
     private var tickTask: Task<Void, Never>?
+    private var lastSyncAttemptAt: Date?
+
+    /// While recording with the app in the background, each /sync wakes the radio: sync this
+    /// often, and right after audio uploads (when the radio is awake anyway).
+    private static let backgroundSyncInterval: TimeInterval = 5 * 60
+    /// The shortest gap between background syncs that ride along with an upload.
+    private static let uploadSyncInterval: TimeInterval = 2 * 60
 
     private init() {
         let defaults = UserDefaults.standard
@@ -120,16 +127,23 @@ final class WatchStore: ObservableObject {
         }
     }
 
-    /// Work for a WKApplicationRefreshBackgroundTask: deliver messages, sync,
-    /// then upload whatever fits before `deadline`.
+    /// Work for a WKApplicationRefreshBackgroundTask, which gets only a few seconds:
+    /// deliver queued messages, then sync. Audio uploads here only while recording (the app
+    /// keeps running then); otherwise an upload would be cut off when the task ends, so the
+    /// audio waits for the app to be opened.
     func performBackgroundRefresh(deadline: Date) async {
         recorder.periodicCheck()
         recorder.remindToResumeIfNeeded()
         prompts.refreshExpiry()
         guard pairingStatus == .paired, client.isPaired else { return }
-        await queue.runPass(ignoreBackoff: true, forceSegments: false, includeSegments: false, deadline: deadline)
+        // A running pass flushes the outbox between segments; waiting for it could use up the task.
+        if !queue.isBusy {
+            await queue.runPass(ignoreBackoff: true, forceSegments: false, includeSegments: false, deadline: deadline)
+        }
         await performSync()
-        await queue.runPass(ignoreBackoff: true, forceSegments: true, includeSegments: true, deadline: deadline)
+        if recorder.isRecording {
+            queue.kick(ignoreBackoff: true)
+        }
     }
 
     /// Delivers queued answers right away (used after a notification action).
@@ -178,6 +192,7 @@ final class WatchStore: ObservableObject {
         guard pairingStatus == .paired, client.isPaired, !isSyncing else { return }
         isSyncing = true
         defer { isSyncing = false }
+        lastSyncAttemptAt = Date()
 
         let delivered = prompts.deliveredIDsToReport()
         let report = WatchStatusReport(deviceName: deviceName,
@@ -240,7 +255,19 @@ final class WatchStore: ObservableObject {
         recorder.periodicCheck()
         prompts.refreshExpiry()
         guard isAppActive || recorder.isRecording else { return }
+        if !isAppActive, let last = lastSyncAttemptAt,
+           Date().timeIntervalSince(last) < WatchStore.backgroundSyncInterval - 5 {
+            // Audio still uploads on its own schedule (each finished segment kicks the queue).
+            return
+        }
         await syncCycle(force: false)
+    }
+
+    /// After an upload in the background: the radio is awake, so a /sync costs little now.
+    private func syncAlongWithUpload() {
+        guard !isAppActive, pairingStatus == .paired else { return }
+        if let last = lastSyncAttemptAt, Date().timeIntervalSince(last) < WatchStore.uploadSyncInterval { return }
+        Task { await self.performSync() }
     }
 
     // MARK: Pairing
@@ -415,13 +442,22 @@ final class WatchStore: ObservableObject {
 
     private func connect() {
         recorder.onSegment = { [weak self] url, meta in
-            self?.queue.enqueueSegment(audioAt: url, meta: meta)
+            guard let self else { return }
+            self.queue.enqueueSegment(audioAt: url, meta: meta)
+            if meta.reason != .rotation, self.pairingStatus == .paired {
+                // Recording stopped, paused or was interrupted (or a voice answer ended): send
+                // the audio now, before the app, no longer recording, is suspended.
+                self.queue.uploadSoon(reason: "Upload the latest audio")
+            }
         }
         recorder.onBookmark = { [weak self] bookmark in
             self?.queue.enqueue(.bookmark(bookmark))
         }
         queue.onUnauthorized = { [weak self] in
             self?.handleUnauthorized()
+        }
+        queue.onSegmentsUploaded = { [weak self] in
+            self?.syncAlongWithUpload()
         }
     }
 

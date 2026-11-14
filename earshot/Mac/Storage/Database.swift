@@ -126,6 +126,9 @@ private final class SQLiteConnection {
 
     var lastInsertRowID: Int64 { sqlite3_last_insert_rowid(handle) }
 
+    /// Rows changed by the most recent INSERT/UPDATE/DELETE on this connection.
+    var changes: Int { Int(sqlite3_changes(handle)) }
+
     var userVersion: Int32 {
         Int32(truncatingIfNeeded: scalarInt64("PRAGMA user_version") ?? 0)
     }
@@ -474,6 +477,38 @@ final class Database: @unchecked Sendable {
                 .date(p.createdAt), .date(p.releasedAt), .date(p.deliveredAt), .date(p.answeredAt),
                 .date(p.expiresAt), .date(p.notBefore),
             ])
+        }
+    }
+
+    /// Marks a prompt delivered only while it is still pending (never overwrites a newer status
+    /// such as answered). Keeps an existing delivered_at. Returns true if the row changed.
+    @discardableResult
+    func markPromptDelivered(id: String, at date: Date) -> Bool {
+        withConnection { c in
+            let ok = c.run("""
+                UPDATE prompts SET status = ?, delivered_at = COALESCE(delivered_at, ?)
+                WHERE id = ? AND status = ?
+                """, [.text(PromptStatus.delivered.rawValue), .date(date), .text(id),
+                      .text(PromptStatus.pending.rawValue)])
+            return ok && c.changes > 0
+        }
+    }
+
+    /// Expires a prompt only while its status is one of `statuses` and its expiry is before `now`
+    /// (never overwrites a prompt that was answered in the meantime). Returns true if the row changed.
+    @discardableResult
+    func expirePrompt(id: String, ifStatusIn statuses: [PromptStatus], expiredBefore now: Date) -> Bool {
+        guard !statuses.isEmpty else { return false }
+        return withConnection { c in
+            var arguments: [SQLValue] = [.text(PromptStatus.expired.rawValue), .text(id)]
+            arguments += statuses.map { SQLValue.text($0.rawValue) }
+            arguments.append(.date(now))
+            let ok = c.run("""
+                UPDATE prompts SET status = ?
+                WHERE id = ? AND status IN (\(Database.placeholders(statuses.count)))
+                AND expires_at IS NOT NULL AND expires_at < ?
+                """, arguments)
+            return ok && c.changes > 0
         }
     }
 

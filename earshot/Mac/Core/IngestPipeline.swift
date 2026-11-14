@@ -2,7 +2,7 @@
 //  Stores incoming audio segments and transcribes them one at a time.
 //
 //  ingest/ingestFile → audio saved under AppPaths.audioDirectory(for:) → Segment
-//  (.received) → FIFO queue → single worker: .transcribing → Transcriber →
+//  (.received) → queue (voice answers first, then FIFO) → single worker: .transcribing → Transcriber →
 //  UtteranceAssembler → db.insertUtterances → .transcribed (or .failed) →
 //  onTranscribed → EarshotEvents (.segments, .utterances).
 
@@ -23,6 +23,8 @@ final class IngestPipeline: @unchecked Sendable {
     private let lock = NSLock()
     private var pendingIDs: [String] = []
     private var pendingSet = Set<String>()
+    /// Number of voice-answer ids at the front of `pendingIDs` (transcribed before the backlog).
+    private var priorityCount = 0
     private var currentID: String?
     private var workerRunning = false
     private var transcribedHandler: (@Sendable (_ segment: Segment, _ utterances: [Utterance]) -> Void)?
@@ -107,6 +109,7 @@ final class IngestPipeline: @unchecked Sendable {
     /// Re-queues .received/.transcribing segments at launch and retries each failed segment once.
     func resumePending() {
         var toQueue: [String] = []
+        var voiceAnswers: [String] = []
 
         let interrupted = db.segments(statuses: [.received, .transcribing], limit: 100_000)
         for var segment in interrupted {
@@ -114,7 +117,11 @@ final class IngestPipeline: @unchecked Sendable {
                 segment.status = .received
                 db.upsertSegment(segment)
             }
-            toQueue.append(segment.id)
+            if segment.reason == SegmentReason.voiceAnswer.rawValue {
+                voiceAnswers.append(segment.id)
+            } else {
+                toQueue.append(segment.id)
+            }
         }
 
         let failed = db.segments(statuses: [.failed], limit: 2_000)
@@ -130,10 +137,11 @@ final class IngestPipeline: @unchecked Sendable {
         let failedIDs = Set(failed.map { $0.id })
         saveRetriedIDs(retried.intersection(failedIDs))
 
-        if !toQueue.isEmpty {
+        if !toQueue.isEmpty || !voiceAnswers.isEmpty {
             Log.info("Ingest: resuming \(interrupted.count) pending segment(s), retrying \(retryCount) failed")
             if !interrupted.isEmpty { EarshotEvents.post(.segments) }
-            enqueue(toQueue)
+            if !voiceAnswers.isEmpty { enqueue(voiceAnswers, priority: true) }
+            if !toQueue.isEmpty { enqueue(toQueue) }
         }
     }
 
@@ -224,7 +232,10 @@ final class IngestPipeline: @unchecked Sendable {
         if duration <= 0 || !duration.isFinite {
             duration = IngestPipeline.audioDuration(of: fileURL) ?? 0
         }
-        let silent = settings.skipSilentSegments && meta.speechRatio < IngestPipeline.silentSpeechRatio
+        // A quiet voice answer is still transcribed: the question scheduler waits for it.
+        let silent = settings.skipSilentSegments
+            && meta.speechRatio < IngestPipeline.silentSpeechRatio
+            && meta.reason != .voiceAnswer
         var segment = Segment(id: meta.id,
                               device: meta.device,
                               startedAt: meta.startedAt,
@@ -254,7 +265,7 @@ final class IngestPipeline: @unchecked Sendable {
             Log.debug("Ingest: segment \(meta.id) is silent (speech \(meta.speechRatio)); not transcribing")
             return SegmentAck(id: meta.id, accepted: true, message: "Stored (silent, not transcribed).")
         }
-        enqueue([meta.id])
+        enqueue([meta.id], priority: meta.reason == .voiceAnswer)
         return SegmentAck(id: meta.id, accepted: true, message: "Queued for transcription.")
     }
 
@@ -290,10 +301,16 @@ final class IngestPipeline: @unchecked Sendable {
 
     // MARK: - Private: queue
 
-    private func enqueue(_ ids: [String]) {
+    /// priority=true (voice answers) queues ahead of the backlog, behind earlier voice answers.
+    private func enqueue(_ ids: [String], priority: Bool = false) {
         lock.lock()
         for id in ids where id != currentID && !pendingSet.contains(id) {
-            pendingIDs.append(id)
+            if priority {
+                pendingIDs.insert(id, at: priorityCount)
+                priorityCount += 1
+            } else {
+                pendingIDs.append(id)
+            }
             pendingSet.insert(id)
         }
         let startWorker = !workerRunning && !pendingIDs.isEmpty
@@ -315,9 +332,11 @@ final class IngestPipeline: @unchecked Sendable {
         guard !pendingIDs.isEmpty else {
             currentID = nil
             workerRunning = false
+            priorityCount = 0
             return nil
         }
         let id = pendingIDs.removeFirst()
+        if priorityCount > 0 { priorityCount -= 1 }
         pendingSet.remove(id)
         currentID = id
         return id
@@ -346,7 +365,9 @@ final class IngestPipeline: @unchecked Sendable {
         }
 
         let settings = SettingsStore.current
-        if settings.skipSilentSegments && segment.speechRatio < IngestPipeline.silentSpeechRatio {
+        if settings.skipSilentSegments
+            && segment.speechRatio < IngestPipeline.silentSpeechRatio
+            && segment.reason != SegmentReason.voiceAnswer.rawValue {
             segment.status = .silent
             segment.error = nil
             db.upsertSegment(segment)

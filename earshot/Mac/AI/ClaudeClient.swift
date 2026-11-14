@@ -89,17 +89,41 @@ final class ClaudeClient: @unchecked Sendable {
     static let apiVersion = "2026-10-21"
     static let fallbackBeta = "server-side-fallback-2026-07-01"
 
+    static let defaultTimeout: TimeInterval = 600
+
+    /// One URLSession (and connection pool) shared by every client that uses the default
+    /// timeout. Clients are created per agent run and whenever the key changes, so a
+    /// session per instance would pile up sessions that are never invalidated.
+    private static let sharedSession: URLSession = makeSession(timeout: defaultTimeout)
+
+    private static func makeSession(timeout: TimeInterval) -> URLSession {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = timeout
+        config.timeoutIntervalForResource = timeout
+        return URLSession(configuration: config)
+    }
+
     let apiKey: String
     let baseURL: URL
     private let session: URLSession
+    /// True when this client created its own session (non-default timeout) and must invalidate it.
+    private let ownsSession: Bool
 
     init(apiKey: String, baseURL: URL = URL(string: "https://api.anthropic.com")!, timeout: TimeInterval = 600) {
         self.apiKey = apiKey
         self.baseURL = baseURL
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = timeout
-        config.timeoutIntervalForResource = timeout
-        self.session = URLSession(configuration: config)
+        if timeout == ClaudeClient.defaultTimeout {
+            self.session = ClaudeClient.sharedSession
+            self.ownsSession = false
+        } else {
+            self.session = ClaudeClient.makeSession(timeout: timeout)
+            self.ownsSession = true
+        }
+    }
+
+    deinit {
+        // Lets any in-flight task finish, then releases the session's resources.
+        if ownsSession { session.finishTasksAndInvalidate() }
     }
 
     /// Client using the key from Settings / Keychain / ANTHROPIC_API_KEY.

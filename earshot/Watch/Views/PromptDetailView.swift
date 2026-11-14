@@ -128,23 +128,25 @@ struct PromptDetailView: View {
             .tint(.red)
         }
 
-        HStack(spacing: 6) {
-            if prompt.kind != .approval {
+        // Approvals get neither: the Mac can't snooze them and reads a dismissal as Deny.
+        // Going back leaves the request pending (it can still be decided on the Mac).
+        if prompt.kind != .approval {
+            HStack(spacing: 6) {
                 Button {
                     send(.snoozed)
                 } label: {
                     Text("Later").frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
+                Button {
+                    send(.dismissed)
+                } label: {
+                    Text(closeTitle(prompt)).frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
             }
-            Button {
-                send(.dismissed)
-            } label: {
-                Text(closeTitle(prompt)).frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.bordered)
+            .padding(.top, 4)
         }
-        .padding(.top, 4)
     }
 
     @ViewBuilder
@@ -232,6 +234,18 @@ struct PromptDetailView: View {
 
 // MARK: - Say it
 
+/// The voice window's bookkeeping, shared by the sheet's task and its onDisappear. A
+/// reference, so both see the same values even after the sheet is gone: the task can
+/// resume (the microphone permission prompt, for one) after onDisappear has run.
+private final class VoiceWindowLifecycle {
+    var token: VoiceWindowToken?
+    var startedAt: Date?
+    /// The sheet went away.
+    var closed = false
+    /// The window was ended or cancelled.
+    var finished = false
+}
+
 /// A 20-second listening window. The recorder captures the answer; the Mac reads
 /// the transcript after `answeredAt`.
 private struct VoiceAnswerSheet: View {
@@ -251,9 +265,7 @@ private struct VoiceAnswerSheet: View {
     private static let window: Double = 20
 
     @State private var phase: Phase = .starting
-    @State private var startedAt: Date? = nil
-    @State private var token: VoiceWindowToken? = nil
-    @State private var finished = false
+    @State private var lifecycle = VoiceWindowLifecycle()
 
     var body: some View {
         VStack(spacing: 8) {
@@ -290,7 +302,7 @@ private struct VoiceAnswerSheet: View {
     }
 
     private func listening(now: Date) -> some View {
-        let elapsed = startedAt.map { now.timeIntervalSince($0) } ?? 0
+        let elapsed = lifecycle.startedAt.map { now.timeIntervalSince($0) } ?? 0
         let remaining = max(0, Int((VoiceAnswerSheet.window - elapsed).rounded(.up)))
         return VStack(spacing: 6) {
             Image(systemName: "mic.fill")
@@ -314,26 +326,41 @@ private struct VoiceAnswerSheet: View {
     }
 
     private func run() async {
-        guard token == nil, phase == .starting else { return }
+        let lifecycle = self.lifecycle
+        guard lifecycle.token == nil, !lifecycle.closed, !lifecycle.finished, phase == .starting else { return }
         guard let newToken = await recorder.beginVoiceWindow() else {
+            guard !lifecycle.closed else { return }
             phase = .failed(recorder.notice ?? "The microphone couldn't start.")
             Haptics.failure()
             return
         }
-        token = newToken
-        startedAt = Date()
+        if Task.isCancelled || lifecycle.closed {
+            // The sheet went away while the microphone was starting; onDisappear had no
+            // window to close then, so close it here or the microphone would stay on.
+            lifecycle.finished = true
+            recorder.cancelVoiceWindow(newToken)
+            return
+        }
+        lifecycle.token = newToken
+        lifecycle.startedAt = Date()
         phase = .listening
         Haptics.start()
         try? await Task.sleep(nanoseconds: UInt64(VoiceAnswerSheet.window * 1_000_000_000))
-        if !Task.isCancelled { finish() }
+        if Task.isCancelled || lifecycle.closed {
+            abandonIfNeeded()
+        } else {
+            finish()
+        }
     }
 
     private func finish() {
-        guard !finished, let token, let startedAt else { return }
-        finished = true
+        let lifecycle = self.lifecycle
+        guard !lifecycle.finished, let token = lifecycle.token, let startedAt = lifecycle.startedAt else { return }
+        lifecycle.finished = true
         let seconds = min(VoiceAnswerSheet.window, max(1, Date().timeIntervalSince(startedAt)))
         prompts.answer(promptID, mode: .voiceWindow, answeredAt: startedAt, voiceWindowSeconds: seconds.rounded())
         recorder.endVoiceWindow(token)
+        guard !lifecycle.closed else { return }
         phase = .sent
         Haptics.success()
         Task {
@@ -342,14 +369,16 @@ private struct VoiceAnswerSheet: View {
         }
     }
 
-    /// The sheet went away before the window ended.
+    /// The sheet went away (or its task was cancelled) before the window ended.
     private func abandonIfNeeded() {
-        guard !finished, let token else { return }
-        if let startedAt, Date().timeIntervalSince(startedAt) >= 3 {
+        let lifecycle = self.lifecycle
+        lifecycle.closed = true
+        guard !lifecycle.finished, let token = lifecycle.token else { return }
+        if let startedAt = lifecycle.startedAt, Date().timeIntervalSince(startedAt) >= 3 {
             // Long enough to have said something: treat it like "Done".
             finish()
         } else {
-            finished = true
+            lifecycle.finished = true
             recorder.cancelVoiceWindow(token)
         }
     }

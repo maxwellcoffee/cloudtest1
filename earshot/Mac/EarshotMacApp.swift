@@ -76,6 +76,10 @@ private struct EarshotCommands: Commands {
                 model.presentImportPanel()
             }
             .keyboardShortcut("i", modifiers: [.command, .shift])
+
+            Button("Export Everything…") {
+                model.exportAll()
+            }
         }
 
         CommandMenu("Earshot") {

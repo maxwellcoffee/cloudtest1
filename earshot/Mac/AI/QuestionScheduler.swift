@@ -66,6 +66,8 @@ final class QuestionScheduler: @unchecked Sendable {
     /// Unanswered questions released within this window block new ones (keeps the wrist calm).
     private static let outstandingWindow: TimeInterval = 6 * 3_600
     private static let maxOutstanding = 2
+    /// Newest processed audio older than this does not count as "what is being said now".
+    private static let speechFreshness: TimeInterval = 10 * 60
 
     private static let declineAnswers: Set<String> = ["not now", "no thanks", "skip", "no thank you", "nah", "dismiss"]
     private static let laterAnswers: Set<String> = ["later", "ask later", "ask me later", "ask again later"]
@@ -131,7 +133,7 @@ final class QuestionScheduler: @unchecked Sendable {
 
         let releasedToday = db.countPromptsReleased(kinds: [.question, .nudge], since: now.startOfDay)
         let lastRelease = db.lastPromptRelease(kinds: [.question, .nudge])
-        let words = db.wordCount(from: now.addingTimeInterval(-300), to: now)
+        let words = settings.avoidQuestionsDuringConversation ? recentSpeechWords(now: now) : 0
         let busy = calendar.isBusy(at: now)
         let decision = QuestionPolicy.canRelease(now: now, settings: settings, releasedToday: releasedToday,
                                                  lastRelease: lastRelease, wordsLastFiveMinutes: words,
@@ -150,8 +152,27 @@ final class QuestionScheduler: @unchecked Sendable {
             }
         }
 
-        // Make sure spoken answers are finalised even when no new audio arrives.
-        await resolveVoiceAnswers()
+        // Make sure spoken answers are finalised even when no new audio arrives. Not awaited:
+        // interpreting an answer is a model call, and the minute tick must not wait for it
+        // (resolveVoiceAnswers is single-flight on its own).
+        Task { [self] in
+            await self.resolveVoiceAnswers()
+        }
+    }
+
+    /// Words heard in the five minutes up to the newest processed audio. Uploads and transcription
+    /// lag the clock by minutes, so a window ending at `now` is often empty mid-conversation.
+    /// Audio that ended more than `speechFreshness` ago no longer anchors the window.
+    private func recentSpeechWords(now: Date) -> Int {
+        let freshFrom = now.addingTimeInterval(-QuestionScheduler.speechFreshness)
+        // Segments are at most 15 minutes long, so this start catches every one ending after freshFrom.
+        let recent = db.segments(from: freshFrom.addingTimeInterval(-900), to: now.addingTimeInterval(60))
+        let latestEnd = recent
+            .filter { ($0.status == .transcribed || $0.status == .silent) && $0.endedAt >= freshFrom }
+            .map { min($0.endedAt, now) }
+            .max()
+        let anchor = latestEnd ?? now
+        return db.wordCount(from: anchor.addingTimeInterval(-300), to: now.addingTimeInterval(1))
     }
 
     private func isOutstandingQuestion(_ prompt: StoredPrompt, now: Date) -> Bool {

@@ -220,26 +220,23 @@ final class APIRouter: @unchecked Sendable {
         db.upsertDevice(updated)
         EarshotEvents.post(.devices)
 
-        // Prompts the watch has shown.
+        // Prompts the watch has shown. Conditional updates: an answer stored concurrently
+        // (the watch posts /answers just before /sync) must never be overwritten.
         var promptsChanged = false
         var seen = Set<String>()
         for id in report.deliveredPromptIDs where !seen.contains(id) {
             seen.insert(id)
-            guard var prompt = db.prompt(id: id), prompt.status == .pending else { continue }
-            prompt.status = .delivered
-            if prompt.deliveredAt == nil { prompt.deliveredAt = now }
-            db.upsertPrompt(prompt)
-            promptsChanged = true
+            if db.markPromptDelivered(id: id, at: now) { promptsChanged = true }
         }
 
         // Expire stale prompts and collect the ones the watch should show.
         let cutoff = now.addingTimeInterval(-APIRouter.deliveredWindow)
         var outgoing: [StoredPrompt] = []
-        for var prompt in db.prompts(statuses: [.pending, .delivered], limit: 500) {
+        for prompt in db.prompts(statuses: [.pending, .delivered], limit: 500) {
             if let expiresAt = prompt.expiresAt, expiresAt < now {
-                prompt.status = .expired
-                db.upsertPrompt(prompt)
-                promptsChanged = true
+                if db.expirePrompt(id: prompt.id, ifStatusIn: [.pending, .delivered], expiredBefore: now) {
+                    promptsChanged = true
+                }
                 continue
             }
             switch prompt.status {
