@@ -55,6 +55,9 @@ The MVP in this repository:
   agent a task, or save a note ("parking spot 4C").
 - A Today glance: headline, words and minutes recorded, open tasks,
   highlights and what's next.
+- A battery forecast while recording ("≈ 5 h 20 m left at this rate"),
+  measured from the actual drain, with a tip to pause during quiet stretches
+  when the battery would not last until the evening.
 
 **On the Mac (macOS app)**
 - A local HTTP server for the watch, with 6-digit pairing codes that rotate
@@ -65,8 +68,17 @@ The MVP in this repository:
 - A main window with Today (live transcript timeline by segment, insights,
   bookmarks), Ask, Inbox, Goals, Digests, Agent, Devices and Settings, plus a
   menu bar extra with status and quick actions.
-- Desk mode: record with the Mac's microphone when you're not wearing the
-  watch. Drag and drop audio files to import them.
+- Desk mode: turn on **Use this Mac's microphone** in Devices to record with
+  the Mac's microphone when you're not wearing the watch. Drop audio files on
+  the Today view to import them.
+- Export everything (Settings > Data): a folder of plain files you can read
+  without Earshot, with one Markdown transcript per day, insights, goals,
+  prompts and actions as JSON, digests as Markdown, and a README describing
+  every file.
+- A personal-memory MCP server (Settings > Integrations, off by default): Claude
+  and other MCP clients can search your transcripts, read a day's transcript,
+  list open tasks, promises and questions, read goals and digests, and ask your
+  memory a question. Every tool is read-only, and clients need their own token.
 
 **AI (Claude, or Apple's on-device model)**
 - Insights extracted from new speech every 15 minutes (once there are at
@@ -74,7 +86,16 @@ The MVP in this repository:
   facts, decisions, open questions, highlights and mood.
 - Proactive questions with a strict budget: at most 6 a day, at least 75
   minutes apart, never during quiet hours (21:00-08:00), never mid-conversation
-  and never during a calendar meeting. All of these are configurable.
+  and never during a calendar meeting. All of these are configurable. Every
+  question must say which decision or action it unlocks; questions that unlock
+  nothing are dropped.
+- Promises tracked in both directions: "You promised: ..." and "Promised to
+  you: ...", with the other person attached.
+- Redaction before the cloud (Settings > Data > Privacy, on by default):
+  e-mail addresses, phone numbers, payment-card numbers, IBANs and account
+  numbers, US Social Security numbers and one-time codes are replaced with
+  placeholders such as `[email]` before text goes to Claude. Your stored
+  transcripts keep the original text.
 - Goal tracking with check-ins and progress notes.
 - A daily digest (summary, highlights, commitments, open loops, goal progress,
   patterns, one reflection question, suggestions for tomorrow) after 21:00, and
@@ -144,8 +165,9 @@ which reports its status (battery, queue, recording state) and returns pending
 prompts, the Today snapshot and the recording settings (the Mac is the single
 place you edit them).
 
-**HTTP API** (all JSON, dates as seconds since 1970; everything except `hello`
-and `pair` needs `Authorization: Bearer <token>`):
+**HTTP API** (all JSON, dates as seconds since 1970; every `/api/v1` endpoint
+except `hello` and `pair` needs `Authorization: Bearer <token>` with the token
+issued at pairing):
 
 | Method | Path | Body | Response |
 |---|---|---|---|
@@ -156,6 +178,7 @@ and `pair` needs `Authorization: Bearer <token>`):
 | POST | `/api/v1/answers`   | `PromptAnswer` | `OKResponse` |
 | POST | `/api/v1/requests`  | `WatchRequest` (ask / command / note) | `WatchRequestAck` |
 | POST | `/api/v1/bookmarks` | `Bookmark` | `OKResponse` |
+| POST | `/mcp`              | JSON-RPC 2.0 (MCP) | JSON-RPC (only while enabled in Settings > Integrations; needs the MCP token) |
 
 The types live in [`Shared/EarshotProtocol.swift`](Shared/EarshotProtocol.swift);
 the module APIs are in [`docs/CONTRACTS.md`](docs/CONTRACTS.md).
@@ -188,7 +211,8 @@ the module APIs are in [`docs/CONTRACTS.md`](docs/CONTRACTS.md).
 ### 1. Generate the project
 
 ```sh
-git clone <this repo> && cd earshot
+git clone <this repo> earshot-src
+cd earshot-src/earshot      # the folder that holds project.yml and scripts/
 scripts/bootstrap.sh YOURTEAMID
 ```
 
@@ -219,19 +243,24 @@ choice is lost the next time the project is generated.
 ### 3. Run the Mac app
 
 Select the **Earshot** scheme and **My Mac**, then Run (Cmd-R). The server
-starts on port 8737.
+starts on port 8737. On first launch an onboarding sheet walks you through
+consent, your Anthropic API key, permissions and pairing the watch; the steps
+below cover the same ground and where to change things later.
 
 ### 4. Add your API key
 
 In Earshot's **Settings > AI**, paste your Anthropic API key (it's stored in
-the Keychain). For development you can instead set `ANTHROPIC_API_KEY` in the
-scheme's environment variables. The default model is `claude-opus-5-5` for
-both background analysis and foreground work (agent, digests, memory chat);
-both are configurable. On macOS 26 with Apple Intelligence you can choose the
-on-device model instead.
+the Keychain, which is the durable option). Earshot also reads
+`ANTHROPIC_API_KEY` from its environment when the Keychain has no key, for
+example from the scheme's Run environment variables, but `xcodegen generate`
+rewrites the shared scheme and drops that setting. The default model is
+`claude-opus-5-5` for both background analysis and foreground work (agent,
+digests, memory chat); both are configurable. On macOS 26 with Apple
+Intelligence you can choose the on-device model instead.
 
-Also fill in **About you** (name, a few lines about yourself, life goals). Every
-prompt uses it, and it is what makes questions personal rather than generic.
+Also fill in **Settings > You > About you** (name, a few lines about yourself,
+life goals). Every prompt uses it, and it is what makes questions personal
+rather than generic.
 
 ### 5. Grant permissions
 
@@ -244,6 +273,7 @@ buttons to request them up front:
 | Calendars and Reminders (full access) | not interrupting meetings; creating events and reminders |
 | Microphone | desk mode only |
 | Automation (Apple Events) | Mail drafts, Apple Notes, AppleScript actions (asked per app) |
+| Files and Folders (Documents) | Markdown notes in `~/Documents/Earshot Notes` (the default notes folder) |
 | Local Network | the watch reaching the server |
 | Accessibility, Screen Recording | computer use only (off by default) |
 
@@ -333,9 +363,13 @@ Earshot works within what watchOS allows a personal app to do. Be aware of:
 
 ## Network and security
 
-The Mac server speaks plain HTTP/1.1 on port 8737 and advertises itself over
-Bonjour as `_earshot._tcp`. Every request except `hello` and `pair` needs the
-bearer token issued at pairing; unpair a device in Devices to revoke it.
+The Mac server speaks plain HTTP/1.1 on port 8737 on all network interfaces
+and advertises itself over Bonjour as `_earshot._tcp`. Every `/api/v1` request
+except `hello` and `pair` needs the bearer token issued at pairing; unpair a
+device in Devices to revoke it. `/mcp` (off by default) uses its own token from
+Settings > Integrations instead. Requests with an `Origin` header that is not
+`localhost` are rejected with 403, so a web page from another site cannot call
+the server through your browser (DNS-rebinding protection).
 
 The watch's App Transport Security settings (in `project.yml`) set both
 `NSAllowsLocalNetworking` and `NSAllowsArbitraryLoads`. On current OS versions
@@ -351,6 +385,16 @@ unencrypted. Anyone on the same network who can capture traffic could read
 them or reuse the token. Use Earshot on networks you trust (home, not café
 Wi-Fi), or put the Mac behind a TLS tunnel and enter its `https://` URL on the
 watch.
+
+The same applies to the MCP server: it shares the port, so while it is on it
+is reachable from your network, not only from this Mac. A client on another
+machine sends the MCP token and receives your memory over plain HTTP. Rotate
+the token in Settings > Integrations to cut every client off at once.
+
+The Mac app's own ATS settings set only `NSAllowsLocalNetworking`, so the
+Whisper-compatible engine can use a self-hosted server by IP address or
+`.local` name over `http://` (for example `http://127.0.0.1:8080/v1`). Any
+other transcription endpoint must use `https://`.
 
 The Mac app is **not sandboxed**: it automates other apps (Apple Events,
 `shortcuts`, `osascript`, computer use) and runs a server. It is built with the
@@ -391,11 +435,19 @@ pause on the watch), don't wear it where recording is prohibited, and use
   - With the Claude backend, **text only** goes to the Anthropic API: transcript
     excerpts, your profile text, goals and related insights needed for each
     task. Audio is never sent to Claude.
+  - **Redaction** (on by default, Settings > Data > Privacy) replaces e-mail
+    addresses, phone, card, IBAN and account numbers, US Social Security
+    numbers and one-time codes with placeholders on the Mac before that text
+    is sent. Names and other details are still sent, and agent tasks are sent
+    as written because the agent needs real addresses to act.
   - If you enable **computer use**, the agent sends screenshots of your screen
     to Claude while it works. It is off by default.
   - The **Whisper-compatible** engine uploads audio to the endpoint you
     configure. Apple Speech runs on-device when the language supports it and may
     otherwise use Apple's servers. SpeechAnalyzer (macOS 26) is on-device.
+  - If you turn on the **MCP server**, the AI app you connect can read your
+    transcripts, open loops, goals and digests, and that app may send them to
+    its own provider. Across the LAN this traffic is plain HTTP.
 - **On-device option.** On macOS 26 with Apple Intelligence, choose Apple's
   on-device model so analysis never leaves the Mac. Combined with
   SpeechAnalyzer, nothing leaves the Mac at all.
@@ -404,6 +456,8 @@ pause on the watch), don't wear it where recording is prohibited, and use
   delete them.
 - **Forget and erase.** Forget a time range to delete those transcripts, or
   erase all data from Settings.
+- **Export.** Settings > Data > Export Everything writes your whole archive as
+  plain Markdown and JSON files to a folder you choose.
 - **Secrets.** API keys are stored in the Keychain. Each watch gets its own
   random token, revocable from Devices.
 
@@ -411,10 +465,12 @@ pause on the watch), don't wear it where recording is prohibited, and use
 
 ## Testing without a watch
 
-- **Desk mode.** Turn on the Mac microphone in Settings and start desk mode
-  recording: the Mac records AAC segments of the same length through the same
-  pipeline as the watch.
-- **Drag and drop.** Drop audio files onto Earshot to import them as segments.
+- **Desk mode.** Turn on **Use this Mac's microphone** in Devices (or use
+  Earshot > Toggle Mac Microphone, Shift-Cmd-M, or **Use Mac Microphone** in
+  the menu bar extra). Recording starts right away: the Mac records AAC
+  segments of the same length through the same pipeline as the watch.
+- **Drag and drop.** Drop audio files onto the Today view to import them as
+  segments.
 - **Smoke test the server.** With the Mac app running, take the pairing code
   from Devices and any `.m4a` recording (QuickTime Player or Voice Memos):
 
@@ -468,7 +524,8 @@ Set a development team instead of building unsigned.
   networks and "client isolation" block device-to-device traffic.
 - Allow incoming connections for Earshot in the macOS firewall.
 - Check the Mac answers locally: `curl http://127.0.0.1:8737/api/v1/hello`.
-- If another app uses port 8737, change the port in Settings and on the watch.
+- If another app uses port 8737, change the port in Settings > Recording >
+  Server, restart Earshot, and update the address on the watch.
 - Keep the Mac awake.
 
 **Pairing fails** - the code rotates every 10 minutes; use the one currently
@@ -481,7 +538,11 @@ shown. A watch that gets 401 errors after you unpaired it needs to pair again.
 - Check the transcription language in Settings (default `en-US`).
 - Very quiet segments are skipped as silent; set a lower (more negative)
   silence threshold if speech is being missed.
-- For the Whisper engine, check the base URL, model and API key.
+- For the Whisper engine, check the base URL, model and API key. An error
+  saying the App Transport Security policy requires a secure connection means
+  the endpoint uses `http://` with a host name that is not local; use
+  `https://` (plain HTTP works only for IP addresses, `.local` names and
+  single-label host names).
 
 **Claude errors** - check the API key and model names in Settings > AI. Rate
 limits, overloads and dropped connections are retried automatically with
@@ -512,10 +573,10 @@ Config/Signing.xcconfig     includes the git-ignored Config/Local.xcconfig
 Shared/EarshotProtocol.swift  wire protocol, compiled into both apps
 Mac/                        macOS app
   Core/                     app model, settings, data model, ingest pipeline, desk mode
-  Server/                   HTTP server, pairing, API router
-  Storage/                  SQLite database with FTS5
+  Server/                   HTTP server, pairing, API router, MCP memory server
+  Storage/                  SQLite database with FTS5, Export Everything
   Transcription/            SpeechAnalyzer, SFSpeechRecognizer, Whisper-compatible
-  AI/                       Claude client, LLM service, insights, questions, digests, memory chat
+  AI/                       Claude client, LLM service, redaction, insights, questions, digests, memory chat
   Agent/                    calendar, actions, approvals, computer control, agent loop
   Views/                    SwiftUI views
   Support/                  JSON tree, logging, dates, paths, network info
@@ -523,6 +584,7 @@ Watch/                      watchOS app (recorder, upload queue, prompts, settin
 MacTests/                   XCTest unit tests
 docs/CONTRACTS.md           module APIs shared by all of the above
 docs/FEATURES.md            feature research and roadmap
+docs/RESEARCH.md            market and platform research notes
 scripts/bootstrap.sh        set up and generate the project
 scripts/smoke-test-server.sh  exercise the Mac server with curl
 ```

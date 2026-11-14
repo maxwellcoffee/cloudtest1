@@ -26,6 +26,11 @@
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>LSUIElement</key>
 	<false/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 	<key>NSAppleEventsUsageDescription</key>
 	<string>Earshot automates apps such as Mail, Notes and Shortcuts to carry out actions you approve.</string>
 	<key>NSBonjourServices</key>
@@ -34,6 +39,8 @@
 	</array>
 	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>Earshot checks your calendar so it never interrupts a meeting, and adds events you mention once you approve them.</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>Earshot saves notes as Markdown files in your Documents folder (Documents/Earshot Notes unless you choose another folder).</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Earshot runs a small server on your local network so your Apple Watch can upload recordings and receive questions.</string>
 	<key>NSMicrophoneUsageDescription</key>

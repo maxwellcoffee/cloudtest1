@@ -9,6 +9,15 @@ final class DateParsingTests: XCTestCase {
     /// 2026-11-14T15:00:00Z
     private let utcThreePM: TimeInterval = 1_794_668_400
 
+    /// Gregorian calendar in the local time zone. DateParsing and Date.dayKey use
+    /// en_US_POSIX formatters (always Gregorian), so the expectations must too:
+    /// Calendar.current may be Buddhist or Japanese, where 2026 is another year.
+    private var gregorian: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone.current
+        return calendar
+    }
+
     private func assertLocal(_ raw: String,
                              year: Int, month: Int, day: Int,
                              hour: Int, minute: Int, second: Int = 0,
@@ -17,7 +26,7 @@ final class DateParsingTests: XCTestCase {
             XCTFail("Could not parse \"\(raw)\"", file: file, line: line)
             return
         }
-        let c = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        let c = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         XCTAssertEqual(c.year, year, "year of \(raw)", file: file, line: line)
         XCTAssertEqual(c.month, month, "month of \(raw)", file: file, line: line)
         XCTAssertEqual(c.day, day, "day of \(raw)", file: file, line: line)
@@ -91,7 +100,7 @@ final class DateParsingTests: XCTestCase {
     }
 
     func testDayKeyAndDayBounds() throws {
-        let date = try XCTUnwrap(Calendar.current.date(from: DateComponents(year: 2026, month: 11, day: 14, hour: 15, minute: 30)))
+        let date = try XCTUnwrap(gregorian.date(from: DateComponents(year: 2026, month: 11, day: 14, hour: 15, minute: 30)))
         XCTAssertEqual(date.dayKey, "2026-11-14")
         XCTAssertEqual(date.startOfDay.dayKey, "2026-11-14")
         XCTAssertEqual(date.endOfDay.dayKey, "2026-11-15")

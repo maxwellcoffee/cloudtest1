@@ -47,7 +47,9 @@ trap 'rm -rf "$WORK"' EXIT
 
 step() { printf '\n==> %s\n' "$*"; }
 
-# request METHOD PATH [curl args...]: prints the body, fails on HTTP >= 400.
+# request METHOD PATH [curl args...]: prints the body on stdout; on HTTP >= 400
+# prints the body (the server's explanation) on stderr and exits, so the reason
+# is visible even when the caller redirects stdout to a file.
 request() {
     local method="$1" path="$2"
     shift 2
@@ -56,12 +58,13 @@ request() {
         echo "error: could not reach $BASE$path (is the Earshot Mac app running?)" >&2
         exit 1
     }
-    cat "$out"
-    echo
     if (( status >= 400 )); then
+        { cat "$out"; echo; } >&2
         echo "error: HTTP $status from $method $path" >&2
         exit 1
     fi
+    cat "$out"
+    echo
 }
 
 # json_string KEY FILE: prints a top-level string value from a JSON file.

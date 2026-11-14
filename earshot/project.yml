@@ -26,6 +26,10 @@ options:
     watchOS: "10.0"
   createIntermediateGroups: true
   developmentLanguage: en
+  # LastUpgradeCheck / LastUpgradeVersion for the Xcode this project targets,
+  # so Xcode 26 does not offer "Update to recommended settings" after every
+  # generate (XcodeGen otherwise writes its own, older default).
+  xcodeVersion: "26.0"
 
 fileGroups:
   - README.md
@@ -73,8 +77,18 @@ targets:
         NSRemindersFullAccessUsageDescription: "Earshot turns tasks and commitments you mention into reminders once you approve them."
         NSAppleEventsUsageDescription: "Earshot automates apps such as Mail, Notes and Shortcuts to carry out actions you approve."
         NSLocalNetworkUsageDescription: "Earshot runs a small server on your local network so your Apple Watch can upload recordings and receive questions."
+        # Not sandboxed, so writing notes to the default ~/Documents/Earshot Notes
+        # triggers the Files and Folders prompt; this is its explanation.
+        NSDocumentsFolderUsageDescription: "Earshot saves notes as Markdown files in your Documents folder (Documents/Earshot Notes unless you choose another folder)."
         NSBonjourServices:
           - _earshot._tcp
+        # From macOS 14, App Transport Security blocks plain-HTTP connections to
+        # IP addresses unless this key is set. It lets the Whisper-compatible
+        # engine reach a self-hosted server such as http://127.0.0.1:8080/v1 or
+        # http://192.168.1.30:9000/v1 (IP addresses, .local names and
+        # single-label host names). Every other host still needs https://.
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
     entitlements:
       path: Mac/Earshot.entitlements
       properties:
@@ -162,6 +176,11 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: $(EARSHOT_BUNDLE_ID_PREFIX).watch
         PRODUCT_NAME: Earshot
         SDKROOT: watchos
+        # XcodeGen's watchOS preset sets SKIP_INSTALL = YES (meant for watch apps
+        # embedded in an iOS app). This standalone app has no container, so it
+        # must install itself, or Product > Archive yields an archive without
+        # Earshot.app.
+        SKIP_INSTALL: "NO"
         TARGETED_DEVICE_FAMILY: "4"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
