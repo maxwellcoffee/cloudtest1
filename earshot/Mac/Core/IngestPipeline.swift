@@ -28,6 +28,7 @@ final class IngestPipeline: @unchecked Sendable {
     private var currentID: String?
     private var workerRunning = false
     private var transcribedHandler: (@Sendable (_ segment: Segment, _ utterances: [Utterance]) -> Void)?
+    private var untranscribedHandler: (@Sendable (_ segment: Segment) -> Void)?
 
     /// Serialises "already stored?" checks with file writes so concurrent uploads of one id are safe.
     private let ingestLock = NSLock()
@@ -46,6 +47,20 @@ final class IngestPipeline: @unchecked Sendable {
         set {
             lock.lock()
             transcribedHandler = newValue
+            lock.unlock()
+        }
+    }
+
+    /// Called after a segment is stored as silent or marked failed instead of transcribed (any thread).
+    var onNotTranscribed: (@Sendable (_ segment: Segment) -> Void)? {
+        get {
+            lock.lock()
+            defer { lock.unlock() }
+            return untranscribedHandler
+        }
+        set {
+            lock.lock()
+            untranscribedHandler = newValue
             lock.unlock()
         }
     }
@@ -263,6 +278,7 @@ final class IngestPipeline: @unchecked Sendable {
 
         if silent {
             Log.debug("Ingest: segment \(meta.id) is silent (speech \(meta.speechRatio)); not transcribing")
+            onNotTranscribed?(segment)
             return SegmentAck(id: meta.id, accepted: true, message: "Stored (silent, not transcribed).")
         }
         enqueue([meta.id], priority: meta.reason == .voiceAnswer)
@@ -372,6 +388,7 @@ final class IngestPipeline: @unchecked Sendable {
             segment.error = nil
             db.upsertSegment(segment)
             EarshotEvents.post(.segments)
+            onNotTranscribed?(segment)
             return
         }
 
@@ -389,6 +406,7 @@ final class IngestPipeline: @unchecked Sendable {
             db.upsertSegment(segment)
             EarshotEvents.post(.segments)
             Log.error("Ingest: audio for segment \(id) is missing; cannot transcribe")
+            onNotTranscribed?(segment)
             return
         }
 
@@ -424,6 +442,7 @@ final class IngestPipeline: @unchecked Sendable {
             db.upsertSegment(segment)
             EarshotEvents.post(.segments)
             Log.error("Ingest: transcription of segment \(id) failed (\(transcriber.name)): \(error.localizedDescription)")
+            onNotTranscribed?(segment)
         }
     }
 

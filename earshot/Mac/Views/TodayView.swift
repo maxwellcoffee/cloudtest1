@@ -230,15 +230,18 @@ private enum TimelineItem: Identifiable {
 }
 
 private enum TimelineBuilder {
+    /// `keptID` (the utterance Today jumped to) stays in the timeline even when it doesn't contain
+    /// the whole query: "All days" results match single words.
     static func build(segments: [Segment], utterances: [Utterance], bookmarks: [StoredBookmark],
-                      query: String) -> [TimelineItem] {
+                      query: String, keptID: Int64? = nil) -> [TimelineItem] {
         let needle = query.trimmed
         let matching: [Utterance]
         if needle.isEmpty {
             matching = utterances
         } else {
             matching = utterances.filter { utterance in
-                utterance.text.localizedCaseInsensitiveContains(needle)
+                if let keptID, utterance.id == keptID { return true }
+                return utterance.text.localizedCaseInsensitiveContains(needle)
                     || (utterance.speaker?.localizedCaseInsensitiveContains(needle) ?? false)
             }
         }
@@ -323,7 +326,8 @@ private struct TranscriptPane: View {
 
     var body: some View {
         let items = TimelineBuilder.build(segments: model.segments, utterances: model.utterances,
-                                          bookmarks: model.bookmarks, query: query)
+                                          bookmarks: model.bookmarks, query: query,
+                                          keptID: model.highlightedUtteranceID)
         VStack(spacing: 0) {
             if !query.trimmed.isEmpty {
                 SearchScopeBar(matchCount: TimelineBuilder.utteranceCount(items), showArchive: $showArchive,

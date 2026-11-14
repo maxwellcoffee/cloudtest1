@@ -160,7 +160,7 @@ final class AppModel: ObservableObject, WatchBridge {
     private var timer: Timer?
     private var eventObserver: NSObjectProtocol?
     private var settingsObserver: AnyCancellable?
-    /// Re-publishes MacMicRecorder changes so views that read `model.micRecorder` refresh.
+    /// Re-publishes MacMicRecorder.isRecording changes so views that read `model.micRecorder.isRecording` refresh.
     private var micObserver: AnyCancellable?
     private var pendingScopes: Set<DataScope> = []
     private var reloadTask: Task<Void, Never>?
@@ -198,7 +198,7 @@ final class AppModel: ObservableObject, WatchBridge {
 
     /// A time range the user asked to forget. Kept for a while so that audio which was still on the
     /// watch, in the transcription queue or in the Mac's current segment at that moment is scrubbed
-    /// once it has been transcribed (see `scrubIfForgotten`).
+    /// once it has been transcribed, stored as silent or marked failed (see `scrubIfForgotten`).
     private struct ForgottenRange: Codable {
         var from: Date
         var to: Date
@@ -305,6 +305,12 @@ final class AppModel: ObservableObject, WatchBridge {
                 self?.handleTranscribed(segment, utterances)
             }
         }
+        // Silent or failed segments keep their audio for a while; a forget request covers them too.
+        pipeline.onNotTranscribed = { [weak self] segment in
+            Task { @MainActor in
+                self?.scrubIfForgotten(segment)
+            }
+        }
         let actionHandler: @Sendable ([ProposedAction]) -> Void = { [weak self] actions in
             Task { @MainActor in
                 self?.handleNewActions(actions)
@@ -339,8 +345,12 @@ final class AppModel: ObservableObject, WatchBridge {
                     self?.refreshAIStatus()
                 }
             }
-        micObserver = micRecorder.objectWillChange
-            .receive(on: RunLoop.main)
+        // Only `isRecording`: the meter level changes twice a second while recording, and views that
+        // need it observe the recorder themselves (MacMicCard, MenuMicButton).
+        micObserver = micRecorder.$isRecording
+            .removeDuplicates()
+            .dropFirst()
+            .receive(on: RunLoop.main)   // $isRecording emits in willSet; deliver after the change
             .sink { [weak self] _ in
                 self?.objectWillChange.send()
             }
@@ -1325,7 +1335,7 @@ final class AppModel: ObservableObject, WatchBridge {
     /// "Forget this": deletes the transcript and the recorded audio of a time range. Utterances that
     /// overlap the range are deleted whole, and so is the audio of every segment that overlaps it.
     /// Segments still waiting for transcription (or still on the watch) are scrubbed once they are
-    /// transcribed, so their speech outside the range is kept.
+    /// transcribed (or stored as silent, or fail), so their speech outside the range is kept.
     func forget(from: Date, to: Date) {
         guard to > from else { return }
         rememberForgottenRange(from: from, to: to)
@@ -1385,7 +1395,8 @@ final class AppModel: ObservableObject, WatchBridge {
         return removed
     }
 
-    /// Re-applies recent forget requests to a segment that was transcribed after them.
+    /// Re-applies recent forget requests to a segment that was transcribed, stored as silent or
+    /// marked failed after them.
     private func scrubIfForgotten(_ segment: Segment) {
         let ranges = loadForgottenRanges().filter { $0.from < segment.endedAt && $0.to > segment.startedAt }
         guard !ranges.isEmpty else { return }
