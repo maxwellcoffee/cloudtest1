@@ -1,0 +1,70 @@
+{
+ "source": "Earshot watch app on branch claude/beautiful-hypatia-m7ctpu (PR #3), commit e36b1b5, 14 Nov 2026: earshot/Watch/*.swift, README.md and docs/FEATURES.md",
+ "items": [
+  {
+   "minimal": "One-tap foreground start, preflight, consent reminder and start cue",
+   "status": "partly",
+   "earshot": "One tap starts all-day capture, but only from inside the app. There are no complications, Smart Stack widget or Control yet (README lists this as a gap). No preflight check for notification permission or a reachable companion, no per-session consent reminder, and no start chime in the watch code.",
+   "change": "Add a WidgetKit complication and a watchOS 26 Control that open the app to Start, a preflight row (mic, Time Sensitive notifications, Mac or iPhone reachable, storage, battery), and a 2-second consent card with a haptic cue."
+  },
+  {
+   "minimal": "Speech-gated capture into segments that survive a crash",
+   "status": "partly",
+   "earshot": "Writes 2-minute 16 kHz AAC segments and measures how much of each is speech; near-silent segments are skipped. Segments are .m4a files through AVAudioFile, and SegmentQueue discards an unreadable file after a crash (\"recording was cut off\"), so the open segment is lost. Silence is skipped per segment, not per utterance.",
+   "change": "Write ADTS (.aac) so a crash loses at most one frame, gate the encoder on speech with a pre-roll ring buffer, and set file protection on segment files."
+  },
+  {
+   "minimal": "Delivery ledger with receipts and visible states",
+   "status": "built",
+   "earshot": "Segments wait in an on-disk queue and are deleted only after the Mac acknowledges them; the watch shows the queued count and last sync. Uploads go straight to the Mac over a foreground URLSession.",
+   "change": "Keep the ledger. Test the direct-to-Mac path during long sessions: the research found a report of the network path dropping every 36-38 s during audio sessions (single source, check on device). WatchConnectivity to an iPhone relay is the fallback the research recommends."
+  },
+  {
+   "minimal": "Interruption handling, dead-man's switch and one-tap resume",
+   "status": "partly",
+   "earshot": "Calls and Siri close the segment with a reason and post \"Earshot isn't recording\" with a resume action; recording resumes when the app is opened. Nothing fires if the app is killed or crashes without seeing an interruption.",
+   "change": "Reschedule a 5-minute local notification at every segment rotation so a silent death still alerts the wearer, and pre-schedule a \"Check recording\" complication entry."
+  },
+  {
+   "minimal": "Timed Pause that asks before resuming, and Stop",
+   "status": "partly",
+   "earshot": "Privacy pause for 15 minutes, 1 hour or until resumed; it turns the mic off. When a timed pause ends, recording restarts by itself if the app is on screen, otherwise a notification asks the wearer to tap.",
+   "change": "Ask before resuming every time (no automatic restart), and turn an unanswered prompt into Stop after 10 minutes."
+  },
+  {
+   "minimal": "Discard the last 5 minutes, last 15 minutes or the whole session",
+   "status": "missing",
+   "earshot": "No discard control. Raw audio is deleted on the Mac after 7 days by default (0 deletes it after transcription), but a bystander's request can't be honoured on the spot.",
+   "change": "Add a two-tap Discard with a 5-second undo that deletes unsent audio on the watch and sends a tombstone the Mac applies before transcription."
+  },
+  {
+   "minimal": "Battery, storage and off-wrist guards",
+   "status": "partly",
+   "earshot": "Shows a battery forecast measured from real drain, stops at 10% battery, and keeps a 100 MB free-space reserve for the queue. Charging only pauses the forecast; recording continues on the charger.",
+   "change": "End the session when the watch starts charging (an off-wrist proxy), and consider stopping at 15% so the watch still works as a watch."
+  },
+  {
+   "minimal": "Status on the wrist: recording screen, complication and Smart Stack",
+   "status": "partly",
+   "earshot": "The Record and Today views show state, words and minutes recorded, queue and battery forecast. There is no complication or Smart Stack widget, so status needs the app open.",
+   "change": "Design the recording screen as a stand-in watch face (large time, small state), and add a complication with REC, Paused, Resume needed and Queued states."
+  },
+  {
+   "minimal": "Moment bookmark on Double Tap (cut first)",
+   "status": "built",
+   "earshot": "A Mark button and Double Tap bookmark the moment, and bookmarked moments are weighted in analysis.",
+   "change": "None needed."
+  },
+  {
+   "minimal": "Evening recap on the wrist (cut first)",
+   "status": "built",
+   "earshot": "A daily digest is generated on the Mac after 21:00 and a notice goes to the watch, plus a weekly review on Sundays.",
+   "change": "None needed for the minimal set. A Smart Stack card would show it without a notification."
+  }
+ ],
+ "beyond": [
+  "Earshot already goes well past the minimal set: Ask, Do and Note from the wrist, proactive questions, a Mac agent with computer use, goals and a memory MCP server. The recommendation puts wrist Ask and outbound actions in Later, and keeps nudges to at most 2 a day by default (Earshot allows 6).",
+  "Earshot processes everything on the Mac. The recommendation makes the iPhone the default processing node so the app works without a Mac, and keeps the Mac for heavier diarization, meeting capture and MCP later.",
+  "Earshot is built for personal installs from Xcode and its README expects App Review to reject it. The recommendation is written for an App Store build, which is why it insists on user-started sessions, visible cues and no keep-alive tricks."
+ ]
+}

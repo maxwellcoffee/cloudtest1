@@ -1,0 +1,558 @@
+{
+ "total": 272,
+ "byCategory": {
+  "AI wearable (pendant/pin/clip)": 18,
+  "Voice AI assistant": 27,
+  "AI voice recorder": 26,
+  "Lifelogging & context-memory platform": 8,
+  "Dictation & voice-to-prompt": 33,
+  "Ring / watch / earbuds": 25,
+  "Smart glasses": 34,
+  "Meeting & call notetaker": 44,
+  "Voice notes & journaling app": 24,
+  "Apple Watch app": 3,
+  "Ambient professional scribe": 30
+ },
+ "byStatus": {
+  "discontinued": 6,
+  "shipping": 227,
+  "announced-upcoming": 22,
+  "rumored": 8,
+  "beta/early-access": 9
+ },
+ "featurePrevalence": [
+  {
+   "feature": "cloud_transcription",
+   "count": 211
+  },
+  {
+   "feature": "tap_or_push_to_talk",
+   "count": 202
+  },
+  {
+   "feature": "auto_summaries",
+   "count": 165
+  },
+  {
+   "feature": "third_party_integrations",
+   "count": 162
+  },
+  {
+   "feature": "export_or_api",
+   "count": 137
+  },
+  {
+   "feature": "action_items_tasks",
+   "count": 135
+  },
+  {
+   "feature": "meeting_or_call_capture",
+   "count": 117
+  },
+  {
+   "feature": "agentic_actions",
+   "count": 116
+  },
+  {
+   "feature": "ask_ai_over_history",
+   "count": 112
+  },
+  {
+   "feature": "searchable_memory",
+   "count": 111
+  },
+  {
+   "feature": "custom_prompts_templates",
+   "count": 107
+  },
+  {
+   "feature": "offline_capture",
+   "count": 94
+  },
+  {
+   "feature": "speaker_diarization",
+   "count": 89
+  },
+  {
+   "feature": "camera_or_visual_context",
+   "count": 86
+  },
+  {
+   "feature": "haptic_or_glanceable_output",
+   "count": 84
+  },
+  {
+   "feature": "recording_consent_controls",
+   "count": 76
+  },
+  {
+   "feature": "proactive_suggestions_or_reminders",
+   "count": 75
+  },
+  {
+   "feature": "on_device_transcription",
+   "count": 68
+  },
+  {
+   "feature": "live_translation",
+   "count": 59
+  },
+  {
+   "feature": "local_only_or_e2e_privacy",
+   "count": 59
+  },
+  {
+   "feature": "sensor_or_location_context",
+   "count": 39
+  },
+  {
+   "feature": "always_on_capture",
+   "count": 29
+  },
+  {
+   "feature": "apple_watch_app",
+   "count": 28
+  }
+ ],
+ "featureByCategory": {
+  "AI wearable (pendant/pin/clip)": {
+   "n": 18,
+   "top": [
+    [
+     "action_items_tasks",
+     12
+    ],
+    [
+     "always_on_capture",
+     11
+    ],
+    [
+     "cloud_transcription",
+     11
+    ],
+    [
+     "auto_summaries",
+     11
+    ],
+    [
+     "searchable_memory",
+     11
+    ],
+    [
+     "ask_ai_over_history",
+     10
+    ],
+    [
+     "proactive_suggestions_or_reminders",
+     10
+    ],
+    [
+     "recording_consent_controls",
+     10
+    ]
+   ]
+  },
+  "AI voice recorder": {
+   "n": 26,
+   "top": [
+    [
+     "auto_summaries",
+     26
+    ],
+    [
+     "tap_or_push_to_talk",
+     25
+    ],
+    [
+     "cloud_transcription",
+     25
+    ],
+    [
+     "offline_capture",
+     24
+    ],
+    [
+     "speaker_diarization",
+     23
+    ],
+    [
+     "meeting_or_call_capture",
+     20
+    ],
+    [
+     "action_items_tasks",
+     18
+    ],
+    [
+     "searchable_memory",
+     16
+    ]
+   ]
+  },
+  "Smart glasses": {
+   "n": 34,
+   "top": [
+    [
+     "haptic_or_glanceable_output",
+     30
+    ],
+    [
+     "live_translation",
+     23
+    ],
+    [
+     "camera_or_visual_context",
+     23
+    ],
+    [
+     "third_party_integrations",
+     20
+    ],
+    [
+     "cloud_transcription",
+     19
+    ],
+    [
+     "sensor_or_location_context",
+     13
+    ],
+    [
+     "export_or_api",
+     13
+    ],
+    [
+     "tap_or_push_to_talk",
+     12
+    ]
+   ]
+  },
+  "Ring / watch / earbuds": {
+   "n": 25,
+   "top": [
+    [
+     "haptic_or_glanceable_output",
+     23
+    ],
+    [
+     "tap_or_push_to_talk",
+     22
+    ],
+    [
+     "cloud_transcription",
+     19
+    ],
+    [
+     "action_items_tasks",
+     16
+    ],
+    [
+     "third_party_integrations",
+     15
+    ],
+    [
+     "export_or_api",
+     15
+    ],
+    [
+     "agentic_actions",
+     14
+    ],
+    [
+     "auto_summaries",
+     13
+    ]
+   ]
+  },
+  "Meeting & call notetaker": {
+   "n": 44,
+   "top": [
+    [
+     "meeting_or_call_capture",
+     44
+    ],
+    [
+     "auto_summaries",
+     39
+    ],
+    [
+     "cloud_transcription",
+     38
+    ],
+    [
+     "export_or_api",
+     38
+    ],
+    [
+     "third_party_integrations",
+     35
+    ],
+    [
+     "action_items_tasks",
+     32
+    ],
+    [
+     "ask_ai_over_history",
+     32
+    ],
+    [
+     "searchable_memory",
+     30
+    ]
+   ]
+  },
+  "Voice notes & journaling app": {
+   "n": 24,
+   "top": [
+    [
+     "tap_or_push_to_talk",
+     24
+    ],
+    [
+     "auto_summaries",
+     18
+    ],
+    [
+     "searchable_memory",
+     16
+    ],
+    [
+     "export_or_api",
+     16
+    ],
+    [
+     "cloud_transcription",
+     14
+    ],
+    [
+     "ask_ai_over_history",
+     13
+    ],
+    [
+     "third_party_integrations",
+     13
+    ],
+    [
+     "action_items_tasks",
+     11
+    ]
+   ]
+  },
+  "Dictation & voice-to-prompt": {
+   "n": 33,
+   "top": [
+    [
+     "tap_or_push_to_talk",
+     32
+    ],
+    [
+     "cloud_transcription",
+     25
+    ],
+    [
+     "on_device_transcription",
+     23
+    ],
+    [
+     "offline_capture",
+     22
+    ],
+    [
+     "local_only_or_e2e_privacy",
+     22
+    ],
+    [
+     "custom_prompts_templates",
+     15
+    ],
+    [
+     "agentic_actions",
+     12
+    ],
+    [
+     "meeting_or_call_capture",
+     9
+    ]
+   ]
+  },
+  "Voice AI assistant": {
+   "n": 27,
+   "top": [
+    [
+     "cloud_transcription",
+     23
+    ],
+    [
+     "tap_or_push_to_talk",
+     20
+    ],
+    [
+     "agentic_actions",
+     20
+    ],
+    [
+     "third_party_integrations",
+     17
+    ],
+    [
+     "haptic_or_glanceable_output",
+     15
+    ],
+    [
+     "camera_or_visual_context",
+     14
+    ],
+    [
+     "searchable_memory",
+     9
+    ],
+    [
+     "sensor_or_location_context",
+     9
+    ]
+   ]
+  },
+  "Apple Watch app": {
+   "n": 3,
+   "top": [
+    [
+     "tap_or_push_to_talk",
+     3
+    ],
+    [
+     "apple_watch_app",
+     3
+    ],
+    [
+     "auto_summaries",
+     2
+    ],
+    [
+     "third_party_integrations",
+     2
+    ],
+    [
+     "sensor_or_location_context",
+     2
+    ],
+    [
+     "recording_consent_controls",
+     2
+    ],
+    [
+     "haptic_or_glanceable_output",
+     2
+    ],
+    [
+     "export_or_api",
+     2
+    ]
+   ]
+  },
+  "Ambient professional scribe": {
+   "n": 30,
+   "top": [
+    [
+     "cloud_transcription",
+     30
+    ],
+    [
+     "auto_summaries",
+     29
+    ],
+    [
+     "tap_or_push_to_talk",
+     26
+    ],
+    [
+     "third_party_integrations",
+     24
+    ],
+    [
+     "custom_prompts_templates",
+     19
+    ],
+    [
+     "agentic_actions",
+     17
+    ],
+    [
+     "action_items_tasks",
+     16
+    ],
+    [
+     "proactive_suggestions_or_reminders",
+     14
+    ]
+   ]
+  },
+  "Lifelogging & context-memory platform": {
+   "n": 8,
+   "top": [
+    [
+     "auto_summaries",
+     8
+    ],
+    [
+     "always_on_capture",
+     7
+    ],
+    [
+     "meeting_or_call_capture",
+     7
+    ],
+    [
+     "cloud_transcription",
+     6
+    ],
+    [
+     "speaker_diarization",
+     6
+    ],
+    [
+     "action_items_tasks",
+     6
+    ],
+    [
+     "searchable_memory",
+     6
+    ],
+    [
+     "ask_ai_over_history",
+     6
+    ]
+   ]
+  }
+ },
+ "upcoming": [
+  "Bee Eclipse (Bee (Amazon)) - Announced Oct 15, 2026 at $99.99. On Nov 16, 2026 bee.computer still says it \"will be available\" and gives no ship date. Amazon listings show \"Coming Soon\".",
+  "Taya Necklace (Taya) - Pre-orders first opened around Sep/Oct 2025 with an $89 deposit. The $5M seed round (TechCrunch) followed on Mar 11, 2026. Batch 1 is sold out and batch 2 is on pre-order at $450, rising to $650 after launch. The official FAQ says \"When does it ship? Fall 2026.\" No shipments were confirmed as of Nov 16, 2026.",
+  "Nirva (Nirva) - $25M pre-Series A ($33M total) announced Oct 22, 2026. Nirva said orders would open in November 2026 at $249, with shipping to early users targeted for end of 2026. As of Nov 16, 2026 the official site (nirva.life) only offers an email list \"for preorder information\".",
+  "Augmental VOX (Augmental) - Unveiled Jul 22-23, 2026 as an early beta at $200, refundable. The official page says Batch 1 is sold out (est. ship Q4 2026) and Batch 2 reservations are open (est. 2027). Ships to US addresses only. No confirmed deliveries as of mid-Nov 2026.",
+  "iKairos (Lingverse) - Debuted at IFA Berlin, early Sep 2026. Only a waitlist is open, with no price, pre-order or retail date. Earlier guidance said pre-orders would open in Q3 2026 and units would ship within 90 days of order. That window passed without pre-orders.",
+  "Muse Charm (Meta) - Shown at Meta Connect on Sep 23, 2026. Zuckerberg said on stage Meta is \"planning to have this ready to ship in time for the holidays in December\" 2026. There is no price, no pre-orders, and no firm date as of mid-Nov 2026. It requires a Muse account, and Muse is rolling out in the US only.",
+  "Meta AI Pendant (Meta Reality Labs) - From a leaked memo by Alex Himel (VP of Wearables), reported by The Information on May 29, 2026: internal dogfooding planned for spring 2027. No specs, price or public launch date.",
+  "Apple AI Pendant (Apple) - Gurman (Bloomberg) reported in May 2026 that it could launch as early as 2027. On Sep 22, 2026 Bloomberg reported the project \"postponed\", with no new date. It is not reported as cancelled.",
+  "OpenAI first device (formerly 'io') (OpenAI (with Jony Ive's io team)) - OpenAI's Feb 2026 court filing in the iyO trademark case says it won't ship before end of Feb 2027 and that the 'io' name is dropped. Bloomberg (Jul 2026) points to a 2027 launch. No official unveiling, date or price as of mid-Nov 2026.",
+  "Project Maxwell (AI pendant) (Motorola 312 Labs (Lenovo)) - Proof of concept shown at Lenovo Tech World at CES, Jan 6, 2026, with demos reportedly also at MWC 2026. No price, release date or commitment to ship as of mid-Nov 2026.",
+  "Luna (Moon pendant) + Samantha (Moonshot (67 Labs, Inc., YC)) - Kickstarter live Nov 10 to Dec 10, 2026. Kicktraq shows about $67.3K from 162 backers against a $10K goal, up from $52.5K on about Nov 13. Shipping estimated Feb 2027 by Gadget Flow (after FCC/Bluetooth certification planned for Jan 2027) or spring 2027 by the official site. The Samantha app is available now as a subscription ($25/mo founding rate, then $50/mo).",
+  "Button (Button Computer (YC W26)) - Pre-order on the official site: \"We'll start shipping to our first U.S. customers on December 15, 2026\". The FAQ says end of 2026. $179 (listed regular price $229) with 3 months of Button AI Pro included. iPhone at launch; Android later, no date.",
+  "Relay Q (Relay (Relay Voice Ltd)) - Shown as an early prototype at IFA Berlin in Sep 2026. Pre-orders are open now: a $150 Early Supporter Bundle that includes Relay Q, a dock, a MagSafe remote and 12 months of Relay Unlimited. relay.tech says it 'Ships in January 2027'. The Relay macOS app can be downloaded now, with a 14-day trial of Relay Unlimited at $15/mo that needs no Relay Q.",
+  "Flowtica Verso (Flowtica) - Unveiled at IFA in Sep 2026. A $10 reservation locks in the $199 price. Full availability is set for Nov 17, 2026, one day from now, at a $224.25 limited-time launch price ($299 regular). Amazon availability is expected in early 2027.",
+  "Meta 'super sensing' always-on AI glasses mode (Meta) - No launch date. The Information first reported 'super sensing' in 2025 as an optional feature set for Meta's 2026 glasses, codenamed Aperol and Bellini. The Financial Times reported a working prototype on Jul 9, 2026: continuous audio plus a photo every few seconds, with the recording LED possibly off. It was not announced at Connect, Sep 23-24, 2026, which launched Ray-Ban Meta Gen 3, Ray-Ban Meta Audio and other models. Some reports say it could arrive later by software update.",
+  "Google Intelligent Eyewear (Android XR glasses by Warby Parker and Gentle Monster) (Google / Samsung (with Warby Parker and Gentle Monster)) - Pre-orders opened Nov 12, 2026, online and in Warby Parker and Gentle Monster stores. They go on sale in stores and online on Dec 10, 2026. Warby Parker styles start at $395 (US). Gentle Monster styles cost $449 to $489 (US and South Korea). The glasses work only with US and South Korean Google accounts.",
+  "Android XR display glasses (Samsung / Google monocular and binocular) (Google / Samsung) - At I/O on May 19, 2026, Google said display versions are coming 'sometime in 2027' (as quoted by 9to5Google; Android Authority described it as strongly implied rather than stated outright). No date was given at the Nov 2026 launch of the display-free glasses. Samsung's first color-display model is reported for late 2027, per The Elec via 9to5Google (Sep 10, 2026) and Trusted Reviews.",
+  "Snap Specs (consumer) (Snap Inc. (Specs)) - Debuted Jun 16, 2026 (AWE) at $2,195. Pre-orders are open in the US, UK and France with a $200 refundable deposit, which Snap says is 'not an order confirmation'. At the Sep 16, 2026 LA event Snap announced Specs Intelligence, Specs for Enterprise and a Verizon connectivity add-on, and repeated 'later this fall'. The Q3 earnings call on Nov 4, 2026 still said shipping begins later this fall. As of mid-Nov 2026 there is no exact date.",
+  "Rokid Color (Rokid) - Unveiled Oct 27, 2026 at Rokid's 'Rokid Jungle' event alongside Rokid Glasses 2. China prices are CNY 4,999 (2GB/64GB) and CNY 5,499 (4GB/64GB). Deliveries are targeted for April 2027, which Rokid calls a target rather than a firm date. Global versions will be announced at CES 2027.",
+  "Pickle 1 (Pickle, Inc.) - Pre-orders opened Jan 1, 2026. Batch 1 ($799, $200 deposit) was targeted for US delivery in Q2 2026 and sold out. By Jan 5, 2026 the listing already offered Batch 2 at $899 for US delivery in Q4 2026, with international delivery one to two quarters later. I found no evidence of any Batch 1 deliveries or a public delay notice. As of mid-Nov 2026 the Q2 target appears missed and Q4 is unconfirmed.",
+  "Apple smart glasses (N50) (Apple) - Per Bloomberg/Gurman (Power On, Nov 15, 2026), the target is an unveil at WWDC in June 2027, with shipping to begin before the end of 2027. The hardware is largely settled, but software and AI are 'running late and could delay the planned 2027 launch'. Siri controls for the glasses began appearing in the iOS 27.3 beta.",
+  "Amazon 'Jayhawk' consumer AR glasses (Amazon) - The Information (via heise, Sep 10, 2025, citing two people familiar with the plans) reported a consumer launch at the end of 2026 or start of 2027, with a monocular full-color display (Meta-Bounds optics), camera, mics and speakers. Price unknown. As of mid-Nov 2026 Amazon has made no announcement, so the late-2026 half of the window has effectively passed and early 2027 is the earliest realistic date. Amazon confirmed the separate 'Amelia' delivery-driver glasses in Oct 2025.",
+  "Zoom My Notes standalone mobile app + Follow Meeting (Zoom Communications) - Announced at Zoomtopia on Oct 20, 2026. The standalone My Notes mobile app, Follow Meeting and Screen Capture in Transcript are each 'Expected December 2026' in Zoom's official post. Compliance Manager support in January 2027 is unverified.",
+  "Bota Leaf & Bean (Zoom My Notes hardware) (Bota) - Consumer devices are on pre-order or reservation with no ship date: a free waitlist, or $30 per subscription for the earliest batches ($25 through the Zoom partnership). Bota emails an estimated ship date and pricing as each batch approaches, before charging. Zoom lists the My Notes integration as expected Q1 2027, and Bota's Zoom page says 'coming soon'.",
+  "Echo Show 16 (Alexa+) (Amazon) - Announced Oct 28, 2026 at $499.99 (Nanomatte $569.99), with pre-orders open and $100 off for pre-orders. Amazon's official press only says it will 'begin shipping later this year'. 9to5Google lists Dec 16, 2026, but neither Amazon press page states that date.",
+  "Sesame eyewear (Sesame) - Announced Oct 5-6, 2026. 'Made in Japan' post: 'available in 2027', with no month. More on the frame collection 'in the coming months'.",
+  "AirPods with cameras (Apple) - Bloomberg's Mark Gurman expects late 2027, likely alongside the 20th-anniversary iPhone in September 2027. In June 2026 he reported a delay tied to Siri AI problems. MacRumors (Nov 15, 2026) says they are still expected in late 2027.",
+  "Muse personal agent on Meta AI glasses (Meta) - Announced at Connect on Sept 23, 2026 for 'the coming months', with no date and no glasses models named. Muse launched in early Sept 2026 on iOS, Android, Mac, web and WhatsApp. Voice mode and expressive avatars began rolling out in the Muse app on Nov 5, 2026, US first. Voice on AI glasses and Muse Charm is still 'coming soon' with no date.",
+  "Natura Interface ring (Natura Inc. (Rolling Square)) - Unveiled Oct 8, 2026 at $99 for early adopters, plus an optional $9/mo subscription after a free period. Kickstarter runs Nov 10 to Dec 20, 2026. TechCrunch says shipping is 'December or January'. GamesBeat says January 2027.",
+  "IYO ONE (IYO Inc. (iyO)) - Unveiled in mid-2024 with a target of shipping in winter 2024, which was missed. As of Nov 2026 the official store still takes preorders listed as 'Ships TBD', at $999 for Wi-Fi and $1,199 for Wi-Fi + LTE. No ship date has been announced."
+ ]
+}

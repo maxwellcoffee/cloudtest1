@@ -1,0 +1,1489 @@
+{
+ "proposals": [
+  {
+   "best_feature_set": [
+    {
+     "tier": "Core",
+     "feature": "One-gesture start from anywhere on the watch (and phone)",
+     "description": "One tap from a complication, a watchOS 26 Control (Control Center or Smart Stack), the Ultra Action Button, or Double Tap inside the app starts a capture session. The iPhone can start the same session. Watch recording works standalone and offline. Consent defaults are set once on first run, so the daily start is a single tap, not a wizard.",
+     "rationale": "One-tap start is the most-praised trait in the watch market scan (Whisper Memos, Just Press Record, Talk Memo), and tap_or_push_to_talk is the second most common feature in the catalog (202/272). watchOS only lets capture begin from a user action in the foreground, so the one thing left to optimise is how cheap that action is. That action is the habit trigger: put the watch on, tap 'Start my day'.",
+     "exemplars": [
+      "Whisper Memos",
+      "Just Press Record",
+      "Granola",
+      "Circleback",
+      "Plaud NotePin S",
+      "Pebble Index 01"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Zero-loss capture pipeline with visible sync states",
+     "description": "Audio goes into small local segments recorded in a journal. A segment is deleted from the watch only after the phone or cloud confirms receipt by hash. The user sees a status ladder (Recording, Queued, Synced, Transcribed, Summarized) with automatic retries instead of silent failure. On the next launch, crash recovery collects any orphaned segments.",
+     "rationale": "Recordings that are lost or never transferred are the top complaint across watch apps. Omi lost an 11 h watch session, Voice Memos truncated an hour-long recording to seconds, and Drafts sync broke after a watchOS update. In a capture product, reliability is the product: one silent loss wipes out the trust built by months of good summaries. Granola's explicit sync-with-retry states are the pattern to copy.",
+     "exemplars": [
+      "Granola",
+      "Bluedot",
+      "Fieldy 3 (formerly Compass)",
+      "HiDock P1",
+      "Omi (open-source platform & SDK) - anti-exemplar, 11 h watch loss"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Interruption-aware sessions with honest coverage",
+     "description": "When a call, Siri, an alarm or another audio app ends capture, the app closes the open segment with a reason, records a gap, and gives one haptic 'Tap to resume' nudge. Summaries and answers know about the gaps ('not recorded 10:42-10:55') and never imply the record is complete.",
+     "rationale": "An interrupted watch recording cannot be resumed from the background (Apple Frameworks Engineer, forum 750432). Granola cannot resume interrupted watch recordings, and Voicenotes users report it 'stopped recording mid-session'. Users forgive a gap they were told about; they do not forgive finding one later. Answers that know the coverage also can't confidently invent what happened during unrecorded periods.",
+     "exemplars": [
+      "Granola (syncs interrupted recordings in part)",
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind) - pauses during calls/FaceTime"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Verifiable record: full transcript, me-vs-others, cited summaries, short audio window",
+     "description": "Each conversation gets a full timestamped transcript that separates at least the wearer from everyone else. Every summary line and action item links to its transcript span. Audio stays playable for a short, user-set verification window (for example 7-30 days) and is then deleted automatically.",
+     "rationale": "Siri Recap deliberately ships summaries only: no transcript, no speakers, 7-day retention. That is the clearest opening for a third party. Bee deletes audio, so users cannot check summaries that hallucinate or that picked up the TV. The Earshot notes conclude that accuracy failures hurt trust more than missing features, and diarization is weak almost everywhere. Citations turn 'the AI said so' into 'here is where they said it'.",
+     "exemplars": [
+      "Plaud Note Pro",
+      "TwinMind",
+      "Legend One",
+      "Taya Necklace",
+      "AWS HealthScribe",
+      "Rev (AI Notetaker and Voice Recorder app)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Moment bookmarks",
+     "description": "One press while recording flags the last ~60 seconds. Flagged spans are pinned to the top of the day's output and weighted more heavily in summaries and action-item extraction.",
+     "rationale": "Ambient capture is mostly noise: a six-month Limitless user judged about 10% of 10 GB valuable. A bookmark is the cheapest possible signal of intent, it needs no transcription on the watch, and it is the most repeated hardware affordance in the category. It also gives the user an active part, an investment, in an otherwise passive product.",
+     "exemplars": [
+      "Plaud NotePin S",
+      "Soundcore Work (AI Note Taker)",
+      "Vocci AI Context Ring",
+      "Flowtica Scribe",
+      "TicNote Watch",
+      "BOYA Notra"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Commitments and action items sent to the user's own tools, with approval",
+     "description": "Extract to-dos, promises ('I'll send it Friday'), dates and follow-ups. One tap sends an item to Reminders, Calendar, Things, Todoist or Notion. In v1 nothing is created without the user's approval.",
+     "rationale": "Action items are what people act on and pay for (135/272 products), and automatic routing is one of the best-loved features in the watch scan. Building yet another task inbox competes with the user's own system; feeding that system creates daily value without asking for a new habit.",
+     "exemplars": [
+      "Pocket",
+      "Cleft Notes",
+      "Whisper Memos",
+      "Pebble Index 01",
+      "AI MindClip",
+      "Todoist Ramble",
+      "Plaud Note Pro"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Consent and bystander controls as first-class UX",
+     "description": "An audible and haptic start cue plus the system mic indicator. One-tap Pause (with a timer) and Stop. Consent reminders that depend on jurisdiction (all-party US states, the EEA, Germany). A wearer-only retention mode that is the default where the law is strict. Scheduled audio deletion. Explicit opt-in before any third-party AI processing.",
+     "rationale": "App Review requires it (guidelines 2.5.14 and 5.1.2(i)), and the legal climate is tightening: Brewer v. Otter.ai, Subia v. Meta, and EDPB Statement 01/2026, which says consent obtained after recording is invalid. Germany's §201 StGB carries criminal penalties. It is also a retention feature: the Limitless user stopped wearing it in social settings, and a Bee user's partner banned it at home. Apple has set the bar with a chime even on silent, opt-in and short retention.",
+     "exemplars": [
+      "Granola",
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind)",
+      "Flowtica Verso",
+      "Nirva",
+      "Taya Necklace",
+      "Fieldy 3 (formerly Compass)",
+      "viaim RecDot",
+      "Pixel Call Notes"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Search and Ask over history, with citations and 'not recorded' honesty (phone/web)",
+     "description": "Full-text and semantic search across transcripts, plus natural-language questions. Every answer cites transcript spans, and when the relevant period wasn't captured the answer says so instead of guessing.",
+     "rationale": "Being able to find things later is the payoff that justifies wearing a mic (ask_ai_over_history 112/272, searchable_memory 111/272). The long-term Limitless verdict was 'a fancy transcription service with a mediocre search', so answers have to be cited and aware of what wasn't recorded to earn repeat use.",
+     "exemplars": [
+      "Granola",
+      "Plaud Note",
+      "Voicenotes",
+      "TwinMind",
+      "Limitless Pendant",
+      "Rev (AI Notetaker and Voice Recorder app)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Honest battery and storage budget",
+     "description": "Drain is measured per watch model and profile and shown as projected hours. Recording stops automatically at a user-set battery floor (default 15%) or when storage runs low, and a lower-bitrate profile kicks in under Low Power Mode. Marketing promises 'your workday', not 24/7.",
+     "rationale": "Battery uncertainty is a top-10 complaint, and almost every figure in the category is a vendor claim. Series 11/12 is rated 24 h for everything, and the research estimates about 10-14 h of continuous recording on Series 11/12 and 8-11 h on SE 3 (low confidence). Watch apps outside the catalog (Tiro, Wave, Hedy) already auto-stop at battery thresholds. A watch that dies at 5 pm fails at being a watch and kills the habit.",
+     "exemplars": [
+      "TwinMind (16+ h capture claim)",
+      "Bee Frontier",
+      "Pebble Index 01 (states a fixed battery life plainly)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Open export and agent access",
+     "description": "Bulk export of transcripts (Markdown/JSON), summaries and audio (AAC) with a documented schema, plus a read-only MCP endpoint and API so Claude, ChatGPT or Cursor can query the user's memory with permission.",
+     "rationale": "Users' memories die with the company: Humane bricked its devices, and Limitless turned off capture and deleted regional data within two weeks of being acquired. Agent access is now table stakes (Granola, Omi, Pebble, Monologue, Screenpipe), and 'no bulk export' is a recorded Voicenotes complaint.",
+     "exemplars": [
+      "Omi (open-source platform & SDK)",
+      "Granola",
+      "Pebble Index 01",
+      "Monologue",
+      "Letterly",
+      "Anarlog (formerly Hyprnote)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Evening recap on the wrist: 'today in three lines'",
+     "description": "After processing, a Smart Stack widget or complication shows today's coverage (hours captured, gaps), the 1-3 commitments that matter, and one recalled detail. A tap opens a short list; full detail stays on the phone. The phone also gets a weekly version.",
+     "rationale": "This is the variable reward of the habit loop, and it fills the 'can't review on the wrist' gap: today's watch apps only capture. The best praise for Siri Recap was that it surfaced a detail the family had forgotten. Daily recaps are common on dedicated wearables but rare on the wrist.",
+     "exemplars": [
+      "Bee Frontier",
+      "AI MindClip",
+      "Legend One",
+      "TicNote Watch",
+      "TwinMind",
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Commitment tracking with rare, well-timed nudges",
+     "description": "Track promises by person and due date. Nudge only when a deadline is near or just before meeting that person, behind a value-of-information gate (default at most about 2 a day). Delivery is passive by default and the user can tune it.",
+     "rationale": "Remembering what you promised is a high-value job: it is the whole pitch of Luna/Samantha, and Halliday checks commitments in the lens. Unwanted proactivity is the fastest route to an uninstall, though: Friend's unprompted texts came across as intrusive, and Omi was called a 'micromanager' and removed its automatic reflections.",
+     "exemplars": [
+      "Luna (Moon pendant) + Samantha",
+      "Comulytic Note Pro",
+      "Halliday G2",
+      "Heidi Health (Heidi II)",
+      "Friend 2.0 (anti-exemplar)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Briefs before you meet someone",
+     "description": "Before a calendar event, or on request, show the open items, promises and last decisions from earlier conversations with the same people.",
+     "rationale": "This turns past capture into future value and is the strongest repeat-use loop in meeting tools. It also justifies keeping transcripts beyond Apple's 7 days.",
+     "exemplars": [
+      "Granola",
+      "Comulytic Note Pro",
+      "Otter.ai",
+      "Flowtica Verso",
+      "Even Realities G2 (with R1 ring)",
+      "Zocks"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Context-triggered start prompts and pause zones",
+     "description": "The app can't start itself, so the phone uses calendar events and places to send a timely 'Tap to start', or 'You're home - pause?'. RelevanceKit brings the right widget forward in the Smart Stack. Users can define places such as home, the therapist's office or the gym where the app suggests pausing.",
+     "rationale": "Users will expect Siri Recap's scheduling by time or place. Because the platform forbids starting capture in the background, a prompt is the honest equivalent. Pause zones protect social acceptability, which is the first thing to erode.",
+     "exemplars": [
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind)",
+      "Vibe Dot",
+      "Granola",
+      "Screenpipe"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Coverage Apple leaves out: older watches, more languages, longer retention",
+     "description": "Support every watch that runs watchOS 27 (Series 9+, Ultra 2+, SE 3), with a watchOS 26 fallback. Transcribe in more than English, and let the user choose retention.",
+     "rationale": "Siri Recap needs a Series 12 or Ultra 4 plus an iPhone 16 or later, works in English only, is not in the EU, and keeps results for 7 days. That leaves out most of the installed base and most of the world. The EU gap comes with EDPB risk.",
+     "exemplars": [
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind) - benchmark/gap",
+      "TwinMind",
+      "Plaud Note",
+      "Fieldy 3 (formerly Compass)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Media and noise filtering; conversation boundary detection",
+     "description": "Drop TV, podcasts and music; split the day into separate conversations so recaps read as events, not a stream.",
+     "rationale": "The Verge found that Bee treated TV and songs as conversation and leaked muted periods into summaries. Summarising the television is a trust killer.",
+     "exemplars": [
+      "Bee Frontier (anti-exemplar)",
+      "ScribbleVet",
+      "BOYA Notra"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Ask from the wrist",
+     "description": "Raise, tap and ask 'what did Dana say about the launch date?'. The watch shows a one- or two-sentence answer with a citation chip and a haptic, and deep-links to the phone.",
+     "rationale": "Searching or asking your memories from the watch is a named unmet need. Petey's 3.8 rating shows open-ended chat on the wrist is hard, so keep it scoped to the user's own memory and short. Ship it only after capture is reliable.",
+     "exemplars": [
+      "Petey - AI Chat for Watch (formerly WatchGPT)",
+      "Stream Ring",
+      "Button",
+      "Natura Interface ring",
+      "Siri AI (Apple Intelligence, Gemini-based)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Unmetered capture and transcription; pay for synthesis (plus a local-only mode)",
+     "description": "The free tier never meters capture or on-device transcripts. The paid tier, priced against a $69.99-$99/yr anchor, buys cloud synthesis, commitments, briefs, long retention and multi-device sync. An optional local-only, no-account mode is available.",
+     "rationale": "Subscription fatigue is real (Bee Pro $11.99/mo, Omi Pro $29.99/mo), and minute caps (Plaud's 300 free min/mo) punish always-on use. On-iPhone SpeechAnalyzer makes transcription close to free at the margin. Pocket, Comulytic and HiDock already market unlimited free transcription, Pebble markets 'no subscription', and Just Press Record at $6.99 one-time is still loved.",
+     "exemplars": [
+      "Pocket",
+      "Comulytic Note Pro",
+      "HiDock P1",
+      "Pebble Index 01",
+      "Just Press Record",
+      "Omi (open-source platform & SDK)"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Agentic follow-ups with approval (emails, recap messages, CRM fields, documents)",
+     "description": "Draft and, after approval, send follow-ups or update systems from a conversation.",
+     "rationale": "High value for professionals, but the potential damage from a wrong action is large and trust has to be earned first. Plaud, TicNote and Comu already fight over this ground.",
+     "exemplars": [
+      "Plaud Note Pro",
+      "Vocci AI Context Ring",
+      "Fieldy 3 (formerly Compass)",
+      "Circleback",
+      "Comu Action Pro",
+      "Read AI (Ada)"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Desktop and online-meeting capture into the same memory",
+     "description": "Botless Mac/PC capture of Zoom, Meet and Teams calls, merged into the same timeline.",
+     "rationale": "This is a different job in a crowded field (44 meeting notetakers in the catalog). Import from or integrate with those tools before building it.",
+     "exemplars": [
+      "Granola",
+      "Plaud NotePin S",
+      "Anarlog (formerly Hyprnote)",
+      "Bluedot",
+      "Screenpipe"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Phone-call capture",
+     "description": "Bring the user's phone calls into the timeline.",
+     "rationale": "iOS already records calls natively and notifies all participants, and the consent rules are complex. Importing from iOS call recordings is the cheaper route.",
+     "exemplars": [
+      "Bee Eclipse",
+      "Pocket",
+      "Plaud Note Pro",
+      "Apple Voice Memos & Notes audio transcription (Apple Intelligence)",
+      "Truecaller AI Call Recording"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Health, place and calendar context on the timeline",
+     "description": "Tag conversations with place, calendar event, and optionally sleep, heart rate and stress.",
+     "rationale": "Useful enrichment that improves recall and briefs, but not the core job.",
+     "exemplars": [
+      "TicNote Watch",
+      "Day One",
+      "Bee Frontier",
+      "Whisper Memos"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Context templates and custom summary styles",
+     "description": "Different output shapes for 1:1s, lectures, client visits and journaling.",
+     "rationale": "Power users love it (Plaud's 10,000+ templates, AudioPen styles), but it adds configuration cost before the core loop is proven.",
+     "exemplars": [
+      "Plaud Note",
+      "AudioPen",
+      "Letterly",
+      "Cleft Notes",
+      "Granola"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Live captions and translation",
+     "description": "Real-time captions or translation relayed to the wrist or earbuds.",
+     "rationale": "Real accessibility value, but the watch has no speech recognition, and a phone round trip costs latency and battery.",
+     "exemplars": [
+      "Live Transcribe & Sound Notifications",
+      "AirCaps (formerly TranscribeGlass)",
+      "TicNote Watch",
+      "Viaim OpenNote"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "People and project pages; shared team memory",
+     "description": "Auto-built pages per person and project, and optional shared team memory.",
+     "rationale": "Strong when there is a lot of history, but it needs months of data and adds multi-party consent problems.",
+     "exemplars": [
+      "TwinMind",
+      "Vibe Dot",
+      "Grain"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Optional companion mic hardware",
+     "description": "Pair a clip or ring mic for better pickup and battery.",
+     "rationale": "Dedicated multi-mic devices probably out-hear a wrist mic. A partnership is cheaper than building hardware.",
+     "exemplars": [
+      "Bee Frontier",
+      "Pebble Index 01",
+      "Plaud NotePin S"
+     ]
+    }
+   ],
+   "minimal_watch_set": [
+    {
+     "feature": "One-tap 'Start my day' with consent cue",
+     "description": "Start a capture session from a complication, a Control (Control Center or Smart Stack), the Ultra Action Button, or Double Tap on the app's start screen. Starting plays a short chime and a haptic and shows an unmistakable Recording state. Consent and jurisdiction defaults are set once on first run.",
+     "why_essential": "An app that must be started by hand every day only becomes a habit if the trigger is nearly effortless, and one-tap start is the most-praised trait of watch recorders. Capture can only begin from a user action in the foreground, so this is the only way into 'always running'. The cue meets guideline 2.5.14 and sets bystanders' expectations.",
+     "watchos_implementation": "A WidgetKit accessory complication and a watchOS 26 Control whose intent opens the app. Controls run in the widget extension and capture must start in the foreground, so they launch the app rather than record. Assign the Control to the Ultra Action Button. The Start button uses .handGestureShortcut(.primaryAction) for Double Tap (S9 and later, including SE 3; not in Low Power Mode or wrist-down). Enable the audio background mode. On Start, call AVAudioSession setCategory(.record) and setActive(true) once per session, then play a chime and a WKInterfaceDevice haptic; the system shows the orange mic indicator. Do not use the Digital Crown double-press, which belongs to Live Rewind on Series 12 and Ultra 4."
+    },
+    {
+     "feature": "Durable, VAD-gated background capture in a crash-safe segment journal",
+     "description": "Once started, the mic stays open in the background with the wrist down. Only speech is encoded, written in 2-minute segments that are each closed, hashed and journaled, so a crash or reboot loses at most the open segment.",
+     "why_essential": "This is the always-running core. Dropping silence keeps storage, uploads and phone processing proportional to speech, and the journal turns 'it was recording' into 'it was saved'.",
+     "watchos_implementation": "An AVAudioEngine inputNode tap feeds a ~2 s ring buffer. A cheap RMS energy gate wakes SoundAnalysis (SNAudioStreamAnalyzer with the built-in classifier via SNClassifySoundRequest) to check for the speech class. Encode speech, plus ~2 s pre-roll and ~1.5 s hangover, through AVAudioConverter/AVAudioFile to AAC mono 16 kHz at 32 kbps, about 0.5 MB per 2-minute segment. Write a JSON sidecar per segment (session id, sequence, wall-clock start/end, SHA-256, markers, close reason), flush it on close, and recover orphaned segments at launch. Never stop or re-activate the engine during silence, because it cannot be restarted from the background; gating happens only at the encoder."
+    },
+    {
+     "feature": "Delivery ledger with receipts and one-line status",
+     "description": "Segments move to the iPhone automatically and are deleted from the watch only after the phone confirms receipt. The complication shows one honest line: recording time, number queued, last sync.",
+     "why_essential": "Lost or never-transferred recordings are the top complaint (Omi's 11 h loss, Voice Memos truncation). Visible sync states are why people trust Granola's watch app.",
+     "watchos_implementation": "Call WCSession.transferFile(_:metadata:) for each closed segment, with sequence number and hash in the metadata. The iPhone's session(_:didReceive:) verifies the hash and acks with transferUserInfo; sendMessage fails when the iPhone app is in the background. Delete a segment only after its ack, watch outstandingFileTransfers, and re-queue transfers that go stale. If the phone is unreachable, upload directly over Wi-Fi or cellular with a standard URLSession while the audio session gives the app runtime (DTS, forum 843751), and use a background URLSession only after the session ends. Test on a device, because transferFile doesn't work in the Simulator."
+    },
+    {
+     "feature": "Interruption detection, one-tap resume, recorded gaps",
+     "description": "When a call, Siri, an alarm or another audio app takes the mic, the app closes the segment, logs a gap with its reason, taps the wrist once with 'Tap to resume', and shows Paused on the complication until the user resumes.",
+     "why_essential": "Capture can't be resumed from the background, so without this an 'always-running' app quietly stops at the first phone call; interruptions are the second most common complaint. Gap markers keep summaries honest about what wasn't heard.",
+     "watchos_implementation": "Observe AVAudioSession interruption, route-change and media-services-reset notifications. On an interruption beginning, close the segment and write a GAP record. Post a local notification with interruptionLevel .timeSensitive and a foreground 'Resume' action, and reload the complication timeline to Paused. The app opens to a full-screen Resume button with .handGestureShortcut(.primaryAction), which re-activates the session as a user-initiated foreground event. Send at most one follow-up reminder after about 10 minutes. Never try to restart in the background when the interruption ends."
+    },
+    {
+     "feature": "Pause and Stop (bystander mode)",
+     "description": "Pause (15 min, 1 h, or until resumed) discards audio in memory and saves nothing. Stop turns the mic off. Both are one tap from the recording screen, and a timed Pause resumes without the user returning to the app.",
+     "why_essential": "Social acceptability is what kills always-on wearables: the Limitless user stopped wearing it socially, and Bee was banned at home. Users must be able to honour 'please don't record' instantly, and all-party consent law and the EDPB make it a compliance need.",
+     "watchos_implementation": "Soft pause keeps AVAudioEngine and the session running (they can't be restarted from the background), drops frames before the encoder, writes PAUSE start/end markers, and shows 'Paused - not saving'. The orange mic indicator stays on, and the screen says so. A timed pause resumes writing in the background because the session never ended. Stop calls setActive(false), and restarting needs a foreground tap. On the paused screen, Resume is the primary action; a Control can open the app straight to this screen."
+    },
+    {
+     "feature": "Battery and storage guardrails with projected hours",
+     "description": "The app measures this watch's actual drain during the session, shows 'about X h left at this rate', drops the bitrate in Low Power Mode, and stops cleanly at a battery floor (default 15%) or when storage runs low, with a final haptic.",
+     "why_essential": "A dead watch fails at its main job and ends the habit. Battery uncertainty is a top-10 complaint and every public figure is a vendor claim. A clean auto-stop also prevents corrupt segments.",
+     "watchos_implementation": "Turn on WatchKit battery monitoring and read the battery level at each segment close to compute %/h. Check free space before each segment and stop below 100 MB. Watch the Low Power Mode state and switch to 24 kbps when it is on. At a threshold, close the segment, call setActive(false), and send a haptic and a notification. Keep the recording screen static, with no timers or waveform animation, while the wrist is down. Whether recording keeps running under Low Power Mode is untested; check it on a device."
+    },
+    {
+     "feature": "Moment bookmark (Double Tap: 'flag that')",
+     "description": "While recording, Double Tap or a tap on the main button flags the last ~60 seconds. The phone pins that span and its transcript to the top of the day and weights it in summaries and action items.",
+     "why_essential": "It turns an ambient firehose into intent at almost no cost, needs no transcription on the watch, and covers the 'remember this' and 'what did they just say' jobs on watches without Live Rewind. It is a proven hardware affordance (Plaud NotePin S, Soundcore Work, Vocci, Flowtica).",
+     "watchos_implementation": "On the recording screen the main button carries .handGestureShortcut(.primaryAction). watchOS brings the app back on wrist raise during a background session, so flagging takes one raise and a pinch. Write {timestamp, lookback 60 s} into the open segment's sidecar and play a click haptic. The ring buffer and segments already written hold the audio, so nothing extra is recorded. Avoid the Crown double-press."
+    },
+    {
+     "feature": "Glanceable payoff: today's coverage and top 1-3 items",
+     "description": "A Smart Stack widget or complication shows today's captured hours and gaps. Once the phone has processed the day, it adds the 1-3 commitments or decisions worth acting on. A tap shows a short read-only list; everything else stays on the phone.",
+     "why_essential": "Capture without a visible reward loses users. This closes the habit loop on the device where the habit lives, fills the 'capture-only, can't review on the wrist' gap, and answers 'did it work?' without opening the phone.",
+     "watchos_implementation": "The iPhone pushes a compact payload (coverage, gap count, up to 3 items with due dates and span IDs) through updateApplicationContext for latest-state data, or transferUserInfo. The watch saves it to an App Group store and reloads the WidgetKit timelines. RelevanceKit raises the 'Start my day' widget in the morning and the recap in the evening. The watch has no chat, no transcripts and no editing; 'Send to Reminders' runs on the phone."
+    }
+   ],
+   "explicitly_cut": [
+    {
+     "feature": "Transcription on the watch / live transcript on the wrist",
+     "reason": "watchOS has no SFSpeechRecognizer or SpeechAnalyzer. System dictation returns final text only and stops silently after ~30-45 s. Streaming text back from the phone costs battery and needs networking the watch restricts. Transcripts belong on the phone."
+    },
+    {
+     "feature": "A Live Rewind clone on the Digital Crown",
+     "reason": "On Series 12 and Ultra 4 the Crown double-press belongs to Apple's free Live Rewind. A rewind needs low-latency speech recognition the watch lacks. The Double Tap bookmark covers the 'flag what was just said' job."
+    },
+    {
+     "feature": "Hands-free start, wake word, scheduled auto-start, auto-resume after interruptions",
+     "reason": "Not possible: capture must be started by the user in the foreground and cannot be resumed from the background (forum 750432). A one-tap resume nudge replaces it now, and phone-side context prompts can come later."
+    },
+    {
+     "feature": "Keep-alives using HKWorkoutSession or WKExtendedRuntimeSession",
+     "reason": "Both break App Review rules: guideline 2.5.4 (2.5.1 per the Earshot notes) bars using background services outside their purpose, and developers have been rejected repeatedly. Extended runtime sessions are capped at 10 min to 1 h, and a workout session pollutes the Activity rings and drains power."
+    },
+    {
+     "feature": "Real-time streaming to the phone or cloud (WebSocket / Network framework)",
+     "reason": "TN3135 restricts low-level networking on watchOS. A developer measured the network path being revoked every ~36-38 s during an audio session (FB24377808), and streaming costs battery. Minutes of latency is fine for the jobs this app serves."
+    },
+    {
+     "feature": "AI chat / Ask on the watch in v1",
+     "reason": "The watch has no on-device LLM. PrivateCloudComputeLanguageModel needs a managed entitlement and has daily quotas. Petey's 3.8 rating shows chat on the wrist is hard to get right. It comes after reliability is proven."
+    },
+    {
+     "feature": "Summaries, transcript browsing or action-item editing on the watch",
+     "reason": "The screen is too small and editing costs battery. The phone owns review; the watch shows at most 1-3 read-only items."
+    },
+    {
+     "feature": "Proactive nudges beyond the resume prompt and the optional evening glance",
+     "reason": "Friend's unprompted texts read as intrusive and Omi drew 'micromanager' criticism. Notification fatigue erodes the habit and uses battery. Nudges belong behind a gate on the phone."
+    },
+    {
+     "feature": "Identifying bystanders by name / voiceprints of others",
+     "reason": "Bystander voiceprints may be GDPR Art. 9 biometric data, and voiceprints raise consent problems. The minimal system separates only the wearer from everyone else, on the phone."
+    },
+    {
+     "feature": "Integrations, templates and agent setup on the watch",
+     "reason": "These are phone and web jobs. Keeping the watch binary small and single-purpose makes it more reliable."
+    },
+    {
+     "feature": "Keeping full raw audio forever by default",
+     "reason": "It adds storage cost and legal exposure: all-party consent states, and the EDPB's recommendation that persistent storage be off by default. A short verification window with transcripts kept longer gives most of the trust benefit."
+    },
+    {
+     "feature": "Recording in Opus or LPCM",
+     "reason": "Opus encoding on the watch is unverified, and LPCM is ~115 MB/h. AAC mono at 24-32 kbps is ~10.8-14.4 MB/h and works on the watch."
+    },
+    {
+     "feature": "Relying on AudioRecordingIntent / Live Activity for the recording indicator",
+     "reason": "Its behaviour on watchOS is unclear: the docs require a Live Activity, but Activity.request lists only iOS and macOS. The system's orange mic indicator plus a clear in-app state are enough. Test it later."
+    },
+    {
+     "feature": "Wrist-flick or pinch triggers, health/location fusion, translation",
+     "reason": "Wrist flick and the watchOS 27 single pinch have no developer API. Health and location context and translation are enrichments, not the core value."
+    },
+    {
+     "feature": "Live waveform or animated always-on display during capture",
+     "reason": "It uses battery for no informational value while the wrist is down. A static Recording/Paused state communicates what matters."
+    }
+   ],
+   "architecture_notes": "JOBS, IN PRIORITY ORDER: (1) Never lose what was said in conversations that matter: in-person work talk, 1:1s, hallway decisions. (2) Surface the few commitments and decisions worth acting on. (3) Let the user find and check a detail later. Quick voice notes use the same session: bookmark, then speak. The watch is a thin, honest recorder; the iPhone does the thinking; the cloud is optional and needs consent.\n\nCAPTURE (watch):\n- The session is user-started in the foreground, from a complication, Control, Action Button or Double Tap. Activate AVAudioSession(.record) once per session and never re-activate it from the background. Re-activation fails in the background (forum 750432), and repeated activation is linked to the ~36-38 s network-path revocation (forum 841590).\n- An AVAudioEngine input tap feeds a ~2 s ring buffer. An RMS energy gate wakes the SoundAnalysis built-in classifier's speech check, and only speech (with pre-roll and hangover) is encoded. The mic and engine keep running through silence and soft Pause; gating happens only at the encoder.\n- Encoding is AAC mono 16 kHz at 32 kbps (24 kbps in Low Power Mode), in 2-minute segments with JSON sidecars: sequence, wall-clock times, SHA-256, bookmark, pause and gap markers, and close reason. Segments are journaled and recovered at launch.\n- On an interruption: close the segment with its reason, write a GAP, send a time-sensitive notification with a haptic ('Tap to resume'), and switch the complication to Paused. Resuming needs a foreground tap.\n- No workout or extended-runtime keep-alives.\n- Target watchOS 27 (Series 9+, Ultra 2+, SE 3) with a watchOS 26 fallback. Leave the Crown double-press alone on Series 12 and Ultra 4.\n\nSYNC:\n- Primary path: WCSession.transferFile per segment, with hash metadata. The iPhone verifies the hash and acks with transferUserInfo, because sendMessage fails when the iPhone app is in the background. The watch deletes a segment only after its ack, and stale entries in outstandingFileTransfers are retried.\n- When the phone is unreachable: upload directly over Wi-Fi or cellular to the user's CloudKit private database or an HTTPS endpoint. Use a standard URLSession while the audio session gives the app runtime, and a background URLSession only after the session ends.\n- Source conflict: the Earshot notes say to always use background transfers (about 4 refreshes an hour with a complication on the face). The tech brief cites DTS (forum 843751) saying background uploads may wait for Wi-Fi and suggesting a standard session during runtime the app already has. I used the more specific DTS guidance for uploads during a session and the Earshot approach afterwards.\n- Segment length: the brief says 1-5 min and Earshot says 2 min. I chose 2 min. At about 0.5 MB a segment is far below the reported sub-30 MB transferFile failure, and a lost segment costs little.\n- Results flow back to the watch through updateApplicationContext or transferUserInfo into an App Group store that the complications and Smart Stack read. Expect minutes of latency. No WebSocket or live streaming (TN3135).\n\nTRANSCRIPTION AND AI:\n- Watch: voice-activity detection only. There is no Speech framework and no on-device LLM on the watch.\n- iPhone (a required companion):\n  - Transcription: SpeechAnalyzer/SpeechTranscriber (iOS 26+) gives free, private, timestamped long-form transcripts. SpeechTranscriber has no custom vocabulary (per Argmax) and covers a limited set of languages; WhisperKit is the fallback for both, but check that it runs on iOS.\n  - Speakers: start with wearer-versus-others from a short voice enrollment. Full diarization (pyannote community-1 via SpeakerKit/FluidAudio) is verified only on the Mac, so test it on iPhone or run it in the cloud tier.\n  - Media filtering: SoundAnalysis classes, plus ShazamKit per the Earshot notes.\n  - Free-tier summaries: Apple Foundation Models on the iPhone with @Generable schemas, sized to the 4,096-token session context. Summarise per conversation, then roll up into a daily summary.\n- Paid cloud tier: runs only after explicit consent to third-party AI (guideline 5.1.2(i)), and everything passes through one redaction gate that logs every payload.\n  - Models: claude-haiku-5-5 for per-conversation extraction, claude-opus-5-5 for nightly synthesis. Run nightly and weekly work on Message Batches at 50% cost.\n  - Follow the API rules recorded in the Earshot notes: no temperature or top_p, control depth with effort, use structured outputs, and check for refusals.\n  - Keys never ship in clients: use your own proxy or the beta ClaudeForFoundationModels package with .appAttest.\n- Don't build core features on Private Cloud Compute (PCC): it needs a managed entitlement and has daily quotas.\n- Every derived item carries source span IDs, and a capture-coverage table lets answers say 'not recorded'.\n- Heavy processing runs while the phone charges overnight and right away when the app opens. The research doesn't verify iOS background limits for long transcription, so show processing status honestly.\n\nDATA:\n- The watch holds only segments the phone hasn't acknowledged.\n- The phone vault holds transcripts (kept until the user deletes them), derived items with spans, and audio for a short verification window: 7 days by default, user-adjustable. 'Summary only' and 'wearer only' modes cover strict jurisdictions.\n- Data is encrypted at rest. Multi-device sync uses the CloudKit private database, so the vendor holds no copy by default.\n- The export schema is documented.\n\nBATTERY BUDGET:\n- Rated battery life: Series 11/12 24 h, SE 3 18 h, Ultra 3 42 h, Ultra 4 50 h.\n- Research estimate (low confidence) for continuous recording down to a 10-15% floor: Series 11/12 about 10-14 h, SE 3 about 8-11 h, Ultra 3 about 18-24 h. Vendor claims range from 3%/h with the screen off to 15-20%/h.\n- Target: total drain at or below ~6%/h while recording on Series 11/12, so a 07:00-19:00 workday ends at 20-25% or more. Ultra models should cover a 16 h waking day, and SE 3 gets a 'workday' profile.\n- Where the power goes: the mic and AAC encoder run continuously. SoundAnalysis runs only when the energy gate trips. The radio wakes in short batches (transferFile is throttled by the OS anyway). No UI work wrist-down, no PCC calls, no streaming.\n- Storage: about 10.8-14.4 MB per hour of speech. A fully ungated 16 h day is about 175-230 MB, and acked segments are deleted.\n- Guards: stop at 15% battery or under 100 MB free, and lower the bitrate in Low Power Mode. Whether recording survives Low Power Mode is untested.\n- Instrument drain per model from the first prototype, show projected hours, and publish no battery claims until they are measured.\n\nOTHER CONFLICTS RESOLVED:\n- App Review: the brief says Apple never answered whether long recording is accepted. The Earshot notes cite an actual rejection in which reviewers said the audio background mode is for playback (forum 776949). I weighted the specific rejection and treat it as the top risk.\n- Granola: the Earshot notes and the brief say it keeps recording wrist-down, while heise says it must stay in the foreground and stops if you check a text or set a timer. My reading: wrist-down is fine, but switching to an app that takes the audio session ends capture. Apple's engineer confirms recording continues in the background, so test continuity while using other apps.\n- Pebble Index 01 (catalog: $75 and in stock) and Sandbar Stream Ring (catalog: shipping since early November 2026): I used the catalog's more recent product-page checks over the Earshot notes.",
+   "risks": [
+    "App Review could reject all-day recording under the audio background mode. A developer was rejected because reviewers said the mode is for playback (forum 776949), DTS cannot speak for App Review, and Apple did not answer in forum 750432. This is existential for the watch app. Mitigation: TestFlight first, Meet with Apple before submitting, user-started sessions only, obvious indicators, no keep-alive tricks.",
+    "Apple could sherlock the product. Siri Recap and Live Rewind (watchOS 27.3, expected December) are free and built in. If Apple extends them to older watches, more languages or the EU, or adds transcripts and speaker labels, the opening narrows to citations, export, integrations and retention. There is no API to build on Apple's Audio Intelligence, and mic contention between our session and Apple's on Series 12/Ultra 4 is untested.",
+    "Real battery drain has never been measured. Every number is a vendor claim or a low-confidence estimate (about 10-14 h of recording on Series 11/12, 8-11 h on SE 3). If drain lands near the reported 15-20%/h, 'always running' shrinks to 'meetings only' and the product thesis changes. Measure per model in week one.",
+    "The platform is fragile, and each weakness below can lose data silently unless the delivery ledger and coverage UI catch it:\n- Calls, Siri, alarms and other audio apps end capture, and it can't restart until the user taps.\n- transferFile is throttled by the OS, and one developer reports a file under 30 MB failing.\n- The network path was revoked every ~36-38 s during an audio session (FB24377808).\n- Behaviour under Low Power Mode, and of AudioRecordingIntent/Live Activity on the watch, is unverified.",
+    "Legal and consent exposure is growing (not legal advice; get counsel before an EU launch or workplace marketing):\n- Wiretap/CIPA suits: Brewer v. Otter.ai and Subia v. Meta are verified; Chamberlain v. Granola is not.\n- 11-13 US states require all-party consent.\n- EDPB Statement 01/2026 says consent obtained after recording is invalid and recommends persistent storage off by default.\n- Germany's §201 StGB carries criminal penalties.\n- Workplace policies may forbid recording.\n- Bystander voiceprints may count as GDPR Art. 9 biometric data.",
+    "Bad AI output could collapse trust. Hallucinations, TV treated as conversation and speaker confusion (Bee) erode it fast, and one wrong 'you promised X' on the wrist does lasting damage. The mitigations are citations, an audio window for checking, media filtering, and a self-check before anything reaches the watch.",
+    "Habits decay and people reject the device socially. The long-term Limitless user dropped it from social settings, then from casual meetings, until only calls remained, and judged about 10% of captures valuable. A Bee user's partner banned it at home. If the evening payoff isn't reliably useful, users stop tapping Start, and unwanted proactivity (Friend, Omi) speeds up churn.",
+    "iPhone background processing is unverified. WCSession delivers files in the background, but the research doesn't confirm that long SpeechAnalyzer jobs can run in iOS background tasks, or that diarization works on the iPhone (it is verified on the Mac). Transcripts may wait for charging or for the app to open, bringing back the 'summaries never arrive' complaint.",
+    "Wrist-mic audio quality is unknown. The research has no evidence on across-the-table pickup, clothing rustle or sleeve occlusion compared with dedicated multi-mic devices (Plaud Note Pro's 4 mics, Comu Action Pro's 6, Legend One's 3). Poor audio limits transcript quality whatever the models.",
+    "Cheap dedicated hardware undercuts the watch's convenience advantage. Bee Frontier costs $74.99 with a 7-day battery and integrates with Apple Watch, Pebble Index 01 costs $75 with no subscription, and Plaud leads the category with long battery and 64 GB of storage.",
+    "Cloud synthesis economics are a risk. All-day transcripts are large, and Opus at $4/$20 per MTok gets expensive if run per chunk. Bulk work goes to on-device Foundation Models (whose 4,096-token context limits quality) or to Haiku, nightly jobs run on batches at 50% off, and capture and transcription stay free so pricing isn't metered by the minute.",
+    "Soft pause is ambiguous. To allow a timed auto-resume the mic stays open, so the orange indicator stays on while the screen says 'Paused', and bystanders may not believe it. Offer a hard Stop and explain the difference plainly.",
+    "Users fear the vendor will disappear. Humane bricked its devices, and Limitless turned off capture and deleted regional data within two weeks of being acquired. Without open export and local-first storage, prospects will hesitate to trust the product with their memory.",
+    "Any watch-side AI that depends on PrivateCloudComputeLanguageModel is exposed: the managed entitlement could be denied, and daily per-user quotas can cut features off in the middle of the day."
+   ]
+  },
+  {
+   "best_feature_set": [
+    {
+     "tier": "Core",
+     "feature": "One-tap, user-started all-day capture session",
+     "description": "A single 'Start capture' tap from a complication, Smart Stack widget, watchOS 26 Control (opens the app), the Ultra Action Button, or Double Tap on the in-app Start button. The session starts in the foreground and then keeps running wrist-down in the background for hours with the screen off.",
+     "rationale": "This is the only legitimate long-recording path on watchOS [H]: an audio-mode session the user starts in the foreground. One-tap start is the most-loved watch capture feature, and every shipping watch recorder works this way. Voice-triggered, scheduled or automatic start is impossible for third parties.",
+     "exemplars": [
+      "Just Press Record",
+      "Whisper Memos",
+      "Granola",
+      "Circleback",
+      "TwinMind",
+      "Bluedot"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Never-lose-a-minute pipeline: crash-safe chunks, receipt ledger, visible sync states",
+     "description": "Audio is written as short AAC segment files, each with a journal entry. A segment is deleted from the watch only after the iPhone confirms it has a durable copy. Every segment shows Recorded > Queued > On iPhone > Transcribed, with automatic retry.",
+     "rationale": "The number-one complaint is recordings lost or never transferred: Omi lost 11 h, Voice Memos truncated recordings, Drafts broke after a watchOS update. Losing data hurts trust more than any missing feature. Granola's explicit sync states are the reference design.",
+     "exemplars": [
+      "Granola",
+      "Bluedot",
+      "Fieldy 3 (formerly Compass)",
+      "Whisper Memos",
+      "Omi (counter-example: 11 h watch recording lost)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Interruption recovery with gap markers and a one-tap resume nudge",
+     "description": "When a call, Siri, an alarm or another audio app interrupts capture, the app closes the open segment and records a GAP with its reason. It then sends one time-sensitive haptic notification ('Tap to resume') and switches the complication to a Resume state. Gaps show in the timeline and are passed to the summarizer so the AI never makes up content for them.",
+     "rationale": "Capture stopping on interruption is the second most common complaint. Resuming from the background is impossible [H], so the best achievable experience is fast detection, an honest gap, and a one-tap foreground resume.",
+     "exemplars": [
+      "Granola (interrupted recordings sync partially but cannot resume)",
+      "Voicenotes (complaint: 'stopped recording mid-session')",
+      "Apple Voice Memos & Notes audio transcription (complaint: alarms stop recordings)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Unmistakable recording state, consent reminder, true one-tap pause",
+     "description": "The system orange mic indicator, plus a start/stop haptic and chime and a distinctive full-screen recording state. A consent reminder appears at session start. Pause actually stops the mic, so the indicator goes off and nothing is buffered.",
+     "rationale": "Required by App Review 2.5.14 (consent plus a clear indication). The EDPB says consent obtained after recording is invalid and indicators should be on by default. Apple's Live Rewind chimes even on silent, which sets the bar. Users abandon these devices first in social settings, so an instant, real pause protects retention.",
+     "exemplars": [
+      "Granola",
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind)",
+      "Limitless Pendant",
+      "Legend One",
+      "Flowtica Verso",
+      "Notion AI Meeting Notes"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Full timestamped transcript with source-audio playback for verification",
+     "description": "A complete transcript per segment with timestamps. Tapping any line plays the original audio for a short default retention window, after which only the transcript is kept unless the user chooses otherwise.",
+     "rationale": "Apple's Siri Recap is summary-only, with no transcript. Bee deletes audio, so reviewers could not check its output when it treated TV as conversation. Being able to verify against the transcript and audio is the clearest gap a third party can fill.",
+     "exemplars": [
+      "Plaud Note Pro",
+      "Just Press Record",
+      "Whisper Notes",
+      "Pocket",
+      "AutoMemo S / AutoMemo R",
+      "Bee Frontier (counter-example: no audio to verify)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Summaries and action items that cite transcript spans",
+     "description": "Per-session and per-day summaries and to-dos, built on the iPhone (on-device Foundation Models where available, or a cloud LLM after explicit consent). Every claim links to the transcript lines it came from.",
+     "rationale": "Summaries are expected (auto_summaries appears in 165 of 272 catalog products). Hallucinated or unverifiable summaries are a top complaint about Bee and Siri Recap, so citations make the output trustworthy.",
+     "exemplars": [
+      "Plaud Note Pro",
+      "Granola",
+      "TicNote Watch",
+      "Limitless Pendant",
+      "Bee Frontier",
+      "Soundcore Work (AI Note Taker)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Searchable day timeline and Ask over history, with honest coverage",
+     "description": "An iPhone timeline of captured and not-captured periods, full-text search, and natural-language Ask with cited answers. When asked about a period that wasn't recorded, it says so, using the coverage table instead of guessing.",
+     "rationale": "This is what users come back for ('what did we decide?'). Searchable memory and ask-over-history are among the most common features in the catalog (111 and 112 products).",
+     "exemplars": [
+      "Limitless Pendant",
+      "Omi (open-source platform & SDK)",
+      "TwinMind",
+      "Plaud NotePin",
+      "Bee Frontier",
+      "Siri AI (Apple Intelligence, Gemini-based)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Retention, privacy and AI-sharing controls",
+     "description": "Per mode, keep summary only, transcript, or transcript plus audio, with auto-delete windows. Storage is local-first and encrypted. A single consent gate covers any third-party AI call (guideline 5.1.2(i)), and delete-everything takes one tap.",
+     "rationale": "Apple has set the privacy baseline: opt-in, 7-day default retention, end-to-end encryption, sensitive-data filters. Litigation against Otter and Meta is rising, and the EDPB says persistent storage should be off by default. Users want a choice of what to keep, which is a listed unmet need.",
+     "exemplars": [
+      "Jump",
+      "Fieldy 3 (formerly Compass)",
+      "Raycon AI Notetaker",
+      "Anarlog (formerly Hyprnote)",
+      "Bee Frontier",
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Battery and storage guards with honest projected hours",
+     "description": "Capture stops cleanly at 15% battery or under 100 MB free, drops bitrate in Low Power Mode, and the complication shows a projected 'about X h left' based on measured drain.",
+     "rationale": "Battery is the least-measured part of the category; nearly every figure is a vendor claim. Draining the user's watch to zero is a reason to uninstall. Apple rates Series 12 at about 24 h for everything, so the budget has to be visible.",
+     "exemplars": [
+      "Bee Eclipse (configurable silence auto-off)",
+      "Whisper Memos (90-min session cap)",
+      "Granola (per-meeting sessions)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Open export and read-only agent access (API/MCP)",
+     "description": "Bulk export (Markdown, JSON, audio) and a read-only MCP server or API so Claude, ChatGPT and other agents can query transcripts, with redaction and an audit log.",
+     "rationale": "Agent access is now expected; Granola, Otter, Omi, Screenpipe, Monologue and Pebble all offer it. Bulk export and memory you can take elsewhere are listed unmet needs. Limitless's shutdown made data portability a selling point.",
+     "exemplars": [
+      "Omi (open-source platform & SDK)",
+      "Granola",
+      "Circleback",
+      "Pebble Index 01",
+      "Monologue",
+      "TwinMind"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Reliable 'me vs others' speaker separation and wearer-only mode",
+     "description": "Diarization on the iPhone or Mac, with the wearer enrolled so 'me' is labeled reliably. An optional wearer-only retention mode drops other speakers' content.",
+     "rationale": "Diarization is weak nearly everywhere (Bee, Limitless, Granola), and Siri Recap does not attempt it. Wearer-only mode is the strongest answer to bystander and consent objections. Voiceprints are enrolled for the wearer only, because bystander voiceprints may be GDPR Art. 9 biometric data.",
+     "exemplars": [
+      "Plaud NotePin S",
+      "Legend One",
+      "AI MindClip",
+      "Taya Necklace",
+      "Nirva"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Bookmark or highlight a moment",
+     "description": "While recording, a Double Tap (or a tap on the recording screen) drops a timestamped highlight with a haptic confirmation. Highlights are weighted in summaries and jump straight to that moment in the timeline.",
+     "rationale": "Cheap to build, users love it on dedicated recorders, and it adds intent to ambient capture. It replaces the Live Rewind gesture, which belongs to Apple on Series 12 and Ultra 4.",
+     "exemplars": [
+      "Plaud NotePin S",
+      "Vocci AI Context Ring",
+      "Soundcore Work (AI Note Taker)",
+      "Flowtica Scribe"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Context-aware start prompts in place of automatic start",
+     "description": "A calendar event, a saved place, or a recurring time window triggers a haptic notification or Smart Stack card ('Team sync starting – Start capture?'). One tap starts capture in the foreground.",
+     "rationale": "Scheduled or ambient automatic start is impossible for third parties [H], while Siri Recap can be scheduled by time and place. A well-timed prompt gets close to Apple's behaviour without breaking platform rules, but nudges must be rare and under the user's control.",
+     "exemplars": [
+      "Granola (taps your wrist before meetings)",
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind) (scheduling by time/place)",
+      "Vibe Dot (scheduled time blocks)",
+      "Comulytic Note Pro (pre-meeting reminders)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Reach where Apple stops",
+     "description": "Supports Series 9 and later and SE 3 on watchOS 26/27, more languages, the EU (with stricter defaults), retention beyond 7 days, and full transcripts.",
+     "rationale": "Siri Recap is limited to Series 12/Ultra 4 with an iPhone 16 or later, English only, no EU, and no transcripts or speaker labels. Those limits are the market that is open to a third party.",
+     "exemplars": [
+      "TwinMind",
+      "Plaud Note",
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind) (counter-example: hardware/region/language gated)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Glanceable results back on the wrist",
+     "description": "The iPhone pushes the latest summary, open to-dos and sync or coverage status to a complication and a Smart Stack widget (RelevanceKit), with no heavy browsing on the watch.",
+     "rationale": "Reviewing on the wrist is an unmet need; today watch apps only capture. Widgets are cheap and battery-friendly compared with an on-watch transcript browser.",
+     "exemplars": [
+      "TicNote Watch",
+      "Pebble Time 2 / Pebble Round 2",
+      "Natura Interface ring (Live Activity replies)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Approval-gated routing of action items",
+     "description": "To-dos go to Reminders, Things or Todoist, and email or Slack drafts are prepared. Nothing executes without explicit approval on the iPhone. Every action is journaled.",
+     "rationale": "Hands-free routing is a top use case, and approval-gated agents are where leaders (Plaud Agent, Vocci) have converged. Keeping approval on the phone limits the blast radius.",
+     "exemplars": [
+      "Whisper Memos",
+      "Pebble Index 01",
+      "Plaud Note Pro",
+      "Vocci AI Context Ring",
+      "Cleft Notes",
+      "Fieldy 3 (formerly Compass)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Jurisdiction-aware consent tooling and pause zones",
+     "description": "Stricter defaults in all-party-consent states and the EEA/UK. Places and Focus modes can auto-prompt a pause (home, doctor, therapist), and an optional spoken or visible notice script is provided for others.",
+     "rationale": "There are 11–13 US all-party-consent states, the EDPB statement, and Germany's §201 StGB. Users abandon these devices first in social settings, and one Bee user's partner banned it at home.",
+     "exemplars": [
+      "viaim RecDot",
+      "Truecaller AI Call Recording",
+      "Pixel Call Notes",
+      "Fellow",
+      "Slack AI huddle notes"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Local-first vault, no-account mode, low or no subscription",
+     "description": "On-device transcription and summaries by default. An open, documented storage format. Cloud AI is optional or bring-your-own-key, with a one-time-purchase or generous free tier.",
+     "rationale": "Subscription fatigue (Bee $11.99, Omi $29.99, Plaud up to $239.99/yr) and shutdown risk (Humane bricked, Limitless deleted regional data) make local-first and no-subscription selling points. On-device processing also keeps marginal cost near zero.",
+     "exemplars": [
+      "Pebble Index 01",
+      "Whisper Notes",
+      "Anarlog (formerly Hyprnote)",
+      "Just Press Record",
+      "Reflect (Reflect Open)"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Daily/weekly synthesis, people and project pages, commitment tracking",
+     "description": "Nightly and weekly rollups (batch-processed), per-person and per-project pages, and tracking of promises made, with at most a couple of nudges a day.",
+     "rationale": "High value but easy to get wrong: Friend's unprompted texts and Omi's 'micromanager' reputation show the backlash. It depends on a trustworthy Core transcript and citations first.",
+     "exemplars": [
+      "TwinMind",
+      "Luna (Moon pendant) + Samantha",
+      "Legend One",
+      "Limitless Pendant"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Ask from the wrist",
+     "description": "Ask a question by voice on the watch and get a short cited answer from your own history, relayed through the iPhone or answered through a cloud model.",
+     "rationale": "There is no on-device LLM or Speech framework on the watch. PrivateCloudComputeLanguageModel needs a managed entitlement and has daily quotas, so it can't be a core dependency. The earshot notes report a beta ClaudeForFoundationModels package for watchOS 27, which I have not verified.",
+     "exemplars": [
+      "Petey - AI Chat for Watch (formerly WatchGPT)",
+      "Siri AI (Apple Intelligence, Gemini-based)"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Mac/desktop botless meeting capture in the same timeline",
+     "description": "A Mac app captures call audio and merges it with watch sessions into one day.",
+     "rationale": "Covers online meetings, which the watch handles poorly, and gives power users a Mac workflow, which Apple lacks. It is a separate product surface with its own permissions and distribution decisions.",
+     "exemplars": [
+      "Granola",
+      "Plaud NotePin S",
+      "Bluedot",
+      "Anarlog (formerly Hyprnote)",
+      "Screenpipe"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Health and location context on the timeline",
+     "description": "Visits (CLVisit), workouts and sleep or heart-rate context from HealthKit annotate the timeline and improve search ('the conversation at the clinic').",
+     "rationale": "A useful differentiator, but it adds permissions and privacy surface. It is not needed for the core value of not missing anything and finding it later.",
+     "exemplars": [
+      "TicNote Watch",
+      "Bee Frontier",
+      "Day One",
+      "Whisper Memos"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Phone-call capture",
+     "description": "Import or capture both sides of phone calls with notifications to all parties.",
+     "rationale": "Legally complex, and Apple's Phone app already records calls with a notice to participants. Watch capture pauses during calls anyway.",
+     "exemplars": [
+      "Bee Eclipse",
+      "Pocket",
+      "Bluedot",
+      "Apple Voice Memos & Notes audio transcription (Apple Intelligence)"
+     ]
+    }
+   ],
+   "minimal_watch_set": [
+    {
+     "feature": "1. One-tap foreground start of a long-running capture session",
+     "description": "'Start capture' from a complication, Smart Stack widget, Control, the Ultra Action Button, or Double Tap on the Start button. After the start, capture keeps running wrist-down with the screen off.",
+     "why_essential": "This is the product. It is also the only legitimate way to record for hours on watchOS [H]. If starting isn't a single tap, people don't capture.",
+     "watchos_implementation": "Declare the audio background mode in Info.plist. In the foreground, call AVAudioSession.sharedInstance().setCategory(.record) then setActive(true) once, and start AVAudioEngine with an inputNode.installTap. Never re-activate the session in a loop, because of the ~36–38 s network-revocation bug, FB24377808. Entry points: WidgetKit accessory complications and a Smart Stack widget that deep-link into the app; a watchOS 26 ControlWidget that opens the app (Controls run in the widget extension, so they must hand off to the foreground app); the Ultra Action Button through that Control or a Shortcut; and .handGestureShortcut(.primaryAction) on the Start button for Double Tap (S9+ and SE 3; not in Low Power Mode or with the wrist down). Do not use HKWorkoutSession or WKExtendedRuntimeSession as a keep-alive. Leave the Crown double-press alone, since it is Live Rewind on Series 12 and Ultra 4. Test AudioRecordingIntent on a device: its docs mention a Live Activity requirement on watchOS that is unclear [L]."
+    },
+    {
+     "feature": "2. Crash-safe segmented recording on the watch",
+     "description": "Speech is encoded as AAC mono at 16 kHz and 24–32 kbps into 2-minute .m4a segment files. Each segment has a JSON sidecar and an entry in an append-only journal. On next launch the app recovers or finalizes any segment left open.",
+     "why_essential": "A crash, low battery or a kill loses at most the current 2 minutes, never the day (compare Omi's 11-hour loss). Small segments also suit WCSession's undocumented size limits.",
+     "watchos_implementation": "Feed tap buffers through AVAudioConverter into AVAudioFile(forWriting:settings:) with kAudioFormatMPEG4AAC. Opus on the watch is unverified, so use AAC only. Rotate files every 120 s (about 0.36–0.48 MB each). The sidecar holds seq, wall-clock start and end, sha256, bitrate and gap reason, and the journal is fsync'd after each rotation. At launch, scan the journal for an unclosed segment, finalize it if it is readable, and record a GAP if it is not."
+    },
+    {
+     "feature": "3. Receipt-based sync to the iPhone with a visible queue",
+     "description": "Each closed segment goes to the iPhone, which writes it durably and sends back an acknowledgement. Only then is the segment deleted from the watch. The watch shows a count of segments recorded, queued, on iPhone and transcribed.",
+     "why_essential": "The top complaint in this category is recordings that never transfer. Receipts and visible states turn silent loss into a status the user can see and retry.",
+     "watchos_implementation": "Call WCSession.default.transferFile(url, metadata:) per segment, then monitor outstandingFileTransfers and session(_:didFinish:error:) and retry on failure. The iPhone checks the hash and replies with transferUserInfo(['ack': seq]); avoid sendMessage, which fails when the iPhone app is in the background. If the iPhone has been unreachable for N minutes, upload to your own HTTPS or CloudKit endpoint with a standard URLSession during the runtime the recording session already provides (DTS guidance, forum 843751). Use a background URLSession only for leftovers after the session ends. Test on hardware with the iPhone's Bluetooth and Wi-Fi off, because the Simulator doesn't support transferFile."
+    },
+    {
+     "feature": "4. Interruption detection and one-tap resume",
+     "description": "A call, Siri, an alarm or another audio app ends capture. The app closes the segment and records a GAP with the reason. It then gives a haptic 'Recording paused by call – Tap to resume' and switches the complication to a Resume state.",
+     "why_essential": "Interruptions are unavoidable and can't be resumed from the background [H]. Without detection the user thinks they recorded the whole day, which is the worst failure possible.",
+     "watchos_implementation": "Observe AVAudioSession.interruptionNotification, AVAudioSession.routeChangeNotification and AVAudioEngineConfigurationChange. On .began, finalize the segment, write a GAP sidecar, and schedule a UNNotificationRequest with interruptionLevel .timeSensitive (needs the Time Sensitive capability and user permission) and a 'Resume' UNNotificationAction with the .foreground option. Call WidgetCenter.shared.reloadAllTimelines() to show the Resume state. Restart setActive(true) and engine.start() only on a user tap in the foreground; activating from the background fails ('Session activation failed')."
+    },
+    {
+     "feature": "5. Clear recording state, consent reminder and true pause",
+     "description": "A full-screen recording state with color and elapsed time, start and stop haptics with an optional chime, and a consent reminder at session start. Pause turns the mic off; Resume takes one tap.",
+     "why_essential": "App Review 2.5.14 requires explicit consent and a clear indication of recording. The EDPB says consent obtained after recording is invalid. A real pause is what keeps the watch on the wrist in social settings.",
+     "watchos_implementation": "The orange mic indicator is automatic and can't be hidden. Use WKInterfaceDevice.current().play(.start) and .play(.stop) for haptics. For Pause, call inputNode.removeTap and engine.stop() so the indicator clears and nothing is buffered. A user-paused session may suspend wrist-down, which is acceptable because Resume is a foreground tap (also bound to .handGestureShortcut). This user-driven stop and restart differs from automatic power gating, which must never stop the engine. Show the consent sheet on first run and a one-line reminder on each Start."
+    },
+    {
+     "feature": "6. Battery and storage guards with projected hours",
+     "description": "Capture stops cleanly at 15% battery or under 100 MB free. Bitrate drops in Low Power Mode. The complication shows a projected time remaining based on this session's measured drain.",
+     "why_essential": "Draining the user's watch to zero is grounds for uninstall. Real drain is unmeasured (vendor claims run from about 3%/h to 15–20%/h), so the app has to measure and be honest about it.",
+     "watchos_implementation": "Set WKInterfaceDevice.current().isBatteryMonitoringEnabled = true and read batteryLevel and batteryState at each segment rotation; log percent per hour to telemetry. Check free space with FileManager volumeAvailableCapacityForImportantUsage and purge acknowledged segments first. Use ProcessInfo.processInfo.isLowPowerModeEnabled and NSProcessInfoPowerStateDidChange to switch to 24 kbps. Whether recording works under Low Power Mode is untested [L], so verify. On a guard stop, finalize the segment, send one notification, and refresh the complication."
+    },
+    {
+     "feature": "7. iPhone companion that makes the audio useful: timestamped transcript, searchable timeline, tap-to-play",
+     "description": "Every synced segment is transcribed on the iPhone into a day timeline that shows gaps. Results are searchable, and tapping a line plays the source audio. The watch shows only a status line such as 'Transcribed through 10:42'.",
+     "why_essential": "There is no speech recognition on the watch [H]. Without transcription and search this is just another Voice Memos. A full transcript with audio to check against is exactly what Siri Recap and Bee do not offer.",
+     "watchos_implementation": "On iOS 26+, run SpeechAnalyzer with SpeechTranscriber on each received segment and store timestamped results (audioTimeRange) in a local full-text-search database. Mark a segment transcribed and send transferUserInfo(['state': 'transcribed', 'seq': n]) to the watch, which updates its queue view and complication timeline. Nothing on the watch beyond receiving status."
+    },
+    {
+     "feature": "8. On-watch speech gating at the encoder (VAD)",
+     "description": "Silence and non-speech are dropped in RAM before encoding, with about 2 s of pre-roll and a 3–5 s hangover so word onsets and endings aren't clipped. A 'record everything' toggle is available.",
+     "why_essential": "It cuts stored and transferred bytes, and with them radio energy and phone transcription time, by an unmeasured but likely large share of a mostly quiet day. It also means silence and background noise never reach disk. It ranks last because the pipeline works without it.",
+     "watchos_implementation": "Compute per-buffer RMS with Accelerate (vDSP_rmsqv) against an adaptive noise floor, and keep a roughly 2 s ring buffer. Only when energy crosses the threshold, pass buffers to SNAudioStreamAnalyzer with SNClassifySoundRequest(classifierIdentifier: .version1) (SoundAnalysis, watchOS 9+) and check the 'speech' confidence. Write to the encoder only while speech plus hangover is active. The engine and mic keep running; gating happens only at the encoder. Measure CPU and battery with the gate on and off before shipping it on by default."
+    }
+   ],
+   "explicitly_cut": [
+    {
+     "feature": "Voice-triggered, scheduled or automatic start, and automatic resume after interruptions",
+     "reason": "Not possible: capture must be started by the user in the foreground and can't be resumed from the background [H]. Use a one-tap start, context-aware start prompts (later) and resume nudges instead."
+    },
+    {
+     "feature": "HKWorkoutSession or WKExtendedRuntimeSession as a keep-alive",
+     "reason": "Workout sessions for non-fitness use have led to repeated rejections (guidelines 2.5.4 and 2.5.1), drain battery, and move Activity rings. Extended runtime sessions are capped at 10 min to 1 h, allow one type per app, and are cancelled for sustained CPU."
+    },
+    {
+     "feature": "On-watch transcription, live captions or a live transcript on the wrist",
+     "reason": "Neither SFSpeechRecognizer nor SpeechAnalyzer exists on watchOS [H]. System dictation stops after about 30–45 s and returns only final text. Streaming audio to the phone for live captions would need low-level networking, which TN3135 restricts and which suffers the 36–38 s revocation bug."
+    },
+    {
+     "feature": "On-watch LLM summaries or PCC-powered Ask in v1",
+     "reason": "There is no on-device model on the watch [H]. PrivateCloudComputeLanguageModel needs a managed entitlement, works online only and hits daily quotas (quotaLimitReached), so it is too fragile for a core feature. Summaries run on the iPhone."
+    },
+    {
+     "feature": "A Live Rewind clone (Crown double-press, 'what did they just say')",
+     "reason": "On Series 12 and Ultra 4 the gesture belongs to Apple. Without ASR on the watch, round-trip latency to the phone would make it feel broken. Apple already ships it, so a highlight bookmark is the cheaper alternative."
+    },
+    {
+     "feature": "Real-time WebSocket or socket streaming to a cloud or Mac",
+     "reason": "TN3135 allows low-level networking only for active audio streaming, CallKit VoIP or tvOS discovery. A watch app can't reach a Mac over Bonjour or raw TCP, and the path has been measured dropping every ~36–38 s. Chunked transferFile and URLSession are the reliable route."
+    },
+    {
+     "feature": "Wrist flick or single-pinch triggers",
+     "reason": "No developer API exists [H]."
+    },
+    {
+     "feature": "Hidden, discreet or indicator-suppressed recording",
+     "reason": "The orange mic indicator can't be hidden [H]. Guidelines 2.5.14 and 2.5.19 forbid hiding recording, and it would invite wiretap and CIPA exposure (Brewer v. Otter, Subia v. Meta)."
+    },
+    {
+     "feature": "Rich transcript browsing, search or editing on the watch",
+     "reason": "A small screen, transfer cost and battery make it a poor fit. Glanceable widgets come later; real review happens on the iPhone."
+    },
+    {
+     "feature": "Proactive coaching or reminder notifications from the watch app",
+     "reason": "Friend's unprompted texts and Omi's 'micromanager' reputation show the backlash, and it costs battery. The only notifications in v1 are resume, guard stops and sync errors."
+    },
+    {
+     "feature": "Bystander voiceprint enrollment or face/person identification",
+     "reason": "Bystander voiceprints may be GDPR Art. 9 biometric data and raise consent risk in all-party states. Only the wearer gets enrolled, and that comes later, on the phone."
+    },
+    {
+     "feature": "Agentic actions executed from the watch (send email, post to Slack)",
+     "reason": "A tiny approval surface and a large blast radius. Action routing comes later, gated by approval on the iPhone."
+    },
+    {
+     "feature": "Opus or other custom codecs",
+     "reason": "Opus encoding on the watch is unverified; older reports say only AAC and LPCM work. Record AAC and transcode on the iPhone if needed."
+    },
+    {
+     "feature": "Live translation",
+     "reason": "No speech recognition on the watch, latency-bound, and outside the core memory value. AirPods Pro 3 and Siri already cover it."
+    },
+    {
+     "feature": "Dependence on Apple's Siri Recap or Audio Intelligence",
+     "reason": "No third-party API was found. It requires S11 Secure Exclave hardware, and the app should compete where Apple stops rather than build on it."
+    },
+    {
+     "feature": "Cloud LLM summaries enabled by default",
+     "reason": "Guideline 5.1.2(i) requires disclosure and explicit permission before sharing with third-party AI. Default to on-device processing on the iPhone and make the cloud opt-in."
+    }
+   ],
+   "architecture_notes": "CAPTURE STRATEGY\n- The watch is a thin, honest recorder. It runs one user-started foreground AVAudioSession (.record) in the audio background mode, with an AVAudioEngine input tap that keeps running wrist-down.\n- The engine is never stopped automatically for power. Gating happens only at the encoder: an energy detector, confirmed by SoundAnalysis's speech class, with roughly 2 s of pre-roll and a 3–5 s hangover.\n- An explicit user Pause really stops the engine. That is allowed because Resume is a foreground tap.\n- Output is AAC mono, 16 kHz, 24–32 kbps, in 2-minute segments with JSON sidecars and an fsync'd journal.\n- Interruptions (AVAudioSession interruption and route-change notifications, engine configuration changes) close the segment, write a GAP record with the reason, fire one time-sensitive 'Tap to resume' notification, and switch the complication to a Resume state.\n- No HKWorkoutSession, no WKExtendedRuntimeSession, no Crown double-press.\n- Target watchOS 27 on Series 9 and later, Ultra 2 and later, and SE 3, with a watchOS 26 fallback. Double Tap needs S9 or later and doesn't work in Low Power Mode or wrist-down.\n\nWHERE TRANSCRIPTION AND AI RUN\n- Nothing on the watch: it has no Speech framework and no on-device LLM.\n- iPhone (required companion): SpeechAnalyzer/SpeechTranscriber on iOS 26+ for timestamped long-form transcripts. It has no custom vocabulary and a limited set of languages at a time, so add WhisperKit later for gaps.\n- Diarization (FluidAudio or SpeakerKit with pyannote community-1) is a Differentiator. Check iOS support; the earshot notes list SpeakerKit as macOS 14+ and put FluidAudio in its own module because it isn't Swift 6.\n- Summaries and extraction use on-device Foundation Models on Apple Intelligence iPhones (4,096-token context per session, so chunk per segment and roll up), with every output carrying source span IDs.\n- Optional cloud path, only after explicit consent under 5.1.2(i), through one logged egress gate:\n  - claude-haiku-5-5 for bulk extraction ($0.10/$0.50 per MTok for prompts up to 100K).\n  - claude-opus-5-5 for daily synthesis ($4/$20 per MTok, effort set explicitly, server-side fallback enabled).\n  - Message Batches at a 50% discount for nightly and weekly rollups.\n  - I checked these prices against the Claude API reference.\n- PCC is never a core dependency (managed entitlement, daily quotas).\n- A Mac is optional later for heavy re-transcription and diarization.\n\nSYNC\n- Primary path: WCSession.transferFile per segment, with seq and sha256 metadata. The iPhone writes the segment durably, then replies with transferUserInfo (not sendMessage). The watch deletes only after that receipt.\n- States are visible on the watch and phone: Recorded > Queued > On iPhone > Transcribed.\n- If the iPhone is unreachable for N minutes, upload with a standard URLSession during the recording session's runtime to your own HTTPS or CloudKit endpoint, batched about every 10 minutes on cellular. A background URLSession handles leftovers after the session ends.\n- Expect minutes of latency, not real time.\n- Keep a hashed ledger on both ends and an open, documented vault format: SQLite or JSON plus a Markdown mirror plus AAC.\n\nBATTERY BUDGET\n- No rigorous public measurement exists.\n- Rated life: Series 11/12 24 h, SE 3 18 h, Ultra 3 42 h, Ultra 4 50 h, an average of about 4%/h for mixed use on Series 12.\n- The brief's own estimate of 10–14 h from 100% to a 10–15% stop on Series 11/12 implies about 6–8.5%/h while recording [L]. SE 3 is about 8–11 h, Ultra 3 about 18–24 h.\n- Vendor claims are not evidence: Hedy about 3%/h, others 15–20%/h, Granola 'more than a dozen hour-long meetings'.\n- So the plan is:\n  1. Screen off, no on-watch ML beyond the gated SoundAnalysis check.\n  2. Prefer Bluetooth (WCSession) over Wi-Fi or cellular.\n  3. Use the VAD to cut bytes.\n  4. Stop at 15%, and step down to 24 kbps in Low Power Mode, whose recording behaviour is untested.\n  5. Log percent per hour per model in telemetry and publish the real numbers.\n- Market 'a workday of capture' on Series and SE models and a full day on Ultra, not 24/7.\n- Data volume: ungated, 16 h is about 175–230 MB/day. Gated, my unverified assumption of 25–50% speech gives about 45–115 MB/day. Storage is not the constraint (about 64 GB).\n\nSOURCE CONFLICTS AND WHICH I CHOSE\n- (1) Segment length: the brief says 1–5 min and earshot says 2 min. I chose 2 min, which falls inside both ranges and keeps a crash loss small.\n- (2) Upload path: earshot says 'always use background transfers' (about 4 refreshes an hour with a complication). The brief cites DTS (forum 843751) saying background URLSession may wait for Wi-Fi and to upload with a standard session during existing runtime. I chose the more specific DTS guidance while recording and background transfers only after the session ends.\n- (3) Granola: the market scan says recording stops if you check a text or set a timer; earshot says it keeps recording wrist-down. I follow the Apple engineer's statement that recording continues in the background. Using other watch apps that touch audio, timers or Siri should be treated as interruptions until tested on a device.\n- (4) The HKWorkoutSession guideline is cited as 2.5.4 (brief) and 2.5.1 (earshot). The outcome is the same: don't use it.\n- (5) TN3135's 'active audio streaming' exception isn't a viable data path, given the earshot reading and the revocation bug, so there are no sockets or WebSockets.\n- (6) For product status and price I prefer the catalog, dated Nov 16 (for example Stream Ring shipping and Pebble Index at $75), over the Nov 14 notes. Catalog records marked unchecked were sourced once.\n\nBUILD EFFORT (my estimate, [L])\n- The minimal watch app plus iPhone companion (items 1–8) is about one watchOS and one iOS engineer for 8–12 weeks to TestFlight.\n- About half of that is an on-device reliability harness, because the Simulator lacks transferFile and allows low-level networking: forced interruptions, kill and crash recovery, Bluetooth and Wi-Fi off, Low Power Mode, and a 12 h soak per watch model.\n- Hold a 'Meet with Apple' App Review consultation before public submission.",
+   "risks": [
+    "App Review: recording in the audio background mode is not formally sanctioned. Apple documents it in playback terms; one developer reports a rejection because reviewers said audio mode is for playback (forum 776949); Apple did not answer the 'long user-started recording' question; DTS can't speak for App Review. Mitigate with TestFlight first, a Meet with Apple consultation, obvious indicators and consent, and positioning as user-started sessions rather than 24/7.",
+    "Apple is a direct competitor. Siri Recap and Live Rewind ship with watchOS 27.3 (expected in December) and make the 'ambient summary' pitch free. The defensible space is full transcripts, verification audio, speaker labels, retention beyond 7 days, older watches, non-English, the EU and agent access. Apple could expand into any of these.",
+    "Unrecoverable interruptions: calls, Siri, alarms, other audio apps and possibly timers end capture, and resuming needs a foreground tap. Heavy phone users will have many gaps and may tire of resume nudges, so coverage could be far below 'all day'.",
+    "Battery is unmeasured. My estimate is about 10–14 h on Series 11/12 and 8–11 h on SE 3 [L], so a full waking day may be impossible without a top-up. Low Power Mode recording behaviour and SoundAnalysis CPU cost are untested. Sustained CPU could get the app throttled or killed.",
+    "Sync fragility: transferFile is throttled for power, has no published size limit, fails in the Simulator, and one report describes a failure under 30 MB. Background URLSession may defer uploads until Wi-Fi. Any silent loss repeats Omi's 11-hour failure, so test with a ledger and soak tests on real devices.",
+    "A networking-path bug: the network path was revoked every ~36–38 s while an audio session was active, which DTS tied to repeated session activation (FB24377808). Any design that re-activates the session or depends on low-level networking risks breaking uploads.",
+    "Legal: 11–13 US all-party-consent states; the EDPB statement (Oct 13, 2026) says consent after recording is invalid and storage should be off by default; Germany's §201 StGB carries criminal penalties; wiretap and CIPA suits are active (Brewer v. Otter, Subia v. Meta), and early-2026 pleading-stage rulings largely favoured plaintiffs. The Granola suit is unverified. California's SB 1130 indicator mandate was vetoed but could return. Recording at work needs employer policy.",
+    "Privacy and social acceptance: users abandon always-on capture first in social settings (the long-term Limitless user, the Bee partner ban, the therapist objection). The EFF and press call Siri Recap 'creepy' or 'surveillance'. Without a wearer-only mode and pause zones, retention will suffer.",
+    "AI disclosure and biometrics: any cloud LLM call needs 5.1.2(i) disclosure and explicit permission. Bystander voiceprints may be GDPR Art. 9 biometric data, so diarization must avoid enrolling non-wearers.",
+    "Transcript quality on wrist audio is unproven: distant speakers, a sleeve over the mic, and TV or music treated as conversation (Bee). SpeechTranscriber lacks custom vocabulary and covers a limited set of languages at a time; its WER of 14.0 on earnings22 is a Mac benchmark, not wrist audio.",
+    "On-device AI limits: Foundation Models on the iPhone needs an Apple Intelligence iPhone and has a 4,096-token context, so summaries need chunking and rollups. Older iPhones fall back to cloud processing, which needs consent and costs money. Watch-side PCC has quotas and a managed entitlement.",
+    "AudioRecordingIntent's watchOS documentation says a Live Activity must run while recording, but Activity.request lists only iOS and macOS. If App Review or the system starts enforcing that, the capture flow may need rework [L].",
+    "Economics: competitors offer free unlimited transcription (Pocket, Comulytic, HiDock) and one-time purchases (Just Press Record, Whisper Notes). Cloud transcription and LLM costs per hour of audio would squeeze a subscription, so on-device processing is a cost necessity, not just a privacy feature.",
+    "Evidence quality: battery figures, several product prices and statuses, and the Granola lawsuit are vendor claims or single-source. Catalog records marked unchecked were not re-verified. Treat roadmap decisions that hinge on them as provisional until tested on devices."
+   ]
+  },
+  {
+   "best_feature_set": [
+    {
+     "tier": "Core",
+     "feature": "Intentional capture: Memo and Session modes (user-started only)",
+     "description": "Two capture modes, both started by the wearer. Memo is tap or hold to capture your own thought, kept as the wearer's speech. Session is one tap to start a long background capture (meeting, lecture, a block of the workday) that can be time-boxed ('until 6 pm'). A schedule only sends the user a reminder to tap; it never starts recording by itself. Capture is never voice-triggered or hidden. Marketing and UI copy say 'Session', never 'always listening'.",
+     "rationale": "watchOS only lets recording start from a foreground user action and cannot resume it from the background, so user initiation is a hard limit as well as the strongest legal and App Review position. The category is splitting into always-on products (Bee, Omi, Nirva, Siri Recap) and intentional ones (Pebble, Plaud, Sandbar, Live Rewind). A watch can credibly do intentional long Sessions. One-tap start is the watch feature users praise most.",
+     "exemplars": [
+      "Pebble Index 01",
+      "Plaud NotePin S",
+      "Whisper Memos",
+      "Just Press Record",
+      "Granola",
+      "Circleback",
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Clear recording indicators and consent at the moment of capture",
+     "description": "The system orange mic indicator (it cannot be hidden), a start chime and haptic that are on by default and cannot be turned off in Session mode, a clear recording screen and a REC state on the complication. Onboarding asks where the user lives and sets defaults to match: the 13 all-party-consent US states on Kilpatrick's list, the EEA/UK, and Germany are strictest. Each Session in a strict jurisdiction shows a consent reminder, offers a one-tap 'Announce' that plays a short spoken notice, and records a consent entry with the session (announced or not, and how).",
+     "rationale": "App Store Guideline 2.5.14 requires a clear indication and explicit consent. The EDPB says indicators should be on by default and hard to turn off, and that consent obtained after recording is invalid. Limitless's own help center says an LED alone is 'not enough'. Only 76 of the 272 catalog products have consent controls, so this protects us legally and also sets us apart.",
+     "exemplars": [
+      "viaim RecDot (spoken consent notice)",
+      "Truecaller AI Call Recording (beep to other party)",
+      "Pixel Call Notes (all parties told)",
+      "Flowtica Verso (indicator cannot be disabled; launches Nov 17)",
+      "Google Intelligent Eyewear (recording stops if LED covered)",
+      "Google Meet 'Take notes for me' (Gemini) (admin-enforced consent)",
+      "Notion AI Meeting Notes (consent messages)",
+      "Granola (watch chime and consent reminder)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Pause, Stop, schedules and pause zones",
+     "description": "An instant Pause (bystander mode) discards audio in memory, so nothing is analysed or saved. A full Stop releases the microphone. Capture pauses automatically during phone calls and FaceTime. Users can set quiet hours and link to Focus modes, and later tag places as pause zones (home, clinic, therapist, a child's school). A paused stretch leaves only a GAP marker.",
+     "rationale": "Social settings are the first thing users give up. A long-term Limitless user stopped wearing it socially, one Bee user's partner banned it at home, and a therapist objected. Limitless's guidance is to turn the device off when someone declines. Fellow removes paused segments entirely, and Siri Recap pauses during calls and can be scheduled. Making it easy to stop recording is what keeps people using it.",
+     "exemplars": [
+      "Fellow (paused segments removed entirely)",
+      "Slack AI huddle notes (anyone can pause)",
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind)",
+      "Bee Eclipse (silence auto-off; announced, unshipped)",
+      "Screenpipe (recording schedules)",
+      "Vibe Dot (scheduled time blocks)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Minimise what is kept, starting with the wearer; retention the user chooses",
+     "description": "Silence is never written to disk. By default the wearer's own speech is kept as a transcript. Other people's speech is kept verbatim only where consent was logged or the jurisdiction allows; otherwise it is reduced to a summary with no quotes. Raw audio is kept encrypted for a short verification window (recommended default 72 h) and then crypto-shredded. Each Session can be set to summary only, transcript, or transcript plus audio. IDs, payment details, login data, health and self-harm content are filtered out before storage and before anything leaves the device.",
+     "rationale": "The EDPB recommends keeping persistent storage off by default and limiting continuous recording. Bee and Siri Recap discard audio, which leaves nothing to check summaries against. A short window balances trust against minimisation. Users have asked for retention they can choose, and Jump already sells it. Keeping less third-party speech reduces both legal exposure and breach exposure.",
+     "exemplars": [
+      "Nirva (wearer's voice only; announced, unverified)",
+      "Taya Necklace (voice fingerprint suppresses others; unshipped)",
+      "Jump (transcript-only / summary-only / full)",
+      "Fieldy 3 (audio deleted after transcription)",
+      "Bee Frontier (raw audio deleted, device-held keys)",
+      "Tactiq (never stores audio)",
+      "Zocks (never stores recordings)",
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind) (7-day deletion, sensitive filters)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Capture pipeline that never loses audio, with visible sync states",
+     "description": "Audio is saved in 2-minute segments recorded in a hashed ledger. A segment is deleted from the watch only after the iPhone confirms it has it. The app recovers after a crash, sends a resume prompt after an interruption, and writes GAP markers. A coverage timeline lets the assistant answer 'not recorded' instead of guessing. Sync states are visible: Recorded, Queued, On iPhone, Transcribed.",
+     "rationale": "The top complaint is recordings that are lost or never transfer: Omi lost 11 hours, Voice Memos truncated a recording, Drafts sync broke after a watchOS update. One such incident ends the trust a privacy-first brand depends on. Granola's visible states with retry are the model to follow.",
+     "exemplars": [
+      "Granola (sync states with retry)",
+      "Bluedot (watch stores locally, syncs later)",
+      "HiDock P1 (stays on device until upload)",
+      "Whisper Memos (offline queue)",
+      "Omi (open-source platform & SDK) (11-hour loss, cautionary)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Transcription on the user's own devices first, separation of 'me' from 'others', summaries that cite the transcript",
+     "description": "The iPhone transcribes with SpeechTranscriber; a Mac can optionally take over heavier diarization. Speech is separated into 'me' and 'others' using only the wearer's own enrolled voice. TV and music are filtered out. Summaries, decisions and action items link each sentence back to the transcript span it came from. Others are not named automatically.",
+     "rationale": "Accuracy failures hurt trust more than missing features do: Bee treated TV as conversation and its summaries hallucinated. Speaker diarization is weak across the category, and Apple does not attempt it. Processing on the user's devices keeps third-party speech off vendor servers and keeps per-user cost low.",
+     "exemplars": [
+      "Whisper Notes",
+      "Google Recorder",
+      "Anarlog (formerly Hyprnote)",
+      "AWS HealthScribe (each sentence linked to transcript)",
+      "Rev (AI Notetaker and Voice Recorder app) (cited answers)",
+      "Plaud Note Pro"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Local-first vault owned by the user, open export, no-account mode, exit guarantee",
+     "description": "Data is stored encrypted on the user's own devices, and the vendor holds no copy by default. Optional sync is end-to-end encrypted. Users can bulk-export to Markdown, JSON and AAC. The schema is documented and an open-source reader is published. One tap deletes everything, and any time range or session can be deleted, which also lets the user honour a bystander's deletion request.",
+     "rationale": "Within two weeks of its acquisition Limitless turned off capture and deleted regional data, and Humane devices were bricked. Users already complain about missing bulk export. Owning their data is the trust advantage incumbents cannot copy (Amazon, Meta, OpenAI). Only 59 of 272 catalog products are local-only or end-to-end encrypted.",
+     "exemplars": [
+      "Reflect (Reflect Open)",
+      "Anarlog (formerly Hyprnote)",
+      "Day One (E2E)",
+      "Whispering (plain files)",
+      "Quill Meetings",
+      "Screenpipe",
+      "Limitless Pendant (cautionary)",
+      "Humane Ai Pin (cautionary)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Explicit consent for third-party AI, through a single exit point",
+     "description": "Cloud LLMs stay off until the user opts in to each provider. Names and numbers are redacted or pseudonymised on the device before anything is sent. All outbound calls go through one exit point that logs every payload. Providers must offer zero retention and no training. Users can bring their own API key.",
+     "rationale": "Guideline 5.1.2(i) requires disclosing sharing with third-party AI and getting explicit permission. The Brewer v. Otter.ai suit alleges the company trained on recordings. Grain advertises that it never trains on customer data. Any silent cloud call risks both rejection and a lawsuit.",
+     "exemplars": [
+      "Grain (never trains on meeting data)",
+      "Jamie (BYOK/CMEK, EEA processing)",
+      "Willow Voice (zero retention)",
+      "Claude voice mode (audio deleted after transcription)",
+      "Button (bring your own API key)"
+     ]
+    },
+    {
+     "tier": "Core",
+     "feature": "Read-only agent access (MCP) with scopes and an audit log",
+     "description": "A local MCP server (stdio and localhost). It starts read-only, applies redaction, gives each client its own token and logs every request. Broad queries such as 'all of last week' need approval on the watch.",
+     "rationale": "Agent access is now expected: Granola, Otter, Omi, Pebble and Screenpipe all offer it. It is also a channel through which bystander speech can leak, so scopes and audit logs are where we can do better than others.",
+     "exemplars": [
+      "Granola",
+      "Pebble Index 01",
+      "Quill Meetings (local MCP)",
+      "Screenpipe",
+      "Vocci AI Context Ring",
+      "Letterly"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Fill the gaps Siri Recap leaves",
+     "description": "Full transcripts with me/others labels, retention beyond 7 days, support for Series 9+/SE 3 on watchOS 27 (with a watchOS 26 fallback) and for iPhones without Apple Intelligence, more languages, export and MCP. Recording continues while the user opens other watch apps. We match Apple's privacy features: opt-in, chime, schedules, sensitive-data filters.",
+     "rationale": "Siri Recap is free but needs a Series 12 or Ultra 4 plus an iPhone 16 or later. It is English-only, not available in the EU, produces summaries only with no speakers, and deletes them after 7 days. Granola's watch app stops if the user checks a text; background audio mode lets ours keep going.",
+     "exemplars": [
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind)",
+      "Apple Watch native voice (watchOS 27 Siri AI, Siri Recap, Voice Memos, dictation)",
+      "Granola"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Consent Kit and rights for bystanders",
+     "description": "A consent card the other person can open from a QR code or link on the iPhone, showing what is kept and offering a deletion request. A spoken announcement. Templates for notifying a workplace. A consent log that can be exported for each session. The other person's speech can be removed by time range or selection, with no voiceprint needed.",
+     "rationale": "The EDPB says manufacturers cannot push GDPR duties onto users. A watch looks like a watch, so bystanders cannot see that it is recording the way they can with a pendant LED, and the burden to disclose is higher. No catalog product offers deletion facing the bystander. Being comfortable using it socially is what keeps people using it.",
+     "exemplars": [
+      "viaim RecDot",
+      "Upheal (consent workflow)",
+      "Blueprint (client-consent workflow)",
+      "Fellow (consent capture)",
+      "Axon Draft One (disclosure footers, audit logs)",
+      "Limitless Pendant (consent guidance)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Verification window and honest coverage",
+     "description": "Within the audio window, every claim in a summary links to the transcript and to playable audio. A coverage timeline shows the gaps. The assistant answers 'not recorded' instead of guessing, and uncertain speaker attribution is labelled as uncertain.",
+     "rationale": "Bee and Recap leave nothing to check. Summaries that put the wrong words in someone's mouth harm relationships and could be misused as evidence.",
+     "exemplars": [
+      "AWS HealthScribe",
+      "Rev (AI Notetaker and Voice Recorder app)",
+      "Granola",
+      "Bee Frontier (no audio to verify, cautionary)",
+      "Friend 2.0 (forgot user's name, cautionary)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Pause by context, with defaults for sensitive places",
+     "description": "The iPhone pauses capture automatically in tagged places, during calendar events marked private or medical, during Focus modes and during calls. A filter for sensitive categories runs before storage. Session mode is 18+.",
+     "rationale": "The EDPB recommends geofencing. Medical, therapy, legal and school settings, and children as bystanders, carry the highest legal and reputational risk. Apple applies an 18+ limit to Recap.",
+     "exemplars": [
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind)",
+      "Fellow (MNPI redaction)",
+      "Bee Eclipse (announced, unshipped)",
+      "Vibe Dot"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Review and ask on the wrist",
+     "description": "A Smart Stack recap card and the day's action items. The user can ask about their memory from the watch, with the answer worked out on the iPhone and shown on the wrist.",
+     "rationale": "Users have asked for this: today watch apps only capture. Showing results on the wrist makes the capture feel worth doing.",
+     "exemplars": [
+      "TicNote Watch (summaries pushed to wrist)",
+      "Petey - AI Chat for Watch",
+      "Pebble Time 2 / Pebble Round 2 (answers on watch)",
+      "Granola (wrist tap before meetings)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Actions only with approval, with a journal and undo",
+     "description": "The assistant drafts reminders, calendar events and follow-up emails and never sends them on its own. Every executed action is journaled with its inverse so it can be undone. Double Tap may only trigger actions that cannot do damage.",
+     "rationale": "An agent working on other people's words has a large blast radius. Approval before acting is the norm among trusted products.",
+     "exemplars": [
+      "Plaud Note Pro (Plaud Agent after approval)",
+      "Vocci AI Context Ring",
+      "Snap Specs (consumer) (acts only with approval)",
+      "Highlight AI (approval-gated drafts)",
+      "Fieldy 3 (Sidekick drafts you approve)",
+      "Claude voice mode (asks permission)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Rare proactivity that the user controls",
+     "description": "A nudge must name the decision it helps with. The default is at most two a day, with quiet hours and batching. Notifications are passive by default and time-sensitive only for deadlines.",
+     "rationale": "Friend's unprompted texts felt intrusive, Omi was called a 'micromanager' and removed its automatic reflections. Unwanted nudges make users feel watched.",
+     "exemplars": [
+      "Granola",
+      "Friend 2.0 (cautionary)",
+      "Omi (open-source platform & SDK) (cautionary)",
+      "Luna (Moon pendant) + Samantha (unshipped)"
+     ]
+    },
+    {
+     "tier": "Differentiator",
+     "feature": "Local tier with no subscription",
+     "description": "Transcription and summaries on the user's own iPhone or Mac, sold as a one-time purchase. Cloud features are optional.",
+     "rationale": "Subscription fatigue is real ($10 to $30 a month across the category), and Pebble markets 'no subscription' as a feature. Processing locally makes this cheap to offer, and it also supports the privacy claims.",
+     "exemplars": [
+      "Just Press Record",
+      "Whisper Notes",
+      "Pebble Index 01",
+      "Spokenly",
+      "MacWhisper",
+      "Comulytic Note Pro (free unlimited transcription)"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Session mode in the EU, UK and Germany",
+     "description": "Launch only after a DPIA and a review by local counsel on §201 StGB. Go first with wearer-only Memo mode and Sessions that require explicit consent, with EU data residency.",
+     "rationale": "The EDPB statement and German criminal law make ambient capture of bystanders in the EEA high-risk, and Limitless withdrew from the EU and UK. Apple's absence from the EU looks like an opening but is a trap for ambient capture.",
+     "exemplars": [
+      "Jamie (EEA processing)",
+      "tl;dv (EU-hosted)",
+      "Tandem Health (EU data residency)",
+      "Limitless Pendant (withdrew from EU/UK, cautionary)"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Consented voiceprints for regular contacts",
+     "description": "A contact can be named automatically only after that person enrolls their own voice and gives explicit consent. They can revoke it at any time.",
+     "rationale": "Voiceprints of bystanders may count as GDPR Art. 9 biometric data. Named speakers are valuable, but only with the other person's consent.",
+     "exemplars": [
+      "AI MindClip (voiceprint speaker ID)",
+      "Vibe Dot (recognized voices)",
+      "Jamie (remembers speakers)",
+      "OpenWhispr (voice fingerprinting)"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Phone-call capture with a mandatory announcement",
+     "description": "Calls recorded on the iPhone, with an audible notice to all parties that cannot be turned off.",
+     "rationale": "Calls are the most heavily regulated recording context. Apple, Google and Truecaller have made announcing the recording the norm.",
+     "exemplars": [
+      "Apple Voice Memos & Notes audio transcription (Apple Intelligence) (notifies all participants)",
+      "Pixel Call Notes",
+      "Truecaller AI Call Recording",
+      "Pocket",
+      "Bee Eclipse (announced, unshipped)"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Team and workplace mode",
+     "description": "Admin recording policies, notice templates for employees, retention controls and legal hold, and redaction of material non-public information.",
+     "rationale": "Recording at work needs employer policy and notice. Enterprise buyers require governance.",
+     "exemplars": [
+      "Fellow",
+      "Google Meet 'Take notes for me' (Gemini)",
+      "Microsoft Teams Facilitator (Microsoft 365 Copilot)",
+      "Webex AI Assistant (Cisco AI Assistant for Webex)"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Modes for regulated professions",
+     "description": "Clinical, therapy and financial-advisor templates, with a BAA/HIPAA and consent workflows for clients.",
+     "rationale": "These are high-value markets, but each needs its own compliance.",
+     "exemplars": [
+      "Abridge",
+      "Upheal",
+      "Freed AI Scribe",
+      "Zocks",
+      "Jump"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Instant replay for watches without Live Rewind",
+     "description": "The watch keeps the last 15 to 30 seconds in RAM, and on request a clip goes to the iPhone for transcription. The app is honest about the latency.",
+     "rationale": "It helps accessibility and fills a gap Apple leaves on older watches. It needs a fast round trip to ASR, and the sync path today takes minutes.",
+     "exemplars": [
+      "Apple Watch Audio Intelligence (Siri Recap + Live Rewind)",
+      "Live Transcribe & Sound Notifications",
+      "AirCaps (formerly TranscribeGlass)"
+     ]
+    },
+    {
+     "tier": "Later",
+     "feature": "Mac meeting capture without a bot, into the same vault",
+     "description": "Capture per-app audio on the Mac with Core Audio process taps, stored in the same vault and governed by the same consent rules.",
+     "rationale": "It covers the online half of the day, but it is a second product surface and does not affect the watch value.",
+     "exemplars": [
+      "Granola",
+      "Plaud NotePin S (Plaud Desktop)",
+      "Anarlog (formerly Hyprnote)",
+      "Screenpipe"
+     ]
+    }
+   ],
+   "minimal_watch_set": [
+    {
+     "feature": "1. Start a Session with one tap, in the foreground",
+     "description": "The user taps once to start a long Session, optionally time-boxed. It keeps running with the wrist down and while the user opens other watch apps.",
+     "why_essential": "watchOS only allows recording to start from a foreground user action and cannot restart it from the background. The tap is both the technical requirement and the legal and App Review basis. One-tap start is the most-loved watch feature, and continuing while the user uses other apps fixes a known Granola complaint.",
+     "watchos_implementation": "A WidgetKit complication or Smart Stack widget deep-links into the app, and the launch from that tap starts the Session immediately. A watchOS 26 Control (Control Center, Smart Stack, or the Action Button on Ultra) opens the app; it cannot start capture from the widget extension. An in-app Start button carries .handGestureShortcut(.primaryAction) for Double Tap (S9+ and SE 3; not in Low Power Mode). On start, activate AVAudioSession with category .record exactly once, install an AVAudioEngine input tap, and declare the 'audio' background mode. Do not bind the Crown double-press, which runs Live Rewind on Series 12 and Ultra 4. Do not depend on AudioRecordingIntent or Live Activities on the watch, whose behaviour there is unclear."
+    },
+    {
+     "feature": "2. Clear recording state and consent at the start",
+     "description": "A start chime plus haptic, a full-screen recording colour when the wrist is raised, a REC state with elapsed time on the complication, and a short consent card at the start of each Session in all-party-consent jurisdictions. The user records whether they announced it.",
+     "why_essential": "Guideline 2.5.14 requires clear indication and consent, and the EDPB says consent obtained after recording is invalid. A watch reads as a covert device, so the wearer has to be prompted to disclose. Without this the app is a liability, not a product.",
+     "watchos_implementation": "The system orange mic indicator appears automatically and cannot be hidden. Play the chime through the active audio session and a WatchKit haptic on start, stop, pause and resume. The chime cannot be turned off in Session mode. Onboarding stores the user's home jurisdiction; the default strict list is the 13 Kilpatrick states plus the EEA/UK. The consent card is a 2-second, non-blocking overlay. Write a consent flag (announced yes/no) into each segment's JSON sidecar so the iPhone can apply the matching retention policy."
+    },
+    {
+     "feature": "3. Instant Pause (bystander mode) and full Stop",
+     "description": "Pause immediately stops anything from being analysed or saved and can be resumed with the wrist down. Stop releases the microphone completely. The UI states plainly which one is active: 'Paused: mic open, nothing kept' or 'Stopped: mic off'.",
+     "why_essential": "Social settings are where people abandon these products (the Bee partner ban, a therapist's objection, Limitless users dropping social use). Limitless's own guidance is to turn the device off when someone declines. Pause has to be instant and reversible or people won't use it. Stop has to exist because the mic indicator stays lit while paused.",
+     "watchos_implementation": "Pause flips a gate flag so the AVAudioEngine tap callback drops buffers before the VAD or the encoder sees them. The engine and session keep running, because re-activating from the background fails. The toggle is the large in-app button, Double Tap (.handGestureShortcut(.primaryAction)) and a complication tap. Stop deactivates the AVAudioSession; restarting then needs a foreground tap. After a configurable time paused (default 15 min), the app switches to Stop so it does not hold the mic indefinitely. Paused time is written as a GAP with reason 'user_pause'."
+    },
+    {
+     "feature": "4. Speech-gated capture in segments",
+     "description": "Only stretches that contain speech are encoded and saved. They go into 2-minute AAC segment files, each with a sidecar recording times, gaps, pauses, the consent flag and a hash.",
+     "why_essential": "It keeps less third-party audio, uses less storage and fewer transfers, and makes data loss impossible to hide. Segments are what make sync and crash recovery reliable.",
+     "watchos_implementation": "The AVAudioEngine input tap feeds a ring buffer holding 3 to 5 seconds of pre-roll. A cheap energy threshold runs first; when it fires, the SoundAnalysis built-in classifier's speech class (watchOS 9+) confirms it. Confirmed audio is encoded as AAC mono, 16 kHz, 24 to 32 kbps; Opus on the watch is unverified. Each segment is flushed to disk every 2 minutes and recorded in a journal. On relaunch the app scans the journal and finalises any partial segment. Silence never reaches disk."
+    },
+    {
+     "feature": "5. Delivery ledger that never loses audio, with visible sync states",
+     "description": "A segment is deleted from the watch only after the iPhone confirms a durable write. The watch and complication show Recorded, Queued, On iPhone and Transcribed (for example, with a count of to-dos), so the user can see the result arrived without a separate review UI.",
+     "why_essential": "Lost or never-transferred recordings are complaint number one (Omi's 11 hours, Voice Memos truncation, Drafts after an update). A privacy-first brand has no second chance on trust.",
+     "watchos_implementation": "Send each segment with WCSession.transferFile and metadata {id, seq, hash}, and track outstandingFileTransfers. The iPhone confirms with WCSession.transferUserInfo; sendMessage fails when the iPhone app is in the background. If the phone is unreachable, upload with a standard URLSession during the runtime the audio session already provides, to the user's encrypted endpoint; a background URLSession may wait for Wi-Fi. No sockets or WebSockets (TN3135, plus the reported ~36 to 38 s path-revocation bug). Keep segments to a few MB each. Test on hardware with the iPhone's Wi-Fi and Bluetooth off; the Simulator does not support transferFile."
+    },
+    {
+     "feature": "6. Recovery after an interruption",
+     "description": "When a call, Siri, an alarm or another audio app ends capture, the open segment is closed with a reason. The user gets one haptic prompt, 'Recording stopped by call. Tap to resume', and summaries get an explicit gap.",
+     "why_essential": "Capture stopping on interruption is complaint number two, and watchOS cannot resume it in the background. Without a prompt, users silently lose the rest of the meeting. Without GAP markers, summaries invent continuity.",
+     "watchos_implementation": "Observe AVAudioSession interruption and route-change notifications. Finalise the segment and write a GAP {start, end, reason}. Post one time-sensitive local notification with a haptic; its action opens the app in the foreground and calls the Session start path again. The complication switches to a 'Resume' state. Never loop notifications. The iPhone side passes GAP tokens to every summariser."
+    },
+    {
+     "feature": "7. Battery and storage limits, with an honest projection",
+     "description": "The app stops automatically before it can empty the watch or fill its storage, lowers quality in Low Power Mode, and shows hours remaining at the drain it has actually measured.",
+     "why_essential": "No public figure exists for continuous-recording drain (vendor claims range from 3 to 20 %/h), and Series 12 is rated at 24 h for everything. A watch dead by mid-afternoon fails at its main job, and inflated claims destroy trust.",
+     "watchos_implementation": "After each segment, check battery level and free space. Stop at 15% battery or below 100 MB free, then post a notification and finalise the segment. In Low Power Mode drop to 24 kbps; recording under Low Power Mode is untested, so validate it on hardware. Double Tap is unavailable in Low Power Mode, so keep the on-screen buttons. Record the drain per Session for each watch model and show '≈ X h left at this rate' in the app and on the complication. Make no public battery claim until it is measured on Series 9 and later, SE 3 and Ultra."
+    }
+   ],
+   "explicitly_cut": [
+    {
+     "feature": "Automatic, voice-triggered or scheduled auto-start (true ambient capture, wake word)",
+     "reason": "The platform forbids it: capture must start from a foreground user action and cannot resume from the background. It is also the weakest legal position under all-party-consent laws and the EDPB statement. Schedules should only remind the user to tap."
+    },
+    {
+     "feature": "Hidden, silent or 'discreet' mode (no chime, dimmed state)",
+     "reason": "The orange mic indicator cannot be hidden. Guideline 2.5.14 requires clear indication and 2.5.19 forbids hidden features, and the EDPB wants indicators hard to disable. A watch already looks covert, so this would make it a covert recorder."
+    },
+    {
+     "feature": "HKWorkoutSession or WKExtendedRuntimeSession keep-alives",
+     "reason": "Developers report repeated rejections under 2.5.4/2.5.1 for this. A workout session also moves the user's Activity rings, and extended sessions are capped at 10 minutes to 1 hour. The audio background mode is the only legitimate path."
+    },
+    {
+     "feature": "On-watch transcription, live captions or on-watch LLM summaries",
+     "reason": "watchOS has no Speech framework and no on-device LLM. PCC needs a managed entitlement, has daily quotas and requires a network connection, all at a battery cost. Transcription and summaries run on the iPhone."
+    },
+    {
+     "feature": "A clone of Live Rewind (instant text of the last 15 seconds)",
+     "reason": "It needs a real-time round trip to ASR, but sync from the watch takes minutes and sockets are unreliable. On Series 12 and Ultra 4, Apple owns the Crown double-press. Moved to Later, with honest latency."
+    },
+    {
+     "feature": "Real-time streaming to the cloud over WebSockets or sockets",
+     "reason": "TN3135 restricts low-level networking, and a path-revocation bug has been reported during audio sessions. Segment files with confirmations are more reliable and leave less third-party audio in transit."
+    },
+    {
+     "feature": "Naming other speakers or storing voiceprints of bystanders",
+     "reason": "Bystander voiceprints may be GDPR Art. 9 biometric data, and naming people without consent breaks social trust. The minimal app separates only 'me' and 'others', on the iPhone, using the wearer's own enrolled voice."
+    },
+    {
+     "feature": "Phone-call capture",
+     "reason": "Calls interrupt watch recording anyway, and they are the most regulated recording context, where the norms of Apple, Pixel and Truecaller require an announcement. Moved to Later on the iPhone with a mandatory notice."
+    },
+    {
+     "feature": "Proactive AI nudges and notifications on the watch",
+     "reason": "Friend's unprompted texts and Omi's 'micromanager' critique show the backlash, and nudges cost battery and attention. The minimal app sends exactly one kind of notification: the resume prompt after an interruption."
+    },
+    {
+     "feature": "Agentic actions from the wrist (send email, create events, message people)",
+     "reason": "The blast radius is large and approving actions on a small screen is hard. Actions stay on the iPhone, require explicit approval and come later."
+    },
+    {
+     "feature": "A highlight or bookmark gesture",
+     "reason": "Double Tap supports one primary action and is reserved for Pause/Resume, which matters more socially. A bookmark is cheap to add later as an on-screen button."
+    },
+    {
+     "feature": "Ask-AI chat and memory search on the wrist",
+     "reason": "It is a real unmet need, but it needs a phone round trip and system dictation, which stops after about 30 to 45 seconds. Deferred to the Differentiator tier; the minimal app shows only the Transcribed sync state."
+    },
+    {
+     "feature": "Sharing, links and team spaces",
+     "reason": "Link sharing that defaults to 'anyone with the link' (reported for Granola by a secondary source) is a classic leak of third-party speech. There is no outbound sharing from the minimal app."
+    },
+    {
+     "feature": "Camera or visual context, location tagging and health-data fusion on the watch",
+     "reason": "These widen the categories of data collected and the exposure of bystanders without adding capture value. Location is used later, only on the iPhone, for pause zones."
+    },
+    {
+     "feature": "Session mode in the EEA, UK or Germany at launch",
+     "reason": "The EDPB statement, German §201 StGB criminal exposure and Limitless's withdrawal show the risk. Ship Memo mode (the wearer's own voice) first, and add Sessions only after a DPIA and legal review."
+    },
+    {
+     "feature": "Third-party cloud AI enabled by default",
+     "reason": "Guideline 5.1.2(i) requires explicit permission, and the Otter suit alleges training on recordings. The minimal app is fully useful with on-device iPhone processing, and cloud is opt-in per provider."
+    }
+   ],
+   "architecture_notes": "POSITIONING. Position the product as an honest recorder for the watch people already own: user-started Sessions and Memos, never hidden 24/7 listening. Siri Recap and Live Rewind set the privacy bar (opt-in, chime, mic indicator, schedules and places, sensitive-data filters, 7-day deletion, E2E encryption) and are free. Compete where they stop:\n- Series 9+ and SE 3 on watchOS 27, with a watchOS 26 fallback.\n- iPhones without Apple Intelligence (Recap needs Series 12/Ultra 4 plus an iPhone 16 or later).\n- Full transcripts with me/others labels.\n- Retention the user chooses.\n- More languages.\n- Export and MCP.\n- Recording that continues while the user opens other watch apps.\nMatch Apple's consent posture or beat it. Against Bee Frontier ($74.99, Alexa+), Plaud and Omi, the pitch is no extra device, a local-first vault, a no-subscription local tier and an exit guarantee (Limitless and Humane are the cautionary cases). Against Meta, Amazon and OpenAI (pendants and glasses arriving in 2027), the pitch is trust: no commerce or ad graph and no vendor copy by default. Only 76 of the 272 catalog products have consent controls and only 59 are local-only or E2E, so trust tooling is still open ground.\n\nCAPTURE (WATCH).\n1. A user tap in the foreground (complication, Control, Ultra Action Button, or Double Tap in the app) activates AVAudioSession(.record) exactly once and installs an AVAudioEngine input tap.\n2. The 'audio' background mode keeps it running with the wrist down and while other apps are in use. An Apple Frameworks Engineer says recording continues in the background but cannot be resumed there.\n3. Never stop the engine for silence or Pause. A gate drops buffers in RAM instead.\n4. The pipeline runs: ring buffer with 3-5 s pre-roll, then an energy gate, then the SoundAnalysis built-in speech class, then AAC mono 16 kHz at 24-32 kbps, written as 2-minute segments with JSON sidecars (times, GAPs, pause and consent flags, hash) and a journal for crash recovery.\n5. On an interruption (call, Siri, alarm, other audio): finalise the segment, write a GAP, send one time-sensitive 'Tap to resume' notification, and switch the complication to Resume.\n6. Do not use HKWorkoutSession or extended-runtime sessions as keep-alives (2.5.4). Do not depend on AudioRecordingIntent or Live Activity behaviour on the watch. Leave the Crown double-press to Apple.\n\nWHERE TRANSCRIPTION AND AI RUN. Nothing runs on the watch: there is no Speech framework and no SystemLanguageModel, and PCC needs a managed entitlement and has daily quotas. The iPhone companion is required:\n- SpeechAnalyzer/SpeechTranscriber (iOS 26) for long-form ASR.\n- me/others separation using only the wearer's own enrolled voice.\n- SoundAnalysis/ShazamKit to filter TV and music.\n- On-device Foundation Models (4,096-token session context, 3-5 tools) for per-segment triage, action items and cited summaries.\nAn optional Mac node runs heavier diarization (FluidAudio or SpeakerKit with pyannote community-1; keep FluidAudio in a Swift 5.10 module) and WhisperKit for extra languages and custom vocabulary.\n\nCloud LLMs are opt-in for each provider (5.1.2(i)) and all traffic goes through one exit point that redacts or pseudonymises locally and logs every payload. Providers must offer zero retention and no training. Per the Earshot notes: claude-haiku-5-5 for bulk extraction, claude-opus-5-5 for daily synthesis, and Message Batches at 50% cost for nightly rollups. Use output_config.effort rather than thinking budgets and send no temperature, top_p or top_k. ClaudeForFoundationModels with .appAttest covers watchOS 27 and iOS without shipping a key, but cannot use the MCP connector or batch. Every derived object carries source_span_ids so it can cite its transcript span, and a coverage table backs honest 'not recorded' answers.\n\nSYNC.\n- Primary path: WCSession.transferFile for each segment with {id, seq, hash}. The watch tracks outstandingFileTransfers. The iPhone writes durably, then confirms over transferUserInfo, not sendMessage. The watch deletes a segment only after that confirmation.\n- Fallback when the phone is unreachable: a standard URLSession upload to the user's own encrypted endpoint (CloudKit private database or self-hosted) during the runtime the audio session already provides. A background URLSession may wait for Wi-Fi.\n- No sockets or WebSockets (TN3135; a ~36-38 s path revocation during audio sessions is reported as FB24377808).\n- Expect minutes of latency. Show Recorded, Queued, On iPhone, Transcribed. Results come back to Smart Stack and complications through WidgetKit reloads.\n- Test on hardware with the iPhone's Wi-Fi and Bluetooth off.\n\nPRIVACY DATA FLOW AND RECOMMENDED DEFAULTS.\n- Watch: silence and paused audio are never written.\n- Raw audio: encrypted on the iPhone for a 72-hour verification window (user can choose 0 h to 30 d, or pin a session), then crypto-shredded.\n- Wearer's own transcript: kept until the user deletes it.\n- Others' verbatim speech: 30 days where consent was logged or the jurisdiction allows. Otherwise, in the 13 Kilpatrick all-party states and the EEA/UK, it is reduced to a summary with no quotes. This lowers retention exposure but does not cure interception claims, so the announcement at the start of a Session is still the primary control.\n- Sensitive-data filters (IDs, payment, auth, health, self-harm) run before storage and before anything leaves the device.\n- Users can delete by time range or by session, which also serves bystander requests.\n- Session mode is 18+.\n- No vendor copy and no training by default.\n- Publish the vault schema and an open-source reader.\n- Distribute through TestFlight first and book Meet with Apple before App Store submission.\n\nBATTERY BUDGET (all low confidence until measured). No rigorous public measurement exists, and vendor claims range from about 3%/h (Hedy) to 15-20%/h. The research brief's estimate from 100% to a 10-15% auto-stop is about 10-14 h on Series 11/12, 8-11 h on SE 3 and 18-24 h on Ultra 3, with Ultra 4 somewhat more. Design target: 5%/h or less on Series 9+ with the screen off. The mic and engine are always on; VAD saves encoder, storage and radio power, not mic power. No streaming. SoundAnalysis runs only after the energy gate fires. Transfers are batched.\n\nStorage: 10.8-14.4 MB/h at 24-32 kbps, so a 16 h worst case is about 175-230 MB, and far less after speech gating, against 64 GB.\n\nLimits: stop at 15% battery or under 100 MB free, and use 24 kbps in Low Power Mode (recording under Low Power Mode is untested). Promise 'a workday Session' publicly, never 'all day', and show measured projected hours in the app.\n\nSOURCE CONFLICTS AND WHICH ONE I CHOSE.\n1. App Review acceptance: the research brief says Apple never answered; the Earshot notes cite a specific rejection in forum thread 776949, where reviewers said audio background mode is for playback. I treat rejection as a real risk.\n2. Siri Recap age limit: the Apple support doc says 18+ (primary source); the Earshot notes, via TechCrunch and Heise, say not for under-13s. I chose 18+ and apply it to Session mode.\n3. Segment length: the brief recommends 1-5 min and Earshot 2 min. I chose 2 min.\n4. Consent states: secondary sources say about 11-13. I chose Kilpatrick's 13-state list as the conservative default and treat Michigan as a hybrid per the brief; the statutes still need verifying.\n5. Granola's watch app: one source says it must stay in the foreground, the other that it records wrist-down. Both fit: wrist-down works, opening another app stops it. Our differentiator is to keep recording in that case.\n6. Stream Ring status and price: I preferred the Nov 16 catalog (shipping, Upstream $14.99/mo) over Earshot (preorder, $10/mo).\n7. Pebble Index 01 price: the catalog says $75 rising to $99, Earshot says $99. It makes no difference to this analysis.\n8. HKWorkoutSession: the sources cite guideline 2.5.4 and 2.5.1 respectively. Both say don't use it.\n9. Bee requiring a button tap after the acquisition: single secondary source. The catalog still flags Bee as always-on, so I treat it as ambient-capable.",
+   "risks": [
+    "App Review: a developer was rejected because reviewers said the audio background mode is for playback (forum 776949), and Apple has not said whether an all-day recording started by the user is acceptable. Mitigation: TestFlight first, book Meet with Apple, frame the feature as user-started, time-boxed Sessions with a chime and a visible state, use no keep-alive tricks, and never use the words 'always listening'.",
+    "Wiretap/CIPA litigation: Brewer v. Otter.ai (Aug 2025) and Subia v. Meta (Oct 2026) are verified, and Holland & Knight reports that early-2026 pleading-stage rulings mostly favoured plaintiffs on wiretap claims. The app vendor could be named alongside users. Discarding others' speech after capture limits retention exposure but does not cure interception claims in all-party-consent states. Chamberlain v. Granola rests on a single competitor blog and must not be cited externally.",
+    "EU and Germany: under EDPB Statement 01/2026, consent after recording is invalid, the household exemption is narrow and manufacturers cannot shift duties to users. German §201 StGB carries up to 3 years for unauthorised recording, and bystander voiceprints may be Art. 9 biometric data. Launching ambient Sessions in the EEA without a DPIA and local counsel is a legal and reputational risk; Limitless withdrew from the EU and UK.",
+    "Looks like a covert recorder: a watch shows no pendant-style LED to bystanders, and the orange mic dot is visible mostly to the wearer, so the product can read as covert. Social backlash drives churn and bad press: Bee was called the 'creepiest Apple Watch app', a Bee user's partner banned it, a therapist objected, and a long-term Limitless user stopped using it socially. The Announce and consent card features have to work in practice, not just exist.",
+    "Apple competing and controlling the platform: Siri Recap and Live Rewind are free, and Apple can widen them in any point release (languages, transcripts, older hardware, EU, a developer API). Apple also controls App Review, the mic indicator, gestures and background policy. Differentiators that rest on Apple's current gaps can vanish within a year. The durable ones are the user-owned vault, export, consent tooling and agent access.",
+    "Big-tech bundling and price pressure: Bee Frontier sells at $74.99 tied into Alexa+ and Prime. Meta has the Limitless team, a pendant in internal testing for spring 2027 and its Muse agent. Google's Intelligent Eyewear goes on sale Dec 10, 2026, and OpenAI and Apple glasses are expected in 2027. Compete on trust and ownership, not on price or model quality.",
+    "Data loss destroying trust: interrupted recordings cannot be resumed, transferFile is throttled (with one reported failure on a file under 30 MB), the network path is reportedly revoked about every 36 s during audio sessions, and recording under Low Power Mode is untested. Omi's 11-hour loss is still a top public complaint, and one viral loss incident would define the brand.",
+    "Unknown battery drain: if real drain is near the 15-20%/h end of vendor reports, Series and SE users get half-day Sessions and the core promise fails. Measure per model before making any claim, and auto-stop at 15%.",
+    "Harm from misattribution and hallucination: a summary that attributes words to the wrong person or invents a commitment can damage relationships or be misused as evidence. Siri Recap avoids speaker attribution entirely. Mitigation: cite transcript spans, label uncertainty, never share automatically.",
+    "Discovery, subpoena and breach exposure: stored transcripts of third parties are discoverable and attractive breach targets, and the TechCrunch op-ed raises evidentiary authentication. Minimisation, short audio windows, local-first storage, E2E encryption and no vendor copy all reduce what can be compelled or leaked.",
+    "Sensitive contexts: medical, therapy, legal privilege, schools, children as bystanders, and MNPI at work. Mitigation: default pause zones, Session mode limited to 18+ (matching Apple's age limit for Recap), and workplace policy templates. Expect employer bans in some workplaces.",
+    "Third-party AI disclosure: Guideline 5.1.2(i) requires naming third-party AI and getting explicit permission, and Otter is accused of training on recordings. A silent cloud call risks rejection and a lawsuit, so cloud must stay opt-in for each provider and go through one audited exit point.",
+    "Regulatory drift: California SB 1130, a mandate for capture indicators on wearables, passed both chambers and was vetoed on Sep 30, 2026, partly because it could cover smartwatches. Expect it to be reintroduced and design to an indicator mandate now.",
+    "Our own continuity: an acquisition or shutdown would repeat Limitless, which turned off capture and deleted regional data within two weeks. Unless the schema and an open-source reader are published and the product works locally without an account, the trust pitch is hollow.",
+    "Evidence quality: several inputs are single-source or unverified: Nirva's wearer-only isolation and Taya's voice suppression (both unshipped), Bee's switch to tap-to-record after the acquisition, Limitless's Consent Mode, the Granola lawsuit, and all continuous-recording battery figures. The catalog and the Earshot notes also disagree on Stream Ring and Pebble status and pricing. Re-verify before using any of these in external positioning."
+   ]
+  }
+ ],
+ "critique": [
+  {
+   "severity": "high",
+   "issue": "The retention rules contradict each other. In strict jurisdictions with no logged consent, other people's words may not be kept verbatim in transcripts, yet raw audio of those same people is kept 72 h by default (the user can extend it to 30 days or pin a session indefinitely). That audio is more sensitive than the verbatim transcript being withheld. Also, 'Sensitive filters ... run before storage' cannot apply to audio: the audio has to be stored on the watch and the iPhone before anything can transcribe it, so the 72 h audio window keeps exactly the IDs, payment details and health talk the filters are meant to remove.",
+   "fix": "Make audio retention depend on jurisdiction and consent. Strict jurisdiction with no logged consent: shred the audio as soon as transcription succeeds (0 h), or keep only the spans attributed to the wearer, and turn off pinning. Elsewhere: 72 h. Reword the filters as 'run on transcripts and derived objects before they are saved, and before anything leaves the device'. When a filter flags a span, shred that span's audio immediately rather than at 72 h. Apply the same rule in the Core retention item, privacy_and_consent and sync_and_storage."
+  },
+  {
+   "severity": "high",
+   "issue": "Silent stops are only detected while the app is alive to see them. Item 4 depends on AVAudioSession interruption and route-change notifications, but a crash, jetsam or system termination delivers no notification. After an interruption takes the audio session, the background runtime may end before the app has posted the time-sensitive notification and reloaded widgets. In those cases the user believes the whole day is being recorded, which the draft itself calls 'the worst failure possible'. Crash recovery at next launch only repairs the files; it does not tell the user.",
+   "fix": "Add a dead-man's-switch: at every 2-minute segment rotation, cancel and reschedule a local UNNotification for about 5 minutes later ('Recording stopped - tap to resume'). If rotations stop for any reason, the notification fires. On .began, post the resume notification before doing any file I/O. Have the complication show 'last saved hh:mm' so a stale REC state is visible. Add a soak test that kills the process and forces jetsam on device."
+  },
+  {
+   "severity": "high",
+   "issue": "The minimal set has no way to act on an objection after something has been recorded. Pause and Stop only prevent future capture. The draft's own sources say consent obtained after recording is invalid (EDPB), and Limitless's guidance in the Earshot notes says to delete audio captured without consent. A bystander who says 'please delete that' can only be helped later on the phone, by which time the segments may already be transcribed.",
+   "fix": "Add a minimal-set control on the recording screen and complication: 'Discard last 5 min / 15 min / this Session'. It deletes the matching unsent segments on the watch and sends a tombstone {session, from, to} through transferUserInfo, which the iPhone applies before transcription or cloud egress, along with any derived objects. Write a GAP with reason user_discard and log it in the consent log."
+  },
+  {
+   "severity": "medium",
+   "issue": "The claim that the Session chime cannot be turned off is not supported by the implementation. Item 1 plays feedback with WKInterfaceDevice.current().play(.start). That plays a haptic whose sound follows the watch's silent mode, so the chime is silent when the watch is muted. Apple's Live Rewind can chime on silent because it is a system feature. The fallback ('.record with haptics only') explicitly drops the chime. The draft also cites Granola's chime that can't be turned off as a model to copy, but the Earshot notes list it as a Granola user complaint.",
+   "fix": "Choose one approach and gate it on a device test. Option A: play a bundled AVAudioPlayer clip under .playAndRecord and confirm on hardware that it plays in silent mode and with AirPods connected. Option B: drop the 'cannot be turned off' claim and rely on the orange indicator, the full-screen state, the haptic and Announce. Either way, mention the Granola complaint and offer a quieter chime in place of no chime."
+  },
+  {
+   "severity": "medium",
+   "issue": "Announce can play to the wrong listener, and .playAndRecord brings a routing risk. When AirPods or other Bluetooth headphones are connected, the pre-recorded notice plays into the wearer's ears, so the person it is meant for never hears it, yet the session logs announced=true. Bluetooth category options (HFP) can also move the input to the headset mic in the middle of a session, which changes what is captured. Even without headphones, the watch speaker is too quiet for a café table. Without Announce, .playAndRecord has little justification, since the brief's [H] path is .record.",
+   "fix": "Check AVAudioSession.currentRoute before Announce. If the output is not the built-in speaker, show an on-screen 'Tell people you're recording' card and log announced=false. Set category options without .allowBluetooth/HFP so input stays on the watch mic, and treat any input-route change as a GAP. If Announce is cut or kept only as an on-screen card, use .record."
+  },
+  {
+   "severity": "medium",
+   "issue": "The timed Pause resumes recording automatically after 15 minutes without the wearer confirming. That can quietly start recording again a person who asked not to be recorded, which undercuts the consent rationale the draft gives for Pause. A single haptic at the end of the timer is easy to miss.",
+   "fix": "When the timer ends, play a haptic and show 'Resume recording?', with Resume as the Double Tap target. Since the engine is still running, the gate flag can flip without re-activating the session; verify that a notification action can flip it from the background. Offer auto-resume only as an opt-in, and never as the default in strict jurisdictions."
+  },
+  {
+   "severity": "medium",
+   "issue": "Separating the wearer from other speakers is Core, and strict-jurisdiction retention depends on it, but the iPhone mechanism is never named or verified. The draft only says 'separate me from others against the wearer's own enrolled voice'. Its own risks list says diarization is verified only on the Mac (SpeakerKit needs macOS 14+), and the summary-only fallback depends on a confidence score nobody has defined.",
+   "fix": "Name a candidate for the iPhone: a Core ML speaker-embedding model, or a FluidAudio iOS build (verify), combined with the wrist-proximity energy cue. Define an acceptance gate on real wrist audio, for example wearer-attribution precision of at least 95% and the confidence threshold that triggers the fallback. Until the gate passes, strict-jurisdiction Sessions without consent store only summaries of non-wearer content. Label the feature 'Core, gated on spike'."
+  },
+  {
+   "severity": "medium",
+   "issue": "The vault's exit guarantee does not hold, and it conflicts with the tiering. Sync and reading rely on the CloudKit private database plus a 'published open-source reader'. A CloudKit container can only be reached by apps signed by the developer team that owns it, so a reader that someone else builds from source cannot read CloudKit data after a shutdown. The local read-only MCP server is 'run by the Mac vault reader', so a Core item needs a Mac app, while the architecture makes the iPhone the default node and puts the Mac companion in Later.",
+   "fix": "Base the exit guarantee on files: a scheduled, user-triggerable export of the documented JSON schema, Markdown and AAC files to Files or iCloud Drive, which any reader can parse. Then either move MCP to Later with the Mac companion, or put a minimal signed Mac reader explicitly in v1 scope and say so in the executive summary and tiering."
+  },
+  {
+   "severity": "medium",
+   "issue": "The battery claims are internally inconsistent. The ship gate of 6 %/h or less sits at the optimistic end of the brief's own estimate for Series 11/12 (10-14 h, i.e. about 6-9 %/h), and it is presented as attainable. The arithmetic is also off: a 12 h day at 6 %/h ends near 28%, not '20-25%'. The marketing line 'a workday Session on Series and SE models' contradicts the SE 3 estimate of about 8-11 h. None of this budgets the screen turning on at every wrist raise during a background session.",
+   "fix": "Set gates and claims per model. Series 11/12: gate ≤7 %/h, stretch goal 6 %/h. SE 3: promise 'most of a workday' or 'meetings', not a workday. Ultra: 'a full waking day'. Correct the end-of-day figure. Add measured screen-on cost per wrist raise to the budget, and publish no claims until measured."
+  },
+  {
+   "severity": "medium",
+   "issue": "The draft overlooks a UX consequence of the background audio session. The brief [H] says watchOS shows the app again whenever the wrist is raised. During a Session, the recording screen therefore replaces the watch face for hours. The draft relies on this for the bookmark ('raise plus pinch'), but the recording screen spec ('static colour state with elapsed time') shows no time of day. That damages the watch's main job and costs battery on every raise.",
+   "fix": "Design the recording screen as a stand-in for the watch face: current time prominent, elapsed time and state secondary, optionally the next calendar event. Verify on device whether the user can go back to their face and whether the setting to return to the clock applies. Measure the per-raise screen cost and include it in the battery budget."
+  },
+  {
+   "severity": "medium",
+   "issue": "The draft says nothing about data protection, a locked watch, or the watch being off the wrist. If segment files use complete protection, writes can fail once the watch locks off-wrist. Recording also carries on if the user takes the watch off and leaves it on a desk or charger. That captures rooms and people with no wearer present, which bystander-consent reasoning does not cover. Item 5 says Double Tap is unavailable wrist-down, but there is no off-wrist policy.",
+   "fix": "Write open segments with .completeUntilFirstUserAuthentication (or .completeUnlessOpen) and encrypt them at rest on the watch. Stop the Session with a GAP when batteryState changes to .charging, as a proxy for off-wrist. Add a device test that removes the watch, lets it lock, and checks that writes continue or stop cleanly as designed."
+  },
+  {
+   "severity": "medium",
+   "issue": "The crash-safety claim doesn't fit the file format. AAC written through AVAudioFile into an .m4a/MP4 container is unreadable until the file is closed, because the moov atom is written at close. 'At launch, finalise ... any orphaned segment' is therefore not possible for the open segment, so a crash loses up to 2 minutes. That is acceptable, but the draft describes it as recoverable.",
+   "fix": "Write segments as ADTS (.aac) or CAF, both of which tolerate a crash. The iPhone can transcode if it needs MP4. Otherwise state plainly that up to one segment (2 min) is lost on a crash, and consider 60 s segments."
+  },
+  {
+   "severity": "medium",
+   "issue": "Choosing the jurisdiction once at onboarding is fragile. Users travel, calls cross state lines (the Earshot notes say the strictest rule generally applies), and the 'conservative 13' list leaves out Michigan, which the brief lists as a hybrid. A user in a one-party state recording a visitor from California gets no consent reminder.",
+   "fix": "Show the 2-second consent reminder at the start of every Session, everywhere; it costs almost nothing. Use jurisdiction only to set retention and Announce defaults. Refresh coarse location from the iPhone at each Session start, and add MI and the other hybrid states to the strict set."
+  },
+  {
+   "severity": "medium",
+   "issue": "An essential preflight check is missing from the minimal set. Item 4's resume nudge needs Time Sensitive notification permission, capture needs mic permission, and transcription needs the companion app installed. If any of these is denied or missing, the honest-gap design fails silently, which is the failure the minimal set exists to prevent.",
+   "fix": "Add a preflight on the Start screen: mic permission, notification and Time Sensitive authorization, WCSession.isCompanionAppInstalled and reachability, free storage, and battery against projected hours. Show a blocking banner for anything missing; for example, if notifications are denied, show 'Interruptions won't alert you' and require the user to acknowledge it before starting."
+  },
+  {
+   "severity": "medium",
+   "issue": "The recap delivery and phone pipeline in Item 8 may not work. Once a Session ends, the watch app is no longer running, so updateApplicationContext doesn't reliably update it and widget reloads count against the budget. On the phone, transcription has no defined trigger: SpeechAnalyzer can't run for long during a short WatchConnectivity background wake. So 'Transcribed through hh:mm' and the evening recap may never arrive, bringing back the 'summaries never arrive' complaint.",
+   "fix": "Push the recap with transferCurrentComplicationUserInfo when a complication is on the active face. Use Text(timerInterval:) for elapsed time and reload only on state changes. On the iPhone, transcribe in a BGProcessingTask (while charging), when the app opens, and from a 'Process now' button, and show a 'Waiting for iPhone' state on the watch. Split Item 8 into status (essential) and recap (included if the phone pipeline is ready)."
+  },
+  {
+   "severity": "low",
+   "issue": "Some 'minimal' items are not essential to a recorder that actually works. Item 7 (the bookmark, with phone-side weighting) and the recap half of Item 8 depend on the full synthesis pipeline. The bookmark is also oversold: it can't answer 'what did they just say', because transcripts take minutes. The best_feature_set Core tier has 14 items, including routing to Things, Todoist and Notion, Ask over history, and MCP, which is beyond an MVP.",
+   "fix": "Mark Item 7 and the recap as 'v1 if cheap; cut first'. Remove the 'what did they just say' claim. Split Core into v1 and v1.x."
+  },
+  {
+   "severity": "low",
+   "issue": "Several statements about Apple's features are wrong or overstated. The executive summary says Siri Recap and Live Rewind 'give summaries only', but Live Rewind shows the last 15 s as transcript text. 'Keep results for 7 days' and the market gap 'retention past 7 days' leave out that Recap summaries are kept if the user saves them.",
+   "fix": "Say that Recap gives summaries only and Live Rewind shows a 15-second transcript snippet. Say Recap summaries expire after 7 days unless saved. Reframe the gap as 'no full transcript, audio or export, and saving one summary at a time'."
+  },
+  {
+   "severity": "low",
+   "issue": "Some catalog facts are misstated. Taya has not missed its date yet: its FAQ says 'Fall 2026', which is still current on Nov 16. iKairos missed a pre-order window, not a ship date. The Soundcore products don't fit 'about 300 free minutes' (Liberty 5 Pro Max has 120 min/mo; Soundcore Work lists no free tier). The list of push-to-talk rings includes Vocci, which flags always_on_capture and records up to 8 h continuously, and Natura, which hasn't shipped.",
+   "fix": "Replace Taya and iKairos with Pickle 1, IYO ONE and Plaud One Explorer (Q4 deliveries unconfirmed), or say 'are at risk of missing'. Drop Soundcore from the 300-minute pattern or write '120-600 free minutes'. Swap Vocci for WIZPR Ring or Stream Ring and note that Natura is unshipped."
+  },
+  {
+   "severity": "low",
+   "issue": "The market_gaps line 'Only TicNote Watch sends results back' to the wrist is contradicted by the catalog: Siri Recap shows summaries on the watch, Pebble Time 2 shows Index 01 agent answers, Petey shows answers, and Granola taps the wrist before meetings.",
+   "fix": "Rephrase: 'No third-party Apple Watch recorder shows the day's capture coverage, gaps and top items on the wrist; Siri Recap shows summaries only on Series 12 and Ultra 4.'"
+  },
+  {
+   "severity": "low",
+   "issue": "There is a contradiction about Granola. The Differentiator states as fact that 'Granola's watch app stops when the user checks a text'. capture_strategy says the sources conflict and assumes background recording continues. The differentiator 'keep recording while the user glances at other apps' therefore rests on behaviour nobody has checked.",
+   "fix": "Mark the Granola claim as conflicting or unverified in the Differentiator, and make 'records while using other watch apps' depend on a device test before it appears in marketing."
+  },
+  {
+   "severity": "low",
+   "issue": "The guidance on session activation is inconsistent. Item 1 says to call setActive(true) 'exactly once per session', but Item 4's Resume calls setActive(true) again after an interruption. The networking bug (FB24377808) is linked to repeated activation.",
+   "fix": "Reword to 'activate once per capture run (Start or user Resume); never re-activate during silence or Pause'. Note that each Resume is a new run, and test URLSession behaviour after a resume."
+  },
+  {
+   "severity": "low",
+   "issue": "The delivery ledger is vague in places. 'Unreachable for N minutes' gives no value for N. 'Own HTTPS endpoint' is ambiguous next to the 'no vendor copy' claim. Nothing defines what counts as a receipt on the CloudKit path, or how the iPhone removes duplicates when a segment arrives by both paths.",
+   "fix": "Set N (for example 15 min). On the CloudKit path, treat CKModifyRecordsOperation success as the receipt. The iPhone de-duplicates by session, seq and sha256. Remove 'own HTTPS endpoint', or define it as an endpoint the user hosts."
+  },
+  {
+   "severity": "low",
+   "issue": "The cloud-AI privacy claims conflict with the architecture. 'Providers must offer zero retention' sits alongside Message Batches for nightly rollups, whose results are stored server-side until retrieved, so ZDR eligibility needs checking. 'Use your own proxy' puts a relay the vendor runs in the data path, despite 'no vendor copy'. Bring-your-own-key users won't have a zero-retention agreement.",
+   "fix": "Confirm Batch ZDR eligibility with Anthropic, or state the retention window and drop Batches under the zero-retention promise. Specify that the proxy is stateless and logs no payloads, or prefer .appAttest. Show bring-your-own-key users a notice that the provider's retention terms apply."
+  },
+  {
+   "severity": "low",
+   "issue": "The battery and storage APIs need verification. batteryLevel may be reported in coarse steps, so a %/h estimate at every 2-minute rotation will be noisy or zero for long stretches. volumeAvailableCapacityForImportantUsageKey may not be available on watchOS.",
+   "fix": "Estimate drain by regression over a window of at least 30 minutes, and show 'measuring...' until then. Verify the resource key on watchOS and fall back to volumeAvailableCapacityKey."
+  },
+  {
+   "severity": "low",
+   "issue": "The watchOS 26 fallback is underspecified. The draft targets Series 9 and later on watchOS 27 with a watchOS 26 fallback, but never says which models the fallback reaches (Series 6-8, SE 2, Ultra 1) or what they lose (Double Tap needs S9 or later; the older 32-bit builds). 'Older watches' is the headline gap against Apple.",
+   "fix": "State the device floor for the fallback, list the features lost on pre-S9 hardware (no Double Tap, so on-screen buttons only), and add Series 6-8 to the battery and soak test matrix, or narrow the 'older watches' claim to Series 9-11, SE 3 and Ultra 2-3."
+  },
+  {
+   "severity": "low",
+   "issue": "The ring buffer may be too short for voice gating. A ~2 s ring buffer with 2 s pre-roll, behind an energy gate followed by a SoundAnalysis confirmation (about 1 s analysis window plus latency), can clip the first words of an utterance once confirmation delay is counted.",
+   "fix": "Size the ring buffer to at least 4 s, take pre-roll from the moment the energy gate trips rather than from SoundAnalysis confirmation, and check clipping on a labelled sample."
+  },
+  {
+   "severity": "low",
+   "issue": "The Core consent item describes Session behaviour in the EEA, UK and Germany ('every Session shows a 2-second consent reminder'), while Session mode there is Later and launch is Memo-only.",
+   "fix": "In the Core item, say that in the EEA, UK and Germany only Memo mode ships at launch, and that the Session consent rules apply there once the DPIA-gated Later item ships."
+  }
+ ]
+}
