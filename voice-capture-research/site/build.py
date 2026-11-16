@@ -50,7 +50,7 @@ CAT_SHORT = {
     'Ring / watch / earbuds': 'Ring, watch or earbuds',
     'Meeting & call notetaker': 'Meeting notetaker',
     'Voice notes & journaling app': 'Voice notes app',
-    'Dictation & voice-to-prompt': 'Dictation and voice prompts',
+    'Dictation & voice-to-prompt': 'Dictation and prompts',
     'Voice AI assistant': 'Voice assistant',
     'Apple Watch app': 'Apple Watch app',
     'Ambient professional scribe': 'Professional scribe',
@@ -65,6 +65,8 @@ STATUS = [  # (value, label, glyph)
 ]
 STATUS_LABEL = {s: l for s, l, _ in STATUS}
 STATUS_GLYPH = {s: g for s, _, g in STATUS}
+CONF_LABEL = {'high': 'Verified, high confidence', 'medium': 'Verified, medium confidence',
+              'low': 'Verified, low confidence', 'unchecked': 'Sourced once, not re-checked'}
 TIER_COPY = {
     'Core': 'Table stakes. Users expect these on day one.',
     'Differentiator': 'Where a new product can beat the field.',
@@ -262,7 +264,7 @@ def market_section(final, stats, products):
       </div>
     </div>
     <figure class="chart">
-      <figcaption><h3>How many products offer each feature</h3><p>Count of the {total} verified products where sources confirm the feature. Unconfirmed counts as no, so treat these as lower bounds.</p></figcaption>
+      <figcaption><h3>How many products offer each feature</h3><p>Out of {total} products, how many have the feature confirmed by a source. A feature without a source counts as missing, so these are lower bounds.</p></figcaption>
       {bar_rows(frows, total)}
       <details class="tbl"><summary>Show as a table</summary>
         <table><thead><tr><th>Feature</th><th class="num">Products</th><th class="num">Share</th></tr></thead><tbody>{table_rows}</tbody></table>
@@ -314,7 +316,7 @@ def catalog_section(products):
         srcs = ''.join(f'<a href="{E(u)}">{E(host(u))}</a>' for u in p.get('sources', [])[:4])
         conf = p.get('verify_confidence', '')
         rows += f'''
-      <tr data-cat="{E(p["category"])}" data-status="{E(p["status"])}" data-flags="{" ".join(flags)}" data-name="{E(p["name"].lower())}" data-text="{E((p["name"] + " " + p["company"] + " " + p["differentiator"] + " " + p["form_factor"]).lower())}">
+      <tr data-cat="{E(p["category"])}" data-status="{E(p["status"])}" data-checked="{"no" if conf == "unchecked" else "yes"}" data-flags="{" ".join(flags)}" data-name="{E(p["name"].lower())}" data-text="{E((p["name"] + " " + p["company"] + " " + p["differentiator"] + " " + p["form_factor"]).lower())}">
         <td class="c-name"><b>{E(p["name"])}</b><span class="muted">{E(p["company"])}</span></td>
         <td class="c-cat">{E(CAT_SHORT.get(p["category"], p["category"]))}<span class="muted">{E(p["form_factor"])}</span></td>
         <td class="c-st">{status_chip(p["status"])}<span class="muted">{E(p["release_timing"])}</span></td>
@@ -325,7 +327,7 @@ def catalog_section(products):
             <div class="fchips">{chips}</div>
             <p><span class="lbl">Limits</span>{E(p.get("limitations", ""))}</p>
             <p><span class="lbl">Platforms</span>{E(p["platforms"])}</p>
-            <p><span class="lbl">Checked</span><span class="conf conf-{E(conf)}">{E(conf)} confidence</span> {E(p.get("verify_notes", ""))}</p>
+            <p><span class="lbl">Checked</span><span class="conf conf-{E(conf)}">{E(CONF_LABEL.get(conf, conf))}</span> {E("" if conf == "unchecked" else p.get("verify_notes", ""))}</p>
             <p class="srcs"><span class="lbl">Sources</span>{srcs}</p>
           </details>
         </td>
@@ -340,6 +342,7 @@ def catalog_section(products):
       <label><span>Category</span><select id="f-cat"><option value="">All categories</option>{cat_opts}</select></label>
       <label><span>Status</span><select id="f-st"><option value="">Any status</option>{st_opts}</select></label>
       <label><span>Has feature</span><select id="f-feat"><option value="">Any feature</option>{feat_opts}</select></label>
+      <label><span>Fact-check</span><select id="f-chk"><option value="">All entries</option><option value="yes">Checked twice</option><option value="no">Sourced once</option></select></label>
       <p class="f-count" id="f-count" aria-live="polite">{len(products)} shown</p>
     </form>
     <div class="tbl-wrap">
@@ -348,6 +351,7 @@ def catalog_section(products):
         <tbody>{rows}</tbody>
       </table>
       <p class="empty" id="f-empty" hidden>Nothing matches these filters. Clear one to see more.</p>
+      <button type="button" class="more" id="f-more" hidden>Show more</button>
     </div>
   </div>
 </section>'''
@@ -378,14 +382,14 @@ def risks_section(final):
 
 
 def method_section(products, curation):
-    conf = {k: sum(1 for p in products if p.get('verify_confidence') == k) for k in ('high', 'medium', 'low')}
+    conf = {k: sum(1 for p in products if p.get('verify_confidence') == k) for k in ('high', 'medium', 'low', 'unchecked')}
     return f'''
 <section id="method">
   <div class="wrap">
     <h2>How this was put together</h2>
     <div class="prose narrow">
-      <p>Twelve research agents each searched the live web for one part of the market: pendants and pins, recorders, glasses, rings and earbuds, meeting notetakers, voice-note apps, dictation tools, voice assistants, Apple Watch apps, professional scribes, lifelogging platforms, and launches due in the next few months. That produced {curation.get("rawCount", "?")} raw records. Duplicates and off-topic entries were removed, gaps were filled, and every remaining record was fact-checked in batches of ten against current sources. Products listed as upcoming, rumored or in beta got a second check that tried to disprove the claimed status and date.</p>
-      <p>Verification confidence: <b>{conf["high"]}</b> high, <b>{conf["medium"]}</b> medium, <b>{conf["low"]}</b> low. {len(curation.get("notFound", []))} records were dropped because they could not be confirmed.</p>
+      <p>Twelve research agents each searched the live web for one part of the market: pendants and pins, recorders, glasses, rings and earbuds, meeting notetakers, voice-note apps, dictation tools, voice assistants, Apple Watch apps, professional scribes, lifelogging platforms, and launches due in the next few months. That produced {curation.get("rawCount", "?")} raw records. Duplicates and off-topic entries were removed, gaps were filled, and records were fact-checked in batches of ten against current sources. Products listed as upcoming, rumored or in beta got one more check that tried to disprove the claimed status and date.</p>
+      <p>Of the {len(products)} products, {conf["high"] + conf["medium"] + conf["low"]} were fact-checked a second time: <b>{conf["high"]}</b> with high confidence, <b>{conf["medium"]}</b> medium and <b>{conf["low"]}</b> low. The second check covered every pendant, recorder, ring, watch and earbud, every Apple Watch app, every lifelogging platform, and everything upcoming, rumored, in beta or discontinued. The remaining <b>{conf["unchecked"]}</b> are shipping software (meeting notetakers, scribes, dictation tools, assistants, voice-note apps and glasses) that the research sweep found and sourced but that were not re-checked, because the run reached the account's usage limit. Each catalog entry says which group it is in. {len(curation.get("notFound", []))} records were dropped because they could not be confirmed.</p>
       <p>A feature counts only when a source confirms it, so a missing feature can mean "not documented" as well as "not offered". Prices and dates change often. Check the linked sources before relying on a specific figure.</p>
       <p>Three reviewers drafted the feature sets independently, one focused on user value, one on watchOS feasibility and battery, one on privacy and market position. A fourth merged them, and a final reviewer checked the merged version against the research and fixed what did not hold up.</p>
     </div>
