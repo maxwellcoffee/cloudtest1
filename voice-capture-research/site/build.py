@@ -74,13 +74,53 @@ TIER_COPY = {
 }
 
 
+def phrase(k):
+    label = FEATURES[k]
+    return label if label.startswith('Apple') else label[0].lower() + label[1:]
+
+
+KEY_RE = re.compile(r'\b(' + '|'.join(sorted(FEATURES, key=len, reverse=True)) + r')\b')
+
+
+def humanize(obj):
+    """Swap internal feature keys (cloud_transcription) for their labels in every string."""
+    if isinstance(obj, str):
+        return KEY_RE.sub(lambda m: phrase(m.group(1)), obj)
+    if isinstance(obj, list):
+        return [humanize(x) for x in obj]
+    if isinstance(obj, dict):
+        return {k: humanize(v) for k, v in obj.items()}
+    return obj
+
+
 def load(name):
     with open(os.path.join(DATA, name)) as f:
         return json.load(f)
 
 
+LIST_RE = re.compile(r'^( *)([-*]|\d+\.) ')
+
+
+def md_prep(text):
+    out, prev_list = [], False
+    for line in (text or '').split('\n'):
+        m = LIST_RE.match(line)
+        if m:
+            line = ' ' * ((len(m.group(1)) // 2) * 4) + line.lstrip(' ')
+            if out and out[-1].strip() and not prev_list:
+                out.append('')
+            prev_list = True
+        elif line.strip() and prev_list and not line.startswith(' '):
+            out.append('')
+            prev_list = False
+        elif not line.strip():
+            prev_list = False
+        out.append(line)
+    return '\n'.join(out)
+
+
 def md(text):
-    text = (text or '').replace('<', '&lt;').replace('>', '&gt;')
+    text = md_prep((text or '').replace('<', '&lt;').replace('>', '&gt;'))
     out = markdown.markdown(text, extensions=['tables', 'sane_lists'])
     # make bare URLs clickable
     out = re.sub(r'(?<!["=>])(https?://[^\s<)\]]+)', r'<a href="\1">\1</a>', out)
@@ -107,98 +147,112 @@ def masthead(final, stats, products):
     upcoming = sum(1 for p in products if p['status'] in ('announced-upcoming', 'rumored'))
     watch = sum(1 for p in products if p['features'].get('apple_watch_app'))
     cats = len([c for c in CATEGORIES if stats['byCategory'].get(c)])
+    checked = sum(1 for p in products if p.get('verify_confidence') in ('high', 'medium', 'low'))
+    lead, opening, risks, _ = split_summary(final['executive_summary'])
+    short = ''
+    if opening or risks:
+        short = f'''
+    <div class="short">
+      {f'<div><h2 class="mini">Where the opening is</h2><div class="prose flush">{md(opening)}</div></div>' if opening else ''}
+      {f'<div><h2 class="mini">What could sink it</h2><div class="prose flush">{md(risks)}</div></div>' if risks else ''}
+    </div>'''
     return f'''
 <header class="masthead">
   <div class="wrap">
-    <p class="eyebrow">Research brief · verified {TODAY}</p>
+    <p class="eyebrow">Research brief · {TODAY}</p>
     <h1>Voice Capture Field Guide</h1>
-    <p class="lead">{E(final["executive_summary"])}</p>
-    <p class="facts"><b>{len(products)}</b> products in <b>{cats}</b> categories · <b>{upcoming}</b> upcoming or rumored · <b>{watch}</b> with an Apple Watch app</p>
+    <p class="lead">{E(lead)}</p>
+    <p class="facts"><b>{len(products)}</b> products in <b>{cats}</b> categories · <b>{checked}</b> fact-checked twice · <b>{upcoming}</b> upcoming or rumored · <b>{watch}</b> with an Apple Watch app</p>
+    {short}
     <nav class="toc" aria-label="Sections">
-      <a href="#watch-app">Minimal Watch app</a><a href="#feature-set">Best feature set</a><a href="#market">Market</a><a href="#upcoming">Coming soon</a><a href="#catalog">Catalog</a><a href="#watchos">Building on watchOS</a><a href="#method">Method</a>
+      <a href="#watch-app">Minimal Watch app</a><a href="#earshot">Against Earshot</a><a href="#feature-set">Best feature set</a><a href="#market">Market</a><a href="#upcoming">Coming soon</a><a href="#catalog">Catalog</a><a href="#watchos">Building on watchOS</a><a href="#method">Method</a>
     </nav>
   </div>
 </header>'''
 
 
 def watch_mock():
-    bars = ''.join(f'<i style="--h:{h}"></i>' for h in (30, 55, 80, 45, 95, 60, 35, 70, 50, 85, 40, 65, 30, 55))
-    return f'''
-<figure class="watch" aria-label="Illustration of the minimal app's main screen">
+    return '''
+<figure class="watch" aria-label="Illustration of the minimal app's recording screen">
   <div class="bezel"><div class="screen">
-    <div class="w-top"><span class="w-rec"><span class="dot" aria-hidden="true"></span>Listening</span><span class="w-time">10:09</span></div>
-    <div class="w-wave" aria-hidden="true">{bars}</div>
-    <div class="w-big">3h 42m</div>
-    <div class="w-sub">captured today · 6 saved moments</div>
-    <div class="w-btns"><span class="w-btn mark">Mark</span><span class="w-btn pause">Pause</span></div>
+    <div class="w-top"><span class="w-rec"><span class="dot" aria-hidden="true"></span>REC 3:42</span><span class="w-sync">On iPhone</span></div>
+    <div class="w-big">10:09</div>
+    <div class="w-sub">Session until 6:00 PM · about 7 h left</div>
+    <div class="w-btns"><span class="w-btn pause">Pause</span><span class="w-btn mark">Mark</span></div>
   </div></div>
-  <figcaption>Illustration of the main screen. The mic dot stays visible while the app is listening.</figcaption>
+  <figcaption>Illustration of the recording screen. It stands in for the watch face, so the time is large and the state is small, and Pause is the biggest button.</figcaption>
 </figure>'''
 
 
 def watch_section(final):
-    items = ''.join(f'''
-    <li>
-      <h3>{E(it["feature"])}</h3>
-      <p>{E(it["description"])}</p>
+    items = ''
+    for it in final['minimal_watch_set']:
+        title, cut = minimal_title(it['feature'])
+        items += f'''
+    <li class="{'optional' if cut else ''}">
+      <div class="mvp-head"><h3>{E(title)}</h3>{'<span class="stage cut">Cut first if time is short</span>' if cut else ''}</div>
+      <div class="prose flush">{md(it["description"])}</div>
       <p class="why"><span class="lbl">Why it's in</span>{E(it["why_essential"])}</p>
-      <p class="impl"><span class="lbl">watchOS</span>{E(it["watchos_implementation"])}</p>
-    </li>''' for it in final['minimal_watch_set'])
+      <details class="impl"><summary>How to build it on watchOS</summary><div class="prose flush">{md(it["watchos_implementation"])}</div></details>
+    </li>'''
     cuts = ''.join(f'<li><b>{E(c["feature"])}</b><span>{E(c["reason"])}</span></li>' for c in final['explicitly_excluded_from_minimal'])
     arch_labels = [('capture_strategy', 'Capture'), ('transcription_and_ai', 'Transcription and AI'),
                    ('sync_and_storage', 'Sync and storage'), ('battery_budget', 'Battery budget'),
                    ('inputs_and_ui', 'Inputs and UI'), ('privacy_and_consent', 'Privacy and consent')]
-    arch = ''.join(f'<div><dt>{lbl}</dt><dd>{E(final["watch_architecture"][k])}</dd></div>' for k, lbl in arch_labels)
+    arch = ''.join(f'<details class="arch-item"><summary>{lbl}</summary><div class="prose flush">{md(final["watch_architecture"][k])}</div></details>' for k, lbl in arch_labels)
+    n_core = sum(1 for it in final['minimal_watch_set'] if not minimal_title(it['feature'])[1])
+    n_cut = len(final['minimal_watch_set']) - n_core
     return f'''
 <section id="watch-app" class="band">
   <div class="wrap">
     <p class="eyebrow">Recommendation 1</p>
     <h2>The minimal always-on Apple Watch app</h2>
-    <p class="sub">The smallest feature set that is still worth wearing, in priority order. Each item lists what it is, why it made the cut, and how to build it with the APIs watchOS offers today.</p>
+    <p class="sub">{n_core} parts make a recorder worth wearing all day{f", plus {n_cut} that are the first to go if time runs short" if n_cut else ""}. They are in build order. Each says what it does, why it made the cut, and how to build it with the APIs watchOS offers today. Marks such as [H], [M] and [L] give the research's confidence (high, medium, low) in a platform claim.</p>
     <div class="watch-grid">
       <ol class="mvp">{items}</ol>
-      <aside class="watch-side">
-        {watch_mock()}
-        <div class="cut">
-          <h3>Left out on purpose</h3>
-          <ul>{cuts}</ul>
-        </div>
-      </aside>
+      <aside class="watch-side">{watch_mock()}</aside>
     </div>
-    <h3 class="arch-h">How it fits together</h3>
-    <dl class="arch">{arch}</dl>
+    <div class="cut">
+      <h3>Left out of the minimal app on purpose</h3>
+      <ul>{cuts}</ul>
+    </div>
+    <div class="arch-wrap">
+      <h3>How it fits together</h3>
+      <div class="arch">{arch}</div>
+    </div>
   </div>
 </section>'''
 
 
 def feature_set_section(final, names):
-    cols = ''
+    blocks = ''
     for tier in ('Core', 'Differentiator', 'Later'):
         feats = [f for f in final['best_feature_set'] if f['tier'] == tier]
         if not feats:
             continue
         cards = ''
         for f in feats:
-            ex = ''.join(f'<span class="ex">{E(x)}</span>' for x in f.get('exemplars', [])[:5])
+            title, stage = feat_title(f['feature'])
+            ex = ''.join(f'<span class="ex">{E(x)}</span>' for x in f.get('exemplars', [])[:6])
             cards += f'''
         <article class="feat">
-          <h4>{E(f["feature"])}</h4>
-          <p>{E(f["description"])}</p>
-          <p class="why">{E(f["rationale"])}</p>
+          <header><h4>{E(title)}</h4>{f'<span class="stage">{E(stage)}</span>' if stage else ''}</header>
+          <div class="prose flush">{md(f["description"])}</div>
           {f'<p class="exs"><span class="lbl">Seen in</span>{ex}</p>' if ex else ''}
+          <details><summary>Why</summary><p class="why">{E(f["rationale"])}</p></details>
         </article>'''
-        cols += f'''
+        blocks += f'''
       <div class="tier tier-{slug(tier)}">
-        <header><h3>{E(tier)}</h3><p>{E(TIER_COPY[tier])}</p><span class="count">{len(feats)}</span></header>
-        {cards}
+        <header><h3>{E(tier)}</h3><p>{E(TIER_COPY[tier])}</p><span class="count">{len(feats)} features</span></header>
+        <div class="feat-grid">{cards}</div>
       </div>'''
     return f'''
 <section id="feature-set">
   <div class="wrap">
     <p class="eyebrow">Recommendation 2</p>
     <h2>The best overall feature set</h2>
-    <p class="sub">For a full product across Watch, iPhone and cloud. Grouped by when to build it.</p>
-    <div class="tiers">{cols}</div>
+    <p class="sub">For a full product across Watch, iPhone and, later, the Mac. Core features carry a release stage: v1 ships first, v1.x follows.</p>
+    <div class="tiers">{blocks}</div>
   </div>
 </section>'''
 
@@ -381,7 +435,7 @@ def risks_section(final):
 </section>'''
 
 
-def method_section(products, curation):
+def method_section(products, curation, final):
     conf = {k: sum(1 for p in products if p.get('verify_confidence') == k) for k in ('high', 'medium', 'low', 'unchecked')}
     return f'''
 <section id="method">
@@ -393,21 +447,86 @@ def method_section(products, curation):
       <p>A feature counts only when a source confirms it, so a missing feature can mean "not documented" as well as "not offered". Prices and dates change often. Check the linked sources before relying on a specific figure.</p>
       <p>Three reviewers drafted the feature sets independently, one focused on user value, one on watchOS feasibility and battery, one on privacy and market position. A fourth merged them, and a final reviewer checked the merged version against the research and fixed what did not hold up.</p>
     </div>
+    {review_notes(final)}
   </div>
 </section>'''
 
 
+
+def review_notes(final):
+    notes = split_summary(final['executive_summary'])[3]
+    if not notes:
+        return ''
+    return f'<details class="brief"><summary>Review notes: what changed after critique, and how source conflicts were settled</summary><div class="prose">{"".join(md(n) for n in notes)}</div></details>'
+
+
+def split_summary(text):
+    paras = [p.strip() for p in (text or '').split('\n\n') if p.strip()]
+    lead = paras[0] if paras else ''
+    opening = next((p for p in paras if p.startswith('The catalog shows')), '')
+    risks = next((p for p in paras if p.startswith('The biggest risks')), '')
+    review = [p for p in paras if p.startswith('Changes made after review') or p.startswith('Where sources conflicted')]
+    return lead, opening, risks, review
+
+
+def minimal_title(f):
+    t = re.sub(r'^\d+\.\s*', '', f)
+    cut = 'cut first' in t.lower()
+    t = re.sub(r':\s*v1[^:]*cut first\s*$', '', t, flags=re.I).strip()
+    return t, cut
+
+
+def earshot_section():
+    path = os.path.join(DATA, 'earshot-comparison.json')
+    if not os.path.exists(path):
+        return ''
+    cmp = json.load(open(path))
+    label = {'built': 'Built', 'partly': 'Partly', 'missing': 'Missing'}
+    rows = ''.join(f'''
+      <tr>
+        <td class="e-item">{E(it["minimal"])}</td>
+        <td class="e-st"><span class="es es-{it["status"]}"><span class="glyph" aria-hidden="true">{ {"built": "●", "partly": "◐", "missing": "○"}[it["status"]] }</span>{label[it["status"]]}</span></td>
+        <td>{E(it["earshot"])}</td>
+        <td>{E(it["change"])}</td>
+      </tr>''' for it in cmp['items'])
+    counts = {k: sum(1 for it in cmp['items'] if it['status'] == k) for k in label}
+    beyond = ''.join(f'<li>{E(x)}</li>' for x in cmp['beyond'])
+    return f'''
+<section id="earshot">
+  <div class="wrap">
+    <p class="eyebrow">Your build</p>
+    <h2>The minimal set against Earshot</h2>
+    <p class="sub">Earshot, the always-listening Watch recorder in this repository (PR #3), already does a lot. Checked against its watch code: <b>{counts["built"]}</b> of the {len(cmp["items"])} minimal items are built, <b>{counts["partly"]}</b> are partly there and <b>{counts["missing"]}</b> is missing.</p>
+    <div class="tbl-wrap">
+      <table class="etable">
+        <thead><tr><th>Minimal item</th><th>Earshot</th><th>What it does today</th><th>What to change</th></tr></thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
+    <h3>Where Earshot and the recommendation part ways</h3>
+    <ul class="ticks">{beyond}</ul>
+    <p class="muted small">{E(cmp["source"])}.</p>
+  </div>
+</section>'''
+
+
+def feat_title(f):
+    m = re.match(r'^(v1[^:]{0,70}):\s*(.+)$', f)
+    if m:
+        return m.group(2), m.group(1)
+    return f, ''
+
 def main():
-    products = load('catalog.json')
-    final = load('recommendation.json')
+    products = humanize(load('catalog.json'))
+    final = humanize(load('recommendation.json'))
     stats = load('stats.json')
     curation = load('curation.json') if os.path.exists(os.path.join(DATA, 'curation.json')) else {}
-    tech = open(os.path.join(DATA, 'watch-technical.md')).read()
-    apps = open(os.path.join(DATA, 'watch-apps.md')).read()
+    tech = humanize(open(os.path.join(DATA, 'watch-technical.md')).read())
+    apps = humanize(open(os.path.join(DATA, 'watch-apps.md')).read())
     names = {p['name'] for p in products}
-    body = (masthead(final, stats, products) + '<main>' + watch_section(final) + feature_set_section(final, names)
+    body = (masthead(final, stats, products) + '<main>' + watch_section(final) + earshot_section() + feature_set_section(final, names)
             + market_section(final, stats, products) + upcoming_section(products) + catalog_section(products)
-            + watchos_section(tech, apps) + risks_section(final) + method_section(products, curation) + '</main>')
+            + watchos_section(tech, apps) + risks_section(final) + method_section(products, curation, final) + '</main>')
     tpl = open(os.path.join(HERE, 'template.html')).read()
     out = tpl.replace('<!--BODY-->', body)
     with open(os.path.join(HERE, 'index.html'), 'w') as f:
